@@ -1,9 +1,9 @@
 /*-----------------------------------------------------------------------*/
-/* Copyright (c) Team 501 - The PowerKnights. All Rights Reserved.       */
-/* Open Source Software - may be modified and shared by other FRC teams  */
-/* under the terms of the Team501 license. The code must be accompanied  */
+/* Copyright (c) Team 501 - The PowerKnights. All Rights Reserved. */
+/* Open Source Software - may be modified and shared by other FRC teams */
+/* under the terms of the Team501 license. The code must be accompanied */
 /* by the Team 501 - The PowerKnights license file in the root directory */
-/* of this project.                                                      */
+/* of this project. */
 /*-----------------------------------------------------------------------*/
 
 package frc.robot.telemetry;
@@ -41,7 +41,6 @@ public final class TelemetryNames {
     ***************/
 
    public final class Telemetry {
-      // FIXME: Need to not be public (but needs higher grouping)
       public static final String name = "Telemetry";
 
       public static final String status = name + ".status";
@@ -57,6 +56,14 @@ public final class TelemetryNames {
       private static final String name = "Properties";
 
       public static final String status = name + ".status";
+   }
+
+   public final class Scheduler {
+      public static final String name = "Scheduler";
+
+      public static final String status = name + ".status";
+      // The current commands running on the robot
+      public static final String currentCommands = name + ".currentCommands";
    }
 
 }
