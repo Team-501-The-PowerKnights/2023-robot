@@ -11,3 +11,5 @@ PhoenixProAnd5.json
 RevLib.json
 
 ## Team 501 ( 3rd Party )
+logback.json
+slf4j.json

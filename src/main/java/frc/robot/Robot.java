@@ -8,6 +8,9 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
+import riolog.PKLogger;
+import riolog.RioLogger;
+
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the TimedRobot
@@ -16,6 +19,10 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  * project.
  */
 public class Robot extends TimedRobot {
+
+  /** Our classes' logger **/
+  private static final PKLogger logger = RioLogger.getLogger(Robot.class.getName());
+
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
@@ -30,6 +37,7 @@ public class Robot extends TimedRobot {
     // and put our autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
 
+    logger.info("Hellow, World (2023)!");
     System.out.println("Hello, World (2023)!");
   }
 
