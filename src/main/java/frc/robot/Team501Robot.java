@@ -8,7 +8,6 @@
 
 package frc.robot;
 
-
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.config.VersionInfo;
@@ -16,7 +15,6 @@ import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
-
 
 /**
  * This class is used to provide a wrapper on the WPILib stuff, and a way to get

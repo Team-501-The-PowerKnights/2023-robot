@@ -25,5 +25,10 @@
       }
     },
   ],
-  "java.test.defaultConfig": "WPIlibUnitTests"
+  "java.test.defaultConfig": "WPIlibUnitTests",
+  "java.format.settings.url": ".ide/501-eclipse-formatter.xml",
+  "java.format.settings.profile": "501-Eclipse",
+  "[java]": {
+    "editor.tabSize": 3
+  }
 }
