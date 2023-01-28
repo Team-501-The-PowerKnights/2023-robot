@@ -1,20 +1,28 @@
+# Electrical / Controls Description
+# PROTO-BOT
+
+
 ## Motors
 
-| Mechanism        | Controller Type | Motor Type    | CAN ID | Position    | PDB ID |
-| ---------------- | --------------- | ------------- | ------ | ----------- | ------ |
-| Drive            | Spark Max       | NEO Brushless | 11     | Left Front  | 15     |
-| Drive            | Spark Max       | NEO Brushless | 12     | Left Rear   | 14     |
-| Drive            | Spark Max       | NEO Brushless | 13     | Right Front | 0      |
-| Drive            | Spark Max       | NEO Brushless | 14     | Right Rear  | 1      |
+| Subsystem      | Controller Type | Motor Type    | CAN ID | Position    | PDB ID |
+| -------------- | --------------- | ------------- | ------ | ----------- | ------ |
+| Drive          | Spark Max       | NEO Brushless | 11     | Left Front  | 15     |
+| Drive          | Spark Max       | NEO Brushless | 12     | Left Rear   | 14     |
+| Drive          | Spark Max       | NEO Brushless | 13     | Right Front | 0      |
+| Drive          | Spark Max       | NEO Brushless | 14     | Right Rear  | 1      |
+| Arm            | Spark Max       |               | 21     | Rotate      | ??     |
+| Arm            | Spark Max       |               | 22     | Extend      | ??     |
+| Gripper        | Spark Max       |               | 31     | Intake      | ??     |
+| Gripper        | Spark Max       |               | 32     | Ingest      |        |
 
 ## Modules
 
-| Mechanism        | Controller Type | CAN ID | Position    | PDB ID |
-| ---------------- | --------------- | ------ | ----------- | ------ |
-| Pneumatics       | PCM             | 0      |             | 8      |
-| Power            | PDB             | 1      |             |        | 
-|                  |                 |        |             |        | 
-|                  |                 |        |             |        | 
+| Mechanism      | Controller Type | CAN ID | Position    | PDB ID |
+| -------------- | --------------- | ------ | ----------- | ------ |
+| Pneumatics     | PCM             | 0      |             | 8      |
+| Power          | PDB             | 1      |             |        | 
+|                |                 |        |             |        | 
+|                |                 |        |             |        | 
 
 ## Sensors
 

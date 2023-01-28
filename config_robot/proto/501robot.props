@@ -1,0 +1,93 @@
+#########################################
+#########################################
+#
+# Team 501 Robot Properties
+#
+#########################################
+#########################################
+
+Robot.robotName = Proto-Bot
+Robot.implementation = Proto
+
+
+
+#########################################
+#########################################
+# Module Defines
+#########################################
+#########################################
+
+#####################
+# PDP
+#####################
+PDP.className = StubPDPModule
+#PDP.className = PDPModule
+
+
+#####################
+# PCM
+#####################
+PCM.className = StubPCMModule
+#PCM.className = PCMModule
+
+
+
+#########################################
+#########################################
+# Sensor Defines
+#########################################
+#########################################
+
+#####################
+# Gyro
+#####################
+Gyro.className = StubGyroSensor
+#Gyro.className =
+
+
+
+#########################################
+#########################################
+# Subsystem Defines
+#########################################
+#########################################
+
+#####################
+# Drive
+#####################
+Drive.className = StubDriveSubsystem
+#Drive.className =
+Drive.autoCommandName = DriveDoNothing
+Drive.teleCommandName = DriveDoNothing
+
+#####################
+# Arm
+#####################
+Arm.className = StubArmSubsystem
+#Arm.className =
+Arm.autoCommandName = ArmDoNothing
+Arm.teleCommandName = ArmDoNothing
+
+#####################
+# Gripper
+#####################
+Gripper.className = StubGripperSubsystem
+#Gripper.className =
+Gripper.autoCommandName = GripperDoNothing
+Gripper.teleCommandName = GripperDoNothing
+
+
+#########################################
+#########################################
+# OI
+#########################################
+#########################################
+
+#####################
+# Driver Gamepad
+#####################
+
+
+#####################
+# Operator Gamepad
+#####################
