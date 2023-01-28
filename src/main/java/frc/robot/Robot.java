@@ -4,10 +4,18 @@
 
 package frc.robot;
 
+import edu.wpi.first.networktables.DoubleArrayTopic;
+import edu.wpi.first.networktables.DoubleEntry;
+import edu.wpi.first.networktables.DoubleTopic;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.networktables.StringPublisher;
+import edu.wpi.first.networktables.StringSubscriber;
+import edu.wpi.first.networktables.StringTopic;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-
+import frc.robot.config.VersionInfo;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -27,6 +35,9 @@ public class Robot extends TimedRobot {
 
    private RobotContainer m_robotContainer;
 
+   private StringPublisher configPub;
+   private StringSubscriber configSub;
+
    /**
     * This function is run when the robot is first started up and should be used
     * for any initialization code.
@@ -39,6 +50,43 @@ public class Robot extends TimedRobot {
 
       logger.info("Hellow, World (2023)!");
       System.out.println("Hello, World (2023)!");
+
+      NetworkTableInstance inst = NetworkTableInstance.getDefault();
+      NetworkTable table = inst.getTable("501Prefs");
+
+      StringTopic configTopic = table.getStringTopic("config");
+
+      configPub = configTopic.publish();
+      configPub.set(VersionInfo.version);
+
+      configTopic.setPersistent(true);
+      configTopic.setRetained(true);
+
+      configPub.close();
+
+      DoubleTopic drivePID_PTopic = table.getDoubleTopic("Drive/P");
+      DoubleEntry drivePID_PEntry = drivePID_PTopic.getEntry(0.0);
+      drivePID_PEntry.set(0.0);
+      DoubleTopic drivePID_ITopic = table.getDoubleTopic("Drive/I");
+      DoubleEntry drivePID_IEntry = drivePID_ITopic.getEntry(0.0);
+      drivePID_IEntry.set(0.0);
+      DoubleTopic drivePID_DTopic = table.getDoubleTopic("Drive/D");
+      DoubleEntry drivePID_DEntry = drivePID_DTopic.getEntry(0.0);
+      drivePID_DEntry.set(0.0);
+      DoubleTopic drivePID_FTopic = table.getDoubleTopic("Drive/F");
+      DoubleEntry drivePID_FEntry = drivePID_FTopic.getEntry(0.0);
+      drivePID_FEntry.set(0.0);
+
+      drivePID_PTopic.setPersistent(true);
+      drivePID_PTopic.setRetained(true);
+      drivePID_ITopic.setPersistent(true);
+      drivePID_ITopic.setRetained(true);
+      drivePID_DTopic.setPersistent(true);
+      drivePID_DTopic.setRetained(true);
+      drivePID_FTopic.setPersistent(true);
+      drivePID_FTopic.setRetained(true);
+
+      configSub = configTopic.subscribe("");
    }
 
    /**
@@ -96,6 +144,8 @@ public class Robot extends TimedRobot {
       if (m_autonomousCommand != null) {
          m_autonomousCommand.cancel();
       }
+
+      logger.info("config={}", configSub.get());
    }
 
    /** This function is called periodically during operator control. */
