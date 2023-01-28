@@ -1,0 +1,47 @@
+[
+  {
+    "name": "/501Prefs/config",
+    "type": "string",
+    "value": "501-Robot 2023.0.0.0 Stu-PID 20230128-142048 780bd98",
+    "properties": {
+      "persistent": true,
+      "retained": true
+    }
+  },
+  {
+    "name": "/501Prefs/Drive/P",
+    "type": "double",
+    "value": 0.0,
+    "properties": {
+      "persistent": true,
+      "retained": true
+    }
+  },
+  {
+    "name": "/501Prefs/Drive/I",
+    "type": "double",
+    "value": 0.0,
+    "properties": {
+      "persistent": true,
+      "retained": true
+    }
+  },
+  {
+    "name": "/501Prefs/Drive/D",
+    "type": "double",
+    "value": 0.0,
+    "properties": {
+      "persistent": true,
+      "retained": true
+    }
+  },
+  {
+    "name": "/501Prefs/Drive/F",
+    "type": "double",
+    "value": 0.0,
+    "properties": {
+      "persistent": true,
+      "retained": true
+    }
+  }
+]
