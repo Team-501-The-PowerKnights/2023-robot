@@ -1,0 +1,11 @@
+[
+  {
+    "name": "/501Prefs/config",
+    "type": "string",
+    "value": "501-Robot 2023.0.0.0 Stu-PID 20230122-123726 7c60e7d",
+    "properties": {
+      "persistent": true,
+      "retained": true
+    }
+  }
+]
