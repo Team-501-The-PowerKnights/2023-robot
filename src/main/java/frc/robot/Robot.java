@@ -43,6 +43,11 @@ public class Robot extends TimedRobot {
 
    private Joystick driverStick;
 
+   private CANSparkMax armRotate;
+   private CANSparkMax armExtend;
+
+   private Joystick operatorStick;
+
    /**
     * This function is run when the robot is first started up and should be used
     * for any initialization code.
@@ -66,16 +71,23 @@ public class Robot extends TimedRobot {
       rightRear = new CANSparkMax(14, MotorType.kBrushless);
       checkError(rightRear.restoreFactoryDefaults(), "LF restore factory defaults {}");
 
-      // // Following mode (Rear follows Front)
-      // checkError(leftRear.follow(leftFront), "L setting following mode {}");
+      // Following mode (Rear follows Front)
+      checkError(leftRear.follow(leftFront), "L setting following mode {}");
 
-      // // Inverted (Right from Left) and Following mode (Rear follows Front)
-      // rightFront.setInverted(true);
-      // checkError(rightRear.follow(rightFront), "R setting following mode {}");
+      // Inverted (Right from Left) and Following mode (Rear follows Front)
+      rightFront.setInverted(true);
+      checkError(rightRear.follow(rightFront), "R setting following mode {}");
 
-      // drive = new DifferentialDrive(leftFront, rightFront);
+      drive = new DifferentialDrive(leftFront, rightFront);
 
-      // driverStick = new Joystick(0);
+      driverStick = new Joystick(0);
+
+      // armRotate = new CANSparkMax(11, MotorType.kBrushless);
+      // checkError(armRotate.restoreFactoryDefaults(), "LF restore factory defaults {}");
+      // armExtend = new CANSparkMax(12, MotorType.kBrushless);
+      // checkError(armExtend.restoreFactoryDefaults(), "LF restore factory defaults {}");
+
+      // operatorStick = new Joystick(1);
    }
 
    // last error (not the same as kOk)
@@ -112,11 +124,10 @@ public class Robot extends TimedRobot {
    /** This function is called once each time the robot enters DisSabled mode. */
    @Override
    public void disabledInit() {
-      // TODO: Put back to just master on each side
       leftFront.set(0);
-      leftRear.set(0);
+      // leftRear.set(0);
       rightFront.set(0);
-      rightRear.set(0);
+      // rightRear.set(0);
    }
 
    @Override
@@ -155,6 +166,7 @@ public class Robot extends TimedRobot {
    /** This function is called periodically during operator control. */
    @Override
    public void teleopPeriodic() {
+      // FIXME: Make this right calls
       drive.arcadeDrive(-driverStick.getY(), -driverStick.getX());
    }
 
