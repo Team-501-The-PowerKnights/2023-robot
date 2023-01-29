@@ -155,10 +155,12 @@ public class Robot extends TimedRobot {
    public void teleopPeriodic() {
       // leftFront.set(0.3);
       // // leftRear.set(0.3);
-      // rightFront.set(0.3);
+      // rightFront.set(0.3);S
       // // rightRear.set(0.3);
 
-      drive.arcadeDrive(-driverStick.getY(), -driverStick.getX());
+      // drive.arcadeDrive(-driverStick.getY(), -driverStick.getX());
+      drive.arcadeDrive(-driverStick.getRawAxis(1) * 0.6,
+            -driverStick.getRawAxis(4) * 0.6);
    }
 
    @Override
