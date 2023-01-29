@@ -6,6 +6,7 @@ package frc.robot;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.REVLibError;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -82,12 +83,14 @@ public class Robot extends TimedRobot {
 
       driverStick = new Joystick(0);
 
-      // armRotate = new CANSparkMax(11, MotorType.kBrushless);
-      // checkError(armRotate.restoreFactoryDefaults(), "LF restore factory defaults {}");
-      // armExtend = new CANSparkMax(12, MotorType.kBrushless);
-      // checkError(armExtend.restoreFactoryDefaults(), "LF restore factory defaults {}");
+      armRotate = new CANSparkMax(21, MotorType.kBrushless);
+      checkError(armRotate.restoreFactoryDefaults(), "AR restore factory defaults {}");
+      checkError(armRotate.setIdleMode(IdleMode.kBrake), "AR set idle mode to break {}");
+      armExtend = new CANSparkMax(22, MotorType.kBrushless);
+      checkError(armExtend.restoreFactoryDefaults(), "AE restore factory defaults {}");
+      checkError(armExtend.setIdleMode(IdleMode.kBrake), "AE set idle mode to break {}");
 
-      // operatorStick = new Joystick(1);
+      operatorStick = new Joystick(1);
    }
 
    // last error (not the same as kOk)
@@ -128,6 +131,9 @@ public class Robot extends TimedRobot {
       // leftRear.set(0);
       rightFront.set(0);
       // rightRear.set(0);
+
+      armRotate.set(0);
+      armExtend.set(0);
    }
 
    @Override
@@ -167,7 +173,9 @@ public class Robot extends TimedRobot {
    @Override
    public void teleopPeriodic() {
       // FIXME: Make this right calls
-      drive.arcadeDrive(-driverStick.getY(), -driverStick.getX());
+      // xSpeed,zRotation
+      // drive.arcadeDrive(-driverStick.getY(), -driverStick.getX());
+      drive.arcadeDrive(0, 0);
    }
 
    @Override
@@ -185,6 +193,12 @@ public class Robot extends TimedRobot {
       // // leftRear.set(0.3);
       // rightFront.set(0.3);
       // // rightRear.set(0.3);
+
+      // FWD: Up, BCK: Down - so reverse sign
+      armRotate.set(-operatorStick.getRawAxis(1) * 0.20);
+
+      // FWD: Out, BCK: In - no need to reverse sign
+      armExtend.set(operatorStick.getRawAxis(5) * 0.20);
    }
 
    /** This function is called once when the robot is first started up. */
