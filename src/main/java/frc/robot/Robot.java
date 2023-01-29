@@ -4,18 +4,16 @@
 
 package frc.robot;
 
-import edu.wpi.first.networktables.DoubleArrayTopic;
-import edu.wpi.first.networktables.DoubleEntry;
-import edu.wpi.first.networktables.DoubleTopic;
-import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.networktables.StringPublisher;
-import edu.wpi.first.networktables.StringSubscriber;
-import edu.wpi.first.networktables.StringTopic;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.REVLibError;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.config.VersionInfo;
+
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -35,8 +33,14 @@ public class Robot extends TimedRobot {
 
    private RobotContainer m_robotContainer;
 
-   private StringPublisher configPub;
-   private StringSubscriber configSub;
+   private CANSparkMax leftFront;
+   private CANSparkMax leftRear;
+   private CANSparkMax rightFront;
+   private CANSparkMax rightRear;
+
+   private DifferentialDrive drive;
+
+   private Joystick driverStick;
 
    /**
     * This function is run when the robot is first started up and should be used
@@ -51,42 +55,38 @@ public class Robot extends TimedRobot {
       logger.info("Hellow, World (2023)!");
       System.out.println("Hello, World (2023)!");
 
-      NetworkTableInstance inst = NetworkTableInstance.getDefault();
-      NetworkTable table = inst.getTable("501Prefs");
+      // Instantiation and factory default-ing motors (can't persist due to timing)
+      leftFront = new CANSparkMax(11, MotorType.kBrushless);
+      checkError(leftFront.restoreFactoryDefaults(), "LF restore factory defaults {}");
+      leftRear = new CANSparkMax(12, MotorType.kBrushless);
+      checkError(leftRear.restoreFactoryDefaults(), "LF restore factory defaults {}");
+      rightFront = new CANSparkMax(13, MotorType.kBrushless);
+      checkError(rightFront.restoreFactoryDefaults(), "LF restore factory defaults {}");
+      rightRear = new CANSparkMax(14, MotorType.kBrushless);
+      checkError(rightRear.restoreFactoryDefaults(), "LF restore factory defaults {}");
 
-      StringTopic configTopic = table.getStringTopic("config");
+      // Following mode (Rear follows Front)
+      checkError(leftRear.follow(leftFront), "L setting following mode {}");
 
-      configPub = configTopic.publish();
-      configPub.set(VersionInfo.version);
+      // Following mode (Rear follows Front)
+      rightFront.setInverted(true);
+      checkError(rightRear.follow(rightFront), "R setting following mode {}");
 
-      configTopic.setPersistent(true);
-      configTopic.setRetained(true);
+      drive = new DifferentialDrive(leftFront, rightFront);
 
-      configPub.close();
+      driverStick = new Joystick(0);
+   }
 
-      DoubleTopic drivePID_PTopic = table.getDoubleTopic("Drive/P");
-      DoubleEntry drivePID_PEntry = drivePID_PTopic.getEntry(0.0);
-      drivePID_PEntry.set(0.0);
-      DoubleTopic drivePID_ITopic = table.getDoubleTopic("Drive/I");
-      DoubleEntry drivePID_IEntry = drivePID_ITopic.getEntry(0.0);
-      drivePID_IEntry.set(0.0);
-      DoubleTopic drivePID_DTopic = table.getDoubleTopic("Drive/D");
-      DoubleEntry drivePID_DEntry = drivePID_DTopic.getEntry(0.0);
-      drivePID_DEntry.set(0.0);
-      DoubleTopic drivePID_FTopic = table.getDoubleTopic("Drive/F");
-      DoubleEntry drivePID_FEntry = drivePID_FTopic.getEntry(0.0);
-      drivePID_FEntry.set(0.0);
+   // last error (not the same as kOk)
+   // TODO: Use to set a degraded error status/state on subsystem
+   @SuppressWarnings("unused")
+   private REVLibError lastError;
 
-      drivePID_PTopic.setPersistent(true);
-      drivePID_PTopic.setRetained(true);
-      drivePID_ITopic.setPersistent(true);
-      drivePID_ITopic.setRetained(true);
-      drivePID_DTopic.setPersistent(true);
-      drivePID_DTopic.setRetained(true);
-      drivePID_FTopic.setPersistent(true);
-      drivePID_FTopic.setRetained(true);
-
-      configSub = configTopic.subscribe("");
+   private void checkError(REVLibError error, String message) {
+      if (error != REVLibError.kOk) {
+         lastError = error;
+         logger.error(message, error);
+      }
    }
 
    /**
@@ -108,9 +108,13 @@ public class Robot extends TimedRobot {
       CommandScheduler.getInstance().run();
    }
 
-   /** This function is called once each time the robot enters Disabled mode. */
+   /** This function is called once each time the robot enters DisSabled mode. */
    @Override
    public void disabledInit() {
+      leftFront.set(0);
+      // leftRear.set(0);
+      rightFront.set(0);
+      // rightRear.set(0);
    }
 
    @Override
@@ -144,13 +148,17 @@ public class Robot extends TimedRobot {
       if (m_autonomousCommand != null) {
          m_autonomousCommand.cancel();
       }
-
-      logger.info("config={}", configSub.get());
    }
 
    /** This function is called periodically during operator control. */
    @Override
    public void teleopPeriodic() {
+      // leftFront.set(0.3);
+      // // leftRear.set(0.3);
+      // rightFront.set(0.3);
+      // // rightRear.set(0.3);
+
+      drive.arcadeDrive(-driverStick.getY(), -driverStick.getX());
    }
 
    @Override
