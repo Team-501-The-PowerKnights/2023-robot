@@ -11,6 +11,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -65,16 +66,16 @@ public class Robot extends TimedRobot {
       rightRear = new CANSparkMax(14, MotorType.kBrushless);
       checkError(rightRear.restoreFactoryDefaults(), "LF restore factory defaults {}");
 
-      // Following mode (Rear follows Front)
-      checkError(leftRear.follow(leftFront), "L setting following mode {}");
+      // // Following mode (Rear follows Front)
+      // checkError(leftRear.follow(leftFront), "L setting following mode {}");
 
-      // Following mode (Rear follows Front)
-      rightFront.setInverted(true);
-      checkError(rightRear.follow(rightFront), "R setting following mode {}");
+      // // Inverted (Right from Left) and Following mode (Rear follows Front)
+      // rightFront.setInverted(true);
+      // checkError(rightRear.follow(rightFront), "R setting following mode {}");
 
-      drive = new DifferentialDrive(leftFront, rightFront);
+      // drive = new DifferentialDrive(leftFront, rightFront);
 
-      driverStick = new Joystick(0);
+      // driverStick = new Joystick(0);
    }
 
    // last error (not the same as kOk)
@@ -111,10 +112,11 @@ public class Robot extends TimedRobot {
    /** This function is called once each time the robot enters DisSabled mode. */
    @Override
    public void disabledInit() {
+      // TODO: Put back to just master on each side
       leftFront.set(0);
-      // leftRear.set(0);
+      leftRear.set(0);
       rightFront.set(0);
-      // rightRear.set(0);
+      rightRear.set(0);
    }
 
    @Override
@@ -153,16 +155,13 @@ public class Robot extends TimedRobot {
    /** This function is called periodically during operator control. */
    @Override
    public void teleopPeriodic() {
-      // leftFront.set(0.3);
-      // // leftRear.set(0.3);
-      // rightFront.set(0.3);
-      // // rightRear.set(0.3);
-
       drive.arcadeDrive(-driverStick.getY(), -driverStick.getX());
    }
 
    @Override
    public void testInit() {
+      // Want our programmed interaction with robot.
+      LiveWindow.setEnabled(false);
       // Cancels all running commands at the start of test mode.
       CommandScheduler.getInstance().cancelAll();
    }
@@ -170,6 +169,10 @@ public class Robot extends TimedRobot {
    /** This function is called periodically during test mode. */
    @Override
    public void testPeriodic() {
+      // leftFront.set(0.3);
+      // // leftRear.set(0.3);
+      // rightFront.set(0.3);
+      // // rightRear.set(0.3);
    }
 
    /** This function is called once when the robot is first started up. */
