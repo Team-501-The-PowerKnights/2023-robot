@@ -6,11 +6,13 @@ package frc.robot;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.REVLibError;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -42,6 +44,11 @@ public class Robot extends TimedRobot {
 
    private Joystick driverStick;
 
+   private CANSparkMax armRotate;
+   private CANSparkMax armExtend;
+
+   private Joystick operatorStick;
+
    /**
     * This function is run when the robot is first started up and should be used
     * for any initialization code.
@@ -68,13 +75,22 @@ public class Robot extends TimedRobot {
       // Following mode (Rear follows Front)
       checkError(leftRear.follow(leftFront), "L setting following mode {}");
 
-      // Following mode (Rear follows Front)
+      // Inverted (Right from Left) and Following mode (Rear follows Front)
       rightFront.setInverted(true);
       checkError(rightRear.follow(rightFront), "R setting following mode {}");
 
       drive = new DifferentialDrive(leftFront, rightFront);
 
       driverStick = new Joystick(0);
+
+      armRotate = new CANSparkMax(21, MotorType.kBrushless);
+      checkError(armRotate.restoreFactoryDefaults(), "AR restore factory defaults {}");
+      checkError(armRotate.setIdleMode(IdleMode.kBrake), "AR set idle mode to break {}");
+      armExtend = new CANSparkMax(22, MotorType.kBrushless);
+      checkError(armExtend.restoreFactoryDefaults(), "AE restore factory defaults {}");
+      checkError(armExtend.setIdleMode(IdleMode.kBrake), "AE set idle mode to break {}");
+
+      operatorStick = new Joystick(1);
    }
 
    // last error (not the same as kOk)
@@ -115,6 +131,9 @@ public class Robot extends TimedRobot {
       // leftRear.set(0);
       rightFront.set(0);
       // rightRear.set(0);
+
+      armRotate.set(0);
+      armExtend.set(0);
    }
 
    @Override
@@ -153,13 +172,16 @@ public class Robot extends TimedRobot {
    /** This function is called periodically during operator control. */
    @Override
    public void teleopPeriodic() {
+      // FIXME: Make this right calls
+      // xSpeed,zRotation
       // drive.arcadeDrive(-driverStick.getY(), -driverStick.getX());
-      drive.arcadeDrive(-driverStick.getRawAxis(1) * 0.6,
-            -driverStick.getRawAxis(4) * 0.6);
+      drive.arcadeDrive(0, 0);
    }
 
    @Override
    public void testInit() {
+      // Want our programmed interaction with robot.
+      LiveWindow.setEnabled(false);
       // Cancels all running commands at the start of test mode.
       CommandScheduler.getInstance().cancelAll();
    }
@@ -167,6 +189,16 @@ public class Robot extends TimedRobot {
    /** This function is called periodically during test mode. */
    @Override
    public void testPeriodic() {
+      // leftFront.set(0.3);
+      // // leftRear.set(0.3);
+      // rightFront.set(0.3);
+      // // rightRear.set(0.3);
+
+      // FWD: Up, BCK: Down - so reverse sign
+      armRotate.set(-operatorStick.getRawAxis(1) * 0.20);
+
+      // FWD: Out, BCK: In - no need to reverse sign
+      armExtend.set(operatorStick.getRawAxis(5) * 0.20);
    }
 
    /** This function is called once when the robot is first started up. */
