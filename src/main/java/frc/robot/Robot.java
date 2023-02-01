@@ -127,10 +127,7 @@ public class Robot extends TimedRobot {
    /** This function is called once each time the robot enters DisSabled mode. */
    @Override
    public void disabledInit() {
-      leftFront.set(0);
-      // leftRear.set(0);
-      rightFront.set(0);
-      // rightRear.set(0);
+      drive.arcadeDrive(0, 0);
 
       armRotate.set(0);
       armExtend.set(0);
@@ -174,8 +171,10 @@ public class Robot extends TimedRobot {
    public void teleopPeriodic() {
       // FIXME: Make this right calls
       // xSpeed,zRotation
+      // drive.arcadeDrive(0, 0);
       // drive.arcadeDrive(-driverStick.getY(), -driverStick.getX());
-      drive.arcadeDrive(0, 0);
+      drive.arcadeDrive(-driverStick.getRawAxis(1) * 0.60,
+            -driverStick.getRawAxis(4) * 0.60);
    }
 
    @Override
@@ -189,11 +188,6 @@ public class Robot extends TimedRobot {
    /** This function is called periodically during test mode. */
    @Override
    public void testPeriodic() {
-      // leftFront.set(0.3);
-      // // leftRear.set(0.3);
-      // rightFront.set(0.3);
-      // // rightRear.set(0.3);
-
       // FWD: Up, BCK: Down - so reverse sign
       armRotate.set(-operatorStick.getRawAxis(1) * 0.20);
 
