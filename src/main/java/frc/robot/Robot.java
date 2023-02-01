@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.REVLibError;
 import com.revrobotics.CANSparkMax.IdleMode;
@@ -46,6 +48,9 @@ public class Robot extends TimedRobot {
 
    private CANSparkMax armRotate;
    private CANSparkMax armExtend;
+
+   private TalonFX leftIngest;
+   private TalonFX rightIngest;
 
    private Joystick operatorStick;
 
@@ -90,6 +95,9 @@ public class Robot extends TimedRobot {
       checkError(armExtend.restoreFactoryDefaults(), "AE restore factory defaults {}");
       checkError(armExtend.setIdleMode(IdleMode.kBrake), "AE set idle mode to break {}");
 
+      leftIngest = new TalonFX(31);
+      rightIngest = new TalonFX(32);
+
       operatorStick = new Joystick(1);
    }
 
@@ -131,6 +139,9 @@ public class Robot extends TimedRobot {
 
       armRotate.set(0);
       armExtend.set(0);
+
+      leftIngest.set(TalonFXControlMode.PercentOutput, 0);
+      rightIngest.set(TalonFXControlMode.PercentOutput, 0);
    }
 
    @Override
@@ -175,6 +186,25 @@ public class Robot extends TimedRobot {
       // drive.arcadeDrive(-driverStick.getY(), -driverStick.getX());
       drive.arcadeDrive(-driverStick.getRawAxis(1) * 0.60,
             -driverStick.getRawAxis(4) * 0.60);
+
+      // FWD: Up, BCK: Down - so reverse sign
+      //armRotate.set(-operatorStick.getRawAxis(1) * 0.20);
+
+      // FWD: Out, BCK: In - no need to reverse sign
+      armExtend.set(operatorStick.getRawAxis(5) * 0.20);
+
+      double inSpeed = operatorStick.getRawAxis(2);
+      double outSpeed = operatorStick.getRawAxis(3);
+      double speed = 0;
+      if (inSpeed > outSpeed) {
+         speed = inSpeed;
+      }
+      else {
+         speed = -outSpeed;
+      }
+      speed *= 0.30;
+      leftIngest.set(TalonFXControlMode.PercentOutput, speed);
+      rightIngest.set(TalonFXControlMode.PercentOutput, -speed);
    }
 
    @Override
@@ -188,11 +218,18 @@ public class Robot extends TimedRobot {
    /** This function is called periodically during test mode. */
    @Override
    public void testPeriodic() {
-      // FWD: Up, BCK: Down - so reverse sign
-      armRotate.set(-operatorStick.getRawAxis(1) * 0.20);
-
-      // FWD: Out, BCK: In - no need to reverse sign
-      armExtend.set(operatorStick.getRawAxis(5) * 0.20);
+      // double inSpeed = operatorStick.getRawAxis(2);
+      // double outSpeed = operatorStick.getRawAxis(3);
+      // double speed = 0;
+      // if (inSpeed > outSpeed) {
+      //    speed = inSpeed;
+      // }
+      // else {
+      //    speed = -outSpeed;
+      // }
+      // speed *= 0.30;
+      // leftIngest.set(TalonFXControlMode.PercentOutput, speed);
+      // rightIngest.set(TalonFXControlMode.PercentOutput, -speed);
    }
 
    /** This function is called once when the robot is first started up. */
