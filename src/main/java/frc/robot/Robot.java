@@ -4,13 +4,7 @@
 
 package frc.robot;
 
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.REVLibError;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -33,15 +27,6 @@ public class Robot extends TimedRobot {
 
    private RobotContainer m_robotContainer;
 
-   private CANSparkMax leftFront;
-   private CANSparkMax leftRear;
-   private CANSparkMax rightFront;
-   private CANSparkMax rightRear;
-
-   private DifferentialDrive drive;
-
-   private Joystick driverStick;
-
    /**
     * This function is run when the robot is first started up and should be used
     * for any initialization code.
@@ -54,39 +39,6 @@ public class Robot extends TimedRobot {
 
       logger.info("Hellow, World (2023)!");
       System.out.println("Hello, World (2023)!");
-
-      // Instantiation and factory default-ing motors (can't persist due to timing)
-      leftFront = new CANSparkMax(11, MotorType.kBrushless);
-      checkError(leftFront.restoreFactoryDefaults(), "LF restore factory defaults {}");
-      leftRear = new CANSparkMax(12, MotorType.kBrushless);
-      checkError(leftRear.restoreFactoryDefaults(), "LF restore factory defaults {}");
-      rightFront = new CANSparkMax(13, MotorType.kBrushless);
-      checkError(rightFront.restoreFactoryDefaults(), "LF restore factory defaults {}");
-      rightRear = new CANSparkMax(14, MotorType.kBrushless);
-      checkError(rightRear.restoreFactoryDefaults(), "LF restore factory defaults {}");
-
-      // Following mode (Rear follows Front)
-      checkError(leftRear.follow(leftFront), "L setting following mode {}");
-
-      // Following mode (Rear follows Front)
-      rightFront.setInverted(true);
-      checkError(rightRear.follow(rightFront), "R setting following mode {}");
-
-      drive = new DifferentialDrive(leftFront, rightFront);
-
-      driverStick = new Joystick(0);
-   }
-
-   // last error (not the same as kOk)
-   // TODO: Use to set a degraded error status/state on subsystem
-   @SuppressWarnings("unused")
-   private REVLibError lastError;
-
-   private void checkError(REVLibError error, String message) {
-      if (error != REVLibError.kOk) {
-         lastError = error;
-         logger.error(message, error);
-      }
    }
 
    /**
@@ -111,10 +63,6 @@ public class Robot extends TimedRobot {
    /** This function is called once each time the robot enters DisSabled mode. */
    @Override
    public void disabledInit() {
-      leftFront.set(0);
-      // leftRear.set(0);
-      rightFront.set(0);
-      // rightRear.set(0);
    }
 
    @Override
@@ -153,9 +101,6 @@ public class Robot extends TimedRobot {
    /** This function is called periodically during operator control. */
    @Override
    public void teleopPeriodic() {
-      // drive.arcadeDrive(-driverStick.getY(), -driverStick.getX());
-      drive.arcadeDrive(-driverStick.getRawAxis(1) * 0.6,
-            -driverStick.getRawAxis(4) * 0.6);
    }
 
    @Override
@@ -167,16 +112,6 @@ public class Robot extends TimedRobot {
    /** This function is called periodically during test mode. */
    @Override
    public void testPeriodic() {
-   }
-
-   /** This function is called once when the robot is first started up. */
-   @Override
-   public void simulationInit() {
-   }
-
-   /** This function is called periodically whilst in simulation. */
-   @Override
-   public void simulationPeriodic() {
    }
 
 }
