@@ -35,6 +35,7 @@ public class Robot extends TimedRobot {
 
    private Command m_autonomousCommand;
 
+   @SuppressWarnings("unused")
    private RobotContainer m_robotContainer;
 
    private CANSparkMax leftFront;
@@ -154,7 +155,7 @@ public class Robot extends TimedRobot {
     */
    @Override
    public void autonomousInit() {
-      m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+      m_autonomousCommand = null;
 
       // schedule the autonomous command (example)
       if (m_autonomousCommand != null) {
