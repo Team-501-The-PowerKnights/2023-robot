@@ -14,16 +14,18 @@ package frc.robot;
 
 import java.util.List;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+
+import frc.robot.modules.IModule;
+import frc.robot.modules.ModulesFactory;
 import frc.robot.preferences.PreferencesManager;
 import frc.robot.properties.PropertiesManager;
 import frc.robot.subsystems.ISubsystem;
 import frc.robot.subsystems.SubsystemsFactory;
 import frc.robot.telemetry.TelemetryManager;
-import frc.robot.telemetry.TelemetryNames;
+
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -47,9 +49,8 @@ public class RobotContainer {
    // CommandXboxController(
    // OperatorConstants.kDriverControllerPort);
 
-
    //
-   // private List<IModule> modules;
+   private List<IModule> modules;
    //
    // private List<ISensor> sensors;
    //
@@ -70,9 +71,9 @@ public class RobotContainer {
       // Make sure Telemetry is initialized
       initializeTelemetry();
 
-      // // Create all the modules
-      // modules = ModulesFactory.constructModules();
-      // followers.addAll(modules);
+      // Create all the modules
+      modules = ModulesFactory.constructModules();
+      ModeFollowers.getInstance().addAll(modules);
 
       // // Create all the sensors
       // sensors = SensorsFactory.constructSensors();
@@ -84,7 +85,6 @@ public class RobotContainer {
 
       // Configure the trigger bindings
       configureBindings();
-
 
       logger.info("Created robot container");
    }

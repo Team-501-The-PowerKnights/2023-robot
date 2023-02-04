@@ -8,6 +8,8 @@
 
 package frc.robot.telemetry;
 
+import frc.robot.modules.ModuleNames;
+
 /**
  * Provides a standard way of defining names for the <i>Telemetry</i> used in
  * the program. No code should define or use a hard-coded string outside of the
@@ -65,6 +67,22 @@ public final class TelemetryNames {
       public static final String status = name + ".status";
       // The current commands running on the robot
       public static final String currentCommands = name + ".currentCommands";
+   }
+
+   /***************
+    * Modules
+    ***************/
+
+   public final class PDP {
+      private static final String name = ModuleNames.pdpName;
+
+      public static final String status = name + ".status";
+      public static final String implClass = name + ".implClass";
+      public static final String defCommand = name + "defCommand";
+
+      public static final String busVoltage = name + ".busVoltage";
+      public static final String totalCurrent = name + ".totalCurrent";
+      public static final String totalEnergy = name + ".totalEnergy";
    }
 
 }
