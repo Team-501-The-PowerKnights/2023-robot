@@ -1,10 +1,10 @@
-/*-----------------------------------------------------------------------*/
-/* Copyright (c) Team 501 - The PowerKnights. All Rights Reserved. */
-/* Open Source Software - may be modified and shared by other FRC teams */
-/* under the terms of the Team501 license. The code must be accompanied */
-/* by the Team 501 - The PowerKnights license file in the root directory */
-/* of this project. */
-/*-----------------------------------------------------------------------*/
+/*------------------------------------------------------------------------*/
+/*- Copyright (c) Team 501 - The PowerKnights. All Rights Reserved.       */
+/*- Open Source Software - may be modified and shared by other FRC teams  */
+/*- under the terms of the Team501 license. The code must be accompanied  */
+/*- by the Team 501 - The PowerKnights license file in the root directory */
+/*- of this project.                                                      */
+/*------------------------------------------------------------------------*/
 
 package frc.robot.subsystems;
 
@@ -15,11 +15,11 @@ package frc.robot.subsystems;
  **/
 public class SubsystemNames {
 
-    public static final String hmiName = "HMI";
+   public static final String hmiName = "HMI";
 
-    public static final String driveName = "Drive";
+   public static final String driveName = "Drive";
 
-    public static final String armName = "Arm";
-    public static final String gripperName = "Gripper";
+   public static final String armName = "Arm";
+   public static final String gripperName = "Gripper";
 
 }
