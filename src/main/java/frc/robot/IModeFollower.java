@@ -11,81 +11,82 @@ package frc.robot;
 /**
  * An interface that allows things like sensors, modules and subsystems
  * track the mode transistions of the robot as defined by the
- * <code>Iterative</code> flavor we use
+ * <code>Iterative</code> flavor we use.
+ * 
  * {@link edu.wpi.first.wpilibj.IterativeRobotBase robot}.
  */
 public interface IModeFollower {
 
-    /**
-     * Initialization code for disabled mode should go here.
-     * <p>
-     * Users should override this method for initialization code which
-     * will be called each time the robot enters disabled mode.
-     */
-    default public void disabledInit() {
-    };
+   /**
+    * Initialization code for disabled mode should go here.
+    * <p>
+    * Users should override this method for initialization code which
+    * will be called each time the robot enters disabled mode.
+    */
+   default public void disabledInit() {
+   };
 
-    /**
-     * Exit code for disabled mode should go here.
-     * <p>
-     * Users should override this method for code which will be called
-     * each time the robot exits disabled mode.
-     */
-    default public void disabledExit() {
-    };
+   /**
+    * Exit code for disabled mode should go here.
+    * <p>
+    * Users should override this method for code which will be called
+    * each time the robot exits disabled mode.
+    */
+   default public void disabledExit() {
+   };
 
-    /**
-     * Initialization code for autonomous mode should go here.
-     * <p>
-     * Users should override this method for initialization code which
-     * will be called each time the robot enters autonomous mode.
-     */
-    default public void autonomousInit() {
-    };
+   /**
+    * Initialization code for autonomous mode should go here.
+    * <p>
+    * Users should override this method for initialization code which
+    * will be called each time the robot enters autonomous mode.
+    */
+   default public void autonomousInit() {
+   };
 
-    /**
-     * Exit code for autonomous mode should go here.
-     * <p>
-     * Users should override this method for code which will be called
-     * each time the robot exits autonomous mode.
-     */
-    default public void autonomousExit() {
-    };
+   /**
+    * Exit code for autonomous mode should go here.
+    * <p>
+    * Users should override this method for code which will be called
+    * each time the robot exits autonomous mode.
+    */
+   default public void autonomousExit() {
+   };
 
-    /**
-     * Initialization code for teleop mode should go here.
-     * <p>
-     * Users should override this method for initialization code which
-     * will be called each time the robot enters teleop mode.
-     */
-    default public void teleopInit() {
-    };
+   /**
+    * Initialization code for teleop mode should go here.
+    * <p>
+    * Users should override this method for initialization code which
+    * will be called each time the robot enters teleop mode.
+    */
+   default public void teleopInit() {
+   };
 
-    /**
-     * Exit code for teleop mode should go here.
-     * <p>
-     * Users should override this method for code which will be called
-     * each time the robot exits teleop mode.
-     */
-    default public void teleopExit() {
-    };
+   /**
+    * Exit code for teleop mode should go here.
+    * <p>
+    * Users should override this method for code which will be called
+    * each time the robot exits teleop mode.
+    */
+   default public void teleopExit() {
+   };
 
-    /**
-     * Initialization code for test mode should go here.
-     * <p>
-     * Users should override this method for initialization code which
-     * will be called each time the robot enters test mode.
-     */
-    default public void testInit() {
-    };
+   /**
+    * Initialization code for test mode should go here.
+    * <p>
+    * Users should override this method for initialization code which
+    * will be called each time the robot enters test mode.
+    */
+   default public void testInit() {
+   };
 
-    /**
-     * Exit code for test mode should go here.
-     * <p>
-     * Users should override this method for code which will be called
-     * each time the robot exits test mode.
-     */
-    default public void testExit() {
-    };
+   /**
+    * Exit code for test mode should go here.
+    * <p>
+    * Users should override this method for code which will be called
+    * each time the robot exits test mode.
+    */
+   default public void testExit() {
+   };
 
 }
