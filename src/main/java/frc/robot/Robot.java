@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
+import frc.robot.telemetry.TelemetryManager;
 import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
@@ -68,14 +69,14 @@ public class Robot extends TimedRobot {
    public void robotInit() {
       logger.info("initializing");
 
-      // Get the loop period set for robot
-      loopPeriod = getPeriod();
-
       // Wait until we get the configuration data from driver station
       waitForDriverStationData();
 
       // Initialize the dashboard to false for status
       SmartDashboard.putBoolean(TelemetryNames.Misc.initStatus, false);
+
+      // Get the loop period set for robot
+      loopPeriod = getPeriod();
 
       // Instantiate our RobotContainer. This will perform all our button bindings,
       // and put our autonomous chooser on the dashboard.
@@ -96,6 +97,12 @@ public class Robot extends TimedRobot {
       endGameStarted = false;
       SmartDashboard.putBoolean(TelemetryNames.Misc.endGameStarted, endGameStarted);
       addPeriodic(endGameDeterminer, 2.0);
+
+      // Set up the telemetry reporter
+      addPeriodic(telemetryReporter, 5 * getLoopPeriod());
+
+      // Put indication of initialization status on dash
+      determineInitStatus();
 
       logger.info("initialized");
    }
@@ -118,6 +125,18 @@ public class Robot extends TimedRobot {
       // }
       // count++;
       // }
+   }
+
+   private void determineInitStatus() {
+      // TODO: Make tri-color status when implemented
+      long warnCount = logger.getWarnCount();
+      long errorCount = logger.getErrorCount();
+      logger.info("init status: errorCount={}, warnCount={}", errorCount, warnCount);
+      // red for bad, green for good (so reverse sense)
+      boolean status = !((errorCount != 0) || (warnCount != 0));
+      SmartDashboard.putBoolean(TelemetryNames.Misc.initStatus, status);
+
+      // TODO: Parse network tables for all status and do a roll-up
    }
 
    /**
@@ -359,4 +378,16 @@ public class Robot extends TimedRobot {
    static public boolean isMatchComplete() {
       return (autonomousComplete && teleopComplete);
    }
+
+   // Periodic runnable to do the reporting off main loop
+   private Runnable telemetryReporter = new Runnable() {
+
+      @Override
+      public void run() {
+         // Update the telemetry
+         TelemetryManager.getInstance().sendTelemetry();
+      }
+
+   };
+
 }

@@ -12,9 +12,20 @@
 
 package frc.robot;
 
+import java.util.List;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.preferences.PreferencesManager;
+import frc.robot.properties.PropertiesManager;
+import frc.robot.subsystems.ISubsystem;
+import frc.robot.subsystems.SubsystemsFactory;
+import frc.robot.telemetry.TelemetryManager;
+import frc.robot.telemetry.TelemetryNames;
+import riolog.PKLogger;
+import riolog.RioLogger;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -24,6 +35,10 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  * commands, and trigger mappings) should be declared here.
  */
 public class RobotContainer {
+
+   /** Our classes' logger **/
+   private static final PKLogger logger = RioLogger.getLogger(RobotContainer.class.getName());
+
    // The robot's subsystems and commands are defined here...
    // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
@@ -32,12 +47,66 @@ public class RobotContainer {
    // CommandXboxController(
    // OperatorConstants.kDriverControllerPort);
 
+
+   //
+   // private List<IModule> modules;
+   //
+   // private List<ISensor> sensors;
+   //
+   private List<ISubsystem> subsystems;
+
    /**
     * The container for the robot. Contains subsystems, OI devices, and commands.
     */
    public RobotContainer() {
+      logger.info("Creating robot container");
+
+      // Make sure Preferences are initialized
+      intializePreferences();
+
+      // Make sure Properties file exists and can be parsed
+      initializeProperties();
+
+      // Make sure Telemetry is initialized
+      initializeTelemetry();
+
+      // // Create all the modules
+      // modules = ModulesFactory.constructModules();
+      // followers.addAll(modules);
+
+      // // Create all the sensors
+      // sensors = SensorsFactory.constructSensors();
+      // followers.addAll(sensors);
+
+      // Create all the subsystems
+      subsystems = SubsystemsFactory.constructSubsystems();
+      ModeFollowers.getInstance().addAll(subsystems);
+
       // Configure the trigger bindings
       configureBindings();
+
+
+      logger.info("Created robot container");
+   }
+
+   private void intializePreferences() {
+      // Reads and initializes all subsystems preferences
+      PreferencesManager.constructInstance();
+
+      logger.info("Preferences as initialized:");
+      PreferencesManager.getInstance().logPreferences(logger);
+   }
+
+   private void initializeProperties() {
+      // Reads and stores all the properties
+      PropertiesManager.constructInstance();
+
+      logger.info("Properties as initialized:");
+      PropertiesManager.getInstance().logProperties(logger);
+   }
+
+   private void initializeTelemetry() {
+      TelemetryManager.constructInstance();
    }
 
    /**
