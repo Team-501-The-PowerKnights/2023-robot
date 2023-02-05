@@ -45,8 +45,7 @@ public class Robot extends TimedRobot {
    private PowerDistribution powerD;
 
    private PneumaticHub pneumH;
-   private static final int gripperSolenoidChannel = 0;
-   private Solenoid gripperSolenoid;
+
 
    /*
     * Driver Stuff
@@ -71,6 +70,9 @@ public class Robot extends TimedRobot {
    private TalonFX leftIngest;
    private TalonFX rightIngest;
 
+   private static final int gripperSolenoidChannel = 0;
+   private Solenoid gripperSolenoid;
+
    /**
     * This function is run when the robot is first started up and should be used
     * for any initialization code.
@@ -85,7 +87,7 @@ public class Robot extends TimedRobot {
 
       // Instantiate and enable
       pneumH = new PneumaticHub(2);
-      pneumH.enableCompressorDigital();
+      pneumH.enableCompressorAnalog(80, 110);
 
       driverStick = new Joystick(0);
 
@@ -277,13 +279,13 @@ public class Robot extends TimedRobot {
       /*
        * Gripper Pneumatics Testing
        */
-      if (operatorStick.getRawButton(1)) {
+      if (operatorStick.getRawButton(3)) {
          if (!gripperButtonDebounce) {
             gripperButtonDebounce = true;
             logger.info("button 1 pressed - open gripper");
             gripperSolenoid.set(true);
          }
-      } else if (operatorStick.getRawButton(3)) {
+      } else if (operatorStick.getRawButton(2)) {
          if (!gripperButtonDebounce) {
             gripperButtonDebounce = true;
             logger.info("button 3 pressed - close gripper");
