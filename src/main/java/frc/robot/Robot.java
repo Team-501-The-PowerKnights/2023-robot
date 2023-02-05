@@ -9,7 +9,11 @@ import com.revrobotics.REVLibError;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.PneumaticHub;
+import edu.wpi.first.wpilibj.PowerDistribution;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -42,6 +46,12 @@ public class Robot extends TimedRobot {
 
    private Joystick driverStick;
 
+   private PowerDistribution powerD;
+
+   private PneumaticHub pneumH;
+   private static final int gripperSolenoidChannel = 0;
+   private Solenoid gripperSolenoid;
+
    /**
     * This function is run when the robot is first started up and should be used
     * for any initialization code.
@@ -52,27 +62,40 @@ public class Robot extends TimedRobot {
       // and put our autonomous chooser on the dashboard.
       m_robotContainer = new RobotContainer();
 
-      logger.info("Hellow, World (2023)!");
-      System.out.println("Hello, World (2023)!");
+      powerD = new PowerDistribution(1, ModuleType.kRev);
 
-      // Instantiation and factory default-ing motors (can't persist due to timing)
-      leftFront = new CANSparkMax(11, MotorType.kBrushless);
-      checkError(leftFront.restoreFactoryDefaults(), "LF restore factory defaults {}");
-      leftRear = new CANSparkMax(12, MotorType.kBrushless);
-      checkError(leftRear.restoreFactoryDefaults(), "LF restore factory defaults {}");
-      rightFront = new CANSparkMax(13, MotorType.kBrushless);
-      checkError(rightFront.restoreFactoryDefaults(), "LF restore factory defaults {}");
-      rightRear = new CANSparkMax(14, MotorType.kBrushless);
-      checkError(rightRear.restoreFactoryDefaults(), "LF restore factory defaults {}");
+      // Instantiate and enable
+      pneumH = new PneumaticHub(2);
+      pneumH.enableCompressorDigital();
+      // Instantiate solenoid and set to false(?) as initial state
+      gripperSolenoid = pneumH.makeSolenoid(gripperSolenoidChannel);
+      gripperSolenoid.set(false);
 
-      // Following mode (Rear follows Front)
-      checkError(leftRear.follow(leftFront), "L setting following mode {}");
-
-      // Following mode (Rear follows Front)
-      rightFront.setInverted(true);
-      checkError(rightRear.follow(rightFront), "R setting following mode {}");
-
-      drive = new DifferentialDrive(leftFront, rightFront);
+      /*
+       * // Instantiation and factory default-ing motors (can't persist due to timing)
+       * leftFront = new CANSparkMax(11, MotorType.kBrushless);
+       * checkError(leftFront.restoreFactoryDefaults(),
+       * "LF restore factory defaults {}");
+       * leftRear = new CANSparkMax(12, MotorType.kBrushless);
+       * checkError(leftRear.restoreFactoryDefaults(),
+       * "LF restore factory defaults {}");
+       * rightFront = new CANSparkMax(13, MotorType.kBrushless);
+       * checkError(rightFront.restoreFactoryDefaults(),
+       * "LF restore factory defaults {}");
+       * rightRear = new CANSparkMax(14, MotorType.kBrushless);
+       * checkError(rightRear.restoreFactoryDefaults(),
+       * "LF restore factory defaults {}");
+       * 
+       * // Following mode (Rear follows Front)
+       * checkError(leftRear.follow(leftFront), "L setting following mode {}");
+       * 
+       * // Following mode (Rear follows Front)
+       * rightFront.setInverted(true);
+       * checkError(rightRear.follow(rightFront), "R setting following mode {}");
+       * 
+       * 
+       * drive = new DifferentialDrive(leftFront, rightFront);
+       */
 
       driverStick = new Joystick(0);
    }
@@ -111,10 +134,12 @@ public class Robot extends TimedRobot {
    /** This function is called once each time the robot enters DisSabled mode. */
    @Override
    public void disabledInit() {
-      leftFront.set(0);
-      // leftRear.set(0);
-      rightFront.set(0);
-      // rightRear.set(0);
+      /*
+       * leftFront.set(0);
+       * // leftRear.set(0);
+       * rightFront.set(0);
+       * // rightRear.set(0);
+       */
    }
 
    @Override
@@ -154,19 +179,40 @@ public class Robot extends TimedRobot {
    @Override
    public void teleopPeriodic() {
       // drive.arcadeDrive(-driverStick.getY(), -driverStick.getX());
-      drive.arcadeDrive(-driverStick.getRawAxis(1) * 0.6,
-            -driverStick.getRawAxis(4) * 0.6);
+      /*
+       * drive.arcadeDrive(-driverStick.getRawAxis(1) * 0.6,
+       * -driverStick.getRawAxis(4) * 0.6);
+       */
    }
+
+   private boolean gripperButtonDebounce;
 
    @Override
    public void testInit() {
       // Cancels all running commands at the start of test mode.
       CommandScheduler.getInstance().cancelAll();
+
+      gripperButtonDebounce = false;
    }
 
    /** This function is called periodically during test mode. */
    @Override
    public void testPeriodic() {
+      if (driverStick.getRawButton(1)) {
+         if (!gripperButtonDebounce) {
+            gripperButtonDebounce = true;
+            logger.info("button 1 pressed - open gripper");
+            gripperSolenoid.set(true);
+         }
+      } else if (driverStick.getRawButton(3)) {
+         if (!gripperButtonDebounce) {
+            gripperButtonDebounce = true;
+            logger.info("button 3 pressed - close gripper");
+            gripperSolenoid.set(false);
+         }
+      } else {
+         gripperButtonDebounce = false;
+      }
    }
 
    /** This function is called once when the robot is first started up. */
