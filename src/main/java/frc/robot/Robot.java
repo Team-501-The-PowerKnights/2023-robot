@@ -12,7 +12,11 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.PneumaticHub;
+import edu.wpi.first.wpilibj.PowerDistribution;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -38,6 +42,17 @@ public class Robot extends TimedRobot {
    @SuppressWarnings("unused")
    private RobotContainer m_robotContainer;
 
+   private PowerDistribution powerD;
+
+   private PneumaticHub pneumH;
+   private static final int gripperSolenoidChannel = 0;
+   private Solenoid gripperSolenoid;
+
+   /*
+    * Driver Stuff
+    */
+   private Joystick driverStick;
+
    private CANSparkMax leftFront;
    private CANSparkMax leftRear;
    private CANSparkMax rightFront;
@@ -45,15 +60,16 @@ public class Robot extends TimedRobot {
 
    private DifferentialDrive drive;
 
-   private Joystick driverStick;
+   /*
+    * Operator Stuff
+    */
+   private Joystick operatorStick;
 
    private CANSparkMax armRotate;
    private CANSparkMax armExtend;
 
    private TalonFX leftIngest;
    private TalonFX rightIngest;
-
-   private Joystick operatorStick;
 
    /**
     * This function is run when the robot is first started up and should be used
@@ -65,8 +81,13 @@ public class Robot extends TimedRobot {
       // and put our autonomous chooser on the dashboard.
       m_robotContainer = new RobotContainer();
 
-      logger.info("Hellow, World (2023)!");
-      System.out.println("Hello, World (2023)!");
+      powerD = new PowerDistribution(1, ModuleType.kRev);
+
+      // Instantiate and enable
+      pneumH = new PneumaticHub(2);
+      pneumH.enableCompressorDigital();
+
+      driverStick = new Joystick(0);
 
       // Instantiation and factory default-ing motors (can't persist due to timing)
       leftFront = new CANSparkMax(11, MotorType.kBrushless);
@@ -87,7 +108,7 @@ public class Robot extends TimedRobot {
 
       drive = new DifferentialDrive(leftFront, rightFront);
 
-      driverStick = new Joystick(0);
+      operatorStick = new Joystick(1);
 
       armRotate = new CANSparkMax(21, MotorType.kBrushless);
       checkError(armRotate.restoreFactoryDefaults(), "AR restore factory defaults {}");
@@ -99,7 +120,9 @@ public class Robot extends TimedRobot {
       leftIngest = new TalonFX(31);
       rightIngest = new TalonFX(32);
 
-      operatorStick = new Joystick(1);
+      // Instantiate solenoid and set to false(?) as initial state
+      gripperSolenoid = pneumH.makeSolenoid(gripperSolenoidChannel);
+      gripperSolenoid.set(false);
    }
 
    // last error (not the same as kOk)
@@ -189,7 +212,7 @@ public class Robot extends TimedRobot {
             -driverStick.getRawAxis(4) * 0.60);
 
       // FWD: Up, BCK: Down - so reverse sign
-      //armRotate.set(-operatorStick.getRawAxis(1) * 0.20);
+      // armRotate.set(-operatorStick.getRawAxis(1) * 0.20);
 
       // FWD: Out, BCK: In - no need to reverse sign
       armExtend.set(operatorStick.getRawAxis(5) * 0.20);
@@ -199,8 +222,7 @@ public class Robot extends TimedRobot {
       double speed = 0;
       if (inSpeed > outSpeed) {
          speed = inSpeed;
-      }
-      else {
+      } else {
          speed = -outSpeed;
       }
       speed *= 0.30;
@@ -208,29 +230,56 @@ public class Robot extends TimedRobot {
       rightIngest.set(TalonFXControlMode.PercentOutput, -speed);
    }
 
+   private boolean gripperButtonDebounce;
+
    @Override
    public void testInit() {
       // Want our programmed interaction with robot.
       LiveWindow.setEnabled(false);
       // Cancels all running commands at the start of test mode.
       CommandScheduler.getInstance().cancelAll();
+
+      gripperButtonDebounce = false;
    }
 
    /** This function is called periodically during test mode. */
    @Override
    public void testPeriodic() {
-      // double inSpeed = operatorStick.getRawAxis(2);
-      // double outSpeed = operatorStick.getRawAxis(3);
-      // double speed = 0;
-      // if (inSpeed > outSpeed) {
-      //    speed = inSpeed;
-      // }
-      // else {
-      //    speed = -outSpeed;
-      // }
-      // speed *= 0.30;
-      // leftIngest.set(TalonFXControlMode.PercentOutput, speed);
-      // rightIngest.set(TalonFXControlMode.PercentOutput, -speed);
+      /*
+       * Gripper Ingest Testing
+       * 
+       * // double inSpeed = operatorStick.getRawAxis(2);
+       * // double outSpeed = operatorStick.getRawAxis(3);
+       * // double speed = 0;
+       * // if (inSpeed > outSpeed) {
+       * // speed = inSpeed;
+       * // }
+       * // else {
+       * // speed = -outSpeed;
+       * // }
+       * // speed *= 0.30;
+       * // leftIngest.set(TalonFXControlMode.PercentOutput, speed);
+       * // rightIngest.set(TalonFXControlMode.PercentOutput, -speed);
+       */
+
+      /*
+       * Gripper Pneumatics Testing
+       */
+      if (driverStick.getRawButton(1)) {
+         if (!gripperButtonDebounce) {
+            gripperButtonDebounce = true;
+            logger.info("button 1 pressed - open gripper");
+            gripperSolenoid.set(true);
+         }
+      } else if (driverStick.getRawButton(3)) {
+         if (!gripperButtonDebounce) {
+            gripperButtonDebounce = true;
+            logger.info("button 3 pressed - close gripper");
+            gripperSolenoid.set(false);
+         }
+      } else {
+         gripperButtonDebounce = false;
+      }
    }
 
    /** This function is called once when the robot is first started up. */
