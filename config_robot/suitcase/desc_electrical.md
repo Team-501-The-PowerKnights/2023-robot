@@ -23,7 +23,7 @@
 | Mechanism      | Controller Type  | CAN ID | Position    | PDB ID |
 | -------------- | ---------------- | ------ | ----------- | ------ |
 | Power          | REV Robotics PDH | 1      |             |        | 
-| Pneumatic      | REV Robotics PH  | 0      |             | 20     | 
+| Pneumatic      | REV Robotics PH  | 2      |             | 20     | 
 | Voltage        | CTRE VRM         |        |             | 21     | 
 | Processor      | NI RoboRIO       |        |             | 22     | 
 |                |                  |        |             |        | 
