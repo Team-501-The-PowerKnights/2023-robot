@@ -22,9 +22,9 @@
 
 | Mechanism      | Controller Type  | CAN ID | Position    | PDB ID |
 | -------------- | ---------------- | ------ | ----------- | ------ |
+| Processor      | NI RoboRIO       | 0      |             |        | 
 | Power          | CTRE PDB         | 1      |             |        | 
 | Voltage        | CTRE VRM         |        |             |        | 
-| Processor      | NI RoboRIO       |        |             |        | 
 |                |                  |        |             |        | 
 |                |                  |        |             |        | 
 |                |                  |        |             |        | 
