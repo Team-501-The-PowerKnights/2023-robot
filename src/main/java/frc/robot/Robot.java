@@ -277,13 +277,13 @@ public class Robot extends TimedRobot {
       /*
        * Gripper Pneumatics Testing
        */
-      if (driverStick.getRawButton(1)) {
+      if (operatorStick.getRawButton(1)) {
          if (!gripperButtonDebounce) {
             gripperButtonDebounce = true;
             logger.info("button 1 pressed - open gripper");
             gripperSolenoid.set(true);
          }
-      } else if (driverStick.getRawButton(3)) {
+      } else if (operatorStick.getRawButton(3)) {
          if (!gripperButtonDebounce) {
             gripperButtonDebounce = true;
             logger.info("button 3 pressed - close gripper");
