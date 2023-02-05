@@ -46,7 +46,6 @@ public class Robot extends TimedRobot {
 
    private PneumaticHub pneumH;
 
-
    /*
     * Driver Stuff
     */
@@ -244,7 +243,7 @@ public class Robot extends TimedRobot {
    public void teleopExit() {
    }
 
-   private boolean gripperButtonDebounce;
+   private boolean gripperOpen;
 
    @Override
    public void testInit() {
@@ -253,7 +252,7 @@ public class Robot extends TimedRobot {
       // Cancels all running commands at the start of test mode.
       CommandScheduler.getInstance().cancelAll();
 
-      gripperButtonDebounce = false;
+      gripperOpen = false;
    }
 
    /** This function is called periodically during test mode. */
@@ -280,19 +279,15 @@ public class Robot extends TimedRobot {
        * Gripper Pneumatics Testing
        */
       if (operatorStick.getRawButton(3)) {
-         if (!gripperButtonDebounce) {
-            gripperButtonDebounce = true;
-            logger.info("button 1 pressed - open gripper");
+         if (!gripperOpen) {
+            logger.info("button 3 pressed - open gripper");
             gripperSolenoid.set(true);
+            gripperOpen = true;
          }
-      } else if (operatorStick.getRawButton(2)) {
-         if (!gripperButtonDebounce) {
-            gripperButtonDebounce = true;
-            logger.info("button 3 pressed - close gripper");
-            gripperSolenoid.set(false);
-         }
-      } else {
-         gripperButtonDebounce = false;
+      } else if (!operatorStick.getRawButton(3) && gripperOpen) {
+         logger.info("button 3 released - close gripper");
+         gripperSolenoid.set(false);
+         gripperOpen = false;
       }
    }
 
