@@ -4,9 +4,9 @@
 
 package frc.robot;
 
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.REVLibError;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.ctre.phoenix.ErrorCode;
+import com.ctre.phoenix.motorcontrol.FollowerType;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PneumaticHub;
@@ -38,10 +38,11 @@ public class Robot extends TimedRobot {
 
    private RobotContainer m_robotContainer;
 
-   private CANSparkMax leftFront;
-   private CANSparkMax leftRear;
-   private CANSparkMax rightFront;
-   private CANSparkMax rightRear;
+   // Need to WPILib wrapper classes to function w/ Drive class
+   private WPI_VictorSPX leftFront;
+   private WPI_VictorSPX leftRear;
+   private WPI_VictorSPX rightFront;
+   private WPI_VictorSPX rightRear;
 
    private DifferentialDrive drive;
 
@@ -72,31 +73,24 @@ public class Robot extends TimedRobot {
       gripperSolenoid = pneumH.makeSolenoid(gripperSolenoidChannel);
       gripperSolenoid.set(false);
 
-      /*
-       * // Instantiation and factory default-ing motors (can't persist due to timing)
-       * leftFront = new CANSparkMax(11, MotorType.kBrushless);
-       * checkError(leftFront.restoreFactoryDefaults(),
-       * "LF restore factory defaults {}");
-       * leftRear = new CANSparkMax(12, MotorType.kBrushless);
-       * checkError(leftRear.restoreFactoryDefaults(),
-       * "LF restore factory defaults {}");
-       * rightFront = new CANSparkMax(13, MotorType.kBrushless);
-       * checkError(rightFront.restoreFactoryDefaults(),
-       * "LF restore factory defaults {}");
-       * rightRear = new CANSparkMax(14, MotorType.kBrushless);
-       * checkError(rightRear.restoreFactoryDefaults(),
-       * "LF restore factory defaults {}");
-       * 
-       * // Following mode (Rear follows Front)
-       * checkError(leftRear.follow(leftFront), "L setting following mode {}");
-       * 
-       * // Following mode (Rear follows Front)
-       * rightFront.setInverted(true);
-       * checkError(rightRear.follow(rightFront), "R setting following mode {}");
-       * 
-       * 
-       * drive = new DifferentialDrive(leftFront, rightFront);
-       */
+      // Instantiation and factory default-ing motors (can't persist due to timing)
+      leftFront = new WPI_VictorSPX(11);
+      checkError(leftFront.configFactoryDefault(), "LF restore factory defaults {}");
+      leftRear = new WPI_VictorSPX(12);
+      checkError(leftRear.configFactoryDefault(), "LR restore factory defaults {}");
+      rightFront = new WPI_VictorSPX(13);
+      checkError(rightFront.configFactoryDefault(), "RF restore factory defaults {}");
+      rightRear = new WPI_VictorSPX(14);
+      checkError(rightRear.configFactoryDefault(), "RR restore factory defaults {}");
+
+      // Following mode (Rear follows Front)
+      leftRear.follow(leftFront, FollowerType.PercentOutput);
+
+      // Following mode (Rear follows Front)
+      rightFront.setInverted(true);
+      rightRear.follow(rightFront, FollowerType.PercentOutput);
+
+      drive = new DifferentialDrive(leftFront, rightFront);
 
       driverStick = new Joystick(0);
    }
@@ -104,10 +98,10 @@ public class Robot extends TimedRobot {
    // last error (not the same as kOk)
    // TODO: Use to set a degraded error status/state on subsystem
    @SuppressWarnings("unused")
-   private REVLibError lastError;
+   private ErrorCode lastError;
 
-   private void checkError(REVLibError error, String message) {
-      if (error != REVLibError.kOk) {
+   private void checkError(ErrorCode error, String message) {
+      if (error != ErrorCode.OK) {
          lastError = error;
          logger.error(message, error);
       }
@@ -135,12 +129,11 @@ public class Robot extends TimedRobot {
    /** This function is called once each time the robot enters DisSabled mode. */
    @Override
    public void disabledInit() {
-      /*
-       * leftFront.set(0);
-       * // leftRear.set(0);
-       * rightFront.set(0);
-       * // rightRear.set(0);
-       */
+      // leftFront.set(VictorSPXControlMode.PercentOutput, 0);
+      // // leftRear.set(VictorSPXControlMode.PercentOutput, 0);
+      // rightFront.set(VictorSPXControlMode.PercentOutput, 0);
+      // // rightRear.set(VictorSPXControlMode.PercentOutput, 0);
+      drive.arcadeDrive(0, 0);
    }
 
    @Override
@@ -188,17 +181,14 @@ public class Robot extends TimedRobot {
    @Override
    public void teleopPeriodic() {
       // drive.arcadeDrive(-driverStick.getY(), -driverStick.getX());
-      /*
-       * drive.arcadeDrive(-driverStick.getRawAxis(1) * 0.6,
-       * -driverStick.getRawAxis(4) * 0.6);
-       */
+
+      drive.arcadeDrive(-driverStick.getRawAxis(1) * 0.6,
+            -driverStick.getRawAxis(4) * 0.6);
    }
 
    @Override
    public void teleopExit() {
    }
-
-   private boolean gripperButtonDebounce;
 
    @Override
    public void testInit() {
@@ -206,28 +196,11 @@ public class Robot extends TimedRobot {
       LiveWindow.setEnabled(false);
       // Cancels all running commands at the start of test mode.
       CommandScheduler.getInstance().cancelAll();
-
-      gripperButtonDebounce = false;
    }
 
    /** This function is called periodically during test mode. */
    @Override
    public void testPeriodic() {
-      if (driverStick.getRawButton(1)) {
-         if (!gripperButtonDebounce) {
-            gripperButtonDebounce = true;
-            logger.info("button 1 pressed - open gripper");
-            gripperSolenoid.set(true);
-         }
-      } else if (driverStick.getRawButton(3)) {
-         if (!gripperButtonDebounce) {
-            gripperButtonDebounce = true;
-            logger.info("button 3 pressed - close gripper");
-            gripperSolenoid.set(false);
-         }
-      } else {
-         gripperButtonDebounce = false;
-      }
    }
 
    @Override
