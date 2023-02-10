@@ -74,4 +74,3 @@ class PDHPowerModule extends BasePowerModule {
    }
 
 }
-

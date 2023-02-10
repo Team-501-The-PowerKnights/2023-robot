@@ -12,11 +12,11 @@ import riolog.PKLogger;
 import riolog.RioLogger;
 
 /**
- * This class provides the implementation of the {@link IPowerModule} for the 
+ * This class provides the implementation of the {@link IPowerModule} for the
  * Suitcase-Bot.
  */
 class SuitcasePowerModule extends PDHPowerModule {
-   
+
    /** Our classes' logger **/
    private static final PKLogger logger = RioLogger.getLogger(SuitcasePowerModule.class.getName());
 
