@@ -11,14 +11,10 @@ package frc.robot.subsystems;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 // import frc.robot.subsystems.arm.ArmFactory;
 // import frc.robot.subsystems.drive.DriveFactory;
 // import frc.robot.subsystems.gripper.GripperFactory;
-import frc.robot.telemetry.TelemetryNames;
 import frc.robot.telemetry.TelemetryManager;
-import frc.robot.utils.PKStatus;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
@@ -36,6 +32,7 @@ public class SubsystemsFactory {
 
       ArrayList<ISubsystem> subsystems = new ArrayList<ISubsystem>();
 
+      @SuppressWarnings("unused")
       TelemetryManager tlmMgr = TelemetryManager.getInstance();
 
       // ** Drive **

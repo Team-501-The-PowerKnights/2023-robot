@@ -18,7 +18,6 @@ import frc.robot.commands.DoNothing;
 import frc.robot.commands.PKCommandBase;
 import frc.robot.properties.PKProperties;
 import frc.robot.properties.PropertiesManager;
-import frc.robot.telemetry.TelemetryNames;
 import frc.robot.utils.PKStatus;
 
 import riolog.PKLogger;

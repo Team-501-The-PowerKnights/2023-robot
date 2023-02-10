@@ -112,6 +112,7 @@ public class Robot extends TimedRobot {
     * is attached, as it holds the run-time configuration.
     **/
    private void waitForDriverStationData() {
+      @SuppressWarnings("unused")
       long count = 0;
       // FIXME: This might not be right (there are handlers to install?)
       // while (DriverStation.isDSAttached()) { // isNewControlData()
