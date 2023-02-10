@@ -21,8 +21,6 @@ class PCMPneumaticModule extends BasePneumaticModule {
     /** My module */
     private final PneumaticsControlModule module;
 
-
-
     public PCMPneumaticModule() {
         logger.info("constructing");
 

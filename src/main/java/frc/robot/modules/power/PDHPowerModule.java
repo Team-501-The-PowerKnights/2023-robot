@@ -26,12 +26,12 @@ class PDHPowerModule extends BasePowerModule {
    /** Our classes' logger **/
    private static final PKLogger logger = RioLogger.getLogger(PDHPowerModule.class.getName());
 
-   private final PowerDistribution pdh;
+   private final PowerDistribution module;
 
    public PDHPowerModule() {
       logger.info("constructing");
 
-      pdh = new PowerDistribution(1, ModuleType.kRev);
+      module = new PowerDistribution(1, ModuleType.kRev);
 
       logger.info("constructed");
    }
@@ -55,22 +55,22 @@ class PDHPowerModule extends BasePowerModule {
 
    @Override
    public double getBusVoltage() {
-      return pdh.getVoltage();
+      return module.getVoltage();
    }
 
    @Override
    public double getTotalCurrent() {
-      return pdh.getTotalCurrent();
+      return module.getTotalCurrent();
    }
 
    @Override
    public double getTotalEnergy() {
-      return pdh.getTotalEnergy();
+      return module.getTotalEnergy();
    }
 
    @Override
    public double getCurrent(int deviceID) {
-      return pdh.getCurrent(deviceID);
+      return module.getCurrent(deviceID);
    }
 
 }
