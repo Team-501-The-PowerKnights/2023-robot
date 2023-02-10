@@ -8,10 +8,10 @@
 
 package frc.robot.subsystems.drive;
 
-import com.ctre.phoenix.ErrorCode;
-import com.ctre.phoenix.motorcontrol.FollowerType;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.REVLibError;
+import com.revrobotics.CANSparkMax.IdleMode;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -25,39 +25,38 @@ import riolog.RioLogger;
  * <i>Suitcase-Bot<i>. It uses the {@link DifferentialDrive} from
  * WPILib.
  */
-public class SuitcaseDriveSubsystem extends BaseDriveSubsystem {
+public class ProtoDriveSubsystem extends BaseDriveSubsystem {
 
    /** Our classes' logger **/
    private static final PKLogger logger = RioLogger.getLogger(SuitcaseDriveSubsystem.class.getName());
 
-   // Need to WPILib wrapper classes to function w/ Drive class
-   private final WPI_VictorSPX leftFront;
-   private final WPI_VictorSPX leftRear;
-   private final WPI_VictorSPX rightFront;
-   private final WPI_VictorSPX rightRear;
+   private final CANSparkMax leftFront;
+   private final CANSparkMax leftRear;
+   private final CANSparkMax rightFront;
+   private final CANSparkMax rightRear;
 
    // Using WPILib DifferentialDrive for now
    private final DifferentialDrive drive;
 
-   SuitcaseDriveSubsystem() {
+   ProtoDriveSubsystem() {
       logger.info("constructing");
 
       // Instantiation and factory default-ing motors (can't persist due to timing)
-      leftFront = new WPI_VictorSPX(11);
-      checkError(leftFront.configFactoryDefault(), "LF restore factory defaults {}");
-      leftRear = new WPI_VictorSPX(12);
-      checkError(leftRear.configFactoryDefault(), "LR restore factory defaults {}");
-      rightFront = new WPI_VictorSPX(13);
-      checkError(rightFront.configFactoryDefault(), "RF restore factory defaults {}");
-      rightRear = new WPI_VictorSPX(14);
-      checkError(rightRear.configFactoryDefault(), "RR restore factory defaults {}");
+      leftFront = new CANSparkMax(11, MotorType.kBrushless);
+      checkError(leftFront.restoreFactoryDefaults(), "LF restore factory defaults {}");
+      leftRear = new CANSparkMax(12, MotorType.kBrushless);
+      checkError(leftRear.restoreFactoryDefaults(), "LF restore factory defaults {}");
+      rightFront = new CANSparkMax(13, MotorType.kBrushless);
+      checkError(rightFront.restoreFactoryDefaults(), "LF restore factory defaults {}");
+      rightRear = new CANSparkMax(14, MotorType.kBrushless);
+      checkError(rightRear.restoreFactoryDefaults(), "LF restore factory defaults {}");
 
       // Following mode (Rear follows Front)
-      leftRear.follow(leftFront, FollowerType.PercentOutput);
+      checkError(leftRear.follow(leftFront), "L setting following mode {}");
 
-      // Following mode (Rear follows Front)
+      // Inverted (Right from Left) and Following mode (Rear follows Front)
       rightFront.setInverted(true);
-      rightRear.follow(rightFront, FollowerType.PercentOutput);
+      checkError(rightRear.follow(rightFront), "R setting following mode {}");
 
       // Start in coast mode
       setBrake(false);
@@ -71,10 +70,10 @@ public class SuitcaseDriveSubsystem extends BaseDriveSubsystem {
    // last error (not the same as kOk)
    // TODO: Use to set a degraded error status/state on subsystem
    @SuppressWarnings("unused")
-   private ErrorCode lastError;
+   private REVLibError lastError;
 
-   private void checkError(ErrorCode error, String message) {
-      if (error != ErrorCode.OK) {
+   private void checkError(REVLibError error, String message) {
+      if (error != REVLibError.kOk) {
          lastError = error;
          logger.error(message, error);
       }
@@ -98,11 +97,11 @@ public class SuitcaseDriveSubsystem extends BaseDriveSubsystem {
    @Override
    public void setBrake(boolean brakeOn) {
       if (brakeOn) {
-         leftFront.setNeutralMode(NeutralMode.Brake);
-         rightFront.setNeutralMode(NeutralMode.Brake);
+         checkError(leftFront.setIdleMode(IdleMode.kBrake), "LF set idle mode to brake {}");
+         checkError(rightFront.setIdleMode(IdleMode.kBrake), "RF set idle mode to brake {}");
       } else {
-         leftFront.setNeutralMode(NeutralMode.Coast);
-         rightFront.setNeutralMode(NeutralMode.Coast);
+         checkError(leftFront.setIdleMode(IdleMode.kCoast), "LF set idle mode to coast {}");
+         checkError(rightFront.setIdleMode(IdleMode.kCoast), "RF set idle mode to coast {}");
       }
    }
 
