@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import frc.robot.modules.pneumatic.PneumaticModuleFactory;
 import frc.robot.modules.power.PowerModuleFactory;
 import frc.robot.telemetry.TelemetryManager;
 import frc.robot.telemetry.TelemetryNames;
@@ -43,13 +45,13 @@ public class ModulesFactory {
          modules.add(m);
       }
 
-      // SmartDashboard.putNumber(TelemetryNames.PCM.status, PKStatus.unknown.tlmValue);
-      // {
-      //    PCMFactory.constructInstance();
-      //    IModule m = PCMFactory.getInstance();
-      //    tlmMgr.addProvider(m);
-      //    modules.add(m);
-      // }
+      SmartDashboard.putNumber(TelemetryNames.Pneumatic.status, PKStatus.unknown.tlmValue);
+      {
+         PneumaticModuleFactory.constructInstance();
+         IModule m = PneumaticModuleFactory.getInstance();
+         tlmMgr.addProvider(m);
+         modules.add(m);
+      }
 
       return modules;
    }

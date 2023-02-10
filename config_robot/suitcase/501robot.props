@@ -27,8 +27,8 @@ Power.className = SuitcasePowerModule
 #####################
 # Pneumatic
 #####################
-Pneumatic.className = StubPneumaticModule
-#Pneumatic.className = SuitcasePneumaticModule
+#Pneumatic.className = StubPneumaticModule
+Pneumatic.className = SuitcasePneumaticModule
 
 
 

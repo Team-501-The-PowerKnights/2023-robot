@@ -85,4 +85,15 @@ public final class TelemetryNames {
       public static final String totalEnergy = name + ".totalEnergy";
    }
 
+   public final class Pneumatic {
+      private static final String name = ModuleNames.pneumaticName;
+
+      public static final String status = name + ".status";
+      public static final String implClass = name + ".implClass";
+      public static final String defCommand = name + "defCommand";
+
+      public static final String enabled = name + ".enabled";
+      public static final String pressureGood = name + ".pressureGood";
+  }
+
 }

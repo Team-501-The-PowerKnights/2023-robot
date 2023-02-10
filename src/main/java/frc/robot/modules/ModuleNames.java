@@ -17,6 +17,6 @@ public class ModuleNames {
 
    public static final String powerName = "Power";
 
-   public static final String pcmName = "PCM";
+   public static final String pneumaticName = "Pneumatic";
 
 }
