@@ -49,8 +49,6 @@ public interface IDriveSubsystem extends ISubsystem {
     */
    public RamseteCommand followTrajectory(Trajectory trajectory);
 
-   public void setSpeed(int canID, double speed);
-
    /**
     * 
     * @return number of encoder clicks
@@ -62,5 +60,7 @@ public interface IDriveSubsystem extends ISubsystem {
     * @return encoder velocity (clicks per second?)
     */
    public double getEncoderVelocity();
+
+   public void setSpeed(int canID, double speed);
 
 }

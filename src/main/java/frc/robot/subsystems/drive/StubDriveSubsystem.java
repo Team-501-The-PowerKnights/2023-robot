@@ -25,24 +25,7 @@ class StubDriveSubsystem extends BaseDriveSubsystem {
    }
 
    @Override
-   public void periodic() {
-      // This method will be called once per scheduler run
-   }
-
-   @Override
-   public void updateTelemetry() {
-      super.updateTelemetry();
-      // Stub doesn't implement this
-   }
-
-   @Override
    public void validateCalibration() {
-      // Stub doesn't implement this
-   }
-
-   @Override
-   public void updatePreferences() {
-      super.updatePreferences();
       // Stub doesn't implement this
    }
 
@@ -73,11 +56,6 @@ class StubDriveSubsystem extends BaseDriveSubsystem {
    }
 
    @Override
-   public void setSpeed(int canID, double speed) {
-      // Stub doesn't implement this
-   }
-
-   @Override
    public void swap() {
       // Stub doesn't implement this
    }
@@ -92,6 +70,11 @@ class StubDriveSubsystem extends BaseDriveSubsystem {
    public double getEncoderVelocity() {
       // Stub doesn't implement this
       return 0;
+   }
+
+   @Override
+   public void setSpeed(int canID, double speed) {
+      // Stub doesn't implement this
    }
 
 }
