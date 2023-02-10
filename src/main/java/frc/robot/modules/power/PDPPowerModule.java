@@ -1,0 +1,76 @@
+/*------------------------------------------------------------------------*/
+/*- Copyright (c) Team 501 - The PowerKnights. All Rights Reserved.       */
+/*- Open Source Software - may be modified and shared by other FRC teams  */
+/*- under the terms of the Team501 license. The code must be accompanied  */
+/*- by the Team 501 - The PowerKnights license file in the root directory */
+/*- of this project.                                                      */
+/*------------------------------------------------------------------------*/
+
+package frc.robot.modules.power;
+
+import edu.wpi.first.wpilibj.PowerDistribution;
+import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import frc.robot.telemetry.TelemetryNames;
+
+import riolog.PKLogger;
+import riolog.RioLogger;
+
+/**
+ * This class provides an implementation based on the Cross the Road
+ * Electronics Power Distribution Panel (PDP).
+ */
+class PDPPowerModule extends BasePowerModule {
+
+   /** Our classes' logger **/
+   private static final PKLogger logger = RioLogger.getLogger(PDPPowerModule.class.getName());
+
+   private final PowerDistribution pdm;
+
+   public PDPPowerModule() {
+      logger.info("constructing");
+
+      pdm = new PowerDistribution(1, ModuleType.kCTRE);
+
+      logger.info("constructed");
+   }
+
+   @Override
+   public void updateTelemetry() {
+      SmartDashboard.putNumber(TelemetryNames.Power.busVoltage, getBusVoltage());
+      SmartDashboard.putNumber(TelemetryNames.Power.totalCurrent, getTotalEnergy());
+      SmartDashboard.putNumber(TelemetryNames.Power.totalEnergy, getTotalEnergy());
+   }
+
+   @Override
+   public void updatePreferences() {
+      // No preferences for this module
+   }
+
+   @Override
+   public void disable() {
+      // Nothing active so nothing to disable
+   }
+
+   @Override
+   public double getBusVoltage() {
+      return pdm.getVoltage();
+   }
+
+   @Override
+   public double getTotalCurrent() {
+      return pdm.getTotalCurrent();
+   }
+
+   @Override
+   public double getTotalEnergy() {
+      return pdm.getTotalEnergy();
+   }
+
+   @Override
+   public double getCurrent(int deviceID) {
+      return pdm.getCurrent(deviceID);
+   }
+
+}

@@ -6,7 +6,7 @@
 /*- of this project.                                                      */
 /*------------------------------------------------------------------------*/
 
-package frc.robot.modules.pdp;
+package frc.robot.modules.power;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -23,15 +23,15 @@ import riolog.RioLogger;
 /**
  * 
  */
-public class PDPFactory {
+public class PowerModuleFactory {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(PDPFactory.class.getName());
+   private static final PKLogger logger = RioLogger.getLogger(PowerModuleFactory.class.getName());
 
    /** Singleton instance of class for all to use **/
    private static IModule ourInstance;
    /** Name of our module **/
-   private static final String myName = ModuleNames.pdpName;
+   private static final String myName = ModuleNames.powerName;
 
    /** Properties for subsystem */
    private static PKProperties props;
@@ -42,7 +42,7 @@ public class PDPFactory {
     * sequencing of the robot and all it's modules.
     **/
    public static synchronized void constructInstance() {
-      SmartDashboard.putNumber(TelemetryNames.PDP.status, PKStatus.inProgress.tlmValue);
+      SmartDashboard.putNumber(TelemetryNames.Power.status, PKStatus.inProgress.tlmValue);
 
       if (ourInstance != null) {
          throw new IllegalStateException(myName + " Already Constructed");
@@ -56,7 +56,7 @@ public class PDPFactory {
    }
 
    private static void loadImplementationClass(String myClassName) {
-      String myPkgName = PDPFactory.class.getPackage().getName();
+      String myPkgName = PowerModuleFactory.class.getPackage().getName();
       if (myClassName.isEmpty()) {
          logger.info("no class specified; go with subsystem default");
          myClassName = new StringBuilder().append(PropertiesManager.getInstance().getImpl()).append(myName)
@@ -72,13 +72,13 @@ public class PDPFactory {
          @SuppressWarnings("deprecation")
          Object myObject = myClass.newInstance();
          ourInstance = (IModule) myObject;
-         SmartDashboard.putNumber(TelemetryNames.PDP.status, PKStatus.success.tlmValue);
+         SmartDashboard.putNumber(TelemetryNames.Power.status, PKStatus.success.tlmValue);
       } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
          logger.error("failed to load class; instantiating default stub for: {}", myName);
-         ourInstance = new StubPDPModule();
-         SmartDashboard.putNumber(TelemetryNames.PDP.status, PKStatus.degraded.tlmValue);
+         ourInstance = new StubPowerModule();
+         SmartDashboard.putNumber(TelemetryNames.Power.status, PKStatus.degraded.tlmValue);
       }
-      SmartDashboard.putString(TelemetryNames.PDP.implClass, ourInstance.getClass().getSimpleName());
+      SmartDashboard.putString(TelemetryNames.Power.implClass, ourInstance.getClass().getSimpleName());
    }
 
    /**

@@ -6,17 +6,24 @@
 /*- of this project.                                                      */
 /*------------------------------------------------------------------------*/
 
-package frc.robot.modules;
+package frc.robot.modules.power;
+
+import riolog.PKLogger;
+import riolog.RioLogger;
 
 /**
- * Provides a standard way of defining names for the <i>Modules</i> used in the
- * program. No code should define or use a hard-coded string outside of the ones
- * defined in this class.
- **/
-public class ModuleNames {
+ * This class provides the implementation of the {@link IPowerModule} for the 
+ * Suitcase-Bot.
+ */
+class SuitcasePowerModule extends PDHPowerModule {
+   
+   /** Our classes' logger **/
+   private static final PKLogger logger = RioLogger.getLogger(SuitcasePowerModule.class.getName());
 
-   public static final String powerName = "Power";
+   public SuitcasePowerModule() {
+      logger.info("constructing");
 
-   public static final String pcmName = "PCM";
+      logger.info("constructed");
+   }
 
 }

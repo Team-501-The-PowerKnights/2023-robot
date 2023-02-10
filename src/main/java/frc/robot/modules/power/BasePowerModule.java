@@ -6,7 +6,7 @@
 /*- of this project.                                                      */
 /*------------------------------------------------------------------------*/
 
-package frc.robot.modules.pdp;
+package frc.robot.modules.power;
 
 import frc.robot.modules.BaseModule;
 import frc.robot.modules.ModuleNames;
@@ -14,13 +14,13 @@ import frc.robot.modules.ModuleNames;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-abstract class BasePDPModule extends BaseModule implements IPDPModule {
+abstract class BasePowerModule extends BaseModule implements IPowerModule {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(BasePDPModule.class.getName());
+   private static final PKLogger logger = RioLogger.getLogger(BasePowerModule.class.getName());
 
-   BasePDPModule() {
-      super(ModuleNames.pdpName);
+   BasePowerModule() {
+      super(ModuleNames.powerName);
       logger.info("constructing");
 
       logger.info("constructed");

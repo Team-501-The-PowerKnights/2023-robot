@@ -18,17 +18,17 @@ Robot.implementation = Suitcase
 #########################################
 
 #####################
-# PDP
+# Power
 #####################
-PDP.className = StubPDPModule
-#PDP.className =
+#Power.className = StubPowerModule
+Power.className = SuitcasePowerModule
 
 
 #####################
-# PCM
+# Pneumatic
 #####################
-#PCM.className = StubPCMModule
-PCM.className = SuitcasePCMModule
+Pneumatic.className = StubPneumaticModule
+#Pneumatic.className = SuitcasePneumaticModule
 
 
 

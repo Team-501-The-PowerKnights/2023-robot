@@ -6,11 +6,11 @@
 /*- of this project.                                                      */
 /*------------------------------------------------------------------------*/
 
-package frc.robot.modules.pdp;
+package frc.robot.modules.power;
 
 import frc.robot.modules.IModule;
 
-public interface IPDPModule extends IModule {
+public interface IPowerModule extends IModule {
 
    public double getBusVoltage();
 

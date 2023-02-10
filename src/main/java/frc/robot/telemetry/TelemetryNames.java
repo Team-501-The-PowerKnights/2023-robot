@@ -73,8 +73,8 @@ public final class TelemetryNames {
     * Modules
     ***************/
 
-   public final class PDP {
-      private static final String name = ModuleNames.pdpName;
+   public final class Power {
+      private static final String name = ModuleNames.powerName;
 
       public static final String status = name + ".status";
       public static final String implClass = name + ".implClass";

@@ -12,9 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-//import frc.robot.modules.pcm.PCMFactory;
-import frc.robot.modules.pdp.PDPFactory;
+import frc.robot.modules.power.PowerModuleFactory;
 import frc.robot.telemetry.TelemetryManager;
 import frc.robot.telemetry.TelemetryNames;
 import frc.robot.utils.PKStatus;
@@ -37,10 +35,10 @@ public class ModulesFactory {
 
       TelemetryManager tlmMgr = TelemetryManager.getInstance();
 
-      SmartDashboard.putNumber(TelemetryNames.PDP.status, PKStatus.unknown.tlmValue);
+      SmartDashboard.putNumber(TelemetryNames.Power.status, PKStatus.unknown.tlmValue);
       {
-         PDPFactory.constructInstance();
-         IModule m = PDPFactory.getInstance();
+         PowerModuleFactory.constructInstance();
+         IModule m = PowerModuleFactory.getInstance();
          tlmMgr.addProvider(m);
          modules.add(m);
       }

@@ -6,7 +6,7 @@
 /*- of this project.                                                      */
 /*------------------------------------------------------------------------*/
 
-package frc.robot.modules.pdp;
+package frc.robot.modules.power;
 
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
@@ -17,26 +17,30 @@ import frc.robot.telemetry.TelemetryNames;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-class PDPModule extends BasePDPModule {
+/**
+ * This class provides an implementation based on the REV Robotics
+ * Power Distribution Hub (PDH).
+ */
+class PDHPowerModule extends BasePowerModule {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(PDPModule.class.getName());
+   private static final PKLogger logger = RioLogger.getLogger(PDHPowerModule.class.getName());
 
-   private final PowerDistribution pdp;
+   private final PowerDistribution pdh;
 
-   public PDPModule() {
+   public PDHPowerModule() {
       logger.info("constructing");
 
-      pdp = new PowerDistribution(0, ModuleType.kCTRE);
+      pdh = new PowerDistribution(1, ModuleType.kRev);
 
       logger.info("constructed");
    }
 
    @Override
    public void updateTelemetry() {
-      SmartDashboard.putNumber(TelemetryNames.PDP.busVoltage, getBusVoltage());
-      SmartDashboard.putNumber(TelemetryNames.PDP.totalCurrent, getTotalEnergy());
-      SmartDashboard.putNumber(TelemetryNames.PDP.totalEnergy, getTotalEnergy());
+      SmartDashboard.putNumber(TelemetryNames.Power.busVoltage, getBusVoltage());
+      SmartDashboard.putNumber(TelemetryNames.Power.totalCurrent, getTotalEnergy());
+      SmartDashboard.putNumber(TelemetryNames.Power.totalEnergy, getTotalEnergy());
    }
 
    @Override
@@ -51,22 +55,23 @@ class PDPModule extends BasePDPModule {
 
    @Override
    public double getBusVoltage() {
-      return pdp.getVoltage();
+      return pdh.getVoltage();
    }
 
    @Override
    public double getTotalCurrent() {
-      return pdp.getTotalCurrent();
+      return pdh.getTotalCurrent();
    }
 
    @Override
    public double getTotalEnergy() {
-      return pdp.getTotalEnergy();
+      return pdh.getTotalEnergy();
    }
 
    @Override
    public double getCurrent(int deviceID) {
-      return pdp.getCurrent(deviceID);
+      return pdh.getCurrent(deviceID);
    }
 
 }
+

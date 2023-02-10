@@ -6,17 +6,17 @@
 /*- of this project.                                                      */
 /*------------------------------------------------------------------------*/
 
-package frc.robot.modules.pdp;
+package frc.robot.modules.power;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-class StubPDPModule extends BasePDPModule {
+class StubPowerModule extends BasePowerModule {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(StubPDPModule.class.getName());
+   private static final PKLogger logger = RioLogger.getLogger(StubPowerModule.class.getName());
 
-   public StubPDPModule() {
+   public StubPowerModule() {
       logger.info("constructing");
 
       logger.info("constructed");

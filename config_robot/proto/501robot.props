@@ -18,17 +18,17 @@ Robot.implementation = Proto
 #########################################
 
 #####################
-# PDP
+# Power
 #####################
-PDP.className = StubPDPModule
-#PDP.className = PDPModule
+Power.className = StubPowerModule
+#Power.className = 
 
 
 #####################
-# PCM
+# Pneumatic
 #####################
-PCM.className = StubPCMModule
-#PCM.className = PCMModule
+Pneumatic.className = StubPneumaticModule
+#Pneumatic.className = 
 
 
 
