@@ -22,6 +22,8 @@ import frc.robot.modules.IModule;
 import frc.robot.modules.ModulesFactory;
 import frc.robot.preferences.PreferencesManager;
 import frc.robot.properties.PropertiesManager;
+import frc.robot.sensors.ISensor;
+import frc.robot.sensors.SensorsFactory;
 import frc.robot.subsystems.ISubsystem;
 import frc.robot.subsystems.SubsystemsFactory;
 import frc.robot.telemetry.TelemetryManager;
@@ -52,7 +54,7 @@ public class RobotContainer {
    //
    private List<IModule> modules;
    //
-   // private List<ISensor> sensors;
+   private List<ISensor> sensors;
    //
    private List<ISubsystem> subsystems;
 
@@ -75,9 +77,9 @@ public class RobotContainer {
       modules = ModulesFactory.constructModules();
       ModeFollowers.getInstance().addAll(modules);
 
-      // // Create all the sensors
-      // sensors = SensorsFactory.constructSensors();
-      // followers.addAll(sensors);
+      // Create all the sensors
+      sensors = SensorsFactory.constructSensors();
+      ModeFollowers.getInstance().addAll(sensors);
 
       // Create all the subsystems
       subsystems = SubsystemsFactory.constructSubsystems();
