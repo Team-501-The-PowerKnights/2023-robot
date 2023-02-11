@@ -6,8 +6,8 @@
 #########################################
 #########################################
 
-Robot.robotName = SWProg-Bot
-Robot.implementation = SWProg
+Robot.robotName = Swprog-Bot
+Robot.implementation = Swprog
 
 
 
@@ -55,8 +55,8 @@ Gyro.className = GyroSensor
 #####################
 # Drive
 #####################
-Drive.className = StubDriveSubsystem
-#Drive.className =
+#Drive.className = StubDriveSubsystem
+Drive.className = SwprogDriveSubsystem
 Drive.autoCommandName = DriveDoNothing
 Drive.teleCommandName = DriveDoNothing
 

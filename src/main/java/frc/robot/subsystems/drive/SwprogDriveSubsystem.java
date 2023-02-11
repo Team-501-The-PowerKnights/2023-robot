@@ -13,14 +13,14 @@ import riolog.RioLogger;
 
 /**
  * This class implements the <code>DriveSubsystem</code> for the
- * <i>Suitcase-Bot<i>.
+ * <i>Swprog-Bot<i>.
  */
-class ProtoDriveSubsystem extends CANSparkMaxDriveSubsystem {
+class SwprogDriveSubsystem extends CANSparkMaxDriveSubsystem {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(ProtoDriveSubsystem.class.getName());
+   private static final PKLogger logger = RioLogger.getLogger(SwprogDriveSubsystem.class.getName());
 
-   ProtoDriveSubsystem() {
+   SwprogDriveSubsystem() {
       logger.info("constructing");
 
       logger.info("constructed");
