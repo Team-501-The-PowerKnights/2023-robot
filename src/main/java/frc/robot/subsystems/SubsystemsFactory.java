@@ -12,13 +12,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import frc.robot.subsystems.arm.ArmFactory;
 import frc.robot.subsystems.drive.DriveFactory;
-// import frc.robot.subsystems.arm.ArmFactory;
-// import frc.robot.subsystems.drive.DriveFactory;
-// import frc.robot.subsystems.gripper.GripperFactory;
 import frc.robot.telemetry.TelemetryManager;
 import frc.robot.telemetry.TelemetryNames;
 import frc.robot.utils.PKStatus;
+
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -48,15 +48,15 @@ public class SubsystemsFactory {
          subsystems.add(ss);
       }
 
-      // // ** Arm **
-      // SmartDashboard.putNumber(TelemetryNames.Arm.status,
-      // PKStatus.unknown.tlmValue);
-      // {
-      // ArmFactory.constructInstance();
-      // ISubsystem ss = ArmFactory.getInstance();
-      // tlmMgr.addProvider(ss);
-      // subsystems.add(ss);
-      // }
+      // ** Arm **
+      SmartDashboard.putNumber(TelemetryNames.Arm.status,
+            PKStatus.unknown.tlmValue);
+      {
+         ArmFactory.constructInstance();
+         ISubsystem ss = ArmFactory.getInstance();
+         tlmMgr.addProvider(ss);
+         subsystems.add(ss);
+      }
 
       // // ** Gripper **
       // SmartDashboard.putNumber(TelemetryNames.Gripper.status,

@@ -6,7 +6,7 @@
 /*- of this project.                                                      */
 /*------------------------------------------------------------------------*/
 
-package frc.robot.subsystems.drive;
+package frc.robot.subsystems.arm;
 
 import edu.wpi.first.wpilibj.Preferences;
 
@@ -25,19 +25,18 @@ import riolog.RioLogger;
  *
  * @see edu.wpi.first.networktables.NetworkTable
  */
-public final class DrivePreferences {
+public final class ArmPreferences {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(DrivePreferences.class.getName());
+   private static final PKLogger logger = RioLogger.getLogger(ArmPreferences.class.getName());
 
-   static private final String name = SubsystemNames.driveName;
+   static private final String name = SubsystemNames.armName;
    static final String pid_P = name + ".P";
    static final String pid_I = name + ".I";
    static final String pid_D = name + ".D";
    static final String pid_F = name + ".F";
-   static final String ramp = name + ".ramp";
 
-   private DrivePreferences() {
+   private ArmPreferences() {
    }
 
    // FIXME: Make perferences & NetworkTables right
@@ -60,11 +59,6 @@ public final class DrivePreferences {
       if (!Preferences.containsKey(pid_F)) {
          logger.warn("{} doesn't exist; creating with default", pid_F);
          Preferences.setDouble(pid_F, 0.0);
-      }
-
-      if (!Preferences.containsKey(ramp)) {
-         logger.warn("{} doesn't exist; creating with default", ramp);
-         Preferences.setDouble(ramp, 0.0);
       }
    }
 

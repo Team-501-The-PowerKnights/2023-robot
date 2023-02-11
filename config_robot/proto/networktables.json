@@ -43,5 +43,50 @@
       "persistent": true,
       "retained": true
     }
+  },
+  {
+    "name": "/501Prefs/Drive/ramp",
+    "type": "double",
+    "value": 0.0,
+    "properties": {
+      "persistent": true,
+      "retained": true
+    }
+  },
+  {
+    "name": "/501Prefs/Arm/P",
+    "type": "double",
+    "value": 0.0,
+    "properties": {
+      "persistent": true,
+      "retained": true
+    }
+  },
+  {
+    "name": "/501Prefs/Arm/I",
+    "type": "double",
+    "value": 0.0,
+    "properties": {
+      "persistent": true,
+      "retained": true
+    }
+  },
+  {
+    "name": "/501Prefs/Arm/D",
+    "type": "double",
+    "value": 0.0,
+    "properties": {
+      "persistent": true,
+      "retained": true
+    }
+  },
+  {
+    "name": "/501Prefs/Arm/F",
+    "type": "double",
+    "value": 0.0,
+    "properties": {
+      "persistent": true,
+      "retained": true
+    }
   }
 ]

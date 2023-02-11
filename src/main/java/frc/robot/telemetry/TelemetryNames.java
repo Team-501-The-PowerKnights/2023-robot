@@ -141,6 +141,10 @@ public final class TelemetryNames {
       public static final String heading = name + ".heading";
    }
 
+   /***************
+    * Subsystems
+    ***************/
+
    public final class Drive {
       private static final String name = SubsystemNames.driveName;
 
@@ -155,6 +159,15 @@ public final class TelemetryNames {
 
       public static final String leftSpeed = name + ".leftSpeed";
       public static final String rightSpeed = name + ".rightSpeed";
+   }
+
+   public final class Arm {
+      private static final String name = SubsystemNames.armName;
+
+      public static final String status = name + ".status";
+      public static final String implClass = name + ".implClass";
+      public static final String autoCommand = name + ".autoCommand";
+      public static final String teleCommand = name + ".teleCommand";
    }
 
 }
