@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.subsystems.arm.ArmFactory;
 import frc.robot.subsystems.drive.DriveFactory;
+import frc.robot.subsystems.gripper.GripperFactory;
 import frc.robot.telemetry.TelemetryManager;
 import frc.robot.telemetry.TelemetryNames;
 import frc.robot.utils.PKStatus;
@@ -58,15 +59,15 @@ public class SubsystemsFactory {
          subsystems.add(ss);
       }
 
-      // // ** Gripper **
-      // SmartDashboard.putNumber(TelemetryNames.Gripper.status,
-      // PKStatus.unknown.tlmValue);
-      // {
-      // GripperFactory.constructInstance();
-      // ISubsystem ss = GripperFactory.getInstance();
-      // tlmMgr.addProvider(ss);
-      // subsystems.add(ss);
-      // }
+      // ** Gripper **
+      SmartDashboard.putNumber(TelemetryNames.Gripper.status,
+            PKStatus.unknown.tlmValue);
+      {
+         GripperFactory.constructInstance();
+         ISubsystem ss = GripperFactory.getInstance();
+         tlmMgr.addProvider(ss);
+         subsystems.add(ss);
+      }
 
       // Load and update the preferences now that all the subsystems are created
       for (ISubsystem ss : subsystems) {
