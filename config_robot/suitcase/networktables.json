@@ -1,6 +1,6 @@
 [
   {
-    "name": "/501Prefs/config",
+    "name": "/Preferences/config",
     "type": "string",
     "value": "501-Robot 2023.0.0.0 Stu-PID 20230128-142048 780bd98",
     "properties": {
@@ -9,7 +9,7 @@
     }
   },
   {
-    "name": "/501Prefs/Drive/P",
+    "name": "/Preferences/Drive.P",
     "type": "double",
     "value": 0.0,
     "properties": {
@@ -18,7 +18,7 @@
     }
   },
   {
-    "name": "/501Prefs/Drive/I",
+    "name": "/Preferences/Drive.I",
     "type": "double",
     "value": 0.0,
     "properties": {
@@ -27,7 +27,7 @@
     }
   },
   {
-    "name": "/501Prefs/Drive/D",
+    "name": "/Preferences/Drive.D",
     "type": "double",
     "value": 0.0,
     "properties": {
@@ -36,7 +36,7 @@
     }
   },
   {
-    "name": "/501Prefs/Drive/F",
+    "name": "/Preferences/Drive.F",
     "type": "double",
     "value": 0.0,
     "properties": {
@@ -45,7 +45,7 @@
     }
   },
   {
-    "name": "/501Prefs/Drive/ramp",
+    "name": "/Preferences/Drive.ramp",
     "type": "double",
     "value": 0.0,
     "properties": {
@@ -54,36 +54,36 @@
     }
   },
   {
-    "name": "/501Prefs/Arm/P",
+    "name": "/Preferences/Arm.P",
     "type": "double",
-    "value": 1.0,
+    "value": 0.0,
     "properties": {
       "persistent": true,
       "retained": true
     }
   },
   {
-    "name": "/501Prefs/Arm/I",
+    "name": "/Preferences/Arm.I",
     "type": "double",
-    "value": 2.0,
+    "value": 0.0,
     "properties": {
       "persistent": true,
       "retained": true
     }
   },
   {
-    "name": "/501Prefs/Arm/D",
+    "name": "/Preferences/Arm.D",
     "type": "double",
-    "value": 3.0,
+    "value": 0.0,
     "properties": {
       "persistent": true,
       "retained": true
     }
   },
   {
-    "name": "/501Prefs/Arm/F",
+    "name": "/Preferences/Arm.F",
     "type": "double",
-    "value": 4.0,
+    "value": 0.0,
     "properties": {
       "persistent": true,
       "retained": true
