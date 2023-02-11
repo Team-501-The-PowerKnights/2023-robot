@@ -72,6 +72,32 @@ public final class TelemetryNames {
    }
 
    /***************
+    * OI
+    ***************/
+
+   public final class OI {
+      // FIXME: Need to not be public (but needs higher grouping)
+      public static final String name = "OI";
+
+      public static final String status = name + ".status";
+   }
+
+   public static class HMI {
+      private static final String name = SubsystemNames.hmiName;
+
+      public static final String rawSpeed = name + ".rawSpeed";
+      public static final String rawTurn = name + ".rawTurn";
+      public static final String turbo = name + ".turbo";
+      public static final String crawl = name + ".crawl";
+      public static final String reversed = name + ".reversed";
+      public static final String oiSpeed = name + ".oiSpeed";
+      public static final String oiTurn = name + ".oiTurn";
+
+      public static final String speed = name + ".speed";
+      public static final String turn = name + ".turn";
+   }
+
+   /***************
     * Modules
     ***************/
 

@@ -26,8 +26,8 @@ import frc.robot.sensors.ISensor;
 import frc.robot.sensors.SensorsFactory;
 import frc.robot.subsystems.ISubsystem;
 import frc.robot.subsystems.SubsystemsFactory;
+import frc.robot.telemetry.SchedulerProvider;
 import frc.robot.telemetry.TelemetryManager;
-
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -52,11 +52,14 @@ public class RobotContainer {
    // OperatorConstants.kDriverControllerPort);
 
    //
-   private List<IModule> modules;
+   private final TelemetryManager tlmMgr;
+
    //
-   private List<ISensor> sensors;
+   private final List<IModule> modules;
    //
-   private List<ISubsystem> subsystems;
+   private final List<ISensor> sensors;
+   //
+   private final List<ISubsystem> subsystems;
 
    /**
     * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -70,8 +73,17 @@ public class RobotContainer {
       // Make sure Properties file exists and can be parsed
       initializeProperties();
 
-      // Make sure Telemetry is initialized
-      initializeTelemetry();
+      // Create telemetry manager
+      TelemetryManager.constructInstance();
+      tlmMgr = TelemetryManager.getInstance();
+
+      // Create command manager
+      SchedulerProvider.constructInstance();
+      tlmMgr.addProvider(SchedulerProvider.getInstance());
+
+      // Creat the OI "subsystem"
+      OI.constructInstance();
+      tlmMgr.addProvider(OI.getInstance());
 
       // Create all the modules
       modules = ModulesFactory.constructModules();
@@ -105,10 +117,6 @@ public class RobotContainer {
 
       logger.info("Properties as initialized:");
       PropertiesManager.getInstance().logProperties(logger);
-   }
-
-   private void initializeTelemetry() {
-      TelemetryManager.constructInstance();
    }
 
    /**
