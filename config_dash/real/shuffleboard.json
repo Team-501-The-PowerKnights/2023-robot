@@ -220,7 +220,7 @@
         "tiles": {
           "9,7": {
             "size": [
-              4,
+              5,
               2
             ],
             "content": {
@@ -233,7 +233,7 @@
           },
           "9,5": {
             "size": [
-              4,
+              5,
               2
             ],
             "content": {
@@ -376,7 +376,7 @@
           },
           "9,9": {
             "size": [
-              4,
+              5,
               2
             ],
             "content": {
@@ -389,7 +389,7 @@
           },
           "9,11": {
             "size": [
-              4,
+              5,
               2
             ],
             "content": {
@@ -448,6 +448,110 @@
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Power.status",
               "_title": "Power.status",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "15,9": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Arm.autoCommand",
+              "_title": "Arm.autoCommand",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "15,7": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Arm.implClass",
+              "_title": "Arm.implClass",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "15,5": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Arm.status",
+              "_title": "Arm.status",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "15,11": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Arm.teleCommand",
+              "_title": "Arm.teleCommand",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "21,9": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Gripper.autoCommand",
+              "_title": "Gripper.autoCommand",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "21,7": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Gripper.implClass",
+              "_title": "Gripper.implClass",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "21,5": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Gripper.status",
+              "_title": "Gripper.status",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "21,11": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Gripper.teleCommand",
+              "_title": "Gripper.teleCommand",
               "_glyph": 148,
               "_showGlyph": false
             }
@@ -1085,56 +1189,6 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "29,0": {
-            "size": [
-              4,
-              10
-            ],
-            "content": {
-              "_type": "List Layout",
-              "_title": "Preferences",
-              "_glyph": 149,
-              "_showGlyph": false,
-              "Layout/Label position": "TOP",
-              "_children": [
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///Preferences/Drive.P",
-                  "_title": "Drive.P",
-                  "_glyph": 148,
-                  "_showGlyph": false
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///Preferences/Drive.I",
-                  "_title": "Drive.I",
-                  "_glyph": 148,
-                  "_showGlyph": false
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///Preferences/Drive.D",
-                  "_title": "Drive.D",
-                  "_glyph": 148,
-                  "_showGlyph": false
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///Preferences/Drive.F",
-                  "_title": "Drive.F",
-                  "_glyph": 148,
-                  "_showGlyph": false
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///Preferences/Drive.ramp",
-                  "_title": "Drive.ramp",
-                  "_glyph": 148,
-                  "_showGlyph": false
-                }
-              ]
-            }
-          },
           "8,0": {
             "size": [
               4,
@@ -1186,6 +1240,33 @@
               "_glyph": 148,
               "_showGlyph": false
             }
+          },
+          "30,0": {
+            "size": [
+              5,
+              6
+            ],
+            "content": {
+              "_type": "Network Table Tree",
+              "_source0": "network_table:///501Prefs/Drive",
+              "_title": "501Prefs/Drive",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "23,0": {
+            "size": [
+              7,
+              11
+            ],
+            "content": {
+              "_type": "Robot Preferences",
+              "_source0": "network_table:///Preferences",
+              "_title": "Preferences",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Miscellaneous/Show search box": true
+            }
           }
         }
       }
@@ -1208,8 +1289,8 @@
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Intake.status",
-              "_title": "Intake.status",
+              "_source0": "network_table:///SmartDashboard/Arm.status",
+              "_title": "Arm.status",
               "_glyph": 148,
               "_showGlyph": false
             }
@@ -1221,21 +1302,8 @@
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Intake.implClass",
-              "_title": "Intake.implClass",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "2,6": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Intake.teleCommand",
-              "_title": "Intake.teleCommand",
+              "_source0": "network_table:///SmartDashboard/Arm.implClass",
+              "_title": "Arm.implClass",
               "_glyph": 148,
               "_showGlyph": false
             }
@@ -1247,10 +1315,50 @@
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Intake.autoCommand",
-              "_title": "Intake.autoCommand",
+              "_source0": "network_table:///SmartDashboard/Arm.autoCommand",
+              "_title": "Arm.autoCommand",
               "_glyph": 148,
               "_showGlyph": false
+            }
+          },
+          "2,6": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Arm.teleCommand",
+              "_title": "Arm.teleCommand",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "30,0": {
+            "size": [
+              5,
+              5
+            ],
+            "content": {
+              "_type": "Network Table Tree",
+              "_source0": "network_table:///501Prefs/Arm",
+              "_title": "501Prefs/Arm",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "23,0": {
+            "size": [
+              7,
+              11
+            ],
+            "content": {
+              "_type": "Robot Preferences",
+              "_source0": "network_table:///Preferences",
+              "_title": "Preferences",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Miscellaneous/Show search box": true
             }
           }
         }
@@ -1266,7 +1374,60 @@
         "hgap": 8.0,
         "vgap": 8.0,
         "titleType": 0,
-        "tiles": {}
+        "tiles": {
+          "2,0": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Gripper.implClass",
+              "_title": "Gripper.implClass",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "2,2": {
+            "size": [
+              3,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Gripper.status",
+              "_title": "Gripper.status",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "2,4": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Gripper.autoCommand",
+              "_title": "Gripper.autoCommand",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "2,6": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Gripper.teleCommand",
+              "_title": "Gripper.teleCommand",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          }
+        }
       }
     },
     {
@@ -1291,6 +1452,20 @@
               "_title": "FMS Override",
               "_glyph": 148,
               "_showGlyph": false
+            }
+          },
+          "28,0": {
+            "size": [
+              7,
+              11
+            ],
+            "content": {
+              "_type": "Robot Preferences",
+              "_source0": "network_table:///Preferences",
+              "_title": "Preferences",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Miscellaneous/Show search box": true
             }
           }
         }
