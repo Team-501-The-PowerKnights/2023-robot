@@ -14,9 +14,8 @@ import java.util.stream.Collectors;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-// import frc.robot.subsystems.arm.ArmPreferences;
-// import frc.robot.subsystems.drive.DrivePreferences;
-// import frc.robot.subsystems.gripper.GripperPreferences;
+import frc.robot.subsystems.arm.ArmPreferences;
+import frc.robot.subsystems.drive.DrivePreferences;
 import frc.robot.telemetry.TelemetryNames;
 import frc.robot.utils.PKStatus;
 
@@ -61,9 +60,9 @@ public final class PreferencesManager {
    private PreferencesManager() {
       logger.info("constructing");
 
-      // DrivePreferences.initialize();
+      DrivePreferences.initialize();
 
-      // ArmPreferences.initialize();
+      ArmPreferences.initialize();
       // GripperPreferences.initialize();
 
       logger.info("constructed");
