@@ -14,6 +14,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -103,6 +104,12 @@ public class Robot extends TimedRobot {
 
       // Put indication of initialization status on dash
       determineInitStatus();
+
+      // WPILib default is to disable this now; but just in case ...
+      LiveWindow.setEnabled(false);
+      // But we want access to the CommandScheduler telemetry content
+      LiveWindow.disableAllTelemetry();
+      LiveWindow.enableTelemetry(CommandScheduler.getInstance());
 
       logger.info("initialized");
    }
@@ -284,14 +291,21 @@ public class Robot extends TimedRobot {
 
    /**
     * This function is called once each time the robot enters Test mode.
+    *
+    * Note:
+    * https://www.chiefdelphi.com/t/running-a-command-in-test-mode/418286/3
+    * https://www.chiefdelphi.com/t/can-you-run-commands-in-test-methods-of-robot-java/349402
     */
    @Override
    public void testInit() {
       logger.info("initializing test");
 
-      // FIXME: Should be / is already elsewhere?
       // Cancels all running commands at the start of test mode.
       CommandScheduler.getInstance().cancelAll();
+
+      // We don't want the "packaged" LiveWindow, but our own testing
+      LiveWindow.setEnabled(false);
+      logger.info("disabled LiveWindow enabled = {}", LiveWindow.isEnabled());
 
       ModeFollowers.getInstance().initTest();
 
