@@ -77,6 +77,9 @@ abstract class BaseDriveSubsystem extends BaseSubsystem implements IDriveSubsyst
       ramp = v;
    }
 
+   /**
+    * Telemetry supported by subsystem.
+    */
    protected double speed = 0.0;
    protected double turn = 0.0;
    protected double leftSpeed = 0.0;

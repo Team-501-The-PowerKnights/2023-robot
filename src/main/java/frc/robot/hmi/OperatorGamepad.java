@@ -8,6 +8,10 @@
 
 package frc.robot.hmi;
 
+import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.commands.DebugPrint;
+import frc.robot.commands.gripper.GripperClose;
+import frc.robot.commands.gripper.GripperOpen;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -22,9 +26,17 @@ public class OperatorGamepad extends F310Gamepad {
    /** Our classes' logger **/
    private static final PKLogger logger = RioLogger.getLogger(OperatorGamepad.class.getName());
 
+   private final Trigger testButton;
+
+   private final Trigger gripperButton;
+
    public OperatorGamepad() {
       super("OperatorGamepad", 1);
       logger.info("constructing");
+
+      testButton = cmdStick.button(redButton);
+
+      gripperButton = cmdStick.button(blueButton);
 
       logger.info("constructed");
    }
@@ -57,12 +69,25 @@ public class OperatorGamepad extends F310Gamepad {
       logger.info("configured");
    }
 
-   /**
-    * (Re-)Configures the button bindings on the gamepad for the
-    * climbing end game play.
-    */
-   public void configureClimbingButtonBindings() {
+   @Override
+   public void testInit() {
+      logger.info("initializing test for {}", myName);
+
+      configureTestButtonBindings();
+
+      logger.info("initialized test for {}", myName);
+   }
+
+   private void configureTestButtonBindings() {
       logger.info("configure");
+
+      testButton.onTrue(new DebugPrint("testButton pressed"));
+
+      gripperButton
+            // Open the gripper when the button is pressed
+            .onTrue(new GripperOpen())
+            // Close thre gripper when that same button is released
+            .onFalse(new GripperClose());
 
       logger.info("configured");
    }

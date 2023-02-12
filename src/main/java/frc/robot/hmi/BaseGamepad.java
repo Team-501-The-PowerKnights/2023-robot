@@ -9,7 +9,7 @@
 package frc.robot.hmi;
 
 import edu.wpi.first.wpilibj.GenericHID;
-
+import edu.wpi.first.wpilibj2.command.button.CommandGenericHID;
 import frc.robot.IModeFollower;
 
 import riolog.PKLogger;
@@ -23,15 +23,20 @@ abstract class BaseGamepad implements IModeFollower, IGamepad {
 	/** Our gamepad's name **/
 	protected final String myName;
 
-	/** Our joystick */
+	/** Our joysick (as old, non-command way) */
 	protected final GenericHID stick;
+	/** Our joystick (command-based variant) */
+	protected final CommandGenericHID cmdStick;
 
 	protected BaseGamepad(String name, int port) {
 		logger.info("constructing {} for {}", name, port);
 
 		myName = name;
 
-		stick = new GenericHID(port);
+		// Create new command based way ...
+		cmdStick = new CommandGenericHID(port);
+		// ... but get old way for backwards compatibility
+		stick = cmdStick.getHID();
 
 		logger.info("constructed");
 	}

@@ -97,6 +97,10 @@ public class RobotContainer {
       subsystems = SubsystemsFactory.constructSubsystems();
       ModeFollowers.getInstance().addAll(subsystems);
 
+      // Add the OI to mode followers
+      // TODO: Determine if this needs to go after all the others?
+      ModeFollowers.getInstance().add(OI.getInstance());
+
       // Configure the trigger bindings
       configureBindings();
 

@@ -11,6 +11,8 @@ package frc.robot.subsystems.gripper;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.commands.gripper.GripperDoNothing;
+import frc.robot.modules.pneumatic.IPneumaticModule;
+import frc.robot.modules.pneumatic.PneumaticModuleFactory;
 import frc.robot.subsystems.BaseSubsystem;
 import frc.robot.subsystems.SubsystemNames;
 import frc.robot.telemetry.TelemetryNames;
@@ -23,9 +25,16 @@ abstract class BaseGripperSubsystem extends BaseSubsystem implements IGripperSub
    /** Our classes' logger **/
    private static final PKLogger logger = RioLogger.getLogger(BaseGripperSubsystem.class.getName());
 
+   private IPneumaticModule pneumatic;
+
+   private static final int gripperChannel = 0;
+
    BaseGripperSubsystem() {
       super(SubsystemNames.gripperName);
       logger.info("constructing");
+
+      pneumatic = PneumaticModuleFactory.getInstance();
+      close();
 
       logger.info("constructed");
    }
@@ -44,13 +53,34 @@ abstract class BaseGripperSubsystem extends BaseSubsystem implements IGripperSub
       logger.info("new preferences for {}:", myName);
    }
 
+   /**
+    * Telemetry support by subsystem.
+    */
+   protected boolean tlmIsOpen = false;
+
    @Override
    public void updateTelemetry() {
+      SmartDashboard.putBoolean(TelemetryNames.Gripper.open, tlmIsOpen);
    }
 
    @Override
    public void updatePreferences() {
       loadPreferences();
+   }
+
+   @Override
+   public void open() {
+      setSolenoid(true);
+   }
+
+   @Override
+   public void close() {
+      setSolenoid(false);
+   }
+
+   private void setSolenoid(boolean isOpen) {
+      tlmIsOpen = isOpen;
+      pneumatic.setSolenoid(gripperChannel, isOpen);
    }
 
 }

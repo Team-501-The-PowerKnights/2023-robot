@@ -9,7 +9,6 @@
 package frc.robot.hmi;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 import frc.robot.telemetry.TelemetryNames;
 
@@ -40,16 +39,6 @@ public class DriverGamepad extends F310Gamepad {
 		// driveSwapButton = new JoystickButton(stick, backButton);
 
 		logger.info("constructed");
-	}
-
-	/**
-	 * (Re-)Configures the button bindings on the gamepad for the
-	 * climbing end game play.
-	 */
-	public void configureClimbingButtonBindings() {
-		logger.info("configure");
-
-		logger.info("configured");
 	}
 
 	@Override

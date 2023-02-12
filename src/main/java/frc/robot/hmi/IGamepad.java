@@ -27,5 +27,6 @@ public interface IGamepad extends ITelemetryProvider {
         //@formatter:on
      */
    public void configureButtonBindings();
+   // FIXME: Delete this, or fix to new way with modes.
 
 }

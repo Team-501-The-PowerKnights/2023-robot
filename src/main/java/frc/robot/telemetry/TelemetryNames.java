@@ -177,6 +177,8 @@ public final class TelemetryNames {
       public static final String implClass = name + ".implClass";
       public static final String autoCommand = name + ".autoCommand";
       public static final String teleCommand = name + ".teleCommand";
+
+      public static final String open = name + ".open";
    }
 
 }

@@ -81,7 +81,7 @@ public class OI implements ITelemetryProvider, IModeFollower {
 
       // Disable the previous button mappings
       logger.trace("***** clearButtons()");
-      CommandScheduler.getInstance().clearButtons();
+      CommandScheduler.getInstance().getActiveButtonLoop().clear();
 
       logger.info("initialized auto for {}", myName);
    }
@@ -102,7 +102,7 @@ public class OI implements ITelemetryProvider, IModeFollower {
       logger.info("initializing teleop for {}", myName);
 
       // Make the button bindings for this mode
-      operatorPad.teleopInit();
+      driverPad.teleopInit();
       operatorPad.teleopInit();
 
       logger.info("initialized teleop for {}", myName);
@@ -112,7 +112,9 @@ public class OI implements ITelemetryProvider, IModeFollower {
    public void testInit() {
       logger.info("initializing test for {}", myName);
 
-      // Nothing for this
+      // Make the button bindings for this mode
+      driverPad.testInit();
+      operatorPad.testInit();
 
       logger.info("initialized test for {}", myName);
    }
