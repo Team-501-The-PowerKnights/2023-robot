@@ -6,11 +6,20 @@ package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.revrobotics.AbsoluteEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.REVLibError;
+import com.revrobotics.RelativeEncoder;
+import com.revrobotics.SparkMaxAbsoluteEncoder;
+import com.revrobotics.SparkMaxAlternateEncoder;
+import com.revrobotics.SparkMaxPIDController;
+import com.revrobotics.SparkMaxRelativeEncoder;
+import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.SparkMaxAbsoluteEncoder.Type;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PneumaticHub;
 import edu.wpi.first.wpilibj.PowerDistribution;
@@ -19,6 +28,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -64,13 +74,24 @@ public class Robot extends TimedRobot {
    private Joystick operatorStick;
 
    private CANSparkMax armRotate;
+   private SparkMaxPIDController armRotatePID;
+   private RelativeEncoder armRotateEncoder;
+   public double rotateP, rotateI, rotateD, rotateIzone, rotateFF, rotateMaxOutput, rotateMinOutput, rotateTarget;
+   public boolean rotatePIDDisable;
+
    private CANSparkMax armExtend;
+   private SparkMaxPIDController armExtendPID;
+   // private AbsoluteEncoder armExtendEncoder;
+   private RelativeEncoder armExtendEncoder;
+   public double extendP, extendI, extendD, extendIzone, extendFF, extendMaxOutput, extendMinOutput, extendTarget;
+   public boolean extendPIDDisable;
 
    private TalonFX leftIngest;
    private TalonFX rightIngest;
 
    private static final int gripperSolenoidChannel = 0;
    private Solenoid gripperSolenoid;
+   private boolean gripperOpen;
 
    /**
     * This function is run when the robot is first started up and should be used
@@ -110,13 +131,81 @@ public class Robot extends TimedRobot {
       drive = new DifferentialDrive(leftFront, rightFront);
 
       operatorStick = new Joystick(1);
+      /****************************************************************************
+       * Arm Rotate Setup
+       *******************************************************************/
 
       armRotate = new CANSparkMax(21, MotorType.kBrushless);
       checkError(armRotate.restoreFactoryDefaults(), "AR restore factory defaults {}");
       checkError(armRotate.setIdleMode(IdleMode.kBrake), "AR set idle mode to break {}");
+      armRotatePID = armRotate.getPIDController();
+      armRotateEncoder = armRotate.getEncoder();
+
+      // PID coefficients
+      rotateP = 0.1;
+      rotateI = 1e-4;
+      rotateD = 1;
+      rotateIzone = 0;
+      rotateFF = 0;
+      rotateMaxOutput = 0.2;
+      rotateMinOutput = -0.2;
+      rotatePIDDisable = true;
+
+      // set PID coefficients
+      armRotatePID.setP(rotateP);
+      armRotatePID.setI(rotateI);
+      armRotatePID.setD(rotateD);
+      armRotatePID.setIZone(rotateIzone);
+      armRotatePID.setFF(rotateFF);
+      armRotatePID.setOutputRange(rotateMinOutput, rotateMaxOutput);
+      if (rotatePIDDisable) {
+         armRotatePID.setReference(0.0, ControlType.kVoltage);
+      } else {
+         armRotatePID.setReference(0.0, ControlType.kPosition);
+      }
+
+      // display PID coefficients on SmartDashboard
+      SmartDashboard.putBoolean("Arm Rot PID Enabled", rotatePIDDisable);
+      SmartDashboard.putNumber("Arm Rot P Gain", rotateP);
+      SmartDashboard.putNumber("Arm Rot I Gain", rotateI);
+      SmartDashboard.putNumber("Arm Rot D Gain", rotateD);
+      SmartDashboard.putNumber("Arm Rot I Zone", rotateIzone);
+      SmartDashboard.putNumber("Arm Rot Feed Forward", rotateFF);
+      SmartDashboard.putNumber("Arm Rot Max Output", rotateMaxOutput);
+      SmartDashboard.putNumber("Arm Rot Min Output", rotateMinOutput);
+      SmartDashboard.putNumber("Arm Rot Set Target", 0);
+      SmartDashboard.putNumber("Arm Rot Feedback", armRotateEncoder.getPosition());
+
+      // /****************************************************************************
+      // * Arm Extend Setup
+      // *******************************************************************/
+
       armExtend = new CANSparkMax(22, MotorType.kBrushless);
       checkError(armExtend.restoreFactoryDefaults(), "AE restore factory defaults {}");
       checkError(armExtend.setIdleMode(IdleMode.kBrake), "AE set idle mode to break {}");
+      // armExtendEncoder = armExtend.getAbsoluteEncoder(Type.kDutyCycle);
+      armExtendEncoder = armExtend.getEncoder();
+      // PID coefficients Extend
+      extendP = 0.1;
+      extendI = 1e-4;
+      extendD = 1;
+      extendIzone = 0;
+      extendFF = 0;
+      extendMaxOutput = 0.2;
+      extendMinOutput = -0.2;
+      extendPIDDisable = false;
+
+      // display PID coefficients on SmartDashboard
+      SmartDashboard.putBoolean("Arm Ext PID Enabled", extendPIDDisable);
+      SmartDashboard.putNumber("Arm Ext P Gain", extendP);
+      SmartDashboard.putNumber("Arm Ext I Gain", extendI);
+      SmartDashboard.putNumber("Arm Ext D Gain", extendD);
+      SmartDashboard.putNumber("Arm Ext I Zone", extendIzone);
+      SmartDashboard.putNumber("Arm Ext Feed Forward", extendFF);
+      SmartDashboard.putNumber("Arm Ext Max Output", extendMaxOutput);
+      SmartDashboard.putNumber("Arm Ext Min Output", extendMinOutput);
+      SmartDashboard.putNumber("Arm Ext Set Target", 0);
+      SmartDashboard.putNumber("Arm Ext Feedback", armExtendEncoder.getPosition());
 
       leftIngest = new TalonFX(31);
       rightIngest = new TalonFX(32);
@@ -124,6 +213,7 @@ public class Robot extends TimedRobot {
       // Instantiate solenoid and set to false(?) as initial state
       gripperSolenoid = pneumH.makeSolenoid(gripperSolenoidChannel);
       gripperSolenoid.set(false);
+      gripperOpen = false;
    }
 
    // last error (not the same as kOk)
@@ -160,6 +250,7 @@ public class Robot extends TimedRobot {
    /** This function is called once each time the robot enters DisSabled mode. */
    @Override
    public void disabledInit() {
+
       drive.arcadeDrive(0, 0);
 
       armRotate.set(0);
@@ -171,6 +262,46 @@ public class Robot extends TimedRobot {
 
    @Override
    public void disabledPeriodic() {
+
+      // read PID coefficients from SmartDashboard
+      rotatePIDDisable = SmartDashboard.getBoolean("Arm Rot PID Enabled", rotatePIDDisable);
+      double ar_p = SmartDashboard.getNumber("Arm Rot P Gain", 0);
+      double ar_i = SmartDashboard.getNumber("Arm Rot I Gain", 0);
+      double ar_d = SmartDashboard.getNumber("Arm Rot D Gain", 0);
+      double ar_iz = SmartDashboard.getNumber("Arm Rot I Zone", 0);
+      double ar_ff = SmartDashboard.getNumber("Arm Rot Feed Forward", 0);
+      double ar_max = SmartDashboard.getNumber("Arm Rot Max Output", 0);
+      double ar_min = SmartDashboard.getNumber("Arm Rot Min Output", 0);
+      rotateTarget = SmartDashboard.getNumber("Arm Rot Set Target", 0);
+
+      // if PID coefficients on SmartDashboard have changed, write new values to
+      // controller
+      if ((ar_p != rotateP)) {
+         armRotatePID.setP(ar_p);
+         rotateP = ar_p;
+      }
+      if ((ar_i != rotateI)) {
+         armRotatePID.setI(ar_i);
+         rotateI = ar_i;
+      }
+      if ((ar_d != rotateD)) {
+         armRotatePID.setD(ar_d);
+         rotateD = ar_d;
+      }
+      if ((ar_iz != rotateIzone)) {
+         armRotatePID.setIZone(ar_iz);
+         rotateIzone = ar_iz;
+      }
+      if ((ar_ff != rotateFF)) {
+         armRotatePID.setFF(ar_ff);
+         rotateFF = ar_ff;
+      }
+      if ((ar_max != rotateMaxOutput) || (ar_min != rotateMinOutput)) {
+         armRotatePID.setOutputRange(ar_min, ar_max);
+         rotateMinOutput = ar_min;
+         rotateMaxOutput = ar_max;
+      }
+
    }
 
    @Override
@@ -208,6 +339,8 @@ public class Robot extends TimedRobot {
       if (m_autonomousCommand != null) {
          m_autonomousCommand.cancel();
       }
+
+      gripperOpen = false;
    }
 
    /** This function is called periodically during operator control. */
@@ -217,14 +350,26 @@ public class Robot extends TimedRobot {
       // xSpeed,zRotation
       // drive.arcadeDrive(0, 0);
       // drive.arcadeDrive(-driverStick.getY(), -driverStick.getX());
-      drive.arcadeDrive(-driverStick.getRawAxis(1) * 0.60,
+      drive.arcadeDrive(-driverStick.getRawAxis(1) * .60,
             -driverStick.getRawAxis(4) * 0.60);
 
       // FWD: Up, BCK: Down - so reverse sign
-      // armRotate.set(-operatorStick.getRawAxis(1) * 0.20);
+      //
+      rotatePIDDisable = SmartDashboard.getBoolean("Arm Rot PID Enabled", rotatePIDDisable);
+      if (rotatePIDDisable) {
+         double armVal = (-operatorStick.getRawAxis(1) * 6); // 0-12v in voltage mode
+         SmartDashboard.putNumber("Arm Rot arvVal", armVal);
+         armRotatePID.setReference(armVal, ControlType.kVoltage);
+         armRotatePID.setP(1.0);
+      } else {
+         rotateTarget = SmartDashboard.getNumber("Arm Rot Set Target", 0);
+         armRotatePID.setReference(rotateTarget, ControlType.kPosition);
+      }
+      SmartDashboard.putNumber("Arn Rot Feedback", armRotateEncoder.getPosition());
 
       // FWD: Out, BCK: In - no need to reverse sign
       armExtend.set(operatorStick.getRawAxis(5) * 0.20);
+      SmartDashboard.putNumber("Arm Ext Feedback", armExtendEncoder.getPosition());
 
       double inSpeed = operatorStick.getRawAxis(2);
       double outSpeed = operatorStick.getRawAxis(3);
@@ -237,13 +382,23 @@ public class Robot extends TimedRobot {
       speed *= 0.30;
       leftIngest.set(TalonFXControlMode.PercentOutput, speed);
       rightIngest.set(TalonFXControlMode.PercentOutput, -speed);
+
+      if (operatorStick.getRawButton(3)) {
+         if (!gripperOpen) {
+            logger.info("button 3 pressed - open gripper");
+            gripperSolenoid.set(true);
+            gripperOpen = true;
+         }
+      } else if (!operatorStick.getRawButton(3) && gripperOpen) {
+         logger.info("button 3 released - close gripper");
+         gripperSolenoid.set(false);
+         gripperOpen = false;
+      }
    }
 
    @Override
    public void teleopExit() {
    }
-
-   private boolean gripperOpen;
 
    @Override
    public void testInit() {
@@ -277,18 +432,18 @@ public class Robot extends TimedRobot {
 
       /*
        * Gripper Pneumatics Testing
+       * if (operatorStick.getRawButton(3)) {
+       * if (!gripperOpen) {
+       * logger.info("button 3 pressed - open gripper");
+       * gripperSolenoid.set(true);
+       * gripperOpen = true;
+       * }
+       * } else if (!operatorStick.getRawButton(3) && gripperOpen) {
+       * logger.info("button 3 released - close gripper");
+       * gripperSolenoid.set(false);
+       * gripperOpen = false;
+       * }
        */
-      if (operatorStick.getRawButton(3)) {
-         if (!gripperOpen) {
-            logger.info("button 3 pressed - open gripper");
-            gripperSolenoid.set(true);
-            gripperOpen = true;
-         }
-      } else if (!operatorStick.getRawButton(3) && gripperOpen) {
-         logger.info("button 3 released - close gripper");
-         gripperSolenoid.set(false);
-         gripperOpen = false;
-      }
    }
 
    @Override
