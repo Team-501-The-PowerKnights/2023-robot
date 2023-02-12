@@ -12,6 +12,16 @@ import frc.robot.modules.IModule;
 
 public interface IPneumaticModule extends IModule {
 
+   /**
+    * 
+    */
    public void enable();
+
+   /**
+    * 
+    * @param index
+    * @param value
+    */
+   public void setSolenoid(int index, boolean value);
 
 }

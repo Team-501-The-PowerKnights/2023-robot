@@ -53,4 +53,9 @@ class PCMPneumaticModule extends BasePneumaticModule {
       setTlmEnabled(true);
    }
 
+   @Override
+   public void setSolenoid(int index, boolean value) {
+      // TODO Auto-generated method stub
+   }
+
 }

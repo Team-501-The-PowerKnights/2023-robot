@@ -8,7 +8,11 @@
 
 package frc.robot.modules.pneumatic;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import edu.wpi.first.wpilibj.PneumaticHub;
+import edu.wpi.first.wpilibj.Solenoid;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
@@ -19,13 +23,20 @@ class PCHPneumaticModule extends BasePneumaticModule {
    private static final PKLogger logger = RioLogger.getLogger(PCHPneumaticModule.class.getName());
 
    /** My module */
-   private final PneumaticHub module;
+   protected final PneumaticHub module;
+
+   // Indexed 0 - 15
+   private final List<Solenoid> solenoids;
 
    public PCHPneumaticModule() {
       logger.info("constructing");
 
       module = new PneumaticHub(2);
+      module.enableCompressorAnalog(80, 110);
+
       enable();
+
+      solenoids = new ArrayList<Solenoid>(16);
 
       logger.info("constructed");
    }
@@ -51,6 +62,16 @@ class PCHPneumaticModule extends BasePneumaticModule {
    public void enable() {
       module.enableCompressorDigital();
       setTlmEnabled(true);
+   }
+
+   @Override
+   public void setSolenoid(int channel, boolean on) {
+      if (solenoids.get(channel) == null) {
+         logger.info("Creating solenoid for channel = {} with initial state = {}",
+               channel, on);
+         solenoids.set(channel, module.makeSolenoid(channel));
+      }
+      solenoids.get(channel).set(on);
    }
 
 }

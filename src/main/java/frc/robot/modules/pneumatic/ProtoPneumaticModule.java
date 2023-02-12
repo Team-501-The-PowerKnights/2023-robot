@@ -11,42 +11,15 @@ package frc.robot.modules.pneumatic;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-class StubPneumaticModule extends BasePneumaticModule {
+class ProtoPneumaticModule extends PCHPneumaticModule {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(StubPneumaticModule.class.getName());
+   private static final PKLogger logger = RioLogger.getLogger(ProtoPneumaticModule.class.getName());
 
-   public StubPneumaticModule() {
+   public ProtoPneumaticModule() {
       logger.info("constructing");
 
       logger.info("constructed");
-   }
-
-   @Override
-   public void updateTelemetry() {
-      super.updateTelemetry();
-
-      // Stub doesn't implement this
-   }
-
-   @Override
-   public void updatePreferences() {
-      // Stub doesn't implement this
-   }
-
-   @Override
-   public void enable() {
-      // Stub doesn't implement this
-   }
-
-   @Override
-   public void disable() {
-      // Stub doesn't implement this
-   }
-
-   @Override
-   public void setSolenoid(int index, boolean value) {
-      // Stub doesn't implement this
    }
 
 }
