@@ -142,14 +142,15 @@ public class Robot extends TimedRobot {
       armRotateEncoder = armRotate.getEncoder();
 
       // PID coefficients
-      rotateP = 0.1;
-      rotateI = 1e-4;
+      rotateP = 0.2;
+      rotateI = 1e-5;
       rotateD = 1;
       rotateIzone = 0;
       rotateFF = 0;
-      rotateMaxOutput = 0.2;
-      rotateMinOutput = -0.2;
-      rotatePIDDisable = true;
+      rotateMaxOutput = 0.3;
+      rotateMinOutput = -0.3;
+      // STU:
+      rotatePIDDisable = false;
 
       // set PID coefficients
       armRotatePID.setP(rotateP);
@@ -341,6 +342,8 @@ public class Robot extends TimedRobot {
       }
 
       gripperOpen = false;
+
+      armRotateEncoder.setPosition(0);
    }
 
    /** This function is called periodically during operator control. */
@@ -363,9 +366,10 @@ public class Robot extends TimedRobot {
          armRotatePID.setP(1.0);
       } else {
          rotateTarget = SmartDashboard.getNumber("Arm Rot Set Target", 0);
-         armRotatePID.setReference(rotateTarget, ControlType.kPosition);
+         // armRotatePID.setReference(rotateTarget, ControlType.kPosition);
+         armRotatePID.setReference(15.0, ControlType.kPosition);
       }
-      SmartDashboard.putNumber("Arn Rot Feedback", armRotateEncoder.getPosition());
+      SmartDashboard.putNumber("Arm Rot Feedback", armRotateEncoder.getPosition());
 
       // FWD: Out, BCK: In - no need to reverse sign
       armExtend.set(operatorStick.getRawAxis(5) * 0.20);
