@@ -140,6 +140,7 @@ public class Robot extends TimedRobot {
       checkError(armRotate.setIdleMode(IdleMode.kBrake), "AR set idle mode to break {}");
       armRotatePID = armRotate.getPIDController();
       armRotateEncoder = armRotate.getEncoder();
+      armRotateEncoder.setPosition(0);
 
       // PID coefficients
       rotateP = 0.2;
@@ -148,7 +149,7 @@ public class Robot extends TimedRobot {
       rotateIzone = 0;
       rotateFF = 0;
       rotateMaxOutput = 0.3;
-      rotateMinOutput = -0.3;
+      rotateMinOutput = -0.1;
       // STU:
       rotatePIDDisable = false;
 
@@ -184,17 +185,33 @@ public class Robot extends TimedRobot {
       armExtend = new CANSparkMax(22, MotorType.kBrushless);
       checkError(armExtend.restoreFactoryDefaults(), "AE restore factory defaults {}");
       checkError(armExtend.setIdleMode(IdleMode.kBrake), "AE set idle mode to break {}");
-      // armExtendEncoder = armExtend.getAbsoluteEncoder(Type.kDutyCycle);
+      armExtendPID = armExtend.getPIDController();
       armExtendEncoder = armExtend.getEncoder();
+      armExtendEncoder.setPosition(0);
+
       // PID coefficients Extend
-      extendP = 0.1;
-      extendI = 1e-4;
+      extendP = 0.2;
+      extendI = 0;
       extendD = 1;
       extendIzone = 0;
       extendFF = 0;
       extendMaxOutput = 0.2;
       extendMinOutput = -0.2;
+      // STU
       extendPIDDisable = false;
+
+      // set PID coefficients
+      armExtendPID.setP(extendP);
+      armExtendPID.setI(extendI);
+      armExtendPID.setD(extendD);
+      armExtendPID.setIZone(extendIzone);
+      armExtendPID.setFF(extendFF);
+      armExtendPID.setOutputRange(extendMinOutput, extendMaxOutput);
+      if (extendPIDDisable) {
+         armExtendPID.setReference(0.0, ControlType.kVoltage);
+      } else {
+         armExtendPID.setReference(0.0, ControlType.kPosition);
+      }
 
       // display PID coefficients on SmartDashboard
       SmartDashboard.putBoolean("Arm Ext PID Enabled", extendPIDDisable);
@@ -208,8 +225,8 @@ public class Robot extends TimedRobot {
       SmartDashboard.putNumber("Arm Ext Set Target", 0);
       SmartDashboard.putNumber("Arm Ext Feedback", armExtendEncoder.getPosition());
 
-      leftIngest = new TalonFX(31);
-      rightIngest = new TalonFX(32);
+      // leftIngest = new TalonFX(31);
+      // rightIngest = new TalonFX(32);
 
       // Instantiate solenoid and set to false(?) as initial state
       gripperSolenoid = pneumH.makeSolenoid(gripperSolenoidChannel);
@@ -257,8 +274,8 @@ public class Robot extends TimedRobot {
       armRotate.set(0);
       armExtend.set(0);
 
-      leftIngest.set(TalonFXControlMode.PercentOutput, 0);
-      rightIngest.set(TalonFXControlMode.PercentOutput, 0);
+      // leftIngest.set(TalonFXControlMode.PercentOutput, 0);
+      // rightIngest.set(TalonFXControlMode.PercentOutput, 0);
    }
 
    @Override
@@ -303,6 +320,44 @@ public class Robot extends TimedRobot {
          rotateMaxOutput = ar_max;
       }
 
+      // read PID coefficients from SmartDashboard
+      extendPIDDisable = SmartDashboard.getBoolean("Arm Ext PID Enabled", extendPIDDisable);
+      ar_p = SmartDashboard.getNumber("Arm Ext P Gain", 0);
+      ar_i = SmartDashboard.getNumber("Arm Ext I Gain", 0);
+      ar_d = SmartDashboard.getNumber("Arm Ext D Gain", 0);
+      ar_iz = SmartDashboard.getNumber("Arm Ext I Zone", 0);
+      ar_ff = SmartDashboard.getNumber("Arm Ext Feed Forward", 0);
+      ar_max = SmartDashboard.getNumber("Arm Ext Max Output", 0);
+      ar_min = SmartDashboard.getNumber("Arm Ext Min Output", 0);
+      extendTarget = SmartDashboard.getNumber("Arm Ext Set Target", 0);
+
+      // if PID coefficients on SmartDashboard have changed, write new values to
+      // controller
+      if ((ar_p != extendP)) {
+         armExtendPID.setP(ar_p);
+         extendP = ar_p;
+      }
+      if ((ar_i != extendI)) {
+         armExtendPID.setI(ar_i);
+         extendI = ar_i;
+      }
+      if ((ar_d != extendD)) {
+         armExtendPID.setD(ar_d);
+         extendD = ar_d;
+      }
+      if ((ar_iz != extendIzone)) {
+         armExtendPID.setIZone(ar_iz);
+         extendIzone = ar_iz;
+      }
+      if ((ar_ff != extendFF)) {
+         armExtendPID.setFF(ar_ff);
+         extendFF = ar_ff;
+      }
+      if ((ar_max != extendMaxOutput) || (ar_min != extendMinOutput)) {
+         armExtendPID.setOutputRange(ar_min, ar_max);
+         extendMinOutput = ar_min;
+         extendMaxOutput = ar_max;
+      }
    }
 
    @Override
@@ -342,8 +397,6 @@ public class Robot extends TimedRobot {
       }
 
       gripperOpen = false;
-
-      armRotateEncoder.setPosition(0);
    }
 
    /** This function is called periodically during operator control. */
@@ -365,27 +418,39 @@ public class Robot extends TimedRobot {
          armRotatePID.setReference(armVal, ControlType.kVoltage);
          armRotatePID.setP(1.0);
       } else {
-         rotateTarget = SmartDashboard.getNumber("Arm Rot Set Target", 0);
+         rotateTarget = SmartDashboard.getNumber("Arm Rot Set Target", 0.0);
          // armRotatePID.setReference(rotateTarget, ControlType.kPosition);
-         armRotatePID.setReference(15.0, ControlType.kPosition);
+         armRotatePID.setReference(rotateTarget, ControlType.kPosition);
       }
       SmartDashboard.putNumber("Arm Rot Feedback", armRotateEncoder.getPosition());
 
       // FWD: Out, BCK: In - no need to reverse sign
-      armExtend.set(operatorStick.getRawAxis(5) * 0.20);
+      // armExtend.set(operatorStick.getRawAxis(5) * 0.20);
+      // SmartDashboard.putNumber("Arm Ext Feedback", armExtendEncoder.getPosition());
+      extendPIDDisable = SmartDashboard.getBoolean("Arm Ext PID Enabled", extendPIDDisable);
+      if (extendPIDDisable) {
+         double armVal = (-operatorStick.getRawAxis(5) * 6); // 0-12v in voltage mode
+         SmartDashboard.putNumber("Arm Ext arvVal", armVal);
+         armExtendPID.setReference(armVal, ControlType.kVoltage);
+         armExtendPID.setP(1.0);
+      } else {
+         extendTarget = SmartDashboard.getNumber("Arm Ext Set Target", 0.0);
+         // armExtendPID.setReference(extendTarget, ControlType.kPosition);
+         armExtendPID.setReference(extendTarget, ControlType.kPosition);
+      }
       SmartDashboard.putNumber("Arm Ext Feedback", armExtendEncoder.getPosition());
 
-      double inSpeed = operatorStick.getRawAxis(2);
-      double outSpeed = operatorStick.getRawAxis(3);
-      double speed = 0;
-      if (inSpeed > outSpeed) {
-         speed = inSpeed;
-      } else {
-         speed = -outSpeed;
-      }
-      speed *= 0.30;
-      leftIngest.set(TalonFXControlMode.PercentOutput, speed);
-      rightIngest.set(TalonFXControlMode.PercentOutput, -speed);
+      // double inSpeed = operatorStick.getRawAxis(2);
+      // double outSpeed = operatorStick.getRawAxis(3);
+      // double speed = 0;
+      // if (inSpeed > outSpeed) {
+      // speed = inSpeed;
+      // } else {
+      // speed = -outSpeed;
+      // }
+      // speed *= 0.30;
+      // leftIngest.set(TalonFXControlMode.PercentOutput, speed);
+      // rightIngest.set(TalonFXControlMode.PercentOutput, -speed);
 
       if (operatorStick.getRawButton(3)) {
          if (!gripperOpen) {
