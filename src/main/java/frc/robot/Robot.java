@@ -31,7 +31,8 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-
+import edu.wpi.first.wpilibj2.command.button.Button;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -72,6 +73,14 @@ public class Robot extends TimedRobot {
     * Operator Stuff
     */
    private Joystick operatorStick;
+
+   private boolean highArmRotateButtonPressed;
+   private boolean midArmRotateButtonPressed;
+   private boolean lowArmRotateButtonPressed;
+
+   private final double highArmSetPoint = 30;
+   private final double midArmSetPoint = 20;
+   private final double lowArmSetPoint = 10;
 
    private CANSparkMax armRotate;
    private SparkMaxPIDController armRotatePID;
@@ -131,6 +140,7 @@ public class Robot extends TimedRobot {
       drive = new DifferentialDrive(leftFront, rightFront);
 
       operatorStick = new Joystick(1);
+
       /****************************************************************************
        * Arm Rotate Setup
        *******************************************************************/
@@ -397,11 +407,21 @@ public class Robot extends TimedRobot {
       }
 
       gripperOpen = false;
+
+      highArmRotateButtonPressed = false;
+      midArmRotateButtonPressed = false;
+      lowArmRotateButtonPressed = false;
    }
 
    /** This function is called periodically during operator control. */
    @Override
    public void teleopPeriodic() {
+      // -****************************************************************
+      // -*
+      // -* DRIVE
+      // -*
+      // -****************************************************************
+
       // FIXME: Make this right calls
       // xSpeed,zRotation
       // drive.arcadeDrive(0, 0);
@@ -409,6 +429,19 @@ public class Robot extends TimedRobot {
       drive.arcadeDrive(-driverStick.getRawAxis(1) * .60,
             -driverStick.getRawAxis(4) * 0.60);
 
+      // drive.curvatureDrive(-driverStick.getRawAxis(1) * .60,
+      // -driverStick.getRawAxis(4) * 0.60, false);
+
+      // drive.curvatureDrive(-driverStick.getRawAxis(1) * .60,
+      // -driverStick.getRawAxis(4) * 0.60, driverStick.getRawButton(5));
+
+      // -****************************************************************
+      // -*
+      // -* ARM ROTATION
+      // -*
+      // -****************************************************************
+
+      //
       // FWD: Up, BCK: Down - so reverse sign
       //
       rotatePIDDisable = SmartDashboard.getBoolean("Arm Rot PID Enabled", rotatePIDDisable);
@@ -423,6 +456,41 @@ public class Robot extends TimedRobot {
          armRotatePID.setReference(rotateTarget, ControlType.kPosition);
       }
       SmartDashboard.putNumber("Arm Rot Feedback", armRotateEncoder.getPosition());
+
+      if (operatorStick.getRawButton(4)) {
+         if (!highArmRotateButtonPressed) {
+            logger.debug("set arm rotate PID to high {}", highArmSetPoint);
+            if (!rotatePIDDisable) {
+               armRotatePID.setReference(highArmSetPoint, ControlType.kPosition);
+            }
+            highArmRotateButtonPressed = true;
+         }
+      } else if (operatorStick.getRawButton(2)) {
+         if (!midArmRotateButtonPressed) {
+            logger.debug("set arm rotate PID to mid {}", midArmSetPoint);
+            if (!rotatePIDDisable) {
+               armRotatePID.setReference(midArmSetPoint, ControlType.kPosition);
+            }
+            midArmRotateButtonPressed = true;
+         }
+      } else if (operatorStick.getRawButton(1)) {
+         if (!lowArmRotateButtonPressed) {
+            logger.debug("set arm rotate PID to low {}", lowArmSetPoint);
+            if (!rotatePIDDisable) {
+               armRotatePID.setReference(lowArmSetPoint, ControlType.kPosition);
+            }
+            lowArmRotateButtonPressed = true;
+         }
+      }
+      highArmRotateButtonPressed = operatorStick.getRawButton(4);
+      midArmRotateButtonPressed = operatorStick.getRawButton(2);
+      lowArmRotateButtonPressed = operatorStick.getRawButton(1);
+
+      // -****************************************************************
+      // -*
+      // -* ARM EXTENSION
+      // -*
+      // -****************************************************************
 
       // FWD: Out, BCK: In - no need to reverse sign
       // armExtend.set(operatorStick.getRawAxis(5) * 0.20);
@@ -440,6 +508,12 @@ public class Robot extends TimedRobot {
       }
       SmartDashboard.putNumber("Arm Ext Feedback", armExtendEncoder.getPosition());
 
+      // -****************************************************************
+      // -*
+      // -* GRIPPER INGEST
+      // -*
+      // -****************************************************************
+
       // double inSpeed = operatorStick.getRawAxis(2);
       // double outSpeed = operatorStick.getRawAxis(3);
       // double speed = 0;
@@ -451,6 +525,12 @@ public class Robot extends TimedRobot {
       // speed *= 0.30;
       // leftIngest.set(TalonFXControlMode.PercentOutput, speed);
       // rightIngest.set(TalonFXControlMode.PercentOutput, -speed);
+
+      // -****************************************************************
+      // -*
+      // -* GRIPPER CLAW
+      // -*
+      // -****************************************************************
 
       if (operatorStick.getRawButton(3)) {
          if (!gripperOpen) {
