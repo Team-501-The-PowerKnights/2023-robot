@@ -425,15 +425,17 @@ public class Robot extends TimedRobot {
       // FIXME: Make this right calls
       // xSpeed,zRotation
       // drive.arcadeDrive(0, 0);
+
       // drive.arcadeDrive(-driverStick.getY(), -driverStick.getX());
-      drive.arcadeDrive(-driverStick.getRawAxis(1) * .60,
-            -driverStick.getRawAxis(4) * 0.60);
+
+      // drive.arcadeDrive(-driverStick.getRawAxis(1) * .60,
+      // -driverStick.getRawAxis(4) * 0.60);
 
       // drive.curvatureDrive(-driverStick.getRawAxis(1) * .60,
       // -driverStick.getRawAxis(4) * 0.60, false);
 
-      // drive.curvatureDrive(-driverStick.getRawAxis(1) * .60,
-      // -driverStick.getRawAxis(4) * 0.60, driverStick.getRawButton(5));
+      drive.curvatureDrive(-driverStick.getRawAxis(1) * .60,
+            -driverStick.getRawAxis(4) * 0.60, driverStick.getRawButton(5));
 
       // -****************************************************************
       // -*
@@ -446,7 +448,7 @@ public class Robot extends TimedRobot {
       //
       rotatePIDDisable = SmartDashboard.getBoolean("Arm Rot PID Enabled", rotatePIDDisable);
       if (rotatePIDDisable) {
-         double armVal = (-operatorStick.getRawAxis(1) * 6); // 0-12v in voltage mode
+         double armVal = (-operatorStick.getRawAxis(5) * 6); // 0-12v in voltage mode
          SmartDashboard.putNumber("Arm Rot arvVal", armVal);
          armRotatePID.setReference(armVal, ControlType.kVoltage);
          armRotatePID.setP(1.0);
@@ -493,11 +495,11 @@ public class Robot extends TimedRobot {
       // -****************************************************************
 
       // FWD: Out, BCK: In - no need to reverse sign
-      // armExtend.set(operatorStick.getRawAxis(5) * 0.20);
+      // armExtend.set(operatorStick.getRawAxis(1) * 0.20);
       // SmartDashboard.putNumber("Arm Ext Feedback", armExtendEncoder.getPosition());
       extendPIDDisable = SmartDashboard.getBoolean("Arm Ext PID Enabled", extendPIDDisable);
       if (extendPIDDisable) {
-         double armVal = (-operatorStick.getRawAxis(5) * 6); // 0-12v in voltage mode
+         double armVal = (-operatorStick.getRawAxis(1) * 6); // 0-12v in voltage mode
          SmartDashboard.putNumber("Arm Ext arvVal", armVal);
          armExtendPID.setReference(armVal, ControlType.kVoltage);
          armExtendPID.setP(1.0);
@@ -532,14 +534,14 @@ public class Robot extends TimedRobot {
       // -*
       // -****************************************************************
 
-      if (operatorStick.getRawButton(3)) {
+      if (operatorStick.getRawButton(6)) {
          if (!gripperOpen) {
-            logger.info("button 3 pressed - open gripper");
+            logger.info("button 6 pressed - open gripper");
             gripperSolenoid.set(true);
             gripperOpen = true;
          }
-      } else if (!operatorStick.getRawButton(3) && gripperOpen) {
-         logger.info("button 3 released - close gripper");
+      } else if (!operatorStick.getRawButton(6) && gripperOpen) {
+         logger.info("button 6 released - close gripper");
          gripperSolenoid.set(false);
          gripperOpen = false;
       }
