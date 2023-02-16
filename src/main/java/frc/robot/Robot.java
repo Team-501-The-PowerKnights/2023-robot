@@ -78,9 +78,22 @@ public class Robot extends TimedRobot {
    private boolean midArmRotateButtonPressed;
    private boolean lowArmRotateButtonPressed;
 
-   private final double highArmSetPoint = 30;
-   private final double midArmSetPoint = 20;
-   private final double lowArmSetPoint = 10;
+   private double highArmRotateSetPoint = 30;
+   private double midArmRotateSetPoint = 20;
+   private double lowArmRotateSetPoint = 10;
+
+   private boolean highArmRotateAsTarget;
+   private boolean midArmRotateAsTarget;
+   private boolean lowArmRotateAsTarget;
+   private boolean highArmRotateReached;
+   private boolean midArmRotateReached;
+   private boolean lowArmRotateReached;
+
+   private boolean armRotationReached;
+
+   private double highArmExtendSetPoint = -150;
+   private double midArmExtendSetPoint = -75;
+   private double lowArmExtendSetPoint = -10;
 
    private CANSparkMax armRotate;
    private SparkMaxPIDController armRotatePID;
@@ -408,9 +421,20 @@ public class Robot extends TimedRobot {
 
       gripperOpen = false;
 
+      pidSetPointChecker = null;
+
       highArmRotateButtonPressed = false;
       midArmRotateButtonPressed = false;
       lowArmRotateButtonPressed = false;
+
+      highArmRotateAsTarget = false;
+      midArmRotateAsTarget = false;
+      lowArmRotateAsTarget = false;
+
+      highArmRotateReached = false;
+      midArmRotateReached = false;
+      lowArmRotateReached = false;
+      armRotationReached = false;
    }
 
    /** This function is called periodically during operator control. */
@@ -459,25 +483,43 @@ public class Robot extends TimedRobot {
 
       if (operatorStick.getRawButton(4)) {
          if (!highArmRotateButtonPressed) {
-            logger.debug("set arm rotate PID to high {}", highArmSetPoint);
+            logger.debug("set arm rotate PID to high {}", highArmRotateSetPoint);
             if (!rotatePIDDisable) {
-               armRotatePID.setReference(highArmSetPoint, ControlType.kPosition);
+               highArmRotateAsTarget = true;
+               midArmRotateAsTarget = false;
+               lowArmRotateAsTarget = false;
+               rotateTarget = highArmRotateSetPoint;
+               armRotatePID.setReference(highArmRotateSetPoint, ControlType.kPosition);
+               pidSetPointChecker = new PidSetPointReached(rotateTarget);
+               armRotationReached = false;
             }
             highArmRotateButtonPressed = true;
          }
       } else if (operatorStick.getRawButton(2)) {
          if (!midArmRotateButtonPressed) {
-            logger.debug("set arm rotate PID to mid {}", midArmSetPoint);
+            logger.debug("set arm rotate PID to mid {}", midArmRotateSetPoint);
             if (!rotatePIDDisable) {
-               armRotatePID.setReference(midArmSetPoint, ControlType.kPosition);
+               highArmRotateAsTarget = false;
+               midArmRotateAsTarget = true;
+               lowArmRotateAsTarget = false;
+               rotateTarget = midArmRotateSetPoint;
+               armRotatePID.setReference(midArmRotateSetPoint, ControlType.kPosition);
+               pidSetPointChecker = new PidSetPointReached(rotateTarget);
+               armRotationReached = false;
             }
             midArmRotateButtonPressed = true;
          }
       } else if (operatorStick.getRawButton(1)) {
          if (!lowArmRotateButtonPressed) {
-            logger.debug("set arm rotate PID to low {}", lowArmSetPoint);
+            logger.debug("set arm rotate PID to low {}", lowArmRotateSetPoint);
             if (!rotatePIDDisable) {
-               armRotatePID.setReference(lowArmSetPoint, ControlType.kPosition);
+               highArmRotateAsTarget = false;
+               midArmRotateAsTarget = false;
+               lowArmRotateAsTarget = true;
+               rotateTarget = lowArmRotateSetPoint;
+               armRotatePID.setReference(lowArmRotateSetPoint, ControlType.kPosition);
+               pidSetPointChecker = new PidSetPointReached(rotateTarget);
+               armRotationReached = false;
             }
             lowArmRotateButtonPressed = true;
          }
@@ -485,6 +527,24 @@ public class Robot extends TimedRobot {
       highArmRotateButtonPressed = operatorStick.getRawButton(4);
       midArmRotateButtonPressed = operatorStick.getRawButton(2);
       lowArmRotateButtonPressed = operatorStick.getRawButton(1);
+
+      double armRotatePosition = armRotateEncoder.getPosition();
+      if (highArmRotateAsTarget) {
+         highArmRotateReached = pidSetPointChecker.isReached(armRotatePosition);
+         midArmRotateReached = false;
+         lowArmRotateReached = false;
+      } else if (midArmRotateAsTarget) {
+         highArmRotateReached = false;
+         midArmRotateReached = pidSetPointChecker.isReached(armRotatePosition);
+         lowArmRotateReached = false;
+      } else if (lowArmRotateAsTarget) {
+         highArmRotateReached = false;
+         midArmRotateReached = false;
+         lowArmRotateReached = pidSetPointChecker.isReached(armRotatePosition);
+      }
+
+      armRotationReached = (highArmRotateReached || lowArmRotateReached || midArmRotateReached);
+      SmartDashboard.putBoolean("armRotationReached", armRotationReached);
 
       // -****************************************************************
       // -*
@@ -542,6 +602,37 @@ public class Robot extends TimedRobot {
          logger.info("button 3 released - close gripper");
          gripperSolenoid.set(false);
          gripperOpen = false;
+      }
+   }
+
+   private PidSetPointReached pidSetPointChecker;
+
+   // Could use velocity if determine scale
+   private class PidSetPointReached {
+      private final int sameCountCount = 25; // at 0.020 sec loop, this is 0.5 seconds
+      private int sameCount;
+
+      private double target;
+      private double lastPosition;
+
+      private final double window = 1.0;
+
+      public PidSetPointReached(double target) {
+         this.target = target;
+
+         sameCount = 0;
+
+         lastPosition = Double.POSITIVE_INFINITY;
+      }
+
+      boolean isReached(double position) {
+         if (Math.abs(target - position) < window) {
+            sameCount++;
+         } else {
+            sameCount = 0;
+            lastPosition = Double.POSITIVE_INFINITY;
+         }
+         return (sameCount >= sameCountCount);
       }
    }
 
