@@ -78,9 +78,9 @@ public class Robot extends TimedRobot {
    private boolean midArmRotateButtonPressed;
    private boolean lowArmRotateButtonPressed;
 
-   private final double highArmSetPoint = 30;
-   private final double midArmSetPoint = 20;
-   private final double lowArmSetPoint = 10;
+   private final double highArmSetPoint = 20;
+   private final double midArmSetPoint = 16;
+   private final double lowArmSetPoint = 2;
 
    private CANSparkMax armRotate;
    private SparkMaxPIDController armRotatePID;
@@ -428,14 +428,14 @@ public class Robot extends TimedRobot {
 
       // drive.arcadeDrive(-driverStick.getY(), -driverStick.getX());
 
-      // drive.arcadeDrive(-driverStick.getRawAxis(1) * .60,
-      // -driverStick.getRawAxis(4) * 0.60);
+      drive.arcadeDrive(-driverStick.getRawAxis(1) * .60,
+            -driverStick.getRawAxis(4) * 0.60);
 
       // drive.curvatureDrive(-driverStick.getRawAxis(1) * .60,
       // -driverStick.getRawAxis(4) * 0.60, false);
 
-      drive.curvatureDrive(-driverStick.getRawAxis(1) * .60,
-            -driverStick.getRawAxis(4) * 0.60, driverStick.getRawButton(5));
+      // drive.curvatureDrive(-driverStick.getRawAxis(1) * .60,
+      // -driverStick.getRawAxis(4) * 0.60, driverStick.getRawButton(5));
 
       // -****************************************************************
       // -*
@@ -453,40 +453,40 @@ public class Robot extends TimedRobot {
          armRotatePID.setReference(armVal, ControlType.kVoltage);
          armRotatePID.setP(1.0);
       } else {
-         rotateTarget = SmartDashboard.getNumber("Arm Rot Set Target", 0.0);
+         // rotateTarget = SmartDashboard.getNumber("Arm Rot Set Target", 0.0);
+         // // armRotatePID.setReference(rotateTarget, ControlType.kPosition);
          // armRotatePID.setReference(rotateTarget, ControlType.kPosition);
-         armRotatePID.setReference(rotateTarget, ControlType.kPosition);
+
+         if (operatorStick.getRawButton(4)) {
+            if (!highArmRotateButtonPressed) {
+               logger.debug("set arm rotate PID to high {}", highArmSetPoint);
+               if (!rotatePIDDisable) {
+                  armRotatePID.setReference(highArmSetPoint, ControlType.kPosition);
+               }
+               highArmRotateButtonPressed = true;
+            }
+         } else if (operatorStick.getRawButton(2)) {
+            if (!midArmRotateButtonPressed) {
+               logger.debug("set arm rotate PID to mid {}", midArmSetPoint);
+               if (!rotatePIDDisable) {
+                  armRotatePID.setReference(midArmSetPoint, ControlType.kPosition);
+               }
+               midArmRotateButtonPressed = true;
+            }
+         } else if (operatorStick.getRawButton(1)) {
+            if (!lowArmRotateButtonPressed) {
+               logger.debug("set arm rotate PID to low {}", lowArmSetPoint);
+               if (!rotatePIDDisable) {
+                  armRotatePID.setReference(lowArmSetPoint, ControlType.kPosition);
+               }
+               lowArmRotateButtonPressed = true;
+            }
+         }
+         highArmRotateButtonPressed = operatorStick.getRawButton(4);
+         midArmRotateButtonPressed = operatorStick.getRawButton(2);
+         lowArmRotateButtonPressed = operatorStick.getRawButton(1);
       }
       SmartDashboard.putNumber("Arm Rot Feedback", armRotateEncoder.getPosition());
-
-      if (operatorStick.getRawButton(4)) {
-         if (!highArmRotateButtonPressed) {
-            logger.debug("set arm rotate PID to high {}", highArmSetPoint);
-            if (!rotatePIDDisable) {
-               armRotatePID.setReference(highArmSetPoint, ControlType.kPosition);
-            }
-            highArmRotateButtonPressed = true;
-         }
-      } else if (operatorStick.getRawButton(2)) {
-         if (!midArmRotateButtonPressed) {
-            logger.debug("set arm rotate PID to mid {}", midArmSetPoint);
-            if (!rotatePIDDisable) {
-               armRotatePID.setReference(midArmSetPoint, ControlType.kPosition);
-            }
-            midArmRotateButtonPressed = true;
-         }
-      } else if (operatorStick.getRawButton(1)) {
-         if (!lowArmRotateButtonPressed) {
-            logger.debug("set arm rotate PID to low {}", lowArmSetPoint);
-            if (!rotatePIDDisable) {
-               armRotatePID.setReference(lowArmSetPoint, ControlType.kPosition);
-            }
-            lowArmRotateButtonPressed = true;
-         }
-      }
-      highArmRotateButtonPressed = operatorStick.getRawButton(4);
-      midArmRotateButtonPressed = operatorStick.getRawButton(2);
-      lowArmRotateButtonPressed = operatorStick.getRawButton(1);
 
       // -****************************************************************
       // -*
