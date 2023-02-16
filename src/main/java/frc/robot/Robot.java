@@ -23,6 +23,7 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PneumaticHub;
 import edu.wpi.first.wpilibj.PowerDistribution;
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
@@ -78,9 +79,12 @@ public class Robot extends TimedRobot {
    private boolean midArmRotateButtonPressed;
    private boolean lowArmRotateButtonPressed;
 
-   private final double highArmSetPoint = 20;
-   private final double midArmSetPoint = 16;
-   private final double lowArmSetPoint = 2;
+   private final double k_highArmSetPoint = 20;
+   private final double k_midArmSetPoint = 16;
+   private final double k_lowArmSetPoint = 5;
+   private double highArmSetPoint;
+   private double midArmSetPoint;
+   private double lowArmSetPoint;
 
    private CANSparkMax armRotate;
    private SparkMaxPIDController armRotatePID;
@@ -124,11 +128,11 @@ public class Robot extends TimedRobot {
       leftFront = new CANSparkMax(11, MotorType.kBrushless);
       checkError(leftFront.restoreFactoryDefaults(), "LF restore factory defaults {}");
       leftRear = new CANSparkMax(12, MotorType.kBrushless);
-      checkError(leftRear.restoreFactoryDefaults(), "LF restore factory defaults {}");
+      checkError(leftRear.restoreFactoryDefaults(), "LR restore factory defaults {}");
       rightFront = new CANSparkMax(13, MotorType.kBrushless);
-      checkError(rightFront.restoreFactoryDefaults(), "LF restore factory defaults {}");
+      checkError(rightFront.restoreFactoryDefaults(), "RF restore factory defaults {}");
       rightRear = new CANSparkMax(14, MotorType.kBrushless);
-      checkError(rightRear.restoreFactoryDefaults(), "LF restore factory defaults {}");
+      checkError(rightRear.restoreFactoryDefaults(), "RR restore factory defaults {}");
 
       // Following mode (Rear follows Front)
       checkError(leftRear.follow(leftFront), "L setting following mode {}");
@@ -136,6 +140,12 @@ public class Robot extends TimedRobot {
       // Inverted (Right from Left) and Following mode (Rear follows Front)
       rightFront.setInverted(true);
       checkError(rightRear.follow(rightFront), "R setting following mode {}");
+
+      // Brake mode for now (should only be in balance)
+      checkError(leftFront.setIdleMode(IdleMode.kBrake), "LF set idle mode to brake {}");
+      checkError(leftRear.setIdleMode(IdleMode.kBrake), "LR set idle mode to brake {}");
+      checkError(rightFront.setIdleMode(IdleMode.kBrake), "RF set idle mode to brake {}");
+      checkError(rightRear.setIdleMode(IdleMode.kBrake), "RR set idle mode to brake {}");
 
       drive = new DifferentialDrive(leftFront, rightFront);
 
@@ -147,7 +157,7 @@ public class Robot extends TimedRobot {
 
       armRotate = new CANSparkMax(21, MotorType.kBrushless);
       checkError(armRotate.restoreFactoryDefaults(), "AR restore factory defaults {}");
-      checkError(armRotate.setIdleMode(IdleMode.kBrake), "AR set idle mode to break {}");
+      checkError(armRotate.setIdleMode(IdleMode.kBrake), "AR set idle mode to brake {}");
       armRotatePID = armRotate.getPIDController();
       armRotateEncoder = armRotate.getEncoder();
       armRotateEncoder.setPosition(0);
@@ -188,6 +198,11 @@ public class Robot extends TimedRobot {
       SmartDashboard.putNumber("Arm Rot Set Target", 0);
       SmartDashboard.putNumber("Arm Rot Feedback", armRotateEncoder.getPosition());
 
+      // initialize set points
+      highArmSetPoint = Preferences.getDouble("armRotate.high", k_highArmSetPoint);
+      midArmSetPoint = Preferences.getDouble("armRotate.mid", k_midArmSetPoint);
+      lowArmSetPoint = Preferences.getDouble("armRotate.low", k_lowArmSetPoint);
+
       // /****************************************************************************
       // * Arm Extend Setup
       // *******************************************************************/
@@ -208,7 +223,7 @@ public class Robot extends TimedRobot {
       extendMaxOutput = 0.2;
       extendMinOutput = -0.2;
       // STU
-      extendPIDDisable = false;
+      extendPIDDisable = true;
 
       // set PID coefficients
       armExtendPID.setP(extendP);
@@ -330,6 +345,11 @@ public class Robot extends TimedRobot {
          rotateMaxOutput = ar_max;
       }
 
+      // read set points from SmartDashboard
+      highArmSetPoint = Preferences.getDouble("armRotate.high", k_highArmSetPoint);
+      midArmSetPoint = Preferences.getDouble("armRotate.mid", k_midArmSetPoint);
+      lowArmSetPoint = Preferences.getDouble("armRotate.low", k_lowArmSetPoint);
+
       // read PID coefficients from SmartDashboard
       extendPIDDisable = SmartDashboard.getBoolean("Arm Ext PID Enabled", extendPIDDisable);
       ar_p = SmartDashboard.getNumber("Arm Ext P Gain", 0);
@@ -428,14 +448,14 @@ public class Robot extends TimedRobot {
 
       // drive.arcadeDrive(-driverStick.getY(), -driverStick.getX());
 
-      drive.arcadeDrive(-driverStick.getRawAxis(1) * .60,
-            -driverStick.getRawAxis(4) * 0.60);
+      drive.arcadeDrive(-driverStick.getRawAxis(1) * 0.60,
+            -driverStick.getRawAxis(4));
 
       // drive.curvatureDrive(-driverStick.getRawAxis(1) * .60,
       // -driverStick.getRawAxis(4) * 0.60, false);
 
       // drive.curvatureDrive(-driverStick.getRawAxis(1) * .60,
-      // -driverStick.getRawAxis(4) * 0.60, driverStick.getRawButton(5));
+      // -driverStick.getRawAxis(4) * 0.60, driverStick.getRawButton(6));
 
       // -****************************************************************
       // -*
