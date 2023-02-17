@@ -63,10 +63,17 @@ public class Robot extends TimedRobot {
     */
    private Joystick driverStick;
 
+   private boolean driveBrakeButtonPressed;
+
+   private boolean driveBrakeEnabled;
+
    private CANSparkMax leftFront;
    private CANSparkMax leftRear;
    private CANSparkMax rightFront;
    private CANSparkMax rightRear;
+
+   private final double k_driveRampRate = 0.0;
+   private double driveRampRate;
 
    private DifferentialDrive drive;
 
@@ -75,16 +82,16 @@ public class Robot extends TimedRobot {
     */
    private Joystick operatorStick;
 
-   private boolean highArmRotateButtonPressed;
-   private boolean midArmRotateButtonPressed;
-   private boolean lowArmRotateButtonPressed;
+   private boolean armHighRotateButtonPressed;
+   private boolean armMidRotateButtonPressed;
+   private boolean armLowRotateButtonPressed;
 
-   private final double k_highArmSetPoint = 20;
-   private final double k_midArmSetPoint = 16;
-   private final double k_lowArmSetPoint = 5;
-   private double highArmSetPoint;
-   private double midArmSetPoint;
-   private double lowArmSetPoint;
+   private final double k_armHighSetPoint = 20;
+   private final double k_armMidSetPoint = 16;
+   private final double k_armLowSetPoint = 5;
+   private double armHighSetPoint;
+   private double armMidSetPoint;
+   private double armLowSetPoint;
 
    private CANSparkMax armRotate;
    private SparkMaxPIDController armRotatePID;
@@ -142,10 +149,21 @@ public class Robot extends TimedRobot {
       checkError(rightRear.follow(rightFront), "R setting following mode {}");
 
       // Brake mode for now (should only be in balance)
-      checkError(leftFront.setIdleMode(IdleMode.kBrake), "LF set idle mode to brake {}");
-      checkError(leftRear.setIdleMode(IdleMode.kBrake), "LR set idle mode to brake {}");
-      checkError(rightFront.setIdleMode(IdleMode.kBrake), "RF set idle mode to brake {}");
-      checkError(rightRear.setIdleMode(IdleMode.kBrake), "RR set idle mode to brake {}");
+      driveBrakeEnabled = false;
+      SmartDashboard.putBoolean("driveBrakeEnabled", driveBrakeEnabled);
+      checkError(leftFront.setIdleMode(IdleMode.kCoast), "LF set idle mode to coast {}");
+      checkError(leftRear.setIdleMode(IdleMode.kCoast), "LR set idle mode to coast {}");
+      checkError(rightFront.setIdleMode(IdleMode.kCoast), "RF set idle mode to coast {}");
+      checkError(rightRear.setIdleMode(IdleMode.kCoast), "RR set idle mode to coast {}");
+
+      // Ramp rate
+      // initialize ramp rate
+      if (!Preferences.containsKey("Drive.rampRate")) {
+         Preferences.setDouble("Drive.rampRate", k_driveRampRate);
+      }
+      driveRampRate = Preferences.getDouble("Drive.rampRate", k_driveRampRate);
+      checkError(leftFront.setOpenLoopRampRate(driveRampRate), "L setting ramp rate {}");
+      checkError(rightFront.setOpenLoopRampRate(driveRampRate), "R setting ramp rate {}");
 
       drive = new DifferentialDrive(leftFront, rightFront);
 
@@ -199,9 +217,18 @@ public class Robot extends TimedRobot {
       SmartDashboard.putNumber("Arm Rot Feedback", armRotateEncoder.getPosition());
 
       // initialize set points
-      highArmSetPoint = Preferences.getDouble("armRotate.high", k_highArmSetPoint);
-      midArmSetPoint = Preferences.getDouble("armRotate.mid", k_midArmSetPoint);
-      lowArmSetPoint = Preferences.getDouble("armRotate.low", k_lowArmSetPoint);
+      if (!Preferences.containsKey("armRotate.high")) {
+         Preferences.setDouble("armRotate.high", k_armHighSetPoint);
+      }
+      armHighSetPoint = Preferences.getDouble("armRotate.high", k_armHighSetPoint);
+      if (!Preferences.containsKey("armRotate.mid")) {
+         Preferences.setDouble("armRotate.mid", k_armMidSetPoint);
+      }
+      armMidSetPoint = Preferences.getDouble("armRotate.mid", k_armMidSetPoint);
+      if (!Preferences.containsKey("armRotate.low")) {
+         Preferences.setDouble("armRotate.low", k_armLowSetPoint);
+      }
+      armLowSetPoint = Preferences.getDouble("armRotate.low", k_armLowSetPoint);
 
       // /****************************************************************************
       // * Arm Extend Setup
@@ -306,6 +333,11 @@ public class Robot extends TimedRobot {
    @Override
    public void disabledPeriodic() {
 
+      // Read amp rate from SmartDashboard
+      driveRampRate = Preferences.getDouble("Drive.rampRate", k_driveRampRate);
+      checkError(leftFront.setOpenLoopRampRate(driveRampRate), "L setting ramp rate {}");
+      checkError(rightFront.setOpenLoopRampRate(driveRampRate), "R setting ramp rate {}");
+
       // read PID coefficients from SmartDashboard
       rotatePIDDisable = SmartDashboard.getBoolean("Arm Rot PID Enabled", rotatePIDDisable);
       double ar_p = SmartDashboard.getNumber("Arm Rot P Gain", 0);
@@ -346,9 +378,9 @@ public class Robot extends TimedRobot {
       }
 
       // read set points from SmartDashboard
-      highArmSetPoint = Preferences.getDouble("armRotate.high", k_highArmSetPoint);
-      midArmSetPoint = Preferences.getDouble("armRotate.mid", k_midArmSetPoint);
-      lowArmSetPoint = Preferences.getDouble("armRotate.low", k_lowArmSetPoint);
+      armHighSetPoint = Preferences.getDouble("armRotate.high", k_armHighSetPoint);
+      armMidSetPoint = Preferences.getDouble("armRotate.mid", k_armMidSetPoint);
+      armLowSetPoint = Preferences.getDouble("armRotate.low", k_armLowSetPoint);
 
       // read PID coefficients from SmartDashboard
       extendPIDDisable = SmartDashboard.getBoolean("Arm Ext PID Enabled", extendPIDDisable);
@@ -426,11 +458,19 @@ public class Robot extends TimedRobot {
          m_autonomousCommand.cancel();
       }
 
-      gripperOpen = false;
+      driveBrakeButtonPressed = false;
+      driveBrakeEnabled = false;
+      SmartDashboard.putBoolean("driveBrakeEnabled", driveBrakeEnabled);
+      checkError(leftFront.setIdleMode(IdleMode.kCoast), "LF set idle mode to coast {}");
+      checkError(leftRear.setIdleMode(IdleMode.kCoast), "LR set idle mode to coast {}");
+      checkError(rightFront.setIdleMode(IdleMode.kCoast), "RF set idle mode to coast {}");
+      checkError(rightRear.setIdleMode(IdleMode.kCoast), "RR set idle mode to coast {}");
 
-      highArmRotateButtonPressed = false;
-      midArmRotateButtonPressed = false;
-      lowArmRotateButtonPressed = false;
+      armHighRotateButtonPressed = false;
+      armMidRotateButtonPressed = false;
+      armLowRotateButtonPressed = false;
+
+      gripperOpen = false;
    }
 
    /** This function is called periodically during operator control. */
@@ -457,6 +497,27 @@ public class Robot extends TimedRobot {
       // drive.curvatureDrive(-driverStick.getRawAxis(1) * .60,
       // -driverStick.getRawAxis(4) * 0.60, driverStick.getRawButton(6));
 
+      if (driverStick.getRawButton(8)) {
+         if (!driveBrakeButtonPressed) {
+            logger.debug("toggle drive brake mode to {}", !driveBrakeEnabled);
+            driveBrakeEnabled = !driveBrakeEnabled;
+            SmartDashboard.putBoolean("driveBrakeEnabled", driveBrakeEnabled);
+            if (driveBrakeEnabled) {
+               checkError(leftFront.setIdleMode(IdleMode.kBrake), "LF set idle mode to brake {}");
+               checkError(leftRear.setIdleMode(IdleMode.kBrake), "LR set idle mode to brake {}");
+               checkError(rightFront.setIdleMode(IdleMode.kBrake), "RF set idle mode to brake {}");
+               checkError(rightRear.setIdleMode(IdleMode.kBrake), "RR set idle mode to brake {}");
+            } else {
+               checkError(leftFront.setIdleMode(IdleMode.kCoast), "LF set idle mode to coast {}");
+               checkError(leftRear.setIdleMode(IdleMode.kCoast), "LR set idle mode to coast {}");
+               checkError(rightFront.setIdleMode(IdleMode.kCoast), "RF set idle mode to coast {}");
+               checkError(rightRear.setIdleMode(IdleMode.kCoast), "RR set idle mode to coast {}");
+            }
+            driveBrakeButtonPressed = true;
+         }
+      }
+      driveBrakeButtonPressed = driverStick.getRawButton(8);
+
       // -****************************************************************
       // -*
       // -* ARM ROTATION
@@ -478,33 +539,33 @@ public class Robot extends TimedRobot {
          // armRotatePID.setReference(rotateTarget, ControlType.kPosition);
 
          if (operatorStick.getRawButton(4)) {
-            if (!highArmRotateButtonPressed) {
-               logger.debug("set arm rotate PID to high {}", highArmSetPoint);
+            if (!armHighRotateButtonPressed) {
+               logger.debug("set arm rotate PID to high {}", armHighSetPoint);
                if (!rotatePIDDisable) {
-                  armRotatePID.setReference(highArmSetPoint, ControlType.kPosition);
+                  armRotatePID.setReference(armHighSetPoint, ControlType.kPosition);
                }
-               highArmRotateButtonPressed = true;
+               armHighRotateButtonPressed = true;
             }
          } else if (operatorStick.getRawButton(2)) {
-            if (!midArmRotateButtonPressed) {
-               logger.debug("set arm rotate PID to mid {}", midArmSetPoint);
+            if (!armMidRotateButtonPressed) {
+               logger.debug("set arm rotate PID to mid {}", armMidSetPoint);
                if (!rotatePIDDisable) {
-                  armRotatePID.setReference(midArmSetPoint, ControlType.kPosition);
+                  armRotatePID.setReference(armMidSetPoint, ControlType.kPosition);
                }
-               midArmRotateButtonPressed = true;
+               armMidRotateButtonPressed = true;
             }
          } else if (operatorStick.getRawButton(1)) {
-            if (!lowArmRotateButtonPressed) {
-               logger.debug("set arm rotate PID to low {}", lowArmSetPoint);
+            if (!armLowRotateButtonPressed) {
+               logger.debug("set arm rotate PID to low {}", armLowSetPoint);
                if (!rotatePIDDisable) {
-                  armRotatePID.setReference(lowArmSetPoint, ControlType.kPosition);
+                  armRotatePID.setReference(armLowSetPoint, ControlType.kPosition);
                }
-               lowArmRotateButtonPressed = true;
+               armLowRotateButtonPressed = true;
             }
          }
-         highArmRotateButtonPressed = operatorStick.getRawButton(4);
-         midArmRotateButtonPressed = operatorStick.getRawButton(2);
-         lowArmRotateButtonPressed = operatorStick.getRawButton(1);
+         armHighRotateButtonPressed = operatorStick.getRawButton(4);
+         armMidRotateButtonPressed = operatorStick.getRawButton(2);
+         armLowRotateButtonPressed = operatorStick.getRawButton(1);
       }
       SmartDashboard.putNumber("Arm Rot Feedback", armRotateEncoder.getPosition());
 
