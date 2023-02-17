@@ -418,6 +418,8 @@ public class Robot extends TimedRobot {
    public void disabledExit() {
    }
 
+   // private long k_autoDelay = Math.fl(1.0 / 0.20); // sec / 20 msec
+
    /**
     * This autonomous runs the autonomous command selected by your
     * {@link RobotContainer} class.
@@ -480,7 +482,7 @@ public class Robot extends TimedRobot {
 
       // drive.arcadeDrive(-driverStick.getY(), -driverStick.getX());
 
-      drive.arcadeDrive(-driverStick.getRawAxis(1) * 0.60,
+      drive.arcadeDrive(-driverStick.getRawAxis(1),
             -driverStick.getRawAxis(4));
 
       // drive.curvatureDrive(-driverStick.getRawAxis(1) * .60,
