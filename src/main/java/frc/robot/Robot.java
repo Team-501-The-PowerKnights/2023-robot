@@ -609,12 +609,12 @@ public class Robot extends TimedRobot {
 
       if (operatorStick.getRawButton(6)) {
          if (!gripperOpen) {
-            logger.info("button 6 pressed - open gripper");
+            // logger.info("button 6 pressed - open gripper");
             gripperSolenoid.set(true);
             gripperOpen = true;
          }
       } else if (!operatorStick.getRawButton(6) && gripperOpen) {
-         logger.info("button 6 released - close gripper");
+         // logger.info("button 6 released - close gripper");
          gripperSolenoid.set(false);
          gripperOpen = false;
       }
