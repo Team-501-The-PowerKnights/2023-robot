@@ -46,6 +46,7 @@ public class Robot extends TimedRobot {
    @SuppressWarnings("unused")
    private RobotContainer m_robotContainer;
 
+   @SuppressWarnings("unused")
    private PowerDistribution powerD;
 
    private PneumaticHub pneumH;
@@ -64,7 +65,7 @@ public class Robot extends TimedRobot {
    private CANSparkMax rightFront;
    private CANSparkMax rightRear;
 
-   private final double k_driveRampRate = 0.0;
+   private final double k_driveRampRate = 1.5;
    private double driveRampRate;
 
    private DifferentialDrive drive;
@@ -78,27 +79,47 @@ public class Robot extends TimedRobot {
    private boolean armMidRotateButtonPressed;
    private boolean armLowRotateButtonPressed;
 
-   private final double k_armHighSetPoint = 20;
-   private final double k_armMidSetPoint = 16;
-   private final double k_armLowSetPoint = 5;
+   private final double k_armHighSetPoint = 26;
+   private final double k_armMidSetPoint = 17;
+   private final double k_armLowSetPoint = 7;
    private double armHighSetPoint;
    private double armMidSetPoint;
    private double armLowSetPoint;
 
+   private final double k_rotateP = 0.2;
+   private final double k_rotateI = 1e-5;
+   private final double k_rotateD = 1;
+   private final double k_rotateIzone = 0;
+   private final double k_rotateFF = 0;
+   private final double k_rotateMinOutput = -0.1;
+   private final double k_rotateMaxOutput = 0.3;
+
+   private boolean rotatePIDDisable;
    private CANSparkMax armRotate;
    private SparkMaxPIDController armRotatePID;
    private RelativeEncoder armRotateEncoder;
-   public double rotateP, rotateI, rotateD, rotateIzone, rotateFF, rotateMaxOutput, rotateMinOutput, rotateTarget;
-   public boolean rotatePIDDisable;
+   private double rotateP, rotateI, rotateD, rotateIzone, rotateFF, rotateMaxOutput, rotateMinOutput;
+   private double rotateTarget;
 
+   private final double k_extendP = 0.2;
+   private final double k_extendI = 0;
+   private final double k_extendD = 1;
+   private final double k_extendIzone = 0;
+   private final double k_extendFF = 0;
+   private final double k_extendMinOutput = -0.2;
+   private final double k_extendMaxOutput = 0.2;
+
+   private boolean extendPIDDisable;
    private CANSparkMax armExtend;
    private SparkMaxPIDController armExtendPID;
    // private AbsoluteEncoder armExtendEncoder;
    private RelativeEncoder armExtendEncoder;
-   public double extendP, extendI, extendD, extendIzone, extendFF, extendMaxOutput, extendMinOutput, extendTarget;
-   public boolean extendPIDDisable;
+   private double extendP, extendI, extendD, extendIzone, extendFF, extendMaxOutput, extendMinOutput;
+   private double extendTarget;
 
+   @SuppressWarnings("unused")
    private TalonFX leftIngest;
+   @SuppressWarnings("unused")
    private TalonFX rightIngest;
 
    private static final int gripperSolenoidChannel = 0;
@@ -172,17 +193,21 @@ public class Robot extends TimedRobot {
       armRotateEncoder = armRotate.getEncoder();
       armRotateEncoder.setPosition(0);
 
-      // PID coefficients
-      rotateP = 0.2;
-      rotateI = 1e-5;
-      rotateD = 1;
-      rotateIzone = 0;
-      rotateFF = 0;
-      rotateMaxOutput = 0.3;
-      rotateMinOutput = -0.1;
-      // STU:
       rotatePIDDisable = false;
+      // PID coefficients
+      rotateP = k_rotateP;
+      rotateI = k_rotateI;
+      rotateD = k_rotateD;
+      rotateIzone = k_rotateIzone;
+      rotateFF = k_rotateFF;
+      rotateMinOutput = k_rotateMinOutput;
+      rotateMaxOutput = k_rotateMaxOutput;
 
+      if (rotatePIDDisable) {
+         armRotatePID.setReference(0.0, ControlType.kVoltage);
+      } else {
+         armRotatePID.setReference(0.0, ControlType.kPosition);
+      }
       // set PID coefficients
       armRotatePID.setP(rotateP);
       armRotatePID.setI(rotateI);
@@ -190,11 +215,6 @@ public class Robot extends TimedRobot {
       armRotatePID.setIZone(rotateIzone);
       armRotatePID.setFF(rotateFF);
       armRotatePID.setOutputRange(rotateMinOutput, rotateMaxOutput);
-      if (rotatePIDDisable) {
-         armRotatePID.setReference(0.0, ControlType.kVoltage);
-      } else {
-         armRotatePID.setReference(0.0, ControlType.kPosition);
-      }
 
       // display PID coefficients on SmartDashboard
       SmartDashboard.putBoolean("Arm Rot PID Enabled", rotatePIDDisable);
@@ -203,8 +223,8 @@ public class Robot extends TimedRobot {
       SmartDashboard.putNumber("Arm Rot D Gain", rotateD);
       SmartDashboard.putNumber("Arm Rot I Zone", rotateIzone);
       SmartDashboard.putNumber("Arm Rot Feed Forward", rotateFF);
-      SmartDashboard.putNumber("Arm Rot Max Output", rotateMaxOutput);
       SmartDashboard.putNumber("Arm Rot Min Output", rotateMinOutput);
+      SmartDashboard.putNumber("Arm Rot Max Output", rotateMaxOutput);
       SmartDashboard.putNumber("Arm Rot Set Target", 0);
       SmartDashboard.putNumber("Arm Rot Feedback", armRotateEncoder.getPosition());
 
@@ -233,17 +253,21 @@ public class Robot extends TimedRobot {
       armExtendEncoder = armExtend.getEncoder();
       armExtendEncoder.setPosition(0);
 
-      // PID coefficients Extend
-      extendP = 0.2;
-      extendI = 0;
-      extendD = 1;
-      extendIzone = 0;
-      extendFF = 0;
-      extendMaxOutput = 0.2;
-      extendMinOutput = -0.2;
-      // STU
       extendPIDDisable = true;
+      // PID coefficients Extend
+      extendP = k_extendP;
+      extendI = k_extendI;
+      extendD = k_extendD;
+      extendIzone = k_extendIzone;
+      extendFF = k_extendFF;
+      extendMinOutput = k_extendMinOutput;
+      extendMaxOutput = k_extendMaxOutput;
 
+      if (extendPIDDisable) {
+         armExtendPID.setReference(0.0, ControlType.kVoltage);
+      } else {
+         armExtendPID.setReference(0.0, ControlType.kPosition);
+      }
       // set PID coefficients
       armExtendPID.setP(extendP);
       armExtendPID.setI(extendI);
@@ -251,11 +275,6 @@ public class Robot extends TimedRobot {
       armExtendPID.setIZone(extendIzone);
       armExtendPID.setFF(extendFF);
       armExtendPID.setOutputRange(extendMinOutput, extendMaxOutput);
-      if (extendPIDDisable) {
-         armExtendPID.setReference(0.0, ControlType.kVoltage);
-      } else {
-         armExtendPID.setReference(0.0, ControlType.kPosition);
-      }
 
       // display PID coefficients on SmartDashboard
       SmartDashboard.putBoolean("Arm Ext PID Enabled", extendPIDDisable);
@@ -264,8 +283,8 @@ public class Robot extends TimedRobot {
       SmartDashboard.putNumber("Arm Ext D Gain", extendD);
       SmartDashboard.putNumber("Arm Ext I Zone", extendIzone);
       SmartDashboard.putNumber("Arm Ext Feed Forward", extendFF);
-      SmartDashboard.putNumber("Arm Ext Max Output", extendMaxOutput);
       SmartDashboard.putNumber("Arm Ext Min Output", extendMinOutput);
+      SmartDashboard.putNumber("Arm Ext Max Output", extendMaxOutput);
       SmartDashboard.putNumber("Arm Ext Set Target", 0);
       SmartDashboard.putNumber("Arm Ext Feedback", armExtendEncoder.getPosition());
 
@@ -337,8 +356,8 @@ public class Robot extends TimedRobot {
       double ar_d = SmartDashboard.getNumber("Arm Rot D Gain", 0);
       double ar_iz = SmartDashboard.getNumber("Arm Rot I Zone", 0);
       double ar_ff = SmartDashboard.getNumber("Arm Rot Feed Forward", 0);
-      double ar_max = SmartDashboard.getNumber("Arm Rot Max Output", 0);
       double ar_min = SmartDashboard.getNumber("Arm Rot Min Output", 0);
+      double ar_max = SmartDashboard.getNumber("Arm Rot Max Output", 0);
       rotateTarget = SmartDashboard.getNumber("Arm Rot Set Target", 0);
 
       // if PID coefficients on SmartDashboard have changed, write new values to
@@ -363,7 +382,7 @@ public class Robot extends TimedRobot {
          armRotatePID.setFF(ar_ff);
          rotateFF = ar_ff;
       }
-      if ((ar_max != rotateMaxOutput) || (ar_min != rotateMinOutput)) {
+      if ((ar_min != rotateMinOutput) || (ar_max != rotateMaxOutput)) {
          armRotatePID.setOutputRange(ar_min, ar_max);
          rotateMinOutput = ar_min;
          rotateMaxOutput = ar_max;
@@ -381,8 +400,8 @@ public class Robot extends TimedRobot {
       ar_d = SmartDashboard.getNumber("Arm Ext D Gain", 0);
       ar_iz = SmartDashboard.getNumber("Arm Ext I Zone", 0);
       ar_ff = SmartDashboard.getNumber("Arm Ext Feed Forward", 0);
-      ar_max = SmartDashboard.getNumber("Arm Ext Max Output", 0);
       ar_min = SmartDashboard.getNumber("Arm Ext Min Output", 0);
+      ar_max = SmartDashboard.getNumber("Arm Ext Max Output", 0);
       extendTarget = SmartDashboard.getNumber("Arm Ext Set Target", 0);
 
       // if PID coefficients on SmartDashboard have changed, write new values to
@@ -407,7 +426,7 @@ public class Robot extends TimedRobot {
          armExtendPID.setFF(ar_ff);
          extendFF = ar_ff;
       }
-      if ((ar_max != extendMaxOutput) || (ar_min != extendMinOutput)) {
+      if ((ar_min != extendMinOutput) || (ar_max != extendMaxOutput)) {
          armExtendPID.setOutputRange(ar_min, ar_max);
          extendMinOutput = ar_min;
          extendMaxOutput = ar_max;
@@ -534,29 +553,35 @@ public class Robot extends TimedRobot {
 
          if (operatorStick.getRawButton(4)) {
             if (!armHighRotateButtonPressed) {
-               logger.debug("set arm rotate PID to high {}", armHighSetPoint);
+               rotateTarget = armHighSetPoint;
+               logger.debug("set arm rotate PID to high {}", rotateTarget);
                if (!rotatePIDDisable) {
-                  armRotatePID.setReference(armHighSetPoint, ControlType.kPosition);
+
+                  armRotatePID.setReference(rotateTarget, ControlType.kPosition);
                }
                armHighRotateButtonPressed = true;
             }
          } else if (operatorStick.getRawButton(2)) {
             if (!armMidRotateButtonPressed) {
-               logger.debug("set arm rotate PID to mid {}", armMidSetPoint);
+               rotateTarget = armMidSetPoint;
+               logger.debug("set arm rotate PID to mid {}", rotateTarget);
                if (!rotatePIDDisable) {
-                  armRotatePID.setReference(armMidSetPoint, ControlType.kPosition);
+                  armRotatePID.setReference(rotateTarget, ControlType.kPosition);
                }
                armMidRotateButtonPressed = true;
             }
          } else if (operatorStick.getRawButton(1)) {
             if (!armLowRotateButtonPressed) {
-               logger.debug("set arm rotate PID to low {}", armLowSetPoint);
+               rotateTarget = armLowSetPoint;
+               logger.debug("set arm rotate PID to low {}", rotateTarget);
                if (!rotatePIDDisable) {
-                  armRotatePID.setReference(armLowSetPoint, ControlType.kPosition);
+                  armRotatePID.setReference(rotateTarget, ControlType.kPosition);
                }
                armLowRotateButtonPressed = true;
             }
          }
+         SmartDashboard.putNumber("Arm Rot Set Target", rotateTarget);
+
          armHighRotateButtonPressed = operatorStick.getRawButton(4);
          armMidRotateButtonPressed = operatorStick.getRawButton(2);
          armLowRotateButtonPressed = operatorStick.getRawButton(1);
