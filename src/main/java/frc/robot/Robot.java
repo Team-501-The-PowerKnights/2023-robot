@@ -5,6 +5,9 @@
 package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+
+import com.kauailabs.navx.frc.AHRS;
+
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.REVLibError;
 import com.revrobotics.RelativeEncoder;
@@ -18,10 +21,10 @@ import edu.wpi.first.wpilibj.PneumaticHub;
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -51,6 +54,9 @@ public class Robot extends TimedRobot {
    private PowerDistribution powerD;
 
    private PneumaticHub pneumH;
+
+   private AHRS ahrs;
+   boolean ahrsValid;
 
    /*
     * Driver Stuff
@@ -143,6 +149,23 @@ public class Robot extends TimedRobot {
       // Instantiate and enable
       pneumH = new PneumaticHub(2);
       pneumH.enableCompressorAnalog(80, 110);
+
+      // Instantiate
+      try {
+         ahrs = new AHRS(SPI.Port.kMXP);
+         ahrsValid = waitForAhrsConnection();
+      } catch (final RuntimeException ex) {
+         logger.error("Instantiating naxX MXP" + ex.getMessage());
+         // SmartDashboard.reportError("Error instantiating navX MXP: " +
+         // ex.getMessage(), true);
+
+         ahrs = null;
+         ahrsValid = false;
+      }
+      SmartDashboard.putBoolean("ahrsValid", ahrsValid);
+      if (ahrsValid) {
+         configureAHRS();
+      }
 
       driverStick = new Joystick(0);
 
@@ -299,6 +322,51 @@ public class Robot extends TimedRobot {
       gripperOpen = false;
    }
 
+   protected boolean waitForAhrsConnection() {
+      long count = 0;
+      while (!ahrs.isConnected()) {
+         logger.debug("waiting ... ahrs not connected");
+         try {
+            Thread.sleep(50);
+         } catch (final InterruptedException ex) {
+            // Don't care
+         }
+         if (++count > 10) {
+            logger.warn("connect - failed to finish count={}", count);
+            break;
+         }
+      }
+      final boolean value = ahrs.isConnected();
+      if (value) {
+         logger.debug("ahrs connected");
+      }
+      return value;
+   }
+
+   protected void configureAHRS() {
+      zeroYaw();
+   }
+
+   private void zeroYaw() {
+      logger.debug("yaw={}", ahrs.getYaw());
+      long count = 0;
+      while (Math.abs(ahrs.getYaw()) > 1.0) {
+         ahrs.zeroYaw();
+         try {
+            logger.debug("zeroYaw::waiting ... yaw={}", ahrs.getYaw());
+            Thread.sleep(50);
+         } catch (final InterruptedException ex) {
+            // Don't care
+         }
+         if (++count > 10) {
+            logger.warn("zeroYaw - failed to finish count={}", count);
+            break;
+         }
+      }
+      logger.debug("zeroYaw::done ... yaw={}", ahrs.getYaw());
+      logger.trace("zeroYaw::done ... angle={}", ahrs.getAngle());
+   }
+
    // last error (not the same as kOk)
    // TODO: Use to set a degraded error status/state on subsystem
    @SuppressWarnings("unused")
@@ -310,6 +378,8 @@ public class Robot extends TimedRobot {
          logger.error(message, error);
       }
    }
+
+   private long gyroTlmCount;
 
    /**
     * This function is called every 20 ms, no matter the mode. Use this for items
@@ -453,6 +523,8 @@ public class Robot extends TimedRobot {
       if (m_autonomousCommand != null) {
          m_autonomousCommand.schedule();
       }
+
+      gyroTlmCount = 0;
    }
 
    /** This function is called periodically during autonomous. */
@@ -461,6 +533,14 @@ public class Robot extends TimedRobot {
       SmartDashboard.putNumber("NavX Yaw", 0.0);
       SmartDashboard.putNumber("NavX Pitch", 0.0);
       SmartDashboard.putNumber("NavX Rotate", 0.0);
+
+      gyroTlmCount++;
+      if (gyroTlmCount > 50) {
+         SmartDashboard.putNumber("Gyro roll", ahrs.getRoll());
+         SmartDashboard.putNumber("Gyro pitch", ahrs.getPitch());
+         SmartDashboard.putNumber("Gyro yaw", ahrs.getYaw());
+         gyroTlmCount = 0;
+      }
    }
 
    @Override
@@ -489,11 +569,25 @@ public class Robot extends TimedRobot {
       armLowRotateButtonPressed = false;
 
       gripperOpen = false;
+
+      gyroTlmCount = 0;
    }
 
    /** This function is called periodically during operator control. */
    @Override
    public void teleopPeriodic() {
+      SmartDashboard.putNumber("NavX Yaw", 0.0);
+      SmartDashboard.putNumber("NavX Pitch", 0.0);
+      SmartDashboard.putNumber("NavX Rotate", 0.0);
+
+      gyroTlmCount++;
+      if (gyroTlmCount > 50) {
+         SmartDashboard.putNumber("Gyro roll", ahrs.getRoll());
+         SmartDashboard.putNumber("Gyro pitch", ahrs.getPitch());
+         SmartDashboard.putNumber("Gyro yaw", ahrs.getYaw());
+         gyroTlmCount = 0;
+      }
+
       // -****************************************************************
       // -*
       // -* DRIVE
@@ -556,13 +650,12 @@ public class Robot extends TimedRobot {
          // // armRotatePID.setReference(rotateTarget, ControlType.kPosition);
          // armRotatePID.setReference(rotateTarget, ControlType.kPosition);
 
-         //Override Posistion
-         if (  Math.abs(operatorStick.getRawAxis(5 )) > .01 ) 
-            {  
-               rotateTarget += operatorStick.getRawAxis(5) * .001; //Offset
-               //armRotatePID.setReference(rotateTarget, ControlType.kPosition); //update pid
+         // Override Posistion
+         if (Math.abs(operatorStick.getRawAxis(5)) > .01) {
+            rotateTarget += operatorStick.getRawAxis(5) * .001; // Offset
+            // armRotatePID.setReference(rotateTarget, ControlType.kPosition); //update pid
 
-            }  
+         }
 
          if (operatorStick.getRawButton(4)) {
             if (!armHighRotateButtonPressed) {
