@@ -21,6 +21,7 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -93,6 +94,7 @@ public class Robot extends TimedRobot {
    private final double k_rotateFF = 0;
    private final double k_rotateMinOutput = -0.1;
    private final double k_rotateMaxOutput = 0.3;
+   private double rotCurrentRef = 0.0;
 
    private boolean rotatePIDDisable;
    private CANSparkMax armRotate;
@@ -358,7 +360,7 @@ public class Robot extends TimedRobot {
       double ar_ff = SmartDashboard.getNumber("Arm Rot Feed Forward", 0);
       double ar_min = SmartDashboard.getNumber("Arm Rot Min Output", 0);
       double ar_max = SmartDashboard.getNumber("Arm Rot Max Output", 0);
-      rotateTarget = SmartDashboard.getNumber("Arm Rot Set Target", 0);
+      rotateTarget = SmartDashboard.getNumber("Arm Rot Set Target", rotateTarget);
 
       // if PID coefficients on SmartDashboard have changed, write new values to
       // controller
@@ -456,6 +458,9 @@ public class Robot extends TimedRobot {
    /** This function is called periodically during autonomous. */
    @Override
    public void autonomousPeriodic() {
+      SmartDashboard.putNumber("NavX Yaw", 0.0);
+      SmartDashboard.putNumber("NavX Pitch", 0.0);
+      SmartDashboard.putNumber("NavX Rotate", 0.0);
    }
 
    @Override
@@ -551,6 +556,14 @@ public class Robot extends TimedRobot {
          // // armRotatePID.setReference(rotateTarget, ControlType.kPosition);
          // armRotatePID.setReference(rotateTarget, ControlType.kPosition);
 
+         //Override Posistion
+         if (  Math.abs(operatorStick.getRawAxis(5 )) > .01 ) 
+            {  
+               rotateTarget += operatorStick.getRawAxis(5) * .001; //Offset
+               //armRotatePID.setReference(rotateTarget, ControlType.kPosition); //update pid
+
+            }  
+
          if (operatorStick.getRawButton(4)) {
             if (!armHighRotateButtonPressed) {
                rotateTarget = armHighSetPoint;
@@ -609,6 +622,7 @@ public class Robot extends TimedRobot {
          armExtendPID.setReference(extendTarget, ControlType.kPosition);
       }
       SmartDashboard.putNumber("Arm Ext Feedback", armExtendEncoder.getPosition());
+      SmartDashboard.getNumber("Arm Rot Set Target", rotateTarget);
 
       // -****************************************************************
       // -*
