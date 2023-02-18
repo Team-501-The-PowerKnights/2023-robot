@@ -100,7 +100,6 @@ public class Robot extends TimedRobot {
    private final double k_rotateFF = 0;
    private final double k_rotateMinOutput = -0.1;
    private final double k_rotateMaxOutput = 0.3;
-   private double rotCurrentRef = 0.0;
 
    private boolean rotatePIDDisable;
    private CANSparkMax armRotate;
@@ -231,7 +230,9 @@ public class Robot extends TimedRobot {
       if (rotatePIDDisable) {
          armRotatePID.setReference(0.0, ControlType.kVoltage);
       } else {
-         armRotatePID.setReference(0.0, ControlType.kPosition);
+         rotateTarget = 0;
+         SmartDashboard.putNumber("Arm Rot Set Target", rotateTarget);
+         armRotatePID.setReference(rotateTarget, ControlType.kPosition);
       }
       // set PID coefficients
       armRotatePID.setP(rotateP);
@@ -651,10 +652,9 @@ public class Robot extends TimedRobot {
          // armRotatePID.setReference(rotateTarget, ControlType.kPosition);
 
          // Override Posistion
-         if (Math.abs(operatorStick.getRawAxis(5)) > .01) {
-            rotateTarget += operatorStick.getRawAxis(5) * .001; // Offset
-            // armRotatePID.setReference(rotateTarget, ControlType.kPosition); //update pid
-
+         if (Math.abs(operatorStick.getRawAxis(5)) > .10) {
+            rotateTarget -= operatorStick.getRawAxis(5) * 0.1; // Offset
+            armRotatePID.setReference(rotateTarget, ControlType.kPosition); // update pid
          }
 
          if (operatorStick.getRawButton(4)) {
@@ -662,7 +662,6 @@ public class Robot extends TimedRobot {
                rotateTarget = armHighSetPoint;
                logger.debug("set arm rotate PID to high {}", rotateTarget);
                if (!rotatePIDDisable) {
-
                   armRotatePID.setReference(rotateTarget, ControlType.kPosition);
                }
                armHighRotateButtonPressed = true;
