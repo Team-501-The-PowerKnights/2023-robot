@@ -78,7 +78,7 @@ public class Robot extends TimedRobot {
    private CANSparkMax rightFront;
    private CANSparkMax rightRear;
 
-   private final double k_driveRampRate = 1.5;
+   private final double k_driveRampRate = 1.0;
    private double driveRampRate;
 
    private DifferentialDrive drive;
@@ -566,7 +566,7 @@ public class Robot extends TimedRobot {
       if (autoDriveCount >= k_autoDelayCount) {
          drive.arcadeDrive(0, 0);
       } else {
-         drive.arcadeDrive(-0.50, 0);
+         drive.arcadeDrive(-0.60, 0);
       }
    }
 
