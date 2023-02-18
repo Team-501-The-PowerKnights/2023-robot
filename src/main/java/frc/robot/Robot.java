@@ -527,7 +527,7 @@ public class Robot extends TimedRobot {
       }
    }
 
-   private final long k_autoDelayCount = (long) (3.0 / 0.20); // sec / 20 msec
+   private final long k_autoDelayCount = (long) (3.0 / 0.020); // sec / 20 msec
    private long autoDriveCount;
 
    /**
@@ -546,6 +546,9 @@ public class Robot extends TimedRobot {
       gyroTlmCount = 0;
 
       autoDriveCount = 0;
+      logger.info("k_autDelayCount = {}", k_autoDelayCount);
+      // FIXME: shouldn't have this disabled
+      drive.setSafetyEnabled(false);
    }
 
    /** This function is called periodically during autonomous. */
@@ -559,12 +562,11 @@ public class Robot extends TimedRobot {
          gyroTlmCount = 0;
       }
 
-      if (autoDriveCount == 0) {
-         drive.arcadeDrive(-0.30, 0);
-      }
       autoDriveCount++;
       if (autoDriveCount >= k_autoDelayCount) {
          drive.arcadeDrive(0, 0);
+      } else {
+         drive.arcadeDrive(-0.50, 0);
       }
    }
 
@@ -573,6 +575,9 @@ public class Robot extends TimedRobot {
       autonomousComplete = true;
 
       drive.arcadeDrive(0, 0);
+
+      // FIXME: shouldn't have this enabled
+      drive.setSafetyEnabled(true);
    }
 
    @Override
