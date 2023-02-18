@@ -16,6 +16,7 @@ import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PneumaticHub;
 import edu.wpi.first.wpilibj.PowerDistribution;
@@ -49,6 +50,11 @@ public class Robot extends TimedRobot {
 
    @SuppressWarnings("unused")
    private RobotContainer m_robotContainer;
+
+   // Flag for having completed autonomous part of match
+   private static boolean autonomousComplete;
+   // Flag for having completed teleop part of match
+   private static boolean teleopComplete;
 
    @SuppressWarnings("unused")
    private PowerDistribution powerD;
@@ -142,6 +148,9 @@ public class Robot extends TimedRobot {
       // Instantiate our RobotContainer. This will perform all our button bindings,
       // and put our autonomous chooser on the dashboard.
       m_robotContainer = new RobotContainer();
+
+      autonomousComplete = false;
+      teleopComplete = false;
 
       powerD = new PowerDistribution(1, ModuleType.kRev);
 
@@ -508,9 +517,18 @@ public class Robot extends TimedRobot {
 
    @Override
    public void disabledExit() {
+      if (autonomousComplete && teleopComplete) {
+         logger.info("EventName:     {}", DriverStation.getEventName());
+         logger.info("MatchType:     {}", DriverStation.getMatchType());
+         logger.info("MatchNumber:   {}", DriverStation.getMatchNumber());
+         logger.info("ReplayNumber:  {}", DriverStation.getReplayNumber());
+         logger.info("Alliance:      {}", DriverStation.getAlliance());
+         logger.info("Location:      {}", DriverStation.getLocation());
+      }
    }
 
-   // private long k_autoDelay = Math.fl(1.0 / 0.20); // sec / 20 msec
+   private final long k_autoDelayCount = (long) (3.0 / 0.20); // sec / 20 msec
+   private long autoDriveCount;
 
    /**
     * This autonomous runs the autonomous command selected by your
@@ -526,15 +544,13 @@ public class Robot extends TimedRobot {
       }
 
       gyroTlmCount = 0;
+
+      autoDriveCount = 0;
    }
 
    /** This function is called periodically during autonomous. */
    @Override
    public void autonomousPeriodic() {
-      SmartDashboard.putNumber("NavX Yaw", 0.0);
-      SmartDashboard.putNumber("NavX Pitch", 0.0);
-      SmartDashboard.putNumber("NavX Rotate", 0.0);
-
       gyroTlmCount++;
       if (gyroTlmCount > 50) {
          SmartDashboard.putNumber("Gyro roll", ahrs.getRoll());
@@ -542,10 +558,21 @@ public class Robot extends TimedRobot {
          SmartDashboard.putNumber("Gyro yaw", ahrs.getYaw());
          gyroTlmCount = 0;
       }
+
+      if (autoDriveCount == 0) {
+         drive.arcadeDrive(-0.30, 0);
+      }
+      autoDriveCount++;
+      if (autoDriveCount >= k_autoDelayCount) {
+         drive.arcadeDrive(0, 0);
+      }
    }
 
    @Override
    public void autonomousExit() {
+      autonomousComplete = true;
+
+      drive.arcadeDrive(0, 0);
    }
 
    @Override
@@ -755,6 +782,7 @@ public class Robot extends TimedRobot {
 
    @Override
    public void teleopExit() {
+      teleopComplete = true;
    }
 
    @Override
