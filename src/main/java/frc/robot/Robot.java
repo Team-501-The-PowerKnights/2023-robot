@@ -119,8 +119,8 @@ public class Robot extends TimedRobot {
    private final double k_extendD = 1;
    private final double k_extendIzone = 0;
    private final double k_extendFF = 0;
-   private final double k_extendMinOutput = -0.2;
-   private final double k_extendMaxOutput = 0.2;
+   private final double k_extendMinOutput = -0.3;
+   private final double k_extendMaxOutput = 0.3;
 
    private boolean extendPIDDisable;
    private CANSparkMax armExtend;
@@ -527,8 +527,11 @@ public class Robot extends TimedRobot {
       }
    }
 
-   private final long k_autoDelayCount = (long) (3.0 / 0.020); // sec / 20 msec
-   private long autoDriveCount;
+   private AutoState autoState;
+   private boolean autoStateStarted;
+
+   private long autoCommandTimerCount;
+   private long autoCommandTimerCountTarget;
 
    /**
     * This autonomous runs the autonomous command selected by your
@@ -545,10 +548,18 @@ public class Robot extends TimedRobot {
 
       gyroTlmCount = 0;
 
-      autoDriveCount = 0;
-      logger.info("k_autDelayCount = {}", k_autoDelayCount);
+      autoState = AutoState.start;
+      autoStateStarted = false;
+
+      autoCommandTimerCount = 0;
+      autoCommandTimerCountTarget = 0;
+
       // FIXME: shouldn't have this disabled
       drive.setSafetyEnabled(false);
+   }
+
+   private enum AutoState {
+      start, rotateArmHigh, extendArmLong, rotateArmMid, openGripper, retractArm, closeGripper, driveBackward, end, done;
    }
 
    /** This function is called periodically during autonomous. */
@@ -562,12 +573,164 @@ public class Robot extends TimedRobot {
          gyroTlmCount = 0;
       }
 
-      autoDriveCount++;
-      if (autoDriveCount >= k_autoDelayCount) {
-         drive.arcadeDrive(0, 0);
-      } else {
-         drive.arcadeDrive(-0.60, 0);
+      switch (autoState) {
+         case start:
+            if (!autoStateStarted) {
+               logger.info("state = {}", autoState);
+               autoStateStarted = true;
+               autoCommandTimerCountTarget = 0;
+               autoCommandTimerCount = 0;
+            }
+            autoState = AutoState.rotateArmHigh;
+            autoStateStarted = false;
+            armRotateHigh();
+            break;
+         case rotateArmHigh:
+            if (!autoStateStarted) {
+               logger.info("state = {}", autoState);
+               autoStateStarted = true;
+               autoCommandTimerCountTarget = (long) (1.0 / 0.020); // sec / 20 msec
+               autoCommandTimerCount = 0;
+            }
+            if (++autoCommandTimerCount >= autoCommandTimerCountTarget) {
+               autoState = AutoState.extendArmLong;
+               autoStateStarted = false;
+               armExtendLong();
+            }
+            break;
+         case extendArmLong:
+            if (!autoStateStarted) {
+               logger.info("state = {}", autoState);
+               autoStateStarted = true;
+               autoCommandTimerCountTarget = (long) (5.0 / 0.020); // sec / 20 msec
+               autoCommandTimerCount = 0;
+            }
+            if (++autoCommandTimerCount >= autoCommandTimerCountTarget) {
+               autoState = AutoState.rotateArmMid;
+               autoStateStarted = false;
+               armRotateMid();
+            }
+            break;
+         case rotateArmMid:
+            if (!autoStateStarted) {
+               logger.info("state = {}", autoState);
+               autoStateStarted = true;
+               autoCommandTimerCountTarget = (long) (1.0 / 0.020); // sec / 20 msec
+               autoCommandTimerCount = 0;
+            }
+            if (++autoCommandTimerCount >= autoCommandTimerCountTarget) {
+               autoState = AutoState.openGripper;
+               autoStateStarted = false;
+               gripperOpen();
+            }
+            break;
+         case openGripper:
+            if (!autoStateStarted) {
+               logger.info("state = {}", autoState);
+               autoStateStarted = true;
+               autoCommandTimerCountTarget = (long) (0.5 / 0.020); // sec / 20 msec
+               autoCommandTimerCount = 0;
+            }
+            if (++autoCommandTimerCount >= autoCommandTimerCountTarget) {
+               autoState = AutoState.retractArm;
+               autoStateStarted = false;
+               armRetractShort();
+            }
+            break;
+         case retractArm:
+            if (!autoStateStarted) {
+               logger.info("state = {}", autoState);
+               autoStateStarted = true;
+               autoCommandTimerCountTarget = (long) (3.0 / 0.020); // sec / 20 msec
+               autoCommandTimerCount = 0;
+            }
+            if (++autoCommandTimerCount >= autoCommandTimerCountTarget) {
+               autoState = AutoState.driveBackward;
+               autoStateStarted = false;
+               gripperClose();
+            }
+            break;
+         case driveBackward:
+            if (!autoStateStarted) {
+               logger.info("state = {}", autoState);
+               autoStateStarted = true;
+               autoCommandTimerCountTarget = (long) (3.0 / 0.020); // sec / 20 msec
+               autoCommandTimerCount = 0;
+            }
+            if (++autoCommandTimerCount >= autoCommandTimerCountTarget) {
+               drive.arcadeDrive(0, 0);
+               autoState = AutoState.closeGripper;
+               autoStateStarted = false;
+            } else {
+               drive.arcadeDrive(-0.60, 0);
+            }
+            break;
+         case closeGripper:
+            if (!autoStateStarted) {
+               logger.info("state = {}", autoState);
+               autoStateStarted = true;
+               autoCommandTimerCountTarget = (long) (0.5 / 0.020); // sec / 20 msec
+               autoCommandTimerCount = 0;
+            }
+            if (++autoCommandTimerCount >= autoCommandTimerCountTarget) {
+               autoState = AutoState.end;
+               autoStateStarted = false;
+            }
+            break;
+         case end:
+            if (!autoStateStarted) {
+               logger.info("state = {}", autoState);
+               autoStateStarted = true;
+            }
+            autoState = AutoState.done;
+            autoStateStarted = false;
+            autoCommandTimerCountTarget = 0;
+            autoCommandTimerCount = 0;
+            break;
+         case done:
+         default:
+            break;
       }
+   }
+
+   private void armRotateHigh() {
+      logger.info("starting command armRotateHigh");
+      rotateTarget = armHighSetPoint;
+      logger.debug("set arm rotate PID to high {}", rotateTarget);
+      armRotatePID.setReference(rotateTarget, ControlType.kPosition);
+   }
+
+   private void armExtendLong() {
+      logger.info("starting command armExtendLong");
+      extendTarget = +190;
+      logger.debug("set arm extend PID to ad-hoc {}", extendTarget);
+      armExtendPID.setReference(extendTarget, ControlType.kPosition);
+   }
+
+   private void armRotateMid() {
+      logger.info("starting command armRotateMid");
+      rotateTarget = armMidSetPoint;
+      logger.debug("set arm rotate PID to mid {}", rotateTarget);
+      armRotatePID.setReference(rotateTarget, ControlType.kPosition);
+   }
+
+   private void gripperOpen() {
+      logger.info("starting command gripperOpen");
+      gripperOpen = true;
+      gripperSolenoid.set(gripperOpen);
+   }
+
+   private void armRetractShort() {
+      logger.info("starting command armRetractShort");
+      extendTarget = +10;
+      logger.debug("set arm retract PID to ad-hoc {}", extendTarget);
+      armExtendPID.setReference(extendTarget, ControlType.kPosition);
+   }
+
+   private void gripperClose() {
+      logger.info("starting command gripperClose");
+      gripperOpen = false;
+      gripperSolenoid.set(gripperOpen);
    }
 
    @Override
