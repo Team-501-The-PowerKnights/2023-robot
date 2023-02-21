@@ -5,6 +5,9 @@
 package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+
+import com.kauailabs.navx.frc.AHRS;
+
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.REVLibError;
 import com.revrobotics.RelativeEncoder;
@@ -13,15 +16,16 @@ import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PneumaticHub;
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -47,10 +51,18 @@ public class Robot extends TimedRobot {
    @SuppressWarnings("unused")
    private RobotContainer m_robotContainer;
 
+   // Flag for having completed autonomous part of match
+   private static boolean autonomousComplete;
+   // Flag for having completed teleop part of match
+   private static boolean teleopComplete;
+
    @SuppressWarnings("unused")
    private PowerDistribution powerD;
 
    private PneumaticHub pneumH;
+
+   private AHRS ahrs;
+   boolean ahrsValid;
 
    /*
     * Driver Stuff
@@ -66,7 +78,7 @@ public class Robot extends TimedRobot {
    private CANSparkMax rightFront;
    private CANSparkMax rightRear;
 
-   private final double k_driveRampRate = 1.5;
+   private final double k_driveRampRate = 1.0;
    private double driveRampRate;
 
    private DifferentialDrive drive;
@@ -94,7 +106,6 @@ public class Robot extends TimedRobot {
    private final double k_rotateFF = 0;
    private final double k_rotateMinOutput = -0.1;
    private final double k_rotateMaxOutput = 0.3;
-   private double rotCurrentRef = 0.0;
 
    private boolean rotatePIDDisable;
    private CANSparkMax armRotate;
@@ -108,8 +119,8 @@ public class Robot extends TimedRobot {
    private final double k_extendD = 1;
    private final double k_extendIzone = 0;
    private final double k_extendFF = 0;
-   private final double k_extendMinOutput = -0.2;
-   private final double k_extendMaxOutput = 0.2;
+   private final double k_extendMinOutput = -0.3;
+   private final double k_extendMaxOutput = 0.3;
 
    private boolean extendPIDDisable;
    private CANSparkMax armExtend;
@@ -138,11 +149,31 @@ public class Robot extends TimedRobot {
       // and put our autonomous chooser on the dashboard.
       m_robotContainer = new RobotContainer();
 
+      autonomousComplete = false;
+      teleopComplete = false;
+
       powerD = new PowerDistribution(1, ModuleType.kRev);
 
       // Instantiate and enable
       pneumH = new PneumaticHub(2);
       pneumH.enableCompressorAnalog(80, 110);
+
+      // Instantiate
+      try {
+         ahrs = new AHRS(SPI.Port.kMXP);
+         ahrsValid = waitForAhrsConnection();
+      } catch (final RuntimeException ex) {
+         logger.error("Instantiating naxX MXP" + ex.getMessage());
+         // SmartDashboard.reportError("Error instantiating navX MXP: " +
+         // ex.getMessage(), true);
+
+         ahrs = null;
+         ahrsValid = false;
+      }
+      SmartDashboard.putBoolean("ahrsValid", ahrsValid);
+      if (ahrsValid) {
+         configureAHRS();
+      }
 
       driverStick = new Joystick(0);
 
@@ -208,7 +239,9 @@ public class Robot extends TimedRobot {
       if (rotatePIDDisable) {
          armRotatePID.setReference(0.0, ControlType.kVoltage);
       } else {
-         armRotatePID.setReference(0.0, ControlType.kPosition);
+         rotateTarget = 0;
+         SmartDashboard.putNumber("Arm Rot Set Target", rotateTarget);
+         armRotatePID.setReference(rotateTarget, ControlType.kPosition);
       }
       // set PID coefficients
       armRotatePID.setP(rotateP);
@@ -299,6 +332,51 @@ public class Robot extends TimedRobot {
       gripperOpen = false;
    }
 
+   protected boolean waitForAhrsConnection() {
+      long count = 0;
+      while (!ahrs.isConnected()) {
+         logger.debug("waiting ... ahrs not connected");
+         try {
+            Thread.sleep(50);
+         } catch (final InterruptedException ex) {
+            // Don't care
+         }
+         if (++count > 10) {
+            logger.warn("connect - failed to finish count={}", count);
+            break;
+         }
+      }
+      final boolean value = ahrs.isConnected();
+      if (value) {
+         logger.debug("ahrs connected");
+      }
+      return value;
+   }
+
+   protected void configureAHRS() {
+      zeroYaw();
+   }
+
+   private void zeroYaw() {
+      logger.debug("yaw={}", ahrs.getYaw());
+      long count = 0;
+      while (Math.abs(ahrs.getYaw()) > 1.0) {
+         ahrs.zeroYaw();
+         try {
+            logger.debug("zeroYaw::waiting ... yaw={}", ahrs.getYaw());
+            Thread.sleep(50);
+         } catch (final InterruptedException ex) {
+            // Don't care
+         }
+         if (++count > 10) {
+            logger.warn("zeroYaw - failed to finish count={}", count);
+            break;
+         }
+      }
+      logger.debug("zeroYaw::done ... yaw={}", ahrs.getYaw());
+      logger.trace("zeroYaw::done ... angle={}", ahrs.getAngle());
+   }
+
    // last error (not the same as kOk)
    // TODO: Use to set a degraded error status/state on subsystem
    @SuppressWarnings("unused")
@@ -310,6 +388,8 @@ public class Robot extends TimedRobot {
          logger.error(message, error);
       }
    }
+
+   private long gyroTlmCount;
 
    /**
     * This function is called every 20 ms, no matter the mode. Use this for items
@@ -437,9 +517,21 @@ public class Robot extends TimedRobot {
 
    @Override
    public void disabledExit() {
+      if (autonomousComplete && teleopComplete) {
+         logger.info("EventName:     {}", DriverStation.getEventName());
+         logger.info("MatchType:     {}", DriverStation.getMatchType());
+         logger.info("MatchNumber:   {}", DriverStation.getMatchNumber());
+         logger.info("ReplayNumber:  {}", DriverStation.getReplayNumber());
+         logger.info("Alliance:      {}", DriverStation.getAlliance());
+         logger.info("Location:      {}", DriverStation.getLocation());
+      }
    }
 
-   // private long k_autoDelay = Math.fl(1.0 / 0.20); // sec / 20 msec
+   private AutoState autoState;
+   private boolean autoStateStarted;
+
+   private long autoCommandTimerCount;
+   private long autoCommandTimerCountTarget;
 
    /**
     * This autonomous runs the autonomous command selected by your
@@ -453,18 +545,202 @@ public class Robot extends TimedRobot {
       if (m_autonomousCommand != null) {
          m_autonomousCommand.schedule();
       }
+
+      gyroTlmCount = 0;
+
+      autoState = AutoState.start;
+      autoStateStarted = false;
+
+      autoCommandTimerCount = 0;
+      autoCommandTimerCountTarget = 0;
+
+      // FIXME: shouldn't have this disabled
+      drive.setSafetyEnabled(false);
+   }
+
+   private enum AutoState {
+      start, rotateArmHigh, extendArmLong, rotateArmMid, openGripper, retractArm, closeGripper, driveBackward, end, done;
    }
 
    /** This function is called periodically during autonomous. */
    @Override
    public void autonomousPeriodic() {
-      SmartDashboard.putNumber("NavX Yaw", 0.0);
-      SmartDashboard.putNumber("NavX Pitch", 0.0);
-      SmartDashboard.putNumber("NavX Rotate", 0.0);
+      gyroTlmCount++;
+      if (gyroTlmCount > 50) {
+         SmartDashboard.putNumber("Gyro roll", ahrs.getRoll());
+         SmartDashboard.putNumber("Gyro pitch", ahrs.getPitch());
+         SmartDashboard.putNumber("Gyro yaw", ahrs.getYaw());
+         gyroTlmCount = 0;
+      }
+
+      switch (autoState) {
+         case start:
+            if (!autoStateStarted) {
+               logger.info("state = {}", autoState);
+               autoStateStarted = true;
+               autoCommandTimerCountTarget = 0;
+               autoCommandTimerCount = 0;
+            }
+            autoState = AutoState.rotateArmHigh;
+            autoStateStarted = false;
+            armRotateHigh();
+            break;
+         case rotateArmHigh:
+            if (!autoStateStarted) {
+               logger.info("state = {}", autoState);
+               autoStateStarted = true;
+               autoCommandTimerCountTarget = (long) (1.0 / 0.020); // sec / 20 msec
+               autoCommandTimerCount = 0;
+            }
+            if (++autoCommandTimerCount >= autoCommandTimerCountTarget) {
+               autoState = AutoState.extendArmLong;
+               autoStateStarted = false;
+               armExtendLong();
+            }
+            break;
+         case extendArmLong:
+            if (!autoStateStarted) {
+               logger.info("state = {}", autoState);
+               autoStateStarted = true;
+               autoCommandTimerCountTarget = (long) (5.0 / 0.020); // sec / 20 msec
+               autoCommandTimerCount = 0;
+            }
+            if (++autoCommandTimerCount >= autoCommandTimerCountTarget) {
+               autoState = AutoState.rotateArmMid;
+               autoStateStarted = false;
+               armRotateMid();
+            }
+            break;
+         case rotateArmMid:
+            if (!autoStateStarted) {
+               logger.info("state = {}", autoState);
+               autoStateStarted = true;
+               autoCommandTimerCountTarget = (long) (1.0 / 0.020); // sec / 20 msec
+               autoCommandTimerCount = 0;
+            }
+            if (++autoCommandTimerCount >= autoCommandTimerCountTarget) {
+               autoState = AutoState.openGripper;
+               autoStateStarted = false;
+               gripperOpen();
+            }
+            break;
+         case openGripper:
+            if (!autoStateStarted) {
+               logger.info("state = {}", autoState);
+               autoStateStarted = true;
+               autoCommandTimerCountTarget = (long) (0.5 / 0.020); // sec / 20 msec
+               autoCommandTimerCount = 0;
+            }
+            if (++autoCommandTimerCount >= autoCommandTimerCountTarget) {
+               autoState = AutoState.retractArm;
+               autoStateStarted = false;
+               armRetractShort();
+            }
+            break;
+         case retractArm:
+            if (!autoStateStarted) {
+               logger.info("state = {}", autoState);
+               autoStateStarted = true;
+               autoCommandTimerCountTarget = (long) (3.0 / 0.020); // sec / 20 msec
+               autoCommandTimerCount = 0;
+            }
+            if (++autoCommandTimerCount >= autoCommandTimerCountTarget) {
+               autoState = AutoState.driveBackward;
+               autoStateStarted = false;
+               gripperClose();
+            }
+            break;
+         case driveBackward:
+            if (!autoStateStarted) {
+               logger.info("state = {}", autoState);
+               autoStateStarted = true;
+               autoCommandTimerCountTarget = (long) (3.0 / 0.020); // sec / 20 msec
+               autoCommandTimerCount = 0;
+            }
+            if (++autoCommandTimerCount >= autoCommandTimerCountTarget) {
+               drive.arcadeDrive(0, 0);
+               autoState = AutoState.closeGripper;
+               autoStateStarted = false;
+            } else {
+               drive.arcadeDrive(-0.60, 0);
+            }
+            break;
+         case closeGripper:
+            if (!autoStateStarted) {
+               logger.info("state = {}", autoState);
+               autoStateStarted = true;
+               autoCommandTimerCountTarget = (long) (0.5 / 0.020); // sec / 20 msec
+               autoCommandTimerCount = 0;
+            }
+            if (++autoCommandTimerCount >= autoCommandTimerCountTarget) {
+               autoState = AutoState.end;
+               autoStateStarted = false;
+            }
+            break;
+         case end:
+            if (!autoStateStarted) {
+               logger.info("state = {}", autoState);
+               autoStateStarted = true;
+            }
+            autoState = AutoState.done;
+            autoStateStarted = false;
+            autoCommandTimerCountTarget = 0;
+            autoCommandTimerCount = 0;
+            break;
+         case done:
+         default:
+            break;
+      }
+   }
+
+   private void armRotateHigh() {
+      logger.info("starting command armRotateHigh");
+      rotateTarget = armHighSetPoint;
+      logger.debug("set arm rotate PID to high {}", rotateTarget);
+      armRotatePID.setReference(rotateTarget, ControlType.kPosition);
+   }
+
+   private void armExtendLong() {
+      logger.info("starting command armExtendLong");
+      extendTarget = +190;
+      logger.debug("set arm extend PID to ad-hoc {}", extendTarget);
+      armExtendPID.setReference(extendTarget, ControlType.kPosition);
+   }
+
+   private void armRotateMid() {
+      logger.info("starting command armRotateMid");
+      rotateTarget = armMidSetPoint;
+      logger.debug("set arm rotate PID to mid {}", rotateTarget);
+      armRotatePID.setReference(rotateTarget, ControlType.kPosition);
+   }
+
+   private void gripperOpen() {
+      logger.info("starting command gripperOpen");
+      gripperOpen = true;
+      gripperSolenoid.set(gripperOpen);
+   }
+
+   private void armRetractShort() {
+      logger.info("starting command armRetractShort");
+      extendTarget = +10;
+      logger.debug("set arm retract PID to ad-hoc {}", extendTarget);
+      armExtendPID.setReference(extendTarget, ControlType.kPosition);
+   }
+
+   private void gripperClose() {
+      logger.info("starting command gripperClose");
+      gripperOpen = false;
+      gripperSolenoid.set(gripperOpen);
    }
 
    @Override
    public void autonomousExit() {
+      autonomousComplete = true;
+
+      drive.arcadeDrive(0, 0);
+
+      // FIXME: shouldn't have this enabled
+      drive.setSafetyEnabled(true);
    }
 
    @Override
@@ -489,11 +765,25 @@ public class Robot extends TimedRobot {
       armLowRotateButtonPressed = false;
 
       gripperOpen = false;
+
+      gyroTlmCount = 0;
    }
 
    /** This function is called periodically during operator control. */
    @Override
    public void teleopPeriodic() {
+      SmartDashboard.putNumber("NavX Yaw", 0.0);
+      SmartDashboard.putNumber("NavX Pitch", 0.0);
+      SmartDashboard.putNumber("NavX Rotate", 0.0);
+
+      gyroTlmCount++;
+      if (gyroTlmCount > 50) {
+         SmartDashboard.putNumber("Gyro roll", ahrs.getRoll());
+         SmartDashboard.putNumber("Gyro pitch", ahrs.getPitch());
+         SmartDashboard.putNumber("Gyro yaw", ahrs.getYaw());
+         gyroTlmCount = 0;
+      }
+
       // -****************************************************************
       // -*
       // -* DRIVE
@@ -556,20 +846,17 @@ public class Robot extends TimedRobot {
          // // armRotatePID.setReference(rotateTarget, ControlType.kPosition);
          // armRotatePID.setReference(rotateTarget, ControlType.kPosition);
 
-         //Override Posistion
-         if (  Math.abs(operatorStick.getRawAxis(5 )) > .01 ) 
-            {  
-               rotateTarget += operatorStick.getRawAxis(5) * .001; //Offset
-               //armRotatePID.setReference(rotateTarget, ControlType.kPosition); //update pid
-
-            }  
+         // Override Posistion
+         if (Math.abs(operatorStick.getRawAxis(5)) > .10) {
+            rotateTarget -= operatorStick.getRawAxis(5) * 0.1; // Offset
+            armRotatePID.setReference(rotateTarget, ControlType.kPosition); // update pid
+         }
 
          if (operatorStick.getRawButton(4)) {
             if (!armHighRotateButtonPressed) {
                rotateTarget = armHighSetPoint;
                logger.debug("set arm rotate PID to high {}", rotateTarget);
                if (!rotatePIDDisable) {
-
                   armRotatePID.setReference(rotateTarget, ControlType.kPosition);
                }
                armHighRotateButtonPressed = true;
@@ -663,6 +950,7 @@ public class Robot extends TimedRobot {
 
    @Override
    public void teleopExit() {
+      teleopComplete = true;
    }
 
    @Override
