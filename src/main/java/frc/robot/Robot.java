@@ -541,6 +541,13 @@ public class Robot extends TimedRobot {
    public void autonomousInit() {
       m_autonomousCommand = null;
 
+      checkError(leftFront.setIdleMode(IdleMode.kBrake), "LF set idle mode to brake {}");
+      checkError(leftRear.setIdleMode(IdleMode.kBrake), "LR set idle mode to brake {}");
+      checkError(rightFront.setIdleMode(IdleMode.kBrake), "RF set idle mode to brake {}");
+      checkError(rightRear.setIdleMode(IdleMode.kBrake), "RR set idle mode to brake {}");
+
+      driveBrakeEnabled = true;
+
       // schedule the autonomous command (example)
       if (m_autonomousCommand != null) {
          m_autonomousCommand.schedule();
@@ -556,6 +563,7 @@ public class Robot extends TimedRobot {
 
       // FIXME: shouldn't have this disabled
       drive.setSafetyEnabled(false);
+      
    }
 
    private enum AutoState {
@@ -657,12 +665,15 @@ public class Robot extends TimedRobot {
                autoCommandTimerCountTarget = (long) (3.0 / 0.020); // sec / 20 msec
                autoCommandTimerCount = 0;
             }
-            if (++autoCommandTimerCount >= autoCommandTimerCountTarget) {
+            if (++autoCommandTimerCount >= autoCommandTimerCountTarget  && ahrs.getPitch() > 8.50) {
                drive.arcadeDrive(0, 0);
                autoState = AutoState.closeGripper;
                autoStateStarted = false;
+               break;
             } else {
+            
                drive.arcadeDrive(-0.60, 0);
+
             }
             break;
          case closeGripper:
