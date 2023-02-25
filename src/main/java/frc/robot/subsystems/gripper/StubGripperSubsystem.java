@@ -26,11 +26,6 @@ class StubGripperSubsystem extends BaseGripperSubsystem {
    }
 
    @Override
-   public void validateCalibration() {
-      // Stub doesn't implement this
-   }
-
-   @Override
    public void disable() {
       // Stub doesn't implement this
    }

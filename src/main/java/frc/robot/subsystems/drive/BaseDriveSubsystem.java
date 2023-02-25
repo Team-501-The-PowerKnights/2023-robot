@@ -77,6 +77,11 @@ abstract class BaseDriveSubsystem extends BaseSubsystem implements IDriveSubsyst
       ramp = v;
    }
 
+   @Override
+   public void validateCalibration() {
+      // Default implementation is empty
+   }
+
    /**
     * Telemetry supported by subsystem.
     */

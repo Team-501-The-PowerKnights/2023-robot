@@ -84,11 +84,6 @@ public class SuitcaseDriveSubsystem extends BaseDriveSubsystem {
    }
 
    @Override
-   public void validateCalibration() {
-      // TODO Auto-generated method stub
-   }
-
-   @Override
    public void disable() {
       // TODO Auto-generated method stub
    }

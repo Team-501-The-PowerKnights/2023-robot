@@ -89,11 +89,6 @@ abstract class BaseArmSubsystem extends BaseSubsystem implements IArmSubsystem {
       SmartDashboard.putString(TelemetryNames.Arm.teleCommand, defaultTeleCommand.getClass().getSimpleName());
    }
 
-   @Override
-   public void validateCalibration() {
-      // Default implementation is empty
-   }
-
    protected void loadPreferences() {
       double v;
 
@@ -152,6 +147,11 @@ abstract class BaseArmSubsystem extends BaseSubsystem implements IArmSubsystem {
       v = Preferences.getDouble(ArmPreferences.extendPID_maxOutput, extendPIDPrefs.MaxOutput);
       logger.info("{} = {}", ArmPreferences.extendPID_maxOutput, v);
       extendPIDPrefs.MaxOutput = v;
+   }
+
+   @Override
+   public void validateCalibration() {
+      // Default implementation is empty
    }
 
    /** Standard telemetry for Rotation PID */

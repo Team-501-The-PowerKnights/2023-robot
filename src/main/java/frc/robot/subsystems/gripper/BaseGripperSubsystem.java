@@ -53,6 +53,11 @@ abstract class BaseGripperSubsystem extends BaseSubsystem implements IGripperSub
       logger.info("new preferences for {}:", myName);
    }
 
+   @Override
+   public void validateCalibration() {
+      // Default implementation is empty
+   }
+
    /**
     * Telemetry support by subsystem.
     */
