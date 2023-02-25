@@ -65,6 +65,9 @@ public class SuitcaseDriveSubsystem extends BaseDriveSubsystem {
       // Drive uses the two paired controllers (Front is master)
       drive = new DifferentialDrive(leftFront, rightFront);
 
+      // FIXME: shouldn't have this enabled
+      drive.setSafetyEnabled(false);
+
       logger.info("constructed");
    }
 
