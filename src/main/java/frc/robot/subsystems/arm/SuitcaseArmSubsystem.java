@@ -12,6 +12,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.REVLibError;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
+import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
@@ -87,20 +88,21 @@ public class SuitcaseArmSubsystem extends BaseArmSubsystem {
 
    @Override
    public void disable() {
-      // TODO Auto-generated method stub
-
+      checkError(rotatePID.setReference(0, ControlType.kDutyCycle), "AR PID set reference to kDutyCycle,0 {}");
+      setTlmRotatePIDEnabled(false);
    }
 
    @Override
    public void stop() {
-      // TODO Auto-generated method stub
-
+      checkError(rotatePID.setReference(0, ControlType.kDutyCycle), "AR PID set reference to kDutyCycle,0 {}");
+      setTlmRotatePIDEnabled(false);
    }
 
    @Override
    public void rotateToPosition(ArmRotationPosition position) {
-      // TODO Auto-generated method stub
-
+      rotatePID.setReference(position.get(), ControlType.kPosition);
+      setTlmRotatePIDEnabled(true);
+      setTlmRotatePIDTarget(position.get());
    }
 
    @Override

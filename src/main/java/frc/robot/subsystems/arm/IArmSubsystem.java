@@ -23,12 +23,26 @@ public interface IArmSubsystem extends ISubsystem {
    /**
     * DOCS: Add your docs here.
     */
-   public enum ArmRotationPosition {
+   public static enum ArmRotationPosition {
       //@formatter:off
-      highPosition, 
-      midPosition, 
-      lowPosition
+      highPosition(0), 
+      midPosition(0), 
+      lowPosition(0);
       //@formatter:on
+
+      private double position;
+
+      private ArmRotationPosition(double position) {
+         this.position = position;
+      }
+
+      public void set(double position) {
+         this.position = position;
+      }
+
+      public double get() {
+         return position;
+      }
    }
 
    /**

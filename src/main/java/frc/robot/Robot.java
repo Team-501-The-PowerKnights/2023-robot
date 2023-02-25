@@ -19,7 +19,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-
+import frc.robot.subsystems.arm.ArmFactory;
+import frc.robot.subsystems.arm.IArmSubsystem.ArmRotationPosition;
 import frc.robot.telemetry.TelemetryManager;
 import frc.robot.telemetry.TelemetryNames;
 
@@ -308,6 +309,8 @@ public class Robot extends TimedRobot {
       logger.info("disabled LiveWindow enabled = {}", LiveWindow.isEnabled());
 
       ModeFollowers.getInstance().initTest();
+
+      ArmFactory.getInstance().rotateToPosition(ArmRotationPosition.highPosition);
 
       logger.info("initialized test");
    }

@@ -126,6 +126,10 @@ abstract class BaseArmSubsystem extends BaseSubsystem implements IArmSubsystem {
       logger.info("{} = {}", ArmPreferences.rotate_lowSetPoint, v);
       rotate_lowSetPoint = v;
 
+      ArmRotationPosition.highPosition.set(rotate_highSetPoint);
+      ArmRotationPosition.midPosition.set(rotate_midSetPoint);
+      ArmRotationPosition.lowPosition.set(rotate_lowSetPoint);
+
       v = Preferences.getDouble(ArmPreferences.extendPID_P, extendPIDPrefs.P);
       logger.info("{} = {}", ArmPreferences.extendPID_P, v);
       extendPIDPrefs.P = v;
@@ -159,27 +163,27 @@ abstract class BaseArmSubsystem extends BaseSubsystem implements IArmSubsystem {
    /** Standard telemetry for Extension PID */
    private PIDTelemetry tlmExtendPID = new PIDTelemetry();
 
-   protected void setRotatePIDEnabled(boolean enabled) {
+   protected void setTlmRotatePIDEnabled(boolean enabled) {
       tlmRotatePID.PIDEnabled = enabled;
    }
 
-   protected void setRotatePIDTarget(double target) {
+   protected void setTlmRotatePIDTarget(double target) {
       tlmRotatePID.PIDTarget = target;
    }
 
-   protected void setRotatePIDCurrent(double current) {
+   protected void setTlmRotatePIDCurrent(double current) {
       tlmRotatePID.PIDCurrent = current;
    }
 
-   protected void setExtendPIDEnabled(boolean enabled) {
+   protected void setTlmExtendPIDEnabled(boolean enabled) {
       tlmExtendPID.PIDEnabled = enabled;
    }
 
-   protected void setExtendPIDTarget(double target) {
+   protected void setTlmExtendPIDTarget(double target) {
       tlmExtendPID.PIDTarget = target;
    }
 
-   protected void setExtendPIDCurrent(double current) {
+   protected void setTlmExtendPIDCurrent(double current) {
       tlmExtendPID.PIDCurrent = current;
    }
 
