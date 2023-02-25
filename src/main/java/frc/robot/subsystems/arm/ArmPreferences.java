@@ -9,7 +9,7 @@
 package frc.robot.subsystems.arm;
 
 import edu.wpi.first.wpilibj.Preferences;
-
+import frc.robot.preferences.PIDPreferences;
 import frc.robot.subsystems.SubsystemNames;
 
 import riolog.PKLogger;
@@ -31,34 +31,103 @@ public final class ArmPreferences {
    private static final PKLogger logger = RioLogger.getLogger(ArmPreferences.class.getName());
 
    static private final String name = SubsystemNames.armName;
-   static final String pid_P = name + ".P";
-   static final String pid_I = name + ".I";
-   static final String pid_D = name + ".D";
-   static final String pid_F = name + ".F";
+
+   static private final String rotateKey = ".Rotate";
+   static final String rotatePID_P = name + rotateKey + PIDPreferences.pid_P;
+   static final String rotatePID_I = name + rotateKey + PIDPreferences.pid_I;
+   static final String rotatePID_D = name + rotateKey + PIDPreferences.pid_D;
+   static final String rotatePID_IZone = name + rotateKey + PIDPreferences.pid_IZone;
+   static final String rotatePID_FF = name + rotateKey + PIDPreferences.pid_FF;
+   static final String rotatePID_minOutput = name + rotateKey + PIDPreferences.pid_minOutput;
+   static final String rotatePID_maxOutput = name + rotateKey + PIDPreferences.pid_maxOutput;
+   static final String rotate_highSetPoint = name + rotateKey + ".HighSetPoint";
+   static final String rotate_midSetPoint = name + rotateKey + ".MidSetPoint";
+   static final String rotate_lowSetPoint = name + rotateKey + ".LowSetPoint";
+
+   static final private String extendKey = ".Extend";
+   static final String extendPID_P = name + extendKey + PIDPreferences.pid_P;
+   static final String extendPID_I = name + extendKey + PIDPreferences.pid_I;
+   static final String extendPID_D = name + extendKey + PIDPreferences.pid_D;
+   static final String extendPID_IZone = name + extendKey + PIDPreferences.pid_IZone;
+   static final String extendPID_FF = name + extendKey + PIDPreferences.pid_FF;
+   static final String extendPID_minOutput = name + extendKey + PIDPreferences.pid_minOutput;
+   static final String extendPID_maxOutput = name + extendKey + PIDPreferences.pid_maxOutput;
 
    private ArmPreferences() {
    }
 
    // FIXME: Make perferences & NetworkTables right
    public static void initialize() {
-      if (!Preferences.containsKey(pid_P)) {
-         logger.warn("{} doesn't exist; creating with default", pid_P);
-         Preferences.setDouble(pid_P, 0.0);
+
+      if (!Preferences.containsKey(rotatePID_P)) {
+         logger.warn("{} doesn't exist; creating with default", rotatePID_P);
+         Preferences.setDouble(rotatePID_P, 0.0);
+      }
+      if (!Preferences.containsKey(rotatePID_I)) {
+         logger.warn("{} doesn't exist; creating with default", rotatePID_I);
+         Preferences.setDouble(rotatePID_I, 0.0);
+      }
+      if (!Preferences.containsKey(rotatePID_D)) {
+         logger.warn("{} doesn't exist; creating with default", rotatePID_D);
+         Preferences.setDouble(rotatePID_D, 0.0);
+      }
+      if (!Preferences.containsKey(rotatePID_IZone)) {
+         logger.warn("{} doesn't exist; creating with default", rotatePID_IZone);
+         Preferences.setDouble(rotatePID_IZone, 0.0);
+      }
+      if (!Preferences.containsKey(rotatePID_FF)) {
+         logger.warn("{} doesn't exist; creating with default", rotatePID_FF);
+         Preferences.setDouble(rotatePID_FF, 0.0);
+      }
+      if (!Preferences.containsKey(rotatePID_minOutput)) {
+         logger.warn("{} doesn't exist; creating with default", rotatePID_minOutput);
+         Preferences.setDouble(rotatePID_minOutput, 0.0);
+      }
+      if (!Preferences.containsKey(rotatePID_maxOutput)) {
+         logger.warn("{} doesn't exist; creating with default", rotatePID_maxOutput);
+         Preferences.setDouble(rotatePID_maxOutput, 0.0);
       }
 
-      if (!Preferences.containsKey(pid_I)) {
-         logger.warn("{} doesn't exist; creating with default", pid_I);
-         Preferences.setDouble(pid_I, 0.0);
+      if (!Preferences.containsKey(rotate_highSetPoint)) {
+         logger.warn("{} doesn't exist; creating with default", rotate_highSetPoint);
+         Preferences.setDouble(rotate_highSetPoint, 0.0);
+      }
+      if (!Preferences.containsKey(rotate_midSetPoint)) {
+         logger.warn("{} doesn't exist; creating with default", rotate_midSetPoint);
+         Preferences.setDouble(rotate_midSetPoint, 0.0);
+      }
+      if (!Preferences.containsKey(rotate_lowSetPoint)) {
+         logger.warn("{} doesn't exist; creating with default", rotate_lowSetPoint);
+         Preferences.setDouble(rotate_lowSetPoint, 0.0);
       }
 
-      if (!Preferences.containsKey(pid_D)) {
-         logger.warn("{} doesn't exist; creating with default", pid_D);
-         Preferences.setDouble(pid_D, 0.0);
+      if (!Preferences.containsKey(extendPID_P)) {
+         logger.warn("{} doesn't exist; creating with default", extendPID_P);
+         Preferences.setDouble(extendPID_P, 0.0);
       }
-
-      if (!Preferences.containsKey(pid_F)) {
-         logger.warn("{} doesn't exist; creating with default", pid_F);
-         Preferences.setDouble(pid_F, 0.0);
+      if (!Preferences.containsKey(extendPID_I)) {
+         logger.warn("{} doesn't exist; creating with default", extendPID_I);
+         Preferences.setDouble(extendPID_I, 0.0);
+      }
+      if (!Preferences.containsKey(extendPID_D)) {
+         logger.warn("{} doesn't exist; creating with default", extendPID_D);
+         Preferences.setDouble(extendPID_D, 0.0);
+      }
+      if (!Preferences.containsKey(extendPID_IZone)) {
+         logger.warn("{} doesn't exist; creating with default", extendPID_IZone);
+         Preferences.setDouble(extendPID_IZone, 0.0);
+      }
+      if (!Preferences.containsKey(extendPID_FF)) {
+         logger.warn("{} doesn't exist; creating with default", extendPID_FF);
+         Preferences.setDouble(extendPID_FF, 0.0);
+      }
+      if (!Preferences.containsKey(extendPID_minOutput)) {
+         logger.warn("{} doesn't exist; creating with default", extendPID_minOutput);
+         Preferences.setDouble(extendPID_minOutput, 0.0);
+      }
+      if (!Preferences.containsKey(extendPID_maxOutput)) {
+         logger.warn("{} doesn't exist; creating with default", extendPID_maxOutput);
+         Preferences.setDouble(extendPID_maxOutput, 0.0);
       }
    }
 

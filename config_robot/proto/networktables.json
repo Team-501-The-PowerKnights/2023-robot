@@ -47,14 +47,41 @@
   {
     "name": "/Preferences/Drive.ramp",
     "type": "double",
-    "value": 0.0,
+    "value": 1.0,
     "properties": {
       "persistent": true,
       "retained": true
     }
   },
   {
-    "name": "/Preferences/Arm.P",
+    "name": "/Preferences/Arm.Rotate.P",
+    "type": "double",
+    "value": 0.2,
+    "properties": {
+      "persistent": true,
+      "retained": true
+    }
+  },
+  {
+    "name": "/Preferences/Arm.Rotate.I",
+    "type": "double",
+    "value": 1e-5,
+    "properties": {
+      "persistent": true,
+      "retained": true
+    }
+  },
+  {
+    "name": "/Preferences/Arm.Rotate.D",
+    "type": "double",
+    "value": 1.0,
+    "properties": {
+      "persistent": true,
+      "retained": true
+    }
+  },
+  {
+    "name": "/Preferences/Arm.Rotate.IZone",
     "type": "double",
     "value": 0.0,
     "properties": {
@@ -63,7 +90,7 @@
     }
   },
   {
-    "name": "/Preferences/Arm.I",
+    "name": "/Preferences/Arm.Rotate.FF",
     "type": "double",
     "value": 0.0,
     "properties": {
@@ -72,7 +99,61 @@
     }
   },
   {
-    "name": "/Preferences/Arm.D",
+    "name": "/Preferences/Arm.Rotate.MinOutput",
+    "type": "double",
+    "value": -0.1,
+    "properties": {
+      "persistent": true,
+      "retained": true
+    }
+  },
+  {
+    "name": "/Preferences/Arm.Rotate.MaxOutput",
+    "type": "double",
+    "value": 0.3,
+    "properties": {
+      "persistent": true,
+      "retained": true
+    }
+  },
+  {
+    "name": "/Preferences/Arm.Rotate.HighSetPoint",
+    "type": "double",
+    "value": 26.0,
+    "properties": {
+      "persistent": true,
+      "retained": true
+    }
+  },
+  {
+    "name": "/Preferences/Arm.Rotate.MidSetPoint",
+    "type": "double",
+    "value": 17.0,
+    "properties": {
+      "persistent": true,
+      "retained": true
+    }
+  },
+  {
+    "name": "/Preferences/Arm.Rotate.LowSetPoint",
+    "type": "double",
+    "value": 7.0,
+    "properties": {
+      "persistent": true,
+      "retained": true
+    }
+  },
+  {
+    "name": "/Preferences/Arm.Extend.P",
+    "type": "double",
+    "value": 0.2,
+    "properties": {
+      "persistent": true,
+      "retained": true
+    }
+  },
+  {
+    "name": "/Preferences/Arm.Extend.I",
     "type": "double",
     "value": 0.0,
     "properties": {
@@ -81,9 +162,45 @@
     }
   },
   {
-    "name": "/Preferences/Arm.F",
+    "name": "/Preferences/Arm.Extend.D",
+    "type": "double",
+    "value": 1.0,
+    "properties": {
+      "persistent": true,
+      "retained": true
+    }
+  },
+  {
+    "name": "/Preferences/Arm.Extend.IZone",
     "type": "double",
     "value": 0.0,
+    "properties": {
+      "persistent": true,
+      "retained": true
+    }
+  },
+  {
+    "name": "/Preferences/Arm.Extend.FF",
+    "type": "double",
+    "value": 0.0,
+    "properties": {
+      "persistent": true,
+      "retained": true
+    }
+  },
+  {
+    "name": "/Preferences/Arm.Extend.MinOutput",
+    "type": "double",
+    "value": -0.3,
+    "properties": {
+      "persistent": true,
+      "retained": true
+    }
+  },
+  {
+    "name": "/Preferences/Arm.Extend.MaxOutput",
+    "type": "double",
+    "value": 0.3,
     "properties": {
       "persistent": true,
       "retained": true
