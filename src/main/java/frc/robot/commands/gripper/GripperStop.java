@@ -6,23 +6,38 @@
 /*- of this project.                                                      */
 /*------------------------------------------------------------------------*/
 
-package frc.robot.commands.arm;
-
-import frc.robot.subsystems.arm.IArmSubsystem.ArmRotationPosition;
+package frc.robot.commands.gripper;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-public class ArmRotateToLow extends ArmRotateToPosition {
+public class GripperStop extends GripperCommandBase {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(ArmRotateToLow.class.getName());
+   private static final PKLogger logger = RioLogger.getLogger(GripperStop.class.getName());
 
-   public ArmRotateToLow() {
-      super(ArmRotationPosition.lowPosition);
+   public GripperStop() {
       logger.info("constructing {}", getName());
 
       logger.info("constructed");
+   }
+
+   @Override
+   public void execute() {
+      super.execute();
+   }
+
+   @Override
+   protected void firstExecution() {
+      logger.trace("gripper.stop() called in firstExecution()");
+
+      // FIXME: Is this right?
+      gripper.stop();
+   }
+
+   @Override
+   public boolean isFinished() {
+      return true;
    }
 
 }

@@ -25,10 +25,4 @@ public class ArmRotateToMid extends ArmRotateToPosition {
       logger.info("constructed");
    }
 
-   @Override
-   protected void firstExecution() {
-      logger.trace("arm.rotateToPosition() to called in firstExecution()");
-      this.firstExecution();
-   }
-
 }

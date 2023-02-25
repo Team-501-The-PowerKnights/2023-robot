@@ -31,7 +31,6 @@ public class ArmDoNothing extends ArmCommandBase {
    protected void firstExecution() {
       logger.trace("arm.stop() called in firstExecution()");
 
-      // FIXME: Is this right? Should do extension too?
       arm.stop();
    }
 

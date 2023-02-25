@@ -83,7 +83,7 @@ public class OI implements ITelemetryProvider, IModeFollower {
       logger.trace("***** clearButtons()");
       CommandScheduler.getInstance().getActiveButtonLoop().clear();
 
-      logger.info("initialized auto for {}", myName);
+      logger.info("initialized disabled for {}", myName);
    }
 
    @Override

@@ -85,6 +85,8 @@ public abstract class BaseSubsystem implements ISubsystem {
    public void autonomousExit() {
       logger.info("exiting auto for {}", myName);
 
+      disable();
+
       logger.info("exited auto for {}", myName);
    }
 
@@ -104,6 +106,8 @@ public abstract class BaseSubsystem implements ISubsystem {
    public void teleopExit() {
       logger.info("exiting teleop for {}", myName);
 
+      disable();
+
       logger.info("exited teleop for {}", myName);
    }
 
@@ -119,6 +123,8 @@ public abstract class BaseSubsystem implements ISubsystem {
    @Override
    public void testExit() {
       logger.info("exiting test for {}", myName);
+
+      disable();
 
       logger.info("exited test for {}", myName);
    }

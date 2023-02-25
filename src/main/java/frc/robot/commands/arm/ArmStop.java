@@ -8,21 +8,35 @@
 
 package frc.robot.commands.arm;
 
-import frc.robot.subsystems.arm.IArmSubsystem.ArmRotationPosition;
-
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-public class ArmRotateToLow extends ArmRotateToPosition {
+public class ArmStop extends ArmCommandBase {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(ArmRotateToLow.class.getName());
+   private static final PKLogger logger = RioLogger.getLogger(ArmStop.class.getName());
 
-   public ArmRotateToLow() {
-      super(ArmRotationPosition.lowPosition);
+   public ArmStop() {
       logger.info("constructing {}", getName());
 
       logger.info("constructed");
+   }
+
+   @Override
+   public void execute() {
+      super.execute();
+   }
+
+   @Override
+   protected void firstExecution() {
+      logger.trace("arm.stop() called in firstExecution()");
+
+      arm.stop();
+   }
+
+   @Override
+   public boolean isFinished() {
+      return true;
    }
 
 }

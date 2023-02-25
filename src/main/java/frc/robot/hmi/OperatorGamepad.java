@@ -9,9 +9,13 @@
 package frc.robot.hmi;
 
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.commands.DebugPrint;
+
+import frc.robot.commands.arm.ArmRotateToHigh;
+import frc.robot.commands.arm.ArmRotateToLow;
+import frc.robot.commands.arm.ArmRotateToMid;
 import frc.robot.commands.gripper.GripperClose;
 import frc.robot.commands.gripper.GripperOpen;
+
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -26,7 +30,9 @@ public class OperatorGamepad extends F310Gamepad {
    /** Our classes' logger **/
    private static final PKLogger logger = RioLogger.getLogger(OperatorGamepad.class.getName());
 
-   private final Trigger testButton;
+   private final Trigger rotateHighButton;
+   private final Trigger rotateMidButton;
+   private final Trigger rotateLowButton;
 
    private final Trigger gripperButton;
 
@@ -34,7 +40,9 @@ public class OperatorGamepad extends F310Gamepad {
       super("OperatorGamepad", 1);
       logger.info("constructing");
 
-      testButton = cmdStick.button(redButton);
+      rotateHighButton = cmdStick.button(yellowButton);
+      rotateMidButton = cmdStick.button(redButton);
+      rotateLowButton = cmdStick.button(greenButton);
 
       gripperButton = cmdStick.button(blueButton);
 
@@ -66,6 +74,17 @@ public class OperatorGamepad extends F310Gamepad {
    private void configureTeleopButtonBindings() {
       logger.info("configure");
 
+      // Rotate to set point when button is pressed
+      rotateHighButton.onTrue(new ArmRotateToHigh());
+      rotateMidButton.onTrue(new ArmRotateToMid());
+      rotateLowButton.onTrue(new ArmRotateToLow());
+
+      gripperButton
+            // Open the gripper when the button is pressed
+            .onTrue(new GripperOpen())
+            // Close thre gripper when that same button is released
+            .onFalse(new GripperClose());
+
       logger.info("configured");
    }
 
@@ -81,13 +100,7 @@ public class OperatorGamepad extends F310Gamepad {
    private void configureTestButtonBindings() {
       logger.info("configure");
 
-      testButton.onTrue(new DebugPrint("testButton pressed"));
-
-      gripperButton
-            // Open the gripper when the button is pressed
-            .onTrue(new GripperOpen())
-            // Close thre gripper when that same button is released
-            .onFalse(new GripperClose());
+      // put any buttons or other triggers for testing
 
       logger.info("configured");
    }

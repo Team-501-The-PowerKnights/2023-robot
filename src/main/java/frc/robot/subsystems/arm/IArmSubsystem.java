@@ -25,14 +25,16 @@ public interface IArmSubsystem extends ISubsystem {
     */
    public static enum ArmRotationPosition {
       //@formatter:off
-      highPosition(0), 
-      midPosition(0), 
-      lowPosition(0);
+      highPosition("High", 0), 
+      midPosition("Mid", 0), 
+      lowPosition("Low", 0);
       //@formatter:on
 
+      private final String name;
       private double position;
 
-      private ArmRotationPosition(double position) {
+      private ArmRotationPosition(String name, double position) {
+         this.name = name;
          this.position = position;
       }
 
@@ -42,6 +44,11 @@ public interface IArmSubsystem extends ISubsystem {
 
       public double get() {
          return position;
+      }
+
+      @Override
+      public String toString() {
+         return name;
       }
    }
 

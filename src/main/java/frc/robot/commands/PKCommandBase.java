@@ -69,10 +69,9 @@ public abstract class PKCommandBase extends CommandBase {
       if (!executedOnce) {
          logger.debug("first execution of {}", getName());
 
-         executedOnce = true;
-
          add(this);
 
+         executedOnce = true;
          firstExecution();
       }
    }

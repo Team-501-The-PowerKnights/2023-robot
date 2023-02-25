@@ -13,6 +13,14 @@ import frc.robot.subsystems.arm.IArmSubsystem.ArmRotationPosition;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
+/**
+ * This class implements an abstract base class suitable for building a
+ * <code>Command<code> to rotate the arm to one of the pre-canned, fixed
+ * locations. It is implemented as a <i>one-shot</code> which means it
+ * makes the call to set the PID reference during the
+ * <code>firstExecution()</code> method, and then does nothing for the
+ * remainder of the subsequent calls to <code>execute()</code>.
+ */
 abstract class ArmRotateToPosition extends ArmCommandBase {
 
    /** Our classes' logger **/
