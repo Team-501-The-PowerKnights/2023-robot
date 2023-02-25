@@ -203,6 +203,21 @@
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
+          },
+          "16,8": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Drive.brakeEnabled",
+              "_title": "Drive.brakeEnabled",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
           }
         }
       }
@@ -1241,31 +1256,19 @@
               "_showGlyph": false
             }
           },
-          "30,0": {
+          "18,0": {
             "size": [
-              5,
-              6
+              4,
+              2
             ],
             "content": {
-              "_type": "Network Table Tree",
-              "_source0": "network_table:///501Prefs/Drive",
-              "_title": "501Prefs/Drive",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "23,0": {
-            "size": [
-              7,
-              11
-            ],
-            "content": {
-              "_type": "Robot Preferences",
-              "_source0": "network_table:///Preferences",
-              "_title": "Preferences",
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Drive.brakeEnabled",
+              "_title": "Drive.brakeEnabled",
               "_glyph": 148,
               "_showGlyph": false,
-              "Miscellaneous/Show search box": true
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
             }
           }
         }
@@ -1334,31 +1337,250 @@
               "_showGlyph": false
             }
           },
-          "30,0": {
+          "11,0": {
             "size": [
-              5,
-              5
+              7,
+              8
             ],
             "content": {
-              "_type": "Network Table Tree",
-              "_source0": "network_table:///501Prefs/Arm",
-              "_title": "501Prefs/Arm",
+              "_type": "List Layout",
+              "_title": "Rotate PID Prefs",
+              "_glyph": 149,
+              "_showGlyph": false,
+              "Layout/Label position": "LEFT",
+              "_children": [
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///Preferences/Arm.Rotate.P",
+                  "_title": "Arm.Rotate.P",
+                  "_glyph": 148,
+                  "_showGlyph": false
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///Preferences/Arm.Rotate.I",
+                  "_title": "Arm.Rotate.I",
+                  "_glyph": 148,
+                  "_showGlyph": false
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///Preferences/Arm.Rotate.D",
+                  "_title": "Arm.Rotate.D",
+                  "_glyph": 148,
+                  "_showGlyph": false
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///Preferences/Arm.Rotate.IZone",
+                  "_title": "Arm.Rotate.IZone",
+                  "_glyph": 148,
+                  "_showGlyph": false
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///Preferences/Arm.Rotate.FF",
+                  "_title": "Arm.Rotate.FF",
+                  "_glyph": 148,
+                  "_showGlyph": false
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///Preferences/Arm.Rotate.MinOutput",
+                  "_title": "Arm.Rotate.MinOutput",
+                  "_glyph": 148,
+                  "_showGlyph": false
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///Preferences/Arm.Rotate.MaxOutput",
+                  "_title": "Arm.Rotate.MaxOutput",
+                  "_glyph": 148,
+                  "_showGlyph": false
+                }
+              ]
+            }
+          },
+          "25,0": {
+            "size": [
+              7,
+              8
+            ],
+            "content": {
+              "_type": "List Layout",
+              "_title": "Extend PID Prefs",
+              "_glyph": 149,
+              "_showGlyph": false,
+              "Layout/Label position": "LEFT",
+              "_children": [
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///Preferences/Arm.Extend.P",
+                  "_title": "Arm.Extend.P",
+                  "_glyph": 148,
+                  "_showGlyph": false
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///Preferences/Arm.Extend.I",
+                  "_title": "Arm.Extend.I",
+                  "_glyph": 148,
+                  "_showGlyph": false
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///Preferences/Arm.Extend.D",
+                  "_title": "Arm.Extend.D",
+                  "_glyph": 148,
+                  "_showGlyph": false
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///Preferences/Arm.Extend.I",
+                  "_title": "Arm.Extend.I",
+                  "_glyph": 148,
+                  "_showGlyph": false
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///Preferences/Arm.Rotate.FF",
+                  "_title": "Arm.Rotate.FF",
+                  "_glyph": 148,
+                  "_showGlyph": false
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///Preferences/Arm.Extend.MinOutput",
+                  "_title": "Arm.Extend.MinOutput",
+                  "_glyph": 148,
+                  "_showGlyph": false
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///Preferences/Arm.Extend.MaxOutput",
+                  "_title": "Arm.Extend.MaxOutput",
+                  "_glyph": 148,
+                  "_showGlyph": false
+                }
+              ]
+            }
+          },
+          "11,9": {
+            "size": [
+              7,
+              4
+            ],
+            "content": {
+              "_type": "List Layout",
+              "_title": "Rotate Set Points",
+              "_glyph": 149,
+              "_showGlyph": false,
+              "Layout/Label position": "LEFT",
+              "_children": [
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///Preferences/Arm.Rotate.HighSetPoint",
+                  "_title": "Arm.Rotate.HighSetPoint",
+                  "_glyph": 148,
+                  "_showGlyph": false
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///Preferences/Arm.Rotate.MidSetPoint",
+                  "_title": "Arm.Rotate.MidSetPoint",
+                  "_glyph": 148,
+                  "_showGlyph": false
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///Preferences/Arm.Rotate.LowSetPoint",
+                  "_title": "Arm.Rotate.LowSetPoint",
+                  "_glyph": 148,
+                  "_showGlyph": false
+                }
+              ]
+            }
+          },
+          "32,4": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Arm.extend.PIDCurrent",
+              "_title": "Arm.extend.PIDCurrent",
               "_glyph": 148,
               "_showGlyph": false
             }
           },
-          "23,0": {
+          "32,2": {
             "size": [
-              7,
-              11
+              5,
+              2
             ],
             "content": {
-              "_type": "Robot Preferences",
-              "_source0": "network_table:///Preferences",
-              "_title": "Preferences",
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Arm.extend.PIDTarget",
+              "_title": "Arm.extend.PIDTarget",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "32,0": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Arm.extend.PIDEnabled",
+              "_title": "Arm.extend.PIDEnabled",
               "_glyph": 148,
               "_showGlyph": false,
-              "Miscellaneous/Show search box": true
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "18,0": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Arm.rotate.PIDEnabled",
+              "_title": "Arm.rotate.PIDEnabled",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "18,2": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Arm.rotate.PIDTarget",
+              "_title": "Arm.rotate.PIDTarget",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "18,4": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Arm.rotate.PIDCurrent",
+              "_title": "Arm.rotate.PIDCurrent",
+              "_glyph": 148,
+              "_showGlyph": false
             }
           }
         }
@@ -1836,6 +2058,39 @@
                   "_showGlyph": false,
                   "Colors/Color when true": "#7CFC00FF",
                   "Colors/Color when false": "#8B0000FF"
+                },
+                {
+                  "_type": "Subsystem Layout",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/Scheduler/Ids",
+                  "_title": "Scheduler/Ids",
+                  "_glyph": 149,
+                  "_showGlyph": false,
+                  "Layout/Label position": "BOTTOM",
+                  "_children": []
+                },
+                {
+                  "_type": "PDP",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[1]",
+                  "_title": "PowerDistribution[1]",
+                  "_glyph": 148,
+                  "_showGlyph": false,
+                  "Visuals/Show voltage and current values": true
+                },
+                {
+                  "_type": "Motor Controller",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/Victor SPX [12]",
+                  "_title": "Victor SPX [12]",
+                  "_glyph": 148,
+                  "_showGlyph": false,
+                  "Visuals/Orientation": "HORIZONTAL"
+                },
+                {
+                  "_type": "Motor Controller",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/Victor SPX [14]",
+                  "_title": "Victor SPX [14]",
+                  "_glyph": 148,
+                  "_showGlyph": false,
+                  "Visuals/Orientation": "HORIZONTAL"
                 }
               ]
             }
