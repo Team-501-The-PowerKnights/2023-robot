@@ -168,6 +168,13 @@ public final class TelemetryNames {
       public static final String implClass = name + ".implClass";
       public static final String autoCommand = name + ".autoCommand";
       public static final String teleCommand = name + ".teleCommand";
+
+      public static final String rotatePIDEnabled = name + ".rotate" + PIDTelemetry.pid_Enabled;
+      public static final String rotatePIDTarget = name + ".rotate" + PIDTelemetry.pid_Target;
+      public static final String rotatePIDCurrent = name + ".rotate" + PIDTelemetry.pid_Current;
+      public static final String extendPIDEnabled = name + ".extend" + PIDTelemetry.pid_Enabled;
+      public static final String extendPIDTarget = name + ".extend" + PIDTelemetry.pid_Target;
+      public static final String extendPIDCurrent = name + ".extend" + PIDTelemetry.pid_Current;
    }
 
    public final class Gripper {

@@ -64,8 +64,8 @@ Drive.teleCommandName = DriveDoNothing
 #####################
 # Arm
 #####################
-Arm.className = StubArmSubsystem
-#Arm.className =
+#Arm.className = StubArmSubsystem
+Arm.className = SuitcaseArmSubsystem
 Arm.autoCommandName = ArmDoNothing
 Arm.teleCommandName = ArmDoNothing
 

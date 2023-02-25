@@ -26,11 +26,6 @@ class StubArmSubsystem extends BaseArmSubsystem {
    }
 
    @Override
-   public void validateCalibration() {
-      // Stub doesn't implement this
-   }
-
-   @Override
    public void disable() {
       // Stub doesn't implement this
    }
@@ -41,33 +36,57 @@ class StubArmSubsystem extends BaseArmSubsystem {
    }
 
    @Override
-   public void rotateToSetPoint(armRotationSetPoint point) {
+   public void rotateToPosition(ArmRotationPosition position) {
       // TODO Auto-generated method stub
+
+   }
+
+   @Override
+   public void rotateToTarget(double target) {
+      // TODO Auto-generated method stub
+
    }
 
    @Override
    public void rotateUp() {
       // TODO Auto-generated method stub
+
    }
 
    @Override
    public void rotateDown() {
       // TODO Auto-generated method stub
+
    }
 
    @Override
    public void rotate(double speed) {
       // TODO Auto-generated method stub
+
+   }
+
+   @Override
+   public void extendToTarget(double target) {
+      // TODO Auto-generated method stub
+
    }
 
    @Override
    public void extend() {
       // TODO Auto-generated method stub
+
    }
 
    @Override
    public void retract() {
       // TODO Auto-generated method stub
+
+   }
+
+   @Override
+   public void extend(double speed) {
+      // TODO Auto-generated method stub
+
    }
 
 }

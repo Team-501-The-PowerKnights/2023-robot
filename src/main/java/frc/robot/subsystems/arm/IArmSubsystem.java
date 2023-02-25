@@ -23,15 +23,28 @@ public interface IArmSubsystem extends ISubsystem {
    /**
     * DOCS: Add your docs here.
     */
-   public enum armRotationSetPoint {
-      position_1, position_2, position_3
+   public enum ArmRotationPosition {
+      //@formatter:off
+      highPosition, 
+      midPosition, 
+      lowPosition
+      //@formatter:on
    }
 
    /**
-    * Rotate the arm to the specified set point and hold it
+    * Rotate the arm to the specified position and hold it
     * there (using a PID).
     */
-   public void rotateToSetPoint(armRotationSetPoint point);
+   public void rotateToPosition(ArmRotationPosition position);
+
+   /**
+    * Rotate the arm to the specified position and hold it
+    * there (using a PID). This is meant for a "manual" setting
+    * rather than one of the canned pre-sets.
+    * 
+    * @param target
+    */
+   public void rotateToTarget(double target);
 
    /**
     * Rotate the arm (away from the ground) or "backwards" (towards
@@ -54,6 +67,15 @@ public interface IArmSubsystem extends ISubsystem {
    public void rotate(double speed);
 
    /**
+    * Extend the arm to the specified position and hold it
+    * there (using a PID). This is meant for a "manual" setting
+    * rather than one of the canned pre-sets.
+    * 
+    * @param target
+    */
+   public void extendToTarget(double target);
+
+   /**
     * Extend the arm out.
     */
    public void extend();
@@ -62,5 +84,13 @@ public interface IArmSubsystem extends ISubsystem {
     * Retract the arm in.
     */
    public void retract();
+
+   /**
+    * Extend the arm under 'manual' control.
+    *
+    * @param speed
+    *           speed to extend at ("+" is out, "-" is in)
+    */
+   public void extend(double speed);
 
 }

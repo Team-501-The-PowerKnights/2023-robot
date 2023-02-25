@@ -15,6 +15,7 @@ import frc.robot.commands.arm.ArmDoNothing;
 import frc.robot.preferences.PIDPreferences;
 import frc.robot.subsystems.BaseSubsystem;
 import frc.robot.subsystems.SubsystemNames;
+import frc.robot.telemetry.PIDTelemetry;
 import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
@@ -42,7 +43,7 @@ abstract class BaseArmSubsystem extends BaseSubsystem implements IArmSubsystem {
    protected double rotate_pid_minOutput = 0;
    protected double rotate_pid_maxOutput = 0;
    //@formatter:off
-   protected PIDPreferences rotatePID = new PIDPreferences(
+   protected PIDPreferences rotatePIDPrefs = new PIDPreferences(
       rotate_pid_P, 
       rotate_pid_I, 
       rotate_pid_D,
@@ -64,7 +65,7 @@ abstract class BaseArmSubsystem extends BaseSubsystem implements IArmSubsystem {
    protected double extend_pid_minOutput = 0;
    protected double extend_pid_maxOutput = 0;
    //@formatter:off
-   protected PIDPreferences extendPID = new PIDPreferences(
+   protected PIDPreferences extendPIDPrefs = new PIDPreferences(
       extend_pid_P, 
       extend_pid_I, 
       extend_pid_D,
@@ -88,32 +89,37 @@ abstract class BaseArmSubsystem extends BaseSubsystem implements IArmSubsystem {
       SmartDashboard.putString(TelemetryNames.Arm.teleCommand, defaultTeleCommand.getClass().getSimpleName());
    }
 
+   @Override
+   public void validateCalibration() {
+      // Default implementation is empty
+   }
+
    protected void loadPreferences() {
       double v;
 
       logger.info("new preferences for {}:", myName);
 
-      v = Preferences.getDouble(ArmPreferences.rotatePID_P, rotatePID.P);
+      v = Preferences.getDouble(ArmPreferences.rotatePID_P, rotatePIDPrefs.P);
       logger.info("{} = {}", ArmPreferences.rotatePID_P, v);
-      rotatePID.P = v;
-      v = Preferences.getDouble(ArmPreferences.rotatePID_I, rotatePID.I);
+      rotatePIDPrefs.P = v;
+      v = Preferences.getDouble(ArmPreferences.rotatePID_I, rotatePIDPrefs.I);
       logger.info("{} = {}", ArmPreferences.rotatePID_I, v);
-      rotatePID.I = v;
-      v = Preferences.getDouble(ArmPreferences.rotatePID_D, rotatePID.D);
+      rotatePIDPrefs.I = v;
+      v = Preferences.getDouble(ArmPreferences.rotatePID_D, rotatePIDPrefs.D);
       logger.info("{} = {}", ArmPreferences.rotatePID_D, v);
-      rotatePID.D = v;
-      v = Preferences.getDouble(ArmPreferences.rotatePID_IZone, rotatePID.IZone);
+      rotatePIDPrefs.D = v;
+      v = Preferences.getDouble(ArmPreferences.rotatePID_IZone, rotatePIDPrefs.IZone);
       logger.info("{} = {}", ArmPreferences.rotatePID_IZone, v);
-      rotatePID.IZone = v;
-      v = Preferences.getDouble(ArmPreferences.rotatePID_FF, rotatePID.FF);
+      rotatePIDPrefs.IZone = v;
+      v = Preferences.getDouble(ArmPreferences.rotatePID_FF, rotatePIDPrefs.FF);
       logger.info("{} = {}", ArmPreferences.rotatePID_FF, v);
-      rotatePID.FF = v;
-      v = Preferences.getDouble(ArmPreferences.rotatePID_minOutput, rotatePID.MinOutput);
+      rotatePIDPrefs.FF = v;
+      v = Preferences.getDouble(ArmPreferences.rotatePID_minOutput, rotatePIDPrefs.MinOutput);
       logger.info("{} = {}", ArmPreferences.rotatePID_minOutput, v);
-      rotatePID.MinOutput = v;
-      v = Preferences.getDouble(ArmPreferences.rotatePID_maxOutput, rotatePID.MaxOutput);
+      rotatePIDPrefs.MinOutput = v;
+      v = Preferences.getDouble(ArmPreferences.rotatePID_maxOutput, rotatePIDPrefs.MaxOutput);
       logger.info("{} = {}", ArmPreferences.rotatePID_maxOutput, v);
-      rotatePID.MaxOutput = v;
+      rotatePIDPrefs.MaxOutput = v;
 
       v = Preferences.getDouble(ArmPreferences.rotate_highSetPoint, rotate_highSetPoint);
       logger.info("{} = {}", ArmPreferences.rotate_highSetPoint, v);
@@ -125,31 +131,67 @@ abstract class BaseArmSubsystem extends BaseSubsystem implements IArmSubsystem {
       logger.info("{} = {}", ArmPreferences.rotate_lowSetPoint, v);
       rotate_lowSetPoint = v;
 
-      v = Preferences.getDouble(ArmPreferences.extendPID_P, extendPID.P);
+      v = Preferences.getDouble(ArmPreferences.extendPID_P, extendPIDPrefs.P);
       logger.info("{} = {}", ArmPreferences.extendPID_P, v);
-      extendPID.P = v;
-      v = Preferences.getDouble(ArmPreferences.extendPID_I, extendPID.I);
+      extendPIDPrefs.P = v;
+      v = Preferences.getDouble(ArmPreferences.extendPID_I, extendPIDPrefs.I);
       logger.info("{} = {}", ArmPreferences.extendPID_I, v);
-      extendPID.I = v;
-      v = Preferences.getDouble(ArmPreferences.extendPID_D, extendPID.D);
+      extendPIDPrefs.I = v;
+      v = Preferences.getDouble(ArmPreferences.extendPID_D, extendPIDPrefs.D);
       logger.info("{} = {}", ArmPreferences.extendPID_D, v);
-      extendPID.D = v;
-      v = Preferences.getDouble(ArmPreferences.extendPID_IZone, extendPID.IZone);
+      extendPIDPrefs.D = v;
+      v = Preferences.getDouble(ArmPreferences.extendPID_IZone, extendPIDPrefs.IZone);
       logger.info("{} = {}", ArmPreferences.extendPID_IZone, v);
-      extendPID.IZone = v;
-      v = Preferences.getDouble(ArmPreferences.extendPID_FF, extendPID.FF);
+      extendPIDPrefs.IZone = v;
+      v = Preferences.getDouble(ArmPreferences.extendPID_FF, extendPIDPrefs.FF);
       logger.info("{} = {}", ArmPreferences.extendPID_FF, v);
-      extendPID.FF = v;
-      v = Preferences.getDouble(ArmPreferences.extendPID_minOutput, extendPID.MinOutput);
+      extendPIDPrefs.FF = v;
+      v = Preferences.getDouble(ArmPreferences.extendPID_minOutput, extendPIDPrefs.MinOutput);
       logger.info("{} = {}", ArmPreferences.extendPID_minOutput, v);
-      extendPID.MinOutput = v;
-      v = Preferences.getDouble(ArmPreferences.extendPID_maxOutput, extendPID.MaxOutput);
+      extendPIDPrefs.MinOutput = v;
+      v = Preferences.getDouble(ArmPreferences.extendPID_maxOutput, extendPIDPrefs.MaxOutput);
       logger.info("{} = {}", ArmPreferences.extendPID_maxOutput, v);
-      extendPID.MaxOutput = v;
+      extendPIDPrefs.MaxOutput = v;
+   }
+
+   /** Standard telemetry for Rotation PID */
+   private PIDTelemetry tlmRotatePID = new PIDTelemetry();
+   /** Standard telemetry for Extension PID */
+   private PIDTelemetry tlmExtendPID = new PIDTelemetry();
+
+   protected void setRotatePIDEnabled(boolean enabled) {
+      tlmRotatePID.PIDEnabled = enabled;
+   }
+
+   protected void setRotatePIDTarget(double target) {
+      tlmRotatePID.PIDTarget = target;
+   }
+
+   protected void setRotatePIDCurrent(double current) {
+      tlmRotatePID.PIDCurrent = current;
+   }
+
+   protected void setExtendPIDEnabled(boolean enabled) {
+      tlmExtendPID.PIDEnabled = enabled;
+   }
+
+   protected void setExtendPIDTarget(double target) {
+      tlmExtendPID.PIDTarget = target;
+   }
+
+   protected void setExtendPIDCurrent(double current) {
+      tlmExtendPID.PIDCurrent = current;
    }
 
    @Override
    public void updateTelemetry() {
+      SmartDashboard.putBoolean(TelemetryNames.Arm.rotatePIDEnabled, tlmRotatePID.PIDEnabled);
+      SmartDashboard.putNumber(TelemetryNames.Arm.rotatePIDTarget, tlmRotatePID.PIDTarget);
+      SmartDashboard.putNumber(TelemetryNames.Arm.rotatePIDCurrent, tlmRotatePID.PIDCurrent);
+
+      SmartDashboard.putBoolean(TelemetryNames.Arm.extendPIDEnabled, tlmExtendPID.PIDEnabled);
+      SmartDashboard.putNumber(TelemetryNames.Arm.extendPIDTarget, tlmExtendPID.PIDTarget);
+      SmartDashboard.putNumber(TelemetryNames.Arm.extendPIDCurrent, tlmExtendPID.PIDCurrent);
    }
 
    @Override
