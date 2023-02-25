@@ -13,12 +13,12 @@ import frc.robot.subsystems.arm.IArmSubsystem.ArmRotationPosition;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-public class ArmRotateToLow extends ArmRotateToPosition {
+public class ArmRotateToLowPosition extends ArmRotateToPosition {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(ArmRotateToLow.class.getName());
+   private static final PKLogger logger = RioLogger.getLogger(ArmRotateToLowPosition.class.getName());
 
-   public ArmRotateToLow() {
+   public ArmRotateToLowPosition() {
       super(ArmRotationPosition.lowPosition);
       logger.info("constructing {}", getName());
 

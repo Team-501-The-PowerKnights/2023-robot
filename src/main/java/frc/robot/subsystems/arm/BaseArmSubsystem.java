@@ -171,6 +171,10 @@ abstract class BaseArmSubsystem extends BaseSubsystem implements IArmSubsystem {
       tlmRotatePID.PIDTarget = target;
    }
 
+   protected double getTlmRotatePIDTarget() {
+      return tlmRotatePID.PIDTarget;
+   }
+
    protected void setTlmRotatePIDCurrent(double current) {
       tlmRotatePID.PIDCurrent = current;
    }

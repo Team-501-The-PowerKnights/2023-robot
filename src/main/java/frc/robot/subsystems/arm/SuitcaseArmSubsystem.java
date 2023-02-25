@@ -107,8 +107,10 @@ public class SuitcaseArmSubsystem extends BaseArmSubsystem {
 
    @Override
    public void rotateToTarget(double target) {
-      // TODO Auto-generated method stub
-
+      double newTarget = getTlmRotatePIDTarget() + target;
+      rotatePID.setReference(newTarget, ControlType.kPosition);
+      setTlmRotatePIDEnabled(true);
+      setTlmRotatePIDTarget(newTarget);
    }
 
    @Override

@@ -13,12 +13,12 @@ import frc.robot.subsystems.arm.IArmSubsystem.ArmRotationPosition;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-public class ArmRotateToHigh extends ArmRotateToPosition {
+public class ArmRotateToHighPosition extends ArmRotateToPosition {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(ArmRotateToHigh.class.getName());
+   private static final PKLogger logger = RioLogger.getLogger(ArmRotateToHighPosition.class.getName());
 
-   public ArmRotateToHigh() {
+   public ArmRotateToHighPosition() {
       super(ArmRotationPosition.highPosition);
       logger.info("constructing {}", getName());
 

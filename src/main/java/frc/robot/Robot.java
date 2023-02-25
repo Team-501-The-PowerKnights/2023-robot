@@ -109,8 +109,8 @@ public class Robot extends TimedRobot {
       // WPILib default is to disable this now; but just in case ...
       LiveWindow.setEnabled(false);
       // But we want access to the CommandScheduler telemetry content
-      LiveWindow.disableAllTelemetry();
-      LiveWindow.enableTelemetry(CommandScheduler.getInstance());
+      // LiveWindow.disableAllTelemetry();
+      // LiveWindow.enableTelemetry(CommandScheduler.getInstance());
 
       logger.info("initialized");
    }

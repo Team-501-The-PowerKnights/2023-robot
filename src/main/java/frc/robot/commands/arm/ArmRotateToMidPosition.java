@@ -13,12 +13,12 @@ import frc.robot.subsystems.arm.IArmSubsystem.ArmRotationPosition;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-public class ArmRotateToMid extends ArmRotateToPosition {
+public class ArmRotateToMidPosition extends ArmRotateToPosition {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(ArmRotateToMid.class.getName());
+   private static final PKLogger logger = RioLogger.getLogger(ArmRotateToMidPosition.class.getName());
 
-   public ArmRotateToMid() {
+   public ArmRotateToMidPosition() {
       super(ArmRotationPosition.midPosition);
       logger.info("constructing {}", getName());
 

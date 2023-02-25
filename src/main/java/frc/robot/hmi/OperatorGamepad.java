@@ -10,9 +10,10 @@ package frc.robot.hmi;
 
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
-import frc.robot.commands.arm.ArmRotateToHigh;
-import frc.robot.commands.arm.ArmRotateToLow;
-import frc.robot.commands.arm.ArmRotateToMid;
+import frc.robot.commands.arm.ArmRotateToHighPosition;
+import frc.robot.commands.arm.ArmRotateToLowPosition;
+import frc.robot.commands.arm.ArmRotateToMidPosition;
+import frc.robot.commands.arm.ArmRotateToTarget;
 import frc.robot.commands.gripper.GripperClose;
 import frc.robot.commands.gripper.GripperOpen;
 
@@ -75,9 +76,11 @@ public class OperatorGamepad extends F310Gamepad {
       logger.info("configure");
 
       // Rotate to set point when button is pressed
-      rotateHighButton.onTrue(new ArmRotateToHigh());
-      rotateMidButton.onTrue(new ArmRotateToMid());
-      rotateLowButton.onTrue(new ArmRotateToLow());
+      rotateHighButton.onTrue(new ArmRotateToHighPosition());
+      rotateMidButton.onTrue(new ArmRotateToMidPosition());
+      rotateLowButton.onTrue(new ArmRotateToLowPosition());
+      // Nudge rotation when joystick is moved
+      new ArmRotateToTarget(() -> deadBand(-getRightYAxis(), 0.10)).schedule();
 
       gripperButton
             // Open the gripper when the button is pressed
