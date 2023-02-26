@@ -133,6 +133,8 @@ public class Robot extends TimedRobot {
    // Gripper Ingest
    private TalonFX leftIngest;
    private TalonFX rightIngest;
+   private double k_gripperMaxInSpeed = -0.30;
+   private double k_gripperMaxOutSpeed = 0.30;
 
    /**
     * This function is run when the robot is first started up and should be used
@@ -327,6 +329,13 @@ public class Robot extends TimedRobot {
 
       rightIngest.setInverted(true);
       rightIngest.follow(leftIngest);
+
+      if (!Preferences.containsKey("Gripper.maxInSpeed")) {
+         Preferences.setDouble("Gripper.maxInSpeed", k_gripperMaxInSpeed);
+      }
+      if (!Preferences.containsKey("Gripper.maxOutSpeed")) {
+         Preferences.setDouble("Gripper.maxOutSpeed", k_gripperMaxOutSpeed);
+      }
    }
 
    protected boolean waitForAhrsConnection() {
@@ -521,6 +530,16 @@ public class Robot extends TimedRobot {
          armExtendPID.setOutputRange(ar_min, ar_max);
          extendMinOutput = ar_min;
          extendMaxOutput = ar_max;
+      }
+
+      double v;
+      v = Preferences.getDouble("Gripper.maxInSpeed", k_gripperMaxInSpeed);
+      if (v != k_gripperMaxInSpeed) {
+         k_gripperMaxInSpeed = v;
+      }
+      v = Preferences.getDouble("Gripper.maxOutSpeed", k_gripperMaxOutSpeed);
+      if (v != k_gripperMaxOutSpeed) {
+         k_gripperMaxOutSpeed = v;
       }
    }
 
@@ -952,11 +971,12 @@ public class Robot extends TimedRobot {
       double outSpeed = operatorStick.getRawAxis(3);
       double speed = 0;
       if (inSpeed > outSpeed) {
-         speed = inSpeed;
+         // speed = inSpeed;
+         speed = Math.max(inSpeed, k_gripperMaxInSpeed);
       } else {
-         speed = -outSpeed;
+         // speed = -outSpeed;
+         speed = Math.min(outSpeed, k_gripperMaxOutSpeed);
       }
-      speed *= 0.30;
       leftIngest.set(TalonFXControlMode.PercentOutput, speed);
    }
 
