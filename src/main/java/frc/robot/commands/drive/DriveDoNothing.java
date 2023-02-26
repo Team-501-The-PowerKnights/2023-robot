@@ -22,16 +22,4 @@ public class DriveDoNothing extends DriveCommandBase {
       logger.info("constructed");
    }
 
-   @Override
-   public void execute() {
-      super.execute();
-   }
-
-   @Override
-   protected void firstExecution() {
-      logger.trace("drive.stop() called in firstExecution()");
-
-      drive.stop();
-   }
-
 }

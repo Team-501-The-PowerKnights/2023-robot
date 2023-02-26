@@ -22,16 +22,4 @@ public class ArmDoNothing extends ArmCommandBase {
       logger.info("constructed");
    }
 
-   @Override
-   public void execute() {
-      super.execute();
-   }
-
-   @Override
-   protected void firstExecution() {
-      logger.trace("arm.stop() called in firstExecution()");
-
-      arm.stop();
-   }
-
 }

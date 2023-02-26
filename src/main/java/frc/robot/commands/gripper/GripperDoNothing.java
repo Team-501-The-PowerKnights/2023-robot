@@ -22,17 +22,4 @@ public class GripperDoNothing extends GripperCommandBase {
       logger.info("constructed");
    }
 
-   @Override
-   public void execute() {
-      super.execute();
-   }
-
-   @Override
-   protected void firstExecution() {
-      logger.trace("gripper.stop() called in firstExecution()");
-
-      // FIXME: Is this right?
-      gripper.stop();
-   }
-
 }
