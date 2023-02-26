@@ -41,6 +41,11 @@ class StubDriveSubsystem extends BaseDriveSubsystem {
    }
 
    @Override
+   public void toggleBrake() {
+      // Stub doesn't implement this
+   }
+
+   @Override
    public void drive(double hmiSpeed, double hmiTurn) {
       // Stub doesn't implement this
    }

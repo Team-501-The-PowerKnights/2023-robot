@@ -85,15 +85,26 @@ abstract class BaseDriveSubsystem extends BaseSubsystem implements IDriveSubsyst
    /**
     * Telemetry supported by subsystem.
     */
-   protected double speed = 0.0;
-   protected double turn = 0.0;
-   protected double leftSpeed = 0.0;
-   protected double rightSpeed = 0.0;
+   // private double tlmSpeed = 0.0;
+   // private double tlmTurn = 0.0;
+   private double tlmLeftSpeed = 0.0;
+   private double tlmRightSpeed = 0.0;
+   private boolean tlmBrakeEnabled = false;
+
+   protected void setTlmSpeed(double leftSpeed, double rightSpeed) {
+      tlmLeftSpeed = leftSpeed;
+      tlmRightSpeed = rightSpeed;
+   }
+
+   protected void setTlmBrakeEnabled(boolean brakeEnabled) {
+      tlmBrakeEnabled = brakeEnabled;
+   }
 
    @Override
    public void updateTelemetry() {
-      SmartDashboard.putNumber(TelemetryNames.Drive.leftSpeed, leftSpeed);
-      SmartDashboard.putNumber(TelemetryNames.Drive.rightSpeed, rightSpeed);
+      SmartDashboard.putNumber(TelemetryNames.Drive.leftSpeed, tlmLeftSpeed);
+      SmartDashboard.putNumber(TelemetryNames.Drive.rightSpeed, tlmRightSpeed);
+      SmartDashboard.putBoolean(TelemetryNames.Drive.brakeEnabled, tlmBrakeEnabled);
    }
 
    @Override

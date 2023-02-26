@@ -104,6 +104,17 @@ abstract class CANSparkMaxDriveSubsystem extends BaseDriveSubsystem {
          checkError(leftFront.setIdleMode(IdleMode.kCoast), "LF set idle mode to coast {}");
          checkError(rightFront.setIdleMode(IdleMode.kCoast), "RF set idle mode to coast {}");
       }
+      setTlmBrakeEnabled(brakeOn);
+   }
+
+   @Override
+   public void toggleBrake() {
+      IdleMode currentMode = leftFront.getIdleMode();
+      if (currentMode == IdleMode.kCoast) {
+         setBrake(true);
+      } else {
+         setBrake(false);
+      }
    }
 
    @Override

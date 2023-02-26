@@ -33,6 +33,12 @@ public interface IDriveSubsystem extends ISubsystem {
    public void setBrake(boolean brakeOn);
 
    /**
+    * Toggles whatever the current setting of the <i>brake</i> is for the
+    * <code>DriveSubsystem</code>.
+    */
+   public void toggleBrake();
+
+   /**
     * "Swap" the drive (invert the sense of the motors)
     * 
     */

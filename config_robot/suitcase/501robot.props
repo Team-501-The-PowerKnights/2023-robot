@@ -58,7 +58,7 @@ Gyro.className = SuitcaseGyroSensor
 #Drive.className = StubDriveSubsystem
 Drive.className = SuitcaseDriveSubsystem
 Drive.autoCommandName = DriveDoNothing
-Drive.teleCommandName = DriveDoNothing
+Drive.teleCommandName = DriveJoystickControl
 
 
 #####################

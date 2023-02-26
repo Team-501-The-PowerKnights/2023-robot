@@ -159,6 +159,7 @@ public final class TelemetryNames {
 
       public static final String leftSpeed = name + ".leftSpeed";
       public static final String rightSpeed = name + ".rightSpeed";
+      public static final String brakeEnabled = name + ".brakeEnabled";
    }
 
    public final class Arm {

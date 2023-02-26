@@ -93,14 +93,27 @@ public class SuitcaseDriveSubsystem extends BaseDriveSubsystem {
       drive.arcadeDrive(0, 0);
    }
 
+   private NeutralMode neutralMode;
+
    @Override
    public void setBrake(boolean brakeOn) {
       if (brakeOn) {
-         leftFront.setNeutralMode(NeutralMode.Brake);
-         rightFront.setNeutralMode(NeutralMode.Brake);
+         neutralMode = NeutralMode.Brake;
       } else {
-         leftFront.setNeutralMode(NeutralMode.Coast);
-         rightFront.setNeutralMode(NeutralMode.Coast);
+         neutralMode = NeutralMode.Coast;
+      }
+      leftFront.setNeutralMode(neutralMode);
+      rightFront.setNeutralMode(neutralMode);
+      setTlmBrakeEnabled(brakeOn);
+   }
+
+   @Override
+   public void toggleBrake() {
+      NeutralMode currentMode = neutralMode;
+      if (currentMode == NeutralMode.Coast) {
+         setBrake(true);
+      } else {
+         setBrake(false);
       }
    }
 

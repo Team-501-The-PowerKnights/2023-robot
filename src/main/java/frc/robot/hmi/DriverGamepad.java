@@ -9,7 +9,9 @@
 package frc.robot.hmi;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 
+import frc.robot.commands.drive.DriveToggleBrake;
 import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
@@ -29,6 +31,7 @@ public class DriverGamepad extends F310Gamepad {
 	// private final Button turboButton;
 	// private final Button crawlButton;
 	// private final Button driveSwapButton;
+	private final Trigger brakeToggleButton;
 
 	public DriverGamepad() {
 		super("DriverGamepad", 0);
@@ -37,6 +40,8 @@ public class DriverGamepad extends F310Gamepad {
 		// turboButton = new JoystickButton(stick, leftBumper);
 		// crawlButton = new JoystickButton(stick, rightBumper);
 		// driveSwapButton = new JoystickButton(stick, backButton);
+
+		brakeToggleButton = cmdStick.button(startButton);
 
 		logger.info("constructed");
 	}
@@ -75,6 +80,8 @@ public class DriverGamepad extends F310Gamepad {
 		// turboButton - implemented in getting values speed & turn
 		// crawlButton - implemented in getting values speed & turn
 		// driveSwapButton.whenPressed(new DriveSwap());
+
+		brakeToggleButton.onTrue(new DriveToggleBrake());
 
 		// Hook to configure for testing of new stuff
 		configureTestBindings();
