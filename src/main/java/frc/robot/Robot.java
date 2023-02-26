@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.ErrorCode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
@@ -317,7 +319,14 @@ public class Robot extends TimedRobot {
        *******************************************************************/
 
       leftIngest = new TalonFX(31);
+      checkError(leftIngest.configFactoryDefault(), "LI restore factory defaults {}");
+      leftIngest.setNeutralMode(NeutralMode.Coast);
       rightIngest = new TalonFX(32);
+      checkError(leftIngest.configFactoryDefault(), "RI restore factory defaults {}");
+      rightIngest.setNeutralMode(NeutralMode.Coast);
+
+      rightIngest.setInverted(true);
+      rightIngest.follow(leftIngest);
    }
 
    protected boolean waitForAhrsConnection() {
@@ -368,11 +377,23 @@ public class Robot extends TimedRobot {
    // last error (not the same as kOk)
    // TODO: Use to set a degraded error status/state on subsystem
    @SuppressWarnings("unused")
-   private REVLibError lastError;
+   private REVLibError lastREVError;
 
    private void checkError(REVLibError error, String message) {
       if (error != REVLibError.kOk) {
-         lastError = error;
+         lastREVError = error;
+         logger.error(message, error);
+      }
+   }
+
+   // last error (not the same as kOk)
+   // TODO: Use to set a degraded error status/state on subsystem
+   @SuppressWarnings("unused")
+   private ErrorCode lastCTREError;
+
+   private void checkError(ErrorCode error, String message) {
+      if (error != ErrorCode.OK) {
+         lastCTREError = error;
          logger.error(message, error);
       }
    }
@@ -529,12 +550,12 @@ public class Robot extends TimedRobot {
    public void autonomousInit() {
       m_autonomousCommand = null;
 
+      driveBrakeEnabled = true;
+      SmartDashboard.putBoolean("driveBrakeEnabled", driveBrakeEnabled);
       checkError(leftFront.setIdleMode(IdleMode.kBrake), "LF set idle mode to brake {}");
       checkError(leftRear.setIdleMode(IdleMode.kBrake), "LR set idle mode to brake {}");
       checkError(rightFront.setIdleMode(IdleMode.kBrake), "RF set idle mode to brake {}");
       checkError(rightRear.setIdleMode(IdleMode.kBrake), "RR set idle mode to brake {}");
-
-      driveBrakeEnabled = true;
 
       // schedule the autonomous command (example)
       if (m_autonomousCommand != null) {
@@ -551,7 +572,6 @@ public class Robot extends TimedRobot {
 
       // FIXME: shouldn't have this disabled
       drive.setSafetyEnabled(false);
-
    }
 
    private enum AutoState {
@@ -731,6 +751,13 @@ public class Robot extends TimedRobot {
    @Override
    public void autonomousExit() {
       autonomousComplete = true;
+
+      driveBrakeEnabled = false;
+      SmartDashboard.putBoolean("driveBrakeEnabled", driveBrakeEnabled);
+      checkError(leftFront.setIdleMode(IdleMode.kCoast), "LF set idle mode to brake {}");
+      checkError(leftRear.setIdleMode(IdleMode.kCoast), "LR set idle mode to brake {}");
+      checkError(rightFront.setIdleMode(IdleMode.kCoast), "RF set idle mode to brake {}");
+      checkError(rightRear.setIdleMode(IdleMode.kCoast), "RR set idle mode to brake {}");
 
       drive.arcadeDrive(0, 0);
 
