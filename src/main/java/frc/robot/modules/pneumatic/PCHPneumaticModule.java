@@ -37,6 +37,9 @@ class PCHPneumaticModule extends BasePneumaticModule {
       enable();
 
       solenoids = new ArrayList<Solenoid>(16);
+      for (int i = 0; i < 16; i++) {
+         solenoids.add(null);
+      }
 
       logger.info("constructed");
    }
@@ -44,6 +47,7 @@ class PCHPneumaticModule extends BasePneumaticModule {
    @Override
    public void updateTelemetry() {
       setTlmPressureGood(module.getPressureSwitch());
+
       super.updateTelemetry();
    }
 

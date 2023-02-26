@@ -45,7 +45,7 @@ public class OperatorGamepad extends F310Gamepad {
       rotateMidButton = cmdStick.button(redButton);
       rotateLowButton = cmdStick.button(greenButton);
 
-      gripperButton = cmdStick.button(blueButton);
+      gripperButton = cmdStick.button(rightBumper);
 
       logger.info("constructed");
    }

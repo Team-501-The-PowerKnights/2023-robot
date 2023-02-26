@@ -6,36 +6,44 @@
 /*- of this project.                                                      */
 /*------------------------------------------------------------------------*/
 
-package frc.robot.commands.gripper;
+package frc.robot.subsystems.gripper;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-public class GripperOpen extends GripperCommandBase {
+/**
+ * DOCS: Add your docs here.
+ */
+class SuitcaseGripperSubsystem extends BaseGripperSubsystem {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(GripperOpen.class.getName());
+   private static final PKLogger logger = RioLogger.getLogger(SuitcaseGripperSubsystem.class.getName());
 
-   public GripperOpen() {
-      logger.info("constructing {}", getName());
+   SuitcaseGripperSubsystem() {
+      super();
+      logger.info("constructing");
 
       logger.info("constructed");
    }
 
    @Override
-   public void execute() {
-      super.execute();
+   public void disable() {
+      close();
    }
 
    @Override
-   protected void firstExecution() {
-      logger.trace("gripper.open() called in firstExecution()");
-      gripper.open();
+   public void stop() {
+      // Stub doesn't implement this
    }
 
    @Override
-   public boolean isFinished() {
-      return true;
+   public void pullIn() {
+      // TODO Auto-generated method stub
+   }
+
+   @Override
+   public void pushOut() {
+      // TODO Auto-generated method stub
    }
 
 }

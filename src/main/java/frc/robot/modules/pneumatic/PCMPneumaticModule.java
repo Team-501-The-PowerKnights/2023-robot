@@ -8,7 +8,11 @@
 
 package frc.robot.modules.pneumatic;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import edu.wpi.first.wpilibj.PneumaticsControlModule;
+import edu.wpi.first.wpilibj.Solenoid;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
@@ -21,11 +25,20 @@ class PCMPneumaticModule extends BasePneumaticModule {
    /** My module */
    private final PneumaticsControlModule module;
 
+   // Indexed 0 - 15
+   private final List<Solenoid> solenoids;
+
    public PCMPneumaticModule() {
       logger.info("constructing");
 
       module = new PneumaticsControlModule(0);
+
       enable();
+
+      solenoids = new ArrayList<Solenoid>(16);
+      for (int i = 0; i < 16; i++) {
+         solenoids.add(null);
+      }
 
       logger.info("constructed");
    }
@@ -33,6 +46,7 @@ class PCMPneumaticModule extends BasePneumaticModule {
    @Override
    public void updateTelemetry() {
       setTlmPressureGood(module.getPressureSwitch());
+
       super.updateTelemetry();
    }
 
@@ -54,8 +68,13 @@ class PCMPneumaticModule extends BasePneumaticModule {
    }
 
    @Override
-   public void setSolenoid(int index, boolean value) {
-      // TODO Auto-generated method stub
+   public void setSolenoid(int channel, boolean on) {
+      if (solenoids.get(channel) == null) {
+         logger.info("Creating solenoid for channel = {} with initial state = {}",
+               channel, on);
+         solenoids.set(channel, module.makeSolenoid(channel));
+      }
+      solenoids.get(channel).set(on);
    }
 
 }

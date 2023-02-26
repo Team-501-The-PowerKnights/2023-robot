@@ -33,4 +33,9 @@ public class GripperClose extends GripperCommandBase {
       gripper.close();
    }
 
+   @Override
+   public boolean isFinished() {
+      return true;
+   }
+
 }
