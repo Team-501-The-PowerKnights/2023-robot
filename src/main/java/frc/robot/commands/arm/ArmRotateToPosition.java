@@ -44,4 +44,9 @@ abstract class ArmRotateToPosition extends ArmCommandBase {
       arm.rotateToPosition(position);
    }
 
+   @Override
+   public boolean isFinished() {
+      return true;
+   }
+
 }
