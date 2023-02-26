@@ -320,10 +320,10 @@ public class Robot extends TimedRobot {
 
       leftIngest = new TalonFX(31);
       checkError(leftIngest.configFactoryDefault(), "LI restore factory defaults {}");
-      leftIngest.setNeutralMode(NeutralMode.Coast);
+      leftIngest.setNeutralMode(NeutralMode.Brake);
       rightIngest = new TalonFX(32);
       checkError(leftIngest.configFactoryDefault(), "RI restore factory defaults {}");
-      rightIngest.setNeutralMode(NeutralMode.Coast);
+      rightIngest.setNeutralMode(NeutralMode.Brake);
 
       rightIngest.setInverted(true);
       rightIngest.follow(leftIngest);
@@ -575,7 +575,7 @@ public class Robot extends TimedRobot {
    }
 
    private enum AutoState {
-      start, rotateArmHigh, extendArmLong, rotateArmMid, openGripper, retractArm, closeGripper, driveBackward, end, done;
+      start, rotateArmHigh, extendArmLong, rotateArmMid, ejectGripper, retractArm, stopGripper, driveBackward, end, done;
    }
 
    /** This function is called periodically during autonomous. */
@@ -635,12 +635,12 @@ public class Robot extends TimedRobot {
                autoCommandTimerCount = 0;
             }
             if (++autoCommandTimerCount >= autoCommandTimerCountTarget) {
-               autoState = AutoState.openGripper;
+               autoState = AutoState.ejectGripper;
                autoStateStarted = false;
                gripperEject();
             }
             break;
-         case openGripper:
+         case ejectGripper:
             if (!autoStateStarted) {
                logger.info("state = {}", autoState);
                autoStateStarted = true;
@@ -661,9 +661,22 @@ public class Robot extends TimedRobot {
                autoCommandTimerCount = 0;
             }
             if (++autoCommandTimerCount >= autoCommandTimerCountTarget) {
+               autoState = AutoState.stopGripper;
+               autoStateStarted = false;
+               gripperStop();
+            }
+            break;
+         case stopGripper:
+            if (!autoStateStarted) {
+               logger.info("state = {}", autoState);
+               autoStateStarted = true;
+               autoCommandTimerCountTarget = (long) (0.10 / 0.020); // sec / 20 msec
+               autoCommandTimerCount = 0;
+            }
+            if (++autoCommandTimerCount >= autoCommandTimerCountTarget) {
                autoState = AutoState.driveBackward;
                autoStateStarted = false;
-               gripperIngest();
+               driveBackward();
             }
             break;
          case driveBackward:
@@ -673,28 +686,19 @@ public class Robot extends TimedRobot {
                autoCommandTimerCountTarget = (long) (3.0 / 0.020); // sec / 20 msec
                autoCommandTimerCount = 0;
             }
-            if (++autoCommandTimerCount >= autoCommandTimerCountTarget && ahrs.getPitch() > 8.50) {
-               drive.arcadeDrive(0, 0);
-               autoState = AutoState.closeGripper;
-               autoStateStarted = false;
-               break;
-            } else {
-
-               drive.arcadeDrive(-0.60, 0);
-
-            }
-            break;
-         case closeGripper:
-            if (!autoStateStarted) {
-               logger.info("state = {}", autoState);
-               autoStateStarted = true;
-               autoCommandTimerCountTarget = (long) (0.5 / 0.020); // sec / 20 msec
-               autoCommandTimerCount = 0;
-            }
             if (++autoCommandTimerCount >= autoCommandTimerCountTarget) {
                autoState = AutoState.end;
                autoStateStarted = false;
             }
+            // if (++autoCommandTimerCount >= autoCommandTimerCountTarget && ahrs.getPitch()
+            // > 8.50) {
+            // drive.arcadeDrive(0, 0);
+            // autoState = AutoState.closeGripper;
+            // autoStateStarted = false;
+            // break;
+            // } else {
+            // drive.arcadeDrive(-0.60, 0);
+            // }
             break;
          case end:
             if (!autoStateStarted) {
@@ -735,6 +739,7 @@ public class Robot extends TimedRobot {
 
    private void gripperEject() {
       logger.info("starting command gripperEject");
+      leftIngest.set(TalonFXControlMode.PercentOutput, 0.30);
    }
 
    private void armRetractShort() {
@@ -744,8 +749,14 @@ public class Robot extends TimedRobot {
       armExtendPID.setReference(extendTarget, ControlType.kPosition);
    }
 
-   private void gripperIngest() {
-      logger.info("starting command gripperIngest");
+   private void gripperStop() {
+      logger.info("starting command gripperStop");
+      leftIngest.set(TalonFXControlMode.PercentOutput, 0);
+   }
+
+   private void driveBackward() {
+      logger.info("starting command gripperStop");
+      drive.arcadeDrive(-0.60, 0);
    }
 
    @Override
@@ -947,7 +958,6 @@ public class Robot extends TimedRobot {
       }
       speed *= 0.30;
       leftIngest.set(TalonFXControlMode.PercentOutput, speed);
-      rightIngest.set(TalonFXControlMode.PercentOutput, -speed);
    }
 
    @Override
