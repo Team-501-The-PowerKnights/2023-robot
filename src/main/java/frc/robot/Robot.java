@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 import com.kauailabs.navx.frc.AHRS;
@@ -18,10 +19,8 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.PneumaticHub;
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.Preferences;
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
@@ -59,14 +58,12 @@ public class Robot extends TimedRobot {
    @SuppressWarnings("unused")
    private PowerDistribution powerD;
 
-   private PneumaticHub pneumH;
-
    private AHRS ahrs;
    boolean ahrsValid;
 
-   /*
-    * Driver Stuff
-    */
+   /*- *************************************
+    *- Driver Stuff
+    *- *************************************/
    private Joystick driverStick;
 
    private boolean driveBrakeButtonPressed;
@@ -83,11 +80,12 @@ public class Robot extends TimedRobot {
 
    private DifferentialDrive drive;
 
-   /*
-    * Operator Stuff
-    */
+   /*- *************************************
+    *- Operator Stuff
+    *- *************************************/
    private Joystick operatorStick;
 
+   // Arm Rotation
    private boolean armHighRotateButtonPressed;
    private boolean armMidRotateButtonPressed;
    private boolean armLowRotateButtonPressed;
@@ -114,6 +112,7 @@ public class Robot extends TimedRobot {
    private double rotateP, rotateI, rotateD, rotateIzone, rotateFF, rotateMaxOutput, rotateMinOutput;
    private double rotateTarget;
 
+   // Arm Extension
    private final double k_extendP = 0.2;
    private final double k_extendI = 0;
    private final double k_extendD = 1;
@@ -125,19 +124,13 @@ public class Robot extends TimedRobot {
    private boolean extendPIDDisable;
    private CANSparkMax armExtend;
    private SparkMaxPIDController armExtendPID;
-   // private AbsoluteEncoder armExtendEncoder;
    private RelativeEncoder armExtendEncoder;
    private double extendP, extendI, extendD, extendIzone, extendFF, extendMaxOutput, extendMinOutput;
    private double extendTarget;
 
-   @SuppressWarnings("unused")
+   // Gripper Ingest
    private TalonFX leftIngest;
-   @SuppressWarnings("unused")
    private TalonFX rightIngest;
-
-   private static final int gripperSolenoidChannel = 0;
-   private Solenoid gripperSolenoid;
-   private boolean gripperOpen;
 
    /**
     * This function is run when the robot is first started up and should be used
@@ -153,10 +146,6 @@ public class Robot extends TimedRobot {
       teleopComplete = false;
 
       powerD = new PowerDistribution(1, ModuleType.kRev);
-
-      // Instantiate and enable
-      pneumH = new PneumaticHub(2);
-      pneumH.enableCompressorAnalog(80, 110);
 
       // Instantiate
       try {
@@ -215,7 +204,7 @@ public class Robot extends TimedRobot {
 
       operatorStick = new Joystick(1);
 
-      /****************************************************************************
+      /*******************************************************************
        * Arm Rotate Setup
        *******************************************************************/
 
@@ -277,9 +266,9 @@ public class Robot extends TimedRobot {
       }
       armLowSetPoint = Preferences.getDouble("armRotate.low", k_armLowSetPoint);
 
-      // /****************************************************************************
-      // * Arm Extend Setup
-      // *******************************************************************/
+      /*******************************************************************
+       * Arm Extend Setup
+       *******************************************************************/
 
       armExtend = new CANSparkMax(22, MotorType.kBrushless);
       checkError(armExtend.restoreFactoryDefaults(), "AE restore factory defaults {}");
@@ -323,13 +312,12 @@ public class Robot extends TimedRobot {
       SmartDashboard.putNumber("Arm Ext Set Target", 0);
       SmartDashboard.putNumber("Arm Ext Feedback", armExtendEncoder.getPosition());
 
-      // leftIngest = new TalonFX(31);
-      // rightIngest = new TalonFX(32);
+      /*******************************************************************
+       * Gripper Ingest Setup
+       *******************************************************************/
 
-      // Instantiate solenoid and set to false(?) as initial state
-      gripperSolenoid = pneumH.makeSolenoid(gripperSolenoidChannel);
-      gripperSolenoid.set(false);
-      gripperOpen = false;
+      leftIngest = new TalonFX(31);
+      rightIngest = new TalonFX(32);
    }
 
    protected boolean waitForAhrsConnection() {
@@ -563,7 +551,7 @@ public class Robot extends TimedRobot {
 
       // FIXME: shouldn't have this disabled
       drive.setSafetyEnabled(false);
-      
+
    }
 
    private enum AutoState {
@@ -629,7 +617,7 @@ public class Robot extends TimedRobot {
             if (++autoCommandTimerCount >= autoCommandTimerCountTarget) {
                autoState = AutoState.openGripper;
                autoStateStarted = false;
-               gripperOpen();
+               gripperEject();
             }
             break;
          case openGripper:
@@ -655,7 +643,7 @@ public class Robot extends TimedRobot {
             if (++autoCommandTimerCount >= autoCommandTimerCountTarget) {
                autoState = AutoState.driveBackward;
                autoStateStarted = false;
-               gripperClose();
+               gripperIngest();
             }
             break;
          case driveBackward:
@@ -665,13 +653,13 @@ public class Robot extends TimedRobot {
                autoCommandTimerCountTarget = (long) (3.0 / 0.020); // sec / 20 msec
                autoCommandTimerCount = 0;
             }
-            if (++autoCommandTimerCount >= autoCommandTimerCountTarget  && ahrs.getPitch() > 8.50) {
+            if (++autoCommandTimerCount >= autoCommandTimerCountTarget && ahrs.getPitch() > 8.50) {
                drive.arcadeDrive(0, 0);
                autoState = AutoState.closeGripper;
                autoStateStarted = false;
                break;
             } else {
-            
+
                drive.arcadeDrive(-0.60, 0);
 
             }
@@ -725,10 +713,8 @@ public class Robot extends TimedRobot {
       armRotatePID.setReference(rotateTarget, ControlType.kPosition);
    }
 
-   private void gripperOpen() {
-      logger.info("starting command gripperOpen");
-      gripperOpen = true;
-      gripperSolenoid.set(gripperOpen);
+   private void gripperEject() {
+      logger.info("starting command gripperEject");
    }
 
    private void armRetractShort() {
@@ -738,10 +724,8 @@ public class Robot extends TimedRobot {
       armExtendPID.setReference(extendTarget, ControlType.kPosition);
    }
 
-   private void gripperClose() {
-      logger.info("starting command gripperClose");
-      gripperOpen = false;
-      gripperSolenoid.set(gripperOpen);
+   private void gripperIngest() {
+      logger.info("starting command gripperIngest");
    }
 
    @Override
@@ -774,8 +758,6 @@ public class Robot extends TimedRobot {
       armHighRotateButtonPressed = false;
       armMidRotateButtonPressed = false;
       armLowRotateButtonPressed = false;
-
-      gripperOpen = false;
 
       gyroTlmCount = 0;
    }
@@ -928,35 +910,17 @@ public class Robot extends TimedRobot {
       // -*
       // -****************************************************************
 
-      // double inSpeed = operatorStick.getRawAxis(2);
-      // double outSpeed = operatorStick.getRawAxis(3);
-      // double speed = 0;
-      // if (inSpeed > outSpeed) {
-      // speed = inSpeed;
-      // } else {
-      // speed = -outSpeed;
-      // }
-      // speed *= 0.30;
-      // leftIngest.set(TalonFXControlMode.PercentOutput, speed);
-      // rightIngest.set(TalonFXControlMode.PercentOutput, -speed);
-
-      // -****************************************************************
-      // -*
-      // -* GRIPPER CLAW
-      // -*
-      // -****************************************************************
-
-      if (operatorStick.getRawButton(6)) {
-         if (!gripperOpen) {
-            // logger.info("button 6 pressed - open gripper");
-            gripperSolenoid.set(true);
-            gripperOpen = true;
-         }
-      } else if (!operatorStick.getRawButton(6) && gripperOpen) {
-         // logger.info("button 6 released - close gripper");
-         gripperSolenoid.set(false);
-         gripperOpen = false;
+      double inSpeed = operatorStick.getRawAxis(2);
+      double outSpeed = operatorStick.getRawAxis(3);
+      double speed = 0;
+      if (inSpeed > outSpeed) {
+         speed = inSpeed;
+      } else {
+         speed = -outSpeed;
       }
+      speed *= 0.30;
+      leftIngest.set(TalonFXControlMode.PercentOutput, speed);
+      rightIngest.set(TalonFXControlMode.PercentOutput, -speed);
    }
 
    @Override
@@ -970,8 +934,6 @@ public class Robot extends TimedRobot {
       LiveWindow.setEnabled(false);
       // Cancels all running commands at the start of test mode.
       CommandScheduler.getInstance().cancelAll();
-
-      gripperOpen = false;
    }
 
    /** This function is called periodically during test mode. */
