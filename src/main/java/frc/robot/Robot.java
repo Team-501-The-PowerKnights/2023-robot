@@ -992,7 +992,7 @@ public class Robot extends TimedRobot {
 
          // Override Posistion
          if (Math.abs(operatorStick.getRawAxis(1)) > .10) {
-            extendTarget = operatorStick.getRawAxis(1) * 0.3; // Offset
+            extendTarget -= operatorStick.getRawAxis(1) * 0.3; // Offset
             armExtendPID.setReference(extendTarget, ControlType.kPosition); // update pid
          }
          // double armVal = (-operatorStick.getRawAxis(1) * 6); // 0-12v in voltage mode
