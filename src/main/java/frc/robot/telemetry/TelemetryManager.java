@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import frc.robot.Robot;
 import frc.robot.telemetry.TelemetryNames.Misc;
 import frc.robot.utils.PKStatus;
 

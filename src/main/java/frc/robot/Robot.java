@@ -77,7 +77,7 @@ public class Robot extends TimedRobot {
    private CANSparkMax rightFront;
    private CANSparkMax rightRear;
 
-   private final double k_driveRampRate = 1.0;
+   private final double k_driveRampRate = 0.75;
    private double driveRampRate;
 
    private DifferentialDrive drive;
@@ -104,8 +104,9 @@ public class Robot extends TimedRobot {
    private final double k_rotateD = 1;
    private final double k_rotateIzone = 0;
    private final double k_rotateFF = 0;
-   private final double k_rotateMinOutput = -0.1;
-   private final double k_rotateMaxOutput = 0.3;
+   private final double k_rotateMinOutput = -0.2;
+   private final double k_rotateMaxOutput = 0.5;
+   private final double k_rotateRampRate = 0.5;
 
    private boolean rotatePIDDisable;
    private CANSparkMax armRotate;
@@ -120,8 +121,8 @@ public class Robot extends TimedRobot {
    private final double k_extendD = 1;
    private final double k_extendIzone = 0;
    private final double k_extendFF = 0;
-   private final double k_extendMinOutput = -0.3;
-   private final double k_extendMaxOutput = 0.3;
+   private final double k_extendMinOutput = -0.5;
+   private final double k_extendMaxOutput = 0.7;
 
    private boolean extendPIDDisable;
    private CANSparkMax armExtend;
@@ -130,11 +131,17 @@ public class Robot extends TimedRobot {
    private double extendP, extendI, extendD, extendIzone, extendFF, extendMaxOutput, extendMinOutput;
    private double extendTarget;
 
+   private final double k_armExtHighSetPoint = 160;
+
+   private final double k_armExtMidSetPoint = 90;
+   private final double k_armExtLowSetPoint = 50;
+
    // Gripper Ingest
    private TalonFX leftIngest;
    private TalonFX rightIngest;
-   private double k_gripperMaxInSpeed = -0.30;
-   private double k_gripperMaxOutSpeed = 0.30;
+   private double k_gripperMaxInSpeed = 0.25;
+   private double k_gripperMaxOutSpeed = 0.17;
+   private double k_gripperIdleSpeed = 0.07;
 
    /**
     * This function is run when the robot is first started up and should be used
@@ -218,6 +225,7 @@ public class Robot extends TimedRobot {
       armRotatePID = armRotate.getPIDController();
       armRotateEncoder = armRotate.getEncoder();
       armRotateEncoder.setPosition(0);
+      armRotate.setOpenLoopRampRate(k_rotateRampRate);
 
       rotatePIDDisable = false;
       // PID coefficients
@@ -255,6 +263,10 @@ public class Robot extends TimedRobot {
       SmartDashboard.putNumber("Arm Rot Max Output", rotateMaxOutput);
       SmartDashboard.putNumber("Arm Rot Set Target", 0);
       SmartDashboard.putNumber("Arm Rot Feedback", armRotateEncoder.getPosition());
+
+      // Gripper Settings
+      // leftIngest.cure
+      // rightIngest
 
       // initialize set points
       if (!Preferences.containsKey("armRotate.high")) {
@@ -898,7 +910,7 @@ public class Robot extends TimedRobot {
 
          // Override Posistion
          if (Math.abs(operatorStick.getRawAxis(5)) > .10) {
-            rotateTarget -= operatorStick.getRawAxis(5) * 0.1; // Offset
+            rotateTarget -= operatorStick.getRawAxis(5) * 0.15; // Offset
             armRotatePID.setReference(rotateTarget, ControlType.kPosition); // update pid
          }
 
@@ -937,7 +949,7 @@ public class Robot extends TimedRobot {
          armLowRotateButtonPressed = operatorStick.getRawButton(1);
       }
       SmartDashboard.putNumber("Arm Rot Feedback", armRotateEncoder.getPosition());
-
+      SmartDashboard.getNumber("Arm Rot Set Target", rotateTarget);
       // -****************************************************************
       // -*
       // -* ARM EXTENSION
@@ -952,14 +964,36 @@ public class Robot extends TimedRobot {
          double armVal = (-operatorStick.getRawAxis(1) * 6); // 0-12v in voltage mode
          SmartDashboard.putNumber("Arm Ext arvVal", armVal);
          armExtendPID.setReference(armVal, ControlType.kVoltage);
-         armExtendPID.setP(1.0);
+         // armExtendPID.setP(1.0);
       } else {
-         extendTarget = SmartDashboard.getNumber("Arm Ext Set Target", 0.0);
+         // Override Posistion
+         if (Math.abs(operatorStick.getRawAxis(1)) > .10) {
+            // extendTarget -= operatorStick.getRawAxis(1) * 0.3; // Offset
+            double armVal = (-operatorStick.getRawAxis(1) * 6); // 0-12v in voltage mode
+            SmartDashboard.putNumber("Arm Ext arvVal", armVal);
+            armExtendPID.setReference(armVal, ControlType.kVoltage);
+            // armExtendPID.setP(1.0);
+            double extendTarget = armExtendEncoder.getPosition(); // update current pos
+         } else {
+            // double extendTarget = armExtendEncoder.getPosition(); //update current pos
+            armExtendPID.setReference(extendTarget, ControlType.kPosition); // update pid
+         }
+
+         if (operatorStick.getRawButton(3) && !extendPIDDisable) {
+            extendTarget = 5;
+            armExtendPID.setReference(extendTarget, ControlType.kPosition);
+         } else if (armLowRotateButtonPressed && !extendPIDDisable) {
+            extendTarget = k_armExtLowSetPoint;
+         } else if (armMidRotateButtonPressed && !extendPIDDisable) {
+            extendTarget = k_armExtMidSetPoint;
+         } else if (armHighRotateButtonPressed && !extendPIDDisable) {
+            extendTarget = k_armExtHighSetPoint;
+         }
+         SmartDashboard.putNumber("Arm Ext Set Target", extendTarget);
+         // armExtendPID.setReference(extendTarget, ControlType.kPosition); // update pid
          // armExtendPID.setReference(extendTarget, ControlType.kPosition);
-         armExtendPID.setReference(extendTarget, ControlType.kPosition);
       }
       SmartDashboard.putNumber("Arm Ext Feedback", armExtendEncoder.getPosition());
-      SmartDashboard.getNumber("Arm Rot Set Target", rotateTarget);
 
       // -****************************************************************
       // -*
@@ -969,15 +1003,25 @@ public class Robot extends TimedRobot {
 
       double inSpeed = operatorStick.getRawAxis(2);
       double outSpeed = operatorStick.getRawAxis(3);
+      SmartDashboard.putNumber("Intake Axis2", inSpeed);
+      SmartDashboard.putNumber("Intake Axis3", outSpeed);
+
       double speed = 0;
       if (inSpeed > outSpeed) {
-         // speed = inSpeed;
-         speed = Math.max(inSpeed, k_gripperMaxInSpeed);
-      } else {
          // speed = -outSpeed;
-         speed = Math.min(outSpeed, k_gripperMaxOutSpeed);
+         speed = Math.max(-inSpeed, -Math.abs(k_gripperMaxOutSpeed));
+      } else {
+         // speed = inSpeed;
+         speed = Math.min(outSpeed, Math.abs(k_gripperMaxInSpeed));
       }
-      leftIngest.set(TalonFXControlMode.PercentOutput, speed);
+
+      if (speed == 0.0) {
+         speed = Math.abs(k_gripperIdleSpeed); // Make the intake run in slow always
+      }
+
+      SmartDashboard.putNumber("Intake Speed", speed);
+      leftIngest.set(TalonFXControlMode.PercentOutput, speed * -1);
+
    }
 
    @Override
