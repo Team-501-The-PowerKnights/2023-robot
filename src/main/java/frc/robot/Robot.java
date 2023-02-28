@@ -17,6 +17,7 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMax.IdleMode;
+import com.revrobotics.CANSparkMax.SoftLimitDirection;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DriverStation;
@@ -123,6 +124,9 @@ public class Robot extends TimedRobot {
    private final double k_extendFF = 0;
    private final double k_extendMinOutput = -0.5;
    private final double k_extendMaxOutput = 0.7;
+
+   private final float k_extendMinSoftLimit = 5.0f;
+   private final float k_extendMaxSoftLimit = 160.0f;
 
    private boolean extendPIDDisable;
    private CANSparkMax armExtend;
@@ -290,6 +294,12 @@ public class Robot extends TimedRobot {
       armExtendPID = armExtend.getPIDController();
       armExtendEncoder = armExtend.getEncoder();
       armExtendEncoder.setPosition(0);
+      // checkError(armExtend.setSoftLimit(SoftLimitDirection.kReverse,
+      // k_extendMinSoftLimit),
+      // "AE set min software limit {}");
+      // checkError(armExtend.setSoftLimit(SoftLimitDirection.kForward,
+      // k_extendMaxSoftLimit),
+      // "AE set max soft limit {}");
 
       extendPIDDisable = false;
       // PID coefficients Extend
