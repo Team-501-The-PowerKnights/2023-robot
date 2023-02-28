@@ -92,12 +92,12 @@ public class Robot extends TimedRobot {
    private boolean armMidRotateButtonPressed;
    private boolean armLowRotateButtonPressed;
 
-   private final double k_armHighSetPoint = 26;
-   private final double k_armMidSetPoint = 17;
-   private final double k_armLowSetPoint = 7;
-   private double armHighSetPoint;
-   private double armMidSetPoint;
-   private double armLowSetPoint;
+   private final double k_armRotateHighSetPoint = 26;
+   private final double k_armRotateMidSetPoint = 17;
+   private final double k_armRotateLowSetPoint = 7;
+   private double armRotateHighSetPoint;
+   private double armRotateMidSetPoint;
+   private double armRotateLowSetPoint;
 
    private final double k_rotateP = 0.2;
    private final double k_rotateI = 1e-5;
@@ -131,10 +131,12 @@ public class Robot extends TimedRobot {
    private double extendP, extendI, extendD, extendIzone, extendFF, extendMaxOutput, extendMinOutput;
    private double extendTarget;
 
-   private final double k_armExtHighSetPoint = 160;
-
-   private final double k_armExtMidSetPoint = 90;
-   private final double k_armExtLowSetPoint = 50;
+   private final double k_armExtendHighSetPoint = 160;
+   private final double k_armExtendMidSetPoint = 90;
+   private final double k_armExtendLowSetPoint = 50;
+   private double armExtendHighSetPoint;
+   private double armExtendMidSetPoint;
+   private double armExtendLowSetPoint;
 
    // Gripper Ingest
    private TalonFX leftIngest;
@@ -264,23 +266,19 @@ public class Robot extends TimedRobot {
       SmartDashboard.putNumber("Arm Rot Set Target", 0);
       SmartDashboard.putNumber("Arm Rot Feedback", armRotateEncoder.getPosition());
 
-      // Gripper Settings
-      // leftIngest.cure
-      // rightIngest
-
       // initialize set points
       if (!Preferences.containsKey("armRotate.high")) {
-         Preferences.setDouble("armRotate.high", k_armHighSetPoint);
+         Preferences.setDouble("armRotate.high", k_armRotateHighSetPoint);
       }
-      armHighSetPoint = Preferences.getDouble("armRotate.high", k_armHighSetPoint);
+      armRotateHighSetPoint = Preferences.getDouble("armRotate.high", k_armRotateHighSetPoint);
       if (!Preferences.containsKey("armRotate.mid")) {
-         Preferences.setDouble("armRotate.mid", k_armMidSetPoint);
+         Preferences.setDouble("armRotate.mid", k_armRotateMidSetPoint);
       }
-      armMidSetPoint = Preferences.getDouble("armRotate.mid", k_armMidSetPoint);
+      armRotateMidSetPoint = Preferences.getDouble("armRotate.mid", k_armRotateMidSetPoint);
       if (!Preferences.containsKey("armRotate.low")) {
-         Preferences.setDouble("armRotate.low", k_armLowSetPoint);
+         Preferences.setDouble("armRotate.low", k_armRotateLowSetPoint);
       }
-      armLowSetPoint = Preferences.getDouble("armRotate.low", k_armLowSetPoint);
+      armRotateLowSetPoint = Preferences.getDouble("armRotate.low", k_armRotateLowSetPoint);
 
       /*******************************************************************
        * Arm Extend Setup
@@ -293,7 +291,7 @@ public class Robot extends TimedRobot {
       armExtendEncoder = armExtend.getEncoder();
       armExtendEncoder.setPosition(0);
 
-      extendPIDDisable = true;
+      extendPIDDisable = false;
       // PID coefficients Extend
       extendP = k_extendP;
       extendI = k_extendI;
@@ -327,6 +325,20 @@ public class Robot extends TimedRobot {
       SmartDashboard.putNumber("Arm Ext Max Output", extendMaxOutput);
       SmartDashboard.putNumber("Arm Ext Set Target", 0);
       SmartDashboard.putNumber("Arm Ext Feedback", armExtendEncoder.getPosition());
+
+      // initialize set points
+      if (!Preferences.containsKey("armExtend.high")) {
+         Preferences.setDouble("armExtend.high", k_armExtendHighSetPoint);
+      }
+      armExtendHighSetPoint = Preferences.getDouble("armExtend.high", k_armExtendHighSetPoint);
+      if (!Preferences.containsKey("armExtend.mid")) {
+         Preferences.setDouble("armExtend.mid", k_armExtendMidSetPoint);
+      }
+      armExtendMidSetPoint = Preferences.getDouble("armExtend.mid", k_armExtendMidSetPoint);
+      if (!Preferences.containsKey("armExtend.low")) {
+         Preferences.setDouble("armExtend.low", k_armExtendLowSetPoint);
+      }
+      armExtendLowSetPoint = Preferences.getDouble("armExtend.low", k_armExtendLowSetPoint);
 
       /*******************************************************************
        * Gripper Ingest Setup
@@ -456,10 +468,18 @@ public class Robot extends TimedRobot {
    @Override
    public void disabledPeriodic() {
 
+      /**
+       * Drive
+       **/
+
       // Read amp rate from SmartDashboard
       driveRampRate = Preferences.getDouble("Drive.rampRate", k_driveRampRate);
       checkError(leftFront.setOpenLoopRampRate(driveRampRate), "L setting ramp rate {}");
       checkError(rightFront.setOpenLoopRampRate(driveRampRate), "R setting ramp rate {}");
+
+      /**
+       * Arm Rotate
+       **/
 
       // read PID coefficients from SmartDashboard
       rotatePIDDisable = SmartDashboard.getBoolean("Arm Rot PID Enabled", rotatePIDDisable);
@@ -501,9 +521,13 @@ public class Robot extends TimedRobot {
       }
 
       // read set points from SmartDashboard
-      armHighSetPoint = Preferences.getDouble("armRotate.high", k_armHighSetPoint);
-      armMidSetPoint = Preferences.getDouble("armRotate.mid", k_armMidSetPoint);
-      armLowSetPoint = Preferences.getDouble("armRotate.low", k_armLowSetPoint);
+      armRotateHighSetPoint = Preferences.getDouble("armRotate.high", k_armRotateHighSetPoint);
+      armRotateMidSetPoint = Preferences.getDouble("armRotate.mid", k_armRotateMidSetPoint);
+      armRotateLowSetPoint = Preferences.getDouble("armRotate.low", k_armRotateLowSetPoint);
+
+      /**
+       * Arm Extend
+       **/
 
       // read PID coefficients from SmartDashboard
       extendPIDDisable = SmartDashboard.getBoolean("Arm Ext PID Enabled", extendPIDDisable);
@@ -543,6 +567,15 @@ public class Robot extends TimedRobot {
          extendMinOutput = ar_min;
          extendMaxOutput = ar_max;
       }
+
+      // read set points from SmartDashboard
+      armExtendHighSetPoint = Preferences.getDouble("armExtend.high", k_armExtendHighSetPoint);
+      armExtendMidSetPoint = Preferences.getDouble("armExtend.mid", k_armExtendMidSetPoint);
+      armExtendLowSetPoint = Preferences.getDouble("armExtend.low", k_armExtendLowSetPoint);
+
+      /**
+       * Gripper
+       **/
 
       double v;
       v = Preferences.getDouble("Gripper.maxInSpeed", k_gripperMaxInSpeed);
@@ -749,7 +782,7 @@ public class Robot extends TimedRobot {
 
    private void armRotateHigh() {
       logger.info("starting command armRotateHigh");
-      rotateTarget = armHighSetPoint;
+      rotateTarget = armRotateHighSetPoint;
       logger.debug("set arm rotate PID to high {}", rotateTarget);
       armRotatePID.setReference(rotateTarget, ControlType.kPosition);
    }
@@ -763,7 +796,7 @@ public class Robot extends TimedRobot {
 
    private void armRotateMid() {
       logger.info("starting command armRotateMid");
-      rotateTarget = armMidSetPoint;
+      rotateTarget = armRotateMidSetPoint;
       logger.debug("set arm rotate PID to mid {}", rotateTarget);
       armRotatePID.setReference(rotateTarget, ControlType.kPosition);
    }
@@ -902,11 +935,7 @@ public class Robot extends TimedRobot {
          double armVal = (-operatorStick.getRawAxis(5) * 6); // 0-12v in voltage mode
          SmartDashboard.putNumber("Arm Rot arvVal", armVal);
          armRotatePID.setReference(armVal, ControlType.kVoltage);
-         armRotatePID.setP(1.0);
       } else {
-         // rotateTarget = SmartDashboard.getNumber("Arm Rot Set Target", 0.0);
-         // // armRotatePID.setReference(rotateTarget, ControlType.kPosition);
-         // armRotatePID.setReference(rotateTarget, ControlType.kPosition);
 
          // Override Posistion
          if (Math.abs(operatorStick.getRawAxis(5)) > .10) {
@@ -916,29 +945,23 @@ public class Robot extends TimedRobot {
 
          if (operatorStick.getRawButton(4)) {
             if (!armHighRotateButtonPressed) {
-               rotateTarget = armHighSetPoint;
+               rotateTarget = armRotateHighSetPoint;
                logger.debug("set arm rotate PID to high {}", rotateTarget);
-               if (!rotatePIDDisable) {
-                  armRotatePID.setReference(rotateTarget, ControlType.kPosition);
-               }
+               armRotatePID.setReference(rotateTarget, ControlType.kPosition);
                armHighRotateButtonPressed = true;
             }
          } else if (operatorStick.getRawButton(2)) {
             if (!armMidRotateButtonPressed) {
-               rotateTarget = armMidSetPoint;
+               rotateTarget = armRotateMidSetPoint;
                logger.debug("set arm rotate PID to mid {}", rotateTarget);
-               if (!rotatePIDDisable) {
-                  armRotatePID.setReference(rotateTarget, ControlType.kPosition);
-               }
+               armRotatePID.setReference(rotateTarget, ControlType.kPosition);
                armMidRotateButtonPressed = true;
             }
          } else if (operatorStick.getRawButton(1)) {
             if (!armLowRotateButtonPressed) {
-               rotateTarget = armLowSetPoint;
+               rotateTarget = armRotateLowSetPoint;
                logger.debug("set arm rotate PID to low {}", rotateTarget);
-               if (!rotatePIDDisable) {
-                  armRotatePID.setReference(rotateTarget, ControlType.kPosition);
-               }
+               armRotatePID.setReference(rotateTarget, ControlType.kPosition);
                armLowRotateButtonPressed = true;
             }
          }
@@ -950,6 +973,7 @@ public class Robot extends TimedRobot {
       }
       SmartDashboard.putNumber("Arm Rot Feedback", armRotateEncoder.getPosition());
       SmartDashboard.getNumber("Arm Rot Set Target", rotateTarget);
+
       // -****************************************************************
       // -*
       // -* ARM EXTENSION
@@ -964,36 +988,43 @@ public class Robot extends TimedRobot {
          double armVal = (-operatorStick.getRawAxis(1) * 6); // 0-12v in voltage mode
          SmartDashboard.putNumber("Arm Ext arvVal", armVal);
          armExtendPID.setReference(armVal, ControlType.kVoltage);
-         // armExtendPID.setP(1.0);
       } else {
+
          // Override Posistion
          if (Math.abs(operatorStick.getRawAxis(1)) > .10) {
-            // extendTarget -= operatorStick.getRawAxis(1) * 0.3; // Offset
-            double armVal = (-operatorStick.getRawAxis(1) * 6); // 0-12v in voltage mode
-            SmartDashboard.putNumber("Arm Ext arvVal", armVal);
-            armExtendPID.setReference(armVal, ControlType.kVoltage);
-            // armExtendPID.setP(1.0);
-            double extendTarget = armExtendEncoder.getPosition(); // update current pos
-         } else {
-            // double extendTarget = armExtendEncoder.getPosition(); //update current pos
+            extendTarget = operatorStick.getRawAxis(1) * 0.3; // Offset
             armExtendPID.setReference(extendTarget, ControlType.kPosition); // update pid
          }
+         // double armVal = (-operatorStick.getRawAxis(1) * 6); // 0-12v in voltage mode
+         // SmartDashboard.putNumber("Arm Ext arvVal", armVal);
+         // armExtendPID.setReference(armVal, ControlType.kVoltage);
+         // double extendTarget = armExtendEncoder.getPosition(); // update current pos
+         // } else {
+         // // double extendTarget = armExtendEncoder.getPosition(); //update current pos
+         // armExtendPID.setReference(extendTarget, ControlType.kPosition); // update pid
+         // }
 
-         if (operatorStick.getRawButton(3) && !extendPIDDisable) {
+         if (armHighRotateButtonPressed) {
+            extendTarget = armExtendHighSetPoint;
+            logger.debug("set arm extend PID to high {}", extendTarget);
+            armExtendPID.setReference(extendTarget, ControlType.kPosition);
+         } else if (armMidRotateButtonPressed) {
+            extendTarget = armExtendMidSetPoint;
+            logger.debug("set arm extend PID to mid {}", extendTarget);
+            armExtendPID.setReference(extendTarget, ControlType.kPosition);
+         } else if (armLowRotateButtonPressed) {
+            extendTarget = armExtendLowSetPoint;
+            logger.debug("set arm extend PID to low {}", extendTarget);
+            armExtendPID.setReference(extendTarget, ControlType.kPosition);
+         } else if (operatorStick.getRawButton(3)) {
+            // Retract all the way in
             extendTarget = 5;
             armExtendPID.setReference(extendTarget, ControlType.kPosition);
-         } else if (armLowRotateButtonPressed && !extendPIDDisable) {
-            extendTarget = k_armExtLowSetPoint;
-         } else if (armMidRotateButtonPressed && !extendPIDDisable) {
-            extendTarget = k_armExtMidSetPoint;
-         } else if (armHighRotateButtonPressed && !extendPIDDisable) {
-            extendTarget = k_armExtHighSetPoint;
          }
          SmartDashboard.putNumber("Arm Ext Set Target", extendTarget);
-         // armExtendPID.setReference(extendTarget, ControlType.kPosition); // update pid
-         // armExtendPID.setReference(extendTarget, ControlType.kPosition);
       }
       SmartDashboard.putNumber("Arm Ext Feedback", armExtendEncoder.getPosition());
+      SmartDashboard.putNumber("Arm Ext Set Target", extendTarget);
 
       // -****************************************************************
       // -*
