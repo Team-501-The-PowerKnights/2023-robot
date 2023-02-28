@@ -492,8 +492,7 @@ public class Robot extends TimedRobot {
       double ar_max = SmartDashboard.getNumber("Arm Rot Max Output", 0);
       rotateTarget = SmartDashboard.getNumber("Arm Rot Set Target", rotateTarget);
 
-      // if PID coefficients on SmartDashboard have changed, write new values to
-      // controller
+      // if PID coefficients on SmartDashboard have changed, update controller
       if ((ar_p != rotateP)) {
          armRotatePID.setP(ar_p);
          rotateP = ar_p;
@@ -540,8 +539,7 @@ public class Robot extends TimedRobot {
       ar_max = SmartDashboard.getNumber("Arm Ext Max Output", 0);
       extendTarget = SmartDashboard.getNumber("Arm Ext Set Target", 0);
 
-      // if PID coefficients on SmartDashboard have changed, write new values to
-      // controller
+      // if PID coefficients on SmartDashboard have changed, update controller
       if ((ar_p != extendP)) {
          armExtendPID.setP(ar_p);
          extendP = ar_p;
@@ -888,9 +886,6 @@ public class Robot extends TimedRobot {
       // FIXME: Make this right calls
       // xSpeed,zRotation
       // drive.arcadeDrive(0, 0);
-
-      // drive.arcadeDrive(-driverStick.getY(), -driverStick.getX());
-
       drive.arcadeDrive(-driverStick.getRawAxis(1),
             -driverStick.getRawAxis(4));
 
@@ -981,8 +976,6 @@ public class Robot extends TimedRobot {
       // -****************************************************************
 
       // FWD: Out, BCK: In - no need to reverse sign
-      // armExtend.set(operatorStick.getRawAxis(1) * 0.20);
-      // SmartDashboard.putNumber("Arm Ext Feedback", armExtendEncoder.getPosition());
       extendPIDDisable = SmartDashboard.getBoolean("Arm Ext PID Enabled", extendPIDDisable);
       if (extendPIDDisable) {
          double armVal = (-operatorStick.getRawAxis(1) * 6); // 0-12v in voltage mode
@@ -995,14 +988,6 @@ public class Robot extends TimedRobot {
             extendTarget -= operatorStick.getRawAxis(1) * 0.3; // Offset
             armExtendPID.setReference(extendTarget, ControlType.kPosition); // update pid
          }
-         // double armVal = (-operatorStick.getRawAxis(1) * 6); // 0-12v in voltage mode
-         // SmartDashboard.putNumber("Arm Ext arvVal", armVal);
-         // armExtendPID.setReference(armVal, ControlType.kVoltage);
-         // double extendTarget = armExtendEncoder.getPosition(); // update current pos
-         // } else {
-         // // double extendTarget = armExtendEncoder.getPosition(); //update current pos
-         // armExtendPID.setReference(extendTarget, ControlType.kPosition); // update pid
-         // }
 
          if (armHighRotateButtonPressed) {
             extendTarget = armExtendHighSetPoint;
@@ -1046,13 +1031,12 @@ public class Robot extends TimedRobot {
          speed = Math.min(outSpeed, Math.abs(k_gripperMaxInSpeed));
       }
 
-      if (speed == 0.0) {
+      if (speed == 0) {
          speed = Math.abs(k_gripperIdleSpeed); // Make the intake run in slow always
       }
 
       SmartDashboard.putNumber("Intake Speed", speed);
       leftIngest.set(TalonFXControlMode.PercentOutput, speed * -1);
-
    }
 
    @Override
