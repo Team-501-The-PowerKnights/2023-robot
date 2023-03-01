@@ -5,9 +5,9 @@
 package frc.robot;
 
 import com.ctre.phoenix.ErrorCode;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
+// import com.ctre.phoenix.motorcontrol.NeutralMode;
+// import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
+// import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 import com.kauailabs.navx.frc.AHRS;
 
@@ -18,6 +18,7 @@ import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMax.SoftLimitDirection;
+// import com.revrobotics.CANSparkMax.SoftLimitDirection;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DriverStation;
@@ -125,15 +126,15 @@ public class Robot extends TimedRobot {
    private final double k_extendMinOutput = -0.5;
    private final double k_extendMaxOutput = 0.7;
 
-   private final float k_extendMinSoftLimit = 5.0f;
-   private final float k_extendMaxSoftLimit = 160.0f;
-
    private boolean extendPIDDisable;
    private CANSparkMax armExtend;
    private SparkMaxPIDController armExtendPID;
    private RelativeEncoder armExtendEncoder;
    private double extendP, extendI, extendD, extendIzone, extendFF, extendMaxOutput, extendMinOutput;
    private double extendTarget;
+
+   private final float k_extendMinSoftLimit = 5f;
+   private final float k_extendMaxSoftLimit = 160f;
 
    private final double k_armExtendHighSetPoint = 160;
    private final double k_armExtendMidSetPoint = 90;
@@ -143,8 +144,10 @@ public class Robot extends TimedRobot {
    private double armExtendLowSetPoint;
 
    // Gripper Ingest
-   private TalonFX leftIngest;
-   private TalonFX rightIngest;
+   // private TalonFX leftIngest;
+   // private TalonFX rightIngest;
+   private CANSparkMax leftIngest;
+   private CANSparkMax rightIngest;
    private double k_gripperMaxInSpeed = 0.25;
    private double k_gripperMaxOutSpeed = 0.17;
    private double k_gripperIdleSpeed = 0.07;
@@ -290,16 +293,16 @@ public class Robot extends TimedRobot {
 
       armExtend = new CANSparkMax(22, MotorType.kBrushless);
       checkError(armExtend.restoreFactoryDefaults(), "AE restore factory defaults {}");
-      checkError(armExtend.setIdleMode(IdleMode.kBrake), "AE set idle mode to break {}");
+      checkError(armExtend.setIdleMode(IdleMode.kBrake), "AE set idle mode to brake {}");
       armExtendPID = armExtend.getPIDController();
       armExtendEncoder = armExtend.getEncoder();
       armExtendEncoder.setPosition(0);
-      // checkError(armExtend.setSoftLimit(SoftLimitDirection.kReverse,
-      // k_extendMinSoftLimit),
-      // "AE set min software limit {}");
-      // checkError(armExtend.setSoftLimit(SoftLimitDirection.kForward,
-      // k_extendMaxSoftLimit),
-      // "AE set max soft limit {}");
+      checkError(armExtend.setSoftLimit(SoftLimitDirection.kReverse, k_extendMinSoftLimit),
+            "AE set min software limit {}");
+      checkError(armExtend.setSoftLimit(SoftLimitDirection.kForward, k_extendMaxSoftLimit),
+            "AE set max soft limit {}");
+      armExtend.enableSoftLimit(SoftLimitDirection.kReverse, true);
+      armExtend.enableSoftLimit(SoftLimitDirection.kForward, true);
 
       extendPIDDisable = false;
       // PID coefficients Extend
@@ -354,12 +357,21 @@ public class Robot extends TimedRobot {
        * Gripper Ingest Setup
        *******************************************************************/
 
-      leftIngest = new TalonFX(31);
-      checkError(leftIngest.configFactoryDefault(), "LI restore factory defaults {}");
-      leftIngest.setNeutralMode(NeutralMode.Brake);
-      rightIngest = new TalonFX(32);
-      checkError(leftIngest.configFactoryDefault(), "RI restore factory defaults {}");
-      rightIngest.setNeutralMode(NeutralMode.Brake);
+      // leftIngest = new TalonFX(31);
+      // checkError(leftIngest.configFactoryDefault(), "LI restore factory defaults
+      // {}");
+      // leftIngest.setNeutralMode(NeutralMode.Brake);
+      // rightIngest = new TalonFX(32);
+      // checkError(leftIngest.configFactoryDefault(), "RI restore factory defaults
+      // {}");
+      // rightIngest.setNeutralMode(NeutralMode.Brake);
+
+      leftIngest = new CANSparkMax(31, MotorType.kBrushed);
+      checkError(leftIngest.restoreFactoryDefaults(), "LI restore factory defaults {}");
+      checkError(leftIngest.setIdleMode(IdleMode.kBrake), "LI set idle mode to brake {}");
+      rightIngest = new CANSparkMax(32, MotorType.kBrushed);
+      checkError(rightIngest.restoreFactoryDefaults(), "RI restore factory defaults {}");
+      checkError(rightIngest.setIdleMode(IdleMode.kBrake), "RI set idle mode to brake {}");
 
       rightIngest.setInverted(true);
       rightIngest.follow(leftIngest);
@@ -434,6 +446,7 @@ public class Robot extends TimedRobot {
    @SuppressWarnings("unused")
    private ErrorCode lastCTREError;
 
+   @SuppressWarnings("unused")
    private void checkError(ErrorCode error, String message) {
       if (error != ErrorCode.OK) {
          lastCTREError = error;
@@ -811,7 +824,8 @@ public class Robot extends TimedRobot {
 
    private void gripperEject() {
       logger.info("starting command gripperEject");
-      leftIngest.set(TalonFXControlMode.PercentOutput, 0.30);
+      // leftIngest.set(TalonFXControlMode.PercentOutput, 0.30);
+      leftIngest.set(0.30);
    }
 
    private void armRetractShort() {
@@ -823,7 +837,8 @@ public class Robot extends TimedRobot {
 
    private void gripperStop() {
       logger.info("starting command gripperStop");
-      leftIngest.set(TalonFXControlMode.PercentOutput, 0);
+      // leftIngest.set(TalonFXControlMode.PercentOutput, 0);
+      leftIngest.set(0);
    }
 
    private void driveBackward() {
@@ -1046,7 +1061,8 @@ public class Robot extends TimedRobot {
       }
 
       SmartDashboard.putNumber("Intake Speed", speed);
-      leftIngest.set(TalonFXControlMode.PercentOutput, speed * -1);
+      // leftIngest.set(TalonFXControlMode.PercentOutput, speed * -1);
+      leftIngest.set(-speed);
    }
 
    @Override
