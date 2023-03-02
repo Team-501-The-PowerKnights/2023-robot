@@ -148,9 +148,9 @@ public class Robot extends TimedRobot {
    // private TalonFX rightIngest;
    private CANSparkMax leftIngest;
    private CANSparkMax rightIngest;
-   private double k_gripperMaxInSpeed = 0.25;
-   private double k_gripperMaxOutSpeed = 0.17;
-   private double k_gripperIdleSpeed = 0.07;
+   private double k_gripperMaxInSpeed = 1.0; // 0.25;
+   private double k_gripperMaxOutSpeed = 1.0; // 0.17;
+   private double k_gripperIdleSpeed = 0.00; // disable
 
    /**
     * This function is run when the robot is first started up and should be used
@@ -230,7 +230,7 @@ public class Robot extends TimedRobot {
 
       armRotate = new CANSparkMax(21, MotorType.kBrushless);
       checkError(armRotate.restoreFactoryDefaults(), "AR restore factory defaults {}");
-      checkError(armRotate.setIdleMode(IdleMode.kBrake), "AR set idle mode to brake {}");
+      checkError(armRotate.setIdleMode(IdleMode.kCoast), "AR set idle mode to coast {}");
       armRotatePID = armRotate.getPIDController();
       armRotateEncoder = armRotate.getEncoder();
       armRotateEncoder.setPosition(0);
@@ -293,7 +293,7 @@ public class Robot extends TimedRobot {
 
       armExtend = new CANSparkMax(22, MotorType.kBrushless);
       checkError(armExtend.restoreFactoryDefaults(), "AE restore factory defaults {}");
-      checkError(armExtend.setIdleMode(IdleMode.kBrake), "AE set idle mode to brake {}");
+      checkError(armExtend.setIdleMode(IdleMode.kCoast), "AE set idle mode to coast {}");
       armExtendPID = armExtend.getPIDController();
       armExtendEncoder = armExtend.getEncoder();
       armExtendEncoder.setPosition(0);
@@ -365,16 +365,18 @@ public class Robot extends TimedRobot {
       // checkError(leftIngest.configFactoryDefault(), "RI restore factory defaults
       // {}");
       // rightIngest.setNeutralMode(NeutralMode.Brake);
+      //
+      // rightIngest.setInverted(true);
+      // rightIngest.follow(leftIngest, true);
 
       leftIngest = new CANSparkMax(31, MotorType.kBrushed);
       checkError(leftIngest.restoreFactoryDefaults(), "LI restore factory defaults {}");
-      checkError(leftIngest.setIdleMode(IdleMode.kBrake), "LI set idle mode to brake {}");
+      checkError(leftIngest.setIdleMode(IdleMode.kCoast), "LI set idle mode to coast {}");
       rightIngest = new CANSparkMax(32, MotorType.kBrushed);
       checkError(rightIngest.restoreFactoryDefaults(), "RI restore factory defaults {}");
-      checkError(rightIngest.setIdleMode(IdleMode.kBrake), "RI set idle mode to brake {}");
+      checkError(rightIngest.setIdleMode(IdleMode.kCoast), "RI set idle mode to coast {}");
 
-      rightIngest.setInverted(true);
-      rightIngest.follow(leftIngest);
+      checkError(rightIngest.follow(leftIngest, true), "RI set follow and invert to true {}");
 
       if (!Preferences.containsKey("Gripper.maxInSpeed")) {
          Preferences.setDouble("Gripper.maxInSpeed", k_gripperMaxInSpeed);
@@ -485,7 +487,12 @@ public class Robot extends TimedRobot {
       armExtend.set(0);
 
       // leftIngest.set(TalonFXControlMode.PercentOutput, 0);
-      // rightIngest.set(TalonFXControlMode.PercentOutput, 0);
+      leftIngest.set(0);
+
+      checkError(armRotate.setIdleMode(IdleMode.kCoast), "AR set idle mode to coast {}");
+      checkError(armExtend.setIdleMode(IdleMode.kCoast), "AR set idle mode to coast {}");
+      checkError(leftIngest.setIdleMode(IdleMode.kCoast), "RI set idle mode to coast {}");
+      checkError(rightIngest.setIdleMode(IdleMode.kCoast), "RI set idle mode to coast {}");
    }
 
    @Override
@@ -634,6 +641,11 @@ public class Robot extends TimedRobot {
    @Override
    public void autonomousInit() {
       m_autonomousCommand = null;
+
+      checkError(armRotate.setIdleMode(IdleMode.kBrake), "AR set idle mode to brake {}");
+      checkError(armExtend.setIdleMode(IdleMode.kBrake), "AR set idle mode to brake {}");
+      checkError(leftIngest.setIdleMode(IdleMode.kBrake), "RI set idle mode to brake {}");
+      checkError(rightIngest.setIdleMode(IdleMode.kBrake), "RI set idle mode to brake {}");
 
       driveBrakeEnabled = true;
       SmartDashboard.putBoolean("driveBrakeEnabled", driveBrakeEnabled);
@@ -872,6 +884,11 @@ public class Robot extends TimedRobot {
          m_autonomousCommand.cancel();
       }
 
+      checkError(armRotate.setIdleMode(IdleMode.kBrake), "AR set idle mode to brake {}");
+      checkError(armExtend.setIdleMode(IdleMode.kBrake), "AR set idle mode to brake {}");
+      checkError(leftIngest.setIdleMode(IdleMode.kBrake), "RI set idle mode to brake {}");
+      checkError(rightIngest.setIdleMode(IdleMode.kBrake), "RI set idle mode to brake {}");
+
       driveBrakeButtonPressed = false;
       driveBrakeEnabled = false;
       SmartDashboard.putBoolean("driveBrakeEnabled", driveBrakeEnabled);
@@ -1044,15 +1061,15 @@ public class Robot extends TimedRobot {
 
       double inSpeed = operatorStick.getRawAxis(2);
       double outSpeed = operatorStick.getRawAxis(3);
-      SmartDashboard.putNumber("Intake Axis2", inSpeed);
-      SmartDashboard.putNumber("Intake Axis3", outSpeed);
+      SmartDashboard.putNumber("Gripper inSpeed", inSpeed);
+      SmartDashboard.putNumber("Gripper outSpeed", outSpeed);
 
       double speed = 0;
       if (inSpeed > outSpeed) {
-         // speed = -outSpeed;
+         // speed = inSpeed;
          speed = Math.max(-inSpeed, -Math.abs(k_gripperMaxOutSpeed));
       } else {
-         // speed = inSpeed;
+         // speed = -outSpeed;
          speed = Math.min(outSpeed, Math.abs(k_gripperMaxInSpeed));
       }
 
@@ -1060,8 +1077,8 @@ public class Robot extends TimedRobot {
          speed = Math.abs(k_gripperIdleSpeed); // Make the intake run in slow always
       }
 
-      SmartDashboard.putNumber("Intake Speed", speed);
-      // leftIngest.set(TalonFXControlMode.PercentOutput, speed * -1);
+      SmartDashboard.putNumber("Gripper speed", speed);
+      // leftIngest.set(TalonFXControlMode.PercentOutput, -speed);
       leftIngest.set(-speed);
    }
 
