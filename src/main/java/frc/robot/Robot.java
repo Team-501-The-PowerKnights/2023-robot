@@ -30,6 +30,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -64,6 +65,29 @@ public class Robot extends TimedRobot {
 
    private AHRS ahrs;
    boolean ahrsValid;
+
+   //
+   private enum AutoSelection {
+      // @formatter:off
+      doNothing("doNothing"), 
+      doFull("doFull");
+      // @formatter:on
+
+      private final String name;
+
+      private AutoSelection(String name) {
+         this.name = name;
+      }
+
+      public String getName() {
+         return name;
+      }
+   }
+
+   // Chooser for autonomous command from Dashboard
+   private SendableChooser<AutoSelection> autoChooser;
+   // Command that was selected
+   private AutoSelection autoSelected;
 
    /*- *************************************
     *- Driver Stuff
@@ -164,6 +188,9 @@ public class Robot extends TimedRobot {
 
       autonomousComplete = false;
       teleopComplete = false;
+
+      // Create the chooser for autonomous command
+      createAutoChooser();
 
       powerD = new PowerDistribution(1, ModuleType.kRev);
 
@@ -456,6 +483,18 @@ public class Robot extends TimedRobot {
       }
    }
 
+   private void createAutoChooser() {
+      autoChooser = new SendableChooser<>();
+
+      // Default option is safety of "do nothing"
+      autoChooser.setDefaultOption("Do Nothing", AutoSelection.doNothing);
+
+      //
+      autoChooser.addOption("Full Auto (place cone & balance)", AutoSelection.doFull);
+
+      SmartDashboard.putData("Auto Mode", autoChooser);
+   }
+
    private long gyroTlmCount;
 
    /**
@@ -490,8 +529,8 @@ public class Robot extends TimedRobot {
       leftIngest.set(0);
 
       checkError(armRotate.setIdleMode(IdleMode.kCoast), "AR set idle mode to coast {}");
-      checkError(armExtend.setIdleMode(IdleMode.kCoast), "AR set idle mode to coast {}");
-      checkError(leftIngest.setIdleMode(IdleMode.kCoast), "RI set idle mode to coast {}");
+      checkError(armExtend.setIdleMode(IdleMode.kCoast), "AE set idle mode to coast {}");
+      checkError(leftIngest.setIdleMode(IdleMode.kCoast), "LI set idle mode to coast {}");
       checkError(rightIngest.setIdleMode(IdleMode.kCoast), "RI set idle mode to coast {}");
    }
 
@@ -628,6 +667,10 @@ public class Robot extends TimedRobot {
       }
    }
 
+   private enum AutoState {
+      start, rotateArmHigh, extendArmLong, rotateArmMid, ejectGripper, retractArm, stopGripper, driveBackward, end, done;
+   }
+
    private AutoState autoState;
    private boolean autoStateStarted;
 
@@ -640,13 +683,6 @@ public class Robot extends TimedRobot {
     */
    @Override
    public void autonomousInit() {
-      m_autonomousCommand = null;
-
-      checkError(armRotate.setIdleMode(IdleMode.kBrake), "AR set idle mode to brake {}");
-      checkError(armExtend.setIdleMode(IdleMode.kBrake), "AR set idle mode to brake {}");
-      checkError(leftIngest.setIdleMode(IdleMode.kBrake), "RI set idle mode to brake {}");
-      checkError(rightIngest.setIdleMode(IdleMode.kBrake), "RI set idle mode to brake {}");
-
       driveBrakeEnabled = true;
       SmartDashboard.putBoolean("driveBrakeEnabled", driveBrakeEnabled);
       checkError(leftFront.setIdleMode(IdleMode.kBrake), "LF set idle mode to brake {}");
@@ -654,12 +690,18 @@ public class Robot extends TimedRobot {
       checkError(rightFront.setIdleMode(IdleMode.kBrake), "RF set idle mode to brake {}");
       checkError(rightRear.setIdleMode(IdleMode.kBrake), "RR set idle mode to brake {}");
 
-      // schedule the autonomous command (example)
-      if (m_autonomousCommand != null) {
-         m_autonomousCommand.schedule();
-      }
+      checkError(armRotate.setIdleMode(IdleMode.kBrake), "AR set idle mode to brake {}");
+      checkError(armExtend.setIdleMode(IdleMode.kBrake), "AE set idle mode to brake {}");
+      checkError(leftIngest.setIdleMode(IdleMode.kBrake), "LI set idle mode to brake {}");
+      checkError(rightIngest.setIdleMode(IdleMode.kBrake), "RI set idle mode to brake {}");
 
       gyroTlmCount = 0;
+
+      autoSelected = autoChooser.getSelected();
+      if (autoSelected == null) {
+         autoSelected = AutoSelection.doNothing;
+      }
+      logger.info("auto function is {}", autoSelected.getName());
 
       autoState = AutoState.start;
       autoStateStarted = false;
@@ -669,10 +711,6 @@ public class Robot extends TimedRobot {
 
       // FIXME: shouldn't have this disabled
       drive.setSafetyEnabled(false);
-   }
-
-   private enum AutoState {
-      start, rotateArmHigh, extendArmLong, rotateArmMid, ejectGripper, retractArm, stopGripper, driveBackward, end, done;
    }
 
    /** This function is called periodically during autonomous. */
@@ -686,6 +724,22 @@ public class Robot extends TimedRobot {
          gyroTlmCount = 0;
       }
 
+      switch (autoSelected) {
+         case doNothing:
+            autoDoNothing();
+            break;
+         case doFull:
+            autoDoFull();
+            break;
+         default:
+            break;
+      }
+   }
+
+   private void autoDoNothing() {
+   }
+
+   private void autoDoFull() {
       switch (autoState) {
          case start:
             if (!autoStateStarted) {
@@ -864,10 +918,10 @@ public class Robot extends TimedRobot {
 
       driveBrakeEnabled = false;
       SmartDashboard.putBoolean("driveBrakeEnabled", driveBrakeEnabled);
-      checkError(leftFront.setIdleMode(IdleMode.kCoast), "LF set idle mode to brake {}");
-      checkError(leftRear.setIdleMode(IdleMode.kCoast), "LR set idle mode to brake {}");
-      checkError(rightFront.setIdleMode(IdleMode.kCoast), "RF set idle mode to brake {}");
-      checkError(rightRear.setIdleMode(IdleMode.kCoast), "RR set idle mode to brake {}");
+      checkError(leftFront.setIdleMode(IdleMode.kCoast), "LF set idle mode to coast {}");
+      checkError(leftRear.setIdleMode(IdleMode.kCoast), "LR set idle mode to coast {}");
+      checkError(rightFront.setIdleMode(IdleMode.kCoast), "RF set idle mode to coast {}");
+      checkError(rightRear.setIdleMode(IdleMode.kCoast), "RR set idle mode to coast {}");
 
       drive.arcadeDrive(0, 0);
 
@@ -877,16 +931,9 @@ public class Robot extends TimedRobot {
 
    @Override
    public void teleopInit() {
-      // This makes sure that the autonomous stops running when teleop starts
-      // running. If you want the autonomous to continue until interrupted by
-      // another command, remove this line or comment it out.
-      if (m_autonomousCommand != null) {
-         m_autonomousCommand.cancel();
-      }
-
       checkError(armRotate.setIdleMode(IdleMode.kBrake), "AR set idle mode to brake {}");
-      checkError(armExtend.setIdleMode(IdleMode.kBrake), "AR set idle mode to brake {}");
-      checkError(leftIngest.setIdleMode(IdleMode.kBrake), "RI set idle mode to brake {}");
+      checkError(armExtend.setIdleMode(IdleMode.kBrake), "AE set idle mode to brake {}");
+      checkError(leftIngest.setIdleMode(IdleMode.kBrake), "LI set idle mode to brake {}");
       checkError(rightIngest.setIdleMode(IdleMode.kBrake), "RI set idle mode to brake {}");
 
       driveBrakeButtonPressed = false;
