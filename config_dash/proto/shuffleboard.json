@@ -1,364 +1,6 @@
 {
   "tabPane": [
     {
-      "title": "SmartDashboard",
-      "autoPopulate": true,
-      "autoPopulatePrefix": "SmartDashboard/",
-      "widgetPane": {
-        "gridSize": 128.0,
-        "showGrid": true,
-        "hgap": 16.0,
-        "vgap": 16.0,
-        "titleType": 0,
-        "tiles": {
-          "0,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Arn Rot Feedback",
-              "_title": "Arn Rot Feedback",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "1,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Misc.codeVersion",
-              "_title": "Misc.codeVersion",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "2,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Arm Rot PID Enabled",
-              "_title": "Arm Rot PID Enabled",
-              "_glyph": 148,
-              "_showGlyph": false,
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "3,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Arm Rot P Gain",
-              "_title": "Arm Rot P Gain",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "4,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Arm Rot I Gain",
-              "_title": "Arm Rot I Gain",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "5,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Arm Rot D Gain",
-              "_title": "Arm Rot D Gain",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "6,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Arm Rot I Zone",
-              "_title": "Arm Rot I Zone",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "7,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Arm Rot Feed Forward",
-              "_title": "Arm Rot Feed Forward",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "8,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Arm Rot Max Output",
-              "_title": "Arm Rot Max Output",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "9,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Arm Rot Min Output",
-              "_title": "Arm Rot Min Output",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "0,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Arm Rot Set Target",
-              "_title": "Arm Rot Set Target",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "1,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Arm Rot Feedback",
-              "_title": "Arm Rot Feedback",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "2,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Arm Ext PID Enabled",
-              "_title": "Arm Ext PID Enabled",
-              "_glyph": 148,
-              "_showGlyph": false,
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "3,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Arm Ext P Gain",
-              "_title": "Arm Ext P Gain",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "4,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Arm Ext I Gain",
-              "_title": "Arm Ext I Gain",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "5,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Arm Ext D Gain",
-              "_title": "Arm Ext D Gain",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "6,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Arm Ext I Zone",
-              "_title": "Arm Ext I Zone",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "7,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Arm Ext Feed Forward",
-              "_title": "Arm Ext Feed Forward",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "8,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Arm Ext Max Output",
-              "_title": "Arm Ext Max Output",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "9,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Arm Ext Min Output",
-              "_title": "Arm Ext Min Output",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "0,2": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Arm Ext Set Target",
-              "_title": "Arm Ext Set Target",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "1,2": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Arm Ext Feedback",
-              "_title": "Arm Ext Feedback",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "2,2": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Arm Rot arvVal",
-              "_title": "Arm Rot arvVal",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "3,2": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Arm Ext arvVal",
-              "_title": "Arm Ext arvVal",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "10,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/driveBrakeEnabled",
-              "_title": "driveBrakeEnabled",
-              "_glyph": 148,
-              "_showGlyph": false,
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          }
-        }
-      }
-    },
-    {
-      "title": "LiveWindow",
-      "autoPopulate": true,
-      "autoPopulatePrefix": "LiveWindow/",
-      "widgetPane": {
-        "gridSize": 128.0,
-        "showGrid": true,
-        "hgap": 8.0,
-        "vgap": 8.0,
-        "titleType": 0,
-        "tiles": {}
-      }
-    },
-    {
       "title": "Arm Rotate",
       "autoPopulate": false,
       "autoPopulatePrefix": "",
@@ -377,20 +19,20 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Arm Rot D Gain",
-              "_title": "SmartDashboard/Arm Rot D Gain",
+              "_title": "Arm Rot D Gain",
               "_glyph": 148,
               "_showGlyph": false
             }
           },
           "10,0": {
             "size": [
-              3,
+              4,
               2
             ],
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Arm Rot Feed Forward",
-              "_title": "SmartDashboard/Arm Rot Feed Forward",
+              "_title": "Arm Rot Feed Forward",
               "_glyph": 148,
               "_showGlyph": false
             }
@@ -403,46 +45,46 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Arm Rot I Gain",
-              "_title": "SmartDashboard/Arm Rot I Gain",
+              "_title": "Arm Rot I Gain",
               "_glyph": 148,
               "_showGlyph": false
             }
           },
           "10,2": {
             "size": [
-              3,
+              4,
               2
             ],
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Arm Rot I Zone",
-              "_title": "SmartDashboard/Arm Rot I Zone",
+              "_title": "Arm Rot I Zone",
               "_glyph": 148,
               "_showGlyph": false
             }
           },
           "10,6": {
             "size": [
-              3,
+              4,
               2
             ],
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Arm Rot Max Output",
-              "_title": "SmartDashboard/Arm Rot Max Output",
+              "_title": "Arm Rot Max Output",
               "_glyph": 148,
               "_showGlyph": false
             }
           },
           "10,4": {
             "size": [
-              3,
+              4,
               2
             ],
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Arm Rot Min Output",
-              "_title": "SmartDashboard/Arm Rot Min Output",
+              "_title": "Arm Rot Min Output",
               "_glyph": 148,
               "_showGlyph": false
             }
@@ -455,7 +97,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Arm Rot P Gain",
-              "_title": "SmartDashboard/Arm Rot P Gain",
+              "_title": "Arm Rot P Gain",
               "_glyph": 148,
               "_showGlyph": false
             }
@@ -468,7 +110,7 @@
             "content": {
               "_type": "Toggle Switch",
               "_source0": "network_table:///SmartDashboard/Arm Rot PID Enabled",
-              "_title": "SmartDashboard/Arm Rot PID Enabled",
+              "_title": "Arm Rot PID Enabled",
               "_glyph": 148,
               "_showGlyph": false
             }
@@ -481,7 +123,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Arm Rot Set Target",
-              "_title": "SmartDashboard/Arm Rot Set Target",
+              "_title": "Arm Rot Set Target",
               "_glyph": 148,
               "_showGlyph": false
             }
@@ -494,7 +136,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Arm Rot arvVal",
-              "_title": "/SmartDashboard/Arm Rot arvVal",
+              "_title": "Arm Rot arvVal",
               "_glyph": 148,
               "_showGlyph": false
             }
@@ -507,7 +149,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Arm Rot Feedback",
-              "_title": "SmartDashboard/Arm Rot Feedback",
+              "_title": "Arm Rot Feedback",
               "_glyph": 148,
               "_showGlyph": false
             }
@@ -520,7 +162,7 @@
             "content": {
               "_type": "Boolean Box",
               "_source0": "network_table:///SmartDashboard/Arm Rot PID Enabled",
-              "_title": "/SmartDashboard/Arm Rot PID Enabled",
+              "_title": "Arm Rot PID Enabled",
               "_glyph": 148,
               "_showGlyph": false,
               "Colors/Color when true": "#7CFC00FF",
@@ -535,7 +177,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///Preferences/armRotate.high",
-              "_title": "/Preferences/armRotate.high",
+              "_title": "armRotate.high",
               "_glyph": 148,
               "_showGlyph": false
             }
@@ -548,7 +190,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///Preferences/armRotate.mid",
-              "_title": "/Preferences/armRotate.mid",
+              "_title": "armRotate.mid",
               "_glyph": 148,
               "_showGlyph": false
             }
@@ -561,7 +203,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///Preferences/armRotate.low",
-              "_title": "/Preferences/armRotate.low",
+              "_title": "armRotate.low",
               "_glyph": 148,
               "_showGlyph": false
             }
@@ -588,7 +230,7 @@
             "content": {
               "_type": "Boolean Box",
               "_source0": "network_table:///SmartDashboard/Arm Ext PID Enabled",
-              "_title": "SmartDashboard/Arm Ext PID Enabled",
+              "_title": "Arm Ext PID Enabled",
               "_glyph": 148,
               "_showGlyph": false,
               "Colors/Color when true": "#7CFC00FF",
@@ -603,7 +245,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Arm Ext Set Target",
-              "_title": "SmartDashboard/Arm Ext Set Target",
+              "_title": "Arm Ext Set Target",
               "_glyph": 148,
               "_showGlyph": false
             }
@@ -616,20 +258,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Arm Ext Feedback",
-              "_title": "SmartDashboard/Arm Ext Feedback",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "24,9": {
-            "size": [
-              12,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Misc.codeVersion",
-              "_title": "SmartDashboard/Misc.codeVersion",
+              "_title": "Arm Ext Feedback",
               "_glyph": 148,
               "_showGlyph": false
             }
@@ -642,7 +271,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Arm Ext arvVal",
-              "_title": "/SmartDashboard/Arm Ext arvVal",
+              "_title": "Arm Ext arvVal",
               "_glyph": 148,
               "_showGlyph": false
             }
@@ -655,7 +284,7 @@
             "content": {
               "_type": "Toggle Switch",
               "_source0": "network_table:///SmartDashboard/Arm Ext PID Enabled",
-              "_title": "SmartDashboard/Arm Ext PID Enabled",
+              "_title": "Arm Ext PID Enabled",
               "_glyph": 148,
               "_showGlyph": false
             }
@@ -668,7 +297,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Arm Ext P Gain",
-              "_title": "SmartDashboard/Arm Ext P Gain",
+              "_title": "Arm Ext P Gain",
               "_glyph": 148,
               "_showGlyph": false
             }
@@ -681,59 +310,59 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Arm Ext D Gain",
-              "_title": "SmartDashboard/Arm Ext D Gain",
+              "_title": "Arm Ext D Gain",
               "_glyph": 148,
               "_showGlyph": false
             }
           },
           "10,0": {
             "size": [
-              3,
+              4,
               2
             ],
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Arm Ext Feed Forward",
-              "_title": "/SmartDashboard/Arm Ext Feed Forward",
+              "_title": "Arm Ext Feed Forward",
               "_glyph": 148,
               "_showGlyph": false
             }
           },
           "10,6": {
             "size": [
-              3,
+              4,
               2
             ],
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Arm Ext Max Output",
-              "_title": "/SmartDashboard/Arm Ext Max Output",
+              "_title": "Arm Ext Max Output",
               "_glyph": 148,
               "_showGlyph": false
             }
           },
           "10,4": {
             "size": [
-              3,
+              4,
               2
             ],
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Arm Ext Min Output",
-              "_title": "/SmartDashboard/Arm Ext Min Output",
+              "_title": "Arm Ext Min Output",
               "_glyph": 148,
               "_showGlyph": false
             }
           },
           "10,2": {
             "size": [
-              3,
+              4,
               2
             ],
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Arm Ext I Zone",
-              "_title": "/SmartDashboard/Arm Ext I Zone",
+              "_title": "Arm Ext I Zone",
               "_glyph": 148,
               "_showGlyph": false
             }
@@ -746,7 +375,46 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Arm Ext I Gain",
-              "_title": "/SmartDashboard/Arm Ext I Gain",
+              "_title": "Arm Ext I Gain",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "26,0": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/armExtend.high",
+              "_title": "armExtend.high",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "26,2": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/armExtend.mid",
+              "_title": "armExtend.mid",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "26,4": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/armExtend.low",
+              "_title": "armExtend.low",
               "_glyph": 148,
               "_showGlyph": false
             }
@@ -773,20 +441,20 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///Preferences/Drive.rampRate",
-              "_title": "/Preferences/Drive.rampRate",
+              "_title": "Drive.rampRate",
               "_glyph": 148,
               "_showGlyph": false
             }
           },
-          "17,3": {
+          "25,0": {
             "size": [
               4,
-              2
+              3
             ],
             "content": {
               "_type": "Boolean Box",
               "_source0": "network_table:///SmartDashboard/driveBrakeEnabled",
-              "_title": "/SmartDashboard/driveBrakeEnabled",
+              "_title": "driveBrakeEnabled",
               "_glyph": 148,
               "_showGlyph": false,
               "Colors/Color when true": "#7CFC00FF",
@@ -795,12 +463,168 @@
           }
         }
       }
+    },
+    {
+      "title": "Gyro",
+      "autoPopulate": false,
+      "autoPopulatePrefix": "",
+      "widgetPane": {
+        "gridSize": 32.0,
+        "showGrid": true,
+        "hgap": 10.0,
+        "vgap": 10.0,
+        "titleType": 0,
+        "tiles": {
+          "13,3": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Gyro pitch",
+              "_title": "Gyro pitch",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "13,1": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Gyro roll",
+              "_title": "Gyro roll",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "13,5": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Gyro yaw",
+              "_title": "Gyro yaw",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Drive Team",
+      "autoPopulate": false,
+      "autoPopulatePrefix": "",
+      "widgetPane": {
+        "gridSize": 32.0,
+        "showGrid": true,
+        "hgap": 10.0,
+        "vgap": 10.0,
+        "titleType": 0,
+        "tiles": {
+          "0,0": {
+            "size": [
+              14,
+              12
+            ],
+            "content": {
+              "_type": "Camera Stream",
+              "_source0": "camera_server://limelight",
+              "_title": "limelight",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Crosshair/Show crosshair": true,
+              "Crosshair/Crosshair color": "#FFFFFFFF",
+              "Controls/Show controls": false,
+              "Controls/Rotation": "NONE",
+              "compression": -1.0,
+              "fps": -1,
+              "imageWidth": 0,
+              "imageHeight": 0
+            }
+          },
+          "15,0": {
+            "size": [
+              4,
+              4
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/driveBrakeEnabled",
+              "_title": "driveBrakeEnabled",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "26,10": {
+            "size": [
+              11,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Misc.codeVersion",
+              "_title": "Misc.codeVersion",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Gripper",
+      "autoPopulate": false,
+      "autoPopulatePrefix": "",
+      "widgetPane": {
+        "gridSize": 32.0,
+        "showGrid": true,
+        "hgap": 10.0,
+        "vgap": 10.0,
+        "titleType": 0,
+        "tiles": {
+          "12,0": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/Gripper.maxInSpeed",
+              "_title": "Gripper.MaxInSpeed",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "12,2": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/Gripper.maxOutSpeed",
+              "_title": "Gripper.maxOutSpeed",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          }
+        }
+      }
     }
   ],
   "windowGeometry": {
-    "x": 6.0,
-    "y": 0.0,
-    "width": 1543.0,
-    "height": 606.0
+    "x": -6.0,
+    "y": 3.0,
+    "width": 1612.0,
+    "height": 663.0
   }
 }
