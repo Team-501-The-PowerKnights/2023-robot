@@ -938,7 +938,7 @@ public class Robot extends TimedRobot {
             if (++autoCommandTimerCount >= autoCommandTimerCountTarget) {
                autoState = AutoState.retractArm;
                autoStateStarted = false;
-               armRetractShort();
+               // armRetractShort();
             }
             break;
          case retractArm:
@@ -964,7 +964,7 @@ public class Robot extends TimedRobot {
             if (++autoCommandTimerCount >= autoCommandTimerCountTarget) {
                autoState = AutoState.driveBackward;
                autoStateStarted = false;
-               driveBackward();
+               driveBackwardBalance();
             }
             break;
          case driveBackward:
@@ -975,7 +975,7 @@ public class Robot extends TimedRobot {
                autoCommandTimerCount = 0;
             }
             if ((++autoCommandTimerCount >= autoCommandTimerCountTarget) ||
-                  (ahrs.getPitch() > 8.50)) {
+                  (ahrs.getPitch() > 12.0)) {
                drive.arcadeDrive(0, 0);
                autoState = AutoState.balance;
                autoStateStarted = false;
@@ -1064,6 +1064,11 @@ public class Robot extends TimedRobot {
    private void driveBackward() {
       logger.info("starting command gripperStop");
       drive.arcadeDrive(-0.60, 0);
+   }
+
+   private void driveBackwardBalance() {
+      logger.info("starting command gripperStop");
+      drive.arcadeDrive(-0.80, 0);
    }
 
    @Override
