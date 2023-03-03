@@ -212,6 +212,8 @@ public class Robot extends TimedRobot {
          configureAHRS();
       }
 
+      gyroTlmCount = 0;
+
       driverStick = new Joystick(0);
 
       // Instantiation and factory default-ing motors (can't persist due to timing)
@@ -523,6 +525,14 @@ public class Robot extends TimedRobot {
 
       SmartDashboard.putNumber("Arm Rot Feedback", armRotateEncoder.getPosition());
       SmartDashboard.putNumber("Arm Ext Feedback", armExtendEncoder.getPosition());
+
+      gyroTlmCount++;
+      if (gyroTlmCount > 25) {
+         SmartDashboard.putNumber("Gyro roll", ahrs.getRoll());
+         SmartDashboard.putNumber("Gyro pitch", ahrs.getPitch());
+         // SmartDashboard.putNumber("Gyro yaw", ahrs.getYaw());
+         gyroTlmCount = 0;
+      }
    }
 
    /** This function is called once each time the robot enters DisSabled mode. */
@@ -717,8 +727,6 @@ public class Robot extends TimedRobot {
       checkError(leftIngest.setIdleMode(IdleMode.kBrake), "LI set idle mode to brake {}");
       checkError(rightIngest.setIdleMode(IdleMode.kBrake), "RI set idle mode to brake {}");
 
-      gyroTlmCount = 0;
-
       autoSelected = autoChooser.getSelected();
       if (autoSelected == null) {
          autoSelected = AutoSelection.doNothing;
@@ -739,13 +747,6 @@ public class Robot extends TimedRobot {
    /** This function is called periodically during autonomous. */
    @Override
    public void autonomousPeriodic() {
-      gyroTlmCount++;
-      if (gyroTlmCount > 25) {
-         SmartDashboard.putNumber("Gyro roll", ahrs.getRoll());
-         SmartDashboard.putNumber("Gyro pitch", ahrs.getPitch());
-         SmartDashboard.putNumber("Gyro yaw", ahrs.getYaw());
-         gyroTlmCount = 0;
-      }
 
       SmartDashboard.putString("Auto state", autoState.name());
 
@@ -959,7 +960,7 @@ public class Robot extends TimedRobot {
             if (!autoStateStarted) {
                logger.info("state = {}", autoState);
                autoStateStarted = true;
-               autoCommandTimerCountTarget = (long) (3.0 / 0.020); // sec / 20 msec
+               autoCommandTimerCountTarget = (long) (1.0 / 0.020); // sec / 20 msec
                autoCommandTimerCount = 0;
             }
             if (++autoCommandTimerCount >= autoCommandTimerCountTarget) {
@@ -985,7 +986,7 @@ public class Robot extends TimedRobot {
             if (!autoStateStarted) {
                logger.info("state = {}", autoState);
                autoStateStarted = true;
-               autoCommandTimerCountTarget = (long) (3.0 / 0.020); // sec / 20 msec
+               autoCommandTimerCountTarget = (long) (2.0 / 0.020); // sec / 20 msec
                autoCommandTimerCount = 0;
             }
             if ((++autoCommandTimerCount >= autoCommandTimerCountTarget) ||
@@ -1014,15 +1015,15 @@ public class Robot extends TimedRobot {
                autoCommandTimerCountTarget = (long) (3.0 / 0.020); // sec / 20 msec
                autoCommandTimerCount = 0;
             }
-            double pitch = ahrs.getPitch();
-            double speed = Math.max(Math.abs(pitch * 0.03), 0.3);
-            if (pitch > 0) {
-               drive.arcadeDrive(speed, 0);
-            } else if (pitch < 0) {
-               drive.arcadeDrive(-speed, 0);
-            } else {
-               drive.arcadeDrive(0, 0);
-            }
+            // double pitch = ahrs.getPitch();
+            // double speed = Math.max(Math.abs(pitch * 0.03), 0.3);
+            // if (pitch > 0) {
+            // drive.arcadeDrive(speed, 0);
+            // } else if (pitch < 0) {
+            // drive.arcadeDrive(-speed, 0);
+            // } else {
+            // drive.arcadeDrive(0, 0);
+            // }
             if (++autoCommandTimerCount >= autoCommandTimerCountTarget) {
                drive.arcadeDrive(0, 0);
                autoState = AutoState.end;
@@ -1094,19 +1095,12 @@ public class Robot extends TimedRobot {
 
    private void driveBackwardOnToRamp() {
       logger.info("starting command gripperStop");
-      drive.arcadeDrive(-0.80, 0);
+      drive.arcadeDrive(-0.60, 0);
    }
 
    @Override
    public void autonomousExit() {
       autonomousComplete = true;
-
-      driveBrakeEnabled = false;
-      SmartDashboard.putBoolean("driveBrakeEnabled", driveBrakeEnabled);
-      checkError(leftFront.setIdleMode(IdleMode.kCoast), "LF set idle mode to coast {}");
-      checkError(leftRear.setIdleMode(IdleMode.kCoast), "LR set idle mode to coast {}");
-      checkError(rightFront.setIdleMode(IdleMode.kCoast), "RF set idle mode to coast {}");
-      checkError(rightRear.setIdleMode(IdleMode.kCoast), "RR set idle mode to coast {}");
 
       drive.arcadeDrive(0, 0);
 
@@ -1132,21 +1126,11 @@ public class Robot extends TimedRobot {
       armHighRotateButtonPressed = false;
       armMidRotateButtonPressed = false;
       armLowRotateButtonPressed = false;
-
-      gyroTlmCount = 0;
    }
 
    /** This function is called periodically during operator control. */
    @Override
    public void teleopPeriodic() {
-      gyroTlmCount++;
-      if (gyroTlmCount > 50) {
-         SmartDashboard.putNumber("Gyro roll", ahrs.getRoll());
-         SmartDashboard.putNumber("Gyro pitch", ahrs.getPitch());
-         SmartDashboard.putNumber("Gyro yaw", ahrs.getYaw());
-         gyroTlmCount = 0;
-      }
-
       // -****************************************************************
       // -*
       // -* DRIVE
