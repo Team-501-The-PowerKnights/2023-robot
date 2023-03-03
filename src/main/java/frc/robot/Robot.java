@@ -541,6 +541,9 @@ public class Robot extends TimedRobot {
    @Override
    public void disabledPeriodic() {
 
+      // Has a "real" auto been selected yet?
+      SmartDashboard.putBoolean("Real Auto?", (autoChooser.getSelected() != AutoSelection.doNothing));
+
       /**
        * Drive
        **/
@@ -849,7 +852,6 @@ public class Robot extends TimedRobot {
                autoCommandTimerCountTarget = (long) (3.0 / 0.020); // sec / 20 msec
                autoCommandTimerCount = 0;
             }
-            // (ahrs.getPitch() > 8.50)
             if (++autoCommandTimerCount >= autoCommandTimerCountTarget) {
                drive.arcadeDrive(0, 0);
                autoState = AutoState.end;
@@ -985,6 +987,15 @@ public class Robot extends TimedRobot {
                autoStateStarted = true;
                autoCommandTimerCountTarget = (long) (3.0 / 0.020); // sec / 20 msec
                autoCommandTimerCount = 0;
+            }
+            double pitch = ahrs.getPitch();
+            double speed = Math.max(Math.abs(pitch * 0.03), 0.3);
+            if (pitch > 0) {
+               drive.arcadeDrive(speed, 0);
+            } else if (pitch < 0) {
+               drive.arcadeDrive(-speed, 0);
+            } else {
+               drive.arcadeDrive(0, 0);
             }
             if (++autoCommandTimerCount >= autoCommandTimerCountTarget) {
                drive.arcadeDrive(0, 0);
