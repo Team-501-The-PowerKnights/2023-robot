@@ -696,6 +696,7 @@ public class Robot extends TimedRobot {
       stopGripper, 
       driveBackward, 
       driveBackwardOnToRamp, 
+      driveBackwardOnToRampTimed,
       pause,
       balance, 
       end, 
@@ -964,9 +965,22 @@ public class Robot extends TimedRobot {
                autoCommandTimerCount = 0;
             }
             if (++autoCommandTimerCount >= autoCommandTimerCountTarget) {
-               autoState = AutoState.driveBackwardOnToRamp;
+               autoState = AutoState.driveBackwardOnToRampTimed;
                autoStateStarted = false;
                driveBackwardOnToRamp();
+            }
+            break;
+         case driveBackwardOnToRampTimed:
+            if (!autoStateStarted) {
+               logger.info("state = {}", autoState);
+               autoStateStarted = true;
+               autoCommandTimerCountTarget = (long) (2.3 / 0.020); // sec / 20 msec
+               autoCommandTimerCount = 0;
+            }
+            if (++autoCommandTimerCount >= autoCommandTimerCountTarget) {
+               autoState = AutoState.pause;
+               autoStateStarted = false;
+               drive.arcadeDrive(0, 0);
             }
             break;
          case driveBackwardOnToRamp:
