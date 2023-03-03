@@ -673,7 +673,7 @@ public class Robot extends TimedRobot {
    }
 
    private enum AutoState {
-      start, rotateArmHigh, extendArmLong, rotateArmMid, ejectGripper, retractArm, stopGripper, driveBackward, end, done;
+      start, rotateArmHigh, extendArmLong, rotateArmMid, ejectGripper, retractArm, stopGripper, driveBackward, balance, end, done;
    }
 
    private AutoState autoState;
@@ -710,6 +710,7 @@ public class Robot extends TimedRobot {
 
       autoState = AutoState.start;
       autoStateStarted = false;
+      SmartDashboard.putString("Auto state", autoState.name());
 
       autoCommandTimerCount = 0;
       autoCommandTimerCountTarget = 0;
@@ -722,12 +723,14 @@ public class Robot extends TimedRobot {
    @Override
    public void autonomousPeriodic() {
       gyroTlmCount++;
-      if (gyroTlmCount > 50) {
+      if (gyroTlmCount > 25) {
          SmartDashboard.putNumber("Gyro roll", ahrs.getRoll());
          SmartDashboard.putNumber("Gyro pitch", ahrs.getPitch());
          SmartDashboard.putNumber("Gyro yaw", ahrs.getYaw());
          gyroTlmCount = 0;
       }
+
+      SmartDashboard.putString("Auto state", autoState.name());
 
       switch (autoSelected) {
          case doNothing:
@@ -735,10 +738,12 @@ public class Robot extends TimedRobot {
             break;
          case doConeAndBackup:
             autoDoConeAndBackup();
+            break;
          case doFull:
             autoDoFull();
             break;
          default:
+            autoDoNothing();
             break;
       }
    }
@@ -967,7 +972,20 @@ public class Robot extends TimedRobot {
                autoCommandTimerCountTarget = (long) (3.0 / 0.020); // sec / 20 msec
                autoCommandTimerCount = 0;
             }
-            // (ahrs.getPitch() > 8.50)
+            if ((++autoCommandTimerCount >= autoCommandTimerCountTarget) ||
+                  (ahrs.getPitch() > 8.50)) {
+               drive.arcadeDrive(0, 0);
+               autoState = AutoState.balance;
+               autoStateStarted = false;
+            }
+            break;
+         case balance:
+            if (!autoStateStarted) {
+               logger.info("state = {}", autoState);
+               autoStateStarted = true;
+               autoCommandTimerCountTarget = (long) (3.0 / 0.020); // sec / 20 msec
+               autoCommandTimerCount = 0;
+            }
             if (++autoCommandTimerCount >= autoCommandTimerCountTarget) {
                drive.arcadeDrive(0, 0);
                autoState = AutoState.end;
