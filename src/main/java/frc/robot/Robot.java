@@ -520,6 +520,9 @@ public class Robot extends TimedRobot {
       // methods. This must be called from the robot's periodic block in order
       // for anything in the Command-based framework to work.
       CommandScheduler.getInstance().run();
+
+      SmartDashboard.putNumber("Arm Rot Feedback", armRotateEncoder.getPosition());
+      SmartDashboard.putNumber("Arm Ext Feedback", armExtendEncoder.getPosition());
    }
 
    /** This function is called once each time the robot enters DisSabled mode. */
@@ -1076,10 +1079,6 @@ public class Robot extends TimedRobot {
    /** This function is called periodically during operator control. */
    @Override
    public void teleopPeriodic() {
-      SmartDashboard.putNumber("NavX Yaw", 0.0);
-      SmartDashboard.putNumber("NavX Pitch", 0.0);
-      SmartDashboard.putNumber("NavX Rotate", 0.0);
-
       gyroTlmCount++;
       if (gyroTlmCount > 50) {
          SmartDashboard.putNumber("Gyro roll", ahrs.getRoll());
@@ -1185,8 +1184,8 @@ public class Robot extends TimedRobot {
          armMidRotateButtonPressed = operatorStick.getRawButton(2);
          armLowRotateButtonPressed = operatorStick.getRawButton(1);
       }
-      SmartDashboard.putNumber("Arm Rot Feedback", armRotateEncoder.getPosition());
       SmartDashboard.getNumber("Arm Rot Set Target", rotateTarget);
+      // Position tracked in robot periodic
 
       // -****************************************************************
       // -*
@@ -1233,8 +1232,8 @@ public class Robot extends TimedRobot {
          }
          SmartDashboard.putNumber("Arm Ext Set Target", extendTarget);
       }
-      SmartDashboard.putNumber("Arm Ext Feedback", armExtendEncoder.getPosition());
       SmartDashboard.putNumber("Arm Ext Set Target", extendTarget);
+      // Position tracked in robot periodic
 
       // -****************************************************************
       // -*
@@ -1281,37 +1280,6 @@ public class Robot extends TimedRobot {
    /** This function is called periodically during test mode. */
    @Override
    public void testPeriodic() {
-      /*
-       * Gripper Ingest Testing
-       * 
-       * // double inSpeed = operatorStick.getRawAxis(2);
-       * // double outSpeed = operatorStick.getRawAxis(3);
-       * // double speed = 0;
-       * // if (inSpeed > outSpeed) {
-       * // speed = inSpeed;
-       * // }
-       * // else {
-       * // speed = -outSpeed;
-       * // }
-       * // speed *= 0.30;
-       * // leftIngest.set(TalonFXControlMode.PercentOutput, speed);
-       * // rightIngest.set(TalonFXControlMode.PercentOutput, -speed);
-       */
-
-      /*
-       * Gripper Pneumatics Testing
-       * if (operatorStick.getRawButton(3)) {
-       * if (!gripperOpen) {
-       * logger.info("button 3 pressed - open gripper");
-       * gripperSolenoid.set(true);
-       * gripperOpen = true;
-       * }
-       * } else if (!operatorStick.getRawButton(3) && gripperOpen) {
-       * logger.info("button 3 released - close gripper");
-       * gripperSolenoid.set(false);
-       * gripperOpen = false;
-       * }
-       */
    }
 
    @Override
