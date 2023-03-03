@@ -676,7 +676,21 @@ public class Robot extends TimedRobot {
    }
 
    private enum AutoState {
-      start, rotateArmHigh, extendArmLong, rotateArmMid, ejectGripper, retractArm, stopGripper, driveBackward, balance, end, done;
+      // @formatter:off
+      start, 
+      rotateArmHigh, 
+      extendArmLong, 
+      rotateArmMid, 
+      ejectGripper, 
+      retractArm, 
+      stopGripper, 
+      driveBackward, 
+      driveBackwardOnToRamp, 
+      pause,
+      balance, 
+      end, 
+      done;
+      // @formatter:on
    }
 
    private AutoState autoState;
@@ -964,10 +978,10 @@ public class Robot extends TimedRobot {
             if (++autoCommandTimerCount >= autoCommandTimerCountTarget) {
                autoState = AutoState.driveBackward;
                autoStateStarted = false;
-               driveBackwardBalance();
+               driveBackwardOnToRamp();
             }
             break;
-         case driveBackward:
+         case driveBackwardOnToRamp:
             if (!autoStateStarted) {
                logger.info("state = {}", autoState);
                autoStateStarted = true;
@@ -975,8 +989,20 @@ public class Robot extends TimedRobot {
                autoCommandTimerCount = 0;
             }
             if ((++autoCommandTimerCount >= autoCommandTimerCountTarget) ||
-                  (ahrs.getPitch() > 12.0)) {
+                  (ahrs.getPitch() > 16.0)) {
                drive.arcadeDrive(0, 0);
+               autoState = AutoState.pause;
+               autoStateStarted = false;
+            }
+            break;
+         case pause:
+            if (!autoStateStarted) {
+               logger.info("state = {}", autoState);
+               autoStateStarted = true;
+               autoCommandTimerCountTarget = (long) (0.10 / 0.020); // sec / 20 msec
+               autoCommandTimerCount = 0;
+            }
+            if (++autoCommandTimerCount >= autoCommandTimerCountTarget) {
                autoState = AutoState.balance;
                autoStateStarted = false;
             }
@@ -1066,7 +1092,7 @@ public class Robot extends TimedRobot {
       drive.arcadeDrive(-0.60, 0);
    }
 
-   private void driveBackwardBalance() {
+   private void driveBackwardOnToRamp() {
       logger.info("starting command gripperStop");
       drive.arcadeDrive(-0.80, 0);
    }
