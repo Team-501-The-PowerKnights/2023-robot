@@ -72,6 +72,70 @@
               "_glyph": 148,
               "_showGlyph": false
             }
+          },
+          "30,3": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Auto state",
+              "_title": "Auto state",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "29,5": {
+            "size": [
+              3,
+              5
+            ],
+            "content": {
+              "_type": "Voltage View",
+              "_source0": "network_table:///SmartDashboard/Gyro pitch",
+              "_title": "Gyro pitch",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Range/Min": -20.0,
+              "Range/Max": 20.0,
+              "Range/Center": 0.0,
+              "Visuals/Orientation": "VERTICAL",
+              "Visuals/Number of tick marks": 5
+            }
+          },
+          "32,6": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Voltage View",
+              "_source0": "network_table:///SmartDashboard/Gyro roll",
+              "_title": "Gyro roll",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Range/Min": -20.0,
+              "Range/Max": 20.0,
+              "Range/Center": 0.0,
+              "Visuals/Orientation": "HORIZONTAL",
+              "Visuals/Number of tick marks": 5
+            }
+          },
+          "23,0": {
+            "size": [
+              4,
+              4
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Real Auto?",
+              "_title": "Real Auto?",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
           }
         }
       }
@@ -245,7 +309,7 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "26,0": {
+          "26,2": {
             "size": [
               4,
               2
@@ -258,7 +322,7 @@
               "_showGlyph": false
             }
           },
-          "26,2": {
+          "26,4": {
             "size": [
               4,
               2
@@ -271,7 +335,7 @@
               "_showGlyph": false
             }
           },
-          "26,4": {
+          "26,6": {
             "size": [
               4,
               2
@@ -280,6 +344,19 @@
               "_type": "Text View",
               "_source0": "network_table:///Preferences/armRotate.low",
               "_title": "armRotate.low",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "26,0": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/armRotate.over",
+              "_title": "armRotate.over",
               "_glyph": 148,
               "_showGlyph": false
             }
@@ -551,53 +628,44 @@
         "vgap": 10.0,
         "titleType": 0,
         "tiles": {
-          "19,3": {
+          "22,3": {
             "size": [
-              3,
-              7
+              14,
+              8
             ],
             "content": {
-              "_type": "Voltage View",
-              "_source0": "network_table:///SmartDashboard/Gyro pitch",
-              "_title": "Gyro pitch",
-              "_glyph": 148,
-              "_showGlyph": false,
-              "Range/Min": -90.0,
-              "Range/Max": 90.0,
-              "Range/Center": 0.0,
-              "Visuals/Orientation": "VERTICAL",
-              "Visuals/Number of tick marks": 5
-            }
-          },
-          "13,3": {
-            "size": [
-              6,
-              3
-            ],
-            "content": {
-              "_type": "Voltage View",
+              "_type": "Graph",
               "_source0": "network_table:///SmartDashboard/Gyro roll",
               "_title": "Gyro roll",
               "_glyph": 148,
               "_showGlyph": false,
-              "Range/Min": -90.0,
-              "Range/Max": 90.0,
-              "Range/Center": 0.0,
-              "Visuals/Orientation": "HORIZONTAL",
-              "Visuals/Number of tick marks": 5
+              "Graph/Visible time": 30.0,
+              "Graph/X-axis auto scrolling": true,
+              "Y-axis/Automatic bounds": true,
+              "Y-axis/Upper bound": 1.0,
+              "Y-axis/Lower bound": -1.0,
+              "Y-axis/Unit": "ul",
+              "Visible data/SmartDashboard/Gyro roll": true
             }
           },
-          "14,1": {
+          "6,3": {
             "size": [
-              7,
-              2
+              14,
+              8
             ],
             "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Gyro yaw",
-              "_title": "Gyro yaw",
+              "_type": "Graph",
+              "_source0": "network_table:///SmartDashboard/Gyro pitch",
+              "_title": "Gyro pitch",
               "_glyph": 148,
-              "_showGlyph": false
+              "_showGlyph": false,
+              "Graph/Visible time": 30.0,
+              "Graph/X-axis auto scrolling": true,
+              "Y-axis/Automatic bounds": true,
+              "Y-axis/Upper bound": 1.0,
+              "Y-axis/Lower bound": -1.0,
+              "Y-axis/Unit": "ul",
+              "Visible data/SmartDashboard/Gyro pitch": true
             }
           }
         }
