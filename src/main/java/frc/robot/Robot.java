@@ -328,7 +328,6 @@ public class Robot extends TimedRobot {
       checkError(armExtend.setIdleMode(IdleMode.kBrake), "AE set idle mode to brake {}");
       armExtendPID = armExtend.getPIDController();
       armExtendEncoder = armExtend.getEncoder();
-      armExtendEncoder.setPosition(0);
       checkError(armExtend.setSoftLimit(SoftLimitDirection.kReverse, k_extendMinSoftLimit),
             "AE set min software limit {}");
       checkError(armExtend.setSoftLimit(SoftLimitDirection.kForward, k_extendMaxSoftLimit),
