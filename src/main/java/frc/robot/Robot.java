@@ -66,6 +66,7 @@ public class Robot extends TimedRobot {
    private enum AutoSelection {
       // @formatter:off
       doNothing("doNothing"), 
+      doConeAndBackup("doConeAndBackup"),
       doFull("doFull");
       // @formatter:on
 
@@ -494,6 +495,8 @@ public class Robot extends TimedRobot {
       autoChooser.setDefaultOption("Do Nothing", AutoSelection.doNothing);
 
       //
+      autoChooser.addOption("Not Full Auto (place cone & backup)", AutoSelection.doConeAndBackup);
+      //
       autoChooser.addOption("Full Auto (place cone & balance)", AutoSelection.doFull);
 
       SmartDashboard.putData("Auto Mode", autoChooser);
@@ -728,6 +731,8 @@ public class Robot extends TimedRobot {
          case doNothing:
             autoDoNothing();
             break;
+         case doConeAndBackup:
+            autoDoConeAndBackup();
          case doFull:
             autoDoFull();
             break;
@@ -737,6 +742,129 @@ public class Robot extends TimedRobot {
    }
 
    private void autoDoNothing() {
+   }
+
+   private void autoDoConeAndBackup() {
+      switch (autoState) {
+         case start:
+            if (!autoStateStarted) {
+               logger.info("state = {}", autoState);
+               autoStateStarted = true;
+               autoCommandTimerCountTarget = 0;
+               autoCommandTimerCount = 0;
+            }
+            autoState = AutoState.rotateArmHigh;
+            autoStateStarted = false;
+            armRotateHigh();
+            break;
+         case rotateArmHigh:
+            if (!autoStateStarted) {
+               logger.info("state = {}", autoState);
+               autoStateStarted = true;
+               autoCommandTimerCountTarget = (long) (1.0 / 0.020); // sec / 20 msec
+               autoCommandTimerCount = 0;
+            }
+            if (++autoCommandTimerCount >= autoCommandTimerCountTarget) {
+               autoState = AutoState.extendArmLong;
+               autoStateStarted = false;
+               armExtendLong();
+            }
+            break;
+         case extendArmLong:
+            if (!autoStateStarted) {
+               logger.info("state = {}", autoState);
+               autoStateStarted = true;
+               autoCommandTimerCountTarget = (long) (5.0 / 0.020); // sec / 20 msec
+               autoCommandTimerCount = 0;
+            }
+            if (++autoCommandTimerCount >= autoCommandTimerCountTarget) {
+               autoState = AutoState.rotateArmMid;
+               autoStateStarted = false;
+               armRotateMid();
+            }
+            break;
+         case rotateArmMid:
+            if (!autoStateStarted) {
+               logger.info("state = {}", autoState);
+               autoStateStarted = true;
+               autoCommandTimerCountTarget = (long) (1.0 / 0.020); // sec / 20 msec
+               autoCommandTimerCount = 0;
+            }
+            if (++autoCommandTimerCount >= autoCommandTimerCountTarget) {
+               autoState = AutoState.ejectGripper;
+               autoStateStarted = false;
+               gripperEject();
+            }
+            break;
+         case ejectGripper:
+            if (!autoStateStarted) {
+               logger.info("state = {}", autoState);
+               autoStateStarted = true;
+               autoCommandTimerCountTarget = (long) (0.5 / 0.020); // sec / 20 msec
+               autoCommandTimerCount = 0;
+            }
+            if (++autoCommandTimerCount >= autoCommandTimerCountTarget) {
+               autoState = AutoState.retractArm;
+               autoStateStarted = false;
+               armRetractShort();
+            }
+            break;
+         case retractArm:
+            if (!autoStateStarted) {
+               logger.info("state = {}", autoState);
+               autoStateStarted = true;
+               autoCommandTimerCountTarget = (long) (3.0 / 0.020); // sec / 20 msec
+               autoCommandTimerCount = 0;
+            }
+            if (++autoCommandTimerCount >= autoCommandTimerCountTarget) {
+               autoState = AutoState.stopGripper;
+               autoStateStarted = false;
+               gripperStop();
+            }
+            break;
+         case stopGripper:
+            if (!autoStateStarted) {
+               logger.info("state = {}", autoState);
+               autoStateStarted = true;
+               autoCommandTimerCountTarget = (long) (0.10 / 0.020); // sec / 20 msec
+               autoCommandTimerCount = 0;
+            }
+            if (++autoCommandTimerCount >= autoCommandTimerCountTarget) {
+               autoState = AutoState.driveBackward;
+               autoStateStarted = false;
+               driveBackward();
+            }
+            break;
+         case driveBackward:
+            if (!autoStateStarted) {
+               logger.info("state = {}", autoState);
+               autoStateStarted = true;
+               autoCommandTimerCountTarget = (long) (3.0 / 0.020); // sec / 20 msec
+               autoCommandTimerCount = 0;
+            }
+            // (ahrs.getPitch() > 8.50)
+            if (++autoCommandTimerCount >= autoCommandTimerCountTarget) {
+               drive.arcadeDrive(0, 0);
+               autoState = AutoState.end;
+               autoStateStarted = false;
+            }
+            break;
+         case end:
+            if (!autoStateStarted) {
+               logger.info("state = {}", autoState);
+               autoStateStarted = true;
+               // Just in case ...
+               drive.arcadeDrive(0, 0);
+            }
+            autoState = AutoState.done;
+            autoStateStarted = false;
+            autoCommandTimerCountTarget = 0;
+            autoCommandTimerCount = 0;
+            break;
+         case done:
+         default:
+            break;
+      }
    }
 
    private void autoDoFull() {
