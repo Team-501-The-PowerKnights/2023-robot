@@ -18,7 +18,6 @@ import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMax.SoftLimitDirection;
-// import com.revrobotics.CANSparkMax.SoftLimitDirection;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DriverStation;
@@ -32,7 +31,6 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 import riolog.PKLogger;
@@ -49,8 +47,6 @@ public class Robot extends TimedRobot {
 
    /** Our classes' logger **/
    private static final PKLogger logger = RioLogger.getLogger(Robot.class.getName());
-
-   private Command m_autonomousCommand;
 
    @SuppressWarnings("unused")
    private RobotContainer m_robotContainer;
@@ -114,13 +110,16 @@ public class Robot extends TimedRobot {
    private Joystick operatorStick;
 
    // Arm Rotation
+   private boolean armOverRotateButtonPressed;
    private boolean armHighRotateButtonPressed;
    private boolean armMidRotateButtonPressed;
    private boolean armLowRotateButtonPressed;
 
+   private final double k_armRotateOverSetPoint = 60;
    private final double k_armRotateHighSetPoint = 26;
    private final double k_armRotateMidSetPoint = 17;
    private final double k_armRotateLowSetPoint = 7;
+   private double armRotateOverSetPoint;
    private double armRotateHighSetPoint;
    private double armRotateMidSetPoint;
    private double armRotateLowSetPoint;
@@ -163,6 +162,7 @@ public class Robot extends TimedRobot {
    private final double k_armExtendHighSetPoint = 160;
    private final double k_armExtendMidSetPoint = 90;
    private final double k_armExtendLowSetPoint = 50;
+   private final double k_armExtendInSetPoint = 5;
    private double armExtendHighSetPoint;
    private double armExtendMidSetPoint;
    private double armExtendLowSetPoint;
@@ -257,7 +257,7 @@ public class Robot extends TimedRobot {
 
       armRotate = new CANSparkMax(21, MotorType.kBrushless);
       checkError(armRotate.restoreFactoryDefaults(), "AR restore factory defaults {}");
-      checkError(armRotate.setIdleMode(IdleMode.kCoast), "AR set idle mode to coast {}");
+      checkError(armRotate.setIdleMode(IdleMode.kBrake), "AR set idle mode to brake {}");
       armRotatePID = armRotate.getPIDController();
       armRotateEncoder = armRotate.getEncoder();
       armRotateEncoder.setPosition(0);
@@ -301,6 +301,10 @@ public class Robot extends TimedRobot {
       SmartDashboard.putNumber("Arm Rot Feedback", armRotateEncoder.getPosition());
 
       // initialize set points
+      if (!Preferences.containsKey("armRotate.over")) {
+         Preferences.setDouble("armRotate.over", k_armRotateOverSetPoint);
+      }
+      armRotateOverSetPoint = Preferences.getDouble("armRotate.over", k_armRotateOverSetPoint);
       if (!Preferences.containsKey("armRotate.high")) {
          Preferences.setDouble("armRotate.high", k_armRotateHighSetPoint);
       }
@@ -320,7 +324,7 @@ public class Robot extends TimedRobot {
 
       armExtend = new CANSparkMax(22, MotorType.kBrushless);
       checkError(armExtend.restoreFactoryDefaults(), "AE restore factory defaults {}");
-      checkError(armExtend.setIdleMode(IdleMode.kCoast), "AE set idle mode to coast {}");
+      checkError(armExtend.setIdleMode(IdleMode.kBrake), "AE set idle mode to brake {}");
       armExtendPID = armExtend.getPIDController();
       armExtendEncoder = armExtend.getEncoder();
       armExtendEncoder.setPosition(0);
@@ -527,11 +531,6 @@ public class Robot extends TimedRobot {
 
       // leftIngest.set(TalonFXControlMode.PercentOutput, 0);
       leftIngest.set(0);
-
-      checkError(armRotate.setIdleMode(IdleMode.kCoast), "AR set idle mode to coast {}");
-      checkError(armExtend.setIdleMode(IdleMode.kCoast), "AE set idle mode to coast {}");
-      checkError(leftIngest.setIdleMode(IdleMode.kCoast), "LI set idle mode to coast {}");
-      checkError(rightIngest.setIdleMode(IdleMode.kCoast), "RI set idle mode to coast {}");
    }
 
    @Override
@@ -589,6 +588,7 @@ public class Robot extends TimedRobot {
       }
 
       // read set points from SmartDashboard
+      armRotateOverSetPoint = Preferences.getDouble("armRotate.over", k_armRotateOverSetPoint);
       armRotateHighSetPoint = Preferences.getDouble("armRotate.high", k_armRotateHighSetPoint);
       armRotateMidSetPoint = Preferences.getDouble("armRotate.mid", k_armRotateMidSetPoint);
       armRotateLowSetPoint = Preferences.getDouble("armRotate.low", k_armRotateLowSetPoint);
@@ -1027,7 +1027,14 @@ public class Robot extends TimedRobot {
             armRotatePID.setReference(rotateTarget, ControlType.kPosition); // update pid
          }
 
-         if (operatorStick.getRawButton(4)) {
+         if (operatorStick.getRawButton(6)) {
+            if (!armOverRotateButtonPressed) {
+               rotateTarget = armRotateOverSetPoint;
+               logger.debug("set arm rotate PID to over {}", rotateTarget);
+               armRotatePID.setReference(rotateTarget, ControlType.kPosition);
+               armOverRotateButtonPressed = true;
+            }
+         } else if (operatorStick.getRawButton(4)) {
             if (!armHighRotateButtonPressed) {
                rotateTarget = armRotateHighSetPoint;
                logger.debug("set arm rotate PID to high {}", rotateTarget);
@@ -1051,6 +1058,7 @@ public class Robot extends TimedRobot {
          }
          SmartDashboard.putNumber("Arm Rot Set Target", rotateTarget);
 
+         armOverRotateButtonPressed = operatorStick.getRawButton(6);
          armHighRotateButtonPressed = operatorStick.getRawButton(4);
          armMidRotateButtonPressed = operatorStick.getRawButton(2);
          armLowRotateButtonPressed = operatorStick.getRawButton(1);
@@ -1078,7 +1086,12 @@ public class Robot extends TimedRobot {
             armExtendPID.setReference(extendTarget, ControlType.kPosition); // update pid
          }
 
-         if (armHighRotateButtonPressed) {
+         if (armOverRotateButtonPressed) {
+            // Over the top retracts all the way in
+            extendTarget = k_armExtendInSetPoint;
+            logger.debug("set arm extend PID to full in {}", extendTarget);
+            armExtendPID.setReference(extendTarget, ControlType.kPosition);
+         } else if (armHighRotateButtonPressed) {
             extendTarget = armExtendHighSetPoint;
             logger.debug("set arm extend PID to high {}", extendTarget);
             armExtendPID.setReference(extendTarget, ControlType.kPosition);
@@ -1092,7 +1105,8 @@ public class Robot extends TimedRobot {
             armExtendPID.setReference(extendTarget, ControlType.kPosition);
          } else if (operatorStick.getRawButton(3)) {
             // Retract all the way in
-            extendTarget = 5;
+            extendTarget = k_armExtendInSetPoint;
+            logger.debug("set arm extend PID to full in {}", extendTarget);
             armExtendPID.setReference(extendTarget, ControlType.kPosition);
          }
          SmartDashboard.putNumber("Arm Ext Set Target", extendTarget);
