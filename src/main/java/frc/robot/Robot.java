@@ -1074,7 +1074,7 @@ public class Robot extends TimedRobot {
    private void gripperEject() {
       logger.info("starting command gripperEject");
       // leftIngest.set(TalonFXControlMode.PercentOutput, 0.30);
-      leftIngest.set(-0.30);
+      leftIngest.set(-0.80);
    }
 
    private void armRetractShort() {
@@ -1142,8 +1142,14 @@ public class Robot extends TimedRobot {
       // FIXME: Make this right calls
       // xSpeed,zRotation
       // drive.arcadeDrive(0, 0);
-      drive.arcadeDrive(-driverStick.getRawAxis(1),
-            -driverStick.getRawAxis(4));
+      double speed = -driverStick.getRawAxis(1);
+      double rotation = -driverStick.getRawAxis(4);
+      // Apply crawl?
+      if (driverStick.getRawButton(5)) {
+         speed *= 0.60;
+         rotation *= 0.75;
+      }
+      drive.arcadeDrive(speed, rotation);
 
       // drive.curvatureDrive(-driverStick.getRawAxis(1) * .60,
       // -driverStick.getRawAxis(4) * 0.60, false);
@@ -1292,22 +1298,22 @@ public class Robot extends TimedRobot {
       SmartDashboard.putNumber("Gripper inSpeed", inSpeed);
       SmartDashboard.putNumber("Gripper outSpeed", outSpeed);
 
-      double speed = 0;
+      double gripperSpeed = 0;
       if (inSpeed > outSpeed) {
          // speed = inSpeed;
-         speed = Math.max(-inSpeed, -Math.abs(k_gripperMaxOutSpeed));
+         gripperSpeed = Math.max(-inSpeed, -Math.abs(k_gripperMaxOutSpeed));
       } else {
          // speed = -outSpeed;
-         speed = Math.min(outSpeed, Math.abs(k_gripperMaxInSpeed));
+         gripperSpeed = Math.min(outSpeed, Math.abs(k_gripperMaxInSpeed));
       }
 
-      if (speed == 0) {
-         speed = Math.abs(k_gripperIdleSpeed); // Make the intake run in slow always
+      if (gripperSpeed == 0) {
+         gripperSpeed = Math.abs(k_gripperIdleSpeed); // Make the intake run in slow always
       }
 
-      SmartDashboard.putNumber("Gripper speed", speed);
+      SmartDashboard.putNumber("Gripper speed", gripperSpeed);
       // leftIngest.set(TalonFXControlMode.PercentOutput, -speed);
-      leftIngest.set(-speed);
+      leftIngest.set(-gripperSpeed);
    }
 
    @Override
