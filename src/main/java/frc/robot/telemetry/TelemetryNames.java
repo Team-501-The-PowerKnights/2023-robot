@@ -162,6 +162,32 @@ public final class TelemetryNames {
       public static final String brakeEnabled = name + ".brakeEnabled";
    }
 
+   public final class ArmRotator {
+      private static final String name = SubsystemNames.armName;
+
+      public static final String status = name + ".status";
+      public static final String implClass = name + ".implClass";
+      public static final String autoCommand = name + ".autoCommand";
+      public static final String teleCommand = name + ".teleCommand";
+
+      public static final String PIDEnabled = name + ".rotate" + PIDTelemetry.pid_Enabled;
+      public static final String PIDTarget = name + ".rotate" + PIDTelemetry.pid_Target;
+      public static final String PIDCurrent = name + ".rotate" + PIDTelemetry.pid_Current;
+   }
+
+   public final class ArmExtender {
+      private static final String name = SubsystemNames.armName;
+
+      public static final String status = name + ".status";
+      public static final String implClass = name + ".implClass";
+      public static final String autoCommand = name + ".autoCommand";
+      public static final String teleCommand = name + ".teleCommand";
+
+      public static final String PIDEnabled = name + ".extend" + PIDTelemetry.pid_Enabled;
+      public static final String PIDTarget = name + ".extend" + PIDTelemetry.pid_Target;
+      public static final String PIDCurrent = name + ".extend" + PIDTelemetry.pid_Current;
+   }
+
    public final class Arm {
       private static final String name = SubsystemNames.armName;
 
@@ -170,12 +196,9 @@ public final class TelemetryNames {
       public static final String autoCommand = name + ".autoCommand";
       public static final String teleCommand = name + ".teleCommand";
 
-      public static final String rotatePIDEnabled = name + ".rotate" + PIDTelemetry.pid_Enabled;
-      public static final String rotatePIDTarget = name + ".rotate" + PIDTelemetry.pid_Target;
-      public static final String rotatePIDCurrent = name + ".rotate" + PIDTelemetry.pid_Current;
-      public static final String extendPIDEnabled = name + ".extend" + PIDTelemetry.pid_Enabled;
-      public static final String extendPIDTarget = name + ".extend" + PIDTelemetry.pid_Target;
-      public static final String extendPIDCurrent = name + ".extend" + PIDTelemetry.pid_Current;
+      public static final String PIDEnabled = name + PIDTelemetry.pid_Enabled;
+      public static final String PIDTarget = name + PIDTelemetry.pid_Target;
+      public static final String PIDCurrent = name + PIDTelemetry.pid_Current;
    }
 
    public final class Gripper {

@@ -14,6 +14,8 @@ import java.util.List;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.subsystems.arm.ArmFactory;
+import frc.robot.subsystems.armextender.ArmExtenderFactory;
+import frc.robot.subsystems.armrotator.ArmRotatorFactory;
 import frc.robot.subsystems.drive.DriveFactory;
 import frc.robot.subsystems.gripper.GripperFactory;
 import frc.robot.telemetry.TelemetryManager;
@@ -55,6 +57,26 @@ public class SubsystemsFactory {
       {
          ArmFactory.constructInstance();
          ISubsystem ss = ArmFactory.getInstance();
+         tlmMgr.addProvider(ss);
+         subsystems.add(ss);
+      }
+
+      // ** ArmRotator **
+      SmartDashboard.putNumber(TelemetryNames.ArmRotator.status,
+            PKStatus.unknown.tlmValue);
+      {
+         ArmRotatorFactory.constructInstance();
+         ISubsystem ss = ArmRotatorFactory.getInstance();
+         tlmMgr.addProvider(ss);
+         subsystems.add(ss);
+      }
+
+      // ** ArmExtender **
+      SmartDashboard.putNumber(TelemetryNames.ArmExtender.status,
+            PKStatus.unknown.tlmValue);
+      {
+         ArmExtenderFactory.constructInstance();
+         ISubsystem ss = ArmExtenderFactory.getInstance();
          tlmMgr.addProvider(ss);
          subsystems.add(ss);
       }

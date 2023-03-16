@@ -193,13 +193,20 @@ abstract class BaseArmSubsystem extends BaseSubsystem implements IArmSubsystem {
 
    @Override
    public void updateTelemetry() {
-      SmartDashboard.putBoolean(TelemetryNames.Arm.rotatePIDEnabled, tlmRotatePID.PIDEnabled);
-      SmartDashboard.putNumber(TelemetryNames.Arm.rotatePIDTarget, tlmRotatePID.PIDTarget);
-      SmartDashboard.putNumber(TelemetryNames.Arm.rotatePIDCurrent, tlmRotatePID.PIDCurrent);
+      // FIXME: Put back the telemetry here
+      // SmartDashboard.putBoolean(TelemetryNames.Arm.rotatePIDEnabled,
+      // tlmRotatePID.PIDEnabled);
+      // SmartDashboard.putNumber(TelemetryNames.Arm.rotatePIDTarget,
+      // tlmRotatePID.PIDTarget);
+      // SmartDashboard.putNumber(TelemetryNames.Arm.rotatePIDCurrent,
+      // tlmRotatePID.PIDCurrent);
 
-      SmartDashboard.putBoolean(TelemetryNames.Arm.extendPIDEnabled, tlmExtendPID.PIDEnabled);
-      SmartDashboard.putNumber(TelemetryNames.Arm.extendPIDTarget, tlmExtendPID.PIDTarget);
-      SmartDashboard.putNumber(TelemetryNames.Arm.extendPIDCurrent, tlmExtendPID.PIDCurrent);
+      // SmartDashboard.putBoolean(TelemetryNames.Arm.extendPIDEnabled,
+      // tlmExtendPID.PIDEnabled);
+      // SmartDashboard.putNumber(TelemetryNames.Arm.extendPIDTarget,
+      // tlmExtendPID.PIDTarget);
+      // SmartDashboard.putNumber(TelemetryNames.Arm.extendPIDCurrent,
+      // tlmExtendPID.PIDCurrent);
    }
 
    @Override

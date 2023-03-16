@@ -19,7 +19,14 @@ public class SubsystemNames {
 
    public static final String driveName = "Drive";
 
+   // Proto-Bot
+   public static final String armExtenderName = "ArmExtender";
+   public static final String armRotatorName = "ArmRotator";
+   // Real-Bot
    public static final String armName = "Arm";
+   public static final String liftName = "Lift";
+   public static final String turretName = "Turret";
+
    public static final String gripperName = "Gripper";
 
 }

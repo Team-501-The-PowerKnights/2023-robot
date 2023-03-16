@@ -71,6 +71,24 @@ Arm.teleCommandName = ArmDoNothing
 
 
 #####################
+# ArmRotator
+#####################
+ArmRotator.className = StubArmRotatorSubsystem
+#ArmRotator.className =
+ArmRotator.autoCommandName = ArmRotatorDoNothing
+ArmRotator.teleCommandName = ArmRotatorDoNothing
+
+
+#####################
+# ArmExtender
+#####################
+ArmExtender.className = StubArmExtenderSubsystem
+#ArmExtender.className =
+ArmExtender.autoCommandName = ArmExtenderDoNothing
+ArmExtender.teleCommandName = ArmExtenderDoNothing
+
+
+#####################
 # Gripper
 #####################
 #Gripper.className = StubGripperSubsystem
