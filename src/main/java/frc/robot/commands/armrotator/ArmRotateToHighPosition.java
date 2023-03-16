@@ -6,42 +6,23 @@
 /*- of this project.                                                      */
 /*------------------------------------------------------------------------*/
 
-package frc.robot.commands.arm;
+package frc.robot.commands.armrotator;
 
-import java.util.function.DoubleSupplier;
+import frc.robot.subsystems.armrotator.IArmRotatorSubsystem.ArmRotationPosition;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-public class ArmRotateToTarget extends ArmCommandBase {
+public class ArmRotateToHighPosition extends ArmRotateToPosition {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(ArmRotateToTarget.class.getName());
+   private static final PKLogger logger = RioLogger.getLogger(ArmRotateToHighPosition.class.getName());
 
-   private final DoubleSupplier supplier;
-
-   public ArmRotateToTarget(DoubleSupplier supplier) {
+   public ArmRotateToHighPosition() {
+      super(ArmRotationPosition.highPosition);
       logger.info("constructing {}", getName());
 
-      this.supplier = supplier;
-
       logger.info("constructed");
-   }
-
-   @Override
-   protected void firstExecution() {
-      logger.trace("calling firstExecution()");
-
-   }
-
-   @Override
-   public void execute() {
-      double input = supplier.getAsDouble();
-      if (input == 0) {
-         return;
-      } else {
-         arm.rotateToTarget(input);
-      }
    }
 
 }

@@ -106,9 +106,9 @@ abstract class BaseArmRotatorSubsystem extends BaseSubsystem implements IArmRota
       logger.info("{} = {}", ArmRotatorPreferences.rotate_lowSetPoint, v);
       lowSetPoint = v;
 
-      ArmRotatorPosition.highPosition.set(highSetPoint);
-      ArmRotatorPosition.midPosition.set(midSetPoint);
-      ArmRotatorPosition.lowPosition.set(lowSetPoint);
+      ArmRotationPosition.highPosition.set(highSetPoint);
+      ArmRotationPosition.midPosition.set(midSetPoint);
+      ArmRotationPosition.lowPosition.set(lowSetPoint);
    }
 
    @Override

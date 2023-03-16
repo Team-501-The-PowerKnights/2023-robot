@@ -6,9 +6,9 @@
 /*- of this project.                                                      */
 /*------------------------------------------------------------------------*/
 
-package frc.robot.commands.arm;
+package frc.robot.commands.armrotator;
 
-import frc.robot.subsystems.arm.IArmSubsystem.ArmRotationPosition;
+import frc.robot.subsystems.armrotator.IArmRotatorSubsystem.ArmRotationPosition;
 
 import riolog.PKLogger;
 import riolog.RioLogger;

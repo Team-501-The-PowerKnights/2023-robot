@@ -9,11 +9,10 @@
 package frc.robot.hmi;
 
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-
-import frc.robot.commands.arm.ArmRotateToHighPosition;
-import frc.robot.commands.arm.ArmRotateToLowPosition;
-import frc.robot.commands.arm.ArmRotateToMidPosition;
-import frc.robot.commands.arm.ArmRotateToTarget;
+import frc.robot.commands.armrotator.ArmRotateToHighPosition;
+import frc.robot.commands.armrotator.ArmRotateToLowPosition;
+import frc.robot.commands.armrotator.ArmRotateToMidPosition;
+import frc.robot.commands.armrotator.ArmRotateToTarget;
 import frc.robot.commands.gripper.GripperClose;
 import frc.robot.commands.gripper.GripperOpen;
 

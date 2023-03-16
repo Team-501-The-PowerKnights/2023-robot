@@ -23,7 +23,7 @@ public interface IArmRotatorSubsystem extends ISubsystem {
    /**
     * DOCS: Add your docs here.
     */
-   public static enum ArmRotatorPosition {
+   public static enum ArmRotationPosition {
       //@formatter:off
       highPosition("High", 0), 
       midPosition("Mid", 0), 
@@ -33,7 +33,7 @@ public interface IArmRotatorSubsystem extends ISubsystem {
       private final String name;
       private double position;
 
-      private ArmRotatorPosition(String name, double position) {
+      private ArmRotationPosition(String name, double position) {
          this.name = name;
          this.position = position;
       }
@@ -56,7 +56,7 @@ public interface IArmRotatorSubsystem extends ISubsystem {
     * Rotate the arm to the specified position and hold it
     * there (using a PID).
     */
-   public void rotateToPosition(ArmRotatorPosition position);
+   public void rotateToPosition(ArmRotationPosition position);
 
    /**
     * Rotate the arm to the specified position and hold it

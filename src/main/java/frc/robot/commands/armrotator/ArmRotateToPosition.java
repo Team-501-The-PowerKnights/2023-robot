@@ -6,9 +6,9 @@
 /*- of this project.                                                      */
 /*------------------------------------------------------------------------*/
 
-package frc.robot.commands.arm;
+package frc.robot.commands.armrotator;
 
-import frc.robot.subsystems.arm.IArmSubsystem.ArmRotationPosition;
+import frc.robot.subsystems.armrotator.IArmRotatorSubsystem.ArmRotationPosition;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
@@ -21,7 +21,7 @@ import riolog.RioLogger;
  * <code>firstExecution()</code> method, and then does nothing for the
  * remainder of the subsequent calls to <code>execute()</code>.
  */
-abstract class ArmRotateToPosition extends ArmCommandBase {
+abstract class ArmRotateToPosition extends ArmRotatorCommandBase {
 
    /** Our classes' logger **/
    private static final PKLogger logger = RioLogger.getLogger(ArmRotateToPosition.class.getName());
@@ -41,7 +41,7 @@ abstract class ArmRotateToPosition extends ArmCommandBase {
    protected void firstExecution() {
       logger.trace("arm.rotateToPosition() to {} called in firstExecution()", position);
 
-      arm.rotateToPosition(position);
+      subsys.rotateToPosition(position);
    }
 
    @Override

@@ -36,7 +36,7 @@ class StubArmRotatorSubsystem extends BaseArmRotatorSubsystem {
    }
 
    @Override
-   public void rotateToPosition(ArmRotatorPosition position) {
+   public void rotateToPosition(ArmRotationPosition position) {
       // TODO Auto-generated method stub
 
    }

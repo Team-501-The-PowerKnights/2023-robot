@@ -6,20 +6,20 @@
 /*- of this project.                                                      */
 /*------------------------------------------------------------------------*/
 
-package frc.robot.commands.arm;
+package frc.robot.commands.armrotator;
 
-import frc.robot.subsystems.arm.IArmSubsystem.ArmRotationPosition;
+import frc.robot.subsystems.armrotator.IArmRotatorSubsystem.ArmRotationPosition;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-public class ArmRotateToHighPosition extends ArmRotateToPosition {
+public class ArmRotateToLowPosition extends ArmRotateToPosition {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(ArmRotateToHighPosition.class.getName());
+   private static final PKLogger logger = RioLogger.getLogger(ArmRotateToLowPosition.class.getName());
 
-   public ArmRotateToHighPosition() {
-      super(ArmRotationPosition.highPosition);
+   public ArmRotateToLowPosition() {
+      super(ArmRotationPosition.lowPosition);
       logger.info("constructing {}", getName());
 
       logger.info("constructed");

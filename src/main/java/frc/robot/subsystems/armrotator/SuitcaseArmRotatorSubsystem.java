@@ -81,7 +81,7 @@ public class SuitcaseArmRotatorSubsystem extends BaseArmRotatorSubsystem {
    }
 
    @Override
-   public void rotateToPosition(ArmRotatorPosition position) {
+   public void rotateToPosition(ArmRotationPosition position) {
       pid.setReference(position.get(), ControlType.kPosition);
       setTlmPIDEnabled(true);
       setTlmPIDTarget(position.get());
