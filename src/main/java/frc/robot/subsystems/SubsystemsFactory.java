@@ -13,6 +13,7 @@ import java.util.List;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import frc.robot.properties.PropertiesManager;
 import frc.robot.subsystems.arm.ArmFactory;
 import frc.robot.subsystems.armextender.ArmExtenderFactory;
 import frc.robot.subsystems.armrotator.ArmRotatorFactory;
@@ -51,34 +52,63 @@ public class SubsystemsFactory {
          subsystems.add(ss);
       }
 
-      // ** Arm **
-      SmartDashboard.putNumber(TelemetryNames.Arm.status,
-            PKStatus.unknown.tlmValue);
-      {
-         ArmFactory.constructInstance();
-         ISubsystem ss = ArmFactory.getInstance();
-         tlmMgr.addProvider(ss);
-         subsystems.add(ss);
-      }
+      switch (PropertiesManager.getInstance().getRobotName()) {
+         case "Suitcase-Bot":
+         case "Swprog-Bot":
+         case "Proto-Bot":
 
-      // ** ArmRotator **
-      SmartDashboard.putNumber(TelemetryNames.ArmRotator.status,
-            PKStatus.unknown.tlmValue);
-      {
-         ArmRotatorFactory.constructInstance();
-         ISubsystem ss = ArmRotatorFactory.getInstance();
-         tlmMgr.addProvider(ss);
-         subsystems.add(ss);
-      }
+            // ** ArmRotator **
+            // @formatter:off
+            SmartDashboard.putNumber(TelemetryNames.ArmRotator.status,
+                  PKStatus.unknown.tlmValue);
+            {
+               ArmRotatorFactory.constructInstance();
+               ISubsystem ss = ArmRotatorFactory.getInstance();
+               tlmMgr.addProvider(ss);
+               subsystems.add(ss);
+            }
+            // @formatter:off
 
-      // ** ArmExtender **
-      SmartDashboard.putNumber(TelemetryNames.ArmExtender.status,
-            PKStatus.unknown.tlmValue);
-      {
-         ArmExtenderFactory.constructInstance();
-         ISubsystem ss = ArmExtenderFactory.getInstance();
-         tlmMgr.addProvider(ss);
-         subsystems.add(ss);
+            // ** ArmExtender **
+            // @formatter:off
+            SmartDashboard.putNumber(TelemetryNames.ArmExtender.status,
+                  PKStatus.unknown.tlmValue);
+            {
+               ArmExtenderFactory.constructInstance();
+               ISubsystem ss = ArmExtenderFactory.getInstance();
+               tlmMgr.addProvider(ss);
+               subsystems.add(ss);
+            }
+            // @formatter:on
+
+            SmartDashboard.putNumber(TelemetryNames.Arm.status,
+                  PKStatus.unknown.tlmValue);
+
+            break;
+
+         case "Real-Bot":
+
+            // ** Arm **
+            // @formatter:off
+            SmartDashboard.putNumber(TelemetryNames.Arm.status,
+                  PKStatus.unknown.tlmValue);
+            {
+               ArmFactory.constructInstance();
+               ISubsystem ss = ArmFactory.getInstance();
+               tlmMgr.addProvider(ss);
+               subsystems.add(ss);
+            }
+            // @formatter:on
+
+            SmartDashboard.putNumber(TelemetryNames.ArmRotator.status,
+                  PKStatus.unknown.tlmValue);
+            SmartDashboard.putNumber(TelemetryNames.ArmExtender.status,
+                  PKStatus.unknown.tlmValue);
+
+            break;
+
+         default:
+            break;
       }
 
       // ** Gripper **

@@ -11,7 +11,7 @@ package frc.robot.subsystems.armextender;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import frc.robot.commands.arm.ArmDoNothing;
+import frc.robot.commands.armextender.ArmExtenderDoNothing;
 import frc.robot.preferences.PIDPreferences;
 import frc.robot.subsystems.BaseSubsystem;
 import frc.robot.subsystems.SubsystemNames;
@@ -61,7 +61,7 @@ abstract class BaseArmExtenderSubsystem extends BaseSubsystem implements IArmExt
 
    @Override
    public void loadDefaultCommands() {
-      loadDefaultCommands(ArmDoNothing.class);
+      loadDefaultCommands(ArmExtenderDoNothing.class);
       SmartDashboard.putString(TelemetryNames.ArmExtender.autoCommand, defaultAutoCommand.getClass().getSimpleName());
       SmartDashboard.putString(TelemetryNames.ArmExtender.teleCommand, defaultTeleCommand.getClass().getSimpleName());
    }

@@ -11,7 +11,7 @@ package frc.robot.subsystems.armrotator;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import frc.robot.commands.arm.ArmDoNothing;
+import frc.robot.commands.armrotator.ArmRotatorDoNothing;
 import frc.robot.preferences.PIDPreferences;
 import frc.robot.subsystems.BaseSubsystem;
 import frc.robot.subsystems.SubsystemNames;
@@ -64,7 +64,7 @@ abstract class BaseArmRotatorSubsystem extends BaseSubsystem implements IArmRota
 
    @Override
    public void loadDefaultCommands() {
-      loadDefaultCommands(ArmDoNothing.class);
+      loadDefaultCommands(ArmRotatorDoNothing.class);
       SmartDashboard.putString(TelemetryNames.ArmRotator.autoCommand, defaultAutoCommand.getClass().getSimpleName());
       SmartDashboard.putString(TelemetryNames.ArmRotator.teleCommand, defaultTeleCommand.getClass().getSimpleName());
    }
