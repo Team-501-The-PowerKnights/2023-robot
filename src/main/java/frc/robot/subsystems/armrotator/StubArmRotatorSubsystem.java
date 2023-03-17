@@ -48,18 +48,6 @@ class StubArmRotatorSubsystem extends BaseArmRotatorSubsystem {
    }
 
    @Override
-   public void rotateUp() {
-      // TODO Auto-generated method stub
-
-   }
-
-   @Override
-   public void rotateDown() {
-      // TODO Auto-generated method stub
-
-   }
-
-   @Override
    public void rotate(double speed) {
       // TODO Auto-generated method stub
 

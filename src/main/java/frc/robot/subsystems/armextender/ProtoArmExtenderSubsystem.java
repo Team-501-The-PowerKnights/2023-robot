@@ -14,6 +14,7 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMax.IdleMode;
+import com.revrobotics.CANSparkMax.SoftLimitDirection;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import riolog.PKLogger;
@@ -22,23 +23,28 @@ import riolog.RioLogger;
 /**
  * DOCS: Add your docs here.
  */
-public class SuitcaseArmExtenderSubsystem extends BaseArmExtenderSubsystem {
+public class ProtoArmExtenderSubsystem extends BaseArmExtenderSubsystem {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(SuitcaseArmExtenderSubsystem.class.getName());
+   private static final PKLogger logger = RioLogger.getLogger(ProtoArmExtenderSubsystem.class.getName());
 
    /** */
    private final CANSparkMax motor;
    private SparkMaxPIDController pid;
    private RelativeEncoder encoder;
 
-   SuitcaseArmExtenderSubsystem() {
+   ProtoArmExtenderSubsystem() {
       logger.info("constructing");
 
-      motor = new CANSparkMax(21, MotorType.kBrushless);
-      checkError(motor.restoreFactoryDefaults(), "AR restore factory defaults {}");
-      checkError(motor.setIdleMode(IdleMode.kBrake), "AR set idle mode to brake {}");
-      checkError(encoder.setPosition(0), "AR set encoder position to 0 {}");
+      motor = new CANSparkMax(22, MotorType.kBrushless);
+      checkError(motor.restoreFactoryDefaults(), "AE restore factory defaults {}");
+      checkError(motor.setIdleMode(IdleMode.kBrake), "AE set idle mode to brake {}");
+      pid = motor.getPIDController();
+      encoder = motor.getEncoder();
+      checkError(motor.setSoftLimit(SoftLimitDirection.kReverse, 0), "AE set min soft limit to 0 {}");
+      checkError(motor.setSoftLimit(SoftLimitDirection.kForward, 0), "AE set max soft limit to 0 {}");
+      checkError(motor.enableSoftLimit(SoftLimitDirection.kReverse, true), "AE enable reverse soft limit {}");
+      checkError(motor.enableSoftLimit(SoftLimitDirection.kForward, true), "AE enable forward soft limit {}");
 
       logger.info("constructed");
    }
@@ -58,12 +64,16 @@ public class SuitcaseArmExtenderSubsystem extends BaseArmExtenderSubsystem {
    public void updatePreferences() {
       super.updatePreferences();
 
-      pid.setP(pidPrefs.P);
-      pid.setI(pidPrefs.I);
-      pid.setD(pidPrefs.D);
-      pid.setIZone(pidPrefs.IZone);
-      pid.setFF(pidPrefs.FF);
-      pid.setOutputRange(pidPrefs.MinOutput, pidPrefs.MaxOutput);
+      checkError(pid.setP(pidPrefs.P), "AE set PID_P {}");
+      checkError(pid.setI(pidPrefs.I), "AE set PID_I {}");
+      checkError(pid.setD(pidPrefs.D), "AE set PID_D {}");
+      checkError(pid.setIZone(pidPrefs.IZone), "AE set PID_IZone {}");
+      checkError(pid.setFF(pidPrefs.FF), "AE set PID_FF {}");
+      checkError(pid.setOutputRange(pidPrefs.MinOutput, pidPrefs.MaxOutput), "AE set PID_OutputRange {}");
+
+      // FIXME: Update Soft Limits
+
+      // FIXME: Update SetPoints
    }
 
    @Override

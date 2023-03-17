@@ -40,6 +40,14 @@ public final class ArmExtenderPreferences {
    static final String extendPID_minOutput = name + PIDPreferences.pid_minOutput;
    static final String extendPID_maxOutput = name + PIDPreferences.pid_maxOutput;
 
+   static final String extend_minSoftLimit = name + ".MinSoftLimit";
+   static final String extend_maxSoftLimit = name + ".MaxSoftLimit";
+
+   static final String extend_highSetPoint = name + ".HighSetPoint";
+   static final String extend_midSetPoint = name + ".MidSetPoint";
+   static final String extend_lowSetPoint = name + ".LowSetPoint";
+   static final String extend_inSetPoint = name + ".InSetPoint";
+
    private ArmExtenderPreferences() {
    }
 
@@ -72,6 +80,32 @@ public final class ArmExtenderPreferences {
       if (!Preferences.containsKey(extendPID_maxOutput)) {
          logger.warn("{} doesn't exist; creating with default", extendPID_maxOutput);
          Preferences.setDouble(extendPID_maxOutput, 0.0);
+      }
+
+      if (!Preferences.containsKey(extend_minSoftLimit)) {
+         logger.warn("{} doesn't exist; creating with default", extend_minSoftLimit);
+         Preferences.setDouble(extend_minSoftLimit, 0.0);
+      }
+      if (!Preferences.containsKey(extend_maxSoftLimit)) {
+         logger.warn("{} doesn't exist; creating with default", extend_maxSoftLimit);
+         Preferences.setDouble(extend_maxSoftLimit, 0.0);
+      }
+
+      if (!Preferences.containsKey(extend_highSetPoint)) {
+         logger.warn("{} doesn't exist; creating with default", extend_highSetPoint);
+         Preferences.setDouble(extend_highSetPoint, 0.0);
+      }
+      if (!Preferences.containsKey(extend_midSetPoint)) {
+         logger.warn("{} doesn't exist; creating with default", extend_midSetPoint);
+         Preferences.setDouble(extend_midSetPoint, 0.0);
+      }
+      if (!Preferences.containsKey(extend_lowSetPoint)) {
+         logger.warn("{} doesn't exist; creating with default", extend_lowSetPoint);
+         Preferences.setDouble(extend_lowSetPoint, 0.0);
+      }
+      if (!Preferences.containsKey(extend_inSetPoint)) {
+         logger.warn("{} doesn't exist; creating with default", extend_inSetPoint);
+         Preferences.setDouble(extend_inSetPoint, 0.0);
       }
    }
 

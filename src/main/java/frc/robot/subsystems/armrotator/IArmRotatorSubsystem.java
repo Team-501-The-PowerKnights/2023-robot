@@ -25,6 +25,7 @@ public interface IArmRotatorSubsystem extends ISubsystem {
     */
    public static enum ArmRotationPosition {
       //@formatter:off
+      overPosition("Over", 0),
       highPosition("High", 0), 
       midPosition("Mid", 0), 
       lowPosition("Low", 0);
@@ -66,18 +67,6 @@ public interface IArmRotatorSubsystem extends ISubsystem {
     * @param target
     */
    public void rotateToTarget(double target);
-
-   /**
-    * Rotate the arm (away from the ground) or "backwards" (towards
-    * the back of the robot).
-    */
-   public void rotateUp();
-
-   /**
-    * Rotate the arm down (towards the ground) or "forward" (towards
-    * the front of the robot).
-    */
-   public void rotateDown();
 
    /**
     * Rotate the arm under 'manual' control.

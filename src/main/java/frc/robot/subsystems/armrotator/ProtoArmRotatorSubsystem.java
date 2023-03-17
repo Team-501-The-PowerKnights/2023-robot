@@ -22,7 +22,7 @@ import riolog.RioLogger;
 /**
  * DOCS: Add your docs here.
  */
-public class SuitcaseArmRotatorSubsystem extends BaseArmRotatorSubsystem {
+public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
 
    /** Our classes' logger **/
    private static final PKLogger logger = RioLogger.getLogger(SuitcaseArmRotatorSubsystem.class.getName());
@@ -32,15 +32,16 @@ public class SuitcaseArmRotatorSubsystem extends BaseArmRotatorSubsystem {
    private SparkMaxPIDController pid;
    private RelativeEncoder encoder;
 
-   SuitcaseArmRotatorSubsystem() {
+   ProtoArmRotatorSubsystem() {
       logger.info("constructing");
 
-      motor = new CANSparkMax(20, MotorType.kBrushless);
+      motor = new CANSparkMax(21, MotorType.kBrushless);
       checkError(motor.restoreFactoryDefaults(), "AR restore factory defaults {}");
       checkError(motor.setIdleMode(IdleMode.kBrake), "AR set idle mode to brake {}");
       pid = motor.getPIDController();
       encoder = motor.getEncoder();
       checkError(encoder.setPosition(0), "AR set encoder position to 0 {}");
+      checkError(motor.setOpenLoopRampRate(0), "AR set open loop ramp rate to 0 {}");
 
       logger.info("constructed");
    }
@@ -60,12 +61,16 @@ public class SuitcaseArmRotatorSubsystem extends BaseArmRotatorSubsystem {
    public void updatePreferences() {
       super.updatePreferences();
 
-      pid.setP(pidPrefs.P);
-      pid.setI(pidPrefs.I);
-      pid.setD(pidPrefs.D);
-      pid.setIZone(pidPrefs.IZone);
-      pid.setFF(pidPrefs.FF);
-      pid.setOutputRange(pidPrefs.MinOutput, pidPrefs.MaxOutput);
+      checkError(pid.setP(pidPrefs.P), "AR set PID_P {}");
+      checkError(pid.setI(pidPrefs.I), "AR set PID_I {}");
+      checkError(pid.setD(pidPrefs.D), "AR set PID_D {}");
+      checkError(pid.setIZone(pidPrefs.IZone), "AR set PID_IZone {}");
+      checkError(pid.setFF(pidPrefs.FF), "AR set PID_FF {}");
+      checkError(pid.setOutputRange(pidPrefs.MinOutput, pidPrefs.MaxOutput), "AR set PID_OutputRange {}");
+
+      // FIXME: Update RampRate
+
+      // FIXME: Update SetPoints
    }
 
    @Override
@@ -89,6 +94,7 @@ public class SuitcaseArmRotatorSubsystem extends BaseArmRotatorSubsystem {
 
    @Override
    public void rotateToTarget(double target) {
+      // FIXME: rotateToTarget(double target)
       double newTarget = getTlmPIDTarget() + target;
       pid.setReference(newTarget, ControlType.kPosition);
       setTlmPIDEnabled(true);

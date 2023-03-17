@@ -39,6 +39,10 @@ public final class ArmRotatorPreferences {
    static final String rotatePID_FF = name + PIDPreferences.pid_FF;
    static final String rotatePID_minOutput = name + PIDPreferences.pid_minOutput;
    static final String rotatePID_maxOutput = name + PIDPreferences.pid_maxOutput;
+
+   static final String rotate_rampRate = name + ".RampRate";
+
+   static final String rotate_overSetPoint = name + ".OverSetPoint";
    static final String rotate_highSetPoint = name + ".HighSetPoint";
    static final String rotate_midSetPoint = name + ".MidSetPoint";
    static final String rotate_lowSetPoint = name + ".LowSetPoint";
@@ -78,6 +82,15 @@ public final class ArmRotatorPreferences {
          Preferences.setDouble(rotatePID_maxOutput, 0.0);
       }
 
+      if (!Preferences.containsKey(rotate_rampRate)) {
+         logger.warn("{} doesn't exist; creating with default", rotate_rampRate);
+         Preferences.setDouble(rotate_rampRate, 0.0);
+      }
+
+      if (!Preferences.containsKey(rotate_overSetPoint)) {
+         logger.warn("{} doesn't exist; creating with default", rotate_overSetPoint);
+         Preferences.setDouble(rotate_overSetPoint, 0.0);
+      }
       if (!Preferences.containsKey(rotate_highSetPoint)) {
          logger.warn("{} doesn't exist; creating with default", rotate_highSetPoint);
          Preferences.setDouble(rotate_highSetPoint, 0.0);

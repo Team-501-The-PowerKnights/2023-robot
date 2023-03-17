@@ -36,19 +36,13 @@ class StubArmExtenderSubsystem extends BaseArmExtenderSubsystem {
    }
 
    @Override
+   public void extendToPosition(ArmExtensionPosition position) {
+      // TODO Auto-generated method stub
+
+   }
+
+   @Override
    public void extendToTarget(double target) {
-      // TODO Auto-generated method stub
-
-   }
-
-   @Override
-   public void extend() {
-      // TODO Auto-generated method stub
-
-   }
-
-   @Override
-   public void retract() {
       // TODO Auto-generated method stub
 
    }

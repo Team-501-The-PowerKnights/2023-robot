@@ -21,6 +21,45 @@ public interface IArmExtenderSubsystem extends ISubsystem {
    public void stop();
 
    /**
+    * DOCS: Add your docs here.
+    */
+   public static enum ArmExtensionPosition {
+      //@formatter:off
+      highPosition("High", 0), 
+      midPosition("Mid", 0), 
+      lowPosition("Low", 0),
+      inPosition("In", 0);
+      //@formatter:on
+
+      private final String name;
+      private double position;
+
+      private ArmExtensionPosition(String name, double position) {
+         this.name = name;
+         this.position = position;
+      }
+
+      public void set(double position) {
+         this.position = position;
+      }
+
+      public double get() {
+         return position;
+      }
+
+      @Override
+      public String toString() {
+         return name;
+      }
+   }
+
+   /**
+    * Extend the arm to the specified position and hold it
+    * there (using a PID).
+    */
+   public void extendToPosition(ArmExtensionPosition position);
+
+   /**
     * Extend the arm to the specified position and hold it
     * there (using a PID). This is meant for a "manual" setting
     * rather than one of the canned pre-sets.
@@ -28,16 +67,6 @@ public interface IArmExtenderSubsystem extends ISubsystem {
     * @param target
     */
    public void extendToTarget(double target);
-
-   /**
-    * Extend the arm out.
-    */
-   public void extend();
-
-   /**
-    * Retract the arm in.
-    */
-   public void retract();
 
    /**
     * Extend the arm under 'manual' control.
