@@ -32,80 +32,80 @@ public final class ArmExtenderPreferences {
 
    static private final String name = SubsystemNames.armExtenderName;
 
-   static final String extendPID_P = name + PIDPreferences.pid_P;
-   static final String extendPID_I = name + PIDPreferences.pid_I;
-   static final String extendPID_D = name + PIDPreferences.pid_D;
-   static final String extendPID_IZone = name + PIDPreferences.pid_IZone;
-   static final String extendPID_FF = name + PIDPreferences.pid_FF;
-   static final String extendPID_minOutput = name + PIDPreferences.pid_minOutput;
-   static final String extendPID_maxOutput = name + PIDPreferences.pid_maxOutput;
+   static final String PID_P = name + PIDPreferences.pid_P;
+   static final String PID_I = name + PIDPreferences.pid_I;
+   static final String PID_D = name + PIDPreferences.pid_D;
+   static final String PID_IZone = name + PIDPreferences.pid_IZone;
+   static final String PID_FF = name + PIDPreferences.pid_FF;
+   static final String PID_minOutput = name + PIDPreferences.pid_minOutput;
+   static final String PID_maxOutput = name + PIDPreferences.pid_maxOutput;
 
-   static final String extend_minSoftLimit = name + ".MinSoftLimit";
-   static final String extend_maxSoftLimit = name + ".MaxSoftLimit";
+   static final String minSoftLimit = name + ".MinSoftLimit";
+   static final String maxSoftLimit = name + ".MaxSoftLimit";
 
-   static final String extend_highSetPoint = name + ".HighSetPoint";
-   static final String extend_midSetPoint = name + ".MidSetPoint";
-   static final String extend_lowSetPoint = name + ".LowSetPoint";
-   static final String extend_inSetPoint = name + ".InSetPoint";
+   static final String highSetPoint = name + ".HighSetPoint";
+   static final String midSetPoint = name + ".MidSetPoint";
+   static final String lowSetPoint = name + ".LowSetPoint";
+   static final String inSetPoint = name + ".InSetPoint";
 
    private ArmExtenderPreferences() {
    }
 
    // FIXME: Make perferences & NetworkTables right
    public static void initialize() {
-      if (!Preferences.containsKey(extendPID_P)) {
-         logger.warn("{} doesn't exist; creating with default", extendPID_P);
-         Preferences.setDouble(extendPID_P, 0.0);
+      if (!Preferences.containsKey(PID_P)) {
+         logger.warn("{} doesn't exist; creating with default", PID_P);
+         Preferences.setDouble(PID_P, 0.0);
       }
-      if (!Preferences.containsKey(extendPID_I)) {
-         logger.warn("{} doesn't exist; creating with default", extendPID_I);
-         Preferences.setDouble(extendPID_I, 0.0);
+      if (!Preferences.containsKey(PID_I)) {
+         logger.warn("{} doesn't exist; creating with default", PID_I);
+         Preferences.setDouble(PID_I, 0.0);
       }
-      if (!Preferences.containsKey(extendPID_D)) {
-         logger.warn("{} doesn't exist; creating with default", extendPID_D);
-         Preferences.setDouble(extendPID_D, 0.0);
+      if (!Preferences.containsKey(PID_D)) {
+         logger.warn("{} doesn't exist; creating with default", PID_D);
+         Preferences.setDouble(PID_D, 0.0);
       }
-      if (!Preferences.containsKey(extendPID_IZone)) {
-         logger.warn("{} doesn't exist; creating with default", extendPID_IZone);
-         Preferences.setDouble(extendPID_IZone, 0.0);
+      if (!Preferences.containsKey(PID_IZone)) {
+         logger.warn("{} doesn't exist; creating with default", PID_IZone);
+         Preferences.setDouble(PID_IZone, 0.0);
       }
-      if (!Preferences.containsKey(extendPID_FF)) {
-         logger.warn("{} doesn't exist; creating with default", extendPID_FF);
-         Preferences.setDouble(extendPID_FF, 0.0);
+      if (!Preferences.containsKey(PID_FF)) {
+         logger.warn("{} doesn't exist; creating with default", PID_FF);
+         Preferences.setDouble(PID_FF, 0.0);
       }
-      if (!Preferences.containsKey(extendPID_minOutput)) {
-         logger.warn("{} doesn't exist; creating with default", extendPID_minOutput);
-         Preferences.setDouble(extendPID_minOutput, 0.0);
+      if (!Preferences.containsKey(PID_minOutput)) {
+         logger.warn("{} doesn't exist; creating with default", PID_minOutput);
+         Preferences.setDouble(PID_minOutput, 0.0);
       }
-      if (!Preferences.containsKey(extendPID_maxOutput)) {
-         logger.warn("{} doesn't exist; creating with default", extendPID_maxOutput);
-         Preferences.setDouble(extendPID_maxOutput, 0.0);
-      }
-
-      if (!Preferences.containsKey(extend_minSoftLimit)) {
-         logger.warn("{} doesn't exist; creating with default", extend_minSoftLimit);
-         Preferences.setDouble(extend_minSoftLimit, 0.0);
-      }
-      if (!Preferences.containsKey(extend_maxSoftLimit)) {
-         logger.warn("{} doesn't exist; creating with default", extend_maxSoftLimit);
-         Preferences.setDouble(extend_maxSoftLimit, 0.0);
+      if (!Preferences.containsKey(PID_maxOutput)) {
+         logger.warn("{} doesn't exist; creating with default", PID_maxOutput);
+         Preferences.setDouble(PID_maxOutput, 0.0);
       }
 
-      if (!Preferences.containsKey(extend_highSetPoint)) {
-         logger.warn("{} doesn't exist; creating with default", extend_highSetPoint);
-         Preferences.setDouble(extend_highSetPoint, 0.0);
+      if (!Preferences.containsKey(minSoftLimit)) {
+         logger.warn("{} doesn't exist; creating with default", minSoftLimit);
+         Preferences.setDouble(minSoftLimit, 0.0);
       }
-      if (!Preferences.containsKey(extend_midSetPoint)) {
-         logger.warn("{} doesn't exist; creating with default", extend_midSetPoint);
-         Preferences.setDouble(extend_midSetPoint, 0.0);
+      if (!Preferences.containsKey(maxSoftLimit)) {
+         logger.warn("{} doesn't exist; creating with default", maxSoftLimit);
+         Preferences.setDouble(maxSoftLimit, 0.0);
       }
-      if (!Preferences.containsKey(extend_lowSetPoint)) {
-         logger.warn("{} doesn't exist; creating with default", extend_lowSetPoint);
-         Preferences.setDouble(extend_lowSetPoint, 0.0);
+
+      if (!Preferences.containsKey(highSetPoint)) {
+         logger.warn("{} doesn't exist; creating with default", highSetPoint);
+         Preferences.setDouble(highSetPoint, 0.0);
       }
-      if (!Preferences.containsKey(extend_inSetPoint)) {
-         logger.warn("{} doesn't exist; creating with default", extend_inSetPoint);
-         Preferences.setDouble(extend_inSetPoint, 0.0);
+      if (!Preferences.containsKey(midSetPoint)) {
+         logger.warn("{} doesn't exist; creating with default", midSetPoint);
+         Preferences.setDouble(midSetPoint, 0.0);
+      }
+      if (!Preferences.containsKey(lowSetPoint)) {
+         logger.warn("{} doesn't exist; creating with default", lowSetPoint);
+         Preferences.setDouble(lowSetPoint, 0.0);
+      }
+      if (!Preferences.containsKey(inSetPoint)) {
+         logger.warn("{} doesn't exist; creating with default", inSetPoint);
+         Preferences.setDouble(inSetPoint, 0.0);
       }
    }
 

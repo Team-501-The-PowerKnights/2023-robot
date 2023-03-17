@@ -32,20 +32,20 @@ public final class ArmRotatorPreferences {
 
    static private final String name = SubsystemNames.armRotatorName;
 
-   static final String rotatePID_P = name + PIDPreferences.pid_P;
-   static final String rotatePID_I = name + PIDPreferences.pid_I;
-   static final String rotatePID_D = name + PIDPreferences.pid_D;
-   static final String rotatePID_IZone = name + PIDPreferences.pid_IZone;
-   static final String rotatePID_FF = name + PIDPreferences.pid_FF;
-   static final String rotatePID_minOutput = name + PIDPreferences.pid_minOutput;
-   static final String rotatePID_maxOutput = name + PIDPreferences.pid_maxOutput;
+   static final String PID_P = name + PIDPreferences.pid_P;
+   static final String PID_I = name + PIDPreferences.pid_I;
+   static final String PID_D = name + PIDPreferences.pid_D;
+   static final String PID_IZone = name + PIDPreferences.pid_IZone;
+   static final String PID_FF = name + PIDPreferences.pid_FF;
+   static final String PID_minOutput = name + PIDPreferences.pid_minOutput;
+   static final String PID_maxOutput = name + PIDPreferences.pid_maxOutput;
 
-   static final String rotate_rampRate = name + ".RampRate";
+   static final String rampRate = name + ".RampRate";
 
-   static final String rotate_overSetPoint = name + ".OverSetPoint";
-   static final String rotate_highSetPoint = name + ".HighSetPoint";
-   static final String rotate_midSetPoint = name + ".MidSetPoint";
-   static final String rotate_lowSetPoint = name + ".LowSetPoint";
+   static final String overSetPoint = name + ".OverSetPoint";
+   static final String highSetPoint = name + ".HighSetPoint";
+   static final String midSetPoint = name + ".MidSetPoint";
+   static final String lowSetPoint = name + ".LowSetPoint";
 
    private ArmRotatorPreferences() {
    }
@@ -53,55 +53,55 @@ public final class ArmRotatorPreferences {
    // FIXME: Make perferences & NetworkTables right
    public static void initialize() {
 
-      if (!Preferences.containsKey(rotatePID_P)) {
-         logger.warn("{} doesn't exist; creating with default", rotatePID_P);
-         Preferences.setDouble(rotatePID_P, 0.0);
+      if (!Preferences.containsKey(PID_P)) {
+         logger.warn("{} doesn't exist; creating with default", PID_P);
+         Preferences.setDouble(PID_P, 0.0);
       }
-      if (!Preferences.containsKey(rotatePID_I)) {
-         logger.warn("{} doesn't exist; creating with default", rotatePID_I);
-         Preferences.setDouble(rotatePID_I, 0.0);
+      if (!Preferences.containsKey(PID_I)) {
+         logger.warn("{} doesn't exist; creating with default", PID_I);
+         Preferences.setDouble(PID_I, 0.0);
       }
-      if (!Preferences.containsKey(rotatePID_D)) {
-         logger.warn("{} doesn't exist; creating with default", rotatePID_D);
-         Preferences.setDouble(rotatePID_D, 0.0);
+      if (!Preferences.containsKey(PID_D)) {
+         logger.warn("{} doesn't exist; creating with default", PID_D);
+         Preferences.setDouble(PID_D, 0.0);
       }
-      if (!Preferences.containsKey(rotatePID_IZone)) {
-         logger.warn("{} doesn't exist; creating with default", rotatePID_IZone);
-         Preferences.setDouble(rotatePID_IZone, 0.0);
+      if (!Preferences.containsKey(PID_IZone)) {
+         logger.warn("{} doesn't exist; creating with default", PID_IZone);
+         Preferences.setDouble(PID_IZone, 0.0);
       }
-      if (!Preferences.containsKey(rotatePID_FF)) {
-         logger.warn("{} doesn't exist; creating with default", rotatePID_FF);
-         Preferences.setDouble(rotatePID_FF, 0.0);
+      if (!Preferences.containsKey(PID_FF)) {
+         logger.warn("{} doesn't exist; creating with default", PID_FF);
+         Preferences.setDouble(PID_FF, 0.0);
       }
-      if (!Preferences.containsKey(rotatePID_minOutput)) {
-         logger.warn("{} doesn't exist; creating with default", rotatePID_minOutput);
-         Preferences.setDouble(rotatePID_minOutput, 0.0);
+      if (!Preferences.containsKey(PID_minOutput)) {
+         logger.warn("{} doesn't exist; creating with default", PID_minOutput);
+         Preferences.setDouble(PID_minOutput, 0.0);
       }
-      if (!Preferences.containsKey(rotatePID_maxOutput)) {
-         logger.warn("{} doesn't exist; creating with default", rotatePID_maxOutput);
-         Preferences.setDouble(rotatePID_maxOutput, 0.0);
-      }
-
-      if (!Preferences.containsKey(rotate_rampRate)) {
-         logger.warn("{} doesn't exist; creating with default", rotate_rampRate);
-         Preferences.setDouble(rotate_rampRate, 0.0);
+      if (!Preferences.containsKey(PID_maxOutput)) {
+         logger.warn("{} doesn't exist; creating with default", PID_maxOutput);
+         Preferences.setDouble(PID_maxOutput, 0.0);
       }
 
-      if (!Preferences.containsKey(rotate_overSetPoint)) {
-         logger.warn("{} doesn't exist; creating with default", rotate_overSetPoint);
-         Preferences.setDouble(rotate_overSetPoint, 0.0);
+      if (!Preferences.containsKey(rampRate)) {
+         logger.warn("{} doesn't exist; creating with default", rampRate);
+         Preferences.setDouble(rampRate, 0.0);
       }
-      if (!Preferences.containsKey(rotate_highSetPoint)) {
-         logger.warn("{} doesn't exist; creating with default", rotate_highSetPoint);
-         Preferences.setDouble(rotate_highSetPoint, 0.0);
+
+      if (!Preferences.containsKey(overSetPoint)) {
+         logger.warn("{} doesn't exist; creating with default", overSetPoint);
+         Preferences.setDouble(overSetPoint, 0.0);
       }
-      if (!Preferences.containsKey(rotate_midSetPoint)) {
-         logger.warn("{} doesn't exist; creating with default", rotate_midSetPoint);
-         Preferences.setDouble(rotate_midSetPoint, 0.0);
+      if (!Preferences.containsKey(highSetPoint)) {
+         logger.warn("{} doesn't exist; creating with default", highSetPoint);
+         Preferences.setDouble(highSetPoint, 0.0);
       }
-      if (!Preferences.containsKey(rotate_lowSetPoint)) {
-         logger.warn("{} doesn't exist; creating with default", rotate_lowSetPoint);
-         Preferences.setDouble(rotate_lowSetPoint, 0.0);
+      if (!Preferences.containsKey(midSetPoint)) {
+         logger.warn("{} doesn't exist; creating with default", midSetPoint);
+         Preferences.setDouble(midSetPoint, 0.0);
+      }
+      if (!Preferences.containsKey(lowSetPoint)) {
+         logger.warn("{} doesn't exist; creating with default", lowSetPoint);
+         Preferences.setDouble(lowSetPoint, 0.0);
       }
    }
 

@@ -36,11 +36,11 @@ public class SuitcaseArmRotatorSubsystem extends BaseArmRotatorSubsystem {
       logger.info("constructing");
 
       motor = new CANSparkMax(20, MotorType.kBrushless);
-      checkError(motor.restoreFactoryDefaults(), "AR restore factory defaults {}");
-      checkError(motor.setIdleMode(IdleMode.kBrake), "AR set idle mode to brake {}");
+      checkError(motor.restoreFactoryDefaults(), "restore factory defaults {}");
+      checkError(motor.setIdleMode(IdleMode.kBrake), "set idle mode to brake {}");
       pid = motor.getPIDController();
       encoder = motor.getEncoder();
-      checkError(encoder.setPosition(0), "AR set encoder position to 0 {}");
+      checkError(encoder.setPosition(0), "set encoder position to 0 {}");
 
       logger.info("constructed");
    }
@@ -70,13 +70,13 @@ public class SuitcaseArmRotatorSubsystem extends BaseArmRotatorSubsystem {
 
    @Override
    public void disable() {
-      checkError(pid.setReference(0, ControlType.kDutyCycle), "AR PID set reference to kDutyCycle,0 {}");
+      checkError(pid.setReference(0, ControlType.kDutyCycle), "PID set reference to kDutyCycle,0 {}");
       setTlmPIDEnabled(false);
    }
 
    @Override
    public void stop() {
-      checkError(pid.setReference(0, ControlType.kDutyCycle), "AR PID set reference to kDutyCycle,0 {}");
+      checkError(pid.setReference(0, ControlType.kDutyCycle), "PID set reference to kDutyCycle,0 {}");
       setTlmPIDEnabled(false);
    }
 

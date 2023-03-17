@@ -36,12 +36,12 @@ public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
       logger.info("constructing");
 
       motor = new CANSparkMax(21, MotorType.kBrushless);
-      checkError(motor.restoreFactoryDefaults(), "AR restore factory defaults {}");
-      checkError(motor.setIdleMode(IdleMode.kBrake), "AR set idle mode to brake {}");
+      checkError(motor.restoreFactoryDefaults(), "restore factory defaults {}");
+      checkError(motor.setIdleMode(IdleMode.kBrake), "set idle mode to brake {}");
       pid = motor.getPIDController();
       encoder = motor.getEncoder();
-      checkError(encoder.setPosition(0), "AR set encoder position to 0 {}");
-      checkError(motor.setOpenLoopRampRate(0), "AR set open loop ramp rate to 0 {}");
+      checkError(encoder.setPosition(0), "set encoder position to 0 {}");
+      checkError(motor.setOpenLoopRampRate(0), "set open loop ramp rate to 0 {}");
 
       logger.info("constructed");
    }
@@ -61,12 +61,12 @@ public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
    public void updatePreferences() {
       super.updatePreferences();
 
-      checkError(pid.setP(pidPrefs.P), "AR set PID_P {}");
-      checkError(pid.setI(pidPrefs.I), "AR set PID_I {}");
-      checkError(pid.setD(pidPrefs.D), "AR set PID_D {}");
-      checkError(pid.setIZone(pidPrefs.IZone), "AR set PID_IZone {}");
-      checkError(pid.setFF(pidPrefs.FF), "AR set PID_FF {}");
-      checkError(pid.setOutputRange(pidPrefs.MinOutput, pidPrefs.MaxOutput), "AR set PID_OutputRange {}");
+      checkError(pid.setP(pidPrefs.P), "set PID_P {}");
+      checkError(pid.setI(pidPrefs.I), "set PID_I {}");
+      checkError(pid.setD(pidPrefs.D), "set PID_D {}");
+      checkError(pid.setIZone(pidPrefs.IZone), "set PID_IZone {}");
+      checkError(pid.setFF(pidPrefs.FF), "set PID_FF {}");
+      checkError(pid.setOutputRange(pidPrefs.MinOutput, pidPrefs.MaxOutput), "set PID_OutputRange {}");
 
       // FIXME: Update RampRate
 
@@ -75,13 +75,13 @@ public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
 
    @Override
    public void disable() {
-      checkError(pid.setReference(0, ControlType.kDutyCycle), "AR PID set reference to kDutyCycle,0 {}");
+      checkError(pid.setReference(0, ControlType.kDutyCycle), "PID set reference to kDutyCycle,0 {}");
       setTlmPIDEnabled(false);
    }
 
    @Override
    public void stop() {
-      checkError(pid.setReference(0, ControlType.kDutyCycle), "AR PID set reference to kDutyCycle,0 {}");
+      checkError(pid.setReference(0, ControlType.kDutyCycle), "PID set reference to kDutyCycle,0 {}");
       setTlmPIDEnabled(false);
    }
 

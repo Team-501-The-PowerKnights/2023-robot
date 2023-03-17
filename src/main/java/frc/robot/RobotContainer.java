@@ -67,11 +67,11 @@ public class RobotContainer {
    public RobotContainer() {
       logger.info("Creating robot container");
 
-      // Make sure Preferences are initialized
-      intializePreferences();
-
       // Make sure Properties file exists and can be parsed
       initializeProperties();
+
+      // Make sure Preferences are initialized
+      intializePreferences();
 
       // Create telemetry manager
       TelemetryManager.constructInstance();

@@ -88,6 +88,11 @@ public class SubsystemsFactory {
 
          case "Real-Bot":
 
+            SmartDashboard.putNumber(TelemetryNames.ArmRotator.status,
+                  PKStatus.unknown.tlmValue);
+            SmartDashboard.putNumber(TelemetryNames.ArmExtender.status,
+                  PKStatus.unknown.tlmValue);
+
             // ** Arm **
             // @formatter:off
             SmartDashboard.putNumber(TelemetryNames.Arm.status,
@@ -99,11 +104,6 @@ public class SubsystemsFactory {
                subsystems.add(ss);
             }
             // @formatter:on
-
-            SmartDashboard.putNumber(TelemetryNames.ArmRotator.status,
-                  PKStatus.unknown.tlmValue);
-            SmartDashboard.putNumber(TelemetryNames.ArmExtender.status,
-                  PKStatus.unknown.tlmValue);
 
             break;
 

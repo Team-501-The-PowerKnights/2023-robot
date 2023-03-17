@@ -13,10 +13,14 @@ import java.util.stream.Collectors;
 
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
+import frc.robot.properties.PropertiesManager;
 import frc.robot.subsystems.arm.ArmPreferences;
+import frc.robot.subsystems.armextender.ArmExtenderPreferences;
+import frc.robot.subsystems.armrotator.ArmRotatorPreferences;
 import frc.robot.subsystems.drive.DrivePreferences;
+import frc.robot.subsystems.gripper.GripperPreferences;
 import frc.robot.telemetry.TelemetryNames;
+import frc.robot.telemetry.TelemetryNames.ArmExtender;
 import frc.robot.utils.PKStatus;
 
 import riolog.PKLogger;
@@ -62,8 +66,28 @@ public final class PreferencesManager {
 
       DrivePreferences.initialize();
 
-      ArmPreferences.initialize();
-      // GripperPreferences.initialize();
+      switch (PropertiesManager.getInstance().getRobotName()) {
+         case "Suitcase-Bot":
+         case "Swprog-Bot":
+         case "Proto-Bot":
+
+            // ** ArmRotator **
+            ArmRotatorPreferences.initialize();
+            // ** Arm Extender **
+            ArmExtenderPreferences.initialize();
+            break;
+
+         case "Real-Bot":
+
+            // ** Arm **
+            // ArmPreferences.initialize();
+            break;
+
+         default:
+            break;
+      }
+
+      GripperPreferences.initialize();
 
       logger.info("constructed");
    }

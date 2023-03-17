@@ -71,26 +71,26 @@ abstract class BaseArmExtenderSubsystem extends BaseSubsystem implements IArmExt
 
       logger.info("new preferences for {}:", myName);
 
-      v = Preferences.getDouble(ArmExtenderPreferences.extendPID_P, pidPrefs.P);
-      logger.info("{} = {}", ArmExtenderPreferences.extendPID_P, v);
+      v = Preferences.getDouble(ArmExtenderPreferences.PID_P, pidPrefs.P);
+      logger.info("{} = {}", ArmExtenderPreferences.PID_P, v);
       pidPrefs.P = v;
-      v = Preferences.getDouble(ArmExtenderPreferences.extendPID_I, pidPrefs.I);
-      logger.info("{} = {}", ArmExtenderPreferences.extendPID_I, v);
+      v = Preferences.getDouble(ArmExtenderPreferences.PID_I, pidPrefs.I);
+      logger.info("{} = {}", ArmExtenderPreferences.PID_I, v);
       pidPrefs.I = v;
-      v = Preferences.getDouble(ArmExtenderPreferences.extendPID_D, pidPrefs.D);
-      logger.info("{} = {}", ArmExtenderPreferences.extendPID_D, v);
+      v = Preferences.getDouble(ArmExtenderPreferences.PID_D, pidPrefs.D);
+      logger.info("{} = {}", ArmExtenderPreferences.PID_D, v);
       pidPrefs.D = v;
-      v = Preferences.getDouble(ArmExtenderPreferences.extendPID_IZone, pidPrefs.IZone);
-      logger.info("{} = {}", ArmExtenderPreferences.extendPID_IZone, v);
+      v = Preferences.getDouble(ArmExtenderPreferences.PID_IZone, pidPrefs.IZone);
+      logger.info("{} = {}", ArmExtenderPreferences.PID_IZone, v);
       pidPrefs.IZone = v;
-      v = Preferences.getDouble(ArmExtenderPreferences.extendPID_FF, pidPrefs.FF);
-      logger.info("{} = {}", ArmExtenderPreferences.extendPID_FF, v);
+      v = Preferences.getDouble(ArmExtenderPreferences.PID_FF, pidPrefs.FF);
+      logger.info("{} = {}", ArmExtenderPreferences.PID_FF, v);
       pidPrefs.FF = v;
-      v = Preferences.getDouble(ArmExtenderPreferences.extendPID_minOutput, pidPrefs.MinOutput);
-      logger.info("{} = {}", ArmExtenderPreferences.extendPID_minOutput, v);
+      v = Preferences.getDouble(ArmExtenderPreferences.PID_minOutput, pidPrefs.MinOutput);
+      logger.info("{} = {}", ArmExtenderPreferences.PID_minOutput, v);
       pidPrefs.MinOutput = v;
-      v = Preferences.getDouble(ArmExtenderPreferences.extendPID_maxOutput, pidPrefs.MaxOutput);
-      logger.info("{} = {}", ArmExtenderPreferences.extendPID_maxOutput, v);
+      v = Preferences.getDouble(ArmExtenderPreferences.PID_maxOutput, pidPrefs.MaxOutput);
+      logger.info("{} = {}", ArmExtenderPreferences.PID_maxOutput, v);
       pidPrefs.MaxOutput = v;
    }
 

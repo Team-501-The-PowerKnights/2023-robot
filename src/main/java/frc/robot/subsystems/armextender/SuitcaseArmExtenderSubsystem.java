@@ -36,9 +36,9 @@ public class SuitcaseArmExtenderSubsystem extends BaseArmExtenderSubsystem {
       logger.info("constructing");
 
       motor = new CANSparkMax(21, MotorType.kBrushless);
-      checkError(motor.restoreFactoryDefaults(), "AR restore factory defaults {}");
-      checkError(motor.setIdleMode(IdleMode.kBrake), "AR set idle mode to brake {}");
-      checkError(encoder.setPosition(0), "AR set encoder position to 0 {}");
+      checkError(motor.restoreFactoryDefaults(), "restore factory defaults {}");
+      checkError(motor.setIdleMode(IdleMode.kBrake), "set idle mode to brake {}");
+      checkError(encoder.setPosition(0), "set encoder position to 0 {}");
 
       logger.info("constructed");
    }
@@ -68,13 +68,13 @@ public class SuitcaseArmExtenderSubsystem extends BaseArmExtenderSubsystem {
 
    @Override
    public void disable() {
-      checkError(pid.setReference(0, ControlType.kDutyCycle), "AE PID set reference to kDutyCycle,0 {}");
+      checkError(pid.setReference(0, ControlType.kDutyCycle), "PID set reference to kDutyCycle,0 {}");
       setTlmPIDEnabled(false);
    }
 
    @Override
    public void stop() {
-      checkError(pid.setReference(0, ControlType.kDutyCycle), "AE PID set reference to kDutyCycle,0 {}");
+      checkError(pid.setReference(0, ControlType.kDutyCycle), "PID set reference to kDutyCycle,0 {}");
       setTlmPIDEnabled(false);
    }
 

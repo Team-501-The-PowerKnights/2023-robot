@@ -31,20 +31,21 @@ public class ProtoArmExtenderSubsystem extends BaseArmExtenderSubsystem {
    /** */
    private final CANSparkMax motor;
    private SparkMaxPIDController pid;
+   @SuppressWarnings("unused")
    private RelativeEncoder encoder;
 
    ProtoArmExtenderSubsystem() {
       logger.info("constructing");
 
       motor = new CANSparkMax(22, MotorType.kBrushless);
-      checkError(motor.restoreFactoryDefaults(), "AE restore factory defaults {}");
-      checkError(motor.setIdleMode(IdleMode.kBrake), "AE set idle mode to brake {}");
+      checkError(motor.restoreFactoryDefaults(), "restore factory defaults {}");
+      checkError(motor.setIdleMode(IdleMode.kBrake), "set idle mode to brake {}");
       pid = motor.getPIDController();
       encoder = motor.getEncoder();
-      checkError(motor.setSoftLimit(SoftLimitDirection.kReverse, 0), "AE set min soft limit to 0 {}");
-      checkError(motor.setSoftLimit(SoftLimitDirection.kForward, 0), "AE set max soft limit to 0 {}");
-      checkError(motor.enableSoftLimit(SoftLimitDirection.kReverse, true), "AE enable reverse soft limit {}");
-      checkError(motor.enableSoftLimit(SoftLimitDirection.kForward, true), "AE enable forward soft limit {}");
+      checkError(motor.setSoftLimit(SoftLimitDirection.kReverse, 0), "set min soft limit to 0 {}");
+      checkError(motor.setSoftLimit(SoftLimitDirection.kForward, 0), "set max soft limit to 0 {}");
+      checkError(motor.enableSoftLimit(SoftLimitDirection.kReverse, true), "enable reverse soft limit {}");
+      checkError(motor.enableSoftLimit(SoftLimitDirection.kForward, true), "enable forward soft limit {}");
 
       logger.info("constructed");
    }
@@ -64,12 +65,12 @@ public class ProtoArmExtenderSubsystem extends BaseArmExtenderSubsystem {
    public void updatePreferences() {
       super.updatePreferences();
 
-      checkError(pid.setP(pidPrefs.P), "AE set PID_P {}");
-      checkError(pid.setI(pidPrefs.I), "AE set PID_I {}");
-      checkError(pid.setD(pidPrefs.D), "AE set PID_D {}");
-      checkError(pid.setIZone(pidPrefs.IZone), "AE set PID_IZone {}");
-      checkError(pid.setFF(pidPrefs.FF), "AE set PID_FF {}");
-      checkError(pid.setOutputRange(pidPrefs.MinOutput, pidPrefs.MaxOutput), "AE set PID_OutputRange {}");
+      checkError(pid.setP(pidPrefs.P), "set PID_P {}");
+      checkError(pid.setI(pidPrefs.I), "set PID_I {}");
+      checkError(pid.setD(pidPrefs.D), "set PID_D {}");
+      checkError(pid.setIZone(pidPrefs.IZone), "set PID_IZone {}");
+      checkError(pid.setFF(pidPrefs.FF), "set PID_FF {}");
+      checkError(pid.setOutputRange(pidPrefs.MinOutput, pidPrefs.MaxOutput), "set PID_OutputRange {}");
 
       // FIXME: Update Soft Limits
 
@@ -78,13 +79,13 @@ public class ProtoArmExtenderSubsystem extends BaseArmExtenderSubsystem {
 
    @Override
    public void disable() {
-      checkError(pid.setReference(0, ControlType.kDutyCycle), "AE PID set reference to kDutyCycle,0 {}");
+      checkError(pid.setReference(0, ControlType.kDutyCycle), "PID set reference to kDutyCycle,0 {}");
       setTlmPIDEnabled(false);
    }
 
    @Override
    public void stop() {
-      checkError(pid.setReference(0, ControlType.kDutyCycle), "AE PID set reference to kDutyCycle,0 {}");
+      checkError(pid.setReference(0, ControlType.kDutyCycle), "PID set reference to kDutyCycle,0 {}");
       setTlmPIDEnabled(false);
    }
 
