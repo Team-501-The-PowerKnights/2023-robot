@@ -32,6 +32,7 @@ public final class ArmRotatorPreferences {
 
    static private final String name = SubsystemNames.armRotatorName;
 
+   /** PID settings */
    static final String PID_P = name + PIDPreferences.pid_P;
    static final String PID_I = name + PIDPreferences.pid_I;
    static final String PID_D = name + PIDPreferences.pid_D;
@@ -40,12 +41,29 @@ public final class ArmRotatorPreferences {
    static final String PID_minOutput = name + PIDPreferences.pid_minOutput;
    static final String PID_maxOutput = name + PIDPreferences.pid_maxOutput;
 
+   private static final double default_pid_P = 0.2;
+   private static final double default_pid_I = 1e-5;
+   private static final double default_pid_D = 1;
+   private static final double default_pid_IZone = 0;
+   private static final double default_pid_FF = 0;
+   private static final double default_pid_minOutput = -0.2;
+   private static final double default_pid_maxOutput = 0.5;
+
+   /** Ramp rate */
    static final String rampRate = name + ".RampRate";
 
+   private static final double default_rampRate = 0.5;
+
+   /** Set points for the various positions */
    static final String overSetPoint = name + ".OverSetPoint";
    static final String highSetPoint = name + ".HighSetPoint";
    static final String midSetPoint = name + ".MidSetPoint";
    static final String lowSetPoint = name + ".LowSetPoint";
+
+   private static final double default_overPosition = 60;
+   private static final double default_highPosition = 26;
+   private static final double default_midPosition = 17;
+   private static final double default_lowPosition = 7;
 
    private ArmRotatorPreferences() {
    }
@@ -55,53 +73,53 @@ public final class ArmRotatorPreferences {
 
       if (!Preferences.containsKey(PID_P)) {
          logger.warn("{} doesn't exist; creating with default", PID_P);
-         Preferences.setDouble(PID_P, 0.0);
+         Preferences.setDouble(PID_P, default_pid_P);
       }
       if (!Preferences.containsKey(PID_I)) {
          logger.warn("{} doesn't exist; creating with default", PID_I);
-         Preferences.setDouble(PID_I, 0.0);
+         Preferences.setDouble(PID_I, default_pid_I);
       }
       if (!Preferences.containsKey(PID_D)) {
          logger.warn("{} doesn't exist; creating with default", PID_D);
-         Preferences.setDouble(PID_D, 0.0);
+         Preferences.setDouble(PID_D, default_pid_D);
       }
       if (!Preferences.containsKey(PID_IZone)) {
          logger.warn("{} doesn't exist; creating with default", PID_IZone);
-         Preferences.setDouble(PID_IZone, 0.0);
+         Preferences.setDouble(PID_IZone, default_pid_IZone);
       }
       if (!Preferences.containsKey(PID_FF)) {
          logger.warn("{} doesn't exist; creating with default", PID_FF);
-         Preferences.setDouble(PID_FF, 0.0);
+         Preferences.setDouble(PID_FF, default_pid_FF);
       }
       if (!Preferences.containsKey(PID_minOutput)) {
          logger.warn("{} doesn't exist; creating with default", PID_minOutput);
-         Preferences.setDouble(PID_minOutput, 0.0);
+         Preferences.setDouble(PID_minOutput, default_pid_minOutput);
       }
       if (!Preferences.containsKey(PID_maxOutput)) {
          logger.warn("{} doesn't exist; creating with default", PID_maxOutput);
-         Preferences.setDouble(PID_maxOutput, 0.0);
+         Preferences.setDouble(PID_maxOutput, default_pid_maxOutput);
       }
 
       if (!Preferences.containsKey(rampRate)) {
          logger.warn("{} doesn't exist; creating with default", rampRate);
-         Preferences.setDouble(rampRate, 0.0);
+         Preferences.setDouble(rampRate, default_rampRate);
       }
 
       if (!Preferences.containsKey(overSetPoint)) {
          logger.warn("{} doesn't exist; creating with default", overSetPoint);
-         Preferences.setDouble(overSetPoint, 0.0);
+         Preferences.setDouble(overSetPoint, default_overPosition);
       }
       if (!Preferences.containsKey(highSetPoint)) {
          logger.warn("{} doesn't exist; creating with default", highSetPoint);
-         Preferences.setDouble(highSetPoint, 0.0);
+         Preferences.setDouble(highSetPoint, default_highPosition);
       }
       if (!Preferences.containsKey(midSetPoint)) {
          logger.warn("{} doesn't exist; creating with default", midSetPoint);
-         Preferences.setDouble(midSetPoint, 0.0);
+         Preferences.setDouble(midSetPoint, default_midPosition);
       }
       if (!Preferences.containsKey(lowSetPoint)) {
          logger.warn("{} doesn't exist; creating with default", lowSetPoint);
-         Preferences.setDouble(lowSetPoint, 0.0);
+         Preferences.setDouble(lowSetPoint, default_lowPosition);
       }
    }
 

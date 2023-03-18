@@ -32,6 +32,7 @@ public final class ArmExtenderPreferences {
 
    static private final String name = SubsystemNames.armExtenderName;
 
+   /** PID settings */
    static final String PID_P = name + PIDPreferences.pid_P;
    static final String PID_I = name + PIDPreferences.pid_I;
    static final String PID_D = name + PIDPreferences.pid_D;
@@ -40,13 +41,31 @@ public final class ArmExtenderPreferences {
    static final String PID_minOutput = name + PIDPreferences.pid_minOutput;
    static final String PID_maxOutput = name + PIDPreferences.pid_maxOutput;
 
+   private static final double default_pid_P = 0.2;
+   private static final double default_pid_I = 0;
+   private static final double default_pid_D = 1;
+   private static final double default_pid_IZone = 0;
+   private static final double default_pid_FF = 0;
+   private static final double default_pid_minOutput = -1;
+   private static final double default_pid_maxOutput = 1;
+
+   /** Soft limits */
    static final String minSoftLimit = name + ".MinSoftLimit";
    static final String maxSoftLimit = name + ".MaxSoftLimit";
 
+   private static final float default_minSoftLimit = 5f;
+   private static final float default_maxSoftLimit = 160f;
+
+   /** Set points for the various positions */
    static final String highSetPoint = name + ".HighSetPoint";
    static final String midSetPoint = name + ".MidSetPoint";
    static final String lowSetPoint = name + ".LowSetPoint";
    static final String inSetPoint = name + ".InSetPoint";
+
+   private static final double default_highPosition = 160;
+   private static final double default_midPosition = 85;
+   private static final double default_lowPosition = 50;
+   private static final double default_inPosition = 5;
 
    private ArmExtenderPreferences() {
    }
@@ -55,57 +74,57 @@ public final class ArmExtenderPreferences {
    public static void initialize() {
       if (!Preferences.containsKey(PID_P)) {
          logger.warn("{} doesn't exist; creating with default", PID_P);
-         Preferences.setDouble(PID_P, 0.0);
+         Preferences.setDouble(PID_P, default_pid_P);
       }
       if (!Preferences.containsKey(PID_I)) {
          logger.warn("{} doesn't exist; creating with default", PID_I);
-         Preferences.setDouble(PID_I, 0.0);
+         Preferences.setDouble(PID_I, default_pid_I);
       }
       if (!Preferences.containsKey(PID_D)) {
          logger.warn("{} doesn't exist; creating with default", PID_D);
-         Preferences.setDouble(PID_D, 0.0);
+         Preferences.setDouble(PID_D, default_pid_D);
       }
       if (!Preferences.containsKey(PID_IZone)) {
          logger.warn("{} doesn't exist; creating with default", PID_IZone);
-         Preferences.setDouble(PID_IZone, 0.0);
+         Preferences.setDouble(PID_IZone, default_pid_IZone);
       }
       if (!Preferences.containsKey(PID_FF)) {
          logger.warn("{} doesn't exist; creating with default", PID_FF);
-         Preferences.setDouble(PID_FF, 0.0);
+         Preferences.setDouble(PID_FF, default_pid_FF);
       }
       if (!Preferences.containsKey(PID_minOutput)) {
          logger.warn("{} doesn't exist; creating with default", PID_minOutput);
-         Preferences.setDouble(PID_minOutput, 0.0);
+         Preferences.setDouble(PID_minOutput, default_pid_minOutput);
       }
       if (!Preferences.containsKey(PID_maxOutput)) {
          logger.warn("{} doesn't exist; creating with default", PID_maxOutput);
-         Preferences.setDouble(PID_maxOutput, 0.0);
+         Preferences.setDouble(PID_maxOutput, default_pid_maxOutput);
       }
 
       if (!Preferences.containsKey(minSoftLimit)) {
          logger.warn("{} doesn't exist; creating with default", minSoftLimit);
-         Preferences.setDouble(minSoftLimit, 0.0);
+         Preferences.setDouble(minSoftLimit, default_minSoftLimit);
       }
       if (!Preferences.containsKey(maxSoftLimit)) {
          logger.warn("{} doesn't exist; creating with default", maxSoftLimit);
-         Preferences.setDouble(maxSoftLimit, 0.0);
+         Preferences.setDouble(maxSoftLimit, default_maxSoftLimit);
       }
 
       if (!Preferences.containsKey(highSetPoint)) {
          logger.warn("{} doesn't exist; creating with default", highSetPoint);
-         Preferences.setDouble(highSetPoint, 0.0);
+         Preferences.setDouble(highSetPoint, default_highPosition);
       }
       if (!Preferences.containsKey(midSetPoint)) {
          logger.warn("{} doesn't exist; creating with default", midSetPoint);
-         Preferences.setDouble(midSetPoint, 0.0);
+         Preferences.setDouble(midSetPoint, default_midPosition);
       }
       if (!Preferences.containsKey(lowSetPoint)) {
          logger.warn("{} doesn't exist; creating with default", lowSetPoint);
-         Preferences.setDouble(lowSetPoint, 0.0);
+         Preferences.setDouble(lowSetPoint, default_lowPosition);
       }
       if (!Preferences.containsKey(inSetPoint)) {
          logger.warn("{} doesn't exist; creating with default", inSetPoint);
-         Preferences.setDouble(inSetPoint, 0.0);
+         Preferences.setDouble(inSetPoint, default_inPosition);
       }
    }
 

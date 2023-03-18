@@ -20,33 +20,15 @@ public interface IArmRotatorSubsystem extends ISubsystem {
     */
    public void stop();
 
-   /** Default PID settings */
-   public static final double default_pid_P = 0.2;
-   public static final double default_pid_I = 1e-5;
-   public static final double default_pid_D = 1;
-   public static final double default_pid_IZone = 0;
-   public static final double default_pid_FF = 0;
-   public static final double default_pid_minOutput = -0.2;
-   public static final double default_pid_maxOutput = 0.5;
-
-   /** Default ramp rate settings (motor) */
-   public static final double default_rampRate = 0.5;
-
-   /** Default set points for the various positions */
-   public static final double default_overPosition = 60;
-   public static final double default_highPosition = 26;
-   public static final double default_midPosition = 17;
-   public static final double default_lowPosition = 7;
-
    /**
     * DOCS: Add your docs here.
     */
    public static enum ArmRotationPosition {
       //@formatter:off
-      overPosition("Over", default_overPosition),
-      highPosition("High", default_highPosition), 
-      midPosition("Mid", default_midPosition), 
-      lowPosition("Low", default_lowPosition);
+      overPosition("Over", 0),
+      highPosition("High", 0), 
+      midPosition("Mid", 0), 
+      lowPosition("Low", 0);
       //@formatter:on
 
       private final String name;

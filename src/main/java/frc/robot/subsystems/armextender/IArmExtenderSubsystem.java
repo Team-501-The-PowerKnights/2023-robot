@@ -20,34 +20,15 @@ public interface IArmExtenderSubsystem extends ISubsystem {
     */
    public void stop();
 
-   /** Default PID settings */
-   public static final double default_pid_P = 0.2;
-   public static final double default_pid_I = 0;
-   public static final double default_pid_D = 1;
-   public static final double default_pid_IZone = 0;
-   public static final double default_pid_FF = 0;
-   public static final double default_pid_minOutput = -1;
-   public static final double default_pid_maxOutput = 1;
-
-   /** Default soft limits on extension (motor + encoder) */
-   public static final float default_minSoftLimit = 5f;
-   public static final float default_maxSoftLimit = 160f;
-
-   /** Default set points for the various positions */
-   public static final double default_highPosition = 160;
-   public static final double default_midPosition = 85;
-   public static final double default_lowPosition = 50;
-   public static final double default_inPosition = 5;
-
    /**
     * DOCS: Add your docs here.
     */
    public static enum ArmExtensionPosition {
       //@formatter:off
-      highPosition("High", default_highPosition), 
-      midPosition("Mid", default_midPosition), 
-      lowPosition("Low", default_lowPosition),
-      inPosition("In", default_inPosition);
+      highPosition("High", 0), 
+      midPosition("Mid", 0), 
+      lowPosition("Low", 0),
+      inPosition("In", 0);
       //@formatter:on
 
       private final String name;

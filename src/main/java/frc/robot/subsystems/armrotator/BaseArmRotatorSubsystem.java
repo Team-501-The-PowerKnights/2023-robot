@@ -34,13 +34,13 @@ abstract class BaseArmRotatorSubsystem extends BaseSubsystem implements IArmRota
     * <i>Preferences</i> if they exist.
     **/
 
-   protected double pid_P = default_pid_P;
-   protected double pid_I = default_pid_I;
-   protected double pid_D = default_pid_D;
-   protected double pid_IZone = default_pid_IZone;
-   protected double pid_FF = default_pid_FF;
-   protected double pid_minOutput = default_pid_minOutput;
-   protected double pid_maxOutput = default_pid_maxOutput;
+   protected double pid_P;
+   protected double pid_I;
+   protected double pid_D;
+   protected double pid_IZone;
+   protected double pid_FF;
+   protected double pid_minOutput;
+   protected double pid_maxOutput;
    //@formatter:off
    protected PIDPreferences pidPrefs = new PIDPreferences(
       pid_P, 
@@ -52,12 +52,12 @@ abstract class BaseArmRotatorSubsystem extends BaseSubsystem implements IArmRota
       pid_maxOutput);
    //@formatter:on
 
-   protected double rampRate = default_rampRate;
+   protected double rampRate;
 
-   protected double overSetPoint = default_overPosition;
-   protected double highSetPoint = default_highPosition;
-   protected double midSetPoint = default_midPosition;
-   protected double lowSetPoint = default_lowPosition;
+   protected double overSetPoint;
+   protected double highSetPoint;
+   protected double midSetPoint;
+   protected double lowSetPoint;
 
    BaseArmRotatorSubsystem() {
       super(SubsystemNames.armRotatorName);
