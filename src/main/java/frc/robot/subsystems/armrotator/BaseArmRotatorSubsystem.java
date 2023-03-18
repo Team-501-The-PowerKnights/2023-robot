@@ -12,12 +12,11 @@ import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.commands.armrotator.ArmRotatorDoNothing;
-import frc.robot.preferences.PIDPreferences;
 import frc.robot.subsystems.BaseSubsystem;
 import frc.robot.subsystems.SubsystemNames;
 import frc.robot.telemetry.PIDTelemetry;
 import frc.robot.telemetry.TelemetryNames;
-
+import frc.robot.utils.PIDValues;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -42,7 +41,7 @@ abstract class BaseArmRotatorSubsystem extends BaseSubsystem implements IArmRota
    protected double pid_minOutput;
    protected double pid_maxOutput;
    //@formatter:off
-   protected PIDPreferences pidPrefs = new PIDPreferences(
+   protected PIDValues pidValues = new PIDValues(
       pid_P, 
       pid_I, 
       pid_D,
@@ -78,27 +77,27 @@ abstract class BaseArmRotatorSubsystem extends BaseSubsystem implements IArmRota
 
       logger.info("new preferences for {}:", myName);
 
-      v = Preferences.getDouble(ArmRotatorPreferences.PID_P, pidPrefs.P);
+      v = Preferences.getDouble(ArmRotatorPreferences.PID_P, pidValues.P);
       logger.info("{} = {}", ArmRotatorPreferences.PID_P, v);
-      pidPrefs.P = v;
-      v = Preferences.getDouble(ArmRotatorPreferences.PID_I, pidPrefs.I);
+      pidValues.P = v;
+      v = Preferences.getDouble(ArmRotatorPreferences.PID_I, pidValues.I);
       logger.info("{} = {}", ArmRotatorPreferences.PID_I, v);
-      pidPrefs.I = v;
-      v = Preferences.getDouble(ArmRotatorPreferences.PID_D, pidPrefs.D);
+      pidValues.I = v;
+      v = Preferences.getDouble(ArmRotatorPreferences.PID_D, pidValues.D);
       logger.info("{} = {}", ArmRotatorPreferences.PID_D, v);
-      pidPrefs.D = v;
-      v = Preferences.getDouble(ArmRotatorPreferences.PID_IZone, pidPrefs.IZone);
+      pidValues.D = v;
+      v = Preferences.getDouble(ArmRotatorPreferences.PID_IZone, pidValues.IZone);
       logger.info("{} = {}", ArmRotatorPreferences.PID_IZone, v);
-      pidPrefs.IZone = v;
-      v = Preferences.getDouble(ArmRotatorPreferences.PID_FF, pidPrefs.FF);
+      pidValues.IZone = v;
+      v = Preferences.getDouble(ArmRotatorPreferences.PID_FF, pidValues.FF);
       logger.info("{} = {}", ArmRotatorPreferences.PID_FF, v);
-      pidPrefs.FF = v;
-      v = Preferences.getDouble(ArmRotatorPreferences.PID_minOutput, pidPrefs.MinOutput);
+      pidValues.FF = v;
+      v = Preferences.getDouble(ArmRotatorPreferences.PID_minOutput, pidValues.MinOutput);
       logger.info("{} = {}", ArmRotatorPreferences.PID_minOutput, v);
-      pidPrefs.MinOutput = v;
-      v = Preferences.getDouble(ArmRotatorPreferences.PID_maxOutput, pidPrefs.MaxOutput);
+      pidValues.MinOutput = v;
+      v = Preferences.getDouble(ArmRotatorPreferences.PID_maxOutput, pidValues.MaxOutput);
       logger.info("{} = {}", ArmRotatorPreferences.PID_maxOutput, v);
-      pidPrefs.MaxOutput = v;
+      pidValues.MaxOutput = v;
 
       v = Preferences.getDouble(ArmRotatorPreferences.rampRate, rampRate);
       logger.info("{} = {}", ArmRotatorPreferences.rampRate, v);

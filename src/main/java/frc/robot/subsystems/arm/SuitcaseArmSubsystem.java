@@ -71,19 +71,19 @@ public class SuitcaseArmSubsystem extends BaseArmSubsystem {
    public void updatePreferences() {
       super.updatePreferences();
 
-      rotatePID.setP(rotatePIDPrefs.P);
-      rotatePID.setI(rotatePIDPrefs.I);
-      rotatePID.setD(rotatePIDPrefs.D);
-      rotatePID.setIZone(rotatePIDPrefs.IZone);
-      rotatePID.setFF(rotatePIDPrefs.FF);
-      rotatePID.setOutputRange(rotatePIDPrefs.MinOutput, rotatePIDPrefs.MaxOutput);
+      rotatePID.setP(rotatePIDValues.P);
+      rotatePID.setI(rotatePIDValues.I);
+      rotatePID.setD(rotatePIDValues.D);
+      rotatePID.setIZone(rotatePIDValues.IZone);
+      rotatePID.setFF(rotatePIDValues.FF);
+      rotatePID.setOutputRange(rotatePIDValues.MinOutput, rotatePIDValues.MaxOutput);
 
-      extendPID.setP(extendPIDPrefs.P);
-      extendPID.setI(extendPIDPrefs.I);
-      extendPID.setD(extendPIDPrefs.D);
-      extendPID.setIZone(extendPIDPrefs.IZone);
-      extendPID.setFF(extendPIDPrefs.FF);
-      extendPID.setOutputRange(extendPIDPrefs.MinOutput, extendPIDPrefs.MaxOutput);
+      extendPID.setP(extendPIDValues.P);
+      extendPID.setI(extendPIDValues.I);
+      extendPID.setD(extendPIDValues.D);
+      extendPID.setIZone(extendPIDValues.IZone);
+      extendPID.setFF(extendPIDValues.FF);
+      extendPID.setOutputRange(extendPIDValues.MinOutput, extendPIDValues.MaxOutput);
    }
 
    @Override

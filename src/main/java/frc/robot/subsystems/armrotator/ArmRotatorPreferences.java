@@ -9,9 +9,8 @@
 package frc.robot.subsystems.armrotator;
 
 import edu.wpi.first.wpilibj.Preferences;
-import frc.robot.preferences.PIDPreferences;
 import frc.robot.subsystems.SubsystemNames;
-
+import frc.robot.utils.PIDValues;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -33,13 +32,13 @@ public final class ArmRotatorPreferences {
    static private final String name = SubsystemNames.armRotatorName;
 
    /** PID settings */
-   static final String PID_P = name + PIDPreferences.pid_P;
-   static final String PID_I = name + PIDPreferences.pid_I;
-   static final String PID_D = name + PIDPreferences.pid_D;
-   static final String PID_IZone = name + PIDPreferences.pid_IZone;
-   static final String PID_FF = name + PIDPreferences.pid_FF;
-   static final String PID_minOutput = name + PIDPreferences.pid_minOutput;
-   static final String PID_maxOutput = name + PIDPreferences.pid_maxOutput;
+   static final String PID_P = name + PIDValues.pid_P;
+   static final String PID_I = name + PIDValues.pid_I;
+   static final String PID_D = name + PIDValues.pid_D;
+   static final String PID_IZone = name + PIDValues.pid_IZone;
+   static final String PID_FF = name + PIDValues.pid_FF;
+   static final String PID_minOutput = name + PIDValues.pid_minOutput;
+   static final String PID_maxOutput = name + PIDValues.pid_maxOutput;
 
    private static final double default_pid_P = 0.2;
    private static final double default_pid_I = 1e-5;

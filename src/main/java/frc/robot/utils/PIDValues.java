@@ -6,16 +6,15 @@
 /*- of this project.                                                      */
 /*------------------------------------------------------------------------*/
 
-package frc.robot.preferences;
+package frc.robot.utils;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-public class PIDPreferences {
-
+public class PIDValues {
    /** Our classes' logger **/
    @SuppressWarnings("unused")
-   private static final PKLogger logger = RioLogger.getLogger(PIDPreferences.class.getName());
+   private static final PKLogger logger = RioLogger.getLogger(PIDValues.class.getName());
 
    public static final String pid_P = ".P";
    public static final String pid_I = ".I";
@@ -33,11 +32,11 @@ public class PIDPreferences {
    public double MinOutput;
    public double MaxOutput;
 
-   public PIDPreferences() {
+   public PIDValues() {
       this(0, 0, 0, 0, 0, 0, 0);
    }
 
-   public PIDPreferences(
+   public PIDValues(
    //@formatter:off
       double P,
       double I,
@@ -55,6 +54,20 @@ public class PIDPreferences {
       this.FF = FF;
       this.MinOutput = MinOutput;
       this.MaxOutput = MaxOutput;
+   }
+
+   @Override
+   public String toString() {
+      StringBuilder buf = new StringBuilder();
+      buf.append("PID:");
+      buf.append(" P=").append(P);
+      buf.append(",I=").append(I);
+      buf.append(",D=").append(D);
+      buf.append(",IZone=").append(IZone);
+      buf.append(",FF=").append(FF);
+      buf.append(",MinOutput=").append(MinOutput);
+      buf.append(",MaxOutput=").append(MaxOutput);
+      return buf.toString();
    }
 
 }

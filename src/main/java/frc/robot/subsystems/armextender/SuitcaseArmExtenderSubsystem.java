@@ -65,12 +65,12 @@ public class SuitcaseArmExtenderSubsystem extends BaseArmExtenderSubsystem {
    public void updatePreferences() {
       super.updatePreferences();
 
-      checkError(pid.setP(pidPrefs.P), "set PID_P {}");
-      checkError(pid.setI(pidPrefs.I), "set PID_I {}");
-      checkError(pid.setD(pidPrefs.D), "set PID_D {}");
-      checkError(pid.setIZone(pidPrefs.IZone), "set PID_IZone {}");
-      checkError(pid.setFF(pidPrefs.FF), "set PID_FF {}");
-      checkError(pid.setOutputRange(pidPrefs.MinOutput, pidPrefs.MaxOutput), "set PID_ min and max output {}");
+      checkError(pid.setP(pidValues.P), "set PID_P {}");
+      checkError(pid.setI(pidValues.I), "set PID_I {}");
+      checkError(pid.setD(pidValues.D), "set PID_D {}");
+      checkError(pid.setIZone(pidValues.IZone), "set PID_IZone {}");
+      checkError(pid.setFF(pidValues.FF), "set PID_FF {}");
+      checkError(pid.setOutputRange(pidValues.MinOutput, pidValues.MaxOutput), "set PID_ min and max output {}");
 
       checkError(motor.setSoftLimit(SoftLimitDirection.kReverse, minSoftLimit), "set min soft limit to 0 {}");
       checkError(motor.setSoftLimit(SoftLimitDirection.kForward, maxSoftLimit), "set max soft limit to 0 {}");

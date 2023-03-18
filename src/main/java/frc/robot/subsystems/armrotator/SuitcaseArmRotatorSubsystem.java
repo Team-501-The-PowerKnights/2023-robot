@@ -60,12 +60,12 @@ public class SuitcaseArmRotatorSubsystem extends BaseArmRotatorSubsystem {
    public void updatePreferences() {
       super.updatePreferences();
 
-      pid.setP(pidPrefs.P);
-      pid.setI(pidPrefs.I);
-      pid.setD(pidPrefs.D);
-      pid.setIZone(pidPrefs.IZone);
-      pid.setFF(pidPrefs.FF);
-      pid.setOutputRange(pidPrefs.MinOutput, pidPrefs.MaxOutput);
+      pid.setP(pidValues.P);
+      pid.setI(pidValues.I);
+      pid.setD(pidValues.D);
+      pid.setIZone(pidValues.IZone);
+      pid.setFF(pidValues.FF);
+      pid.setOutputRange(pidValues.MinOutput, pidValues.MaxOutput);
    }
 
    @Override
