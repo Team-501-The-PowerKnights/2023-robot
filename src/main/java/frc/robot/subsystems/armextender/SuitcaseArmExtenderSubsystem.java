@@ -14,6 +14,7 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMax.IdleMode;
+import com.revrobotics.CANSparkMax.SoftLimitDirection;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import riolog.PKLogger;
@@ -30,15 +31,21 @@ public class SuitcaseArmExtenderSubsystem extends BaseArmExtenderSubsystem {
    /** */
    private final CANSparkMax motor;
    private SparkMaxPIDController pid;
+   @SuppressWarnings("unused")
    private RelativeEncoder encoder;
 
    SuitcaseArmExtenderSubsystem() {
       logger.info("constructing");
 
-      motor = new CANSparkMax(21, MotorType.kBrushless);
+      motor = new CANSparkMax(22, MotorType.kBrushless);
       checkError(motor.restoreFactoryDefaults(), "restore factory defaults {}");
       checkError(motor.setIdleMode(IdleMode.kBrake), "set idle mode to brake {}");
-      checkError(encoder.setPosition(0), "set encoder position to 0 {}");
+      pid = motor.getPIDController();
+      encoder = motor.getEncoder();
+      checkError(motor.setSoftLimit(SoftLimitDirection.kReverse, 0), "set min soft limit to 0 {}");
+      checkError(motor.setSoftLimit(SoftLimitDirection.kForward, 0), "set max soft limit to 0 {}");
+      checkError(motor.enableSoftLimit(SoftLimitDirection.kReverse, true), "enable reverse soft limit {}");
+      checkError(motor.enableSoftLimit(SoftLimitDirection.kForward, true), "enable forward soft limit {}");
 
       logger.info("constructed");
    }
@@ -58,12 +65,20 @@ public class SuitcaseArmExtenderSubsystem extends BaseArmExtenderSubsystem {
    public void updatePreferences() {
       super.updatePreferences();
 
-      pid.setP(pidPrefs.P);
-      pid.setI(pidPrefs.I);
-      pid.setD(pidPrefs.D);
-      pid.setIZone(pidPrefs.IZone);
-      pid.setFF(pidPrefs.FF);
-      pid.setOutputRange(pidPrefs.MinOutput, pidPrefs.MaxOutput);
+      checkError(pid.setP(pidPrefs.P), "set PID_P {}");
+      checkError(pid.setI(pidPrefs.I), "set PID_I {}");
+      checkError(pid.setD(pidPrefs.D), "set PID_D {}");
+      checkError(pid.setIZone(pidPrefs.IZone), "set PID_IZone {}");
+      checkError(pid.setFF(pidPrefs.FF), "set PID_FF {}");
+      checkError(pid.setOutputRange(pidPrefs.MinOutput, pidPrefs.MaxOutput), "set PID_ min and max output {}");
+
+      checkError(motor.setSoftLimit(SoftLimitDirection.kReverse, minSoftLimit), "set min soft limit to 0 {}");
+      checkError(motor.setSoftLimit(SoftLimitDirection.kForward, maxSoftLimit), "set max soft limit to 0 {}");
+
+      ArmExtensionPosition.highPosition.set(highSetPoint);
+      ArmExtensionPosition.midPosition.set(midSetPoint);
+      ArmExtensionPosition.lowPosition.set(lowSetPoint);
+      ArmExtensionPosition.inPosition.set(inSetPoint);
    }
 
    @Override
@@ -80,14 +95,18 @@ public class SuitcaseArmExtenderSubsystem extends BaseArmExtenderSubsystem {
 
    @Override
    public void extendToPosition(ArmExtensionPosition position) {
-      // TODO Auto-generated method stub
+      logger.debug("position = {}", position);
 
+      double target = position.get();
+      extendToTarget(target);
    }
 
    @Override
    public void extendToTarget(double target) {
-      // TODO Auto-generated method stub
-
+      logger.debug("set PID target = {}", target);
+      checkError(pid.setReference(target, ControlType.kPosition), "PID set reference to kPosition,0 {}");
+      setTlmPIDEnabled(true);
+      setTlmPIDTarget(target);
    }
 
    @Override

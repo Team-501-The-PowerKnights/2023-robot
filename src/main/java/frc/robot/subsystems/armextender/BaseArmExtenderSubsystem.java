@@ -30,17 +30,16 @@ abstract class BaseArmExtenderSubsystem extends BaseSubsystem implements IArmExt
     * PID(s) for Subystem
     *
     * These are the defaults to use, and they get overwritten by the values from
-    * the
-    * <i>Preferences</i> if they exist.
+    * the <i>Preferences</i> if they exist.
     **/
 
-   protected double pid_P = 0;
-   protected double pid_I = 0;
-   protected double pid_D = 0;
-   protected double pid_IZone = 0;
-   protected double pid_FF = 0;
-   protected double pid_minOutput = 0;
-   protected double pid_maxOutput = 0;
+   protected double pid_P = default_pid_P;
+   protected double pid_I = default_pid_I;
+   protected double pid_D = default_pid_D;
+   protected double pid_IZone = default_pid_IZone;
+   protected double pid_FF = default_pid_FF;
+   protected double pid_minOutput = default_pid_minOutput;
+   protected double pid_maxOutput = default_pid_maxOutput;
    //@formatter:off
    protected PIDPreferences pidPrefs = new PIDPreferences(
       pid_P, 
@@ -51,6 +50,14 @@ abstract class BaseArmExtenderSubsystem extends BaseSubsystem implements IArmExt
       pid_minOutput, 
       pid_maxOutput);
    //@formatter:on
+
+   protected float minSoftLimit = default_minSoftLimit;
+   protected float maxSoftLimit = default_maxSoftLimit;
+
+   protected double highSetPoint = default_highPosition;
+   protected double midSetPoint = default_midPosition;
+   protected double lowSetPoint = default_lowPosition;
+   protected double inSetPoint = default_inPosition;
 
    BaseArmExtenderSubsystem() {
       super(SubsystemNames.armExtenderName);
@@ -92,6 +99,26 @@ abstract class BaseArmExtenderSubsystem extends BaseSubsystem implements IArmExt
       v = Preferences.getDouble(ArmExtenderPreferences.PID_maxOutput, pidPrefs.MaxOutput);
       logger.info("{} = {}", ArmExtenderPreferences.PID_maxOutput, v);
       pidPrefs.MaxOutput = v;
+
+      v = Preferences.getDouble(ArmExtenderPreferences.minSoftLimit, minSoftLimit);
+      logger.info("{} = {}", ArmExtenderPreferences.minSoftLimit, v);
+      minSoftLimit = (float) v;
+      v = Preferences.getDouble(ArmExtenderPreferences.maxSoftLimit, maxSoftLimit);
+      logger.info("{} = {}", ArmExtenderPreferences.maxSoftLimit, v);
+      maxSoftLimit = (float) v;
+
+      v = Preferences.getDouble(ArmExtenderPreferences.highSetPoint, highSetPoint);
+      logger.info("{} = {}", ArmExtenderPreferences.highSetPoint, v);
+      highSetPoint = v;
+      v = Preferences.getDouble(ArmExtenderPreferences.midSetPoint, midSetPoint);
+      logger.info("{} = {}", ArmExtenderPreferences.midSetPoint, v);
+      midSetPoint = v;
+      v = Preferences.getDouble(ArmExtenderPreferences.lowSetPoint, lowSetPoint);
+      logger.info("{} = {}", ArmExtenderPreferences.lowSetPoint, v);
+      lowSetPoint = v;
+      v = Preferences.getDouble(ArmExtenderPreferences.inSetPoint, inSetPoint);
+      logger.info("{} = {}", ArmExtenderPreferences.inSetPoint, v);
+      inSetPoint = v;
    }
 
    @Override
