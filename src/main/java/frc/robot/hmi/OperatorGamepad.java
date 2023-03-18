@@ -9,12 +9,15 @@
 package frc.robot.hmi;
 
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+
+import frc.robot.commands.armextender.ArmExtendToHighPosition;
+import frc.robot.commands.armextender.ArmExtendToInPosition;
+import frc.robot.commands.armextender.ArmExtendToLowPosition;
+import frc.robot.commands.armextender.ArmExtendToMidPosition;
 import frc.robot.commands.armrotator.ArmRotateToHighPosition;
 import frc.robot.commands.armrotator.ArmRotateToLowPosition;
 import frc.robot.commands.armrotator.ArmRotateToMidPosition;
-import frc.robot.commands.armrotator.ArmRotateToTarget;
-import frc.robot.commands.gripper.GripperClose;
-import frc.robot.commands.gripper.GripperOpen;
+import frc.robot.commands.armrotator.ArmRotateToOverPosition;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
@@ -30,21 +33,19 @@ public class OperatorGamepad extends F310Gamepad {
    /** Our classes' logger **/
    private static final PKLogger logger = RioLogger.getLogger(OperatorGamepad.class.getName());
 
+   private final Trigger rotateOverButton;
    private final Trigger rotateHighButton;
    private final Trigger rotateMidButton;
    private final Trigger rotateLowButton;
-
-   private final Trigger gripperButton;
 
    public OperatorGamepad() {
       super("OperatorGamepad", 1);
       logger.info("constructing");
 
+      rotateOverButton = cmdStick.button(rightBumper);
       rotateHighButton = cmdStick.button(yellowButton);
       rotateMidButton = cmdStick.button(redButton);
       rotateLowButton = cmdStick.button(greenButton);
-
-      gripperButton = cmdStick.button(rightBumper);
 
       logger.info("constructed");
    }
@@ -74,18 +75,17 @@ public class OperatorGamepad extends F310Gamepad {
    private void configureTeleopButtonBindings() {
       logger.info("configure");
 
-      // Rotate to set point when button is pressed
-      rotateHighButton.onTrue(new ArmRotateToHighPosition());
-      rotateMidButton.onTrue(new ArmRotateToMidPosition());
-      rotateLowButton.onTrue(new ArmRotateToLowPosition());
-      // Nudge rotation when joystick is moved
-      new ArmRotateToTarget(() -> deadBand(-getRightYAxis(), 0.10)).schedule();
+      // Pose the arm when button is pressed
+      rotateOverButton.onTrue(new ArmRotateToOverPosition()).onTrue(new ArmExtendToInPosition());
+      rotateHighButton.onTrue(new ArmRotateToHighPosition()).onTrue(new ArmExtendToHighPosition());
+      rotateMidButton.onTrue(new ArmRotateToMidPosition()).onTrue(new ArmExtendToMidPosition());
+      rotateLowButton.onTrue(new ArmRotateToLowPosition()).onTrue(new ArmExtendToLowPosition());
 
-      gripperButton
-            // Open the gripper when the button is pressed
-            .onTrue(new GripperOpen())
-            // Close thre gripper when that same button is released
-            .onFalse(new GripperClose());
+      // TODO Nudge rotate when joysick is moved ...
+      // Nudge rotation when joystick is moved
+      // new ArmRotateToTarget(() -> deadBand(-getRightYAxis(), 0.10)).schedule();
+
+      // TODO: Gripper
 
       logger.info("configured");
    }

@@ -27,24 +27,29 @@ class StubArmRotatorSubsystem extends BaseArmRotatorSubsystem {
 
    @Override
    public void disable() {
-      // Stub doesn't implement this
+      setTlmPIDEnabled(false);
    }
 
    @Override
    public void stop() {
-      // Stub doesn't implement this
+      setTlmPIDEnabled(false);
    }
 
    @Override
    public void rotateToPosition(ArmRotationPosition position) {
-      // TODO Auto-generated method stub
+      logger.debug("position = {}", position);
 
+      double target = position.get();
+      rotateToTarget(target);
    }
 
    @Override
    public void rotateToTarget(double target) {
-      // TODO Auto-generated method stub
+      logger.debug("set PID target = {}", target);
 
+      // Stub doesn't implement this
+      setTlmPIDEnabled(true);
+      setTlmPIDTarget(target);
    }
 
    @Override

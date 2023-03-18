@@ -35,7 +35,7 @@ public class SuitcaseArmRotatorSubsystem extends BaseArmRotatorSubsystem {
    SuitcaseArmRotatorSubsystem() {
       logger.info("constructing");
 
-      motor = new CANSparkMax(20, MotorType.kBrushless);
+      motor = new CANSparkMax(21, MotorType.kBrushless);
       checkError(motor.restoreFactoryDefaults(), "restore factory defaults {}");
       checkError(motor.setIdleMode(IdleMode.kBrake), "set idle mode to brake {}");
       pid = motor.getPIDController();
@@ -82,17 +82,19 @@ public class SuitcaseArmRotatorSubsystem extends BaseArmRotatorSubsystem {
 
    @Override
    public void rotateToPosition(ArmRotationPosition position) {
-      pid.setReference(position.get(), ControlType.kPosition);
-      setTlmPIDEnabled(true);
-      setTlmPIDTarget(position.get());
+      logger.debug("position = {}", position);
+
+      double target = position.get();
+      rotateToTarget(target);
    }
 
    @Override
    public void rotateToTarget(double target) {
-      double newTarget = getTlmPIDTarget() + target;
-      pid.setReference(newTarget, ControlType.kPosition);
+      logger.debug("set PID target = {}", target);
+
+      checkError(pid.setReference(target, ControlType.kPosition), "PID set reference to kPosition,0 {}");
       setTlmPIDEnabled(true);
-      setTlmPIDTarget(newTarget);
+      setTlmPIDTarget(target);
    }
 
    @Override

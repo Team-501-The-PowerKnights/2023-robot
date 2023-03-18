@@ -104,6 +104,7 @@ public class SuitcaseArmExtenderSubsystem extends BaseArmExtenderSubsystem {
    @Override
    public void extendToTarget(double target) {
       logger.debug("set PID target = {}", target);
+
       checkError(pid.setReference(target, ControlType.kPosition), "PID set reference to kPosition,0 {}");
       setTlmPIDEnabled(true);
       setTlmPIDTarget(target);

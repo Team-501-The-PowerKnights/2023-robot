@@ -27,24 +27,29 @@ class StubArmExtenderSubsystem extends BaseArmExtenderSubsystem {
 
    @Override
    public void disable() {
-      // Stub doesn't implement this
+      setTlmPIDEnabled(false);
    }
 
    @Override
    public void stop() {
-      // Stub doesn't implement this
+      setTlmPIDEnabled(false);
    }
 
    @Override
    public void extendToPosition(ArmExtensionPosition position) {
-      // TODO Auto-generated method stub
+      logger.debug("position = {}", position);
 
+      double target = position.get();
+      extendToTarget(target);
    }
 
    @Override
    public void extendToTarget(double target) {
-      // TODO Auto-generated method stub
+      logger.debug("set PID target = {}", target);
 
+      // Stub doesn't implement this
+      setTlmPIDEnabled(true);
+      setTlmPIDTarget(target);
    }
 
    @Override
