@@ -10,18 +10,18 @@
 | Drive          | Spark Max       | NEO Brushless | 12     | Left Rear   | 14     |
 | Drive          | Spark Max       | NEO Brushless | 13     | Right Front | 0      |
 | Drive          | Spark Max       | NEO Brushless | 14     | Right Rear  | 1      |
-| Arm            | Spark Max       |               | 21     | Rotate      | ??     |
-| Arm            | Spark Max       |               | 22     | Extend      | ??     |
-| Gripper        | Spark Max       |               | 31     | Intake      | ??     |
-| Gripper        | Spark Max       |               | 32     | Ingest      |        |
+| Arm Rotator    | Spark Max       | NEO Brushless | 21     | --          | ??     |
+| Arm Extender   | Spark Max       | NEO Brushless | 22     | --          | ??     |
+| Gripper        | Spark Max       | REV HD Hex    | 31     | Left        | ??     |
+| Gripper        | Spark Max       | REV HD Hex    | 32     | Right       | ??     |
+| Wrist          | Spark Max       | NEO Brushless | 41     | --          | ??     |
 
 ## Modules
 
-| Mechanism      | Controller Type  | CAN ID | Position    | PDB ID |
+| Module         | Module Type      | CAN ID | Position    | PDB ID |
 | -------------- | ---------------- | ------ | ----------- | ------ |
 | Power          | Rev Robotics PDB | 1      |             |        | 
-| Pneumatic      | CTRE PCM         | 0      |             | 20     | 
-| Voltage        | CTRE VRM         |        |             | 21     | 
+| Voltage        | CTRE VRM         |        |             | ??     | 
 | Processor      | NI RoboRIO       |        |             | 22     | 
 |                |                  |        |             |        | 
 |                |                  |        |             |        | 
@@ -29,15 +29,13 @@
 
 ## Sensors
 
-| Mechanism   | Sensor Type  | Port      | Position |
-| ----------- | ------------ | --------- |----------|
-|             |              |           |          |
-|             |              |           |          |
-|             |              |           |          |
-|             |              |           |          |
-|             |              |           |          |
-|             |              |           |          |
-~~| Elevator    | Ultrasonic-y | 0         | Lower    |~~
+| Subsystem      | Mechanism Type   | Sensor Type        | Port      | Position    |
+| -------------- | ---------------- | ------------------ | --------- | ----------- |
+| Drive          | Gyro             | NavX2-MXP          | 0         |             |
+| Drive          |                  |                    |           | Left Front  |
+| Drive          |                  |                    |           | Right Front |
+| Arm Rotator    | Relative Encoder |                    | --        | --          |
+| Arm Extender   | Relative Encoder |                    | --        | --          |
+|                |                  |                    |           |             |
+|                |                  |                    |           |             |
 
-~~| Drive       | Relative Encoder | Left  | Left Front (Talon SRX)  |~~
-~~| Drive       | Relative Encoder | Right | Right Front (Talon SRX) |~~
