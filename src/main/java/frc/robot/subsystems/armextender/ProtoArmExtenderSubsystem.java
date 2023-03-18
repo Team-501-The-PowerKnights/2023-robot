@@ -102,6 +102,12 @@ public class ProtoArmExtenderSubsystem extends BaseArmExtenderSubsystem {
    }
 
    @Override
+   public void offsetTarget(double offset) {
+      // TODO Auto-generated method stub
+
+   }
+
+   @Override
    public void extend(double speed) {
       // TODO Auto-generated method stub
 

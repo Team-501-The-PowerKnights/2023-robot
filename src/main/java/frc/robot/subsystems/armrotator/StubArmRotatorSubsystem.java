@@ -45,11 +45,20 @@ class StubArmRotatorSubsystem extends BaseArmRotatorSubsystem {
 
    @Override
    public void rotateToTarget(double target) {
-      logger.debug("set PID target = {}", target);
+      logger.trace("set PID target = {}", target);
 
       // Stub doesn't implement this
       setTlmPIDEnabled(true);
       setTlmPIDTarget(target);
+   }
+
+   @Override
+   public void offsetTarget(double offset) {
+      logger.trace("offset PID target = {}", offset);
+
+      double target = getTlmPIDTarget();
+      target += offset;
+      rotateToTarget(target);
    }
 
    @Override

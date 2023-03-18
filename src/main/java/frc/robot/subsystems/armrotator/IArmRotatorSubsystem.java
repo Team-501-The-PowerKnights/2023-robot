@@ -69,6 +69,15 @@ public interface IArmRotatorSubsystem extends ISubsystem {
    public void rotateToTarget(double target);
 
    /**
+    * Adjust the current set point of the PID. This change will
+    * be lost the next time one of the pre-sets is selected.
+    *
+    * @param offset
+    *           amount of offset ("+" is up, "-" is down)
+    */
+   public void offsetTarget(double offset);
+
+   /**
     * Rotate the arm under 'manual' control.
     *
     * @param speed

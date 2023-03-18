@@ -6,21 +6,21 @@
 /*- of this project.                                                      */
 /*------------------------------------------------------------------------*/
 
-package frc.robot.commands.armrotator;
+package frc.robot.commands.armextender;
 
 import java.util.function.DoubleSupplier;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-public class ArmRotateToTarget extends ArmRotatorCommandBase {
+public class ArmNudgeExtensionTarget extends ArmExtenderCommandBase {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(ArmRotateToTarget.class.getName());
+   private static final PKLogger logger = RioLogger.getLogger(ArmNudgeExtensionTarget.class.getName());
 
    private final DoubleSupplier supplier;
 
-   public ArmRotateToTarget(DoubleSupplier supplier) {
+   public ArmNudgeExtensionTarget(DoubleSupplier supplier) {
       logger.info("constructing {}", getName());
 
       this.supplier = supplier;
@@ -39,9 +39,11 @@ public class ArmRotateToTarget extends ArmRotatorCommandBase {
       double input = supplier.getAsDouble();
       if (input == 0) {
          return;
-      } else {
-         subsys.rotateToTarget(input);
       }
+
+      // Scale by 15% and change sign
+      input *= -0.15;
+      subsys.offsetTarget(input);
    }
 
 }

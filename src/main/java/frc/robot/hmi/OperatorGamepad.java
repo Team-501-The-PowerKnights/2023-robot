@@ -14,6 +14,8 @@ import frc.robot.commands.armextender.ArmExtendToHighPosition;
 import frc.robot.commands.armextender.ArmExtendToInPosition;
 import frc.robot.commands.armextender.ArmExtendToLowPosition;
 import frc.robot.commands.armextender.ArmExtendToMidPosition;
+import frc.robot.commands.armextender.ArmNudgeExtensionTarget;
+import frc.robot.commands.armrotator.ArmNudgeRotationTarget;
 import frc.robot.commands.armrotator.ArmRotateToHighPosition;
 import frc.robot.commands.armrotator.ArmRotateToLowPosition;
 import frc.robot.commands.armrotator.ArmRotateToMidPosition;
@@ -33,21 +35,45 @@ public class OperatorGamepad extends F310Gamepad {
    /** Our classes' logger **/
    private static final PKLogger logger = RioLogger.getLogger(OperatorGamepad.class.getName());
 
-   private final Trigger rotateOverButton;
-   private final Trigger rotateHighButton;
-   private final Trigger rotateMidButton;
-   private final Trigger rotateLowButton;
+   private final Trigger armOverPoseButton;
+   private final Trigger armHighPoseButton;
+   private final Trigger armMidPoseButton;
+   private final Trigger armLowPoseButton;
+
+   private final Trigger armRotateNudgeTrigger;
+   private final Trigger armExtendNudgeTrigger;
 
    public OperatorGamepad() {
       super("OperatorGamepad", 1);
       logger.info("constructing");
 
-      rotateOverButton = cmdStick.button(rightBumper);
-      rotateHighButton = cmdStick.button(yellowButton);
-      rotateMidButton = cmdStick.button(redButton);
-      rotateLowButton = cmdStick.button(greenButton);
+      armOverPoseButton = cmdStick.button(rightBumper);
+      armHighPoseButton = cmdStick.button(yellowButton);
+      armMidPoseButton = cmdStick.button(redButton);
+      armLowPoseButton = cmdStick.button(greenButton);
+
+      armRotateNudgeTrigger = new Trigger(this::isRotationNudged);
+      armExtendNudgeTrigger = new Trigger(this::isExtensionNudged);
 
       logger.info("constructed");
+   }
+
+   /**
+    * Determine if Right Y-Axis joystick is moved from the <i>dead band</i>.
+    *
+    * @return whether joystick is offset from deadband (i.e., active)
+    */
+   private boolean isRotationNudged() {
+      return (Math.abs(deadBand(-getRightYAxis(), 0.10)) > 0);
+   }
+
+   /**
+    * Determine if Left Y-Axis joystick is moved from the <i>dead band</i>.
+    *
+    * @return whether joystick is offset from deadband (i.e., active)
+    */
+   private boolean isExtensionNudged() {
+      return (Math.abs(deadBand(-getLeftYAxis(), 0.10)) > 0);
    }
 
    @Override
@@ -76,16 +102,19 @@ public class OperatorGamepad extends F310Gamepad {
       logger.info("configure");
 
       // Pose the arm when button is pressed
-      rotateOverButton.onTrue(new ArmRotateToOverPosition()).onTrue(new ArmExtendToInPosition());
-      rotateHighButton.onTrue(new ArmRotateToHighPosition()).onTrue(new ArmExtendToHighPosition());
-      rotateMidButton.onTrue(new ArmRotateToMidPosition()).onTrue(new ArmExtendToMidPosition());
-      rotateLowButton.onTrue(new ArmRotateToLowPosition()).onTrue(new ArmExtendToLowPosition());
+      armOverPoseButton.onTrue(new ArmRotateToOverPosition()).onTrue(new ArmExtendToInPosition());
+      armHighPoseButton.onTrue(new ArmRotateToHighPosition()).onTrue(new ArmExtendToHighPosition());
+      armMidPoseButton.onTrue(new ArmRotateToMidPosition()).onTrue(new ArmExtendToMidPosition());
+      armLowPoseButton.onTrue(new ArmRotateToLowPosition()).onTrue(new ArmExtendToLowPosition());
 
-      // TODO Nudge rotate when joysick is moved ...
       // Nudge rotation when joystick is moved
-      // new ArmRotateToTarget(() -> deadBand(-getRightYAxis(), 0.10)).schedule();
+      armRotateNudgeTrigger.whileTrue(new ArmNudgeRotationTarget(() -> deadBand(-getRightYAxis(), 0.10)));
+      // Nudge extenion when the joysick is moved
+      armExtendNudgeTrigger.whileTrue(new ArmNudgeExtensionTarget(() -> deadBand(-getLeftYAxis(), 0.10)));
 
       // TODO: Gripper
+
+      // TODO: Wrist
 
       logger.info("configured");
    }

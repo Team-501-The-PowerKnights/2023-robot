@@ -87,6 +87,7 @@ public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
 
    @Override
    public void rotateToPosition(ArmRotationPosition position) {
+      // FIXME: rotateToPosition(ArmRotationPosition position)
       pid.setReference(position.get(), ControlType.kPosition);
       setTlmPIDEnabled(true);
       setTlmPIDTarget(position.get());
@@ -99,6 +100,15 @@ public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
       pid.setReference(newTarget, ControlType.kPosition);
       setTlmPIDEnabled(true);
       setTlmPIDTarget(newTarget);
+   }
+
+   @Override
+   public void offsetTarget(double offset) {
+      logger.trace("offset PID target = {}", offset);
+
+      double target = getTlmPIDTarget();
+      target += offset;
+      rotateToTarget(target);
    }
 
    @Override

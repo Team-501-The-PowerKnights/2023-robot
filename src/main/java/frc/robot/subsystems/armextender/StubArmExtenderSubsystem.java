@@ -53,6 +53,15 @@ class StubArmExtenderSubsystem extends BaseArmExtenderSubsystem {
    }
 
    @Override
+   public void offsetTarget(double offset) {
+      logger.trace("offset PID target = {}", offset);
+
+      double target = getTlmPIDTarget();
+      target += offset;
+      extendToTarget(target);
+   }
+
+   @Override
    public void extend(double speed) {
       // TODO Auto-generated method stub
 

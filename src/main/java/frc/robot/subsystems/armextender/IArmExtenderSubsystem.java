@@ -69,6 +69,15 @@ public interface IArmExtenderSubsystem extends ISubsystem {
    public void extendToTarget(double target);
 
    /**
+    * Adjust the current set point of the PID. This change will
+    * be lost the next time one of the pre-sets is selected.
+    *
+    * @param offset
+    *           amount of offset ("+" is out, "-" is in)
+    */
+   public void offsetTarget(double offset);
+
+   /**
     * Extend the arm under 'manual' control.
     *
     * @param speed
