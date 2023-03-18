@@ -58,6 +58,13 @@ public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
    }
 
    @Override
+   public void updateTelemetry() {
+      setTlmPIDCurrent(encoder.getPosition());
+
+      super.updateTelemetry();
+   }
+
+   @Override
    public void updatePreferences() {
       super.updatePreferences();
 
@@ -68,9 +75,12 @@ public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
       checkError(pid.setFF(pidValues.FF), "set PID_FF {}");
       checkError(pid.setOutputRange(pidValues.MinOutput, pidValues.MaxOutput), "set PID_OutputRange {}");
 
-      // FIXME: Update RampRate
+      checkError(motor.setOpenLoopRampRate(rampRate), "set open loop ramp rate to 0 {}");
 
-      // FIXME: Update SetPoints
+      ArmRotationPosition.overPosition.set(overSetPoint);
+      ArmRotationPosition.highPosition.set(highSetPoint);
+      ArmRotationPosition.midPosition.set(midSetPoint);
+      ArmRotationPosition.lowPosition.set(lowSetPoint);
    }
 
    @Override
@@ -87,19 +97,19 @@ public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
 
    @Override
    public void rotateToPosition(ArmRotationPosition position) {
-      // FIXME: rotateToPosition(ArmRotationPosition position)
-      pid.setReference(position.get(), ControlType.kPosition);
-      setTlmPIDEnabled(true);
-      setTlmPIDTarget(position.get());
+      logger.debug("position = {}", position);
+
+      double target = position.get();
+      rotateToTarget(target);
    }
 
    @Override
    public void rotateToTarget(double target) {
-      // FIXME: rotateToTarget(double target)
-      double newTarget = getTlmPIDTarget() + target;
-      pid.setReference(newTarget, ControlType.kPosition);
+      logger.trace("set PID target = {}", target);
+
+      checkError(pid.setReference(target, ControlType.kPosition), "PID set reference to kPosition,0 {}");
       setTlmPIDEnabled(true);
-      setTlmPIDTarget(newTarget);
+      setTlmPIDTarget(target);
    }
 
    @Override

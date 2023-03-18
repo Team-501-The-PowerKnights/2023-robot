@@ -31,7 +31,6 @@ public class ProtoArmExtenderSubsystem extends BaseArmExtenderSubsystem {
    /** */
    private final CANSparkMax motor;
    private SparkMaxPIDController pid;
-   @SuppressWarnings("unused")
    private RelativeEncoder encoder;
 
    ProtoArmExtenderSubsystem() {
@@ -62,6 +61,13 @@ public class ProtoArmExtenderSubsystem extends BaseArmExtenderSubsystem {
    }
 
    @Override
+   public void updateTelemetry() {
+      setTlmPIDCurrent(encoder.getPosition());
+
+      super.updateTelemetry();
+   }
+
+   @Override
    public void updatePreferences() {
       super.updatePreferences();
 
@@ -72,9 +78,13 @@ public class ProtoArmExtenderSubsystem extends BaseArmExtenderSubsystem {
       checkError(pid.setFF(pidValues.FF), "set PID_FF {}");
       checkError(pid.setOutputRange(pidValues.MinOutput, pidValues.MaxOutput), "set PID_OutputRange {}");
 
-      // FIXME: Update Soft Limits
+      checkError(motor.setSoftLimit(SoftLimitDirection.kReverse, minSoftLimit), "set min soft limit to 0 {}");
+      checkError(motor.setSoftLimit(SoftLimitDirection.kForward, maxSoftLimit), "set max soft limit to 0 {}");
 
-      // FIXME: Update SetPoints
+      ArmExtensionPosition.highPosition.set(highSetPoint);
+      ArmExtensionPosition.midPosition.set(midSetPoint);
+      ArmExtensionPosition.lowPosition.set(lowSetPoint);
+      ArmExtensionPosition.inPosition.set(inSetPoint);
    }
 
    @Override
@@ -91,20 +101,28 @@ public class ProtoArmExtenderSubsystem extends BaseArmExtenderSubsystem {
 
    @Override
    public void extendToPosition(ArmExtensionPosition position) {
-      // TODO Auto-generated method stub
+      logger.debug("position = {}", position);
 
+      double target = position.get();
+      extendToTarget(target);
    }
 
    @Override
    public void extendToTarget(double target) {
-      // TODO Auto-generated method stub
+      logger.debug("set PID target = {}", target);
 
+      checkError(pid.setReference(target, ControlType.kPosition), "PID set reference to kPosition,0 {}");
+      setTlmPIDEnabled(true);
+      setTlmPIDTarget(target);
    }
 
    @Override
    public void offsetTarget(double offset) {
-      // TODO Auto-generated method stub
+      logger.trace("offset PID target = {}", offset);
 
+      double target = getTlmPIDTarget();
+      target += offset;
+      extendToTarget(target);
    }
 
    @Override

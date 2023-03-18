@@ -41,6 +41,7 @@ public class SuitcaseArmRotatorSubsystem extends BaseArmRotatorSubsystem {
       pid = motor.getPIDController();
       encoder = motor.getEncoder();
       checkError(encoder.setPosition(0), "set encoder position to 0 {}");
+      checkError(motor.setOpenLoopRampRate(0), "set open loop ramp rate to 0 {}");
 
       logger.info("constructed");
    }
@@ -60,12 +61,19 @@ public class SuitcaseArmRotatorSubsystem extends BaseArmRotatorSubsystem {
    public void updatePreferences() {
       super.updatePreferences();
 
-      pid.setP(pidValues.P);
-      pid.setI(pidValues.I);
-      pid.setD(pidValues.D);
-      pid.setIZone(pidValues.IZone);
-      pid.setFF(pidValues.FF);
-      pid.setOutputRange(pidValues.MinOutput, pidValues.MaxOutput);
+      checkError(pid.setP(pidValues.P), "set PID_P {}");
+      checkError(pid.setI(pidValues.I), "set PID_I {}");
+      checkError(pid.setD(pidValues.D), "set PID_D {}");
+      checkError(pid.setIZone(pidValues.IZone), "set PID_IZone {}");
+      checkError(pid.setFF(pidValues.FF), "set PID_FF {}");
+      checkError(pid.setOutputRange(pidValues.MinOutput, pidValues.MaxOutput), "set PID_ min and max output {}");
+
+      checkError(motor.setOpenLoopRampRate(rampRate), "set open loop ramp rate to 0 {}");
+
+      ArmRotationPosition.overPosition.set(overSetPoint);
+      ArmRotationPosition.highPosition.set(highSetPoint);
+      ArmRotationPosition.midPosition.set(midSetPoint);
+      ArmRotationPosition.lowPosition.set(lowSetPoint);
    }
 
    @Override
