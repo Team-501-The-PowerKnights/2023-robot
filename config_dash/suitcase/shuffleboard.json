@@ -24,7 +24,7 @@
               "_showGlyph": false
             }
           },
-          "33,6": {
+          "33,4": {
             "size": [
               4,
               2
@@ -189,25 +189,10 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "33,4": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Pneumatic.pressureGood",
-              "_title": "Pneumatic.pressure",
-              "_glyph": 148,
-              "_showGlyph": false,
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
           "16,8": {
             "size": [
               4,
-              2
+              3
             ],
             "content": {
               "_type": "Boolean Box",
@@ -467,59 +452,7 @@
               "_showGlyph": false
             }
           },
-          "15,9": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Arm.autoCommand",
-              "_title": "Arm.autoCommand",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "15,7": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Arm.implClass",
-              "_title": "Arm.implClass",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "15,5": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Arm.status",
-              "_title": "Arm.status",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "15,11": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Arm.teleCommand",
-              "_title": "Arm.teleCommand",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "21,9": {
+          "27,9": {
             "size": [
               5,
               2
@@ -532,7 +465,7 @@
               "_showGlyph": false
             }
           },
-          "21,7": {
+          "27,7": {
             "size": [
               5,
               2
@@ -545,7 +478,7 @@
               "_showGlyph": false
             }
           },
-          "21,5": {
+          "27,5": {
             "size": [
               5,
               2
@@ -558,7 +491,7 @@
               "_showGlyph": false
             }
           },
-          "21,11": {
+          "27,11": {
             "size": [
               5,
               2
@@ -567,6 +500,110 @@
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Gripper.teleCommand",
               "_title": "Gripper.teleCommand",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "15,5": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ArmRotator.status",
+              "_title": "ArmRotator.status",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "15,7": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ArmRotator.implClass",
+              "_title": "ArmRotator.implClass",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "15,9": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ArmRotator.autoCommand",
+              "_title": "ArmRotator.autoCommand",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "15,11": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ArmRotator.teleCommand",
+              "_title": "ArmRotator.teleCommand",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "21,5": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ArmExtender.status",
+              "_title": "ArmExtender.status",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "21,7": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ArmExtender.implClass",
+              "_title": "ArmExtender.implClass",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "21,11": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ArmExtender.teleCommand",
+              "_title": "ArmExtender.teleCommand",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "21,9": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ArmExtender.autoCommand",
+              "_title": "ArmExtender.autoCommand",
               "_glyph": 148,
               "_showGlyph": false
             }
@@ -1005,9 +1042,9 @@
         "vgap": 8.0,
         "titleType": 0,
         "tiles": {
-          "2,0": {
+          "1,0": {
             "size": [
-              5,
+              6,
               2
             ],
             "content": {
@@ -1018,9 +1055,9 @@
               "_showGlyph": false
             }
           },
-          "2,2": {
+          "1,2": {
             "size": [
-              3,
+              6,
               2
             ],
             "content": {
@@ -1031,7 +1068,7 @@
               "_showGlyph": false
             }
           },
-          "8,6": {
+          "10,6": {
             "size": [
               4,
               2
@@ -1044,7 +1081,7 @@
               "_showGlyph": false
             }
           },
-          "12,6": {
+          "14,6": {
             "size": [
               4,
               2
@@ -1057,7 +1094,7 @@
               "_showGlyph": false
             }
           },
-          "8,2": {
+          "10,2": {
             "size": [
               4,
               2
@@ -1070,7 +1107,7 @@
               "_showGlyph": false
             }
           },
-          "12,2": {
+          "14,2": {
             "size": [
               4,
               2
@@ -1083,9 +1120,9 @@
               "_showGlyph": false
             }
           },
-          "2,9": {
+          "1,9": {
             "size": [
-              5,
+              6,
               2
             ],
             "content": {
@@ -1096,9 +1133,9 @@
               "_showGlyph": false
             }
           },
-          "2,11": {
+          "1,11": {
             "size": [
-              3,
+              6,
               2
             ],
             "content": {
@@ -1109,7 +1146,7 @@
               "_showGlyph": false
             }
           },
-          "8,11": {
+          "10,11": {
             "size": [
               3,
               2
@@ -1122,7 +1159,7 @@
               "_showGlyph": false
             }
           },
-          "14,11": {
+          "16,11": {
             "size": [
               3,
               2
@@ -1135,7 +1172,7 @@
               "_showGlyph": false
             }
           },
-          "11,11": {
+          "13,11": {
             "size": [
               3,
               2
@@ -1148,7 +1185,7 @@
               "_showGlyph": false
             }
           },
-          "8,9": {
+          "10,9": {
             "size": [
               3,
               2
@@ -1161,7 +1198,7 @@
               "_showGlyph": false
             }
           },
-          "11,9": {
+          "13,9": {
             "size": [
               3,
               2
@@ -1174,7 +1211,7 @@
               "_showGlyph": false
             }
           },
-          "8,4": {
+          "10,4": {
             "size": [
               4,
               2
@@ -1189,7 +1226,7 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "12,4": {
+          "14,4": {
             "size": [
               4,
               2
@@ -1204,7 +1241,7 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "8,0": {
+          "10,0": {
             "size": [
               4,
               2
@@ -1217,7 +1254,7 @@
               "_showGlyph": false
             }
           },
-          "12,0": {
+          "14,0": {
             "size": [
               4,
               2
@@ -1230,9 +1267,9 @@
               "_showGlyph": false
             }
           },
-          "2,4": {
+          "1,4": {
             "size": [
-              5,
+              6,
               2
             ],
             "content": {
@@ -1243,9 +1280,9 @@
               "_showGlyph": false
             }
           },
-          "2,6": {
+          "1,6": {
             "size": [
-              5,
+              6,
               2
             ],
             "content": {
@@ -1256,7 +1293,7 @@
               "_showGlyph": false
             }
           },
-          "18,0": {
+          "20,0": {
             "size": [
               4,
               2
@@ -1275,7 +1312,7 @@
       }
     },
     {
-      "title": "Arm",
+      "title": "Arm Rotator",
       "autoPopulate": false,
       "autoPopulatePrefix": "",
       "widgetPane": {
@@ -1285,300 +1322,527 @@
         "vgap": 8.0,
         "titleType": 0,
         "tiles": {
-          "2,2": {
+          "9,4": {
             "size": [
-              3,
+              4,
               2
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Arm.status",
-              "_title": "Arm.status",
+              "_source0": "network_table:///Preferences/ArmRotator.D",
+              "_title": "D",
               "_glyph": 148,
               "_showGlyph": false
             }
           },
-          "2,0": {
+          "9,8": {
             "size": [
-              5,
+              4,
               2
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Arm.implClass",
-              "_title": "Arm.implClass",
+              "_source0": "network_table:///Preferences/ArmRotator.FF",
+              "_title": "FF",
               "_glyph": 148,
               "_showGlyph": false
             }
           },
-          "2,4": {
+          "25,2": {
             "size": [
-              5,
+              4,
               2
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Arm.autoCommand",
-              "_title": "Arm.autoCommand",
+              "_source0": "network_table:///Preferences/ArmRotator.HighSetPoint",
+              "_title": "HighSetPoint",
               "_glyph": 148,
               "_showGlyph": false
             }
           },
-          "2,6": {
+          "9,2": {
             "size": [
-              5,
+              4,
               2
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Arm.teleCommand",
-              "_title": "Arm.teleCommand",
+              "_source0": "network_table:///Preferences/ArmRotator.I",
+              "_title": "I",
               "_glyph": 148,
               "_showGlyph": false
             }
           },
-          "11,0": {
+          "9,6": {
             "size": [
-              7,
-              8
+              4,
+              2
             ],
             "content": {
-              "_type": "List Layout",
-              "_title": "Rotate PID Prefs",
-              "_glyph": 149,
-              "_showGlyph": false,
-              "Layout/Label position": "LEFT",
-              "_children": [
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///Preferences/Arm.Rotate.P",
-                  "_title": "Arm.Rotate.P",
-                  "_glyph": 148,
-                  "_showGlyph": false
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///Preferences/Arm.Rotate.I",
-                  "_title": "Arm.Rotate.I",
-                  "_glyph": 148,
-                  "_showGlyph": false
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///Preferences/Arm.Rotate.D",
-                  "_title": "Arm.Rotate.D",
-                  "_glyph": 148,
-                  "_showGlyph": false
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///Preferences/Arm.Rotate.IZone",
-                  "_title": "Arm.Rotate.IZone",
-                  "_glyph": 148,
-                  "_showGlyph": false
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///Preferences/Arm.Rotate.FF",
-                  "_title": "Arm.Rotate.FF",
-                  "_glyph": 148,
-                  "_showGlyph": false
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///Preferences/Arm.Rotate.MinOutput",
-                  "_title": "Arm.Rotate.MinOutput",
-                  "_glyph": 148,
-                  "_showGlyph": false
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///Preferences/Arm.Rotate.MaxOutput",
-                  "_title": "Arm.Rotate.MaxOutput",
-                  "_glyph": 148,
-                  "_showGlyph": false
-                }
-              ]
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/ArmRotator.IZone",
+              "_title": "IZone",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "25,6": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/ArmRotator.LowSetPoint",
+              "_title": "LowSetPoint",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "14,2": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/ArmRotator.MaxOutput",
+              "_title": "MaxOutput",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "25,4": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/ArmRotator.MidSetPoint",
+              "_title": "MidSetPoint",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "14,0": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/ArmRotator.MinOutput",
+              "_title": "MinOutput",
+              "_glyph": 148,
+              "_showGlyph": false
             }
           },
           "25,0": {
             "size": [
-              7,
-              8
-            ],
-            "content": {
-              "_type": "List Layout",
-              "_title": "Extend PID Prefs",
-              "_glyph": 149,
-              "_showGlyph": false,
-              "Layout/Label position": "LEFT",
-              "_children": [
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///Preferences/Arm.Extend.P",
-                  "_title": "Arm.Extend.P",
-                  "_glyph": 148,
-                  "_showGlyph": false
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///Preferences/Arm.Extend.I",
-                  "_title": "Arm.Extend.I",
-                  "_glyph": 148,
-                  "_showGlyph": false
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///Preferences/Arm.Extend.D",
-                  "_title": "Arm.Extend.D",
-                  "_glyph": 148,
-                  "_showGlyph": false
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///Preferences/Arm.Extend.I",
-                  "_title": "Arm.Extend.I",
-                  "_glyph": 148,
-                  "_showGlyph": false
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///Preferences/Arm.Rotate.FF",
-                  "_title": "Arm.Rotate.FF",
-                  "_glyph": 148,
-                  "_showGlyph": false
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///Preferences/Arm.Extend.MinOutput",
-                  "_title": "Arm.Extend.MinOutput",
-                  "_glyph": 148,
-                  "_showGlyph": false
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///Preferences/Arm.Extend.MaxOutput",
-                  "_title": "Arm.Extend.MaxOutput",
-                  "_glyph": 148,
-                  "_showGlyph": false
-                }
-              ]
-            }
-          },
-          "11,9": {
-            "size": [
-              7,
-              4
-            ],
-            "content": {
-              "_type": "List Layout",
-              "_title": "Rotate Set Points",
-              "_glyph": 149,
-              "_showGlyph": false,
-              "Layout/Label position": "LEFT",
-              "_children": [
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///Preferences/Arm.Rotate.HighSetPoint",
-                  "_title": "Arm.Rotate.HighSetPoint",
-                  "_glyph": 148,
-                  "_showGlyph": false
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///Preferences/Arm.Rotate.MidSetPoint",
-                  "_title": "Arm.Rotate.MidSetPoint",
-                  "_glyph": 148,
-                  "_showGlyph": false
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///Preferences/Arm.Rotate.LowSetPoint",
-                  "_title": "Arm.Rotate.LowSetPoint",
-                  "_glyph": 148,
-                  "_showGlyph": false
-                }
-              ]
-            }
-          },
-          "32,4": {
-            "size": [
-              5,
+              4,
               2
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Arm.extend.PIDCurrent",
-              "_title": "Arm.extend.PIDCurrent",
+              "_source0": "network_table:///Preferences/ArmRotator.OverSetPoint",
+              "_title": "OverSetPoint",
               "_glyph": 148,
               "_showGlyph": false
             }
           },
-          "32,2": {
+          "14,5": {
             "size": [
-              5,
+              4,
               2
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Arm.extend.PIDTarget",
-              "_title": "Arm.extend.PIDTarget",
+              "_source0": "network_table:///Preferences/ArmRotator.RampRate",
+              "_title": "RampRate",
               "_glyph": 148,
               "_showGlyph": false
             }
           },
-          "32,0": {
+          "9,0": {
             "size": [
-              5,
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/ArmRotator.P",
+              "_title": "P",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "19,4": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ArmRotator.PIDCurrent",
+              "_title": "PIDCurrent",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "19,0": {
+            "size": [
+              4,
               2
             ],
             "content": {
               "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Arm.extend.PIDEnabled",
-              "_title": "Arm.extend.PIDEnabled",
+              "_source0": "network_table:///SmartDashboard/ArmRotator.PIDEnabled",
+              "_title": "PIDEnabled",
               "_glyph": 148,
               "_showGlyph": false,
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "18,0": {
+          "19,2": {
             "size": [
-              5,
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ArmRotator.PIDTarget",
+              "_title": "PIDTarget",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "1,4": {
+            "size": [
+              6,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ArmRotator.autoCommand",
+              "_title": "autoCommand",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "1,0": {
+            "size": [
+              6,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ArmRotator.implClass",
+              "_title": "implClass",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "1,2": {
+            "size": [
+              6,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ArmRotator.status",
+              "_title": "status",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "1,6": {
+            "size": [
+              6,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ArmRotator.teleCommand",
+              "_title": "teleCommand",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Arm Extender",
+      "autoPopulate": false,
+      "autoPopulatePrefix": "",
+      "widgetPane": {
+        "gridSize": 32.0,
+        "showGrid": true,
+        "hgap": 8.0,
+        "vgap": 8.0,
+        "titleType": 0,
+        "tiles": {
+          "9,4": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/ArmExtender.D",
+              "_title": "D",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "9,8": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/ArmExtender.FF",
+              "_title": "FF",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "25,0": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/ArmExtender.HighSetPoint",
+              "_title": "HighSetPoint",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "9,2": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/ArmExtender.I",
+              "_title": "I",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "9,6": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/ArmExtender.IZone",
+              "_title": "IZone",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "25,6": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/ArmExtender.InSetPoint",
+              "_title": "InSetPoint",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "25,4": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/ArmExtender.LowSetPoint",
+              "_title": "LowSetPoint",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "14,2": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/ArmExtender.MaxOutput",
+              "_title": "MaxOutput",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "14,7": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/ArmExtender.MaxSoftLimit",
+              "_title": "MaxSoftLimit",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "25,2": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/ArmExtender.MidSetPoint",
+              "_title": "MidSetPoint",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "14,0": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/ArmExtender.MinOutput",
+              "_title": "MinOutput",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "14,5": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/ArmExtender.MinSoftLimit",
+              "_title": "MinSoftLimit",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "9,0": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/ArmExtender.P",
+              "_title": "P",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "19,4": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ArmExtender.PIDCurrent",
+              "_title": "PIDCurrent",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "19,0": {
+            "size": [
+              4,
               2
             ],
             "content": {
               "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Arm.rotate.PIDEnabled",
-              "_title": "Arm.rotate.PIDEnabled",
+              "_source0": "network_table:///SmartDashboard/ArmExtender.PIDEnabled",
+              "_title": "PIDEnabled",
               "_glyph": 148,
               "_showGlyph": false,
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "18,2": {
+          "19,2": {
             "size": [
-              5,
+              4,
               2
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Arm.rotate.PIDTarget",
-              "_title": "Arm.rotate.PIDTarget",
+              "_source0": "network_table:///SmartDashboard/ArmExtender.PIDTarget",
+              "_title": "PIDTarget",
               "_glyph": 148,
               "_showGlyph": false
             }
           },
-          "18,4": {
+          "1,4": {
             "size": [
-              5,
+              6,
               2
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Arm.rotate.PIDCurrent",
-              "_title": "Arm.rotate.PIDCurrent",
+              "_source0": "network_table:///SmartDashboard/ArmExtender.autoCommand",
+              "_title": "autoCommand",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "1,0": {
+            "size": [
+              6,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ArmExtender.implClass",
+              "_title": "implClass",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "1,2": {
+            "size": [
+              6,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ArmExtender.status",
+              "_title": "status",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "1,6": {
+            "size": [
+              6,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ArmExtender.teleCommand",
+              "_title": "teleCommand",
               "_glyph": 148,
               "_showGlyph": false
             }
@@ -1597,9 +1861,9 @@
         "vgap": 8.0,
         "titleType": 0,
         "tiles": {
-          "2,0": {
+          "1,0": {
             "size": [
-              5,
+              6,
               2
             ],
             "content": {
@@ -1610,9 +1874,9 @@
               "_showGlyph": false
             }
           },
-          "2,2": {
+          "1,2": {
             "size": [
-              3,
+              6,
               2
             ],
             "content": {
@@ -1623,9 +1887,9 @@
               "_showGlyph": false
             }
           },
-          "2,4": {
+          "1,4": {
             "size": [
-              5,
+              6,
               2
             ],
             "content": {
@@ -1636,9 +1900,9 @@
               "_showGlyph": false
             }
           },
-          "2,6": {
+          "1,6": {
             "size": [
-              5,
+              6,
               2
             ],
             "content": {
@@ -1647,21 +1911,6 @@
               "_title": "Gripper.teleCommand",
               "_glyph": 148,
               "_showGlyph": false
-            }
-          },
-          "9,0": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Gripper.open",
-              "_title": "/SmartDashboard/Gripper.open",
-              "_glyph": 148,
-              "_showGlyph": false,
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
             }
           }
         }
@@ -1694,7 +1943,7 @@
           "28,0": {
             "size": [
               7,
-              11
+              13
             ],
             "content": {
               "_type": "Robot Preferences",
@@ -1703,411 +1952,6 @@
               "_glyph": 148,
               "_showGlyph": false,
               "Miscellaneous/Show search box": true
-            }
-          }
-        }
-      }
-    },
-    {
-      "title": "LiveWindow",
-      "autoPopulate": true,
-      "autoPopulatePrefix": "LiveWindow/",
-      "widgetPane": {
-        "gridSize": 96.0,
-        "showGrid": true,
-        "hgap": 16.0,
-        "vgap": 16.0,
-        "titleType": 0,
-        "tiles": {
-          "0,0": {
-            "size": [
-              2,
-              4
-            ],
-            "content": {
-              "_type": "Subsystem Layout",
-              "_source0": "network_table:///LiveWindow/StubDriveSubsystem",
-              "_title": "StubDriveSubsystem",
-              "_glyph": 149,
-              "_showGlyph": false,
-              "Layout/Label position": "BOTTOM",
-              "_children": []
-            }
-          },
-          "2,0": {
-            "size": [
-              2,
-              4
-            ],
-            "content": {
-              "_type": "Subsystem Layout",
-              "_source0": "network_table:///LiveWindow/StubIntakeSubsystem",
-              "_title": "StubArmSubsystem",
-              "_glyph": 149,
-              "_showGlyph": false,
-              "Layout/Label position": "BOTTOM",
-              "_children": []
-            }
-          },
-          "4,0": {
-            "size": [
-              2,
-              4
-            ],
-            "content": {
-              "_type": "Subsystem Layout",
-              "_source0": "network_table:///LiveWindow/StubTurretSubsystem",
-              "_title": "StubGripperSubsystem",
-              "_glyph": 149,
-              "_showGlyph": false,
-              "Layout/Label position": "BOTTOM",
-              "_children": []
-            }
-          },
-          "8,0": {
-            "size": [
-              2,
-              4
-            ],
-            "content": {
-              "_type": "Subsystem Layout",
-              "_source0": "network_table:///LiveWindow/Ungrouped",
-              "_title": "Ungrouped",
-              "_glyph": 149,
-              "_showGlyph": false,
-              "Layout/Label position": "BOTTOM",
-              "_children": [
-                {
-                  "_type": "Differential Drivebase",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/DifferentialDrive[1]",
-                  "_title": "DifferentialDrive[1]",
-                  "_glyph": 148,
-                  "_showGlyph": false,
-                  "Wheels/Number of wheels": 4,
-                  "Wheels/Wheel diameter": 80.0,
-                  "Visuals/Show velocity vectors": true
-                },
-                {
-                  "_type": "Boolean Box",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/DigitalInput[9]/Value",
-                  "_title": "DigitalInput[9]/Value",
-                  "_glyph": 148,
-                  "_showGlyph": false,
-                  "Colors/Color when true": "#7CFC00FF",
-                  "Colors/Color when false": "#8B0000FF"
-                },
-                {
-                  "_type": "Boolean Box",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/SwitchableChannel",
-                  "_title": "PowerDistribution[0]/SwitchableChannel",
-                  "_glyph": 148,
-                  "_showGlyph": false,
-                  "Colors/Color when true": "#7CFC00FF",
-                  "Colors/Color when false": "#8B0000FF"
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Voltage",
-                  "_title": "PowerDistribution[0]/Voltage",
-                  "_glyph": 148,
-                  "_showGlyph": false
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Chan10",
-                  "_title": "PowerDistribution[0]/Chan10",
-                  "_glyph": 148,
-                  "_showGlyph": false
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Chan11",
-                  "_title": "PowerDistribution[0]/Chan11",
-                  "_glyph": 148,
-                  "_showGlyph": false
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Chan12",
-                  "_title": "PowerDistribution[0]/Chan12",
-                  "_glyph": 148,
-                  "_showGlyph": false
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Chan13",
-                  "_title": "PowerDistribution[0]/Chan13",
-                  "_glyph": 148,
-                  "_showGlyph": false
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Chan14",
-                  "_title": "PowerDistribution[0]/Chan14",
-                  "_glyph": 148,
-                  "_showGlyph": false
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Chan15",
-                  "_title": "PowerDistribution[0]/Chan15",
-                  "_glyph": 148,
-                  "_showGlyph": false
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Chan0",
-                  "_title": "PowerDistribution[0]/Chan0",
-                  "_glyph": 148,
-                  "_showGlyph": false
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Chan1",
-                  "_title": "PowerDistribution[0]/Chan1",
-                  "_glyph": 148,
-                  "_showGlyph": false
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Chan2",
-                  "_title": "PowerDistribution[0]/Chan2",
-                  "_glyph": 148,
-                  "_showGlyph": false
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Chan3",
-                  "_title": "PowerDistribution[0]/Chan3",
-                  "_glyph": 148,
-                  "_showGlyph": false
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Chan4",
-                  "_title": "PowerDistribution[0]/Chan4",
-                  "_glyph": 148,
-                  "_showGlyph": false
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Chan5",
-                  "_title": "PowerDistribution[0]/Chan5",
-                  "_glyph": 148,
-                  "_showGlyph": false
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Chan7",
-                  "_title": "PowerDistribution[0]/Chan7",
-                  "_glyph": 148,
-                  "_showGlyph": false
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Chan8",
-                  "_title": "PowerDistribution[0]/Chan8",
-                  "_glyph": 148,
-                  "_showGlyph": false
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Chan9",
-                  "_title": "PowerDistribution[0]/Chan9",
-                  "_glyph": 148,
-                  "_showGlyph": false
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Chan6",
-                  "_title": "PowerDistribution[0]/Chan6",
-                  "_glyph": 148,
-                  "_showGlyph": false
-                },
-                {
-                  "_type": "Gyro",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/navX-Sensor[4]",
-                  "_title": "navX-Sensor[4]",
-                  "_glyph": 148,
-                  "_showGlyph": false,
-                  "Visuals/Major tick spacing": 45.0,
-                  "Visuals/Starting angle": 180.0,
-                  "Visuals/Show tick mark ring": true,
-                  "Visuals/Counter clockwise": false
-                },
-                {
-                  "_type": "Boolean Box",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/DigitalInput[8]/Value",
-                  "_title": "DigitalInput[8]/Value",
-                  "_glyph": 148,
-                  "_showGlyph": false,
-                  "Colors/Color when true": "#7CFC00FF",
-                  "Colors/Color when false": "#8B0000FF"
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/TotalCurrent",
-                  "_title": "PowerDistribution[0]/TotalCurrent",
-                  "_glyph": 148,
-                  "_showGlyph": false
-                },
-                {
-                  "_type": "Boolean Box",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/Compressor[0]/Enabled",
-                  "_title": "Compressor[0]/Enabled",
-                  "_glyph": 148,
-                  "_showGlyph": false,
-                  "Colors/Color when true": "#7CFC00FF",
-                  "Colors/Color when false": "#8B0000FF"
-                },
-                {
-                  "_type": "Boolean Box",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/Compressor[0]/Pressure switch",
-                  "_title": "Compressor[0]/Pressure switch",
-                  "_glyph": 148,
-                  "_showGlyph": false,
-                  "Colors/Color when true": "#7CFC00FF",
-                  "Colors/Color when false": "#8B0000FF"
-                },
-                {
-                  "_type": "Boolean Box",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/Solenoid[0,3]/Value",
-                  "_title": "LiveWindow/Ungrouped/Solenoid[0,3]/Value",
-                  "_glyph": 148,
-                  "_showGlyph": false,
-                  "Colors/Color when true": "#7CFC00FF",
-                  "Colors/Color when false": "#8B0000FF"
-                },
-                {
-                  "_type": "Boolean Box",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/Solenoid[0,1]/Value",
-                  "_title": "LiveWindow/Ungrouped/Solenoid[0,1]/Value",
-                  "_glyph": 148,
-                  "_showGlyph": false,
-                  "Colors/Color when true": "#7CFC00FF",
-                  "Colors/Color when false": "#8B0000FF"
-                },
-                {
-                  "_type": "Boolean Box",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/DigitalInput[1]/Value",
-                  "_title": "LiveWindow/Ungrouped/DigitalInput[1]/Value",
-                  "_glyph": 148,
-                  "_showGlyph": false,
-                  "Colors/Color when true": "#7CFC00FF",
-                  "Colors/Color when false": "#8B0000FF"
-                },
-                {
-                  "_type": "Boolean Box",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/DigitalInput[0]/Value",
-                  "_title": "DigitalInput[0]/Value",
-                  "_glyph": 148,
-                  "_showGlyph": false,
-                  "Colors/Color when true": "#7CFC00FF",
-                  "Colors/Color when false": "#8B0000FF"
-                },
-                {
-                  "_type": "Boolean Box",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/DigitalInput[2]/Value",
-                  "_title": "DigitalInput[2]/Value",
-                  "_glyph": 148,
-                  "_showGlyph": false,
-                  "Colors/Color when true": "#7CFC00FF",
-                  "Colors/Color when false": "#8B0000FF"
-                },
-                {
-                  "_type": "PID Controller",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PIDController[3]",
-                  "_title": "LiveWindow/Ungrouped/PIDController[3]",
-                  "_glyph": 148,
-                  "_showGlyph": false
-                },
-                {
-                  "_type": "PID Controller",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PIDController[2]",
-                  "_title": "LiveWindow/Ungrouped/PIDController[2]",
-                  "_glyph": 148,
-                  "_showGlyph": false
-                },
-                {
-                  "_type": "PID Controller",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PIDController[4]",
-                  "_title": "LiveWindow/Ungrouped/PIDController[4]",
-                  "_glyph": 148,
-                  "_showGlyph": false
-                },
-                {
-                  "_type": "PID Controller",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PIDController[1]",
-                  "_title": "LiveWindow/Ungrouped/PIDController[1]",
-                  "_glyph": 148,
-                  "_showGlyph": false
-                },
-                {
-                  "_type": "PID Controller",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PIDController[6]",
-                  "_title": "PIDController[6]",
-                  "_glyph": 148,
-                  "_showGlyph": false
-                },
-                {
-                  "_type": "PID Controller",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PIDController[5]",
-                  "_title": "PIDController[5]",
-                  "_glyph": 148,
-                  "_showGlyph": false
-                },
-                {
-                  "_type": "Boolean Box",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/Solenoid[0,7]/Value",
-                  "_title": "Solenoid[0,7]/Value",
-                  "_glyph": 148,
-                  "_showGlyph": false,
-                  "Colors/Color when true": "#7CFC00FF",
-                  "Colors/Color when false": "#8B0000FF"
-                },
-                {
-                  "_type": "Boolean Box",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/Solenoid[0,6]/Value",
-                  "_title": "Solenoid[0,6]/Value",
-                  "_glyph": 148,
-                  "_showGlyph": false,
-                  "Colors/Color when true": "#7CFC00FF",
-                  "Colors/Color when false": "#8B0000FF"
-                },
-                {
-                  "_type": "Subsystem Layout",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/Scheduler/Ids",
-                  "_title": "Scheduler/Ids",
-                  "_glyph": 149,
-                  "_showGlyph": false,
-                  "Layout/Label position": "BOTTOM",
-                  "_children": []
-                },
-                {
-                  "_type": "PDP",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[1]",
-                  "_title": "PowerDistribution[1]",
-                  "_glyph": 148,
-                  "_showGlyph": false,
-                  "Visuals/Show voltage and current values": true
-                },
-                {
-                  "_type": "Motor Controller",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/Victor SPX [12]",
-                  "_title": "Victor SPX [12]",
-                  "_glyph": 148,
-                  "_showGlyph": false,
-                  "Visuals/Orientation": "HORIZONTAL"
-                },
-                {
-                  "_type": "Motor Controller",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/Victor SPX [14]",
-                  "_title": "Victor SPX [14]",
-                  "_glyph": 148,
-                  "_showGlyph": false,
-                  "Visuals/Orientation": "HORIZONTAL"
-                }
-              ]
             }
           }
         }

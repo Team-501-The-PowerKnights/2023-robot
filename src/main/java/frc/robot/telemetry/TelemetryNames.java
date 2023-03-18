@@ -163,29 +163,29 @@ public final class TelemetryNames {
    }
 
    public final class ArmRotator {
-      private static final String name = SubsystemNames.armName;
+      private static final String name = SubsystemNames.armRotatorName;
 
       public static final String status = name + ".status";
       public static final String implClass = name + ".implClass";
       public static final String autoCommand = name + ".autoCommand";
       public static final String teleCommand = name + ".teleCommand";
 
-      public static final String PIDEnabled = name + ".rotate" + PIDTelemetry.pid_Enabled;
-      public static final String PIDTarget = name + ".rotate" + PIDTelemetry.pid_Target;
-      public static final String PIDCurrent = name + ".rotate" + PIDTelemetry.pid_Current;
+      public static final String PIDEnabled = name + PIDTelemetry.pid_Enabled;
+      public static final String PIDTarget = name + PIDTelemetry.pid_Target;
+      public static final String PIDCurrent = name + PIDTelemetry.pid_Current;
    }
 
    public final class ArmExtender {
-      private static final String name = SubsystemNames.armName;
+      private static final String name = SubsystemNames.armExtenderName;
 
       public static final String status = name + ".status";
       public static final String implClass = name + ".implClass";
       public static final String autoCommand = name + ".autoCommand";
       public static final String teleCommand = name + ".teleCommand";
 
-      public static final String PIDEnabled = name + ".extend" + PIDTelemetry.pid_Enabled;
-      public static final String PIDTarget = name + ".extend" + PIDTelemetry.pid_Target;
-      public static final String PIDCurrent = name + ".extend" + PIDTelemetry.pid_Current;
+      public static final String PIDEnabled = name + PIDTelemetry.pid_Enabled;
+      public static final String PIDTarget = name + PIDTelemetry.pid_Target;
+      public static final String PIDCurrent = name + PIDTelemetry.pid_Current;
    }
 
    public final class Arm {
