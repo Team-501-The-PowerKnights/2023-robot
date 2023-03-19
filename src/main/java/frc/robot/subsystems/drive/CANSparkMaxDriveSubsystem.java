@@ -62,8 +62,15 @@ abstract class CANSparkMaxDriveSubsystem extends BaseDriveSubsystem {
       // Start in coast mode
       setBrake(false);
 
+      // FIXME: Needs to be based on preferences
+      checkError(leftFront.setOpenLoopRampRate(0.5), "L setting ramp rate {}");
+      checkError(rightFront.setOpenLoopRampRate(0.5), "R setting ramp rate {}");
+
       // Drive uses the two paired controllers (Front is master)
       drive = new DifferentialDrive(leftFront, rightFront);
+
+      // FIXME: Shouldn't need to do this
+      drive.setSafetyEnabled(false);
 
       logger.info("constructed");
    }

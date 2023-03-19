@@ -40,6 +40,8 @@ public class OperatorGamepad extends F310Gamepad {
    private final Trigger armMidPoseButton;
    private final Trigger armLowPoseButton;
 
+   private final Trigger armRetractButton;
+
    private final Trigger armRotateNudgeTrigger;
    private final Trigger armExtendNudgeTrigger;
 
@@ -53,6 +55,8 @@ public class OperatorGamepad extends F310Gamepad {
       armHighPoseButton = cmdStick.button(yellowButton);
       armMidPoseButton = cmdStick.button(redButton);
       armLowPoseButton = cmdStick.button(greenButton);
+
+      armRetractButton = cmdStick.button(blueButton);
 
       armRotateNudgeTrigger = new Trigger(this::isArmRotationNudged);
       armExtendNudgeTrigger = new Trigger(this::isArmExtensionNudged);
@@ -135,6 +139,9 @@ public class OperatorGamepad extends F310Gamepad {
       armHighPoseButton.onTrue(new ArmRotateToHighPosition()).onTrue(new ArmExtendToHighPosition());
       armMidPoseButton.onTrue(new ArmRotateToMidPosition()).onTrue(new ArmExtendToMidPosition());
       armLowPoseButton.onTrue(new ArmRotateToLowPosition()).onTrue(new ArmExtendToLowPosition());
+
+      // Retract arm completely when button is pressed
+      armRetractButton.onTrue(new ArmExtendToInPosition());
 
       // Nudge rotation when joystick is moved
       armRotateNudgeTrigger.whileTrue(new ArmNudgeRotationTarget(() -> deadBand(-getRightYAxis(), 0.10)));

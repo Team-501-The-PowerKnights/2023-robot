@@ -29,7 +29,7 @@ public class DriverGamepad extends F310Gamepad {
 	private static final PKLogger logger = RioLogger.getLogger(DriverGamepad.class.getName());
 
 	// private final Button turboButton;
-	// private final Button crawlButton;
+	private final Trigger crawlButton;
 	// private final Button driveSwapButton;
 	private final Trigger brakeToggleButton;
 
@@ -37,8 +37,8 @@ public class DriverGamepad extends F310Gamepad {
 		super("DriverGamepad", 0);
 		logger.info("constructing");
 
-		// turboButton = new JoystickButton(stick, leftBumper);
-		// crawlButton = new JoystickButton(stick, rightBumper);
+		// turboButton = new JoystickButton(stick, rightBumper);
+		crawlButton = cmdStick.button(leftBumper);
 		// driveSwapButton = new JoystickButton(stick, backButton);
 
 		brakeToggleButton = cmdStick.button(startButton);
@@ -51,7 +51,7 @@ public class DriverGamepad extends F310Gamepad {
 		SmartDashboard.putNumber(TelemetryNames.HMI.rawSpeed, getRawDriveSpeed());
 		SmartDashboard.putNumber(TelemetryNames.HMI.rawTurn, getRawDriveTurn());
 		// SmartDashboard.putBoolean(TelemetryNames.HMI.turbo, turboButton.get());
-		// SmartDashboard.putBoolean(TelemetryNames.HMI.crawl, crawlButton.get());
+		SmartDashboard.putBoolean(TelemetryNames.HMI.crawl, crawlButton.getAsBoolean());
 		SmartDashboard.putNumber(TelemetryNames.HMI.oiSpeed, getDriveSpeed());
 		SmartDashboard.putNumber(TelemetryNames.HMI.oiTurn, getDriveTurn());
 	}
@@ -95,13 +95,16 @@ public class DriverGamepad extends F310Gamepad {
 
 	public double getDriveSpeed() {
 		double hmiSpeed = getRawDriveSpeed();
-		double calcSpeed;
+		double calcSpeed = hmiSpeed;
+		if (crawlButton.getAsBoolean()) {
+			calcSpeed *= 0.60;
+		}
 		// if (turboButton.get()) {
 		// calcSpeed = hmiSpeed;
 		// // } else if (crawlButton.get()) {
 		// // calcSpeed = hmiSpeed * 0.30;
 		// } else {
-		calcSpeed = hmiSpeed *= 0.50;
+		// calcSpeed = hmiSpeed *= 0.50;
 		// }
 		return calcSpeed;
 	}
@@ -113,13 +116,16 @@ public class DriverGamepad extends F310Gamepad {
 	public double getDriveTurn() {
 		// Need to reverse the sign of turn
 		final double hmiTurn = -getRawDriveTurn();
-		double calcTurn;
+		double calcTurn = hmiTurn;
+		if (crawlButton.getAsBoolean()) {
+			calcTurn *= 0.75;
+		}
 		// if (turboButton.get()) {
 		// calcTurn = hmiTurn * 0.60;
 		// // } else if (crawlButton.get()) {
 		// // calcTurn = hmiTurn * 0.25;
 		// } else {
-		calcTurn = hmiTurn * 0.30;
+		// calcTurn = hmiTurn * 0.30;
 		// }
 		return calcTurn;
 	}
