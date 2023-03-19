@@ -63,7 +63,7 @@ public final class ArmExtenderPreferences {
 
    private static final double default_highPosition = 160;
    private static final double default_midPosition = 85;
-   private static final double default_lowPosition = 50;
+   private static final double default_lowPosition = 25; // 50 in code
    private static final double default_inPosition = 5;
 
    private ArmExtenderPreferences() {

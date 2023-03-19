@@ -61,15 +61,14 @@ public final class ArmRotatorPreferences {
 
    private static final double default_overPosition = 60;
    private static final double default_highPosition = 26;
-   private static final double default_midPosition = 17;
-   private static final double default_lowPosition = 7;
+   private static final double default_midPosition = 21; // 17 in code
+   private static final double default_lowPosition = 3.5; // 7 in code
 
    private ArmRotatorPreferences() {
    }
 
    // FIXME: Make perferences & NetworkTables right
    public static void initialize() {
-
       if (!Preferences.containsKey(PID_P)) {
          logger.warn("{} doesn't exist; creating with default", PID_P);
          Preferences.setDouble(PID_P, default_pid_P);
