@@ -10,19 +10,19 @@
 | Drive          | Spark Max       | NEO Brushless | 12     | Left Rear   | 14     |
 | Drive          | Spark Max       | NEO Brushless | 13     | Right Front | 0      |
 | Drive          | Spark Max       | NEO Brushless | 14     | Right Rear  | 1      |
-| Arm Rotator    | Spark Max       | NEO Brushless | 21     | --          | ??     |
-| Arm Extender   | Spark Max       | NEO Brushless | 22     | --          | ??     |
-| Gripper        | Spark Max       | REV HD Hex    | 31     | Left        | ??     |
-| Gripper        | Spark Max       | REV HD Hex    | 32     | Right       | ??     |
-| Wrist          | Spark Max       | NEO Brushless | 41     | --          | ??     |
+| Arm Rotator    | Spark Max       | NEO Brushless | 21     | --          | 10     |
+| Arm Extender   | Spark Max       | NEO Brushless | 22     | --          | 11     |
+| Gripper        | Spark Max       | REV HD Hex    | 31     | Left        | 2      |
+| Gripper        | Spark Max       | REV HD Hex    | 32     | Right       | 17     |
+| Wrist          | Spark Max       | NEO Brushless | 41     | --          | 16     |
 
 ## Modules
 
 | Module         | Module Type      | CAN ID | Position    | PDB ID |
 | -------------- | ---------------- | ------ | ----------- | ------ |
 | Power          | Rev Robotics PDB | 1      |             |        | 
-| Voltage        | CTRE VRM         |        |             | ??     | 
-| Processor      | NI RoboRIO       |        |             | 22     | 
+| Voltage        | CTRE VRM         |        |             | 23     | 
+| Processor      | NI RoboRIO       | 0      |             | 21     | 
 |                |                  |        |             |        | 
 |                |                  |        |             |        | 
 |                |                  |        |             |        | 

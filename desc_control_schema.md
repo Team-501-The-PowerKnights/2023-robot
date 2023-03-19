@@ -25,8 +25,7 @@
 | [analog] | Right Joystick #5 F-B | Rotate (down/up)                            |
 
 ### Gripper
-| Type     | Gamepad Control   | Action                  |
-| -------- | ----------------- | ----------------------- |
-| [analog] | Left Trigger) | Pull In |
-| [analog] | Right Trigger) | Push Out |
-| [button] | Blue #3) | Open  *{whenHeld}* |
+| Type     | Gamepad Control       | Action                                      |
+| -------- | --------------------- | ------------------------------------------- |
+| [analog] | Left Trigger          | Pull In                                     |
+| [analog] | Right Trigger         | Push Out                                    |
