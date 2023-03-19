@@ -36,15 +36,16 @@ public abstract class PKCommandBase extends CommandBase {
 
    private static void add(PKCommandBase c) {
       activeCommands.add(c);
-      activeCommandsList = activeCommands.toArray(new PKCommandBase[0]);
+      // activeCommandsList = activeCommands.toArray(new PKCommandBase[0]);
    }
 
    private static void remove(PKCommandBase c) {
       activeCommands.remove(c);
-      activeCommandsList = activeCommands.toArray(new PKCommandBase[0]);
+      // activeCommandsList = activeCommands.toArray(new PKCommandBase[0]);
    }
 
    public static PKCommandBase[] getActiveCommands() {
+      activeCommandsList = activeCommands.toArray(new PKCommandBase[0]);
       return activeCommandsList;
    }
 
