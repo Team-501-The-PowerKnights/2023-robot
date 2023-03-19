@@ -55,10 +55,28 @@ Gyro.className = StubGyroSensor
 #####################
 # Drive
 #####################
-#Drive.className = StubDriveSubsystem
-Drive.className = ProtoDriveSubsystem
+Drive.className = StubDriveSubsystem
+#Drive.className = ProtoDriveSubsystem
 Drive.autoCommandName = DriveDoNothing
 Drive.teleCommandName = DriveDoNothing
+
+
+#####################
+# ArmRotator
+#####################
+ArmRotator.className = StubArmRotatorSubsystem
+#ArmRotator.className = ProtoArmRotatorSubsystem
+ArmRotator.autoCommandName = ArmRotatorDoNothing
+ArmRotator.teleCommandName = ArmRotatorDoNothing
+
+
+#####################
+# ArmExtender
+#####################
+ArmExtender.className = StubArmExtenderSubsystem
+#ArmExtender.className = ProtoArmExtenderSubsystem
+ArmExtender.autoCommandName = ArmExtenderDoNothing
+ArmExtender.teleCommandName = ArmExtenderDoNothing
 
 
 #####################
@@ -71,28 +89,10 @@ Arm.teleCommandName = ArmDoNothing
 
 
 #####################
-# ArmRotator
-#####################
-ArmRotator.className = StubArmRotatorSubsystem
-#ArmRotator.className =
-ArmRotator.autoCommandName = ArmRotatorDoNothing
-ArmRotator.teleCommandName = ArmRotatorDoNothing
-
-
-#####################
-# ArmExtender
-#####################
-ArmExtender.className = StubArmExtenderSubsystem
-#ArmExtender.className =
-ArmExtender.autoCommandName = ArmExtenderDoNothing
-ArmExtender.teleCommandName = ArmExtenderDoNothing
-
-
-#####################
 # Gripper
 #####################
 Gripper.className = StubGripperSubsystem
-#Gripper.className =
+#Gripper.className = ProtoGripperSubsystem
 Gripper.autoCommandName = GripperDoNothing
 Gripper.teleCommandName = GripperDoNothing
 

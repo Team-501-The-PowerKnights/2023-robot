@@ -62,15 +62,6 @@ Drive.teleCommandName = DriveJoystickControl
 
 
 #####################
-# Arm
-#####################
-Arm.className = StubArmSubsystem
-#Arm.className =
-Arm.autoCommandName = ArmDoNothing
-Arm.teleCommandName = ArmDoNothing
-
-
-#####################
 # ArmRotator
 #####################
 ArmRotator.className = StubArmRotatorSubsystem
@@ -86,6 +77,15 @@ ArmExtender.className = StubArmExtenderSubsystem
 #ArmExtender.className =
 ArmExtender.autoCommandName = ArmExtenderDoNothing
 ArmExtender.teleCommandName = ArmExtenderDoNothing
+
+
+#####################
+# Arm
+#####################
+Arm.className = StubArmSubsystem
+#Arm.className =
+Arm.autoCommandName = ArmDoNothing
+Arm.teleCommandName = ArmDoNothing
 
 
 #####################
