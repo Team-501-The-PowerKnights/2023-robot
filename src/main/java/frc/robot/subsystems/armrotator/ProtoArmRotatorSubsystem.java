@@ -58,6 +58,20 @@ public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
    }
 
    @Override
+   public void autonomousInit() {
+      super.autonomousInit();
+
+      checkError(motor.setIdleMode(IdleMode.kBrake), "set idle mode to brake {}");
+   };
+
+   @Override
+   public void teleopInit() {
+      super.teleopInit();
+
+      checkError(motor.setIdleMode(IdleMode.kBrake), "set idle mode to brake {}");
+   };
+
+   @Override
    public void updateTelemetry() {
       setTlmPIDCurrent(encoder.getPosition());
 

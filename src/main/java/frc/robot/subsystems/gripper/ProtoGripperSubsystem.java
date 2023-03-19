@@ -57,6 +57,22 @@ public class ProtoGripperSubsystem extends BaseGripperSubsystem {
    }
 
    @Override
+   public void autonomousInit() {
+      super.autonomousInit();
+
+      checkError(leftMotor.setIdleMode(IdleMode.kBrake), "LG set idle mode to brake {}");
+      checkError(rightMotor.setIdleMode(IdleMode.kBrake), "RG set idle mode to brake {}");
+   };
+
+   @Override
+   public void teleopInit() {
+      super.teleopInit();
+
+      checkError(leftMotor.setIdleMode(IdleMode.kBrake), "LG set idle mode to brake {}");
+      checkError(rightMotor.setIdleMode(IdleMode.kBrake), "RG set idle mode to brake {}");
+   };
+
+   @Override
    public void disable() {
       leftMotor.set(0);
       setTlmSpeed(0);
