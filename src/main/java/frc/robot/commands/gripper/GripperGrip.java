@@ -8,34 +8,31 @@
 
 package frc.robot.commands.gripper;
 
+import java.util.function.DoubleSupplier;
+
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-public class GripperOpen extends GripperCommandBase {
+public class GripperGrip extends GripperCommandBase {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(GripperOpen.class.getName());
+   private static final PKLogger logger = RioLogger.getLogger(GripperGrip.class.getName());
 
-   public GripperOpen() {
+   private final DoubleSupplier supplier;
+
+   public GripperGrip(DoubleSupplier supplier) {
       logger.info("constructing {}", getName());
+
+      this.supplier = supplier;
 
       logger.info("constructed");
    }
 
    @Override
    public void execute() {
-      super.execute();
-   }
+      double input = supplier.getAsDouble();
 
-   @Override
-   protected void firstExecution() {
-      logger.trace("gripper.open() called in firstExecution()");
-      gripper.open();
-   }
-
-   @Override
-   public boolean isFinished() {
-      return true;
+      subsys.grip(input);
    }
 
 }

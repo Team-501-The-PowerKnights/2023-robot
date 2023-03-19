@@ -8,6 +8,7 @@
 
 package frc.robot.subsystems.gripper;
 
+import edu.wpi.first.wpilibj.Preferences;
 import frc.robot.subsystems.SubsystemNames;
 
 import riolog.PKLogger;
@@ -26,17 +27,40 @@ import riolog.RioLogger;
 public final class GripperPreferences {
 
    /** Our classes' logger **/
-   @SuppressWarnings("unused")
    private static final PKLogger logger = RioLogger.getLogger(GripperPreferences.class.getName());
 
-   @SuppressWarnings("unused")
    static private final String name = SubsystemNames.gripperName;
+
+   /** Max Speeds */
+   static final String maxInSpeed = name + ".MaxInSpeed";
+   static final String maxOutSpeed = name + ".MaxOutSpeed";
+
+   private static final double default_maxInSpeed = 1;
+   private static final double default_maxOutSpeed = 1;
+
+   /** Idle Speed */
+   static final String idleSpeed = name + ".IdleSpeed";
+
+   private static final double default_idleSpeed = 0;
 
    private GripperPreferences() {
    }
 
    // FIXME: Make perferences & NetworkTables right
    public static void initialize() {
+      if (!Preferences.containsKey(maxInSpeed)) {
+         logger.warn("{} doesn't exist; creating with default", maxInSpeed);
+         Preferences.setDouble(maxInSpeed, default_maxInSpeed);
+      }
+      if (!Preferences.containsKey(maxOutSpeed)) {
+         logger.warn("{} doesn't exist; creating with default", maxOutSpeed);
+         Preferences.setDouble(maxOutSpeed, default_maxOutSpeed);
+      }
+
+      if (!Preferences.containsKey(idleSpeed)) {
+         logger.warn("{} doesn't exist; creating with default", idleSpeed);
+         Preferences.setDouble(idleSpeed, default_idleSpeed);
+      }
    }
 
 }

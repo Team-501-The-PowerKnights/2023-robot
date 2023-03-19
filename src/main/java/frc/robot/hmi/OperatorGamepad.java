@@ -20,7 +20,7 @@ import frc.robot.commands.armrotator.ArmRotateToHighPosition;
 import frc.robot.commands.armrotator.ArmRotateToLowPosition;
 import frc.robot.commands.armrotator.ArmRotateToMidPosition;
 import frc.robot.commands.armrotator.ArmRotateToOverPosition;
-
+import frc.robot.commands.gripper.GripperGrip;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -43,6 +43,8 @@ public class OperatorGamepad extends F310Gamepad {
    private final Trigger armRotateNudgeTrigger;
    private final Trigger armExtendNudgeTrigger;
 
+   private final Trigger gripperTrigger;
+
    public OperatorGamepad() {
       super("OperatorGamepad", 1);
       logger.info("constructing");
@@ -52,8 +54,10 @@ public class OperatorGamepad extends F310Gamepad {
       armMidPoseButton = cmdStick.button(redButton);
       armLowPoseButton = cmdStick.button(greenButton);
 
-      armRotateNudgeTrigger = new Trigger(this::isRotationNudged);
-      armExtendNudgeTrigger = new Trigger(this::isExtensionNudged);
+      armRotateNudgeTrigger = new Trigger(this::isArmRotationNudged);
+      armExtendNudgeTrigger = new Trigger(this::isArmExtensionNudged);
+
+      gripperTrigger = new Trigger(this::isGripperActive);
 
       logger.info("constructed");
    }
@@ -63,7 +67,7 @@ public class OperatorGamepad extends F310Gamepad {
     *
     * @return whether joystick is offset from deadband (i.e., active)
     */
-   private boolean isRotationNudged() {
+   private boolean isArmRotationNudged() {
       return (Math.abs(deadBand(-getRightYAxis(), 0.10)) > 0);
    }
 
@@ -72,8 +76,33 @@ public class OperatorGamepad extends F310Gamepad {
     *
     * @return whether joystick is offset from deadband (i.e., active)
     */
-   private boolean isExtensionNudged() {
+   private boolean isArmExtensionNudged() {
       return (Math.abs(deadBand(-getLeftYAxis(), 0.10)) > 0);
+   }
+
+   /**
+    * Determine if the Left and/or Right Triggers are moved from the
+    * <i>dead band<i>.
+    *
+    * @return whether either (or both) of the triggers are active
+    */
+   private boolean isGripperActive() {
+      return (deadBand(getLeftTrigger(), 0.01) > 0)
+            || (deadBand(getRightTrigger(), 0.01) > 0);
+      // return true;
+   }
+
+   private double getGripperSpeed() {
+      double inSpeed = getLeftTrigger();
+      double outSpeed = getRightTrigger();
+
+      double speed;
+      if (inSpeed > outSpeed) {
+         speed = inSpeed;
+      } else {
+         speed = -outSpeed;
+      }
+      return speed;
    }
 
    @Override
@@ -112,7 +141,8 @@ public class OperatorGamepad extends F310Gamepad {
       // Nudge extenion when the joysick is moved
       armExtendNudgeTrigger.whileTrue(new ArmNudgeExtensionTarget(() -> deadBand(-getLeftYAxis(), 0.10)));
 
-      // TODO: Gripper
+      // Move the gripper motors when triggers are active
+      gripperTrigger.whileTrue(new GripperGrip(() -> getGripperSpeed()));
 
       // TODO: Wrist
 

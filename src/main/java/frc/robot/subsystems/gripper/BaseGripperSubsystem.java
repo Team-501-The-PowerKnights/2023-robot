@@ -8,11 +8,10 @@
 
 package frc.robot.subsystems.gripper;
 
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.commands.gripper.GripperDoNothing;
-import frc.robot.modules.pneumatic.IPneumaticModule;
-import frc.robot.modules.pneumatic.PneumaticModuleFactory;
 import frc.robot.subsystems.BaseSubsystem;
 import frc.robot.subsystems.SubsystemNames;
 import frc.robot.telemetry.TelemetryNames;
@@ -25,16 +24,14 @@ abstract class BaseGripperSubsystem extends BaseSubsystem implements IGripperSub
    /** Our classes' logger **/
    private static final PKLogger logger = RioLogger.getLogger(BaseGripperSubsystem.class.getName());
 
-   private IPneumaticModule pneumatic;
+   protected double maxInSpeed;
+   protected double maxOutSpeed;
 
-   private static final int gripperChannel = 0;
+   protected double idleSpeed;
 
    BaseGripperSubsystem() {
       super(SubsystemNames.gripperName);
       logger.info("constructing");
-
-      pneumatic = PneumaticModuleFactory.getInstance();
-      close();
 
       logger.info("constructed");
    }
@@ -47,10 +44,20 @@ abstract class BaseGripperSubsystem extends BaseSubsystem implements IGripperSub
    }
 
    protected void loadPreferences() {
-      @SuppressWarnings("unused")
       double v;
 
       logger.info("new preferences for {}:", myName);
+
+      v = Preferences.getDouble(GripperPreferences.maxInSpeed, maxInSpeed);
+      logger.info("{} = {}", GripperPreferences.maxInSpeed, v);
+      maxInSpeed = v;
+      v = Preferences.getDouble(GripperPreferences.maxOutSpeed, maxOutSpeed);
+      logger.info("{} = {}", GripperPreferences.maxOutSpeed, v);
+      maxOutSpeed = v;
+
+      v = Preferences.getDouble(GripperPreferences.idleSpeed, idleSpeed);
+      logger.info("{} = {}", GripperPreferences.idleSpeed, v);
+      idleSpeed = v;
    }
 
    @Override
@@ -61,31 +68,20 @@ abstract class BaseGripperSubsystem extends BaseSubsystem implements IGripperSub
    /**
     * Telemetry support by subsystem.
     */
-   protected boolean tlmIsOpen = false;
+   protected double tlmSpeed = 0;
+
+   protected void setTlmSpeed(double speed) {
+      tlmSpeed = speed;
+   }
 
    @Override
    public void updateTelemetry() {
-      SmartDashboard.putBoolean(TelemetryNames.Gripper.open, tlmIsOpen);
+      SmartDashboard.putNumber(TelemetryNames.Gripper.speed, tlmSpeed);
    }
 
    @Override
    public void updatePreferences() {
       loadPreferences();
-   }
-
-   @Override
-   public void open() {
-      setSolenoid(true);
-   }
-
-   @Override
-   public void close() {
-      setSolenoid(false);
-   }
-
-   private void setSolenoid(boolean isOpen) {
-      tlmIsOpen = isOpen;
-      pneumatic.setSolenoid(gripperChannel, isOpen);
    }
 
 }

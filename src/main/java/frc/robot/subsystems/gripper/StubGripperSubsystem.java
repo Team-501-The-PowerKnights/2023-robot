@@ -28,21 +28,13 @@ class StubGripperSubsystem extends BaseGripperSubsystem {
    @Override
    public void disable() {
       // Stub doesn't implement this
+      setTlmSpeed(0);
    }
 
    @Override
    public void stop() {
       // Stub doesn't implement this
-   }
-
-   @Override
-   public void open() {
-      // TODO Auto-generated method stub
-   }
-
-   @Override
-   public void close() {
-      // TODO Auto-generated method stub
+      setTlmSpeed(0);
    }
 
    @Override
@@ -53,6 +45,12 @@ class StubGripperSubsystem extends BaseGripperSubsystem {
    @Override
    public void pushOut() {
       // TODO Auto-generated method stub
+   }
+
+   @Override
+   public void grip(double speed) {
+      // Stub doesn't implement this
+      setTlmSpeed(speed);
    }
 
 }

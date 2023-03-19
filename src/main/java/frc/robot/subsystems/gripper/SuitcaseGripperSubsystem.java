@@ -28,12 +28,14 @@ class SuitcaseGripperSubsystem extends BaseGripperSubsystem {
 
    @Override
    public void disable() {
-      close();
+      // Suitcase doesn't implement this
+      setTlmSpeed(0);
    }
 
    @Override
    public void stop() {
-      // Stub doesn't implement this
+      // Suitcase doesn't implement this
+      setTlmSpeed(0);
    }
 
    @Override
@@ -44,6 +46,17 @@ class SuitcaseGripperSubsystem extends BaseGripperSubsystem {
    @Override
    public void pushOut() {
       // TODO Auto-generated method stub
+   }
+
+   @Override
+   public void grip(double speed) {
+      if (speed < 0) {
+         speed = Math.max(speed, -0.7); // -maxOutSpeed
+      } else {
+         speed = Math.min(speed, 0.5); // maxInSpeed
+      }
+      // Suitcase doesn't implement this
+      setTlmSpeed(speed);
    }
 
 }

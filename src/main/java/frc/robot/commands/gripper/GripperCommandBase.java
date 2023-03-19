@@ -24,13 +24,13 @@ abstract class GripperCommandBase extends PKCommandBase {
    private static final PKLogger logger = RioLogger.getLogger(GripperCommandBase.class.getName());
 
    // Handle to our subsystem
-   protected final IGripperSubsystem gripper;
+   protected final IGripperSubsystem subsys;
 
    public GripperCommandBase() {
       logger.info("constructing {}", getName());
 
-      gripper = GripperFactory.getInstance();
-      addRequirements(gripper);
+      subsys = GripperFactory.getInstance();
+      addRequirements(subsys);
 
       logger.info("constructed");
    }

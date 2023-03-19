@@ -31,7 +31,7 @@ public class GripperStop extends GripperCommandBase {
    protected void firstExecution() {
       logger.trace("gripper.stop() called in firstExecution()");
 
-      gripper.stop();
+      subsys.stop();
    }
 
    @Override

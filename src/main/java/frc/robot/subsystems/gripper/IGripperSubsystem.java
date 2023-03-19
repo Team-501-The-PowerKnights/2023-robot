@@ -21,16 +21,6 @@ public interface IGripperSubsystem extends ISubsystem {
    public void stop();
 
    /**
-    * Open the gripper.
-    */
-   public void open();
-
-   /**
-    * Close the gripper.
-    */
-   public void close();
-
-   /**
     * Pull the object into the gripper.
     */
    public void pullIn();
@@ -39,5 +29,13 @@ public interface IGripperSubsystem extends ISubsystem {
     * Push the object out of the gripper.
     */
    public void pushOut();
+
+   /**
+    * Grip the object.
+    *
+    * @param speed
+    *           speed to rotate at ("+" is in, "-" is out)
+    */
+   public void grip(double speed);
 
 }

@@ -29,12 +29,6 @@ public class ArmNudgeRotationTarget extends ArmRotatorCommandBase {
    }
 
    @Override
-   protected void firstExecution() {
-      logger.trace("calling firstExecution()");
-
-   }
-
-   @Override
    public void execute() {
       double input = supplier.getAsDouble();
       if (input == 0) {
