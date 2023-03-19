@@ -106,7 +106,7 @@
               "_showGlyph": false,
               "Crosshair/Show crosshair": true,
               "Crosshair/Crosshair color": "#FFFFFFFF",
-              "Controls/Show controls": true,
+              "Controls/Show controls": false,
               "Controls/Rotation": "NONE",
               "compression": -1.0,
               "fps": -1,
@@ -604,6 +604,58 @@
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/ArmExtender.autoCommand",
               "_title": "ArmExtender.autoCommand",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "33,5": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Wrist.status",
+              "_title": "Wrist.status",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "33,7": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Wrist.implClass",
+              "_title": "Wrist.implClass",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "33,11": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Wrist.teleCommand",
+              "_title": "Wrist.teleCommand",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "33,9": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Wrist.autoCommand",
+              "_title": "Wrist.autoCommand",
               "_glyph": 148,
               "_showGlyph": false
             }
@@ -1861,6 +1913,58 @@
         "vgap": 8.0,
         "titleType": 0,
         "tiles": {
+          "9,4": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/Gripper.IdleSpeed",
+              "_title": "IdleSpeed",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "9,0": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/Gripper.MaxInSpeed",
+              "_title": "MaxInSpeed",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "9,2": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/Gripper.MaxOutSpeed",
+              "_title": "MaxOutSpeed",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "16,0": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Gripper.speed",
+              "_title": "speed",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
           "1,0": {
             "size": [
               6,
@@ -1869,7 +1973,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Gripper.implClass",
-              "_title": "Gripper.implClass",
+              "_title": "implClass",
               "_glyph": 148,
               "_showGlyph": false
             }
@@ -1882,7 +1986,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Gripper.status",
-              "_title": "Gripper.status",
+              "_title": "status",
               "_glyph": 148,
               "_showGlyph": false
             }
@@ -1895,7 +1999,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Gripper.autoCommand",
-              "_title": "Gripper.autoCommand",
+              "_title": "autoCommand",
               "_glyph": 148,
               "_showGlyph": false
             }
@@ -1908,7 +2012,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Gripper.teleCommand",
-              "_title": "Gripper.teleCommand",
+              "_title": "teleCommand",
               "_glyph": 148,
               "_showGlyph": false
             }
@@ -1956,12 +2060,210 @@
           }
         }
       }
+    },
+    {
+      "title": "Wrist",
+      "autoPopulate": false,
+      "autoPopulatePrefix": "",
+      "widgetPane": {
+        "gridSize": 32.0,
+        "showGrid": true,
+        "hgap": 8.0,
+        "vgap": 8.0,
+        "titleType": 0,
+        "tiles": {
+          "9,4": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/Wrist.D",
+              "_title": "D",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "9,8": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/Wrist.FF",
+              "_title": "Wrist.FF",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "9,2": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/Wrist.I",
+              "_title": "I",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "9,6": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/Wrist.IZone",
+              "_title": "IZone",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "14,2": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/Wrist.MaxOutput",
+              "_title": "MaxOutput",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "14,0": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/Wrist.MinOutput",
+              "_title": "MinOutput",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "9,0": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/Wrist.P",
+              "_title": "P",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "19,4": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Wrist.PIDCurrent",
+              "_title": "PIDCurrent",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "19,0": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Wrist.PIDEnabled",
+              "_title": "PIDEnabled",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "19,2": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Wrist.PIDTarget",
+              "_title": "PIDTarget",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "1,4": {
+            "size": [
+              6,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Wrist.autoCommand",
+              "_title": "autoCommand",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "1,0": {
+            "size": [
+              6,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Wrist.implClass",
+              "_title": "implClass",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "1,2": {
+            "size": [
+              6,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Wrist.status",
+              "_title": "status",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "1,6": {
+            "size": [
+              6,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Wrist.teleCommand",
+              "_title": "teleCommand",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          }
+        }
+      }
     }
   ],
   "windowGeometry": {
     "x": 0.0,
     "y": 0.0,
-    "width": 1549.0,
+    "width": 1570.0,
     "height": 668.0
   }
 }

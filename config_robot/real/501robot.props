@@ -97,6 +97,15 @@ Gripper.autoCommandName = GripperDoNothing
 Gripper.teleCommandName = GripperDoNothing
 
 
+#####################
+# Wrist
+#####################
+Wrist.className = StubWristSubsystem
+#Wrist.className = 
+Wrist.autoCommandName = WristDoNothing
+Wrist.teleCommandName = WristDoNothing
+
+
 
 #########################################
 #########################################

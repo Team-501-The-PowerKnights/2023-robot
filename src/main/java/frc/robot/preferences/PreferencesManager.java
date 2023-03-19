@@ -19,6 +19,7 @@ import frc.robot.subsystems.armextender.ArmExtenderPreferences;
 import frc.robot.subsystems.armrotator.ArmRotatorPreferences;
 import frc.robot.subsystems.drive.DrivePreferences;
 import frc.robot.subsystems.gripper.GripperPreferences;
+import frc.robot.subsystems.wrist.WristPreferences;
 import frc.robot.telemetry.TelemetryNames;
 import frc.robot.utils.PKStatus;
 
@@ -87,6 +88,8 @@ public final class PreferencesManager {
       }
 
       GripperPreferences.initialize();
+
+      WristPreferences.initialize();
 
       logger.info("constructed");
    }

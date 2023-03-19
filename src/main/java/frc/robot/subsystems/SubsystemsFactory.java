@@ -19,6 +19,7 @@ import frc.robot.subsystems.armextender.ArmExtenderFactory;
 import frc.robot.subsystems.armrotator.ArmRotatorFactory;
 import frc.robot.subsystems.drive.DriveFactory;
 import frc.robot.subsystems.gripper.GripperFactory;
+import frc.robot.subsystems.wrist.WristFactory;
 import frc.robot.telemetry.TelemetryManager;
 import frc.robot.telemetry.TelemetryNames;
 import frc.robot.utils.PKStatus;
@@ -117,6 +118,16 @@ public class SubsystemsFactory {
       {
          GripperFactory.constructInstance();
          ISubsystem ss = GripperFactory.getInstance();
+         tlmMgr.addProvider(ss);
+         subsystems.add(ss);
+      }
+
+      // ** Gripper **
+      SmartDashboard.putNumber(TelemetryNames.Wrist.status,
+            PKStatus.unknown.tlmValue);
+      {
+         WristFactory.constructInstance();
+         ISubsystem ss = WristFactory.getInstance();
          tlmMgr.addProvider(ss);
          subsystems.add(ss);
       }

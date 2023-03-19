@@ -28,5 +28,6 @@ public class SubsystemNames {
    public static final String turretName = "Turret";
 
    public static final String gripperName = "Gripper";
+   public static final String wristName = "Wrist";
 
 }
