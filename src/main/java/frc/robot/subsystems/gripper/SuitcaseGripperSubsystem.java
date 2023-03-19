@@ -49,11 +49,16 @@ class SuitcaseGripperSubsystem extends BaseGripperSubsystem {
    }
 
    @Override
+   public void idleIn() {
+      grip(idleSpeed);
+   }
+
+   @Override
    public void grip(double speed) {
       if (speed < 0) {
-         speed = Math.max(speed, -0.7); // -maxOutSpeed
+         speed = Math.max(speed, -maxOutSpeed);
       } else {
-         speed = Math.min(speed, 0.5); // maxInSpeed
+         speed = Math.min(speed, maxInSpeed);
       }
       // Suitcase doesn't implement this
       setTlmSpeed(speed);

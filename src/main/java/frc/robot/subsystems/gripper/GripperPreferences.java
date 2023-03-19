@@ -41,7 +41,7 @@ public final class GripperPreferences {
    /** Idle Speed */
    static final String idleSpeed = name + ".IdleSpeed";
 
-   private static final double default_idleSpeed = 0;
+   private static final double default_idleSpeed = 0.2;
 
    private GripperPreferences() {
    }

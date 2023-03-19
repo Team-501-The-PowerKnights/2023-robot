@@ -48,6 +48,11 @@ class StubGripperSubsystem extends BaseGripperSubsystem {
    }
 
    @Override
+   public void idleIn() {
+      grip(idleSpeed);
+   }
+
+   @Override
    public void grip(double speed) {
       // Stub doesn't implement this
       setTlmSpeed(speed);

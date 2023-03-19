@@ -93,7 +93,8 @@ Arm.teleCommandName = ArmDoNothing
 #Gripper.className = StubGripperSubsystem
 Gripper.className = ProtoGripperSubsystem
 Gripper.autoCommandName = GripperDoNothing
-Gripper.teleCommandName = GripperDoNothing
+#Gripper.teleCommandName = GripperDoNothing
+Gripper.teleCommandName = GripperIdleIn
 
 
 #####################

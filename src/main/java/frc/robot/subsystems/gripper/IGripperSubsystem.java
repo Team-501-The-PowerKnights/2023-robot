@@ -31,6 +31,12 @@ public interface IGripperSubsystem extends ISubsystem {
    public void pushOut();
 
    /**
+    * Pull the object into the gripper using the <code>idleSpeed</code>
+    * preference.
+    */
+   public void idleIn();
+
+   /**
     * Grip the object.
     *
     * @param speed
