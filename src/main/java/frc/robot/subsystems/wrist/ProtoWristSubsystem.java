@@ -61,6 +61,8 @@ public class ProtoWristSubsystem extends BaseWristSubsystem {
       super.autonomousInit();
 
       checkError(motor.setIdleMode(IdleMode.kBrake), "set idle mode to brake {}");
+
+      rotateToPosition(WristPosition.upPosition);
    };
 
    @Override
@@ -68,6 +70,8 @@ public class ProtoWristSubsystem extends BaseWristSubsystem {
       super.teleopInit();
 
       checkError(motor.setIdleMode(IdleMode.kBrake), "set idle mode to brake {}");
+
+      rotateToPosition(WristPosition.upPosition);
    };
 
    @Override
@@ -88,8 +92,8 @@ public class ProtoWristSubsystem extends BaseWristSubsystem {
       checkError(pid.setFF(pidValues.FF), "set PID_FF {}");
       checkError(pid.setOutputRange(pidValues.MinOutput, pidValues.MaxOutput), "set PID_OutputRange {}");
 
-      WristPosition.cwPosition.set(cwSetPoint);
-      WristPosition.ccwPosition.set(ccwSetPoint);
+      WristPosition.upPosition.set(upSetPoint);
+      WristPosition.overPosition.set(overSetPoint);
    }
 
    @Override

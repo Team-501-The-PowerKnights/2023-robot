@@ -25,8 +25,8 @@ public interface IWristSubsystem extends ISubsystem {
     */
    public static enum WristPosition {
       //@formatter:off
-      cwPosition("CW", 0),
-      ccwPosition("CCW", 0);
+      upPosition("CW", 0),
+      overPosition("CCW", 0);
       //@formatter:on
 
       private final String name;

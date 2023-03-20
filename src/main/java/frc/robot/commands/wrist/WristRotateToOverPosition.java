@@ -13,13 +13,13 @@ import frc.robot.subsystems.wrist.IWristSubsystem.WristPosition;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-public class WristRotateToCWPosition extends WristRotateToPosition {
+public class WristRotateToOverPosition extends WristRotateToPosition {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(WristRotateToCWPosition.class.getName());
+   private static final PKLogger logger = RioLogger.getLogger(WristRotateToOverPosition.class.getName());
 
-   public WristRotateToCWPosition() {
-      super(WristPosition.cwPosition);
+   public WristRotateToOverPosition() {
+      super(WristPosition.overPosition);
       logger.info("constructing {}", getName());
 
       logger.info("constructed");

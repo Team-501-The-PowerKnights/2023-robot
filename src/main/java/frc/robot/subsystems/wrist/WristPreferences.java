@@ -49,11 +49,11 @@ public final class WristPreferences {
    private static final double default_pid_maxOutput = 0;
 
    /** Set points for the various positions */
-   static final String cwSetPoint = name + ".CWSetPoint";
-   static final String ccwSetPoint = name + ".CCWSetPoint";
+   static final String upSetPoint = name + ".UpSetPoint";
+   static final String overSetPoint = name + ".OverSetPoint";
 
-   private static final double default_cwPosition = 0;
-   private static final double default_ccwPosition = 0;
+   private static final double default_upPosition = 0;
+   private static final double default_overPosition = 10.2;
 
    private WristPreferences() {
    }
@@ -89,13 +89,13 @@ public final class WristPreferences {
          Preferences.setDouble(PID_maxOutput, default_pid_maxOutput);
       }
 
-      if (!Preferences.containsKey(cwSetPoint)) {
-         logger.warn("{} doesn't exist; creating with default", cwSetPoint);
-         Preferences.setDouble(cwSetPoint, default_cwPosition);
+      if (!Preferences.containsKey(upSetPoint)) {
+         logger.warn("{} doesn't exist; creating with default", upSetPoint);
+         Preferences.setDouble(upSetPoint, default_upPosition);
       }
-      if (!Preferences.containsKey(ccwSetPoint)) {
-         logger.warn("{} doesn't exist; creating with default", ccwSetPoint);
-         Preferences.setDouble(ccwSetPoint, default_ccwPosition);
+      if (!Preferences.containsKey(overSetPoint)) {
+         logger.warn("{} doesn't exist; creating with default", overSetPoint);
+         Preferences.setDouble(overSetPoint, default_overPosition);
       }
    }
 

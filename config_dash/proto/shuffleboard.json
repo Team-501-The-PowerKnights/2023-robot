@@ -2255,6 +2255,32 @@
               "_glyph": 148,
               "_showGlyph": false
             }
+          },
+          "25,0": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/Wrist.UpSetPoint",
+              "_title": "UpSetPoint",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "25,2": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/Wrist.OverSetPoint",
+              "_title": "OverSetPoint",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
           }
         }
       }
