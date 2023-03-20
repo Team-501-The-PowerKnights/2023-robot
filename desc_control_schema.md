@@ -18,10 +18,11 @@
 ### Arm
 | Type     | Gamepad Control       | Action                                      |
 | -------- | --------------------- | ------------------------------------------- |
-| [button] | Right Bumper #6       | Arm Over Pose  [Rotate Over, Extend In]     |
-| [button] | Yellow #4             | Arm High Pose  [Rotate High, Extend High]   |
-| [button] | Red #2                | Arm Mid Pose   [Rotate Mid,  Extend Mid]    |
-| [button] | Blue #1               | Arm Low Pose   [Rotate Low,  Extend Low]    |
+| [button] | Right Bumper #6       | Arm Over Pose  [Rotate Over, Extend In, Flip Gripper]     |
+| [button] | Yellow #4             | Arm High Pose  [Rotate High, Extend High, Gripper Home]   |
+| [button] | Red #2                | Arm Mid Pose   [Rotate Mid,  Extend Mid, Gripper Home]    |
+| [button] | Green #1              | Arm Low Pose   [Rotate Low,  Extend Low, Gripper Home]    |
+| [button] | Blue #1               | Arm Retract Pose   [Extend Home]            |
 | [analog] | Left Joystick #1 F-B  | Extend (out/in)                             |
 | [analog] | Right Joystick #5 F-B | Rotate (down/up)                            |
 
