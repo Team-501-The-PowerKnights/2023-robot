@@ -14,6 +14,8 @@
 |  ~~[button] (Left Bumper)     | Drive Train Turbo Enabled *{whenHeld}*~~ |
 |  ~~[button] (Back Button)     | Switch Drive Direction~~ |
 
+<img src="https://github.com/Team-501-The-PowerKnights/2023-robot/blob/main/F310.jpg">
+
 ## Operator
 ### Arm
 | Type     | Gamepad Control       | Action                                      |
@@ -31,3 +33,7 @@
 | -------- | --------------------- | ------------------------------------------- |
 | [analog] | Left Trigger          | Pull In                                     |
 | [analog] | Right Trigger         | Push Out                                    |
+
+
+
+<img src="https://github.com/Team-501-The-PowerKnights/2023-robot/blob/main/F310.jpg">
