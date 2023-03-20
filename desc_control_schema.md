@@ -10,6 +10,7 @@
 | [analog] | Left Joystick F-B  | Drivetrain Speed (forward/backward) |
 | [analog] | Right Joystick L-R | Drivetrain Rotate (left/right) |
 | [button] | Right Bumper       | Drivetrain Crawl Enabled *{whenHeld}* |
+| [button] | Start              | Enable / Disable Brakes |
 |  ~~[button] (Left Bumper)     | Drive Train Turbo Enabled *{whenHeld}*~~ |
 |  ~~[button] (Back Button)     | Switch Drive Direction~~ |
 
