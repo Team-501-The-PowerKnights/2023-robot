@@ -21,6 +21,9 @@ import frc.robot.commands.armrotator.ArmRotateToLowPosition;
 import frc.robot.commands.armrotator.ArmRotateToMidPosition;
 import frc.robot.commands.armrotator.ArmRotateToOverPosition;
 import frc.robot.commands.gripper.GripperGrip;
+import frc.robot.commands.wrist.WristRotateToOverPosition;
+import frc.robot.commands.wrist.WristRotateToUpPosition;
+
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -42,8 +45,8 @@ public class OperatorGamepad extends F310Gamepad {
 
    private final Trigger armRetractButton;
 
-   private final Trigger armRotateNudgeTrigger;
-   private final Trigger armExtendNudgeTrigger;
+   private final Trigger armRotateNudgeJoystick;
+   private final Trigger armExtendNudgeJoystick;
 
    private final Trigger gripperTrigger;
 
@@ -58,8 +61,8 @@ public class OperatorGamepad extends F310Gamepad {
 
       armRetractButton = cmdStick.button(blueButton);
 
-      armRotateNudgeTrigger = new Trigger(this::isArmRotationNudged);
-      armExtendNudgeTrigger = new Trigger(this::isArmExtensionNudged);
+      armRotateNudgeJoystick = new Trigger(this::isArmRotationNudged);
+      armExtendNudgeJoystick = new Trigger(this::isArmExtensionNudged);
 
       gripperTrigger = new Trigger(this::isGripperActive);
 
@@ -135,23 +138,37 @@ public class OperatorGamepad extends F310Gamepad {
       logger.info("configure");
 
       // Pose the arm when button is pressed
-      armOverPoseButton.onTrue(new ArmRotateToOverPosition()).onTrue(new ArmExtendToInPosition());
-      armHighPoseButton.onTrue(new ArmRotateToHighPosition()).onTrue(new ArmExtendToHighPosition());
-      armMidPoseButton.onTrue(new ArmRotateToMidPosition()).onTrue(new ArmExtendToMidPosition());
-      armLowPoseButton.onTrue(new ArmRotateToLowPosition()).onTrue(new ArmExtendToLowPosition());
+      armOverPoseButton
+            .onTrue(new ArmRotateToOverPosition())
+            .onTrue(new ArmExtendToInPosition())
+            .onTrue(new WristRotateToOverPosition());
+      armHighPoseButton
+            .onTrue(new ArmRotateToHighPosition())
+            .onTrue(new ArmExtendToHighPosition())
+            .onTrue(new WristRotateToUpPosition());
+      armMidPoseButton
+            .onTrue(new ArmRotateToMidPosition())
+            .onTrue(new ArmExtendToMidPosition())
+            .onTrue(new WristRotateToUpPosition());
+      armLowPoseButton
+            .onTrue(new ArmRotateToLowPosition())
+            .onTrue(new ArmExtendToLowPosition())
+            .onTrue(new WristRotateToUpPosition());
 
       // Retract arm completely when button is pressed
-      armRetractButton.onTrue(new ArmExtendToInPosition());
+      armRetractButton
+            .onTrue(new ArmExtendToInPosition());
 
       // Nudge rotation when joystick is moved
-      armRotateNudgeTrigger.whileTrue(new ArmNudgeRotationTarget(() -> deadBand(-getRightYAxis(), 0.10)));
+      armRotateNudgeJoystick
+            .whileTrue(new ArmNudgeRotationTarget(() -> deadBand(-getRightYAxis(), 0.10)));
       // Nudge extenion when the joysick is moved
-      armExtendNudgeTrigger.whileTrue(new ArmNudgeExtensionTarget(() -> deadBand(-getLeftYAxis(), 0.10)));
+      armExtendNudgeJoystick
+            .whileTrue(new ArmNudgeExtensionTarget(() -> deadBand(-getLeftYAxis(), 0.10)));
 
       // Move the gripper motors when triggers are active
-      gripperTrigger.whileTrue(new GripperGrip(() -> getGripperSpeed()));
-
-      // TODO: Wrist
+      gripperTrigger
+            .whileTrue(new GripperGrip(() -> getGripperSpeed()));
 
       logger.info("configured");
    }
