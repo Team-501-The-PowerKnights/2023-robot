@@ -14,12 +14,12 @@ import riolog.RioLogger;
 /**
  * DOCS: Add your docs here.
  */
-public class StubWristSubsystem extends BaseWristSubsystem {
+public class SuitcaseWristSubsystem extends BaseWristSubsystem {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(StubWristSubsystem.class.getName());
+   private static final PKLogger logger = RioLogger.getLogger(SuitcaseWristSubsystem.class.getName());
 
-   StubWristSubsystem() {
+   SuitcaseWristSubsystem() {
       logger.info("constructing");
 
       logger.info("constructed");
@@ -47,7 +47,7 @@ public class StubWristSubsystem extends BaseWristSubsystem {
    public void rotateToTarget(double target) {
       logger.trace("set PID target = {}", target);
 
-      // Stub doesn't implement this
+      // Suitcase doesn't implement this
       setTlmPIDEnabled(true);
       setTlmPIDTarget(target);
    }

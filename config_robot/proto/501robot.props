@@ -100,8 +100,8 @@ Gripper.teleCommandName = GripperIdleIn
 #####################
 # Wrist
 #####################
-Wrist.className = StubWristSubsystem
-#Wrist.className = 
+#Wrist.className = StubWristSubsystem
+Wrist.className = ProtoWristSubsystem
 Wrist.autoCommandName = WristDoNothing
 Wrist.teleCommandName = WristDoNothing
 

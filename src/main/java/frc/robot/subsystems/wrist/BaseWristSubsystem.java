@@ -51,6 +51,9 @@ abstract class BaseWristSubsystem extends BaseSubsystem implements IWristSubsyst
       pid_maxOutput);
    //@formatter:on
 
+   protected double cwSetPoint;
+   protected double ccwSetPoint;
+
    BaseWristSubsystem() {
       super(SubsystemNames.wristName);
       logger.info("constructing");
@@ -91,6 +94,16 @@ abstract class BaseWristSubsystem extends BaseSubsystem implements IWristSubsyst
       v = Preferences.getDouble(WristPreferences.PID_maxOutput, pidValues.MaxOutput);
       logger.info("{} = {}", WristPreferences.PID_maxOutput, v);
       pidValues.MaxOutput = v;
+
+      v = Preferences.getDouble(WristPreferences.cwSetPoint, cwSetPoint);
+      logger.info("{} = {}", WristPreferences.cwSetPoint, v);
+      cwSetPoint = v;
+      v = Preferences.getDouble(WristPreferences.ccwSetPoint, ccwSetPoint);
+      logger.info("{} = {}", WristPreferences.ccwSetPoint, v);
+      ccwSetPoint = v;
+
+      WristPosition.cwPosition.set(cwSetPoint);
+      WristPosition.ccwPosition.set(ccwSetPoint);
    }
 
    @Override
