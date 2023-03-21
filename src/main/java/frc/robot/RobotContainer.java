@@ -14,10 +14,12 @@ package frc.robot;
 
 import java.util.List;
 
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-
+import frc.robot.commands.AutoDoNothing;
 import frc.robot.modules.IModule;
 import frc.robot.modules.ModulesFactory;
 import frc.robot.preferences.PreferencesManager;
@@ -101,6 +103,9 @@ public class RobotContainer {
       // TODO: Determine if this needs to go after all the others?
       ModeFollowers.getInstance().add(OI.getInstance());
 
+      // Create and place auto chooser on dashboard
+      createAutoChooser();
+
       // Configure the trigger bindings
       configureBindings();
 
@@ -145,14 +150,76 @@ public class RobotContainer {
       // m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
    }
 
+   //
+   public enum AutoSelection {
+      // @formatter:off
+      doNothing("doNothing"), 
+      doSimpleBackup("doSimpleBackup"),
+      doConeAndBackup("doConeAndBackup"),
+      doFull("doFull");
+      // @formatter:on
+
+      private final String name;
+
+      private AutoSelection(String name) {
+         this.name = name;
+      }
+
+      public String getName() {
+         return name;
+      }
+   }
+
+   // Chooser for autonomous command from Dashboard
+   private SendableChooser<AutoSelection> autoChooser;
+   // Command that was selected
+   private AutoSelection autoSelected;
+
+   private void createAutoChooser() {
+      autoChooser = new SendableChooser<>();
+
+      // Default option is safety of "do nothing"
+      autoChooser.setDefaultOption("Do Nothing", AutoSelection.doNothing);
+
+      //
+      autoChooser.addOption("Simple Backup", AutoSelection.doSimpleBackup);
+
+      //
+      autoChooser.addOption("Not Full Auto (place cone & backup)", AutoSelection.doConeAndBackup);
+      //
+      autoChooser.addOption("Full Auto (place cone & balance)", AutoSelection.doFull);
+
+      SmartDashboard.putData("Auto Mode", autoChooser);
+   }
+
+   public boolean isRealAutoSelected() {
+      return (autoChooser.getSelected() != AutoSelection.doNothing);
+   }
+
    /**
     * Use this to pass the autonomous command to the main {@link Robot} class.
     *
     * @return the command to run in autonomous
     */
    public Command getAutonomousCommand() {
-      // An example command will be run in autonomous
-      // return Autos.exampleAuto(m_exampleSubsystem);
-      return null;
+      autoSelected = autoChooser.getSelected();
+      logger.info("auto command selected = {}", autoSelected);
+      switch (autoSelected) {
+         case doNothing:
+            return new AutoDoNothing();
+
+         case doSimpleBackup:
+            return new AutoDoNothing();
+
+         case doConeAndBackup:
+            return new AutoDoNothing();
+
+         case doFull:
+            return new AutoDoNothing();
+
+         default:
+            return new AutoDoNothing();
+      }
    }
+
 }

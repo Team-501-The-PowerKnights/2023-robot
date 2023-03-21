@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+
 import frc.robot.subsystems.arm.ArmFactory;
 import frc.robot.subsystems.arm.IArmSubsystem.ArmRotationPosition;
 import frc.robot.telemetry.TelemetryManager;
@@ -40,7 +41,6 @@ public class Robot extends TimedRobot {
    private static final PKLogger logger = RioLogger.getLogger(Robot.class.getName());
 
    // Capture the period at start (shouldn't ever change)
-   @SuppressWarnings("unused")
    private static double loopPeriod;
 
    // Flag for started/running autonomous part of match
@@ -58,10 +58,9 @@ public class Robot extends TimedRobot {
    // Flag for having completed teleop part of match
    private static boolean teleopComplete;
 
-   @SuppressWarnings("unused")
    private RobotContainer robotContainer;
 
-   private Command m_autonomousCommand;
+   private Command autonomousCommand;
 
    /**
     * This function is run when the robot is first started up and should be used
@@ -184,6 +183,8 @@ public class Robot extends TimedRobot {
     */
    @Override
    public void disabledPeriodic() {
+      // Has a "real" auto been selected yet?
+      SmartDashboard.putBoolean(TelemetryNames.Misc.realAuto, robotContainer.isRealAutoSelected());
    }
 
    /**
@@ -210,6 +211,12 @@ public class Robot extends TimedRobot {
       autonomousComplete = false;
 
       ModeFollowers.getInstance().initAutonomous();
+
+      // schedule the autonomous command (example)
+      autonomousCommand = robotContainer.getAutonomousCommand();
+      if (autonomousCommand != null) {
+         autonomousCommand.schedule();
+      }
 
       logger.info("initialized autonomous");
    }
@@ -253,10 +260,9 @@ public class Robot extends TimedRobot {
 
       // FIXME: Should be / is already elsewhere?
       // This makes sure that the autonomous stops running when teleop starts
-      // running. If you want the autonomous to continue until interrupted by
-      // another command, remove this line or comment it out.
-      if (m_autonomousCommand != null) {
-         m_autonomousCommand.cancel();
+      // running.
+      if (autonomousCommand != null) {
+         autonomousCommand.cancel();
       }
 
       ModeFollowers.getInstance().initTeleop();
