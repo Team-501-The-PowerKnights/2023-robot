@@ -99,11 +99,13 @@ public class ProtoWristSubsystem extends BaseWristSubsystem {
 
    @Override
    public void disable() {
+      checkError(pid.setReference(0, ControlType.kDutyCycle), "PID set reference to kDutyCycle,0 {}");
       setTlmPIDEnabled(false);
    }
 
    @Override
    public void stop() {
+      checkError(pid.setReference(0, ControlType.kDutyCycle), "PID set reference to kDutyCycle,0 {}");
       setTlmPIDEnabled(false);
    }
 
@@ -122,9 +124,6 @@ public class ProtoWristSubsystem extends BaseWristSubsystem {
       checkError(pid.setReference(target, ControlType.kPosition), "PID set reference to kPosition,0 {}");
       setTlmPIDEnabled(true);
       setTlmPIDTarget(target);
-
-      logger.debug("PID: {} {} {} {} {} {} {}",
-            pid.getP(), pid.getI(), pid.getD(), pid.getIZone(), pid.getFF(), pid.getOutputMin(), pid.getOutputMax());
    }
 
    @Override

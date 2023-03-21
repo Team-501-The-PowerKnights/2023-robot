@@ -40,13 +40,13 @@ public final class WristPreferences {
    static final String PID_minOutput = name + PIDValues.pid_minOutput;
    static final String PID_maxOutput = name + PIDValues.pid_maxOutput;
 
-   private static final double default_pid_P = 0;
-   private static final double default_pid_I = 0;
+   private static final double default_pid_P = 0.4;
+   private static final double default_pid_I = 0.0004;
    private static final double default_pid_D = 0;
    private static final double default_pid_IZone = 0;
    private static final double default_pid_FF = 0;
-   private static final double default_pid_minOutput = -0;
-   private static final double default_pid_maxOutput = 0;
+   private static final double default_pid_minOutput = -0.3;
+   private static final double default_pid_maxOutput = 0.3;
 
    /** Set points for the various positions */
    static final String upSetPoint = name + ".UpSetPoint";

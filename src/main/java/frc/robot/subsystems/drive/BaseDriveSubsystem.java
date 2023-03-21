@@ -39,6 +39,7 @@ abstract class BaseDriveSubsystem extends BaseSubsystem implements IDriveSubsyst
    protected double pid_I = 0;
    protected double pid_D = 0;
    protected double pid_F = 0;
+
    /** Speed controller ramping between 0 and max (sec) */
    protected double ramp = 0;
 
@@ -72,6 +73,7 @@ abstract class BaseDriveSubsystem extends BaseSubsystem implements IDriveSubsyst
       v = Preferences.getDouble(DrivePreferences.pid_F, default_pid_F);
       logger.info("{} = {}", DrivePreferences.pid_F, v);
       pid_F = v;
+
       v = Preferences.getDouble(DrivePreferences.ramp, default_ramp);
       logger.info("{} = {}", DrivePreferences.ramp, v);
       ramp = v;

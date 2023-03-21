@@ -25,8 +25,7 @@ import riolog.RioLogger;
 
 /**
  * A base class for subsystems that handles registration in the constructor,
- * deals
- * with the default commands, and provides default methods for the
+ * deals with the default commands, and provides default methods for the
  * {@link frc.robot.IModeFollower IRobotModes} interface for notifications of
  * mode transitions.
  */

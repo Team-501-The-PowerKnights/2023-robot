@@ -45,8 +45,8 @@ public final class ArmRotatorPreferences {
    private static final double default_pid_D = 1;
    private static final double default_pid_IZone = 0;
    private static final double default_pid_FF = 0;
-   private static final double default_pid_minOutput = -0.2;
-   private static final double default_pid_maxOutput = 0.5;
+   private static final double default_pid_minOutput = -1;
+   private static final double default_pid_maxOutput = 0.3;
 
    /** Ramp rate */
    static final String rampRate = name + ".RampRate";
