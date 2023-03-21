@@ -12,6 +12,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.REVLibError;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
+import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
@@ -118,9 +119,12 @@ public class ProtoWristSubsystem extends BaseWristSubsystem {
    public void rotateToTarget(double target) {
       logger.trace("set PID target = {}", target);
 
-      // Suitcase doesn't implement this
+      checkError(pid.setReference(target, ControlType.kPosition), "PID set reference to kPosition,0 {}");
       setTlmPIDEnabled(true);
       setTlmPIDTarget(target);
+
+      logger.debug("PID: {} {} {} {} {} {} {}",
+            pid.getP(), pid.getI(), pid.getD(), pid.getIZone(), pid.getFF(), pid.getOutputMin(), pid.getOutputMax());
    }
 
    @Override

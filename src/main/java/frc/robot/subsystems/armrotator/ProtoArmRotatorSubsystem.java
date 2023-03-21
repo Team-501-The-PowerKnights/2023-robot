@@ -131,7 +131,7 @@ public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
       logger.trace("offset PID target = {}", offset);
 
       double target = getTlmPIDTarget();
-      target += offset;
+      target -= offset;
       rotateToTarget(target);
    }
 
