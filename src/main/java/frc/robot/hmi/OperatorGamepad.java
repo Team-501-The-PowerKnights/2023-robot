@@ -8,6 +8,7 @@
 
 package frc.robot.hmi;
 
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 import frc.robot.commands.armextender.ArmExtendToHighPosition;
@@ -139,8 +140,9 @@ public class OperatorGamepad extends F310Gamepad {
 
       // Pose the arm when button is pressed
       armOverPoseButton
-            .onTrue(new ArmRotateToOverPosition())
             .onTrue(new ArmExtendToInPosition())
+            .onTrue(new WaitCommand(2.0)) // FIXME: Delete time delay
+            .onTrue(new ArmRotateToOverPosition())
             .onTrue(new WristRotateToOverPosition());
       armHighPoseButton
             .onTrue(new ArmRotateToHighPosition())

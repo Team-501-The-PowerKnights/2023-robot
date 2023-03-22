@@ -19,7 +19,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+
 import frc.robot.commands.AutoDoNothing;
+import frc.robot.commands.drive.DriveBackwardTimed;
 import frc.robot.modules.IModule;
 import frc.robot.modules.ModulesFactory;
 import frc.robot.preferences.PreferencesManager;
@@ -30,6 +32,7 @@ import frc.robot.subsystems.ISubsystem;
 import frc.robot.subsystems.SubsystemsFactory;
 import frc.robot.telemetry.SchedulerProvider;
 import frc.robot.telemetry.TelemetryManager;
+
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -209,7 +212,7 @@ public class RobotContainer {
             return new AutoDoNothing();
 
          case doSimpleBackup:
-            return new AutoDoNothing();
+            return new DriveBackwardTimed(2.0);
 
          case doConeAndBackup:
             return new AutoDoNothing();
