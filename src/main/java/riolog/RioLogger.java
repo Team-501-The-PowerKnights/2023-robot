@@ -25,7 +25,8 @@ import ch.qos.logback.core.FileAppender;
 public class RioLogger {
 
    // LOGGER Setting for default level
-   // private static final Level defaultLevel = Level.DEBUG.level;
+   // private static final Level defaultLevel = Level.INFO;
+   // private static final Level defaultLevel = Level.DEBUG;
    private static final Level defaultLevel = Level.TRACE;
 
    private static final String logMountPoint = "/media/sda1/";

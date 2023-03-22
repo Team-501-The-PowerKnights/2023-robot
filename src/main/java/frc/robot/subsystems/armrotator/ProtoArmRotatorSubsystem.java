@@ -111,7 +111,7 @@ public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
 
    @Override
    public void rotateToPosition(ArmRotationPosition position) {
-      logger.debug("position = {}", position);
+      logger.trace("position = {}", position);
 
       double target = position.get();
       rotateToTarget(target);
