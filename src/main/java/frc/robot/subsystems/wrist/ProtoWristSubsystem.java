@@ -42,6 +42,7 @@ public class ProtoWristSubsystem extends BaseWristSubsystem {
       encoder = motor.getEncoder();
       checkError(encoder.setPosition(0), "set encoder position to 0 {}");
       checkError(motor.setOpenLoopRampRate(0), "set open loop ramp rate to 0 {}");
+      checkError(motor.setSmartCurrentLimit(3), "set smart current limit to 3 {}");
 
       logger.info("constructed");
    }
@@ -111,7 +112,7 @@ public class ProtoWristSubsystem extends BaseWristSubsystem {
 
    @Override
    public void rotateToPosition(WristPosition position) {
-      logger.debug("position = {}", position);
+      logger.trace("position = {}", position);
 
       double target = position.get();
       rotateToTarget(target);
