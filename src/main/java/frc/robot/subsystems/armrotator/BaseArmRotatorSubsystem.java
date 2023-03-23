@@ -12,15 +12,16 @@ import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.commands.armrotator.ArmRotatorDoNothing;
-import frc.robot.subsystems.BaseSubsystem;
+import frc.robot.subsystems.PIDSubsystem;
 import frc.robot.subsystems.SubsystemNames;
 import frc.robot.telemetry.PIDTelemetry;
 import frc.robot.telemetry.TelemetryNames;
 import frc.robot.utils.PIDValues;
+
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-abstract class BaseArmRotatorSubsystem extends BaseSubsystem implements IArmRotatorSubsystem {
+abstract class BaseArmRotatorSubsystem extends PIDSubsystem implements IArmRotatorSubsystem {
 
    /** Our classes' logger **/
    private static final PKLogger logger = RioLogger.getLogger(BaseArmRotatorSubsystem.class.getName());
@@ -136,6 +137,8 @@ abstract class BaseArmRotatorSubsystem extends BaseSubsystem implements IArmRota
 
    protected void setTlmPIDTarget(double target) {
       tlmPID.PIDTarget = target;
+
+      setSetpoint(target);
    }
 
    protected double getTlmPIDTarget() {
@@ -144,6 +147,9 @@ abstract class BaseArmRotatorSubsystem extends BaseSubsystem implements IArmRota
 
    protected void setTlmPIDCurrent(double current) {
       tlmPID.PIDCurrent = current;
+
+      newMeasurement(current);
+      tlmPID.PIDAtTarget = atSetpoint();
    }
 
    @Override
@@ -151,6 +157,7 @@ abstract class BaseArmRotatorSubsystem extends BaseSubsystem implements IArmRota
       SmartDashboard.putBoolean(TelemetryNames.ArmRotator.PIDEnabled, tlmPID.PIDEnabled);
       SmartDashboard.putNumber(TelemetryNames.ArmRotator.PIDTarget, tlmPID.PIDTarget);
       SmartDashboard.putNumber(TelemetryNames.ArmRotator.PIDCurrent, tlmPID.PIDCurrent);
+      SmartDashboard.putBoolean(TelemetryNames.ArmRotator.PIDAtTarget, tlmPID.PIDAtTarget);
    }
 
    @Override
