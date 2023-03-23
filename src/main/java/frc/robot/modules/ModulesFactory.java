@@ -13,6 +13,7 @@ import java.util.List;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import frc.robot.modules.led.LEDModuleFactory;
 import frc.robot.modules.pneumatic.PneumaticModuleFactory;
 import frc.robot.modules.power.PowerModuleFactory;
 import frc.robot.telemetry.TelemetryManager;
@@ -49,6 +50,14 @@ public class ModulesFactory {
       {
          PneumaticModuleFactory.constructInstance();
          IModule m = PneumaticModuleFactory.getInstance();
+         tlmMgr.addProvider(m);
+         modules.add(m);
+      }
+
+      SmartDashboard.putNumber(TelemetryNames.LED.status, PKStatus.unknown.tlmValue);
+      {
+         LEDModuleFactory.constructInstance();
+         IModule m = LEDModuleFactory.getInstance();
          tlmMgr.addProvider(m);
          modules.add(m);
       }

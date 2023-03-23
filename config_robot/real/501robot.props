@@ -31,6 +31,13 @@ Pneumatic.className = StubPneumaticModule
 #Pneumatic.className = 
 
 
+#####################
+# LED
+#####################
+LED.className = StubLEDModule
+#LED.className = 
+
+
 
 #########################################
 #########################################
