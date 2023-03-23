@@ -57,6 +57,7 @@ Gyro.className = ProtoGyroSensor
 #####################
 #Drive.className = StubDriveSubsystem
 Drive.className = ProtoDriveSubsystem
+Drive.autoCommandName = DriveDoNothing
 Drive.teleCommandName = DriveJoystickControl
 
 

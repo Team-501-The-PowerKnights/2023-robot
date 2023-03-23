@@ -12,6 +12,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.AddressableLED;
+import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -62,6 +64,9 @@ public class Robot extends TimedRobot {
 
    private Command autonomousCommand;
 
+   private AddressableLED m_led;
+   private AddressableLEDBuffer m_ledBuffer;
+
    /**
     * This function is run when the robot is first started up and should be used
     * for any initialization code.
@@ -102,6 +107,18 @@ public class Robot extends TimedRobot {
       // Set up the telemetry reporter
       addPeriodic(telemetryReporter, 5 * getLoopPeriod());
 
+      m_led = new AddressableLED(0);
+
+      // Reuse buffer
+      // Default to a length of 60, start empty output
+      // Length is expensive to set, so only set it once, then just update data
+      m_ledBuffer = new AddressableLEDBuffer(72);
+      m_led.setLength(m_ledBuffer.getLength());
+
+      // Set the data
+      m_led.setData(m_ledBuffer);
+      m_led.start();
+
       // Put indication of initialization status on dash
       determineInitStatus();
 
@@ -137,12 +154,27 @@ public class Robot extends TimedRobot {
 
    private void determineInitStatus() {
       // TODO: Make tri-color status when implemented
-      long warnCount = logger.getWarnCount();
       long errorCount = logger.getErrorCount();
+      long warnCount = logger.getWarnCount();
       logger.info("init status: errorCount={}, warnCount={}", errorCount, warnCount);
       // red for bad, green for good (so reverse sense)
       boolean status = !((errorCount != 0) || (warnCount != 0));
       SmartDashboard.putBoolean(TelemetryNames.Misc.initStatus, status);
+
+      if (errorCount != 0) {
+         for (int i = 0; i < m_ledBuffer.getLength(); i++) {
+            m_ledBuffer.setRGB(i, 255, 0, 0);
+         }
+      } else if (warnCount != 0) {
+         for (int i = 0; i < m_ledBuffer.getLength(); i++) {
+            m_ledBuffer.setRGB(i, 255, 255, 0);
+         }
+      } else {
+         for (int i = 0; i < m_ledBuffer.getLength(); i++) {
+            m_ledBuffer.setRGB(i, 0, 255, 0);
+         }
+      }
+      m_led.setData(m_ledBuffer);
 
       // TODO: Parse network tables for all status and do a roll-up
    }
