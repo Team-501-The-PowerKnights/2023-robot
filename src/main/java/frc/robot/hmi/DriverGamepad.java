@@ -10,9 +10,11 @@ package frc.robot.hmi;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-
+import frc.robot.commands.PKCommandBase;
 import frc.robot.commands.drive.DriveToggleBrake;
+import frc.robot.modules.led.LEDModuleFactory;
 import frc.robot.telemetry.TelemetryNames;
+import frc.robot.utils.PKColor8Bit;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
@@ -31,7 +33,16 @@ public class DriverGamepad extends F310Gamepad {
 	// private final Button turboButton;
 	private final Trigger crawlButton;
 	// private final Button driveSwapButton;
+
 	private final Trigger brakeToggleButton;
+
+	private final Trigger gamePieceButton;
+
+	//
+	private static final PKColor8Bit yellow = new PKColor8Bit("yellow", 255, 255, 0);
+	private static final PKColor8Bit purple = new PKColor8Bit("purple", 160, 32, 240);
+	// State of last color selected
+	private PKColor8Bit lastGamePieceColor;
 
 	public DriverGamepad() {
 		super("DriverGamepad", 0);
@@ -42,6 +53,8 @@ public class DriverGamepad extends F310Gamepad {
 		// driveSwapButton = new JoystickButton(stick, backButton);
 
 		brakeToggleButton = cmdStick.button(startButton);
+
+		gamePieceButton = cmdStick.button(yellowButton);
 
 		logger.info("constructed");
 	}
@@ -71,7 +84,42 @@ public class DriverGamepad extends F310Gamepad {
 
 		configureTeleopButtonBindings();
 
+		lastGamePieceColor = purple;
+		LEDModuleFactory.getInstance().setColor(lastGamePieceColor);
+
 		logger.info("initialized teleop for {}", myName);
+	}
+
+	// FIXME: Make this on-the-fly command?
+	// FIXME: Make into one-shot command?
+	private class ToggleGamePieceColor extends PKCommandBase {
+
+		/** Our classes' logger **/
+		// private static final PKLogger logger =
+		// RioLogger.getLogger(ToggleGamePieceColor.class.getName());
+
+		public ToggleGamePieceColor() {
+			logger.info("constructing {}", getName());
+		}
+
+		@Override
+		public void execute() {
+			super.execute();
+		}
+
+		@Override
+		protected void firstExecution() {
+			logger.trace("ledModule.setColor() called in firstExecution()");
+
+			lastGamePieceColor = (lastGamePieceColor.equals(yellow)) ? purple : yellow;
+			LEDModuleFactory.getInstance().setColor(lastGamePieceColor);
+		}
+
+		@Override
+		public boolean isFinished() {
+			return true;
+		}
+
 	}
 
 	private void configureTeleopButtonBindings() {
@@ -82,6 +130,8 @@ public class DriverGamepad extends F310Gamepad {
 		// driveSwapButton.whenPressed(new DriveSwap());
 
 		brakeToggleButton.onTrue(new DriveToggleBrake());
+
+		gamePieceButton.onTrue(new ToggleGamePieceColor());
 
 		// Hook to configure for testing of new stuff
 		configureTestBindings();
