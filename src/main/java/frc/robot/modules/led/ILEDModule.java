@@ -6,19 +6,35 @@
 /*- of this project.                                                      */
 /*------------------------------------------------------------------------*/
 
-package frc.robot.modules;
+package frc.robot.modules.led;
+
+import frc.robot.modules.IModule;
+import frc.robot.utils.PKColor8Bit;
 
 /**
- * Provides a standard way of defining names for the <i>Modules</i> used in the
- * program. No code should define or use a hard-coded string outside of the ones
- * defined in this class.
- **/
-public class ModuleNames {
+ * Add your docs here.
+ */
+public interface ILEDModule extends IModule {
 
-   public static final String powerName = "Power";
+   /**
+    * 
+    */
+   public void enable();
 
-   public static final String pneumaticName = "Pneumatic";
+   /**
+    * Sets all the LEDs to the single color specified.
+    *
+    * @param r
+    * @param g
+    * @param b
+    */
+   public void setRGB(int r, int g, int b);
 
-   public static final String ledName = "LED";
+   /**
+    * Sets all the LEDs to the single color specified.
+    *
+    * @param color
+    */
+   public void setColor(PKColor8Bit color);
 
 }

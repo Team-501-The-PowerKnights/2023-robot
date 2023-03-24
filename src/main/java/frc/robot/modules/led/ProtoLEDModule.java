@@ -6,19 +6,24 @@
 /*- of this project.                                                      */
 /*------------------------------------------------------------------------*/
 
-package frc.robot.modules;
+package frc.robot.modules.led;
 
-/**
- * Provides a standard way of defining names for the <i>Modules</i> used in the
- * program. No code should define or use a hard-coded string outside of the ones
- * defined in this class.
- **/
-public class ModuleNames {
+import riolog.PKLogger;
+import riolog.RioLogger;
 
-   public static final String powerName = "Power";
+public class ProtoLEDModule extends AddressibleLEDModule {
 
-   public static final String pneumaticName = "Pneumatic";
+   /** Our classes' logger **/
+   private static final PKLogger logger = RioLogger.getLogger(ProtoLEDModule.class.getName());
 
-   public static final String ledName = "LED";
+   private static final int pwmPort = 0;
+   private static final int ledLength = 72;
+
+   public ProtoLEDModule() {
+      super(pwmPort, ledLength);
+      logger.info("constructing");
+
+      logger.info("constructed");
+   }
 
 }

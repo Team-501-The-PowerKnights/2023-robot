@@ -124,6 +124,17 @@ public final class TelemetryNames {
       public static final String pressureGood = name + ".pressureGood";
    }
 
+   public final class LED {
+      private static final String name = ModuleNames.ledName;
+
+      public static final String status = name + ".status";
+      public static final String implClass = name + ".implClass";
+      public static final String defCommand = name + "defCommand";
+
+      public static final String enabled = name + ".enabled";
+      public static final String color = name + ".color";
+   }
+
    /***************
     * Sensors
     ***************/
