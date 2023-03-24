@@ -21,10 +21,6 @@ public class ProtoLEDModule extends AddressibleLEDModule {
    private static final int pwmPort = 0;
    private static final int ledLength = 72;
 
-   public static final PKColor8Bit red = new PKColor8Bit("red", 255, 0, 0);
-   public static final PKColor8Bit orange = new PKColor8Bit("orange", 255, 165, 0);
-   public static final PKColor8Bit green = new PKColor8Bit("green", 0, 255, 0);
-
    public static final PKColor8Bit yellow = new PKColor8Bit("yellow", 255, 255, 0);
    public static final PKColor8Bit purple = new PKColor8Bit("purple", 160, 32, 240);
 

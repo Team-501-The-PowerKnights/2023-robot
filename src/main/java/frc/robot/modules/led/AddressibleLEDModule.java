@@ -60,7 +60,7 @@ class AddressibleLEDModule extends BaseLEDModule {
    @Override
    public void setRGB(int r, int g, int b) {
       for (int i = 0; i < m_ledBuffer.getLength(); i++) {
-         m_ledBuffer.setRGB(i, 0, 0, 0);
+         m_ledBuffer.setRGB(i, r, g, b);
       }
       m_led.setData(m_ledBuffer);
    }
