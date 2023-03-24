@@ -174,10 +174,10 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "16,6": {
+          "16,5": {
             "size": [
               4,
-              3
+              4
             ],
             "content": {
               "_type": "Boolean Box",
@@ -186,7 +186,7 @@
               "_glyph": 148,
               "_showGlyph": false,
               "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
+              "Colors/Color when false": "#999999FF"
             }
           },
           "16,9": {
@@ -201,7 +201,7 @@
               "_glyph": 148,
               "_showGlyph": false,
               "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
+              "Colors/Color when false": "#999999FF"
             }
           }
         }
@@ -929,6 +929,19 @@
               "_glyph": 148,
               "_showGlyph": false
             }
+          },
+          "10,7": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/LED.color",
+              "_title": "LED.color",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
           }
         }
       }
@@ -1342,7 +1355,7 @@
               "_glyph": 148,
               "_showGlyph": false,
               "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
+              "Colors/Color when false": "#999999FF"
             }
           }
         }
@@ -1540,7 +1553,7 @@
               "_glyph": 148,
               "_showGlyph": false,
               "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
+              "Colors/Color when false": "#999999FF"
             }
           },
           "19,2": {
@@ -1816,7 +1829,7 @@
               "_glyph": 148,
               "_showGlyph": false,
               "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
+              "Colors/Color when false": "#999999FF"
             }
           },
           "19,2": {
@@ -2132,7 +2145,7 @@
               "_glyph": 148,
               "_showGlyph": false,
               "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
+              "Colors/Color when false": "#999999FF"
             }
           },
           "19,2": {
