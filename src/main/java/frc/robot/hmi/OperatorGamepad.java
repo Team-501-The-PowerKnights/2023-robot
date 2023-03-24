@@ -15,6 +15,7 @@ import frc.robot.commands.armextender.ArmExtendToHighPosition;
 import frc.robot.commands.armextender.ArmExtendToInPosition;
 import frc.robot.commands.armextender.ArmExtendToLowPosition;
 import frc.robot.commands.armextender.ArmExtendToMidPosition;
+import frc.robot.commands.armextender.ArmExtendToOverPosition;
 import frc.robot.commands.armextender.ArmNudgeExtensionTarget;
 import frc.robot.commands.armrotator.ArmNudgeRotationTarget;
 import frc.robot.commands.armrotator.ArmRotateToHighPosition;
@@ -143,6 +144,7 @@ public class OperatorGamepad extends F310Gamepad {
             .onTrue(new ArmExtendToInPosition())
             .onTrue(new WaitCommand(2.0)) // FIXME: Delete time delay
             .onTrue(new ArmRotateToOverPosition())
+            .onTrue(new ArmExtendToOverPosition())
             .onTrue(new WristRotateToOverPosition());
       armHighPoseButton
             .onTrue(new ArmRotateToHighPosition())
