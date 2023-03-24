@@ -53,6 +53,7 @@ abstract class BaseArmExtenderSubsystem extends BaseSubsystem implements IArmExt
    protected float minSoftLimit;
    protected float maxSoftLimit;
 
+   protected double overSetPoint;
    protected double highSetPoint;
    protected double midSetPoint;
    protected double lowSetPoint;
@@ -106,6 +107,9 @@ abstract class BaseArmExtenderSubsystem extends BaseSubsystem implements IArmExt
       logger.info("{} = {}", ArmExtenderPreferences.maxSoftLimit, v);
       maxSoftLimit = (float) v;
 
+      v = Preferences.getDouble(ArmExtenderPreferences.overSetPoint, overSetPoint);
+      logger.info("{} = {}", ArmExtenderPreferences.overSetPoint, v);
+      overSetPoint = v;
       v = Preferences.getDouble(ArmExtenderPreferences.highSetPoint, highSetPoint);
       logger.info("{} = {}", ArmExtenderPreferences.highSetPoint, v);
       highSetPoint = v;

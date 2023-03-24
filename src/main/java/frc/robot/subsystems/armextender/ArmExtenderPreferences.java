@@ -56,11 +56,13 @@ public final class ArmExtenderPreferences {
    private static final float default_maxSoftLimit = 160f;
 
    /** Set points for the various positions */
+   static final String overSetPoint = name + ".OverSetPoint";
    static final String highSetPoint = name + ".HighSetPoint";
    static final String midSetPoint = name + ".MidSetPoint";
    static final String lowSetPoint = name + ".LowSetPoint";
    static final String inSetPoint = name + ".InSetPoint";
 
+   private static final double default_overPosition = 165;
    private static final double default_highPosition = 160;
    private static final double default_midPosition = 85;
    private static final double default_lowPosition = 25; // 50 in code
@@ -109,6 +111,10 @@ public final class ArmExtenderPreferences {
          Preferences.setDouble(maxSoftLimit, default_maxSoftLimit);
       }
 
+      if (!Preferences.containsKey(overSetPoint)) {
+         logger.warn("{} doesn't exist; creating with default", overSetPoint);
+         Preferences.setDouble(overSetPoint, default_overPosition);
+      }
       if (!Preferences.containsKey(highSetPoint)) {
          logger.warn("{} doesn't exist; creating with default", highSetPoint);
          Preferences.setDouble(highSetPoint, default_highPosition);
