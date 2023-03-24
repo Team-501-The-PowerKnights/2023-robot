@@ -22,6 +22,8 @@ public class PKColor8Bit extends Color8Bit {
    @SuppressWarnings("unused")
    private static final PKLogger logger = RioLogger.getLogger(PKStatus.class.getName());
 
+   public static final PKColor8Bit blackRGB = new PKColor8Bit("black", 0, 0, 0);
+
    public static final PKColor8Bit redRGB = new PKColor8Bit("red", 255, 0, 0);
    public static final PKColor8Bit yellowRGB = new PKColor8Bit("yellow", 255, 255, 0);
    public static final PKColor8Bit orangeRGB = new PKColor8Bit("orange", 255, 165, 0);

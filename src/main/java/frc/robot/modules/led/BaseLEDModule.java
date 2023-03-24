@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.modules.BaseModule;
 import frc.robot.modules.ModuleNames;
 import frc.robot.telemetry.TelemetryNames;
+import frc.robot.utils.PKColor8Bit;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
@@ -31,14 +32,21 @@ abstract class BaseLEDModule extends BaseModule implements ILEDModule {
 
    // Module state
    protected boolean tlmEnabled = false;
+   // Currently displayed color
+   protected PKColor8Bit tlmColor = PKColor8Bit.blackRGB;
 
    protected void setTlmEnabled(boolean enabled) {
       tlmEnabled = enabled;
    }
 
+   protected void setTlmColor(PKColor8Bit color) {
+      tlmColor = color;
+   }
+
    @Override
    public void updateTelemetry() {
       SmartDashboard.putBoolean(TelemetryNames.LED.enabled, tlmEnabled);
+      SmartDashboard.putString(TelemetryNames.LED.color, tlmColor.toString());
    }
 
 }
