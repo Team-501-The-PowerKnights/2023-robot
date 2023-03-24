@@ -63,11 +63,13 @@ class AddressibleLEDModule extends BaseLEDModule {
          m_ledBuffer.setRGB(i, r, g, b);
       }
       m_led.setData(m_ledBuffer);
+      // FIXME: How do we determine color tlm from here?
    }
 
    @Override
    public void setColor(PKColor8Bit color) {
       setRGB(color.red, color.green, color.blue);
+      setTlmColor(color);
    }
 
 }

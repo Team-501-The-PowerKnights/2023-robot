@@ -27,15 +27,15 @@ Power.className = SuitcasePowerModule
 #####################
 # Pneumatic
 #####################
-#Pneumatic.className = StubPneumaticModule
-Pneumatic.className = 
+Pneumatic.className = StubPneumaticModule
+#Pneumatic.className =
 
 
 #####################
 # LED
 #####################
-LED.className = StubLEDModule
-#LED.className = 
+#LED.className = StubLEDModule
+LED.className = SuitcaseLEDModule
 
 
 
