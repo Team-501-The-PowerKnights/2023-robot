@@ -125,7 +125,7 @@ public final class TelemetryNames {
    }
 
    public final class LED {
-      private static final String name = ModuleNames.pneumaticName;
+      private static final String name = ModuleNames.ledName;
 
       public static final String status = name + ".status";
       public static final String implClass = name + ".implClass";
