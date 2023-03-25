@@ -21,6 +21,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 import frc.robot.modules.led.LEDModuleFactory;
+import frc.robot.preferences.PreferencesManager;
 import frc.robot.subsystems.arm.ArmFactory;
 import frc.robot.subsystems.arm.IArmSubsystem.ArmRotationPosition;
 import frc.robot.telemetry.TelemetryManager;
@@ -184,7 +185,72 @@ public class Robot extends TimedRobot {
 
       ModeFollowers.getInstance().initDisabled();
 
+      if (isMatchComplete()) {
+         logger.info("match complete");
+
+         logFinalVisionData();
+
+         logFinalPreferences();
+
+         logMatchData();
+
+         logErrorCounts();
+
+         // for (IModule m : modules) {
+         // m.disable();
+         // }
+         // for (ISensor s : sensors) {
+         // s.disable();
+         // }
+         // for (ISubsystem s : subsystems) {
+         // s.disable();
+         // }
+      }
+
+      // (Re-)initialize end game state
+      endGameStarted = false;
+      SmartDashboard.putBoolean(TelemetryNames.Misc.endGameStarted, endGameStarted);
+
       logger.info("initialized disabled");
+   }
+
+   /**
+    * Log the data associated with the vision to the tail of the log file.
+    **/
+   private void logFinalVisionData() {
+      logger.info("vision data:");
+   }
+
+   /**
+    * Log the data associated with the preferences to the tail of the log file.
+    **/
+   private void logFinalPreferences() {
+      logger.info("preferences:");
+      PreferencesManager.getInstance().logPreferences(logger);
+   }
+
+   /**
+    * Log the data associated with the match to the tail of the log file. This
+    * allows us to easily determine whether it is a real match, and what match it
+    * was.
+    **/
+   private void logMatchData() {
+      logger.info("EventName:     {}", DriverStation.getEventName());
+      logger.info("MatchType:     {}", DriverStation.getMatchType());
+      logger.info("MatchNumber:   {}", DriverStation.getMatchNumber());
+      logger.info("ReplayNumber:  {}", DriverStation.getReplayNumber());
+      logger.info("Alliance:      {}", DriverStation.getAlliance());
+      logger.info("Location:      {}", DriverStation.getLocation());
+   }
+
+   /**
+    * Log the count of errors and warnings from the logger to the tail of the
+    * log file.
+    */
+   private void logErrorCounts() {
+      long warnCount = logger.getWarnCount();
+      long errorCount = logger.getErrorCount();
+      logger.info("error counts: errorCount={}, warnCount={}", errorCount, warnCount);
    }
 
    /**
