@@ -249,7 +249,8 @@ public class RobotContainer {
                   new ArmRotateToLowPosition(),
                   new ArmExtendToLowPosition(),
                   new WaitCommand(0.5),
-                  new DriveBackwardToBalance(2.24, -0.60)
+                  new DriveBackwardToBalance(2.24, -0.60),
+                  new DriveBalance()
               );
             // @formatter:on
 
@@ -259,7 +260,7 @@ public class RobotContainer {
                new SequentialCommandGroup(
                   new SequentialCommandGroup(new ArmRotateToAutoConePosition(), new WaitCommand(1)),
                   new SequentialCommandGroup(new WristRotateToOverPosition(), new WaitCommand(0.5)),
-                  new SequentialCommandGroup(new ArmExtendToAutoConePosition(), new WaitCommand(4)), // 5
+                  new SequentialCommandGroup(new ArmExtendToAutoConePosition(), new WaitCommand(3.5)), // 4
                   new SequentialCommandGroup(new GripperEject(), new WaitCommand(0.5)),
                   new ParallelCommandGroup(
                      new SequentialCommandGroup(new ArmExtendToLowPosition(), new WaitCommand(3)),
@@ -274,7 +275,7 @@ public class RobotContainer {
                new SequentialCommandGroup(
                   new SequentialCommandGroup(new ArmRotateToAutoConePosition(), new WaitCommand(1)),
                   new SequentialCommandGroup(new WristRotateToOverPosition(), new WaitCommand(0.5)),
-                  new SequentialCommandGroup(new ArmExtendToAutoConePosition(), new WaitCommand(4)), // 5
+                  new SequentialCommandGroup(new ArmExtendToAutoConePosition(), new WaitCommand(3.5)), // 4
                   new SequentialCommandGroup(new GripperEject(), new WaitCommand(0.5)),
                   new ParallelCommandGroup(
                      new SequentialCommandGroup(new ArmExtendToLowPosition(), new WaitCommand(3)),
@@ -290,7 +291,7 @@ public class RobotContainer {
                new SequentialCommandGroup(
                   new SequentialCommandGroup(new ArmRotateToAutoConePosition(), new WaitCommand(1)),
                   new SequentialCommandGroup(new WristRotateToOverPosition(), new WaitCommand(0.5)),
-                  new SequentialCommandGroup(new ArmExtendToAutoConePosition(), new WaitCommand(4)), // 5
+                  new SequentialCommandGroup(new ArmExtendToAutoConePosition(), new WaitCommand(3.5)), // 4
                   new SequentialCommandGroup(new GripperEject(), new WaitCommand(0.5)),
                   new ParallelCommandGroup(
                      new SequentialCommandGroup(new ArmExtendToLowPosition(), new WaitCommand(3)),

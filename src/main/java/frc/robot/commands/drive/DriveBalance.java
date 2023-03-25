@@ -46,15 +46,25 @@ public class DriveBalance extends DriveCommandBase {
       super.execute();
 
       double offsetAngle = gyro.getPitch();
-      if (Math.abs(offsetAngle) < 1) {
-         drive.drive(0, 0);
-      } else {
-         double offsetSpeed = Math.min(maxSpeed, ((5 - Math.abs(offsetAngle)) * 0.3));
-         double speed = (offsetAngle < 0) ? offsetSpeed : -offsetSpeed;
-         logger.debug("balance: angle={} offsetSpeed={} speed={}");
 
-         drive.drive(speed, 0);
+      // if (Math.abs(offsetAngle) < 1) {
+      // drive.drive(0, 0);
+      // } else {
+      // double offsetSpeed = Math.min(maxSpeed, ((5 - Math.abs(offsetAngle)) * 0.3));
+      // double speed = (offsetAngle < 0) ? offsetSpeed : -offsetSpeed;
+      // logger.debug("balance: angle={} offsetSpeed={} speed={}");
+
+      // drive.drive(speed, 0);
+      // }
+
+      double speed;
+      if (Math.abs(offsetAngle) < 1) {
+         speed = 0;
+      } else {
+         speed = (offsetAngle < 0) ? 0.2 : -0.2;
       }
+      logger.debug("balance: angle={} speed={}", offsetAngle, speed);
+      drive.drive(speed, 0);
    }
 
    @Override
