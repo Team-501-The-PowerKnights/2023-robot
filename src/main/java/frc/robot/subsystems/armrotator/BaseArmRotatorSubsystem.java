@@ -57,6 +57,8 @@ abstract class BaseArmRotatorSubsystem extends BaseSubsystem implements IArmRota
    protected double highSetPoint;
    protected double midSetPoint;
    protected double lowSetPoint;
+   //
+   protected double autoConeSetPoint;
 
    BaseArmRotatorSubsystem() {
       super(SubsystemNames.armRotatorName);
@@ -116,10 +118,16 @@ abstract class BaseArmRotatorSubsystem extends BaseSubsystem implements IArmRota
       logger.info("{} = {}", ArmRotatorPreferences.lowSetPoint, v);
       lowSetPoint = v;
 
+      v = Preferences.getDouble(ArmRotatorPreferences.autoConeSetPoint, autoConeSetPoint);
+      logger.info("{} = {}", ArmRotatorPreferences.autoConeSetPoint, v);
+      autoConeSetPoint = v;
+
       ArmRotationPosition.overPosition.set(overSetPoint);
       ArmRotationPosition.highPosition.set(highSetPoint);
       ArmRotationPosition.midPosition.set(midSetPoint);
       ArmRotationPosition.lowPosition.set(lowSetPoint);
+      //
+      ArmRotationPosition.autoConePosition.set(autoConeSetPoint);
    }
 
    @Override

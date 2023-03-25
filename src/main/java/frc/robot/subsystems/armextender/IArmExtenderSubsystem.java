@@ -29,7 +29,9 @@ public interface IArmExtenderSubsystem extends ISubsystem {
       highPosition("High", 0), 
       midPosition("Mid", 0), 
       lowPosition("Low", 0),
-      inPosition("In", 0);
+      inPosition("In", 0),
+      //
+      autoConePosition("AutoCone", 0);
       //@formatter:on
 
       private final String name;

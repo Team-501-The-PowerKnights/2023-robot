@@ -11,6 +11,7 @@ package frc.robot.subsystems.armextender;
 import edu.wpi.first.wpilibj.Preferences;
 import frc.robot.subsystems.SubsystemNames;
 import frc.robot.utils.PIDValues;
+
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -62,6 +63,8 @@ public final class ArmExtenderPreferences {
    static final String midSetPoint = name + ".MidSetPoint";
    static final String lowSetPoint = name + ".LowSetPoint";
    static final String inSetPoint = name + ".InSetPoint";
+   //
+   static final String autoConeSetPoint = name + ".AutoConeSetPoint";
 
    // FIXME: Added 3:1 gearbox
    private static final double default_overPosition = 3 * 87;
@@ -69,6 +72,8 @@ public final class ArmExtenderPreferences {
    private static final double default_midPosition = 3 * 57; // 85;
    private static final double default_lowPosition = 3 * 5; // 25;
    private static final double default_inPosition = 3 * 5;
+   //
+   private static final double default_autoConePosition = 3 * 57; // 85;
 
    private ArmExtenderPreferences() {
    }
@@ -132,6 +137,11 @@ public final class ArmExtenderPreferences {
       if (!Preferences.containsKey(inSetPoint)) {
          logger.warn("{} doesn't exist; creating with default", inSetPoint);
          Preferences.setDouble(inSetPoint, default_inPosition);
+      }
+
+      if (!Preferences.containsKey(autoConeSetPoint)) {
+         logger.warn("{} doesn't exist; creating with default", autoConeSetPoint);
+         Preferences.setDouble(autoConeSetPoint, default_autoConePosition);
       }
    }
 

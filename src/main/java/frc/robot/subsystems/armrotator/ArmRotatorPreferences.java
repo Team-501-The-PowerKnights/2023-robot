@@ -9,8 +9,10 @@
 package frc.robot.subsystems.armrotator;
 
 import edu.wpi.first.wpilibj.Preferences;
+
 import frc.robot.subsystems.SubsystemNames;
 import frc.robot.utils.PIDValues;
+
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -58,11 +60,15 @@ public final class ArmRotatorPreferences {
    static final String highSetPoint = name + ".HighSetPoint";
    static final String midSetPoint = name + ".MidSetPoint";
    static final String lowSetPoint = name + ".LowSetPoint";
+   //
+   static final String autoConeSetPoint = name + ".AutoConeSetPoint";
 
    private static final double default_overPosition = -129; // 60;
    private static final double default_highPosition = -50; // 26;
    private static final double default_midPosition = -44; // 21;
    private static final double default_lowPosition = -12; // 3.5;
+   //
+   private static final double default_autoConePosition = 3 * -44; // 21;
 
    private ArmRotatorPreferences() {
    }
@@ -118,6 +124,11 @@ public final class ArmRotatorPreferences {
       if (!Preferences.containsKey(lowSetPoint)) {
          logger.warn("{} doesn't exist; creating with default", lowSetPoint);
          Preferences.setDouble(lowSetPoint, default_lowPosition);
+      }
+
+      if (!Preferences.containsKey(autoConeSetPoint)) {
+         logger.warn("{} doesn't exist; creating with default", autoConeSetPoint);
+         Preferences.setDouble(autoConeSetPoint, default_autoConePosition);
       }
    }
 
