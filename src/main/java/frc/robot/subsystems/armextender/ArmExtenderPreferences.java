@@ -40,11 +40,11 @@ public final class ArmExtenderPreferences {
    static final String PID_minOutput = name + PIDValues.pid_minOutput;
    static final String PID_maxOutput = name + PIDValues.pid_maxOutput;
 
-   private static final double default_pid_P = 0.2;
-   private static final double default_pid_I = 0;
+   private static final double default_pid_P = 0.5; // 0.2;
+   private static final double default_pid_I = 1e-4; // 0;
    private static final double default_pid_D = 1;
    private static final double default_pid_IZone = 0;
-   private static final double default_pid_FF = 0;
+   private static final double default_pid_FF = 0.01; // 0;
    private static final double default_pid_minOutput = -1;
    private static final double default_pid_maxOutput = 1;
 
@@ -62,10 +62,10 @@ public final class ArmExtenderPreferences {
    static final String lowSetPoint = name + ".LowSetPoint";
    static final String inSetPoint = name + ".InSetPoint";
 
-   private static final double default_overPosition = 165;
+   private static final double default_overPosition = 87;
    private static final double default_highPosition = 160;
-   private static final double default_midPosition = 85;
-   private static final double default_lowPosition = 25; // 50 in code
+   private static final double default_midPosition = 57; // 85;
+   private static final double default_lowPosition = 5; // 25;
    private static final double default_inPosition = 5;
 
    private ArmExtenderPreferences() {

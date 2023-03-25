@@ -36,7 +36,7 @@ public final class GripperPreferences {
    static final String maxOutSpeed = name + ".MaxOutSpeed";
 
    private static final double default_maxInSpeed = 1;
-   private static final double default_maxOutSpeed = 1;
+   private static final double default_maxOutSpeed = 0.8; // 1;
 
    /** Idle Speed */
    static final String idleSpeed = name + ".IdleSpeed";

@@ -41,7 +41,7 @@ public final class WristPreferences {
    static final String PID_maxOutput = name + PIDValues.pid_maxOutput;
 
    private static final double default_pid_P = 0.4;
-   private static final double default_pid_I = 0.0004;
+   private static final double default_pid_I = 0.0006; // 0.0004;
    private static final double default_pid_D = 0;
    private static final double default_pid_IZone = 0;
    private static final double default_pid_FF = 0;
