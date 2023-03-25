@@ -32,6 +32,7 @@ import frc.robot.commands.drive.DriveBackwardTimed;
 import frc.robot.commands.drive.DriveBackwardToBalance;
 import frc.robot.commands.gripper.GripperEject;
 import frc.robot.commands.gripper.GripperStop;
+import frc.robot.commands.wrist.WristRotateToOverPosition;
 import frc.robot.modules.IModule;
 import frc.robot.modules.ModulesFactory;
 import frc.robot.preferences.PreferencesManager;
@@ -247,7 +248,7 @@ public class RobotContainer {
                   new ArmRotateToLowPosition(),
                   new ArmExtendToLowPosition(),
                   new WaitCommand(0.5),
-                  new DriveBackwardToBalance(2.3, -0.60)
+                  new DriveBackwardToBalance(2.2, -0.60)
               );
             // @formatter:on
 
@@ -270,13 +271,14 @@ public class RobotContainer {
             return
                new SequentialCommandGroup(
                   new SequentialCommandGroup(new ArmRotateToMidPosition(), new WaitCommand(1)),
+                  new SequentialCommandGroup(new WristRotateToOverPosition(), new WaitCommand(0.5)),
                   new SequentialCommandGroup(new ArmExtendToMidPosition(), new WaitCommand(5)),
                   new SequentialCommandGroup(new GripperEject(), new WaitCommand(0.5)),
                   new ParallelCommandGroup(
                      new SequentialCommandGroup(new ArmExtendToLowPosition(), new WaitCommand(3)),
                      new SequentialCommandGroup(new GripperStop(), new WaitCommand(0.1))
                   ),
-                  new DriveBackwardTimed(2.3, -0.60)
+                  new DriveBackwardToBalance(2.2, -0.60)
                );
             // @formatter:on
 
