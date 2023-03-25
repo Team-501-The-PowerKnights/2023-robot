@@ -22,6 +22,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 import frc.robot.commands.AutoDoNothing;
 import frc.robot.commands.drive.DriveBackwardTimed;
+import frc.robot.commands.drive.DriveBackwardToBalance;
 import frc.robot.modules.IModule;
 import frc.robot.modules.ModulesFactory;
 import frc.robot.preferences.PreferencesManager;
@@ -158,6 +159,7 @@ public class RobotContainer {
       // @formatter:off
       doNothing("doNothing"), 
       doSimpleBackup("doSimpleBackup"),
+      doBackupToBalance("doBackupToBalance"),
       doConeAndBackup("doConeAndBackup"),
       doFull("doFull");
       // @formatter:on
@@ -186,11 +188,15 @@ public class RobotContainer {
 
       //
       autoChooser.addOption("Simple Backup", AutoSelection.doSimpleBackup);
+      //
+      autoChooser.addOption("(new) Backup to Balance", AutoSelection.doBackupToBalance);
 
       //
       autoChooser.addOption("Not Full Auto (place cone & backup)", AutoSelection.doConeAndBackup);
       //
       autoChooser.addOption("Full Auto (place cone & balance)", AutoSelection.doFull);
+
+      //
 
       SmartDashboard.putData("Auto Mode", autoChooser);
    }
@@ -212,7 +218,10 @@ public class RobotContainer {
             return new AutoDoNothing();
 
          case doSimpleBackup:
-            return new DriveBackwardTimed(2.0);
+            return new DriveBackwardTimed(3.0);
+
+         case doBackupToBalance:
+            return new DriveBackwardToBalance(2.3, -0.60);
 
          case doConeAndBackup:
             return new AutoDoNothing();
