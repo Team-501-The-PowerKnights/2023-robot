@@ -173,6 +173,7 @@ public class RobotContainer {
       doNothing("doNothing"), 
       doSimpleBackup("doSimpleBackup"),
       doBackupToBalance("doBackupToBalance"),
+      doCommunityToBalance("doCommunityToBalance"),
       doCone("doCone"),
       doConeAndBackup("doConeAndBackup"),
       doFull("doFull");
@@ -204,6 +205,8 @@ public class RobotContainer {
       autoChooser.addOption("Simple Backup", AutoSelection.doSimpleBackup);
       //
       autoChooser.setDefaultOption("Backup to Balance", AutoSelection.doBackupToBalance);
+      //
+      autoChooser.addOption("Community to Balance", AutoSelection.doCommunityToBalance);
 
       //
       autoChooser.addOption("(me) Not Full (mid cone)", AutoSelection.doCone);
@@ -253,8 +256,22 @@ public class RobotContainer {
                   new ArmExtendToLowPosition(),
                   new WaitCommand(0.5), 
                   new LogPIDs(),
-                  new DriveBackwardToBalance(3.75, -0.60),
-                  new DriveForwardTimed(4.0, 0.45),
+                  new DriveBackwardToBalance(2.12, -0.60), // 2.25
+                  new DriveBalance()
+              );
+            // @formatter:on
+
+         case doCommunityToBalance:
+            // @formatter:off
+            return
+              new SequentialCommandGroup(
+                  new GripperEject(),
+                  new ArmRotateToLowPosition(), 
+                  new ArmExtendToLowPosition(),
+                  new WaitCommand(0.5), 
+                  new LogPIDs(),
+                  new DriveBackwardToBalance(3.5, -0.60),
+                  new DriveForwardTimed(3.5, 0.45),
                   new DriveBalance()
               );
             // @formatter:on
@@ -306,8 +323,7 @@ public class RobotContainer {
                      new SequentialCommandGroup(new GripperStop(), new WaitCommand(0.1))
                   ),
                   new LogPIDs(),
-                  new DriveBackwardToBalance(3.75, -0.60),
-                  new DriveForwardTimed(4.0, 0.45),
+                  new DriveBackwardToBalance(2.12, -0.60), // 2.25
                   new DriveBalance()
                );
             // @formatter:on
