@@ -58,7 +58,7 @@ public class DriveBalance extends DriveCommandBase {
       // }
 
       double speed;
-      if (Math.abs(offsetAngle) < 3) {
+      if (Math.abs(offsetAngle) < 4) {
          speed = 0;
       } else {
          speed = (offsetAngle < 0) ? -0.26 : 0.26;
