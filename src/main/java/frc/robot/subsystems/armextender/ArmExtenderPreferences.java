@@ -52,8 +52,9 @@ public final class ArmExtenderPreferences {
    static final String minSoftLimit = name + ".MinSoftLimit";
    static final String maxSoftLimit = name + ".MaxSoftLimit";
 
-   private static final float default_minSoftLimit = 5f;
-   private static final float default_maxSoftLimit = 160f;
+   // FIXME: Added 3:1 gearbox
+   private static final float default_minSoftLimit = 3 * 5f;
+   private static final float default_maxSoftLimit = 3 * 160f;
 
    /** Set points for the various positions */
    static final String overSetPoint = name + ".OverSetPoint";
