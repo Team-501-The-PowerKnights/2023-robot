@@ -62,11 +62,12 @@ public final class ArmExtenderPreferences {
    static final String lowSetPoint = name + ".LowSetPoint";
    static final String inSetPoint = name + ".InSetPoint";
 
-   private static final double default_overPosition = 87;
-   private static final double default_highPosition = 160;
-   private static final double default_midPosition = 57; // 85;
-   private static final double default_lowPosition = 5; // 25;
-   private static final double default_inPosition = 5;
+   // FIXME: Added 3:1 gearbox
+   private static final double default_overPosition = 3 * 87;
+   private static final double default_highPosition = 3 * 160;
+   private static final double default_midPosition = 3 * 57; // 85;
+   private static final double default_lowPosition = 3 * 5; // 25;
+   private static final double default_inPosition = 3 * 5;
 
    private ArmExtenderPreferences() {
    }
