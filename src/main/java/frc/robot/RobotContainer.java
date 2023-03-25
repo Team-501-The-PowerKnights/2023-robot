@@ -168,6 +168,7 @@ public class RobotContainer {
       doNothing("doNothing"), 
       doSimpleBackup("doSimpleBackup"),
       doBackupToBalance("doBackupToBalance"),
+      doCone("doCone"),
       doConeAndBackup("doConeAndBackup"),
       doFull("doFull");
       // @formatter:on
@@ -200,9 +201,11 @@ public class RobotContainer {
       autoChooser.addOption("Backup to Balance", AutoSelection.doBackupToBalance);
 
       //
-      autoChooser.addOption("(me) Not Full Auto (place cone & backup)", AutoSelection.doConeAndBackup);
+      autoChooser.addOption("(me) Not Full (mid cone)", AutoSelection.doCone);
       //
-      autoChooser.addOption("Full Auto (place cone & balance)", AutoSelection.doFull);
+      autoChooser.addOption("(me) Not Full (mid cone & backup)", AutoSelection.doConeAndBackup);
+      //
+      autoChooser.addOption("Full Auto", AutoSelection.doFull);
 
       //
 
@@ -231,7 +234,7 @@ public class RobotContainer {
          case doBackupToBalance:
             return new DriveBackwardToBalance(2.3, -0.60);
 
-         case doConeAndBackup:
+         case doCone:
             // @formatter:off
             return
                new SequentialCommandGroup(
@@ -242,6 +245,21 @@ public class RobotContainer {
                      new SequentialCommandGroup(new ArmExtendToLowPosition(), new WaitCommand(3)),
                      new SequentialCommandGroup(new GripperStop(), new WaitCommand(0.1))
                   )
+               );
+            // @formatter:on
+
+         case doConeAndBackup:
+            // @formatter:off
+            return
+               new SequentialCommandGroup(
+                  new SequentialCommandGroup(new ArmRotateToMidPosition(), new WaitCommand(1)),
+                  new SequentialCommandGroup(new ArmExtendToMidPosition(), new WaitCommand(5)),
+                  new SequentialCommandGroup(new GripperEject(), new WaitCommand(0.5)),
+                  new ParallelCommandGroup(
+                     new SequentialCommandGroup(new ArmExtendToLowPosition(), new WaitCommand(3)),
+                     new SequentialCommandGroup(new GripperStop(), new WaitCommand(0.1))
+                  ),
+                  new DriveBackwardTimed(2.3, -0.60)
                );
             // @formatter:on
 
