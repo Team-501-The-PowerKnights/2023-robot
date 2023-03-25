@@ -211,6 +211,9 @@ public class Robot extends TimedRobot {
       endGameStarted = false;
       SmartDashboard.putBoolean(TelemetryNames.Misc.endGameStarted, endGameStarted);
 
+      // Should we be checking autonomous mode selection?
+      autoModeCheckEnabled = !autonomousComplete;
+
       logger.info("initialized disabled");
    }
 
@@ -253,13 +256,42 @@ public class Robot extends TimedRobot {
       logger.info("error counts: errorCount={}, warnCount={}", errorCount, warnCount);
    }
 
+   private boolean autoModeCheckEnabled = true;
+
+   private long autoModeCheckDelay = (long) (20.0 / getPeriod());
+   private long autoErrorOnPeriod = (long) (1.5 / getPeriod());
+   private long autoErrorOffPeriod = (long) (0.75 / getPeriod());
+   private long autoErrorCount;
+   private boolean autoErrorOn = true;
+
    /**
     * This function is called periodically while the robot is in Disabled mode.
     */
    @Override
    public void disabledPeriodic() {
       // Has a "real" auto been selected yet?
-      SmartDashboard.putBoolean(TelemetryNames.Misc.realAuto, robotContainer.isRealAutoSelected());
+      boolean realAutoSelected = robotContainer.isRealAutoSelected();
+      SmartDashboard.putBoolean(TelemetryNames.Misc.realAuto, realAutoSelected);
+
+      if (autoModeCheckEnabled && !robotContainer.isRealAutoSelected()) {
+         if (autoModeCheckDelay > 0) {
+            --autoModeCheckDelay;
+         } else if (!realAutoSelected) {
+            if (--autoErrorCount <= 0) {
+               if (autoErrorOn) {
+                  LEDModuleFactory.getInstance().setColor(PKColor8Bit.blackRGB);
+                  autoErrorCount = autoErrorOffPeriod;
+               } else {
+                  LEDModuleFactory.getInstance().setColor(PKColor8Bit.redRGB);
+                  autoErrorCount = autoErrorOnPeriod;
+               }
+               autoErrorOn = !autoErrorOn;
+            }
+         }
+      } else {
+         autoModeCheckEnabled = false;
+         LEDModuleFactory.getInstance().setColor(PKColor8Bit.greenRGB);
+      }
    }
 
    /**
