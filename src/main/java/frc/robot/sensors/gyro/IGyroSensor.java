@@ -20,7 +20,7 @@ public interface IGyroSensor extends ISensor {
     * Returns the raw 'roll' ('Y') value from sensor. This is aligned along the
     * short axis of the board.
     * 
-    * @return roll or Y value
+    * @return roll or Y value (+ if "CW" and - is "CCW")
     */
    public double getRoll();
 
@@ -28,7 +28,7 @@ public interface IGyroSensor extends ISensor {
     * Returns the raw 'pitch' ('X') value from sensor. This is aligned along the
     * long axis of the board.
     * 
-    * @return pitch or X value
+    * @return pitch or X value (+ if "up" and - is "down")
     */
    public double getPitch();
 

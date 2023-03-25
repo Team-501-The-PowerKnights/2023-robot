@@ -30,6 +30,7 @@ import frc.robot.commands.armrotator.ArmRotateToAutoConePosition;
 import frc.robot.commands.armrotator.ArmRotateToLowPosition;
 import frc.robot.commands.drive.DriveBackwardTimed;
 import frc.robot.commands.drive.DriveBackwardToBalance;
+import frc.robot.commands.drive.DriveBalance;
 import frc.robot.commands.gripper.GripperEject;
 import frc.robot.commands.gripper.GripperStop;
 import frc.robot.commands.wrist.WristRotateToOverPosition;
@@ -258,7 +259,7 @@ public class RobotContainer {
                new SequentialCommandGroup(
                   new SequentialCommandGroup(new ArmRotateToAutoConePosition(), new WaitCommand(1)),
                   new SequentialCommandGroup(new WristRotateToOverPosition(), new WaitCommand(0.5)),
-                  new SequentialCommandGroup(new ArmExtendToAutoConePosition(), new WaitCommand(5)),
+                  new SequentialCommandGroup(new ArmExtendToAutoConePosition(), new WaitCommand(4)), // 5
                   new SequentialCommandGroup(new GripperEject(), new WaitCommand(0.5)),
                   new ParallelCommandGroup(
                      new SequentialCommandGroup(new ArmExtendToLowPosition(), new WaitCommand(3)),
@@ -273,7 +274,7 @@ public class RobotContainer {
                new SequentialCommandGroup(
                   new SequentialCommandGroup(new ArmRotateToAutoConePosition(), new WaitCommand(1)),
                   new SequentialCommandGroup(new WristRotateToOverPosition(), new WaitCommand(0.5)),
-                  new SequentialCommandGroup(new ArmExtendToAutoConePosition(), new WaitCommand(5)),
+                  new SequentialCommandGroup(new ArmExtendToAutoConePosition(), new WaitCommand(4)), // 5
                   new SequentialCommandGroup(new GripperEject(), new WaitCommand(0.5)),
                   new ParallelCommandGroup(
                      new SequentialCommandGroup(new ArmExtendToLowPosition(), new WaitCommand(3)),
@@ -284,7 +285,20 @@ public class RobotContainer {
             // @formatter:on
 
          case doFull:
-            return new AutoDoNothing();
+            // @formatter:off
+            return
+               new SequentialCommandGroup(
+                  new SequentialCommandGroup(new ArmRotateToAutoConePosition(), new WaitCommand(1)),
+                  new SequentialCommandGroup(new WristRotateToOverPosition(), new WaitCommand(0.5)),
+                  new SequentialCommandGroup(new ArmExtendToAutoConePosition(), new WaitCommand(4)), // 5
+                  new SequentialCommandGroup(new GripperEject(), new WaitCommand(0.5)),
+                  new ParallelCommandGroup(
+                     new SequentialCommandGroup(new ArmExtendToLowPosition(), new WaitCommand(3)),
+                     new SequentialCommandGroup(new GripperStop(), new WaitCommand(0.1))
+                  ),
+                  new DriveBackwardToBalance(2.24, -0.60)
+               );
+            // @formatter:on
 
          default:
             return new AutoDoNothing();
