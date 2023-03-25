@@ -61,7 +61,7 @@ public class DriveForwardTimed extends DriveCommandBase {
    public DriveForwardTimed(double duration, double speed) {
       logger.info("constructing {} for {} {}", getName(), duration, speed);
 
-      setValues(speed, duration);
+      setValues(duration, speed);
 
       logger.info("constructed");
    }

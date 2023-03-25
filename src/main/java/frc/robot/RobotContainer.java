@@ -24,6 +24,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 import frc.robot.commands.AutoDoNothing;
+import frc.robot.commands.LogPIDs;
 import frc.robot.commands.armextender.ArmExtendToAutoConePosition;
 import frc.robot.commands.armextender.ArmExtendToLowPosition;
 import frc.robot.commands.armrotator.ArmRotateToAutoConePosition;
@@ -31,6 +32,7 @@ import frc.robot.commands.armrotator.ArmRotateToLowPosition;
 import frc.robot.commands.drive.DriveBackwardTimed;
 import frc.robot.commands.drive.DriveBackwardToBalance;
 import frc.robot.commands.drive.DriveBalance;
+import frc.robot.commands.drive.DriveForwardTimed;
 import frc.robot.commands.gripper.GripperEject;
 import frc.robot.commands.gripper.GripperStop;
 import frc.robot.commands.wrist.WristRotateToOverPosition;
@@ -246,10 +248,13 @@ public class RobotContainer {
             // @formatter:off
             return
               new SequentialCommandGroup(
-                  new ArmRotateToLowPosition(),
+                  new GripperEject(),
+                  new ArmRotateToLowPosition(), 
                   new ArmExtendToLowPosition(),
-                  new WaitCommand(0.5),
-                  new DriveBackwardToBalance(2.24, -0.60),
+                  new WaitCommand(0.5), 
+                  new LogPIDs(),
+                  new DriveBackwardToBalance(3.75, -0.60),
+                  new DriveForwardTimed(4.0, 0.45),
                   new DriveBalance()
               );
             // @formatter:on
@@ -261,6 +266,7 @@ public class RobotContainer {
                   new SequentialCommandGroup(new ArmRotateToAutoConePosition(), new WaitCommand(1)),
                   new SequentialCommandGroup(new WristRotateToOverPosition(), new WaitCommand(0.5)),
                   new SequentialCommandGroup(new ArmExtendToAutoConePosition(), new WaitCommand(3.5)), // 4
+                  new LogPIDs(),
                   new SequentialCommandGroup(new GripperEject(), new WaitCommand(0.5)),
                   new ParallelCommandGroup(
                      new SequentialCommandGroup(new ArmExtendToLowPosition(), new WaitCommand(3)),
@@ -276,6 +282,7 @@ public class RobotContainer {
                   new SequentialCommandGroup(new ArmRotateToAutoConePosition(), new WaitCommand(1)),
                   new SequentialCommandGroup(new WristRotateToOverPosition(), new WaitCommand(0.5)),
                   new SequentialCommandGroup(new ArmExtendToAutoConePosition(), new WaitCommand(3.5)), // 4
+                  new LogPIDs(),
                   new SequentialCommandGroup(new GripperEject(), new WaitCommand(0.5)),
                   new ParallelCommandGroup(
                      new SequentialCommandGroup(new ArmExtendToLowPosition(), new WaitCommand(3)),
@@ -292,12 +299,16 @@ public class RobotContainer {
                   new SequentialCommandGroup(new ArmRotateToAutoConePosition(), new WaitCommand(1)),
                   new SequentialCommandGroup(new WristRotateToOverPosition(), new WaitCommand(0.5)),
                   new SequentialCommandGroup(new ArmExtendToAutoConePosition(), new WaitCommand(3.5)), // 4
+                  new LogPIDs(),
                   new SequentialCommandGroup(new GripperEject(), new WaitCommand(0.5)),
                   new ParallelCommandGroup(
                      new SequentialCommandGroup(new ArmExtendToLowPosition(), new WaitCommand(3)),
                      new SequentialCommandGroup(new GripperStop(), new WaitCommand(0.1))
                   ),
-                  new DriveBackwardToBalance(2.24, -0.60)
+                  new LogPIDs(),
+                  new DriveBackwardToBalance(3.75, -0.60),
+                  new DriveForwardTimed(4.0, 0.45),
+                  new DriveBalance()
                );
             // @formatter:on
 

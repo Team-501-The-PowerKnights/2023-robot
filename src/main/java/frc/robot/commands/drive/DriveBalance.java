@@ -61,7 +61,7 @@ public class DriveBalance extends DriveCommandBase {
       if (Math.abs(offsetAngle) < 1) {
          speed = 0;
       } else {
-         speed = (offsetAngle < 0) ? 0.2 : -0.2;
+         speed = (offsetAngle < 0) ? -0.26 : 0.26;
       }
       logger.debug("balance: angle={} speed={}", offsetAngle, speed);
       drive.drive(speed, 0);
