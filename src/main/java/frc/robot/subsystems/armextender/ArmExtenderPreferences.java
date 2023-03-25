@@ -54,8 +54,8 @@ public final class ArmExtenderPreferences {
    static final String maxSoftLimit = name + ".MaxSoftLimit";
 
    // FIXME: Added 3:1 gearbox
-   private static final float default_minSoftLimit = 3 * 5f;
-   private static final float default_maxSoftLimit = 3 * 160f;
+   private static final float default_minSoftLimit = 5f;
+   private static final float default_maxSoftLimit = 480f;
 
    /** Set points for the various positions */
    static final String overSetPoint = name + ".OverSetPoint";
@@ -66,14 +66,13 @@ public final class ArmExtenderPreferences {
    //
    static final String autoConeSetPoint = name + ".AutoConeSetPoint";
 
-   // FIXME: Added 3:1 gearbox
-   private static final double default_overPosition = 3 * 87;
-   private static final double default_highPosition = 3 * 160;
-   private static final double default_midPosition = 3 * 57; // 85;
-   private static final double default_lowPosition = 3 * 5; // 25;
-   private static final double default_inPosition = 3 * 5;
+   private static final double default_overPosition = 261;
+   private static final double default_highPosition = 480;
+   private static final double default_midPosition = 180;
+   private static final double default_lowPosition = 25;
+   private static final double default_inPosition = 25;
    //
-   private static final double default_autoConePosition = 3 * 57; // 85;
+   private static final double default_autoConePosition = 180;
 
    private ArmExtenderPreferences() {
    }

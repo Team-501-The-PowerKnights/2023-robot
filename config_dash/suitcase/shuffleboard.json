@@ -1620,6 +1620,19 @@
               "_glyph": 148,
               "_showGlyph": false
             }
+          },
+          "30,4": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/ArmRotator.AutoConeSetPoint",
+              "_title": "AutoConeSetPoint",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
           }
         }
       }
@@ -1661,7 +1674,7 @@
               "_showGlyph": false
             }
           },
-          "25,0": {
+          "25,2": {
             "size": [
               4,
               2
@@ -1700,7 +1713,7 @@
               "_showGlyph": false
             }
           },
-          "25,6": {
+          "25,8": {
             "size": [
               4,
               2
@@ -1713,7 +1726,7 @@
               "_showGlyph": false
             }
           },
-          "25,4": {
+          "25,6": {
             "size": [
               4,
               2
@@ -1752,7 +1765,7 @@
               "_showGlyph": false
             }
           },
-          "25,2": {
+          "25,4": {
             "size": [
               4,
               2
@@ -1893,6 +1906,32 @@
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/ArmExtender.teleCommand",
               "_title": "teleCommand",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "25,0": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/ArmExtender.OverSetPoint",
+              "_title": "OverSetPoint",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "30,4": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/ArmExtender.AutoConeSetPoint",
+              "_title": "AutoConeSetPoint",
               "_glyph": 148,
               "_showGlyph": false
             }
