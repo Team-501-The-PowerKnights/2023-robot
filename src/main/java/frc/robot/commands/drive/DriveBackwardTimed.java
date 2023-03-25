@@ -61,7 +61,7 @@ public class DriveBackwardTimed extends DriveCommandBase {
    public DriveBackwardTimed(double duration, double speed) {
       logger.info("constructing {} for {} {}", getName(), duration, speed);
 
-      setValues(speed, duration);
+      setValues(duration, speed);
 
       logger.info("constructed");
    }
