@@ -170,6 +170,11 @@ abstract class BaseArmExtenderSubsystem extends BaseSubsystem implements IArmExt
    }
 
    @Override
+   public void logTelemetry() {
+      logger.debug("{}: PID target={} current={}", myName, tlmPID.PIDTarget, tlmPID.PIDCurrent);
+   }
+
+   @Override
    public void updatePreferences() {
       loadPreferences();
    }

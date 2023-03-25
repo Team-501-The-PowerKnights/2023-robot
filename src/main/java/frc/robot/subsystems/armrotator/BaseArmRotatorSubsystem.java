@@ -162,6 +162,11 @@ abstract class BaseArmRotatorSubsystem extends BaseSubsystem implements IArmRota
    }
 
    @Override
+   public void logTelemetry() {
+      logger.debug("{}: PID target={} current={}", myName, tlmPID.PIDTarget, tlmPID.PIDCurrent);
+   }
+
+   @Override
    public void updatePreferences() {
       loadPreferences();
    }
