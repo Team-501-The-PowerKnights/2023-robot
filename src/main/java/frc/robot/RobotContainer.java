@@ -26,6 +26,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.AutoDoNothing;
 import frc.robot.commands.armextender.ArmExtendToLowPosition;
 import frc.robot.commands.armextender.ArmExtendToMidPosition;
+import frc.robot.commands.armrotator.ArmRotateToLowPosition;
 import frc.robot.commands.armrotator.ArmRotateToMidPosition;
 import frc.robot.commands.drive.DriveBackwardTimed;
 import frc.robot.commands.drive.DriveBackwardToBalance;
@@ -229,10 +230,26 @@ public class RobotContainer {
             return new AutoDoNothing();
 
          case doSimpleBackup:
-            return new DriveBackwardTimed(3.0, -0.60);
+            // @formatter:off
+            return
+              new SequentialCommandGroup(
+                  new ArmRotateToLowPosition(),
+                  new ArmExtendToLowPosition(),
+                  new WaitCommand(0.5),
+                  new DriveBackwardTimed(3.0, -0.60)
+              );
+            // @formatter:on
 
          case doBackupToBalance:
-            return new DriveBackwardToBalance(2.3, -0.60);
+            // @formatter:off
+            return
+              new SequentialCommandGroup(
+                  new ArmRotateToLowPosition(),
+                  new ArmExtendToLowPosition(),
+                  new WaitCommand(0.5),
+                  new DriveBackwardToBalance(2.3, -0.60)
+              );
+            // @formatter:on
 
          case doCone:
             // @formatter:off
