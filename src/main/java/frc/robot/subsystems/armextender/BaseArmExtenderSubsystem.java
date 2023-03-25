@@ -122,6 +122,11 @@ abstract class BaseArmExtenderSubsystem extends BaseSubsystem implements IArmExt
       v = Preferences.getDouble(ArmExtenderPreferences.inSetPoint, inSetPoint);
       logger.info("{} = {}", ArmExtenderPreferences.inSetPoint, v);
       inSetPoint = v;
+
+      ArmExtensionPosition.overPosition.set(overSetPoint);
+      ArmExtensionPosition.highPosition.set(highSetPoint);
+      ArmExtensionPosition.midPosition.set(midSetPoint);
+      ArmExtensionPosition.lowPosition.set(lowSetPoint);
    }
 
    @Override
