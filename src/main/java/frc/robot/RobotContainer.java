@@ -198,12 +198,12 @@ public class RobotContainer {
       autoChooser = new SendableChooser<>();
 
       // Default option is safety of "do nothing"
-      autoChooser.setDefaultOption("Do Nothing", AutoSelection.doNothing);
+      autoChooser.addOption("Do Nothing", AutoSelection.doNothing);
 
       //
       autoChooser.addOption("Simple Backup", AutoSelection.doSimpleBackup);
       //
-      autoChooser.addOption("Backup to Balance", AutoSelection.doBackupToBalance);
+      autoChooser.setDefaultOption("Backup to Balance", AutoSelection.doBackupToBalance);
 
       //
       autoChooser.addOption("(me) Not Full (mid cone)", AutoSelection.doCone);
