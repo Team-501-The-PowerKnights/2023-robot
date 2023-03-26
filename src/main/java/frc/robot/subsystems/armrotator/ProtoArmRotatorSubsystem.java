@@ -38,6 +38,8 @@ public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
 
    private AbsoluteEncoder absEncoder;
    private final double absEncoderBaseline = 0.29263;
+   // Plus reverse sign for direction to normalize to relative
+   private final double absEncoderScale = -250;
 
    ProtoArmRotatorSubsystem() {
       logger.info("constructing");
@@ -56,7 +58,7 @@ public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
       double encoderOffset = absEncoderCurrent - absEncoderBaseline;
       logger.info("encoder init: baseline={}, current={}, offset={}",
             absEncoderBaseline, absEncoderCurrent, encoderOffset);
-      checkError(encoder.setPosition(encoderOffset * 281.25), "set encoder position based on absolute {}");
+      checkError(encoder.setPosition(encoderOffset * absEncoderScale), "set encoder position based on absolute {}");
 
       logger.info("constructed");
    }
@@ -89,7 +91,7 @@ public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
    @Override
    public void updateTelemetry() {
       SmartDashboard.putNumber(TelemetryNames.ArmRotator.absCurrent,
-            ((absEncoder.getPosition() - absEncoderBaseline) * 281.25));
+            ((absEncoder.getPosition() - absEncoderBaseline) * absEncoderScale));
 
       setTlmPIDCurrent(encoder.getPosition());
 
