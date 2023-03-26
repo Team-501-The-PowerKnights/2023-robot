@@ -24,7 +24,7 @@ public class DriveForwardTimed extends DriveCommandBase {
    // Duration to execute (in seconds)
    private double duration;
    // Speed to drive
-   private double speed = 0.30; // default
+   private double speed = 0.60; // default
    private final double turn = 0.0; // no turn component
 
    // Timer to count it down during execute()
