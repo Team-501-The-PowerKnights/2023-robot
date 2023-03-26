@@ -311,7 +311,7 @@ public class RobotContainer {
                      new SequentialCommandGroup(new ArmExtendToLowPosition(), new WaitCommand(3)),
                      new SequentialCommandGroup(new GripperStop(), new WaitCommand(0.1))
                   ),
-                  new DriveBackwardTimed(3.0, -0.60)  // 2.24
+                  new DriveBackwardTimed(3.5, -0.60)  // 3.0 2.24
                );
             // @formatter:on
 
