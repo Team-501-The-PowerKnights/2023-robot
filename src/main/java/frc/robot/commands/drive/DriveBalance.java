@@ -9,9 +9,12 @@
 package frc.robot.commands.drive;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.modules.led.ILEDModule;
+import frc.robot.modules.led.LEDModuleFactory;
 import frc.robot.sensors.gyro.GyroFactory;
 import frc.robot.sensors.gyro.IGyroSensor;
 import frc.robot.telemetry.TelemetryNames;
+import frc.robot.utils.PKColor8Bit;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -25,6 +28,8 @@ public class DriveBalance extends DriveCommandBase {
 
    //
    private final IGyroSensor gyro;
+   //
+   private final ILEDModule leds;
 
    /**
     * Creates an instance of a class to try and stay balanced (assuming
@@ -34,6 +39,7 @@ public class DriveBalance extends DriveCommandBase {
       logger.info("constructing {}", getName());
 
       gyro = GyroFactory.getInstance();
+      leds = LEDModuleFactory.getInstance();
 
       logger.info("constructed");
    }
@@ -41,6 +47,8 @@ public class DriveBalance extends DriveCommandBase {
    @Override
    public void initialize() {
       super.initialize();
+
+      LEDModuleFactory.getInstance().setColor(PKColor8Bit.blackRGB);
    }
 
    @Override
@@ -63,9 +71,11 @@ public class DriveBalance extends DriveCommandBase {
       double speed;
       if (Math.abs(offsetAngle) < 4) {
          isBalanced = true;
+         setBalanced();
          speed = 0;
       } else {
          isBalanced = false;
+         setUnbalanced();
          speed = (offsetAngle < 0) ? -0.26 : 0.26;
       }
       logger.debug("balance: angle={} speed={}", offsetAngle, speed);
@@ -77,7 +87,17 @@ public class DriveBalance extends DriveCommandBase {
    public void end(boolean interrupted) {
       super.end(interrupted);
 
+      leds.setColor(PKColor8Bit.greenRGB);
+
       drive.stop();
+   }
+
+   private void setUnbalanced() {
+      leds.setColor(PKColor8Bit.blackRGB);
+   }
+
+   private void setBalanced() {
+      leds.setColor(PKColor8Bit.blueRGB);
    }
 
 }
