@@ -66,7 +66,7 @@ public final class ArmRotatorPreferences {
    private static final double default_overPosition = -115; // -120
    private static final double default_highPosition = -50;
    private static final double default_midPosition = -45;
-   private static final double default_lowPosition = -9;
+   private static final double default_lowPosition = -11; // -9
    //
    private static final double default_autoConePosition = -49; // -45
 
