@@ -8,8 +8,10 @@
 
 package frc.robot.commands.drive;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.sensors.gyro.GyroFactory;
 import frc.robot.sensors.gyro.IGyroSensor;
+import frc.robot.telemetry.TelemetryNames;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -57,13 +59,17 @@ public class DriveBalance extends DriveCommandBase {
       // drive.drive(speed, 0);
       // }
 
+      boolean isBalanced;
       double speed;
       if (Math.abs(offsetAngle) < 4) {
+         isBalanced = true;
          speed = 0;
       } else {
+         isBalanced = false;
          speed = (offsetAngle < 0) ? -0.26 : 0.26;
       }
       logger.debug("balance: angle={} speed={}", offsetAngle, speed);
+      SmartDashboard.putBoolean(TelemetryNames.Gyro.balanced, isBalanced);
       drive.drive(speed, 0);
    }
 
