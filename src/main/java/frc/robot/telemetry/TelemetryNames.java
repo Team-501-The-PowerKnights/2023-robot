@@ -150,6 +150,9 @@ public final class TelemetryNames {
       public static final String yaw = name + ".yaw";
       public static final String angle = name + ".angle";
       public static final String heading = name + ".heading";
+
+      // FIXME: Make an autonomous Telemetry class
+      public static final String balanced = name + ".balanced";
    }
 
    /***************
@@ -184,6 +187,8 @@ public final class TelemetryNames {
       public static final String PIDEnabled = name + PIDTelemetry.pid_Enabled;
       public static final String PIDTarget = name + PIDTelemetry.pid_Target;
       public static final String PIDCurrent = name + PIDTelemetry.pid_Current;
+
+      public static final String absCurrent = name + ".absCurrent";
    }
 
    public final class ArmExtender {
