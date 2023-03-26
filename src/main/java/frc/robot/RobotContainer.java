@@ -216,7 +216,8 @@ public class RobotContainer {
       //
       autoChooser.setDefaultOption("(*UNH*) Place Mid Cone & Backup", AutoSelection.doMidConeAndBackup);
       //
-      autoChooser.addOption("(*UNH*) Place Over Cone & Go Forward", AutoSelection.doOverConeAndGoForward);
+      // autoChooser.addOption("Place Over Cone & Go Forward",
+      // AutoSelection.doOverConeAndGoForward);
       //
       autoChooser.addOption("Full Auto", AutoSelection.doFull);
 
