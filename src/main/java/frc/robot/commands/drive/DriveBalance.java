@@ -21,7 +21,7 @@ public class DriveBalance extends DriveCommandBase {
    private static final PKLogger logger = RioLogger.getLogger(DriveBalance.class.getName());
 
    // Max speed to drive the motors out; no matter how far out.
-   private static final double maxSpeed = 0.3;
+   // private static final double maxSpeed = 0.3;
 
    //
    private final IGyroSensor gyro;
