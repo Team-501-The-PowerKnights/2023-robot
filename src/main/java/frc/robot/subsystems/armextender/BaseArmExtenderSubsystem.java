@@ -17,6 +17,7 @@ import frc.robot.subsystems.SubsystemNames;
 import frc.robot.telemetry.PIDTelemetry;
 import frc.robot.telemetry.TelemetryNames;
 import frc.robot.utils.PIDValues;
+
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -58,6 +59,8 @@ abstract class BaseArmExtenderSubsystem extends BaseSubsystem implements IArmExt
    protected double midSetPoint;
    protected double lowSetPoint;
    protected double inSetPoint;
+   //
+   protected double autoConeSetPoint;
 
    BaseArmExtenderSubsystem() {
       super(SubsystemNames.armExtenderName);
@@ -122,6 +125,17 @@ abstract class BaseArmExtenderSubsystem extends BaseSubsystem implements IArmExt
       v = Preferences.getDouble(ArmExtenderPreferences.inSetPoint, inSetPoint);
       logger.info("{} = {}", ArmExtenderPreferences.inSetPoint, v);
       inSetPoint = v;
+
+      v = Preferences.getDouble(ArmExtenderPreferences.autoConeSetPoint, autoConeSetPoint);
+      logger.info("{} = {}", ArmExtenderPreferences.autoConeSetPoint, v);
+      autoConeSetPoint = v;
+
+      ArmExtensionPosition.overPosition.set(overSetPoint);
+      ArmExtensionPosition.highPosition.set(highSetPoint);
+      ArmExtensionPosition.midPosition.set(midSetPoint);
+      ArmExtensionPosition.lowPosition.set(lowSetPoint);
+      //
+      ArmExtensionPosition.autoConePosition.set(autoConeSetPoint);
    }
 
    @Override
@@ -153,6 +167,11 @@ abstract class BaseArmExtenderSubsystem extends BaseSubsystem implements IArmExt
       SmartDashboard.putBoolean(TelemetryNames.ArmExtender.PIDEnabled, tlmPID.PIDEnabled);
       SmartDashboard.putNumber(TelemetryNames.ArmExtender.PIDTarget, tlmPID.PIDTarget);
       SmartDashboard.putNumber(TelemetryNames.ArmExtender.PIDCurrent, tlmPID.PIDCurrent);
+   }
+
+   @Override
+   public void logTelemetry() {
+      logger.debug("{}: PID target={} current={}", myName, tlmPID.PIDTarget, tlmPID.PIDCurrent);
    }
 
    @Override

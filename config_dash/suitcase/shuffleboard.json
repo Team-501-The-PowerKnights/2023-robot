@@ -81,7 +81,7 @@
           "33,4": {
             "size": [
               4,
-              2
+              4
             ],
             "content": {
               "_type": "Boolean Box",
@@ -202,6 +202,39 @@
               "_showGlyph": false,
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#999999FF"
+            }
+          },
+          "21,5": {
+            "size": [
+              2,
+              4
+            ],
+            "content": {
+              "_type": "Voltage View",
+              "_source0": "network_table:///SmartDashboard/Gyro.pitch",
+              "_title": "Gyro.pitch",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Range/Min": -20.0,
+              "Range/Max": 20.0,
+              "Range/Center": 0.0,
+              "Visuals/Orientation": "VERTICAL",
+              "Visuals/Number of tick marks": 5
+            }
+          },
+          "21,9": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Gyro.balanced",
+              "_title": "balanced",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#FFFF99FF"
             }
           }
         }
@@ -1620,6 +1653,32 @@
               "_glyph": 148,
               "_showGlyph": false
             }
+          },
+          "30,4": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/ArmRotator.AutoConeSetPoint",
+              "_title": "AutoConeSetPoint",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "19,8": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ArmRotator.absCurrent",
+              "_title": "absCurrent",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
           }
         }
       }
@@ -1661,7 +1720,7 @@
               "_showGlyph": false
             }
           },
-          "25,0": {
+          "25,2": {
             "size": [
               4,
               2
@@ -1700,7 +1759,7 @@
               "_showGlyph": false
             }
           },
-          "25,6": {
+          "25,8": {
             "size": [
               4,
               2
@@ -1713,7 +1772,7 @@
               "_showGlyph": false
             }
           },
-          "25,4": {
+          "25,6": {
             "size": [
               4,
               2
@@ -1752,7 +1811,7 @@
               "_showGlyph": false
             }
           },
-          "25,2": {
+          "25,4": {
             "size": [
               4,
               2
@@ -1893,6 +1952,32 @@
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/ArmExtender.teleCommand",
               "_title": "teleCommand",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "25,0": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/ArmExtender.OverSetPoint",
+              "_title": "OverSetPoint",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "30,4": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/ArmExtender.AutoConeSetPoint",
+              "_title": "AutoConeSetPoint",
               "_glyph": 148,
               "_showGlyph": false
             }
@@ -2278,6 +2363,42 @@
               "_glyph": 148,
               "_showGlyph": false,
               "Miscellaneous/Show search box": true
+            }
+          },
+          "12,2": {
+            "size": [
+              3,
+              5
+            ],
+            "content": {
+              "_type": "Voltage View",
+              "_source0": "network_table:///SmartDashboard/Gyro.pitch",
+              "_title": "Gyro.pitch",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Range/Min": -30.0,
+              "Range/Max": 30.0,
+              "Range/Center": 0.0,
+              "Visuals/Orientation": "VERTICAL",
+              "Visuals/Number of tick marks": 5
+            }
+          },
+          "10,7": {
+            "size": [
+              7,
+              2
+            ],
+            "content": {
+              "_type": "Voltage View",
+              "_source0": "network_table:///SmartDashboard/Gyro.roll",
+              "_title": "SmartDashboard/Gyro.roll",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Range/Min": -30.0,
+              "Range/Max": 30.0,
+              "Range/Center": 0.0,
+              "Visuals/Orientation": "HORIZONTAL",
+              "Visuals/Number of tick marks": 5
             }
           }
         }

@@ -91,7 +91,9 @@ public class ProtoGripperSubsystem extends BaseGripperSubsystem {
 
    @Override
    public void pushOut() {
-      // TODO Auto-generated method stub
+      double speed = -0.8;
+      leftMotor.set(speed);
+      setTlmSpeed(speed);
    }
 
    @Override

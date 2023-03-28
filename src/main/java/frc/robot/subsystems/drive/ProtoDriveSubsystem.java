@@ -26,4 +26,22 @@ class ProtoDriveSubsystem extends CANSparkMaxDriveSubsystem {
       logger.info("constructed");
    }
 
+   @Override
+   public void autonomousInit() {
+      logger.info("initializing auto for {}", myName);
+      super.autonomousInit();
+
+      setBrake(true);
+      logger.info("initialized auto for {}", myName);
+   };
+
+   @Override
+   public void teleopInit() {
+      super.teleopInit();
+      logger.info("initializing teleop for {}", myName);
+
+      setBrake(true);
+      logger.info("initialized teleop for {}", myName);
+   };
+
 }

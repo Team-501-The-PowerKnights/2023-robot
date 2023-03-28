@@ -9,8 +9,10 @@
 package frc.robot.subsystems.armrotator;
 
 import edu.wpi.first.wpilibj.Preferences;
+
 import frc.robot.subsystems.SubsystemNames;
 import frc.robot.utils.PIDValues;
+
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -40,13 +42,13 @@ public final class ArmRotatorPreferences {
    static final String PID_minOutput = name + PIDValues.pid_minOutput;
    static final String PID_maxOutput = name + PIDValues.pid_maxOutput;
 
-   private static final double default_pid_P = 0.2;
-   private static final double default_pid_I = 1e-5;
-   private static final double default_pid_D = 1;
-   private static final double default_pid_IZone = 0;
-   private static final double default_pid_FF = 0;
-   private static final double default_pid_minOutput = -1;
-   private static final double default_pid_maxOutput = 0.3;
+   private static final double default_pid_P = 1; // 0.5;
+   private static final double default_pid_I = 1e-4; // 0;
+   private static final double default_pid_D = 10; // 1
+   private static final double default_pid_IZone = 25; // 0
+   private static final double default_pid_FF = 0.06; // 0.01;
+   private static final double default_pid_minOutput = -0.5; // -0.7;
+   private static final double default_pid_maxOutput = 0.35;
 
    /** Ramp rate */
    static final String rampRate = name + ".RampRate";
@@ -58,11 +60,15 @@ public final class ArmRotatorPreferences {
    static final String highSetPoint = name + ".HighSetPoint";
    static final String midSetPoint = name + ".MidSetPoint";
    static final String lowSetPoint = name + ".LowSetPoint";
+   //
+   static final String autoConeSetPoint = name + ".AutoConeSetPoint";
 
-   private static final double default_overPosition = 60;
-   private static final double default_highPosition = 26;
-   private static final double default_midPosition = 21; // 17 in code
-   private static final double default_lowPosition = 3.5; // 7 in code
+   private static final double default_overPosition = -115; // -120
+   private static final double default_highPosition = -50;
+   private static final double default_midPosition = -45;
+   private static final double default_lowPosition = -11; // -9
+   //
+   private static final double default_autoConePosition = -49; // -45
 
    private ArmRotatorPreferences() {
    }
@@ -118,6 +124,11 @@ public final class ArmRotatorPreferences {
       if (!Preferences.containsKey(lowSetPoint)) {
          logger.warn("{} doesn't exist; creating with default", lowSetPoint);
          Preferences.setDouble(lowSetPoint, default_lowPosition);
+      }
+
+      if (!Preferences.containsKey(autoConeSetPoint)) {
+         logger.warn("{} doesn't exist; creating with default", autoConeSetPoint);
+         Preferences.setDouble(autoConeSetPoint, default_autoConePosition);
       }
    }
 

@@ -29,6 +29,8 @@ public class PKColor8Bit extends Color8Bit {
    public static final PKColor8Bit orangeRGB = new PKColor8Bit("orange", 255, 165, 0);
    public static final PKColor8Bit greenRGB = new PKColor8Bit("green", 0, 255, 0);
 
+   public static final PKColor8Bit blueRGB = new PKColor8Bit("blue", 0, 0, 255);
+
    @SuppressWarnings("unused")
    private final String name;
 

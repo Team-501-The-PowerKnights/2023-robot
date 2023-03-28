@@ -17,11 +17,27 @@ import java.util.List;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 import frc.robot.commands.AutoDoNothing;
+import frc.robot.commands.LogPIDs;
+import frc.robot.commands.armextender.ArmExtendToAutoConePosition;
+import frc.robot.commands.armextender.ArmExtendToLowPosition;
+import frc.robot.commands.armextender.ArmExtendToOverPosition;
+import frc.robot.commands.armrotator.ArmRotateToAutoConePosition;
+import frc.robot.commands.armrotator.ArmRotateToLowPosition;
+import frc.robot.commands.armrotator.ArmRotateToOverPosition;
 import frc.robot.commands.drive.DriveBackwardTimed;
+import frc.robot.commands.drive.DriveBackwardToBalance;
+import frc.robot.commands.drive.DriveBalance;
+import frc.robot.commands.drive.DriveForwardTimed;
+import frc.robot.commands.gripper.GripperEject;
+import frc.robot.commands.gripper.GripperStop;
+import frc.robot.commands.wrist.WristRotateToOverPosition;
 import frc.robot.modules.IModule;
 import frc.robot.modules.ModulesFactory;
 import frc.robot.preferences.PreferencesManager;
@@ -158,7 +174,11 @@ public class RobotContainer {
       // @formatter:off
       doNothing("doNothing"), 
       doSimpleBackup("doSimpleBackup"),
-      doConeAndBackup("doConeAndBackup"),
+      doBackupToBalance("doBackupToBalance"),
+      doCommunityToBalance("doCommunityToBalance"),
+      doMidCone("doCone"),
+      doMidConeAndBackup("doMidConeAndBackup"),
+      doOverConeAndGoForward("doOverConeAndForward"),
       doFull("doFull");
       // @formatter:on
 
@@ -182,15 +202,26 @@ public class RobotContainer {
       autoChooser = new SendableChooser<>();
 
       // Default option is safety of "do nothing"
-      autoChooser.setDefaultOption("Do Nothing", AutoSelection.doNothing);
+      autoChooser.addOption("Do Nothing", AutoSelection.doNothing);
 
       //
       autoChooser.addOption("Simple Backup", AutoSelection.doSimpleBackup);
+      //
+      autoChooser.addOption("Backup to Balance", AutoSelection.doBackupToBalance);
+      //
+      autoChooser.addOption("Community to Balance", AutoSelection.doCommunityToBalance);
 
       //
-      autoChooser.addOption("Not Full Auto (place cone & backup)", AutoSelection.doConeAndBackup);
+      autoChooser.addOption("Place Mid Cone", AutoSelection.doMidCone);
       //
-      autoChooser.addOption("Full Auto (place cone & balance)", AutoSelection.doFull);
+      autoChooser.setDefaultOption("(*UNH*) Place Mid Cone & Backup", AutoSelection.doMidConeAndBackup);
+      //
+      // autoChooser.addOption("Place Over Cone & Go Forward",
+      // AutoSelection.doOverConeAndGoForward);
+      //
+      autoChooser.addOption("Full Auto", AutoSelection.doFull);
+
+      //
 
       SmartDashboard.putData("Auto Mode", autoChooser);
    }
@@ -212,13 +243,112 @@ public class RobotContainer {
             return new AutoDoNothing();
 
          case doSimpleBackup:
-            return new DriveBackwardTimed(2.0);
+            // @formatter:off
+            return
+              new SequentialCommandGroup(
+                  new ArmRotateToLowPosition(),
+                  new ArmExtendToLowPosition(),
+                  new WaitCommand(0.5),
+                  new DriveBackwardTimed(3.0, -0.60)
+              );
+            // @formatter:on
 
-         case doConeAndBackup:
-            return new AutoDoNothing();
+         case doBackupToBalance:
+            // @formatter:off
+            return
+              new SequentialCommandGroup(
+                  new GripperEject(),
+                  new ArmRotateToLowPosition(), 
+                  new ArmExtendToLowPosition(),
+                  new WaitCommand(0.5), 
+                  new LogPIDs(),
+                  new DriveBackwardToBalance(2.12, -0.60), // 2.25
+                  new DriveBalance()
+              );
+            // @formatter:on
+
+         case doCommunityToBalance:
+            // @formatter:off
+            return
+              new SequentialCommandGroup(
+                  new GripperEject(),
+                  new ArmRotateToLowPosition(), 
+                  new ArmExtendToLowPosition(),
+                  new WaitCommand(0.5), 
+                  new LogPIDs(),
+                  new DriveBackwardToBalance(3.5, -0.60),
+                  new DriveForwardTimed(3.5, 0.45),
+                  new DriveBalance()
+              );
+            // @formatter:on
+
+         case doMidCone:
+            // @formatter:off
+            return
+               new SequentialCommandGroup(
+                  new SequentialCommandGroup(new ArmRotateToAutoConePosition(), new WaitCommand(1)),
+                  new SequentialCommandGroup(new WristRotateToOverPosition(), new WaitCommand(0.5)),
+                  new SequentialCommandGroup(new ArmExtendToAutoConePosition(), new WaitCommand(3.5)), // 4
+                  new LogPIDs(),
+                  new SequentialCommandGroup(new GripperEject(), new WaitCommand(0.5)),
+                  new ParallelCommandGroup(
+                     new SequentialCommandGroup(new ArmExtendToLowPosition(), new WaitCommand(3)),
+                     new SequentialCommandGroup(new GripperStop(), new WaitCommand(0.1))
+                  )
+               );
+            // @formatter:on
+
+         case doMidConeAndBackup:
+            // @formatter:off
+            return
+               new SequentialCommandGroup(
+                  new SequentialCommandGroup(new ArmRotateToAutoConePosition(), new WaitCommand(1)),
+                  new SequentialCommandGroup(new WristRotateToOverPosition(), new WaitCommand(0.5)),
+                  new SequentialCommandGroup(new ArmExtendToAutoConePosition(), new WaitCommand(3.5)), // 4
+                  new LogPIDs(),
+                  new SequentialCommandGroup(new GripperEject(), new WaitCommand(0.5)),
+                  new ParallelCommandGroup(
+                     new SequentialCommandGroup(new ArmExtendToLowPosition(), new WaitCommand(3)),
+                     new SequentialCommandGroup(new GripperStop(), new WaitCommand(0.1))
+                  ),
+                  new DriveBackwardTimed(3.5, -0.60)  // 3.0 2.24
+               );
+            // @formatter:on
+
+         case doOverConeAndGoForward:
+            // @formatter:off
+            return
+               new SequentialCommandGroup(
+                     new SequentialCommandGroup(new ArmRotateToOverPosition(), new WaitCommand(1)),
+                     new SequentialCommandGroup(new ArmExtendToOverPosition(), new WaitCommand(3.5)), // 4
+                     new LogPIDs(),
+                     new SequentialCommandGroup(new GripperEject(), new WaitCommand(0.5)),
+                     new ParallelCommandGroup(
+                           new SequentialCommandGroup(new ArmExtendToLowPosition(), new WaitCommand(3)),
+                           new SequentialCommandGroup(new GripperStop(), new WaitCommand(0.1)),
+                           new SequentialCommandGroup(new ArmRotateToLowPosition(), new WaitCommand(1.5))),
+                     new DriveForwardTimed(3.0, 0.60) // 2.24
+            );
+            // @formatter:on
 
          case doFull:
-            return new AutoDoNothing();
+            // @formatter:off
+            return
+               new SequentialCommandGroup(
+                  new SequentialCommandGroup(new ArmRotateToAutoConePosition(), new WaitCommand(1)),
+                  new SequentialCommandGroup(new WristRotateToOverPosition(), new WaitCommand(0.5)),
+                  new SequentialCommandGroup(new ArmExtendToAutoConePosition(), new WaitCommand(3.5)), // 4
+                  new LogPIDs(),
+                  new SequentialCommandGroup(new GripperEject(), new WaitCommand(0.5)),
+                  new ParallelCommandGroup(
+                     new SequentialCommandGroup(new ArmExtendToLowPosition(), new WaitCommand(3)),
+                     new SequentialCommandGroup(new GripperStop(), new WaitCommand(0.1))
+                  ),
+                  new LogPIDs(),
+                  new DriveBackwardToBalance(2.12, -0.60), // 2.25
+                  new DriveBalance()
+               );
+            // @formatter:on
 
          default:
             return new AutoDoNothing();

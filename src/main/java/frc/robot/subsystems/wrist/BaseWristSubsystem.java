@@ -138,6 +138,11 @@ abstract class BaseWristSubsystem extends BaseSubsystem implements IWristSubsyst
    }
 
    @Override
+   public void logTelemetry() {
+      logger.debug("{}: PID target={} current={}", myName, tlmPID.PIDTarget, tlmPID.PIDCurrent);
+   }
+
+   @Override
    public void updatePreferences() {
       loadPreferences();
    }

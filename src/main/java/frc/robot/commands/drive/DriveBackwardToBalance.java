@@ -16,37 +16,22 @@ import riolog.RioLogger;
 /**
  * Add your docs here.
  */
-public class DriveBackwardTimed extends DriveCommandBase {
+public class DriveBackwardToBalance extends DriveCommandBase {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(DriveBackwardTimed.class.getName());
+   private static final PKLogger logger = RioLogger.getLogger(DriveBackwardToBalance.class.getName());
 
    // Duration to execute (in seconds)
    private double duration;
    // Speed to drive
-   private double speed = -0.60; // default
+   private double speed = -0.30; // default
    private final double turn = 0.0; // no turn component
 
    // Timer to count it down during execute()
    private TimerFromPeriod timer;
 
-   protected DriveBackwardTimed() {
+   protected DriveBackwardToBalance() {
       // Prevent direct instantiation
-   }
-
-   /**
-    * Creates an instance of a class to dive backward at the default
-    * speed.
-    * 
-    * @param duration
-    *           - duration to drive (seconds)
-    */
-   public DriveBackwardTimed(double duration) {
-      logger.info("constructing {} for {} {}", getName(), duration, speed);
-
-      setValues(duration, speed);
-
-      logger.info("constructed");
    }
 
    /**
@@ -58,7 +43,7 @@ public class DriveBackwardTimed extends DriveCommandBase {
     * @param speed
     *           - speed to drive
     */
-   public DriveBackwardTimed(double duration, double speed) {
+   public DriveBackwardToBalance(double duration, double speed) {
       logger.info("constructing {} for {} {}", getName(), duration, speed);
 
       setValues(duration, speed);

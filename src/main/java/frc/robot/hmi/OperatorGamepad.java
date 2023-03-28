@@ -144,6 +144,7 @@ public class OperatorGamepad extends F310Gamepad {
             .onTrue(new ArmExtendToInPosition())
             .onTrue(new WaitCommand(2.0)) // FIXME: Delete time delay
             .onTrue(new ArmRotateToOverPosition())
+            .onTrue(new WaitCommand(2.0)) // FIXME: Delete time delay
             .onTrue(new ArmExtendToOverPosition())
             .onTrue(new WristRotateToOverPosition());
       armHighPoseButton
