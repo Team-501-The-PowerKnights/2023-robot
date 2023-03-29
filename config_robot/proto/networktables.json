@@ -50,7 +50,7 @@
   {
     "name": "/Preferences/ArmRotator.I",
     "type": "double",
-    "value": 0.0001,
+    "value": 0.001,
     "properties": {
       "persistent": true
     }
@@ -66,7 +66,7 @@
   {
     "name": "/Preferences/ArmRotator.IZone",
     "type": "double",
-    "value": 25.0,
+    "value": 5.0,
     "properties": {
       "persistent": true
     }
@@ -130,7 +130,7 @@
   {
     "name": "/Preferences/ArmRotator.LowSetPoint",
     "type": "double",
-    "value": -9.0,
+    "value": -11.0,
     "properties": {
       "persistent": true
     }
@@ -146,7 +146,7 @@
   {
     "name": "/Preferences/ArmExtender.I",
     "type": "double",
-    "value": 0.0001,
+    "value": 0.001,
     "properties": {
       "persistent": true
     }
@@ -162,7 +162,7 @@
   {
     "name": "/Preferences/ArmExtender.IZone",
     "type": "double",
-    "value": 0.0,
+    "value": 10.0,
     "properties": {
       "persistent": true
     }
@@ -258,7 +258,7 @@
   {
     "name": "/Preferences/Gripper.MaxOutSpeed",
     "type": "double",
-    "value": 0.8,
+    "value": 1.0,
     "properties": {
       "persistent": true
     }
@@ -346,7 +346,7 @@
   {
     "name": "/Preferences/ArmRotator.AutoConeSetPoint",
     "type": "double",
-    "value": -49.0,
+    "value": -51.0,
     "properties": {
       "persistent": true
     }
@@ -354,7 +354,7 @@
   {
     "name": "/Preferences/ArmExtender.AutoConeSetPoint",
     "type": "double",
-    "value": 195.0,
+    "value": 200.0,
     "properties": {
       "persistent": true
     }

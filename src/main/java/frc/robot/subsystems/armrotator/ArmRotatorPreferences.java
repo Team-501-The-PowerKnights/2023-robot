@@ -63,12 +63,12 @@ public final class ArmRotatorPreferences {
    //
    static final String autoConeSetPoint = name + ".AutoConeSetPoint";
 
-   private static final double default_overPosition = -115; // -120
+   private static final double default_overPosition = -115;
    private static final double default_highPosition = -50;
    private static final double default_midPosition = -45;
-   private static final double default_lowPosition = -11; // -9
+   private static final double default_lowPosition = -11;
    //
-   private static final double default_autoConePosition = -49; // -45
+   private static final double default_autoConePosition = -51;
 
    private ArmRotatorPreferences() {
    }

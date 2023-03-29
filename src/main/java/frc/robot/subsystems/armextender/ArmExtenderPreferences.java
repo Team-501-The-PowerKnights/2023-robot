@@ -44,7 +44,7 @@ public final class ArmExtenderPreferences {
    private static final double default_pid_P = 0.5;
    private static final double default_pid_I = 1e-4;
    private static final double default_pid_D = 1;
-   private static final double default_pid_IZone = 0;
+   private static final double default_pid_IZone = 10;
    private static final double default_pid_FF = 0.01;
    private static final double default_pid_minOutput = -1;
    private static final double default_pid_maxOutput = 1;
@@ -66,13 +66,13 @@ public final class ArmExtenderPreferences {
    //
    static final String autoConeSetPoint = name + ".AutoConeSetPoint";
 
-   private static final double default_overPosition = 315; // 261
+   private static final double default_overPosition = 315;
    private static final double default_highPosition = 480;
    private static final double default_midPosition = 180;
    private static final double default_lowPosition = 25;
    private static final double default_inPosition = 25;
    //
-   private static final double default_autoConePosition = 195; // 180
+   private static final double default_autoConePosition = 200;
 
    private ArmExtenderPreferences() {
    }
