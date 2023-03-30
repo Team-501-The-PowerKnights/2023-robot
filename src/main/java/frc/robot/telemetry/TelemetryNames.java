@@ -203,6 +203,7 @@ public final class TelemetryNames {
       public static final String PIDEnabled = name + PIDTelemetry.pid_Enabled;
       public static final String PIDTarget = name + PIDTelemetry.pid_Target;
       public static final String PIDCurrent = name + PIDTelemetry.pid_Current;
+      public static final String PIDAtTarget = name + PIDTelemetry.pid_AtTarget;
    }
 
    public final class Arm {
@@ -216,6 +217,7 @@ public final class TelemetryNames {
       public static final String PIDEnabled = name + PIDTelemetry.pid_Enabled;
       public static final String PIDTarget = name + PIDTelemetry.pid_Target;
       public static final String PIDCurrent = name + PIDTelemetry.pid_Current;
+      public static final String PIDAtTarget = name + PIDTelemetry.pid_AtTarget;
    }
 
    public final class Gripper {
@@ -240,6 +242,7 @@ public final class TelemetryNames {
       public static final String PIDEnabled = name + PIDTelemetry.pid_Enabled;
       public static final String PIDTarget = name + PIDTelemetry.pid_Target;
       public static final String PIDCurrent = name + PIDTelemetry.pid_Current;
+      public static final String PIDAtTarget = name + PIDTelemetry.pid_AtTarget;
    }
 
 }

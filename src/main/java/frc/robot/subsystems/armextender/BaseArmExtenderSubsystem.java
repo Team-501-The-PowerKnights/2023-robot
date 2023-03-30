@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.commands.armextender.ArmExtenderDoNothing;
-import frc.robot.subsystems.BaseSubsystem;
+import frc.robot.subsystems.PIDSubsystem;
 import frc.robot.subsystems.SubsystemNames;
 import frc.robot.telemetry.PIDTelemetry;
 import frc.robot.telemetry.TelemetryNames;
@@ -21,7 +21,7 @@ import frc.robot.utils.PIDValues;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-abstract class BaseArmExtenderSubsystem extends BaseSubsystem implements IArmExtenderSubsystem {
+abstract class BaseArmExtenderSubsystem extends PIDSubsystem implements IArmExtenderSubsystem {
 
    /** Our classes' logger **/
    private static final PKLogger logger = RioLogger.getLogger(BaseArmExtenderSubsystem.class.getName());
@@ -160,6 +160,9 @@ abstract class BaseArmExtenderSubsystem extends BaseSubsystem implements IArmExt
 
    protected void setTlmPIDCurrent(double current) {
       tlmPID.PIDCurrent = current;
+
+      newMeasurement(current);
+      tlmPID.PIDAtTarget = atSetpoint();
    }
 
    @Override
@@ -167,11 +170,13 @@ abstract class BaseArmExtenderSubsystem extends BaseSubsystem implements IArmExt
       SmartDashboard.putBoolean(TelemetryNames.ArmExtender.PIDEnabled, tlmPID.PIDEnabled);
       SmartDashboard.putNumber(TelemetryNames.ArmExtender.PIDTarget, tlmPID.PIDTarget);
       SmartDashboard.putNumber(TelemetryNames.ArmExtender.PIDCurrent, tlmPID.PIDCurrent);
+      SmartDashboard.putBoolean(TelemetryNames.ArmExtender.PIDAtTarget, tlmPID.PIDAtTarget);
    }
 
    @Override
    public void logTelemetry() {
-      logger.debug("{}: PID target={} current={}", myName, tlmPID.PIDTarget, tlmPID.PIDCurrent);
+      logger.debug("{}: PID target={} current={} atTarget={}",
+            myName, tlmPID.PIDTarget, tlmPID.PIDCurrent, tlmPID.PIDAtTarget);
    }
 
    @Override

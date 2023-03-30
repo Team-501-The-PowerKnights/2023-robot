@@ -170,7 +170,8 @@ abstract class BaseArmRotatorSubsystem extends PIDSubsystem implements IArmRotat
 
    @Override
    public void logTelemetry() {
-      logger.debug("{}: PID target={} current={}", myName, tlmPID.PIDTarget, tlmPID.PIDCurrent);
+      logger.debug("{}: PID target={} current={} atTarget={}",
+            myName, tlmPID.PIDTarget, tlmPID.PIDCurrent, tlmPID.PIDAtTarget);
    }
 
    @Override

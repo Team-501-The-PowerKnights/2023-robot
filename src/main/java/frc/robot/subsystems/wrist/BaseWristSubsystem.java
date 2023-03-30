@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.commands.wrist.WristDoNothing;
-import frc.robot.subsystems.BaseSubsystem;
+import frc.robot.subsystems.PIDSubsystem;
 import frc.robot.subsystems.SubsystemNames;
 import frc.robot.telemetry.PIDTelemetry;
 import frc.robot.telemetry.TelemetryNames;
@@ -21,7 +21,7 @@ import frc.robot.utils.PIDValues;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-abstract class BaseWristSubsystem extends BaseSubsystem implements IWristSubsystem {
+abstract class BaseWristSubsystem extends PIDSubsystem implements IWristSubsystem {
 
    /** Our classes' logger **/
    private static final PKLogger logger = RioLogger.getLogger(BaseWristSubsystem.class.getName());
@@ -128,6 +128,9 @@ abstract class BaseWristSubsystem extends BaseSubsystem implements IWristSubsyst
 
    protected void setTlmPIDCurrent(double current) {
       tlmPID.PIDCurrent = current;
+
+      newMeasurement(current);
+      tlmPID.PIDAtTarget = atSetpoint();
    }
 
    @Override
@@ -135,11 +138,13 @@ abstract class BaseWristSubsystem extends BaseSubsystem implements IWristSubsyst
       SmartDashboard.putBoolean(TelemetryNames.Wrist.PIDEnabled, tlmPID.PIDEnabled);
       SmartDashboard.putNumber(TelemetryNames.Wrist.PIDTarget, tlmPID.PIDTarget);
       SmartDashboard.putNumber(TelemetryNames.Wrist.PIDCurrent, tlmPID.PIDCurrent);
+      SmartDashboard.putBoolean(TelemetryNames.Wrist.PIDAtTarget, tlmPID.PIDAtTarget);
    }
 
    @Override
    public void logTelemetry() {
-      logger.debug("{}: PID target={} current={}", myName, tlmPID.PIDTarget, tlmPID.PIDCurrent);
+      logger.debug("{}: PID target={} current={} atTarget={}",
+            myName, tlmPID.PIDTarget, tlmPID.PIDCurrent, tlmPID.PIDAtTarget);
    }
 
    @Override

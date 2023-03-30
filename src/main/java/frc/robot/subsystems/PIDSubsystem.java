@@ -14,7 +14,7 @@ import riolog.RioLogger;
 /**
  * DOCS
  */
-public abstract class PIDSubsystem extends BaseSubsystem {
+public abstract class PIDSubsystem extends BaseSubsystem implements IPIDSubsystem {
 
    /** Our classes' logger **/
    private static final PKLogger logger = RioLogger.getLogger(BaseSubsystem.class.getName());
@@ -67,7 +67,7 @@ public abstract class PIDSubsystem extends BaseSubsystem {
     * @param tolerance
     *           - Position error which is tolerable.
     */
-   public void setTolerance​(double tolerance) {
+   public void setTolerance(double tolerance) {
       m_positionTolerance = tolerance;
    }
 
