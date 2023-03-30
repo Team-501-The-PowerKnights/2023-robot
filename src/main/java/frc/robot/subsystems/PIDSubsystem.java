@@ -8,6 +8,10 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import frc.robot.telemetry.PIDTelemetry;
+
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -18,6 +22,9 @@ public abstract class PIDSubsystem extends BaseSubsystem implements IPIDSubsyste
 
    /** Our classes' logger **/
    private static final PKLogger logger = RioLogger.getLogger(BaseSubsystem.class.getName());
+
+   /** Standard telemetry for PID */
+   protected PIDTelemetry tlmPID = new PIDTelemetry();
 
    // The error at the time of the most recent call to calculate()
    private double m_positionError;
@@ -36,6 +43,40 @@ public abstract class PIDSubsystem extends BaseSubsystem implements IPIDSubsyste
       logger.info("constructing");
 
       logger.info("constructed");
+   }
+
+   protected void setTlmPIDEnabled(boolean enabled) {
+      tlmPID.PIDEnabled = enabled;
+   }
+
+   protected void setTlmPIDTarget(double target) {
+      tlmPID.PIDTarget = target;
+
+      setSetpoint(target);
+   }
+
+   protected double getTlmPIDTarget() {
+      return tlmPID.PIDTarget;
+   }
+
+   protected void setTlmPIDCurrent(double current) {
+      tlmPID.PIDCurrent = current;
+
+      newMeasurement(current);
+      tlmPID.PIDAtTarget = atSetpoint();
+   }
+
+   protected void updateTelemetry(String enabledName, String targetName, String currentName, String atTargetName) {
+      SmartDashboard.putBoolean(enabledName, tlmPID.PIDEnabled);
+      SmartDashboard.putNumber(targetName, tlmPID.PIDTarget);
+      SmartDashboard.putNumber(currentName, tlmPID.PIDCurrent);
+      SmartDashboard.putBoolean(atTargetName, tlmPID.PIDAtTarget);
+   }
+
+   @Override
+   public void logTelemetry() {
+      logger.debug("{}: PID target={} current={} atTarget={}",
+            myName, tlmPID.PIDTarget, tlmPID.PIDCurrent, tlmPID.PIDAtTarget);
    }
 
    /**

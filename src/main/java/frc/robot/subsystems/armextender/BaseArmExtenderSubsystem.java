@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.armextender.ArmExtenderDoNothing;
 import frc.robot.subsystems.PIDSubsystem;
 import frc.robot.subsystems.SubsystemNames;
-import frc.robot.telemetry.PIDTelemetry;
 import frc.robot.telemetry.TelemetryNames;
 import frc.robot.utils.PIDValues;
 
@@ -143,40 +142,10 @@ abstract class BaseArmExtenderSubsystem extends PIDSubsystem implements IArmExte
       // Default implementation is empty
    }
 
-   /** Standard telemetry for PID */
-   private PIDTelemetry tlmPID = new PIDTelemetry();
-
-   protected void setTlmPIDEnabled(boolean enabled) {
-      tlmPID.PIDEnabled = enabled;
-   }
-
-   protected void setTlmPIDTarget(double target) {
-      tlmPID.PIDTarget = target;
-   }
-
-   protected double getTlmPIDTarget() {
-      return tlmPID.PIDTarget;
-   }
-
-   protected void setTlmPIDCurrent(double current) {
-      tlmPID.PIDCurrent = current;
-
-      newMeasurement(current);
-      tlmPID.PIDAtTarget = atSetpoint();
-   }
-
    @Override
    public void updateTelemetry() {
-      SmartDashboard.putBoolean(TelemetryNames.ArmExtender.PIDEnabled, tlmPID.PIDEnabled);
-      SmartDashboard.putNumber(TelemetryNames.ArmExtender.PIDTarget, tlmPID.PIDTarget);
-      SmartDashboard.putNumber(TelemetryNames.ArmExtender.PIDCurrent, tlmPID.PIDCurrent);
-      SmartDashboard.putBoolean(TelemetryNames.ArmExtender.PIDAtTarget, tlmPID.PIDAtTarget);
-   }
-
-   @Override
-   public void logTelemetry() {
-      logger.debug("{}: PID target={} current={} atTarget={}",
-            myName, tlmPID.PIDTarget, tlmPID.PIDCurrent, tlmPID.PIDAtTarget);
+      super.updateTelemetry(TelemetryNames.ArmExtender.PIDEnabled, TelemetryNames.ArmExtender.PIDTarget,
+            TelemetryNames.ArmExtender.PIDCurrent, TelemetryNames.ArmExtender.PIDAtTarget);
    }
 
    @Override

@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.armrotator.ArmRotatorDoNothing;
 import frc.robot.subsystems.PIDSubsystem;
 import frc.robot.subsystems.SubsystemNames;
-import frc.robot.telemetry.PIDTelemetry;
 import frc.robot.telemetry.TelemetryNames;
 import frc.robot.utils.PIDValues;
 
@@ -136,42 +135,10 @@ abstract class BaseArmRotatorSubsystem extends PIDSubsystem implements IArmRotat
       // Default implementation is empty
    }
 
-   /** Standard telemetry for PID */
-   private PIDTelemetry tlmPID = new PIDTelemetry();
-
-   protected void setTlmPIDEnabled(boolean enabled) {
-      tlmPID.PIDEnabled = enabled;
-   }
-
-   protected void setTlmPIDTarget(double target) {
-      tlmPID.PIDTarget = target;
-
-      setSetpoint(target);
-   }
-
-   protected double getTlmPIDTarget() {
-      return tlmPID.PIDTarget;
-   }
-
-   protected void setTlmPIDCurrent(double current) {
-      tlmPID.PIDCurrent = current;
-
-      newMeasurement(current);
-      tlmPID.PIDAtTarget = atSetpoint();
-   }
-
    @Override
    public void updateTelemetry() {
-      SmartDashboard.putBoolean(TelemetryNames.ArmRotator.PIDEnabled, tlmPID.PIDEnabled);
-      SmartDashboard.putNumber(TelemetryNames.ArmRotator.PIDTarget, tlmPID.PIDTarget);
-      SmartDashboard.putNumber(TelemetryNames.ArmRotator.PIDCurrent, tlmPID.PIDCurrent);
-      SmartDashboard.putBoolean(TelemetryNames.ArmRotator.PIDAtTarget, tlmPID.PIDAtTarget);
-   }
-
-   @Override
-   public void logTelemetry() {
-      logger.debug("{}: PID target={} current={} atTarget={}",
-            myName, tlmPID.PIDTarget, tlmPID.PIDCurrent, tlmPID.PIDAtTarget);
+      super.updateTelemetry(TelemetryNames.ArmRotator.PIDEnabled, TelemetryNames.ArmRotator.PIDTarget,
+            TelemetryNames.ArmRotator.PIDCurrent, TelemetryNames.ArmRotator.PIDAtTarget);
    }
 
    @Override
