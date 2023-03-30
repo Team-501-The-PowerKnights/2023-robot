@@ -6,42 +6,37 @@
 /*- of this project.                                                      */
 /*------------------------------------------------------------------------*/
 
-package frc.robot.subsystems.drive;
+package frc.robot.modules.led;
+
+import frc.robot.utils.PKColor8Bit;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-/**
- * This class implements the <code>DriveSubsystem</code> for the
- * <i>Suitcase-Bot<i>.
- */
-class ProtoDriveSubsystem extends CANSparkMaxDriveSubsystem {
+public class StubLEDModule extends BaseLEDModule {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(ProtoDriveSubsystem.class.getName());
+   private static final PKLogger logger = RioLogger.getLogger(StubLEDModule.class.getName());
 
-   ProtoDriveSubsystem() {
+   public StubLEDModule() {
       logger.info("constructing");
 
       logger.info("constructed");
    }
 
    @Override
-   public void autonomousInit() {
-      logger.info("initializing auto for {}", myName);
-      super.autonomousInit();
-
-      setBrake(true);
-      logger.info("initialized auto for {}", myName);
-   };
+   public void enable() {
+      // Stub doesn't implement this
+   }
 
    @Override
-   public void teleopInit() {
-      super.teleopInit();
-      logger.info("initializing teleop for {}", myName);
+   public void setRGB(int r, int g, int b) {
+      // Stub doesn't implement this
+   }
 
-      setBrake(true);
-      logger.info("initialized teleop for {}", myName);
-   };
+   @Override
+   public void setColor(PKColor8Bit color) {
+      // Stub doesn't implement this
+   }
 
 }

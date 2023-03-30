@@ -39,7 +39,7 @@ public class TimerFromPeriod {
 
       duration = seconds;
       count = secondsToClicks(seconds);
-      // logger.trace("duration = {}, count = {}", duration, count);
+      logger.trace("duration = {}, count = {}", duration, count);
 
       logger.info("constructed");
    }

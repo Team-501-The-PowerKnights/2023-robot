@@ -34,7 +34,7 @@ public class ProtoGyroSensor extends BaseGyroSensor {
 
    @Override
    public double getPitch() {
-      return mySensor.ahrs.getPitch();
+      return -mySensor.ahrs.getPitch();
    }
 
    @Override

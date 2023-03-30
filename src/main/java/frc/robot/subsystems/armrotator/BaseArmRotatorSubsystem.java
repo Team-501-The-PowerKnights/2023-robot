@@ -58,6 +58,8 @@ abstract class BaseArmRotatorSubsystem extends PIDSubsystem implements IArmRotat
    protected double highSetPoint;
    protected double midSetPoint;
    protected double lowSetPoint;
+   //
+   protected double autoConeSetPoint;
 
    BaseArmRotatorSubsystem() {
       super(SubsystemNames.armRotatorName);
@@ -117,10 +119,16 @@ abstract class BaseArmRotatorSubsystem extends PIDSubsystem implements IArmRotat
       logger.info("{} = {}", ArmRotatorPreferences.lowSetPoint, v);
       lowSetPoint = v;
 
+      v = Preferences.getDouble(ArmRotatorPreferences.autoConeSetPoint, autoConeSetPoint);
+      logger.info("{} = {}", ArmRotatorPreferences.autoConeSetPoint, v);
+      autoConeSetPoint = v;
+
       ArmRotationPosition.overPosition.set(overSetPoint);
       ArmRotationPosition.highPosition.set(highSetPoint);
       ArmRotationPosition.midPosition.set(midSetPoint);
       ArmRotationPosition.lowPosition.set(lowSetPoint);
+      //
+      ArmRotationPosition.autoConePosition.set(autoConeSetPoint);
    }
 
    @Override
@@ -158,6 +166,11 @@ abstract class BaseArmRotatorSubsystem extends PIDSubsystem implements IArmRotat
       SmartDashboard.putNumber(TelemetryNames.ArmRotator.PIDTarget, tlmPID.PIDTarget);
       SmartDashboard.putNumber(TelemetryNames.ArmRotator.PIDCurrent, tlmPID.PIDCurrent);
       SmartDashboard.putBoolean(TelemetryNames.ArmRotator.PIDAtTarget, tlmPID.PIDAtTarget);
+   }
+
+   @Override
+   public void logTelemetry() {
+      logger.debug("{}: PID target={} current={}", myName, tlmPID.PIDTarget, tlmPID.PIDCurrent);
    }
 
    @Override

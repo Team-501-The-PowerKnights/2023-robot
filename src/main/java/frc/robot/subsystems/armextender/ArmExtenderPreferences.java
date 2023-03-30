@@ -11,6 +11,7 @@ package frc.robot.subsystems.armextender;
 import edu.wpi.first.wpilibj.Preferences;
 import frc.robot.subsystems.SubsystemNames;
 import frc.robot.utils.PIDValues;
+
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -40,11 +41,11 @@ public final class ArmExtenderPreferences {
    static final String PID_minOutput = name + PIDValues.pid_minOutput;
    static final String PID_maxOutput = name + PIDValues.pid_maxOutput;
 
-   private static final double default_pid_P = 0.2;
-   private static final double default_pid_I = 0;
+   private static final double default_pid_P = 0.5;
+   private static final double default_pid_I = 1e-4;
    private static final double default_pid_D = 1;
-   private static final double default_pid_IZone = 0;
-   private static final double default_pid_FF = 0;
+   private static final double default_pid_IZone = 10;
+   private static final double default_pid_FF = 0.01;
    private static final double default_pid_minOutput = -1;
    private static final double default_pid_maxOutput = 1;
 
@@ -52,19 +53,26 @@ public final class ArmExtenderPreferences {
    static final String minSoftLimit = name + ".MinSoftLimit";
    static final String maxSoftLimit = name + ".MaxSoftLimit";
 
+   // FIXME: Added 3:1 gearbox
    private static final float default_minSoftLimit = 5f;
-   private static final float default_maxSoftLimit = 160f;
+   private static final float default_maxSoftLimit = 480f;
 
    /** Set points for the various positions */
+   static final String overSetPoint = name + ".OverSetPoint";
    static final String highSetPoint = name + ".HighSetPoint";
    static final String midSetPoint = name + ".MidSetPoint";
    static final String lowSetPoint = name + ".LowSetPoint";
    static final String inSetPoint = name + ".InSetPoint";
+   //
+   static final String autoConeSetPoint = name + ".AutoConeSetPoint";
 
-   private static final double default_highPosition = 160;
-   private static final double default_midPosition = 85;
-   private static final double default_lowPosition = 25; // 50 in code
-   private static final double default_inPosition = 5;
+   private static final double default_overPosition = 315;
+   private static final double default_highPosition = 480;
+   private static final double default_midPosition = 180;
+   private static final double default_lowPosition = 25;
+   private static final double default_inPosition = 25;
+   //
+   private static final double default_autoConePosition = 200;
 
    private ArmExtenderPreferences() {
    }
@@ -109,6 +117,10 @@ public final class ArmExtenderPreferences {
          Preferences.setDouble(maxSoftLimit, default_maxSoftLimit);
       }
 
+      if (!Preferences.containsKey(overSetPoint)) {
+         logger.warn("{} doesn't exist; creating with default", overSetPoint);
+         Preferences.setDouble(overSetPoint, default_overPosition);
+      }
       if (!Preferences.containsKey(highSetPoint)) {
          logger.warn("{} doesn't exist; creating with default", highSetPoint);
          Preferences.setDouble(highSetPoint, default_highPosition);
@@ -124,6 +136,11 @@ public final class ArmExtenderPreferences {
       if (!Preferences.containsKey(inSetPoint)) {
          logger.warn("{} doesn't exist; creating with default", inSetPoint);
          Preferences.setDouble(inSetPoint, default_inPosition);
+      }
+
+      if (!Preferences.containsKey(autoConeSetPoint)) {
+         logger.warn("{} doesn't exist; creating with default", autoConeSetPoint);
+         Preferences.setDouble(autoConeSetPoint, default_autoConePosition);
       }
    }
 

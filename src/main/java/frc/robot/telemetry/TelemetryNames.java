@@ -124,6 +124,17 @@ public final class TelemetryNames {
       public static final String pressureGood = name + ".pressureGood";
    }
 
+   public final class LED {
+      private static final String name = ModuleNames.ledName;
+
+      public static final String status = name + ".status";
+      public static final String implClass = name + ".implClass";
+      public static final String defCommand = name + "defCommand";
+
+      public static final String enabled = name + ".enabled";
+      public static final String color = name + ".color";
+   }
+
    /***************
     * Sensors
     ***************/
@@ -139,6 +150,9 @@ public final class TelemetryNames {
       public static final String yaw = name + ".yaw";
       public static final String angle = name + ".angle";
       public static final String heading = name + ".heading";
+
+      // FIXME: Make an autonomous Telemetry class
+      public static final String balanced = name + ".balanced";
    }
 
    /***************
@@ -174,6 +188,8 @@ public final class TelemetryNames {
       public static final String PIDTarget = name + PIDTelemetry.pid_Target;
       public static final String PIDCurrent = name + PIDTelemetry.pid_Current;
       public static final String PIDAtTarget = name + PIDTelemetry.pid_AtTarget;
+
+      public static final String absCurrent = name + ".absCurrent";
    }
 
    public final class ArmExtender {

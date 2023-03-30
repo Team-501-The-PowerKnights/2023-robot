@@ -11,12 +11,12 @@ package frc.robot.commands.gripper;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-public class GripperIdleIn extends GripperCommandBase {
+public class GripperEject extends GripperCommandBase {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(GripperIdleIn.class.getName());
+   private static final PKLogger logger = RioLogger.getLogger(GripperEject.class.getName());
 
-   public GripperIdleIn() {
+   public GripperEject() {
       logger.info("constructing {}", getName());
 
       logger.info("constructed");
@@ -29,9 +29,14 @@ public class GripperIdleIn extends GripperCommandBase {
 
    @Override
    protected void firstExecution() {
-      logger.trace("gripper.idleIn() called in firstExecution()");
+      logger.trace("gripper.pushOut() called in firstExecution()");
 
-      subsys.idleIn();
+      subsys.pushOut();
+   }
+
+   @Override
+   public boolean isFinished() {
+      return true;
    }
 
 }

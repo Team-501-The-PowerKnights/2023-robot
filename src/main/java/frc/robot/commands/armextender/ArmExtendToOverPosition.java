@@ -6,32 +6,23 @@
 /*- of this project.                                                      */
 /*------------------------------------------------------------------------*/
 
-package frc.robot.commands.gripper;
+package frc.robot.commands.armextender;
+
+import frc.robot.subsystems.armextender.IArmExtenderSubsystem.ArmExtensionPosition;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-public class GripperIdleIn extends GripperCommandBase {
+public class ArmExtendToOverPosition extends ArmExtendToPosition {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(GripperIdleIn.class.getName());
+   private static final PKLogger logger = RioLogger.getLogger(ArmExtendToOverPosition.class.getName());
 
-   public GripperIdleIn() {
+   public ArmExtendToOverPosition() {
+      super(ArmExtensionPosition.overPosition);
       logger.info("constructing {}", getName());
 
       logger.info("constructed");
-   }
-
-   @Override
-   public void execute() {
-      super.execute();
-   }
-
-   @Override
-   protected void firstExecution() {
-      logger.trace("gripper.idleIn() called in firstExecution()");
-
-      subsys.idleIn();
    }
 
 }

@@ -8,6 +8,7 @@
 
 package frc.robot.subsystems.armrotator;
 
+import com.revrobotics.AbsoluteEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.REVLibError;
 import com.revrobotics.RelativeEncoder;
@@ -15,7 +16,10 @@ import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.SparkMaxAbsoluteEncoder.Type;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.telemetry.TelemetryNames;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -32,6 +36,11 @@ public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
    private SparkMaxPIDController pid;
    private RelativeEncoder encoder;
 
+   private AbsoluteEncoder absEncoder;
+   private final double absEncoderBaseline = 0.29263;
+   // Plus reverse sign for direction to normalize to relative
+   private final double absEncoderScale = -250;
+
    ProtoArmRotatorSubsystem() {
       logger.info("constructing");
 
@@ -42,6 +51,14 @@ public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
       encoder = motor.getEncoder();
       checkError(encoder.setPosition(0), "set encoder position to 0 {}");
       checkError(motor.setOpenLoopRampRate(0), "set open loop ramp rate to 0 {}");
+
+      absEncoder = motor.getAbsoluteEncoder(Type.kDutyCycle);
+
+      double absEncoderCurrent = absEncoder.getPosition();
+      double encoderOffset = absEncoderCurrent - absEncoderBaseline;
+      logger.info("encoder init: baseline={}, current={}, offset={}",
+            absEncoderBaseline, absEncoderCurrent, encoderOffset);
+      checkError(encoder.setPosition(encoderOffset * absEncoderScale), "set encoder position based on absolute {}");
 
       logger.info("constructed");
    }
@@ -73,6 +90,9 @@ public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
 
    @Override
    public void updateTelemetry() {
+      SmartDashboard.putNumber(TelemetryNames.ArmRotator.absCurrent,
+            ((absEncoder.getPosition() - absEncoderBaseline) * absEncoderScale));
+
       setTlmPIDCurrent(encoder.getPosition());
 
       super.updateTelemetry();
