@@ -97,7 +97,7 @@ public final class PreferencesManager {
    public void logPreferences(PKLogger logger) {
       StringBuilder buf = new StringBuilder();
       buf.append(" preferences:");
-      for (String key : Preferences.getKeys().stream().collect(Collectors.toCollection(ArrayList::new))) {
+      for (String key : Preferences.getKeys().stream().sorted().collect(Collectors.toCollection(ArrayList::new))) {
          buf.append("\n..."); // logger gobbles up leading spaces
          buf.append(key).append(" = ").append(Preferences.getDouble(key, 3171960.));
       }
