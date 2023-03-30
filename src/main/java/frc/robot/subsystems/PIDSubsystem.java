@@ -26,18 +26,6 @@ public abstract class PIDSubsystem extends BaseSubsystem implements IPIDSubsyste
    /** Standard telemetry for PID */
    protected PIDTelemetry tlmPID = new PIDTelemetry();
 
-   // The error at the time of the most recent call to calculate()
-   private double m_positionError;
-
-   // The error that is considered at setpoint.
-   private double m_positionTolerance = 0.05;
-
-   private double m_setpoint;
-   private double m_measurement;
-
-   private boolean m_haveMeasurement;
-   private boolean m_haveSetpoint;
-
    public PIDSubsystem(String name) {
       super(name);
       logger.info("constructing");
@@ -47,6 +35,10 @@ public abstract class PIDSubsystem extends BaseSubsystem implements IPIDSubsyste
 
    protected void setTlmPIDEnabled(boolean enabled) {
       tlmPID.PIDEnabled = enabled;
+
+      if (!enabled) {
+         reset();
+      }
    }
 
    protected void setTlmPIDTarget(double target) {
@@ -79,6 +71,18 @@ public abstract class PIDSubsystem extends BaseSubsystem implements IPIDSubsyste
             myName, tlmPID.PIDTarget, tlmPID.PIDCurrent, tlmPID.PIDAtTarget);
    }
 
+   // The error at the time of the most recent call to calculate()
+   private double m_positionError;
+
+   // The error that is considered at setpoint.
+   private double m_positionTolerance = 0.05;
+
+   private double m_setpoint;
+   private double m_measurement;
+
+   private boolean m_haveMeasurement;
+   private boolean m_haveSetpoint;
+
    /**
     * Sets the setpoint for the PIDController.
     *
@@ -89,7 +93,11 @@ public abstract class PIDSubsystem extends BaseSubsystem implements IPIDSubsyste
       m_setpoint = setpoint;
       m_haveSetpoint = true;
 
-      m_positionError = m_setpoint - m_measurement;
+      if (m_haveMeasurement) {
+         m_positionError = m_setpoint - m_measurement;
+      } else {
+         m_positionError = m_setpoint;
+      }
    }
 
    /**
@@ -125,20 +133,24 @@ public abstract class PIDSubsystem extends BaseSubsystem implements IPIDSubsyste
       m_measurement = measurement;
       m_haveMeasurement = true;
 
-      m_positionError = m_setpoint - m_measurement;
+      if (m_haveSetpoint) {
+         m_positionError = m_setpoint - m_measurement;
+      } else {
+         m_positionError = m_measurement;
+      }
    }
 
-   /**
-    * Returns true if the error is within the tolerance of the setpoint.
-    *
-    * This will return false until at least one input value has been computed.
-    * 
-    * @return Whether the error is within the acceptable bounds.
-    */
    public boolean atSetpoint() {
       return m_haveMeasurement
             && m_haveSetpoint
             && Math.abs(m_positionError) < m_positionTolerance;
+   }
+
+   public boolean achievedSetPoint() {
+      return m_haveMeasurement
+            && m_haveSetpoint
+            && Math.abs(m_positionError) < m_positionTolerance;
+
    }
 
    /**

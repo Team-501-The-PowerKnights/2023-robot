@@ -60,6 +60,15 @@ public interface IPIDSubsystem extends ISubsystem {
    public boolean atSetpoint();
 
    /**
+    * Returns true if the error is within the tolerance of the setpoint.
+    *
+    * This will return false until at least one input value has been computed.
+    * 
+    * @return Whether the error is within the acceptable bounds.
+    */
+   public boolean achievedSetPoint();
+
+   /**
     * 
     */
    public void reset();
