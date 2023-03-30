@@ -71,17 +71,56 @@ public abstract class PIDSubsystem extends BaseSubsystem implements IPIDSubsyste
             myName, tlmPID.PIDTarget, tlmPID.PIDCurrent, tlmPID.PIDAtTarget);
    }
 
-   // The error at the time of the most recent call to calculate()
-   private double m_positionError;
-
-   // The error that is considered at setpoint.
-   private double m_positionTolerance = 0.05;
-
+   private boolean m_haveSetpoint;
    private double m_setpoint;
-   private double m_measurement;
 
    private boolean m_haveMeasurement;
-   private boolean m_haveSetpoint;
+   private double m_measurement;
+
+   private class AtSetPoint {
+      // The error that is considered at setpoint.
+      public double m_positionTolerance = 0.05;
+
+      // The error at the time of the most recent call to calculate()
+      public double m_positionError;
+
+      public void calcPositionError() {
+         m_positionError = m_setpoint - m_measurement;
+      }
+
+      public boolean atSetPoint() {
+         return Math.abs(m_atSetPoint.m_positionError) < m_atSetPoint.m_positionTolerance;
+      }
+   }
+
+   private AtSetPoint m_atSetPoint;
+
+   private class AchievedSetPoint {
+      // The error that is considered at setpoint.
+      public double m_positionTolerance;
+
+      public void setPositionTolerance(double setPoint) {
+         m_positionTolerance = Math.abs(setPoint * 0.10);
+
+         m_positionAtCount = 0;
+      }
+
+      public long m_positionAtCount;
+
+      public void calcPositionError() {
+         if (m_atSetPoint.m_positionError < m_positionTolerance) {
+            m_positionAtCount = (m_positionAtCount < 0) ? 0 : ++m_positionAtCount;
+         } else {
+            --m_positionAtCount;
+         }
+      }
+
+      public boolean achievedSetPoint() {
+         return m_positionAtCount > 5; // 0.10 seconds
+      }
+   }
+
+   private AchievedSetPoint m_achievedSetPoint;
 
    /**
     * Sets the setpoint for the PIDController.
@@ -93,11 +132,10 @@ public abstract class PIDSubsystem extends BaseSubsystem implements IPIDSubsyste
       m_setpoint = setpoint;
       m_haveSetpoint = true;
 
-      if (m_haveMeasurement) {
-         m_positionError = m_setpoint - m_measurement;
-      } else {
-         m_positionError = m_setpoint;
-      }
+      m_achievedSetPoint.setPositionTolerance(setpoint);
+
+      m_atSetPoint.calcPositionError();
+      m_achievedSetPoint.calcPositionError();
    }
 
    /**
@@ -117,7 +155,7 @@ public abstract class PIDSubsystem extends BaseSubsystem implements IPIDSubsyste
     *           - Position error which is tolerable.
     */
    public void setTolerance(double tolerance) {
-      m_positionTolerance = tolerance;
+      m_atSetPoint.m_positionTolerance = tolerance;
    }
 
    /**
@@ -126,40 +164,39 @@ public abstract class PIDSubsystem extends BaseSubsystem implements IPIDSubsyste
     * @return the position tolerance of the controller.
     */
    public double getTolerance() {
-      return m_positionTolerance;
+      return m_atSetPoint.m_positionTolerance;
    }
 
    public void newMeasurement(double measurement) {
       m_measurement = measurement;
       m_haveMeasurement = true;
 
-      if (m_haveSetpoint) {
-         m_positionError = m_setpoint - m_measurement;
-      } else {
-         m_positionError = m_measurement;
-      }
+      m_atSetPoint.calcPositionError();
+      m_achievedSetPoint.calcPositionError();
    }
 
    public boolean atSetpoint() {
       return m_haveMeasurement
             && m_haveSetpoint
-            && Math.abs(m_positionError) < m_positionTolerance;
+            && m_atSetPoint.atSetPoint();
    }
 
    public boolean achievedSetPoint() {
       return m_haveMeasurement
             && m_haveSetpoint
-            && Math.abs(m_positionError) < m_positionTolerance;
-
+            && m_achievedSetPoint.achievedSetPoint();
    }
 
    /**
     * 
     */
    public void reset() {
-      m_positionError = 0;
-      m_haveMeasurement = false;
       m_haveSetpoint = false;
+      m_haveMeasurement = false;
+
+      m_atSetPoint.m_positionError = 0;
+
+      m_achievedSetPoint.m_positionAtCount = 0;
    }
 
 }
