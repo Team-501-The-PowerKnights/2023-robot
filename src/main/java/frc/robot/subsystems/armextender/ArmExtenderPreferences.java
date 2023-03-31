@@ -9,6 +9,7 @@
 package frc.robot.subsystems.armextender;
 
 import edu.wpi.first.wpilibj.Preferences;
+
 import frc.robot.subsystems.SubsystemNames;
 import frc.robot.utils.PIDValues;
 
@@ -42,7 +43,7 @@ public final class ArmExtenderPreferences {
    static final String PID_maxOutput = name + PIDValues.pid_maxOutput;
 
    private static final double default_pid_P = 0.5;
-   private static final double default_pid_I = 1e-4;
+   private static final double default_pid_I = 0.001;
    private static final double default_pid_D = 1;
    private static final double default_pid_IZone = 10;
    private static final double default_pid_FF = 0.01;
@@ -54,7 +55,7 @@ public final class ArmExtenderPreferences {
    static final String maxSoftLimit = name + ".MaxSoftLimit";
 
    // FIXME: Added 3:1 gearbox
-   private static final float default_minSoftLimit = 5f;
+   private static final float default_minSoftLimit = -200f;
    private static final float default_maxSoftLimit = 480f;
 
    /** Set points for the various positions */
@@ -66,11 +67,11 @@ public final class ArmExtenderPreferences {
    //
    static final String autoConeSetPoint = name + ".AutoConeSetPoint";
 
-   private static final double default_overPosition = 315;
-   private static final double default_highPosition = 480;
-   private static final double default_midPosition = 180;
-   private static final double default_lowPosition = 25;
-   private static final double default_inPosition = 25;
+   private static final double default_overPosition = 365;
+   private static final double default_highPosition = 0;
+   private static final double default_midPosition = 367;
+   private static final double default_lowPosition = 5;
+   private static final double default_inPosition = 5;
    //
    private static final double default_autoConePosition = 200;
 

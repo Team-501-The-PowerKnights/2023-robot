@@ -42,13 +42,13 @@ public final class ArmRotatorPreferences {
    static final String PID_minOutput = name + PIDValues.pid_minOutput;
    static final String PID_maxOutput = name + PIDValues.pid_maxOutput;
 
-   private static final double default_pid_P = 1; // 0.5;
-   private static final double default_pid_I = 1e-4; // 0;
-   private static final double default_pid_D = 10; // 1
-   private static final double default_pid_IZone = 25; // 0
-   private static final double default_pid_FF = 0.06; // 0.01;
-   private static final double default_pid_minOutput = -0.5; // -0.7;
-   private static final double default_pid_maxOutput = 0.35;
+   private static final double default_pid_P = 1;
+   private static final double default_pid_I = 0.005;
+   private static final double default_pid_D = 200;
+   private static final double default_pid_IZone = 4;
+   private static final double default_pid_FF = 0;
+   private static final double default_pid_minOutput = -0.25;
+   private static final double default_pid_maxOutput = 0.25;
 
    /** Ramp rate */
    static final String rampRate = name + ".RampRate";
@@ -63,12 +63,12 @@ public final class ArmRotatorPreferences {
    //
    static final String autoConeSetPoint = name + ".AutoConeSetPoint";
 
-   private static final double default_overPosition = -115;
-   private static final double default_highPosition = -50;
-   private static final double default_midPosition = -45;
-   private static final double default_lowPosition = -11;
+   private static final double default_overPosition = -5;
+   private static final double default_highPosition = 0;
+   private static final double default_midPosition = 17;
+   private static final double default_lowPosition = 32;
    //
-   private static final double default_autoConePosition = -51;
+   private static final double default_autoConePosition = 0;
 
    private ArmRotatorPreferences() {
    }

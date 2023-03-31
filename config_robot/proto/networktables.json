@@ -50,7 +50,7 @@
   {
     "name": "/Preferences/ArmRotator.I",
     "type": "double",
-    "value": 0.001,
+    "value": 0.005,
     "properties": {
       "persistent": true
     }
@@ -58,7 +58,7 @@
   {
     "name": "/Preferences/ArmRotator.D",
     "type": "double",
-    "value": 10.0,
+    "value": 200.0,
     "properties": {
       "persistent": true
     }
@@ -66,7 +66,7 @@
   {
     "name": "/Preferences/ArmRotator.IZone",
     "type": "double",
-    "value": 5.0,
+    "value": 4.0,
     "properties": {
       "persistent": true
     }
@@ -74,7 +74,7 @@
   {
     "name": "/Preferences/ArmRotator.FF",
     "type": "double",
-    "value": 0.06,
+    "value": 0.0,
     "properties": {
       "persistent": true
     }
@@ -82,7 +82,7 @@
   {
     "name": "/Preferences/ArmRotator.MinOutput",
     "type": "double",
-    "value": -0.5,
+    "value": -0.25,
     "properties": {
       "persistent": true
     }
@@ -90,7 +90,7 @@
   {
     "name": "/Preferences/ArmRotator.MaxOutput",
     "type": "double",
-    "value": 0.35,
+    "value": 0.25,
     "properties": {
       "persistent": true
     }
@@ -106,7 +106,7 @@
   {
     "name": "/Preferences/ArmRotator.OverSetPoint",
     "type": "double",
-    "value": -115.0,
+    "value": -5.0,
     "properties": {
       "persistent": true
     }
@@ -114,7 +114,7 @@
   {
     "name": "/Preferences/ArmRotator.HighSetPoint",
     "type": "double",
-    "value": -50.0,
+    "value": 0.0,
     "properties": {
       "persistent": true
     }
@@ -122,7 +122,7 @@
   {
     "name": "/Preferences/ArmRotator.MidSetPoint",
     "type": "double",
-    "value": -45.0,
+    "value": 17.0,
     "properties": {
       "persistent": true
     }
@@ -130,7 +130,7 @@
   {
     "name": "/Preferences/ArmRotator.LowSetPoint",
     "type": "double",
-    "value": -11.0,
+    "value": 32.0,
     "properties": {
       "persistent": true
     }
@@ -194,7 +194,7 @@
   {
     "name": "/Preferences/ArmExtender.MinSoftLimit",
     "type": "double",
-    "value": 5.0,
+    "value": -200.0,
     "properties": {
       "persistent": true
     }
@@ -210,7 +210,7 @@
   {
     "name": "/Preferences/ArmExtender.OverSetPoint",
     "type": "double",
-    "value": 315.0,
+    "value": 365.0,
     "properties": {
       "persistent": true
     }
@@ -218,7 +218,7 @@
   {
     "name": "/Preferences/ArmExtender.HighSetPoint",
     "type": "double",
-    "value": 480.0,
+    "value": 0.0,
     "properties": {
       "persistent": true
     }
@@ -226,7 +226,7 @@
   {
     "name": "/Preferences/ArmExtender.MidSetPoint",
     "type": "double",
-    "value": 180.0,
+    "value": 367.0,
     "properties": {
       "persistent": true
     }
@@ -234,7 +234,7 @@
   {
     "name": "/Preferences/ArmExtender.LowSetPoint",
     "type": "double",
-    "value": 25.0,
+    "value": 5.0,
     "properties": {
       "persistent": true
     }
@@ -242,7 +242,7 @@
   {
     "name": "/Preferences/ArmExtender.InSetPoint",
     "type": "double",
-    "value": 25.0,
+    "value": 5.0,
     "properties": {
       "persistent": true
     }
@@ -346,7 +346,7 @@
   {
     "name": "/Preferences/ArmRotator.AutoConeSetPoint",
     "type": "double",
-    "value": -51.0,
+    "value": 0.0,
     "properties": {
       "persistent": true
     }
