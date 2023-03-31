@@ -26,15 +26,20 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.AutoDoNothing;
 import frc.robot.commands.LogPIDs;
 import frc.robot.commands.armextender.ArmExtendToAutoConePosition;
+import frc.robot.commands.armextender.ArmExtendToInPosition;
 import frc.robot.commands.armextender.ArmExtendToLowPosition;
 import frc.robot.commands.armextender.ArmExtendToOverPosition;
+import frc.robot.commands.armextender.ArmExtendToTarget;
 import frc.robot.commands.armrotator.ArmRotateToAutoConePosition;
 import frc.robot.commands.armrotator.ArmRotateToLowPosition;
+import frc.robot.commands.armrotator.ArmRotateToMidPosition;
 import frc.robot.commands.armrotator.ArmRotateToOverPosition;
+import frc.robot.commands.armrotator.ArmRotateToTarget;
 import frc.robot.commands.drive.DriveBackwardTimed;
 import frc.robot.commands.drive.DriveBackwardToBalance;
 import frc.robot.commands.drive.DriveBalance;
 import frc.robot.commands.drive.DriveForwardTimed;
+import frc.robot.commands.drive.DriveForwardToBalance;
 import frc.robot.commands.gripper.GripperEject;
 import frc.robot.commands.gripper.GripperStop;
 import frc.robot.commands.wrist.WristRotateToOverPosition;
@@ -179,7 +184,10 @@ public class RobotContainer {
       doMidCone("doCone"),
       doMidConeAndBackup("doMidConeAndBackup"),
       doOverConeAndGoForward("doOverConeAndForward"),
-      doFull("doFull");
+      doFull("doFull"),
+      //
+      doLowConeForward("doLowConeForward"),
+      doForwardToBalance("doForwardToBalance");
       // @formatter:on
 
       private final String name;
@@ -221,7 +229,10 @@ public class RobotContainer {
       //
       autoChooser.addOption("Full Auto", AutoSelection.doFull);
 
-      //
+      // Working on automating operator
+      autoChooser.addOption("*** Place Low Cone Forward", AutoSelection.doLowConeForward);
+
+      autoChooser.addOption("*** Drive Forward to Balance", AutoSelection.doForwardToBalance);
 
       SmartDashboard.putData("Auto Mode", autoChooser);
    }
@@ -348,6 +359,32 @@ public class RobotContainer {
                   new DriveBackwardToBalance(2.12, -0.60), // 2.25
                   new DriveBalance()
                );
+            // @formatter:on
+
+         case doLowConeForward:
+            // @formatter:off
+            return
+               new SequentialCommandGroup(
+                  new SequentialCommandGroup(new ArmRotateToTarget(17), new WaitCommand(4)),
+                  new SequentialCommandGroup(new ArmExtendToTarget(423.6), new WaitCommand(10)),
+                  new SequentialCommandGroup(new ArmRotateToTarget(19.5), new WaitCommand(2)),
+                  new SequentialCommandGroup(new GripperEject(), new WaitCommand(0.3)),
+                  new SequentialCommandGroup(new ArmExtendToInPosition(), new WaitCommand(10))
+               );
+            // @formatter:on
+
+         case doForwardToBalance:
+            // @formatter:off
+            return
+              new SequentialCommandGroup(
+                  new GripperEject(),
+                  new ArmRotateToMidPosition(), 
+                  new ArmExtendToLowPosition(),
+                  new WaitCommand(1.0), 
+                  new LogPIDs(),
+                  new DriveForwardToBalance(2.12, 0.60), // 2.25
+                  new DriveBalance()
+              );
             // @formatter:on
 
          default:
