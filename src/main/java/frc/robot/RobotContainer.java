@@ -180,14 +180,15 @@ public class RobotContainer {
       doNothing("doNothing"), 
       doSimpleBackup("doSimpleBackup"),
       doBackupToBalance("doBackupToBalance"),
-      doCommunityToBalance("doCommunityToBalance"),
+      doCommunityBackupToBalance("doCommunityBackupToBalance"),
       doMidCone("doCone"),
       doMidConeAndBackup("doMidConeAndBackup"),
       doOverConeAndGoForward("doOverConeAndForward"),
       doFull("doFull"),
       //
       doLowConeForward("doLowConeForward"),
-      doForwardToBalance("doForwardToBalance");
+      doForwardToBalance("doForwardToBalance"),
+      doCommunityForwardToBalance("doCommunityForwardToBalance");
       // @formatter:on
 
       private final String name;
@@ -217,7 +218,7 @@ public class RobotContainer {
       //
       autoChooser.addOption("Backup to Balance", AutoSelection.doBackupToBalance);
       //
-      autoChooser.addOption("Community to Balance", AutoSelection.doCommunityToBalance);
+      autoChooser.addOption("Community Backup to Balance", AutoSelection.doCommunityBackupToBalance);
 
       //
       autoChooser.addOption("Place Mid Cone", AutoSelection.doMidCone);
@@ -233,6 +234,8 @@ public class RobotContainer {
       autoChooser.addOption("*** Place Low Cone Forward", AutoSelection.doLowConeForward);
 
       autoChooser.addOption("*** Drive Forward to Balance", AutoSelection.doForwardToBalance);
+
+      autoChooser.addOption("*** Community Forward to Balance", AutoSelection.doCommunityForwardToBalance);
 
       SmartDashboard.putData("Auto Mode", autoChooser);
    }
@@ -278,7 +281,7 @@ public class RobotContainer {
               );
             // @formatter:on
 
-         case doCommunityToBalance:
+         case doCommunityBackupToBalance:
             // @formatter:off
             return
               new SequentialCommandGroup(
@@ -383,6 +386,21 @@ public class RobotContainer {
                   new WaitCommand(1.0), 
                   new LogPIDs(),
                   new DriveForwardToBalance(2.12, 0.60), // 2.25
+                  new DriveBalance()
+              );
+            // @formatter:on
+
+         case doCommunityForwardToBalance:
+            // @formatter:off
+            return
+              new SequentialCommandGroup(
+                  new GripperEject(),
+                  new ArmRotateToMidPosition(), 
+                  new ArmExtendToLowPosition(),
+                  new WaitCommand(1.0), 
+                  new LogPIDs(),
+                  new DriveForwardToBalance(3.6, 0.60),
+                  new DriveBackwardTimed(3.5, -0.45),
                   new DriveBalance()
               );
             // @formatter:on
