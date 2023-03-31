@@ -30,6 +30,9 @@ public abstract class PIDSubsystem extends BaseSubsystem implements IPIDSubsyste
       super(name);
       logger.info("constructing");
 
+      m_atSetPoint = new AtSetPoint();
+      m_achievedSetPoint = new AchievedSetPoint();
+
       logger.info("constructed");
    }
 

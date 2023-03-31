@@ -19,7 +19,9 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.SparkMaxAbsoluteEncoder.Type;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import frc.robot.telemetry.TelemetryNames;
+
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -29,7 +31,7 @@ import riolog.RioLogger;
 public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(SuitcaseArmRotatorSubsystem.class.getName());
+   private static final PKLogger logger = RioLogger.getLogger(ProtoArmRotatorSubsystem.class.getName());
 
    /** */
    private final CANSparkMax motor;
@@ -37,9 +39,9 @@ public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
    private RelativeEncoder encoder;
 
    private AbsoluteEncoder absEncoder;
-   private final double absEncoderBaseline = 0.29263;
+   private final double absEncoderBaseline = 0.5356;
    // Plus reverse sign for direction to normalize to relative
-   private final double absEncoderScale = -250;
+   private final double absEncoderScale = -112.5;
 
    ProtoArmRotatorSubsystem() {
       logger.info("constructing");
@@ -59,6 +61,9 @@ public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
       logger.info("encoder init: baseline={}, current={}, offset={}",
             absEncoderBaseline, absEncoderCurrent, encoderOffset);
       checkError(encoder.setPosition(encoderOffset * absEncoderScale), "set encoder position based on absolute {}");
+
+      // Can't use get right after set?
+      rotateToTarget(encoderOffset * absEncoderScale);
 
       logger.info("constructed");
    }
