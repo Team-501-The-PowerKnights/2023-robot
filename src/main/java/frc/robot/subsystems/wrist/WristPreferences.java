@@ -10,6 +10,7 @@ package frc.robot.subsystems.wrist;
 
 import edu.wpi.first.wpilibj.Preferences;
 
+import frc.robot.preferences.IPreferences;
 import frc.robot.subsystems.SubsystemNames;
 import frc.robot.utils.PIDValues;
 
@@ -26,12 +27,23 @@ import riolog.RioLogger;
  *
  * @see edu.wpi.first.networktables.NetworkTable
  */
-public final class WristPreferences {
+public final class WristPreferences implements IPreferences {
 
    /** Our classes' logger **/
    private static final PKLogger logger = RioLogger.getLogger(WristPreferences.class.getName());
 
    static private final String name = SubsystemNames.wristName;
+
+   private WristPreferences() {
+   }
+
+   public static WristPreferences getInstance() {
+      return Holder.INSTANCE;
+   }
+
+   private static class Holder {
+      private static final WristPreferences INSTANCE = new WristPreferences();
+   }
 
    /** PID settings */
    static final String PID_P = name + PIDValues.pid_P;
@@ -57,11 +69,10 @@ public final class WristPreferences {
    private static final double default_upPosition = 0;
    private static final double default_overPosition = 10.2;
 
-   private WristPreferences() {
-   }
-
    // FIXME: Make perferences & NetworkTables right
-   public static void initialize() {
+   public void initialize() {
+      logger.info("initializing");
+
       if (!Preferences.containsKey(PID_P)) {
          logger.warn("{} doesn't exist; creating with default", PID_P);
          Preferences.setDouble(PID_P, default_pid_P);
@@ -99,6 +110,8 @@ public final class WristPreferences {
          logger.warn("{} doesn't exist; creating with default", overSetPoint);
          Preferences.setDouble(overSetPoint, default_overPosition);
       }
+
+      logger.info("initialized");
    }
 
 }

@@ -9,6 +9,8 @@
 package frc.robot.subsystems.gripper;
 
 import edu.wpi.first.wpilibj.Preferences;
+
+import frc.robot.preferences.IPreferences;
 import frc.robot.subsystems.SubsystemNames;
 
 import riolog.PKLogger;
@@ -24,12 +26,23 @@ import riolog.RioLogger;
  *
  * @see edu.wpi.first.networktables.NetworkTable
  */
-public final class GripperPreferences {
+public final class GripperPreferences implements IPreferences {
 
    /** Our classes' logger **/
    private static final PKLogger logger = RioLogger.getLogger(GripperPreferences.class.getName());
 
    static private final String name = SubsystemNames.gripperName;
+
+   private GripperPreferences() {
+   }
+
+   public static GripperPreferences getInstance() {
+      return Holder.INSTANCE;
+   }
+
+   private static class Holder {
+      private static final GripperPreferences INSTANCE = new GripperPreferences();
+   }
 
    /** Max Speeds */
    static final String maxInSpeed = name + ".MaxInSpeed";
@@ -43,11 +56,11 @@ public final class GripperPreferences {
 
    private static final double default_idleSpeed = 0.2;
 
-   private GripperPreferences() {
-   }
-
    // FIXME: Make perferences & NetworkTables right
-   public static void initialize() {
+   @Override
+   public void initialize() {
+      logger.info("initializing");
+
       if (!Preferences.containsKey(maxInSpeed)) {
          logger.warn("{} doesn't exist; creating with default", maxInSpeed);
          Preferences.setDouble(maxInSpeed, default_maxInSpeed);
@@ -61,6 +74,8 @@ public final class GripperPreferences {
          logger.warn("{} doesn't exist; creating with default", idleSpeed);
          Preferences.setDouble(idleSpeed, default_idleSpeed);
       }
+
+      logger.info("initialized");
    }
 
 }

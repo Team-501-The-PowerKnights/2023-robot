@@ -8,7 +8,6 @@
 
 package frc.robot.subsystems.drive;
 
-import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.commands.drive.DriveDoNothing;
@@ -27,22 +26,6 @@ abstract class BaseDriveSubsystem extends BaseSubsystem implements IDriveSubsyst
    /** Our classes' logger **/
    private static final PKLogger logger = RioLogger.getLogger(BaseDriveSubsystem.class.getName());
 
-   /** Default preferences for subystem **/
-   private final double default_pid_P = 0.0;
-   private final double default_pid_I = 0.0;
-   private final double default_pid_D = 0.0;
-   private final double default_pid_F = 0.0;
-   private final double default_ramp = 0.0;
-
-   /** PID for subystem **/
-   protected double pid_P = 0;
-   protected double pid_I = 0;
-   protected double pid_D = 0;
-   protected double pid_F = 0;
-
-   /** Speed controller ramping between 0 and max (sec) */
-   protected double ramp = 0;
-
    BaseDriveSubsystem() {
       super(SubsystemNames.driveName);
       logger.info("constructing");
@@ -58,25 +41,6 @@ abstract class BaseDriveSubsystem extends BaseSubsystem implements IDriveSubsyst
    }
 
    protected void loadPreferences() {
-      double v;
-
-      logger.info("new preferences for {}:", myName);
-      v = Preferences.getDouble(DrivePreferences.pid_P, default_pid_P);
-      logger.info("{} = {}", DrivePreferences.pid_P, v);
-      pid_P = v;
-      v = Preferences.getDouble(DrivePreferences.pid_I, default_pid_I);
-      logger.info("{} = {}", DrivePreferences.pid_I, v);
-      pid_I = v;
-      v = Preferences.getDouble(DrivePreferences.pid_D, default_pid_D);
-      logger.info("{} = {}", DrivePreferences.pid_D, v);
-      pid_D = v;
-      v = Preferences.getDouble(DrivePreferences.pid_F, default_pid_F);
-      logger.info("{} = {}", DrivePreferences.pid_F, v);
-      pid_F = v;
-
-      v = Preferences.getDouble(DrivePreferences.ramp, default_ramp);
-      logger.info("{} = {}", DrivePreferences.ramp, v);
-      ramp = v;
    }
 
    @Override

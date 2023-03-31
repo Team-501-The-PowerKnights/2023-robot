@@ -10,6 +10,7 @@ package frc.robot.subsystems.armrotator;
 
 import edu.wpi.first.wpilibj.Preferences;
 
+import frc.robot.preferences.IPreferences;
 import frc.robot.subsystems.SubsystemNames;
 import frc.robot.utils.PIDValues;
 
@@ -26,12 +27,23 @@ import riolog.RioLogger;
  *
  * @see edu.wpi.first.networktables.NetworkTable
  */
-public final class ArmRotatorPreferences {
+public final class ArmRotatorPreferences implements IPreferences {
 
    /** Our classes' logger **/
    private static final PKLogger logger = RioLogger.getLogger(ArmRotatorPreferences.class.getName());
 
    static private final String name = SubsystemNames.armRotatorName;
+
+   private ArmRotatorPreferences() {
+   }
+
+   public static ArmRotatorPreferences getInstance() {
+      return Holder.INSTANCE;
+   }
+
+   private static class Holder {
+      private static final ArmRotatorPreferences INSTANCE = new ArmRotatorPreferences();
+   }
 
    /** PID settings */
    static final String PID_P = name + PIDValues.pid_P;
@@ -70,11 +82,11 @@ public final class ArmRotatorPreferences {
    //
    private static final double default_autoConePosition = 0;
 
-   private ArmRotatorPreferences() {
-   }
-
    // FIXME: Make perferences & NetworkTables right
-   public static void initialize() {
+   @Override
+   public void initialize() {
+      logger.info("initializing");
+
       if (!Preferences.containsKey(PID_P)) {
          logger.warn("{} doesn't exist; creating with default", PID_P);
          Preferences.setDouble(PID_P, default_pid_P);
@@ -130,6 +142,8 @@ public final class ArmRotatorPreferences {
          logger.warn("{} doesn't exist; creating with default", autoConeSetPoint);
          Preferences.setDouble(autoConeSetPoint, default_autoConePosition);
       }
+
+      logger.info("initialized");
    }
 
 }

@@ -9,8 +9,11 @@
 package frc.robot.subsystems.arm;
 
 import edu.wpi.first.wpilibj.Preferences;
+
+import frc.robot.preferences.IPreferences;
 import frc.robot.subsystems.SubsystemNames;
 import frc.robot.utils.PIDValues;
+
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -24,12 +27,23 @@ import riolog.RioLogger;
  *
  * @see edu.wpi.first.networktables.NetworkTable
  */
-public final class ArmPreferences {
+public final class ArmPreferences implements IPreferences {
 
    /** Our classes' logger **/
    private static final PKLogger logger = RioLogger.getLogger(ArmPreferences.class.getName());
 
    static private final String name = SubsystemNames.armName;
+
+   private ArmPreferences() {
+   }
+
+   public static ArmPreferences getInstance() {
+      return Holder.INSTANCE;
+   }
+
+   private static class Holder {
+      private static final ArmPreferences INSTANCE = new ArmPreferences();
+   }
 
    static private final String rotateKey = ".Rotate";
    static final String rotatePID_P = name + rotateKey + PIDValues.pid_P;
@@ -52,11 +66,9 @@ public final class ArmPreferences {
    static final String extendPID_minOutput = name + extendKey + PIDValues.pid_minOutput;
    static final String extendPID_maxOutput = name + extendKey + PIDValues.pid_maxOutput;
 
-   private ArmPreferences() {
-   }
-
    // FIXME: Make perferences & NetworkTables right
-   public static void initialize() {
+   public void initialize() {
+      logger.info("initializing");
 
       if (!Preferences.containsKey(rotatePID_P)) {
          logger.warn("{} doesn't exist; creating with default", rotatePID_P);
@@ -128,6 +140,8 @@ public final class ArmPreferences {
          logger.warn("{} doesn't exist; creating with default", extendPID_maxOutput);
          Preferences.setDouble(extendPID_maxOutput, 0.0);
       }
+
+      logger.info("initialized");
    }
 
 }
