@@ -60,10 +60,11 @@ public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
       double encoderOffset = absEncoderCurrent - absEncoderBaseline;
       logger.info("encoder init: baseline={}, current={}, offset={}",
             absEncoderBaseline, absEncoderCurrent, encoderOffset);
-      checkError(encoder.setPosition(encoderOffset * absEncoderScale), "set encoder position based on absolute {}");
+      double encoderZero = encoderOffset * absEncoderScale;
+      checkError(encoder.setPosition(encoderZero), "set encoder position based on absolute {}");
 
-      // Can't use get right after set?
-      rotateToTarget(encoderOffset * absEncoderScale);
+      // Set the PID so when it wakes up it doesn't try to move
+      rotateToTarget(encoderZero); // Can't use get right after set?
 
       logger.info("constructed");
    }
