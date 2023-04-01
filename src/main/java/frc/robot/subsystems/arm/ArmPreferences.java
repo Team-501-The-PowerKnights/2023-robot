@@ -9,8 +9,11 @@
 package frc.robot.subsystems.arm;
 
 import edu.wpi.first.wpilibj.Preferences;
+
+import frc.robot.preferences.BasePreferences;
 import frc.robot.subsystems.SubsystemNames;
 import frc.robot.utils.PIDValues;
+
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -24,39 +27,50 @@ import riolog.RioLogger;
  *
  * @see edu.wpi.first.networktables.NetworkTable
  */
-public final class ArmPreferences {
+public final class ArmPreferences extends BasePreferences {
 
    /** Our classes' logger **/
    private static final PKLogger logger = RioLogger.getLogger(ArmPreferences.class.getName());
 
-   static private final String name = SubsystemNames.armName;
-
-   static private final String rotateKey = ".Rotate";
-   static final String rotatePID_P = name + rotateKey + PIDValues.pid_P;
-   static final String rotatePID_I = name + rotateKey + PIDValues.pid_I;
-   static final String rotatePID_D = name + rotateKey + PIDValues.pid_D;
-   static final String rotatePID_IZone = name + rotateKey + PIDValues.pid_IZone;
-   static final String rotatePID_FF = name + rotateKey + PIDValues.pid_FF;
-   static final String rotatePID_minOutput = name + rotateKey + PIDValues.pid_minOutput;
-   static final String rotatePID_maxOutput = name + rotateKey + PIDValues.pid_maxOutput;
-   static final String rotate_highSetPoint = name + rotateKey + ".HighSetPoint";
-   static final String rotate_midSetPoint = name + rotateKey + ".MidSetPoint";
-   static final String rotate_lowSetPoint = name + rotateKey + ".LowSetPoint";
-
-   static final private String extendKey = ".Extend";
-   static final String extendPID_P = name + extendKey + PIDValues.pid_P;
-   static final String extendPID_I = name + extendKey + PIDValues.pid_I;
-   static final String extendPID_D = name + extendKey + PIDValues.pid_D;
-   static final String extendPID_IZone = name + extendKey + PIDValues.pid_IZone;
-   static final String extendPID_FF = name + extendKey + PIDValues.pid_FF;
-   static final String extendPID_minOutput = name + extendKey + PIDValues.pid_minOutput;
-   static final String extendPID_maxOutput = name + extendKey + PIDValues.pid_maxOutput;
-
    private ArmPreferences() {
+      super(SubsystemNames.armName);
+      logger.info("constructing");
+
+      logger.info("constructed");
    }
 
+   public static ArmPreferences getInstance() {
+      return Holder.INSTANCE;
+   }
+
+   private static class Holder {
+      private static final ArmPreferences INSTANCE = new ArmPreferences();
+   }
+
+   static private final String rotateKey = ".Rotate";
+   final String rotatePID_P = name + rotateKey + PIDValues.pid_P;
+   final String rotatePID_I = name + rotateKey + PIDValues.pid_I;
+   final String rotatePID_D = name + rotateKey + PIDValues.pid_D;
+   final String rotatePID_IZone = name + rotateKey + PIDValues.pid_IZone;
+   final String rotatePID_FF = name + rotateKey + PIDValues.pid_FF;
+   final String rotatePID_minOutput = name + rotateKey + PIDValues.pid_minOutput;
+   final String rotatePID_maxOutput = name + rotateKey + PIDValues.pid_maxOutput;
+   final String rotate_highSetPoint = name + rotateKey + ".HighSetPoint";
+   final String rotate_midSetPoint = name + rotateKey + ".MidSetPoint";
+   final String rotate_lowSetPoint = name + rotateKey + ".LowSetPoint";
+
+   static final private String extendKey = ".Extend";
+   final String extendPID_P = name + extendKey + PIDValues.pid_P;
+   final String extendPID_I = name + extendKey + PIDValues.pid_I;
+   final String extendPID_D = name + extendKey + PIDValues.pid_D;
+   final String extendPID_IZone = name + extendKey + PIDValues.pid_IZone;
+   final String extendPID_FF = name + extendKey + PIDValues.pid_FF;
+   final String extendPID_minOutput = name + extendKey + PIDValues.pid_minOutput;
+   final String extendPID_maxOutput = name + extendKey + PIDValues.pid_maxOutput;
+
    // FIXME: Make perferences & NetworkTables right
-   public static void initialize() {
+   public void initialize() {
+      logger.info("initializing");
 
       if (!Preferences.containsKey(rotatePID_P)) {
          logger.warn("{} doesn't exist; creating with default", rotatePID_P);
@@ -128,6 +142,11 @@ public final class ArmPreferences {
          logger.warn("{} doesn't exist; creating with default", extendPID_maxOutput);
          Preferences.setDouble(extendPID_maxOutput, 0.0);
       }
+
+      logger.info("preferences as initialized:");
+      logPreferences(logger);
+
+      logger.info("initialized");
    }
 
 }

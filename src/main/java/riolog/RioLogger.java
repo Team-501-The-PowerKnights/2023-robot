@@ -26,8 +26,8 @@ public class RioLogger {
 
    // LOGGER Setting for default level
    // private static final Level defaultLevel = Level.INFO;
-   private static final Level defaultLevel = Level.DEBUG;
-   // private static final Level defaultLevel = Level.TRACE;
+   // private static final Level defaultLevel = Level.DEBUG;
+   private static final Level defaultLevel = Level.TRACE;
 
    private static final String logMountPoint = "/media/sda1/";
    private static final String logDirName = "501logs/";
@@ -37,6 +37,11 @@ public class RioLogger {
    private static final boolean useLogFile;
 
    static {
+      // lc = (LoggerContext) LoggerFactory.getILoggerFactory();
+      // StatusPrinter.print(RioLogger.lc);
+      // RioLogger.lc.reset();
+      // StatusPrinter.print(RioLogger.lc);
+
       final File logDir = new File(logMountPoint + logDirName);
       useLogFile = logDir.exists();
       System.out.println("useLogFile=" + useLogFile);
@@ -65,22 +70,26 @@ public class RioLogger {
    public static PKLogger getLogger(String loggerName) {
       final ch.qos.logback.classic.Logger logger = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(loggerName);
 
-      final LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
+      final LoggerContext lc = logger.getLoggerContext();
 
+      // This doesn't work for line number as level of indirection through PKLogger
+      // final String pattern = "%date{HH:mm:ss.SSS} [%thread] %-5level
+      // %logger{10}[%-3line] %msg%n";
+      //
+      final String pattern = "%date{HH:mm:ss.SSS} [%thread] %-5level %logger{10} %msg%n";
       /*
        * Can't share encoders, so each appender needs to have it's own
        */
 
       {
          final PatternLayoutEncoder ple = new PatternLayoutEncoder();
-         ple.setPattern(
-               "%date{HH:mm:ss.SSS} %level [%thread] %logger{10}[%line] %msg%n");
          ple.setContext(lc);
+         ple.setPattern(pattern);
          ple.start();
 
          final ConsoleAppender<ILoggingEvent> consoleAppender = new ConsoleAppender<>();
-         consoleAppender.setEncoder(ple);
          consoleAppender.setContext(lc);
+         consoleAppender.setEncoder(ple);
          consoleAppender.start();
          //
          logger.addAppender(consoleAppender);
@@ -88,15 +97,14 @@ public class RioLogger {
 
       if (useLogFile) {
          final PatternLayoutEncoder ple = new PatternLayoutEncoder();
-         ple.setPattern(
-               "%date{HH:mm:ss.SSS} %level [%thread] %logger{10}[%line] %msg%n");
          ple.setContext(lc);
+         ple.setPattern(pattern);
          ple.start();
 
          final FileAppender<ILoggingEvent> fileAppender = new FileAppender<>();
          fileAppender.setFile(logFile);
-         fileAppender.setEncoder(ple);
          fileAppender.setContext(lc);
+         fileAppender.setEncoder(ple);
          fileAppender.setAppend(true);
          fileAppender.start();
          //

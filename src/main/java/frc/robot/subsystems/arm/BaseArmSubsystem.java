@@ -17,6 +17,7 @@ import frc.robot.subsystems.SubsystemNames;
 import frc.robot.telemetry.PIDTelemetry;
 import frc.robot.telemetry.TelemetryNames;
 import frc.robot.utils.PIDValues;
+
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -74,9 +75,13 @@ abstract class BaseArmSubsystem extends BaseSubsystem implements IArmSubsystem {
       extend_pid_maxOutput);
    //@formatter:on
 
+   private final ArmPreferences prefs;
+
    BaseArmSubsystem() {
       super(SubsystemNames.armName);
       logger.info("constructing");
+
+      prefs = ArmPreferences.getInstance();
 
       logger.info("constructed");
    }
@@ -93,62 +98,62 @@ abstract class BaseArmSubsystem extends BaseSubsystem implements IArmSubsystem {
 
       logger.info("new preferences for {}:", myName);
 
-      v = Preferences.getDouble(ArmPreferences.rotatePID_P, rotatePIDValues.P);
-      logger.info("{} = {}", ArmPreferences.rotatePID_P, v);
+      v = Preferences.getDouble(prefs.rotatePID_P, rotatePIDValues.P);
+      logger.info("{} = {}", prefs.rotatePID_P, v);
       rotatePIDValues.P = v;
-      v = Preferences.getDouble(ArmPreferences.rotatePID_I, rotatePIDValues.I);
-      logger.info("{} = {}", ArmPreferences.rotatePID_I, v);
+      v = Preferences.getDouble(prefs.rotatePID_I, rotatePIDValues.I);
+      logger.info("{} = {}", prefs.rotatePID_I, v);
       rotatePIDValues.I = v;
-      v = Preferences.getDouble(ArmPreferences.rotatePID_D, rotatePIDValues.D);
-      logger.info("{} = {}", ArmPreferences.rotatePID_D, v);
+      v = Preferences.getDouble(prefs.rotatePID_D, rotatePIDValues.D);
+      logger.info("{} = {}", prefs.rotatePID_D, v);
       rotatePIDValues.D = v;
-      v = Preferences.getDouble(ArmPreferences.rotatePID_IZone, rotatePIDValues.IZone);
-      logger.info("{} = {}", ArmPreferences.rotatePID_IZone, v);
+      v = Preferences.getDouble(prefs.rotatePID_IZone, rotatePIDValues.IZone);
+      logger.info("{} = {}", prefs.rotatePID_IZone, v);
       rotatePIDValues.IZone = v;
-      v = Preferences.getDouble(ArmPreferences.rotatePID_FF, rotatePIDValues.FF);
-      logger.info("{} = {}", ArmPreferences.rotatePID_FF, v);
+      v = Preferences.getDouble(prefs.rotatePID_FF, rotatePIDValues.FF);
+      logger.info("{} = {}", prefs.rotatePID_FF, v);
       rotatePIDValues.FF = v;
-      v = Preferences.getDouble(ArmPreferences.rotatePID_minOutput, rotatePIDValues.MinOutput);
-      logger.info("{} = {}", ArmPreferences.rotatePID_minOutput, v);
+      v = Preferences.getDouble(prefs.rotatePID_minOutput, rotatePIDValues.MinOutput);
+      logger.info("{} = {}", prefs.rotatePID_minOutput, v);
       rotatePIDValues.MinOutput = v;
-      v = Preferences.getDouble(ArmPreferences.rotatePID_maxOutput, rotatePIDValues.MaxOutput);
-      logger.info("{} = {}", ArmPreferences.rotatePID_maxOutput, v);
+      v = Preferences.getDouble(prefs.rotatePID_maxOutput, rotatePIDValues.MaxOutput);
+      logger.info("{} = {}", prefs.rotatePID_maxOutput, v);
       rotatePIDValues.MaxOutput = v;
 
-      v = Preferences.getDouble(ArmPreferences.rotate_highSetPoint, rotate_highSetPoint);
-      logger.info("{} = {}", ArmPreferences.rotate_highSetPoint, v);
+      v = Preferences.getDouble(prefs.rotate_highSetPoint, rotate_highSetPoint);
+      logger.info("{} = {}", prefs.rotate_highSetPoint, v);
       rotate_highSetPoint = v;
-      v = Preferences.getDouble(ArmPreferences.rotate_midSetPoint, rotate_midSetPoint);
-      logger.info("{} = {}", ArmPreferences.rotate_midSetPoint, v);
+      v = Preferences.getDouble(prefs.rotate_midSetPoint, rotate_midSetPoint);
+      logger.info("{} = {}", prefs.rotate_midSetPoint, v);
       rotate_midSetPoint = v;
-      v = Preferences.getDouble(ArmPreferences.rotate_lowSetPoint, rotate_lowSetPoint);
-      logger.info("{} = {}", ArmPreferences.rotate_lowSetPoint, v);
+      v = Preferences.getDouble(prefs.rotate_lowSetPoint, rotate_lowSetPoint);
+      logger.info("{} = {}", prefs.rotate_lowSetPoint, v);
       rotate_lowSetPoint = v;
 
       ArmRotationPosition.highPosition.set(rotate_highSetPoint);
       ArmRotationPosition.midPosition.set(rotate_midSetPoint);
       ArmRotationPosition.lowPosition.set(rotate_lowSetPoint);
 
-      v = Preferences.getDouble(ArmPreferences.extendPID_P, extendPIDValues.P);
-      logger.info("{} = {}", ArmPreferences.extendPID_P, v);
+      v = Preferences.getDouble(prefs.extendPID_P, extendPIDValues.P);
+      logger.info("{} = {}", prefs.extendPID_P, v);
       extendPIDValues.P = v;
-      v = Preferences.getDouble(ArmPreferences.extendPID_I, extendPIDValues.I);
-      logger.info("{} = {}", ArmPreferences.extendPID_I, v);
+      v = Preferences.getDouble(prefs.extendPID_I, extendPIDValues.I);
+      logger.info("{} = {}", prefs.extendPID_I, v);
       extendPIDValues.I = v;
-      v = Preferences.getDouble(ArmPreferences.extendPID_D, extendPIDValues.D);
-      logger.info("{} = {}", ArmPreferences.extendPID_D, v);
+      v = Preferences.getDouble(prefs.extendPID_D, extendPIDValues.D);
+      logger.info("{} = {}", prefs.extendPID_D, v);
       extendPIDValues.D = v;
-      v = Preferences.getDouble(ArmPreferences.extendPID_IZone, extendPIDValues.IZone);
-      logger.info("{} = {}", ArmPreferences.extendPID_IZone, v);
+      v = Preferences.getDouble(prefs.extendPID_IZone, extendPIDValues.IZone);
+      logger.info("{} = {}", prefs.extendPID_IZone, v);
       extendPIDValues.IZone = v;
-      v = Preferences.getDouble(ArmPreferences.extendPID_FF, extendPIDValues.FF);
-      logger.info("{} = {}", ArmPreferences.extendPID_FF, v);
+      v = Preferences.getDouble(prefs.extendPID_FF, extendPIDValues.FF);
+      logger.info("{} = {}", prefs.extendPID_FF, v);
       extendPIDValues.FF = v;
-      v = Preferences.getDouble(ArmPreferences.extendPID_minOutput, extendPIDValues.MinOutput);
-      logger.info("{} = {}", ArmPreferences.extendPID_minOutput, v);
+      v = Preferences.getDouble(prefs.extendPID_minOutput, extendPIDValues.MinOutput);
+      logger.info("{} = {}", prefs.extendPID_minOutput, v);
       extendPIDValues.MinOutput = v;
-      v = Preferences.getDouble(ArmPreferences.extendPID_maxOutput, extendPIDValues.MaxOutput);
-      logger.info("{} = {}", ArmPreferences.extendPID_maxOutput, v);
+      v = Preferences.getDouble(prefs.extendPID_maxOutput, extendPIDValues.MaxOutput);
+      logger.info("{} = {}", prefs.extendPID_maxOutput, v);
       extendPIDValues.MaxOutput = v;
    }
 

@@ -832,7 +832,7 @@
           },
           "31,7": {
             "size": [
-              5,
+              6,
               2
             ],
             "content": {
@@ -845,7 +845,7 @@
           },
           "31,9": {
             "size": [
-              5,
+              6,
               2
             ],
             "content": {
@@ -858,7 +858,7 @@
           },
           "31,11": {
             "size": [
-              5,
+              6,
               2
             ],
             "content": {
@@ -1667,7 +1667,7 @@
               "_showGlyph": false
             }
           },
-          "19,8": {
+          "19,9": {
             "size": [
               4,
               2
@@ -1678,6 +1678,21 @@
               "_title": "absCurrent",
               "_glyph": 148,
               "_showGlyph": false
+            }
+          },
+          "19,6": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/ArmRotator.PIDAtTarget",
+              "_title": "PIDAtTarget",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#999999FF"
             }
           }
         }
@@ -1980,6 +1995,21 @@
               "_title": "AutoConeSetPoint",
               "_glyph": 148,
               "_showGlyph": false
+            }
+          },
+          "19,6": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/ArmExtender.PIDAtTarget",
+              "_title": "PIDAtTarget",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#999999FF"
             }
           }
         }
@@ -2322,6 +2352,21 @@
               "_title": "OverSetPoint",
               "_glyph": 148,
               "_showGlyph": false
+            }
+          },
+          "19,6": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Wrist.PIDAtTarget",
+              "_title": "PIDAtTarget",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#999999FF"
             }
           }
         }

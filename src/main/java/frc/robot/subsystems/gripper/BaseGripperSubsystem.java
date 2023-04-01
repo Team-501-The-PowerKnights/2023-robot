@@ -29,9 +29,13 @@ abstract class BaseGripperSubsystem extends BaseSubsystem implements IGripperSub
 
    protected double idleSpeed;
 
+   private final GripperPreferences prefs;
+
    BaseGripperSubsystem() {
       super(SubsystemNames.gripperName);
       logger.info("constructing");
+
+      prefs = GripperPreferences.getInstance();
 
       logger.info("constructed");
    }
@@ -48,15 +52,15 @@ abstract class BaseGripperSubsystem extends BaseSubsystem implements IGripperSub
 
       logger.info("new preferences for {}:", myName);
 
-      v = Preferences.getDouble(GripperPreferences.maxInSpeed, maxInSpeed);
-      logger.info("{} = {}", GripperPreferences.maxInSpeed, v);
+      v = Preferences.getDouble(prefs.maxInSpeed, maxInSpeed);
+      logger.info("{} = {}", prefs.maxInSpeed, v);
       maxInSpeed = v;
-      v = Preferences.getDouble(GripperPreferences.maxOutSpeed, maxOutSpeed);
-      logger.info("{} = {}", GripperPreferences.maxOutSpeed, v);
+      v = Preferences.getDouble(prefs.maxOutSpeed, maxOutSpeed);
+      logger.info("{} = {}", prefs.maxOutSpeed, v);
       maxOutSpeed = v;
 
-      v = Preferences.getDouble(GripperPreferences.idleSpeed, idleSpeed);
-      logger.info("{} = {}", GripperPreferences.idleSpeed, v);
+      v = Preferences.getDouble(prefs.idleSpeed, idleSpeed);
+      logger.info("{} = {}", prefs.idleSpeed, v);
       idleSpeed = v;
    }
 

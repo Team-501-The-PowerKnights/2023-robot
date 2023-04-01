@@ -8,8 +8,7 @@
 
 package frc.robot.subsystems.drive;
 
-import edu.wpi.first.wpilibj.Preferences;
-
+import frc.robot.preferences.BasePreferences;
 import frc.robot.subsystems.SubsystemNames;
 
 import riolog.PKLogger;
@@ -25,47 +24,34 @@ import riolog.RioLogger;
  *
  * @see edu.wpi.first.networktables.NetworkTable
  */
-public final class DrivePreferences {
+public final class DrivePreferences extends BasePreferences {
 
    /** Our classes' logger **/
    private static final PKLogger logger = RioLogger.getLogger(DrivePreferences.class.getName());
 
-   static private final String name = SubsystemNames.driveName;
-   static final String pid_P = name + ".P";
-   static final String pid_I = name + ".I";
-   static final String pid_D = name + ".D";
-   static final String pid_F = name + ".F";
-   static final String ramp = name + ".ramp";
-
    private DrivePreferences() {
+      super(SubsystemNames.driveName);
+      logger.info("constructing");
+
+      logger.info("constructed");
+   }
+
+   public static DrivePreferences getInstance() {
+      return Holder.INSTANCE;
+   }
+
+   private static class Holder {
+      private static final DrivePreferences INSTANCE = new DrivePreferences();
    }
 
    // FIXME: Make perferences & NetworkTables right
-   public static void initialize() {
-      if (!Preferences.containsKey(pid_P)) {
-         logger.warn("{} doesn't exist; creating with default", pid_P);
-         Preferences.setDouble(pid_P, 0.0);
-      }
+   public void initialize() {
+      logger.info("initializing");
 
-      if (!Preferences.containsKey(pid_I)) {
-         logger.warn("{} doesn't exist; creating with default", pid_I);
-         Preferences.setDouble(pid_I, 0.0);
-      }
+      logger.info("preferences as initialized:");
+      logPreferences(logger);
 
-      if (!Preferences.containsKey(pid_D)) {
-         logger.warn("{} doesn't exist; creating with default", pid_D);
-         Preferences.setDouble(pid_D, 0.0);
-      }
-
-      if (!Preferences.containsKey(pid_F)) {
-         logger.warn("{} doesn't exist; creating with default", pid_F);
-         Preferences.setDouble(pid_F, 0.0);
-      }
-
-      if (!Preferences.containsKey(ramp)) {
-         logger.warn("{} doesn't exist; creating with default", ramp);
-         Preferences.setDouble(ramp, 0.0);
-      }
+      logger.info("initialized");
    }
 
 }

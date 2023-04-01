@@ -9,6 +9,8 @@
 package frc.robot.subsystems.armextender;
 
 import edu.wpi.first.wpilibj.Preferences;
+
+import frc.robot.preferences.BasePreferences;
 import frc.robot.subsystems.SubsystemNames;
 import frc.robot.utils.PIDValues;
 
@@ -25,60 +27,71 @@ import riolog.RioLogger;
  *
  * @see edu.wpi.first.networktables.NetworkTable
  */
-public final class ArmExtenderPreferences {
+public final class ArmExtenderPreferences extends BasePreferences {
 
    /** Our classes' logger **/
    private static final PKLogger logger = RioLogger.getLogger(ArmExtenderPreferences.class.getName());
 
-   static private final String name = SubsystemNames.armExtenderName;
-
-   /** PID settings */
-   static final String PID_P = name + PIDValues.pid_P;
-   static final String PID_I = name + PIDValues.pid_I;
-   static final String PID_D = name + PIDValues.pid_D;
-   static final String PID_IZone = name + PIDValues.pid_IZone;
-   static final String PID_FF = name + PIDValues.pid_FF;
-   static final String PID_minOutput = name + PIDValues.pid_minOutput;
-   static final String PID_maxOutput = name + PIDValues.pid_maxOutput;
-
-   private static final double default_pid_P = 0.5;
-   private static final double default_pid_I = 1e-4;
-   private static final double default_pid_D = 1;
-   private static final double default_pid_IZone = 10;
-   private static final double default_pid_FF = 0.01;
-   private static final double default_pid_minOutput = -1;
-   private static final double default_pid_maxOutput = 1;
-
-   /** Soft limits */
-   static final String minSoftLimit = name + ".MinSoftLimit";
-   static final String maxSoftLimit = name + ".MaxSoftLimit";
-
-   // FIXME: Added 3:1 gearbox
-   private static final float default_minSoftLimit = 5f;
-   private static final float default_maxSoftLimit = 480f;
-
-   /** Set points for the various positions */
-   static final String overSetPoint = name + ".OverSetPoint";
-   static final String highSetPoint = name + ".HighSetPoint";
-   static final String midSetPoint = name + ".MidSetPoint";
-   static final String lowSetPoint = name + ".LowSetPoint";
-   static final String inSetPoint = name + ".InSetPoint";
-   //
-   static final String autoConeSetPoint = name + ".AutoConeSetPoint";
-
-   private static final double default_overPosition = 315;
-   private static final double default_highPosition = 480;
-   private static final double default_midPosition = 180;
-   private static final double default_lowPosition = 25;
-   private static final double default_inPosition = 25;
-   //
-   private static final double default_autoConePosition = 200;
-
    private ArmExtenderPreferences() {
+      super(SubsystemNames.armExtenderName);
+      logger.info("constructing");
+
+      logger.info("constructed");
    }
 
+   public static ArmExtenderPreferences getInstance() {
+      return Holder.INSTANCE;
+   }
+
+   private static class Holder {
+      private static final ArmExtenderPreferences INSTANCE = new ArmExtenderPreferences();
+   }
+
+   /** PID settings */
+   final String PID_P = name + PIDValues.pid_P;
+   final String PID_I = name + PIDValues.pid_I;
+   final String PID_D = name + PIDValues.pid_D;
+   final String PID_IZone = name + PIDValues.pid_IZone;
+   final String PID_FF = name + PIDValues.pid_FF;
+   final String PID_minOutput = name + PIDValues.pid_minOutput;
+   final String PID_maxOutput = name + PIDValues.pid_maxOutput;
+
+   static final double default_pid_P = 0.5;
+   static final double default_pid_I = 0.001;
+   static final double default_pid_D = 1;
+   static final double default_pid_IZone = 10;
+   static final double default_pid_FF = 0.01;
+   static final double default_pid_minOutput = -1;
+   static final double default_pid_maxOutput = 1;
+
+   /** Soft limits */
+   final String minSoftLimit = name + ".MinSoftLimit";
+   final String maxSoftLimit = name + ".MaxSoftLimit";
+
+   static final float default_minSoftLimit = -200f;
+   static final float default_maxSoftLimit = 480f;
+
+   /** Set points for the various positions */
+   final String overSetPoint = name + ".OverSetPoint";
+   final String highSetPoint = name + ".HighSetPoint";
+   final String midSetPoint = name + ".MidSetPoint";
+   final String lowSetPoint = name + ".LowSetPoint";
+   final String inSetPoint = name + ".InSetPoint";
+   //
+   final String autoConeSetPoint = name + ".AutoConeSetPoint";
+
+   static final double default_overPosition = 365;
+   static final double default_highPosition = 0;
+   static final double default_midPosition = 367;
+   static final double default_lowPosition = 5;
+   static final double default_inPosition = 5;
+   //
+   static final double default_autoConePosition = 200;
+
    // FIXME: Make perferences & NetworkTables right
-   public static void initialize() {
+   public void initialize() {
+      logger.info("initializing");
+
       if (!Preferences.containsKey(PID_P)) {
          logger.warn("{} doesn't exist; creating with default", PID_P);
          Preferences.setDouble(PID_P, default_pid_P);
@@ -142,6 +155,11 @@ public final class ArmExtenderPreferences {
          logger.warn("{} doesn't exist; creating with default", autoConeSetPoint);
          Preferences.setDouble(autoConeSetPoint, default_autoConePosition);
       }
+
+      logger.info("preferences as initialized:");
+      logPreferences(logger);
+
+      logger.info("initialized");
    }
 
 }

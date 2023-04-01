@@ -9,8 +9,11 @@
 package frc.robot.subsystems.wrist;
 
 import edu.wpi.first.wpilibj.Preferences;
+
+import frc.robot.preferences.BasePreferences;
 import frc.robot.subsystems.SubsystemNames;
 import frc.robot.utils.PIDValues;
+
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -24,21 +27,34 @@ import riolog.RioLogger;
  *
  * @see edu.wpi.first.networktables.NetworkTable
  */
-public final class WristPreferences {
+public final class WristPreferences extends BasePreferences {
 
    /** Our classes' logger **/
    private static final PKLogger logger = RioLogger.getLogger(WristPreferences.class.getName());
 
-   static private final String name = SubsystemNames.wristName;
+   private WristPreferences() {
+      super(SubsystemNames.wristName);
+      logger.info("constructing");
+
+      logger.info("constructed");
+   }
+
+   public static WristPreferences getInstance() {
+      return Holder.INSTANCE;
+   }
+
+   private static class Holder {
+      private static final WristPreferences INSTANCE = new WristPreferences();
+   }
 
    /** PID settings */
-   static final String PID_P = name + PIDValues.pid_P;
-   static final String PID_I = name + PIDValues.pid_I;
-   static final String PID_D = name + PIDValues.pid_D;
-   static final String PID_IZone = name + PIDValues.pid_IZone;
-   static final String PID_FF = name + PIDValues.pid_FF;
-   static final String PID_minOutput = name + PIDValues.pid_minOutput;
-   static final String PID_maxOutput = name + PIDValues.pid_maxOutput;
+   final String PID_P = name + PIDValues.pid_P;
+   final String PID_I = name + PIDValues.pid_I;
+   final String PID_D = name + PIDValues.pid_D;
+   final String PID_IZone = name + PIDValues.pid_IZone;
+   final String PID_FF = name + PIDValues.pid_FF;
+   final String PID_minOutput = name + PIDValues.pid_minOutput;
+   final String PID_maxOutput = name + PIDValues.pid_maxOutput;
 
    private static final double default_pid_P = 0.4;
    private static final double default_pid_I = 0.0006;
@@ -49,17 +65,16 @@ public final class WristPreferences {
    private static final double default_pid_maxOutput = 0.3;
 
    /** Set points for the various positions */
-   static final String upSetPoint = name + ".UpSetPoint";
-   static final String overSetPoint = name + ".OverSetPoint";
+   final String upSetPoint = name + ".UpSetPoint";
+   final String overSetPoint = name + ".OverSetPoint";
 
    private static final double default_upPosition = 0;
    private static final double default_overPosition = 10.2;
 
-   private WristPreferences() {
-   }
-
    // FIXME: Make perferences & NetworkTables right
-   public static void initialize() {
+   public void initialize() {
+      logger.info("initializing");
+
       if (!Preferences.containsKey(PID_P)) {
          logger.warn("{} doesn't exist; creating with default", PID_P);
          Preferences.setDouble(PID_P, default_pid_P);
@@ -97,6 +112,11 @@ public final class WristPreferences {
          logger.warn("{} doesn't exist; creating with default", overSetPoint);
          Preferences.setDouble(overSetPoint, default_overPosition);
       }
+
+      logger.info("preferences as initialized:");
+      logPreferences(logger);
+
+      logger.info("initialized");
    }
 
 }

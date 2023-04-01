@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import frc.robot.properties.PropertiesManager;
 import frc.robot.subsystems.arm.ArmPreferences;
 import frc.robot.subsystems.armextender.ArmExtenderPreferences;
@@ -64,7 +65,7 @@ public final class PreferencesManager {
    private PreferencesManager() {
       logger.info("constructing");
 
-      DrivePreferences.initialize();
+      DrivePreferences.getInstance().initialize();
 
       switch (PropertiesManager.getInstance().getRobotName()) {
          case "Suitcase-Bot":
@@ -72,24 +73,24 @@ public final class PreferencesManager {
          case "Proto-Bot":
 
             // ** ArmRotator **
-            ArmRotatorPreferences.initialize();
+            ArmRotatorPreferences.getInstance().initialize();
             // ** Arm Extender **
-            ArmExtenderPreferences.initialize();
+            ArmExtenderPreferences.getInstance().initialize();
             break;
 
          case "Real-Bot":
 
             // ** Arm **
-            ArmPreferences.initialize();
+            ArmPreferences.getInstance().initialize();
             break;
 
          default:
             break;
       }
 
-      GripperPreferences.initialize();
+      GripperPreferences.getInstance().initialize();
 
-      WristPreferences.initialize();
+      WristPreferences.getInstance().initialize();
 
       logger.info("constructed");
    }
@@ -97,7 +98,7 @@ public final class PreferencesManager {
    public void logPreferences(PKLogger logger) {
       StringBuilder buf = new StringBuilder();
       buf.append(" preferences:");
-      for (String key : Preferences.getKeys().stream().collect(Collectors.toCollection(ArrayList::new))) {
+      for (String key : Preferences.getKeys().stream().sorted().collect(Collectors.toCollection(ArrayList::new))) {
          buf.append("\n..."); // logger gobbles up leading spaces
          buf.append(key).append(" = ").append(Preferences.getDouble(key, 3171960.));
       }

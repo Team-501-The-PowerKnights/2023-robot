@@ -12,16 +12,15 @@ import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.commands.wrist.WristDoNothing;
-import frc.robot.subsystems.BaseSubsystem;
+import frc.robot.subsystems.PIDSubsystem;
 import frc.robot.subsystems.SubsystemNames;
-import frc.robot.telemetry.PIDTelemetry;
 import frc.robot.telemetry.TelemetryNames;
 import frc.robot.utils.PIDValues;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-abstract class BaseWristSubsystem extends BaseSubsystem implements IWristSubsystem {
+abstract class BaseWristSubsystem extends PIDSubsystem implements IWristSubsystem {
 
    /** Our classes' logger **/
    private static final PKLogger logger = RioLogger.getLogger(BaseWristSubsystem.class.getName());
@@ -54,9 +53,13 @@ abstract class BaseWristSubsystem extends BaseSubsystem implements IWristSubsyst
    protected double upSetPoint;
    protected double overSetPoint;
 
+   private final WristPreferences prefs;
+
    BaseWristSubsystem() {
       super(SubsystemNames.wristName);
       logger.info("constructing");
+
+      prefs = WristPreferences.getInstance();
 
       logger.info("constructed");
    }
@@ -73,33 +76,33 @@ abstract class BaseWristSubsystem extends BaseSubsystem implements IWristSubsyst
 
       logger.info("new preferences for {}:", myName);
 
-      v = Preferences.getDouble(WristPreferences.PID_P, pidValues.P);
-      logger.info("{} = {}", WristPreferences.PID_P, v);
+      v = Preferences.getDouble(prefs.PID_P, pidValues.P);
+      logger.info("{} = {}", prefs.PID_P, v);
       pidValues.P = v;
-      v = Preferences.getDouble(WristPreferences.PID_I, pidValues.I);
-      logger.info("{} = {}", WristPreferences.PID_I, v);
+      v = Preferences.getDouble(prefs.PID_I, pidValues.I);
+      logger.info("{} = {}", prefs.PID_I, v);
       pidValues.I = v;
-      v = Preferences.getDouble(WristPreferences.PID_D, pidValues.D);
-      logger.info("{} = {}", WristPreferences.PID_D, v);
+      v = Preferences.getDouble(prefs.PID_D, pidValues.D);
+      logger.info("{} = {}", prefs.PID_D, v);
       pidValues.D = v;
-      v = Preferences.getDouble(WristPreferences.PID_IZone, pidValues.IZone);
-      logger.info("{} = {}", WristPreferences.PID_IZone, v);
+      v = Preferences.getDouble(prefs.PID_IZone, pidValues.IZone);
+      logger.info("{} = {}", prefs.PID_IZone, v);
       pidValues.IZone = v;
-      v = Preferences.getDouble(WristPreferences.PID_FF, pidValues.FF);
-      logger.info("{} = {}", WristPreferences.PID_FF, v);
+      v = Preferences.getDouble(prefs.PID_FF, pidValues.FF);
+      logger.info("{} = {}", prefs.PID_FF, v);
       pidValues.FF = v;
-      v = Preferences.getDouble(WristPreferences.PID_minOutput, pidValues.MinOutput);
-      logger.info("{} = {}", WristPreferences.PID_minOutput, v);
+      v = Preferences.getDouble(prefs.PID_minOutput, pidValues.MinOutput);
+      logger.info("{} = {}", prefs.PID_minOutput, v);
       pidValues.MinOutput = v;
-      v = Preferences.getDouble(WristPreferences.PID_maxOutput, pidValues.MaxOutput);
-      logger.info("{} = {}", WristPreferences.PID_maxOutput, v);
+      v = Preferences.getDouble(prefs.PID_maxOutput, pidValues.MaxOutput);
+      logger.info("{} = {}", prefs.PID_maxOutput, v);
       pidValues.MaxOutput = v;
 
-      v = Preferences.getDouble(WristPreferences.upSetPoint, upSetPoint);
-      logger.info("{} = {}", WristPreferences.upSetPoint, v);
+      v = Preferences.getDouble(prefs.upSetPoint, upSetPoint);
+      logger.info("{} = {}", prefs.upSetPoint, v);
       upSetPoint = v;
-      v = Preferences.getDouble(WristPreferences.overSetPoint, overSetPoint);
-      logger.info("{} = {}", WristPreferences.overSetPoint, v);
+      v = Preferences.getDouble(prefs.overSetPoint, overSetPoint);
+      logger.info("{} = {}", prefs.overSetPoint, v);
       overSetPoint = v;
 
       WristPosition.upPosition.set(upSetPoint);
@@ -111,35 +114,10 @@ abstract class BaseWristSubsystem extends BaseSubsystem implements IWristSubsyst
       // Default implementation is empty
    }
 
-   /** Standard telemetry for PID */
-   private PIDTelemetry tlmPID = new PIDTelemetry();
-
-   protected void setTlmPIDEnabled(boolean enabled) {
-      tlmPID.PIDEnabled = enabled;
-   }
-
-   protected void setTlmPIDTarget(double target) {
-      tlmPID.PIDTarget = target;
-   }
-
-   protected double getTlmPIDTarget() {
-      return tlmPID.PIDTarget;
-   }
-
-   protected void setTlmPIDCurrent(double current) {
-      tlmPID.PIDCurrent = current;
-   }
-
    @Override
    public void updateTelemetry() {
-      SmartDashboard.putBoolean(TelemetryNames.Wrist.PIDEnabled, tlmPID.PIDEnabled);
-      SmartDashboard.putNumber(TelemetryNames.Wrist.PIDTarget, tlmPID.PIDTarget);
-      SmartDashboard.putNumber(TelemetryNames.Wrist.PIDCurrent, tlmPID.PIDCurrent);
-   }
-
-   @Override
-   public void logTelemetry() {
-      logger.debug("{}: PID target={} current={}", myName, tlmPID.PIDTarget, tlmPID.PIDCurrent);
+      super.updateTelemetry(TelemetryNames.Wrist.PIDEnabled, TelemetryNames.Wrist.PIDTarget,
+            TelemetryNames.Wrist.PIDCurrent, TelemetryNames.Wrist.PIDAtTarget);
    }
 
    @Override

@@ -12,15 +12,15 @@ import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.commands.armrotator.ArmRotatorDoNothing;
-import frc.robot.subsystems.BaseSubsystem;
+import frc.robot.subsystems.PIDSubsystem;
 import frc.robot.subsystems.SubsystemNames;
-import frc.robot.telemetry.PIDTelemetry;
 import frc.robot.telemetry.TelemetryNames;
 import frc.robot.utils.PIDValues;
+
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-abstract class BaseArmRotatorSubsystem extends BaseSubsystem implements IArmRotatorSubsystem {
+abstract class BaseArmRotatorSubsystem extends PIDSubsystem implements IArmRotatorSubsystem {
 
    /** Our classes' logger **/
    private static final PKLogger logger = RioLogger.getLogger(BaseArmRotatorSubsystem.class.getName());
@@ -60,9 +60,13 @@ abstract class BaseArmRotatorSubsystem extends BaseSubsystem implements IArmRota
    //
    protected double autoConeSetPoint;
 
+   private final ArmRotatorPreferences prefs;
+
    BaseArmRotatorSubsystem() {
       super(SubsystemNames.armRotatorName);
       logger.info("constructing");
+
+      prefs = ArmRotatorPreferences.getInstance();
 
       logger.info("constructed");
    }
@@ -79,47 +83,47 @@ abstract class BaseArmRotatorSubsystem extends BaseSubsystem implements IArmRota
 
       logger.info("new preferences for {}:", myName);
 
-      v = Preferences.getDouble(ArmRotatorPreferences.PID_P, pidValues.P);
-      logger.info("{} = {}", ArmRotatorPreferences.PID_P, v);
+      v = Preferences.getDouble(prefs.PID_P, pidValues.P);
+      logger.info("{} = {}", prefs.PID_P, v);
       pidValues.P = v;
-      v = Preferences.getDouble(ArmRotatorPreferences.PID_I, pidValues.I);
-      logger.info("{} = {}", ArmRotatorPreferences.PID_I, v);
+      v = Preferences.getDouble(prefs.PID_I, pidValues.I);
+      logger.info("{} = {}", prefs.PID_I, v);
       pidValues.I = v;
-      v = Preferences.getDouble(ArmRotatorPreferences.PID_D, pidValues.D);
-      logger.info("{} = {}", ArmRotatorPreferences.PID_D, v);
+      v = Preferences.getDouble(prefs.PID_D, pidValues.D);
+      logger.info("{} = {}", prefs.PID_D, v);
       pidValues.D = v;
-      v = Preferences.getDouble(ArmRotatorPreferences.PID_IZone, pidValues.IZone);
-      logger.info("{} = {}", ArmRotatorPreferences.PID_IZone, v);
+      v = Preferences.getDouble(prefs.PID_IZone, pidValues.IZone);
+      logger.info("{} = {}", prefs.PID_IZone, v);
       pidValues.IZone = v;
-      v = Preferences.getDouble(ArmRotatorPreferences.PID_FF, pidValues.FF);
-      logger.info("{} = {}", ArmRotatorPreferences.PID_FF, v);
+      v = Preferences.getDouble(prefs.PID_FF, pidValues.FF);
+      logger.info("{} = {}", prefs.PID_FF, v);
       pidValues.FF = v;
-      v = Preferences.getDouble(ArmRotatorPreferences.PID_minOutput, pidValues.MinOutput);
-      logger.info("{} = {}", ArmRotatorPreferences.PID_minOutput, v);
+      v = Preferences.getDouble(prefs.PID_minOutput, pidValues.MinOutput);
+      logger.info("{} = {}", prefs.PID_minOutput, v);
       pidValues.MinOutput = v;
-      v = Preferences.getDouble(ArmRotatorPreferences.PID_maxOutput, pidValues.MaxOutput);
-      logger.info("{} = {}", ArmRotatorPreferences.PID_maxOutput, v);
+      v = Preferences.getDouble(prefs.PID_maxOutput, pidValues.MaxOutput);
+      logger.info("{} = {}", prefs.PID_maxOutput, v);
       pidValues.MaxOutput = v;
 
-      v = Preferences.getDouble(ArmRotatorPreferences.rampRate, rampRate);
-      logger.info("{} = {}", ArmRotatorPreferences.rampRate, v);
+      v = Preferences.getDouble(prefs.rampRate, rampRate);
+      logger.info("{} = {}", prefs.rampRate, v);
       rampRate = v;
 
-      v = Preferences.getDouble(ArmRotatorPreferences.overSetPoint, overSetPoint);
-      logger.info("{} = {}", ArmRotatorPreferences.overSetPoint, v);
+      v = Preferences.getDouble(prefs.overSetPoint, overSetPoint);
+      logger.info("{} = {}", prefs.overSetPoint, v);
       overSetPoint = v;
-      v = Preferences.getDouble(ArmRotatorPreferences.highSetPoint, highSetPoint);
-      logger.info("{} = {}", ArmRotatorPreferences.highSetPoint, v);
+      v = Preferences.getDouble(prefs.highSetPoint, highSetPoint);
+      logger.info("{} = {}", prefs.highSetPoint, v);
       highSetPoint = v;
-      v = Preferences.getDouble(ArmRotatorPreferences.midSetPoint, midSetPoint);
-      logger.info("{} = {}", ArmRotatorPreferences.midSetPoint, v);
+      v = Preferences.getDouble(prefs.midSetPoint, midSetPoint);
+      logger.info("{} = {}", prefs.midSetPoint, v);
       midSetPoint = v;
-      v = Preferences.getDouble(ArmRotatorPreferences.lowSetPoint, lowSetPoint);
-      logger.info("{} = {}", ArmRotatorPreferences.lowSetPoint, v);
+      v = Preferences.getDouble(prefs.lowSetPoint, lowSetPoint);
+      logger.info("{} = {}", prefs.lowSetPoint, v);
       lowSetPoint = v;
 
-      v = Preferences.getDouble(ArmRotatorPreferences.autoConeSetPoint, autoConeSetPoint);
-      logger.info("{} = {}", ArmRotatorPreferences.autoConeSetPoint, v);
+      v = Preferences.getDouble(prefs.autoConeSetPoint, autoConeSetPoint);
+      logger.info("{} = {}", prefs.autoConeSetPoint, v);
       autoConeSetPoint = v;
 
       ArmRotationPosition.overPosition.set(overSetPoint);
@@ -135,35 +139,10 @@ abstract class BaseArmRotatorSubsystem extends BaseSubsystem implements IArmRota
       // Default implementation is empty
    }
 
-   /** Standard telemetry for PID */
-   private PIDTelemetry tlmPID = new PIDTelemetry();
-
-   protected void setTlmPIDEnabled(boolean enabled) {
-      tlmPID.PIDEnabled = enabled;
-   }
-
-   protected void setTlmPIDTarget(double target) {
-      tlmPID.PIDTarget = target;
-   }
-
-   protected double getTlmPIDTarget() {
-      return tlmPID.PIDTarget;
-   }
-
-   protected void setTlmPIDCurrent(double current) {
-      tlmPID.PIDCurrent = current;
-   }
-
    @Override
    public void updateTelemetry() {
-      SmartDashboard.putBoolean(TelemetryNames.ArmRotator.PIDEnabled, tlmPID.PIDEnabled);
-      SmartDashboard.putNumber(TelemetryNames.ArmRotator.PIDTarget, tlmPID.PIDTarget);
-      SmartDashboard.putNumber(TelemetryNames.ArmRotator.PIDCurrent, tlmPID.PIDCurrent);
-   }
-
-   @Override
-   public void logTelemetry() {
-      logger.debug("{}: PID target={} current={}", myName, tlmPID.PIDTarget, tlmPID.PIDCurrent);
+      super.updateTelemetry(TelemetryNames.ArmRotator.PIDEnabled, TelemetryNames.ArmRotator.PIDTarget,
+            TelemetryNames.ArmRotator.PIDCurrent, TelemetryNames.ArmRotator.PIDAtTarget);
    }
 
    @Override
