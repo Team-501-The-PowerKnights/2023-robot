@@ -8,7 +8,7 @@
 
 package frc.robot.subsystems.drive;
 
-import frc.robot.preferences.IPreferences;
+import frc.robot.preferences.BasePreferences;
 import frc.robot.subsystems.SubsystemNames;
 
 import riolog.PKLogger;
@@ -24,15 +24,16 @@ import riolog.RioLogger;
  *
  * @see edu.wpi.first.networktables.NetworkTable
  */
-public final class DrivePreferences implements IPreferences {
+public final class DrivePreferences extends BasePreferences {
 
    /** Our classes' logger **/
    private static final PKLogger logger = RioLogger.getLogger(DrivePreferences.class.getName());
 
-   @SuppressWarnings("unused")
-   static private final String name = SubsystemNames.driveName;
-
    private DrivePreferences() {
+      super(SubsystemNames.driveName);
+      logger.info("constructing");
+
+      logger.info("constructed");
    }
 
    public static DrivePreferences getInstance() {

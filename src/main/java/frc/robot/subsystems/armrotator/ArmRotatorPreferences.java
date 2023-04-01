@@ -10,7 +10,7 @@ package frc.robot.subsystems.armrotator;
 
 import edu.wpi.first.wpilibj.Preferences;
 
-import frc.robot.preferences.IPreferences;
+import frc.robot.preferences.BasePreferences;
 import frc.robot.subsystems.SubsystemNames;
 import frc.robot.utils.PIDValues;
 
@@ -27,14 +27,16 @@ import riolog.RioLogger;
  *
  * @see edu.wpi.first.networktables.NetworkTable
  */
-public final class ArmRotatorPreferences implements IPreferences {
+public final class ArmRotatorPreferences extends BasePreferences {
 
    /** Our classes' logger **/
    private static final PKLogger logger = RioLogger.getLogger(ArmRotatorPreferences.class.getName());
 
-   static private final String name = SubsystemNames.armRotatorName;
-
    private ArmRotatorPreferences() {
+      super(SubsystemNames.armRotatorName);
+      logger.info("constructing");
+
+      logger.info("constructed");
    }
 
    public static ArmRotatorPreferences getInstance() {
@@ -46,13 +48,13 @@ public final class ArmRotatorPreferences implements IPreferences {
    }
 
    /** PID settings */
-   static final String PID_P = name + PIDValues.pid_P;
-   static final String PID_I = name + PIDValues.pid_I;
-   static final String PID_D = name + PIDValues.pid_D;
-   static final String PID_IZone = name + PIDValues.pid_IZone;
-   static final String PID_FF = name + PIDValues.pid_FF;
-   static final String PID_minOutput = name + PIDValues.pid_minOutput;
-   static final String PID_maxOutput = name + PIDValues.pid_maxOutput;
+   final String PID_P = name + PIDValues.pid_P;
+   final String PID_I = name + PIDValues.pid_I;
+   final String PID_D = name + PIDValues.pid_D;
+   final String PID_IZone = name + PIDValues.pid_IZone;
+   final String PID_FF = name + PIDValues.pid_FF;
+   final String PID_minOutput = name + PIDValues.pid_minOutput;
+   final String PID_maxOutput = name + PIDValues.pid_maxOutput;
 
    private static final double default_pid_P = 1;
    private static final double default_pid_I = 0.005;
@@ -63,17 +65,17 @@ public final class ArmRotatorPreferences implements IPreferences {
    private static final double default_pid_maxOutput = 0.25;
 
    /** Ramp rate */
-   static final String rampRate = name + ".RampRate";
+   final String rampRate = name + ".RampRate";
 
    private static final double default_rampRate = 0.5;
 
    /** Set points for the various positions */
-   static final String overSetPoint = name + ".OverSetPoint";
-   static final String highSetPoint = name + ".HighSetPoint";
-   static final String midSetPoint = name + ".MidSetPoint";
-   static final String lowSetPoint = name + ".LowSetPoint";
+   final String overSetPoint = name + ".OverSetPoint";
+   final String highSetPoint = name + ".HighSetPoint";
+   final String midSetPoint = name + ".MidSetPoint";
+   final String lowSetPoint = name + ".LowSetPoint";
    //
-   static final String autoConeSetPoint = name + ".AutoConeSetPoint";
+   final String autoConeSetPoint = name + ".AutoConeSetPoint";
 
    private static final double default_overPosition = -5;
    private static final double default_highPosition = 0;

@@ -53,9 +53,13 @@ abstract class BaseWristSubsystem extends PIDSubsystem implements IWristSubsyste
    protected double upSetPoint;
    protected double overSetPoint;
 
+   private final WristPreferences prefs;
+
    BaseWristSubsystem() {
       super(SubsystemNames.wristName);
       logger.info("constructing");
+
+      prefs = WristPreferences.getInstance();
 
       logger.info("constructed");
    }
@@ -72,33 +76,33 @@ abstract class BaseWristSubsystem extends PIDSubsystem implements IWristSubsyste
 
       logger.info("new preferences for {}:", myName);
 
-      v = Preferences.getDouble(WristPreferences.PID_P, pidValues.P);
-      logger.info("{} = {}", WristPreferences.PID_P, v);
+      v = Preferences.getDouble(prefs.PID_P, pidValues.P);
+      logger.info("{} = {}", prefs.PID_P, v);
       pidValues.P = v;
-      v = Preferences.getDouble(WristPreferences.PID_I, pidValues.I);
-      logger.info("{} = {}", WristPreferences.PID_I, v);
+      v = Preferences.getDouble(prefs.PID_I, pidValues.I);
+      logger.info("{} = {}", prefs.PID_I, v);
       pidValues.I = v;
-      v = Preferences.getDouble(WristPreferences.PID_D, pidValues.D);
-      logger.info("{} = {}", WristPreferences.PID_D, v);
+      v = Preferences.getDouble(prefs.PID_D, pidValues.D);
+      logger.info("{} = {}", prefs.PID_D, v);
       pidValues.D = v;
-      v = Preferences.getDouble(WristPreferences.PID_IZone, pidValues.IZone);
-      logger.info("{} = {}", WristPreferences.PID_IZone, v);
+      v = Preferences.getDouble(prefs.PID_IZone, pidValues.IZone);
+      logger.info("{} = {}", prefs.PID_IZone, v);
       pidValues.IZone = v;
-      v = Preferences.getDouble(WristPreferences.PID_FF, pidValues.FF);
-      logger.info("{} = {}", WristPreferences.PID_FF, v);
+      v = Preferences.getDouble(prefs.PID_FF, pidValues.FF);
+      logger.info("{} = {}", prefs.PID_FF, v);
       pidValues.FF = v;
-      v = Preferences.getDouble(WristPreferences.PID_minOutput, pidValues.MinOutput);
-      logger.info("{} = {}", WristPreferences.PID_minOutput, v);
+      v = Preferences.getDouble(prefs.PID_minOutput, pidValues.MinOutput);
+      logger.info("{} = {}", prefs.PID_minOutput, v);
       pidValues.MinOutput = v;
-      v = Preferences.getDouble(WristPreferences.PID_maxOutput, pidValues.MaxOutput);
-      logger.info("{} = {}", WristPreferences.PID_maxOutput, v);
+      v = Preferences.getDouble(prefs.PID_maxOutput, pidValues.MaxOutput);
+      logger.info("{} = {}", prefs.PID_maxOutput, v);
       pidValues.MaxOutput = v;
 
-      v = Preferences.getDouble(WristPreferences.upSetPoint, upSetPoint);
-      logger.info("{} = {}", WristPreferences.upSetPoint, v);
+      v = Preferences.getDouble(prefs.upSetPoint, upSetPoint);
+      logger.info("{} = {}", prefs.upSetPoint, v);
       upSetPoint = v;
-      v = Preferences.getDouble(WristPreferences.overSetPoint, overSetPoint);
-      logger.info("{} = {}", WristPreferences.overSetPoint, v);
+      v = Preferences.getDouble(prefs.overSetPoint, overSetPoint);
+      logger.info("{} = {}", prefs.overSetPoint, v);
       overSetPoint = v;
 
       WristPosition.upPosition.set(upSetPoint);

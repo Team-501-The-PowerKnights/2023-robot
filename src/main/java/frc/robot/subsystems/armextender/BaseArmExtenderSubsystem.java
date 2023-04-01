@@ -61,9 +61,13 @@ abstract class BaseArmExtenderSubsystem extends PIDSubsystem implements IArmExte
    //
    protected double autoConeSetPoint;
 
+   private final ArmExtenderPreferences prefs;
+
    BaseArmExtenderSubsystem() {
       super(SubsystemNames.armExtenderName);
       logger.info("constructing");
+
+      prefs = ArmExtenderPreferences.getInstance();
 
       logger.info("constructed");
    }
@@ -80,53 +84,53 @@ abstract class BaseArmExtenderSubsystem extends PIDSubsystem implements IArmExte
 
       logger.info("new preferences for {}:", myName);
 
-      v = Preferences.getDouble(ArmExtenderPreferences.PID_P, pidValues.P);
-      logger.info("{} = {}", ArmExtenderPreferences.PID_P, v);
+      v = Preferences.getDouble(prefs.PID_P, pidValues.P);
+      logger.info("{} = {}", prefs.PID_P, v);
       pidValues.P = v;
-      v = Preferences.getDouble(ArmExtenderPreferences.PID_I, pidValues.I);
-      logger.info("{} = {}", ArmExtenderPreferences.PID_I, v);
+      v = Preferences.getDouble(prefs.PID_I, pidValues.I);
+      logger.info("{} = {}", prefs.PID_I, v);
       pidValues.I = v;
-      v = Preferences.getDouble(ArmExtenderPreferences.PID_D, pidValues.D);
-      logger.info("{} = {}", ArmExtenderPreferences.PID_D, v);
+      v = Preferences.getDouble(prefs.PID_D, pidValues.D);
+      logger.info("{} = {}", prefs.PID_D, v);
       pidValues.D = v;
-      v = Preferences.getDouble(ArmExtenderPreferences.PID_IZone, pidValues.IZone);
-      logger.info("{} = {}", ArmExtenderPreferences.PID_IZone, v);
+      v = Preferences.getDouble(prefs.PID_IZone, pidValues.IZone);
+      logger.info("{} = {}", prefs.PID_IZone, v);
       pidValues.IZone = v;
-      v = Preferences.getDouble(ArmExtenderPreferences.PID_FF, pidValues.FF);
-      logger.info("{} = {}", ArmExtenderPreferences.PID_FF, v);
+      v = Preferences.getDouble(prefs.PID_FF, pidValues.FF);
+      logger.info("{} = {}", prefs.PID_FF, v);
       pidValues.FF = v;
-      v = Preferences.getDouble(ArmExtenderPreferences.PID_minOutput, pidValues.MinOutput);
-      logger.info("{} = {}", ArmExtenderPreferences.PID_minOutput, v);
+      v = Preferences.getDouble(prefs.PID_minOutput, pidValues.MinOutput);
+      logger.info("{} = {}", prefs.PID_minOutput, v);
       pidValues.MinOutput = v;
-      v = Preferences.getDouble(ArmExtenderPreferences.PID_maxOutput, pidValues.MaxOutput);
-      logger.info("{} = {}", ArmExtenderPreferences.PID_maxOutput, v);
+      v = Preferences.getDouble(prefs.PID_maxOutput, pidValues.MaxOutput);
+      logger.info("{} = {}", prefs.PID_maxOutput, v);
       pidValues.MaxOutput = v;
 
-      v = Preferences.getDouble(ArmExtenderPreferences.minSoftLimit, minSoftLimit);
-      logger.info("{} = {}", ArmExtenderPreferences.minSoftLimit, v);
+      v = Preferences.getDouble(prefs.minSoftLimit, minSoftLimit);
+      logger.info("{} = {}", prefs.minSoftLimit, v);
       minSoftLimit = (float) v;
-      v = Preferences.getDouble(ArmExtenderPreferences.maxSoftLimit, maxSoftLimit);
-      logger.info("{} = {}", ArmExtenderPreferences.maxSoftLimit, v);
+      v = Preferences.getDouble(prefs.maxSoftLimit, maxSoftLimit);
+      logger.info("{} = {}", prefs.maxSoftLimit, v);
       maxSoftLimit = (float) v;
 
-      v = Preferences.getDouble(ArmExtenderPreferences.overSetPoint, overSetPoint);
-      logger.info("{} = {}", ArmExtenderPreferences.overSetPoint, v);
+      v = Preferences.getDouble(prefs.overSetPoint, overSetPoint);
+      logger.info("{} = {}", prefs.overSetPoint, v);
       overSetPoint = v;
-      v = Preferences.getDouble(ArmExtenderPreferences.highSetPoint, highSetPoint);
-      logger.info("{} = {}", ArmExtenderPreferences.highSetPoint, v);
+      v = Preferences.getDouble(prefs.highSetPoint, highSetPoint);
+      logger.info("{} = {}", prefs.highSetPoint, v);
       highSetPoint = v;
-      v = Preferences.getDouble(ArmExtenderPreferences.midSetPoint, midSetPoint);
-      logger.info("{} = {}", ArmExtenderPreferences.midSetPoint, v);
+      v = Preferences.getDouble(prefs.midSetPoint, midSetPoint);
+      logger.info("{} = {}", prefs.midSetPoint, v);
       midSetPoint = v;
-      v = Preferences.getDouble(ArmExtenderPreferences.lowSetPoint, lowSetPoint);
-      logger.info("{} = {}", ArmExtenderPreferences.lowSetPoint, v);
+      v = Preferences.getDouble(prefs.lowSetPoint, lowSetPoint);
+      logger.info("{} = {}", prefs.lowSetPoint, v);
       lowSetPoint = v;
-      v = Preferences.getDouble(ArmExtenderPreferences.inSetPoint, inSetPoint);
-      logger.info("{} = {}", ArmExtenderPreferences.inSetPoint, v);
+      v = Preferences.getDouble(prefs.inSetPoint, inSetPoint);
+      logger.info("{} = {}", prefs.inSetPoint, v);
       inSetPoint = v;
 
-      v = Preferences.getDouble(ArmExtenderPreferences.autoConeSetPoint, autoConeSetPoint);
-      logger.info("{} = {}", ArmExtenderPreferences.autoConeSetPoint, v);
+      v = Preferences.getDouble(prefs.autoConeSetPoint, autoConeSetPoint);
+      logger.info("{} = {}", prefs.autoConeSetPoint, v);
       autoConeSetPoint = v;
 
       ArmExtensionPosition.overPosition.set(overSetPoint);

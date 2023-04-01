@@ -10,7 +10,7 @@ package frc.robot.subsystems.gripper;
 
 import edu.wpi.first.wpilibj.Preferences;
 
-import frc.robot.preferences.IPreferences;
+import frc.robot.preferences.BasePreferences;
 import frc.robot.subsystems.SubsystemNames;
 
 import riolog.PKLogger;
@@ -26,14 +26,16 @@ import riolog.RioLogger;
  *
  * @see edu.wpi.first.networktables.NetworkTable
  */
-public final class GripperPreferences implements IPreferences {
+public final class GripperPreferences extends BasePreferences {
 
    /** Our classes' logger **/
    private static final PKLogger logger = RioLogger.getLogger(GripperPreferences.class.getName());
 
-   static private final String name = SubsystemNames.gripperName;
-
    private GripperPreferences() {
+      super(SubsystemNames.gripperName);
+      logger.info("constructing");
+
+      logger.info("constructed");
    }
 
    public static GripperPreferences getInstance() {
@@ -45,14 +47,14 @@ public final class GripperPreferences implements IPreferences {
    }
 
    /** Max Speeds */
-   static final String maxInSpeed = name + ".MaxInSpeed";
-   static final String maxOutSpeed = name + ".MaxOutSpeed";
+   final String maxInSpeed = name + ".MaxInSpeed";
+   final String maxOutSpeed = name + ".MaxOutSpeed";
 
    private static final double default_maxInSpeed = 1;
    private static final double default_maxOutSpeed = 1;
 
    /** Idle Speed */
-   static final String idleSpeed = name + ".IdleSpeed";
+   final String idleSpeed = name + ".IdleSpeed";
 
    private static final double default_idleSpeed = 0.2;
 

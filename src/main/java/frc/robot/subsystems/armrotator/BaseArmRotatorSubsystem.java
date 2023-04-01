@@ -60,9 +60,13 @@ abstract class BaseArmRotatorSubsystem extends PIDSubsystem implements IArmRotat
    //
    protected double autoConeSetPoint;
 
+   private final ArmRotatorPreferences prefs;
+
    BaseArmRotatorSubsystem() {
       super(SubsystemNames.armRotatorName);
       logger.info("constructing");
+
+      prefs = ArmRotatorPreferences.getInstance();
 
       logger.info("constructed");
    }
@@ -79,47 +83,47 @@ abstract class BaseArmRotatorSubsystem extends PIDSubsystem implements IArmRotat
 
       logger.info("new preferences for {}:", myName);
 
-      v = Preferences.getDouble(ArmRotatorPreferences.PID_P, pidValues.P);
-      logger.info("{} = {}", ArmRotatorPreferences.PID_P, v);
+      v = Preferences.getDouble(prefs.PID_P, pidValues.P);
+      logger.info("{} = {}", prefs.PID_P, v);
       pidValues.P = v;
-      v = Preferences.getDouble(ArmRotatorPreferences.PID_I, pidValues.I);
-      logger.info("{} = {}", ArmRotatorPreferences.PID_I, v);
+      v = Preferences.getDouble(prefs.PID_I, pidValues.I);
+      logger.info("{} = {}", prefs.PID_I, v);
       pidValues.I = v;
-      v = Preferences.getDouble(ArmRotatorPreferences.PID_D, pidValues.D);
-      logger.info("{} = {}", ArmRotatorPreferences.PID_D, v);
+      v = Preferences.getDouble(prefs.PID_D, pidValues.D);
+      logger.info("{} = {}", prefs.PID_D, v);
       pidValues.D = v;
-      v = Preferences.getDouble(ArmRotatorPreferences.PID_IZone, pidValues.IZone);
-      logger.info("{} = {}", ArmRotatorPreferences.PID_IZone, v);
+      v = Preferences.getDouble(prefs.PID_IZone, pidValues.IZone);
+      logger.info("{} = {}", prefs.PID_IZone, v);
       pidValues.IZone = v;
-      v = Preferences.getDouble(ArmRotatorPreferences.PID_FF, pidValues.FF);
-      logger.info("{} = {}", ArmRotatorPreferences.PID_FF, v);
+      v = Preferences.getDouble(prefs.PID_FF, pidValues.FF);
+      logger.info("{} = {}", prefs.PID_FF, v);
       pidValues.FF = v;
-      v = Preferences.getDouble(ArmRotatorPreferences.PID_minOutput, pidValues.MinOutput);
-      logger.info("{} = {}", ArmRotatorPreferences.PID_minOutput, v);
+      v = Preferences.getDouble(prefs.PID_minOutput, pidValues.MinOutput);
+      logger.info("{} = {}", prefs.PID_minOutput, v);
       pidValues.MinOutput = v;
-      v = Preferences.getDouble(ArmRotatorPreferences.PID_maxOutput, pidValues.MaxOutput);
-      logger.info("{} = {}", ArmRotatorPreferences.PID_maxOutput, v);
+      v = Preferences.getDouble(prefs.PID_maxOutput, pidValues.MaxOutput);
+      logger.info("{} = {}", prefs.PID_maxOutput, v);
       pidValues.MaxOutput = v;
 
-      v = Preferences.getDouble(ArmRotatorPreferences.rampRate, rampRate);
-      logger.info("{} = {}", ArmRotatorPreferences.rampRate, v);
+      v = Preferences.getDouble(prefs.rampRate, rampRate);
+      logger.info("{} = {}", prefs.rampRate, v);
       rampRate = v;
 
-      v = Preferences.getDouble(ArmRotatorPreferences.overSetPoint, overSetPoint);
-      logger.info("{} = {}", ArmRotatorPreferences.overSetPoint, v);
+      v = Preferences.getDouble(prefs.overSetPoint, overSetPoint);
+      logger.info("{} = {}", prefs.overSetPoint, v);
       overSetPoint = v;
-      v = Preferences.getDouble(ArmRotatorPreferences.highSetPoint, highSetPoint);
-      logger.info("{} = {}", ArmRotatorPreferences.highSetPoint, v);
+      v = Preferences.getDouble(prefs.highSetPoint, highSetPoint);
+      logger.info("{} = {}", prefs.highSetPoint, v);
       highSetPoint = v;
-      v = Preferences.getDouble(ArmRotatorPreferences.midSetPoint, midSetPoint);
-      logger.info("{} = {}", ArmRotatorPreferences.midSetPoint, v);
+      v = Preferences.getDouble(prefs.midSetPoint, midSetPoint);
+      logger.info("{} = {}", prefs.midSetPoint, v);
       midSetPoint = v;
-      v = Preferences.getDouble(ArmRotatorPreferences.lowSetPoint, lowSetPoint);
-      logger.info("{} = {}", ArmRotatorPreferences.lowSetPoint, v);
+      v = Preferences.getDouble(prefs.lowSetPoint, lowSetPoint);
+      logger.info("{} = {}", prefs.lowSetPoint, v);
       lowSetPoint = v;
 
-      v = Preferences.getDouble(ArmRotatorPreferences.autoConeSetPoint, autoConeSetPoint);
-      logger.info("{} = {}", ArmRotatorPreferences.autoConeSetPoint, v);
+      v = Preferences.getDouble(prefs.autoConeSetPoint, autoConeSetPoint);
+      logger.info("{} = {}", prefs.autoConeSetPoint, v);
       autoConeSetPoint = v;
 
       ArmRotationPosition.overPosition.set(overSetPoint);
