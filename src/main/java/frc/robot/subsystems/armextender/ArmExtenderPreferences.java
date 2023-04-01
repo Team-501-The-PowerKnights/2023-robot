@@ -156,6 +156,9 @@ public final class ArmExtenderPreferences extends BasePreferences {
          Preferences.setDouble(autoConeSetPoint, default_autoConePosition);
       }
 
+      logger.info("preferences as initialized:");
+      logPreferences(logger);
+
       logger.info("initialized");
    }
 

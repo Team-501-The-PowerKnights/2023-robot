@@ -48,6 +48,9 @@ public final class DrivePreferences extends BasePreferences {
    public void initialize() {
       logger.info("initializing");
 
+      logger.info("preferences as initialized:");
+      logPreferences(logger);
+
       logger.info("initialized");
    }
 

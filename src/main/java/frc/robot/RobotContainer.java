@@ -139,9 +139,6 @@ public class RobotContainer {
    private void intializePreferences() {
       // Reads and initializes all subsystems preferences
       PreferencesManager.constructInstance();
-
-      logger.info("Preferences as initialized:");
-      PreferencesManager.getInstance().logPreferences(logger);
    }
 
    private void initializeProperties() {

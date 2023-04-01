@@ -143,6 +143,9 @@ public final class ArmPreferences extends BasePreferences {
          Preferences.setDouble(extendPID_maxOutput, 0.0);
       }
 
+      logger.info("preferences as initialized:");
+      logPreferences(logger);
+
       logger.info("initialized");
    }
 

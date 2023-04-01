@@ -113,6 +113,9 @@ public final class WristPreferences extends BasePreferences {
          Preferences.setDouble(overSetPoint, default_overPosition);
       }
 
+      logger.info("preferences as initialized:");
+      logPreferences(logger);
+
       logger.info("initialized");
    }
 

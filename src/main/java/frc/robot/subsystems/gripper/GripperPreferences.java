@@ -77,6 +77,9 @@ public final class GripperPreferences extends BasePreferences {
          Preferences.setDouble(idleSpeed, default_idleSpeed);
       }
 
+      logger.info("preferences as initialized:");
+      logPreferences(logger);
+
       logger.info("initialized");
    }
 

@@ -8,6 +8,10 @@
 
 package frc.robot.preferences;
 
+import java.util.ArrayList;
+import java.util.stream.Collectors;
+
+import edu.wpi.first.wpilibj.Preferences;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -30,7 +34,14 @@ abstract public class BasePreferences implements IPreferences {
    }
 
    public void logPreferences(PKLogger logger) {
-
+      StringBuilder buf = new StringBuilder();
+      buf.append(" preferences:");
+      for (String key : Preferences.getKeys().stream().filter(k -> k.contains(name)).sorted()
+            .collect(Collectors.toCollection(ArrayList::new))) {
+         buf.append("\n..."); // logger gobbles up leading spaces
+         buf.append(key).append(" = ").append(Preferences.getDouble(key, 3171960.));
+      }
+      logger.info(buf.toString());
    }
 
 }
