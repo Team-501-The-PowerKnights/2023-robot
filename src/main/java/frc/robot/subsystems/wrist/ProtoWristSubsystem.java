@@ -100,12 +100,14 @@ public class ProtoWristSubsystem extends BaseWristSubsystem {
 
    @Override
    public void disable() {
+      // FIXME: Change to non-deprecated method
       checkError(pid.setReference(0, ControlType.kDutyCycle), "PID set reference to kDutyCycle,0 {}");
       setTlmPIDEnabled(false);
    }
 
    @Override
    public void stop() {
+      // FIXME: Change to non-deprecated method
       checkError(pid.setReference(0, ControlType.kDutyCycle), "PID set reference to kDutyCycle,0 {}");
       setTlmPIDEnabled(false);
    }
@@ -122,6 +124,7 @@ public class ProtoWristSubsystem extends BaseWristSubsystem {
    public void rotateToTarget(double target) {
       logger.trace("set PID target = {}", target);
 
+      // FIXME: Change to non-deprecated method
       checkError(pid.setReference(target, ControlType.kPosition), "PID set reference to kPosition,0 {}");
       setTlmPIDEnabled(true);
       setTlmPIDTarget(target);
