@@ -29,7 +29,7 @@ public class ArmRotateToTarget extends ArmRotatorCommandBase {
 
    @Override
    protected void firstExecution() {
-      logger.trace("arm.rotateToTarget() to {} called in firstExecution()", target);
+      logger.trace("subsys.rotateToTarget() to {} called in firstExecution()", target);
 
       subsys.rotateToTarget(target);
    }

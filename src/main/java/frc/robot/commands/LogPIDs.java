@@ -33,15 +33,15 @@ public class LogPIDs extends PKCommandBase {
 
       {
          IArmRotatorSubsystem subsys = ArmRotatorFactory.getInstance();
-         subsys.logTelemetry();
+         subsys.logPID();
       }
       {
          IArmExtenderSubsystem subsys = ArmExtenderFactory.getInstance();
-         subsys.logTelemetry();
+         subsys.logPID();
       }
       {
          IWristSubsystem subsys = WristFactory.getInstance();
-         subsys.logTelemetry();
+         subsys.logPID();
       }
    }
 

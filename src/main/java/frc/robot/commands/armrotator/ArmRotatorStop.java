@@ -29,7 +29,7 @@ public class ArmRotatorStop extends ArmRotatorCommandBase {
 
    @Override
    protected void firstExecution() {
-      logger.trace("arm.stop() called in firstExecution()");
+      logger.trace("subsys.stop() called in firstExecution()");
 
       subsys.stop();
    }

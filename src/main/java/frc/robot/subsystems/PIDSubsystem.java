@@ -16,7 +16,7 @@ import riolog.PKLogger;
 import riolog.RioLogger;
 
 /**
- * DOCS
+ * DOCS: Insert docs here
  */
 public abstract class PIDSubsystem extends BaseSubsystem implements IPIDSubsystem {
 
@@ -66,12 +66,6 @@ public abstract class PIDSubsystem extends BaseSubsystem implements IPIDSubsyste
       SmartDashboard.putNumber(targetName, tlmPID.PIDTarget);
       SmartDashboard.putNumber(currentName, tlmPID.PIDCurrent);
       SmartDashboard.putBoolean(atTargetName, tlmPID.PIDAtTarget);
-   }
-
-   @Override
-   public void logTelemetry() {
-      logger.debug("{}: PID target={} current={} atTarget={}",
-            myName, tlmPID.PIDTarget, tlmPID.PIDCurrent, tlmPID.PIDAtTarget);
    }
 
    private boolean m_haveSetpoint;
@@ -125,12 +119,6 @@ public abstract class PIDSubsystem extends BaseSubsystem implements IPIDSubsyste
 
    private AchievedSetPoint m_achievedSetPoint;
 
-   /**
-    * Sets the setpoint for the PIDController.
-    *
-    * @param setpoint
-    *           The desired setpoint.
-    */
    public void setSetpoint(double setpoint) {
       m_setpoint = setpoint;
       m_haveSetpoint = true;
@@ -141,31 +129,14 @@ public abstract class PIDSubsystem extends BaseSubsystem implements IPIDSubsyste
       m_achievedSetPoint.calcPositionError();
    }
 
-   /**
-    * Returns the current setpoint of the PIDController.
-    *
-    * @return The current setpoint.
-    */
    public double getSetpoint() {
       return m_setpoint;
    }
 
-   /**
-    * Sets the position error which is considered tolerable for use with
-    * atSetpoint().
-    *
-    * @param tolerance
-    *           - Position error which is tolerable.
-    */
    public void setTolerance(double tolerance) {
       m_atSetPoint.m_positionTolerance = tolerance;
    }
 
-   /**
-    * Returns the position tolerance of this controller.
-    *
-    * @return the position tolerance of the controller.
-    */
    public double getTolerance() {
       return m_atSetPoint.m_positionTolerance;
    }
@@ -190,9 +161,6 @@ public abstract class PIDSubsystem extends BaseSubsystem implements IPIDSubsyste
             && m_achievedSetPoint.achievedSetPoint();
    }
 
-   /**
-    * 
-    */
    public void reset() {
       m_haveSetpoint = false;
       m_haveMeasurement = false;
@@ -200,6 +168,11 @@ public abstract class PIDSubsystem extends BaseSubsystem implements IPIDSubsyste
       m_atSetPoint.m_positionError = 0;
 
       m_achievedSetPoint.m_positionAtCount = 0;
+   }
+
+   public void logPID() {
+      logger.debug("{}: PID enabled={}, target={} current={} atTarget={}",
+            myName, tlmPID.PIDEnabled, tlmPID.PIDTarget, tlmPID.PIDCurrent, tlmPID.PIDAtTarget);
    }
 
 }

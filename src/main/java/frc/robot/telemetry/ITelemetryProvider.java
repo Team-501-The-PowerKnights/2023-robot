@@ -15,7 +15,4 @@ public interface ITelemetryProvider {
 
    public void updateTelemetry();
 
-   default public void logTelemetry() {
-   };
-
 }

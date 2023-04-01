@@ -8,12 +8,12 @@
 
 package frc.robot.subsystems.wrist;
 
-import frc.robot.subsystems.ISubsystem;
+import frc.robot.subsystems.IPIDSubsystem;
 
 /**
  * DOCS: Add your docs here.
  */
-public interface IWristSubsystem extends ISubsystem {
+public interface IWristSubsystem extends IPIDSubsystem {
 
    /**
     * Stop the wrist from any motion it may have been running under.

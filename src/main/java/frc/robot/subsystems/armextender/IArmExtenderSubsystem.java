@@ -8,12 +8,12 @@
 
 package frc.robot.subsystems.armextender;
 
-import frc.robot.subsystems.ISubsystem;
+import frc.robot.subsystems.IPIDSubsystem;
 
 /**
  * DOCS: Add your docs here.
  */
-public interface IArmExtenderSubsystem extends ISubsystem {
+public interface IArmExtenderSubsystem extends IPIDSubsystem {
 
    /**
     * Stop the arm extender from any motion it may have been running under.

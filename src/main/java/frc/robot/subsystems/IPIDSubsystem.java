@@ -73,4 +73,9 @@ public interface IPIDSubsystem extends ISubsystem {
     */
    public void reset();
 
+   /**
+    * 
+    */
+   public void logPID();
+
 }

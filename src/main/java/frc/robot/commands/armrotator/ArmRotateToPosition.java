@@ -39,7 +39,7 @@ abstract class ArmRotateToPosition extends ArmRotatorCommandBase {
 
    @Override
    protected void firstExecution() {
-      logger.trace("arm.rotateToPosition() to {} called in firstExecution()", position);
+      logger.trace("subsys.rotateToPosition() to {} called in firstExecution()", position);
 
       subsys.rotateToPosition(position);
    }

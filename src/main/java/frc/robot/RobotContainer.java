@@ -69,14 +69,6 @@ public class RobotContainer {
    /** Our classes' logger **/
    private static final PKLogger logger = RioLogger.getLogger(RobotContainer.class.getName());
 
-   // The robot's subsystems and commands are defined here...
-   // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-
-   // Replace with CommandPS4Controller or CommandJoystick if needed
-   // private final CommandXboxController m_driverController = new
-   // CommandXboxController(
-   // OperatorConstants.kDriverControllerPort);
-
    //
    private final TelemetryManager tlmMgr;
 
@@ -175,17 +167,21 @@ public class RobotContainer {
    public enum AutoSelection {
       // @formatter:off
       doNothing("doNothing"), 
-      doSimpleBackup("doSimpleBackup"),
-      doBackupToBalance("doBackupToBalance"),
-      doCommunityBackupToBalance("doCommunityBackupToBalance"),
-      doMidCone("doCone"),
-      doMidConeAndBackup("doMidConeAndBackup"),
+      //
+      doSimpleBackward("doSimpleBackward"),
+      doSimpleForward("doSimpleForward"),
+      //
+      doBackwardToBalance("doBackwardToBalance"),
+      doCommunityBackwardToBalance("doCommunityBackupToBalance"),
+      doForwardToBalance("doForwardToBalance"),
+      doCommunityForwardToBalance("doCommunityForwardToBalance"),
+      //
+      doMidCone("doMidCone"),
+      doMidConeAndBackward("doMidConeAndBackward"),
       doOverConeAndGoForward("doOverConeAndForward"),
       doFull("doFull"),
       //
-      doLowConeForward("doLowConeForward"),
-      doForwardToBalance("doForwardToBalance"),
-      doCommunityForwardToBalance("doCommunityForwardToBalance");
+      doLowConeForward("doLowConeForward");
       // @formatter:on
 
       private final String name;
@@ -208,19 +204,26 @@ public class RobotContainer {
       autoChooser = new SendableChooser<>();
 
       // Default option is safety of "do nothing"
-      autoChooser.addOption("Do Nothing", AutoSelection.doNothing);
+      autoChooser.setDefaultOption("Do Nothing", AutoSelection.doNothing);
 
       //
-      autoChooser.addOption("Simple Backup", AutoSelection.doSimpleBackup);
+      autoChooser.addOption("Simple BACKWARD", AutoSelection.doSimpleBackward);
       //
-      autoChooser.addOption("Backup to Balance", AutoSelection.doBackupToBalance);
+      autoChooser.addOption("Simple FORWARD", AutoSelection.doSimpleForward);
+
       //
-      autoChooser.addOption("Community Backup to Balance", AutoSelection.doCommunityBackupToBalance);
+      autoChooser.addOption("BACKWARD to Balance", AutoSelection.doBackwardToBalance);
+      //
+      autoChooser.addOption("Community BACKWARD to Balance", AutoSelection.doCommunityBackwardToBalance);
+      //
+      autoChooser.addOption("FORWARD to Balance", AutoSelection.doForwardToBalance);
+      //
+      autoChooser.addOption("Community FORWARD to Balance", AutoSelection.doCommunityForwardToBalance);
 
       //
       autoChooser.addOption("Place Mid Cone", AutoSelection.doMidCone);
       //
-      autoChooser.setDefaultOption("(*UNH*) Place Mid Cone & Backup", AutoSelection.doMidConeAndBackup);
+      autoChooser.addOption("Place Mid Cone & BACKWARD", AutoSelection.doMidConeAndBackward);
       //
       // autoChooser.addOption("Place Over Cone & Go Forward",
       // AutoSelection.doOverConeAndGoForward);
@@ -229,10 +232,6 @@ public class RobotContainer {
 
       // Working on automating operator
       autoChooser.addOption("*** Place Low Cone Forward", AutoSelection.doLowConeForward);
-
-      autoChooser.addOption("*** Drive Forward to Balance", AutoSelection.doForwardToBalance);
-
-      autoChooser.addOption("*** Community Forward to Balance", AutoSelection.doCommunityForwardToBalance);
 
       SmartDashboard.putData("Auto Mode", autoChooser);
    }
@@ -253,7 +252,7 @@ public class RobotContainer {
          case doNothing:
             return new AutoDoNothing();
 
-         case doSimpleBackup:
+         case doSimpleBackward:
             // @formatter:off
             return
               new SequentialCommandGroup(
@@ -264,7 +263,18 @@ public class RobotContainer {
               );
             // @formatter:on
 
-         case doBackupToBalance:
+         case doSimpleForward:
+            // @formatter:off
+            return
+              new SequentialCommandGroup(
+                  new ArmRotateToLowPosition(),
+                  new ArmExtendToLowPosition(),
+                  new WaitCommand(0.5),
+                  new DriveForwardTimed(3.0, -0.60)
+              );
+            // @formatter:on
+
+         case doBackwardToBalance:
             // @formatter:off
             return
               new SequentialCommandGroup(
@@ -278,7 +288,7 @@ public class RobotContainer {
               );
             // @formatter:on
 
-         case doCommunityBackupToBalance:
+         case doCommunityBackwardToBalance:
             // @formatter:off
             return
               new SequentialCommandGroup(
@@ -289,6 +299,35 @@ public class RobotContainer {
                   new LogPIDs(),
                   new DriveBackwardToBalance(3.5, -0.60),
                   new DriveForwardTimed(3.5, 0.45),
+                  new DriveBalance()
+              );
+            // @formatter:on
+
+         case doForwardToBalance:
+            // @formatter:off
+            return
+              new SequentialCommandGroup(
+                  new GripperEject(),
+                  new ArmRotateToMidPosition(), 
+                  new ArmExtendToLowPosition(),
+                  new WaitCommand(1.0), 
+                  new LogPIDs(),
+                  new DriveForwardToBalance(2.12, 0.60), // 2.25
+                  new DriveBalance()
+              );
+            // @formatter:on
+
+         case doCommunityForwardToBalance:
+            // @formatter:off
+            return
+              new SequentialCommandGroup(
+                  new GripperEject(),
+                  new ArmRotateToMidPosition(), 
+                  new ArmExtendToLowPosition(),
+                  new WaitCommand(1.0), 
+                  new LogPIDs(),
+                  new DriveForwardToBalance(3.6, 0.60),
+                  new DriveBackwardTimed(3.5, -0.45),
                   new DriveBalance()
               );
             // @formatter:on
@@ -309,7 +348,7 @@ public class RobotContainer {
                );
             // @formatter:on
 
-         case doMidConeAndBackup:
+         case doMidConeAndBackward:
             // @formatter:off
             return
                new SequentialCommandGroup(
@@ -371,35 +410,6 @@ public class RobotContainer {
                   new SequentialCommandGroup(new GripperEject(), new WaitCommand(0.3)),
                   new SequentialCommandGroup(new ArmExtendToInPosition(), new WaitCommand(10))
                );
-            // @formatter:on
-
-         case doForwardToBalance:
-            // @formatter:off
-            return
-              new SequentialCommandGroup(
-                  new GripperEject(),
-                  new ArmRotateToMidPosition(), 
-                  new ArmExtendToLowPosition(),
-                  new WaitCommand(1.0), 
-                  new LogPIDs(),
-                  new DriveForwardToBalance(2.12, 0.60), // 2.25
-                  new DriveBalance()
-              );
-            // @formatter:on
-
-         case doCommunityForwardToBalance:
-            // @formatter:off
-            return
-              new SequentialCommandGroup(
-                  new GripperEject(),
-                  new ArmRotateToMidPosition(), 
-                  new ArmExtendToLowPosition(),
-                  new WaitCommand(1.0), 
-                  new LogPIDs(),
-                  new DriveForwardToBalance(3.6, 0.60),
-                  new DriveBackwardTimed(3.5, -0.45),
-                  new DriveBalance()
-              );
             // @formatter:on
 
          default:

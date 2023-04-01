@@ -39,7 +39,7 @@ public class ArmExtendToPosition extends ArmExtenderCommandBase {
 
    @Override
    protected void firstExecution() {
-      logger.trace("arm.extendToPosition() to {} called in firstExecution()", position);
+      logger.trace("subsys.extendToPosition() to {} called in firstExecution()", position);
 
       subsys.extendToPosition(position);
    }

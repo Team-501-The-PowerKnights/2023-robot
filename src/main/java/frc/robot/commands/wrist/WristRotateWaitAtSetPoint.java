@@ -6,37 +6,39 @@
 /*- of this project.                                                      */
 /*------------------------------------------------------------------------*/
 
-package frc.robot.commands.armextender;
+package frc.robot.commands.wrist;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-public class ArmExtenderStop extends ArmExtenderCommandBase {
+public class WristRotateWaitAtSetPoint extends WristCommandBase {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(ArmExtenderStop.class.getName());
+   private static final PKLogger logger = RioLogger.getLogger(WristRotateWaitAtSetPoint.class.getName());
 
-   public ArmExtenderStop() {
+   public WristRotateWaitAtSetPoint() {
       logger.info("constructing {}", getName());
 
       logger.info("constructed");
    }
 
    @Override
-   public void execute() {
-      super.execute();
-   }
-
-   @Override
    protected void firstExecution() {
-      logger.trace("subsys.stop() called in firstExecution()");
-
-      subsys.stop();
+      logger.trace("subsys.logPID() to {} called in firstExecution()");
+      subsys.logPID();
    }
 
    @Override
    public boolean isFinished() {
-      return true;
+      return subsys.achievedSetPoint();
+   }
+
+   @Override
+   public void end(boolean interrupted) {
+      logger.trace("subsys.logPID() to {} called in end()");
+      subsys.logPID();
+
+      super.end(interrupted);
    }
 
 }

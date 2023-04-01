@@ -29,7 +29,7 @@ public class ArmExtendToTarget extends ArmExtenderCommandBase {
 
    @Override
    protected void firstExecution() {
-      logger.trace("arm.extendToTarget() to {} called in firstExecution()", target);
+      logger.trace("subsys.extendToTarget() to {} called in firstExecution()", target);
 
       subsys.extendToTarget(target);
    }
