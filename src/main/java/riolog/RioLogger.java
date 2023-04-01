@@ -18,16 +18,26 @@ import ch.qos.logback.classic.encoder.PatternLayoutEncoder;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.ConsoleAppender;
 import ch.qos.logback.core.FileAppender;
+import ch.qos.logback.core.util.StatusPrinter;
 
 /**
  *
  **/
 public class RioLogger {
 
-   // LOGGER Setting for default level
+   // Logger setting for default level
+   // @formatter:off
    // private static final Level defaultLevel = Level.INFO;
    // private static final Level defaultLevel = Level.DEBUG;
    private static final Level defaultLevel = Level.TRACE;
+   // @formatter:on
+
+   // Logger setting for message format/content
+   // @formatter:off
+   // This doesn't work for line number as level of indirection through PKLogger
+   // final String pattern = "%date{HH:mm:ss.SSS} [%thread] %-5level %logger{10}[%-3line] %msg%n";
+   private static final String pattern = "%date{HH:mm:ss.SSS} [%thread] %-5level %logger{10} %msg%n";
+   // @formatter:on
 
    private static final String logMountPoint = "/media/sda1/";
    private static final String logDirName = "501logs/";
@@ -37,10 +47,8 @@ public class RioLogger {
    private static final boolean useLogFile;
 
    static {
-      // lc = (LoggerContext) LoggerFactory.getILoggerFactory();
-      // StatusPrinter.print(RioLogger.lc);
-      // RioLogger.lc.reset();
-      // StatusPrinter.print(RioLogger.lc);
+      LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
+      StatusPrinter.print(lc);
 
       final File logDir = new File(logMountPoint + logDirName);
       useLogFile = logDir.exists();
@@ -72,11 +80,6 @@ public class RioLogger {
 
       final LoggerContext lc = logger.getLoggerContext();
 
-      // This doesn't work for line number as level of indirection through PKLogger
-      // final String pattern = "%date{HH:mm:ss.SSS} [%thread] %-5level
-      // %logger{10}[%-3line] %msg%n";
-      //
-      final String pattern = "%date{HH:mm:ss.SSS} [%thread] %-5level %logger{10} %msg%n";
       /*
        * Can't share encoders, so each appender needs to have it's own
        */
