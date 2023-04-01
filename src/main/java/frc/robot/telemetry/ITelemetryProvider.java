@@ -15,4 +15,10 @@ public interface ITelemetryProvider {
 
    public void updateTelemetry();
 
+   /**
+    * TODO: Remove default and/or implement method
+    */
+   public default void logTelemetry() {
+   };
+
 }
