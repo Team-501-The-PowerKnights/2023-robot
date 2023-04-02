@@ -63,6 +63,7 @@ public abstract class PIDSubsystem extends BaseSubsystem implements IPIDSubsyste
 
       newMeasurement(current);
       tlmPID.PIDAtTarget = atSetpoint();
+      tlmPID.PIDOnTarget = onSetPoint();
    }
 
    protected double getTlmPIDCurrent() {
