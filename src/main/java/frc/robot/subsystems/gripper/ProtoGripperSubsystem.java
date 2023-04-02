@@ -10,7 +10,8 @@ package frc.robot.subsystems.gripper;
 
 import com.ctre.phoenix.ErrorCode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.REVLibError;
@@ -32,7 +33,7 @@ public class ProtoGripperSubsystem extends BaseGripperSubsystem {
    private final CANSparkMax leftMotor;
    private final CANSparkMax rightMotor;
    //
-   private final WPI_TalonFX frameMotor;
+   private final TalonFX frameMotor;
 
    ProtoGripperSubsystem() {
       super();
@@ -48,9 +49,12 @@ public class ProtoGripperSubsystem extends BaseGripperSubsystem {
 
       checkError(rightMotor.follow(leftMotor, true), "RG set follow and invert to true {}");
 
-      frameMotor = new WPI_TalonFX(33);
+      frameMotor = new TalonFX(33);
       checkError(frameMotor.configFactoryDefault(), "FG restore factory defaults {}");
       frameMotor.setNeutralMode(NeutralMode.Coast);
+
+      // frameMotor.setInverted(true);
+      // frameMotor.follow(leftMotor);
 
       logger.info("constructed");
    }
@@ -99,15 +103,14 @@ public class ProtoGripperSubsystem extends BaseGripperSubsystem {
    public void disable() {
       double speed = 0;
       leftMotor.set(speed);
-      frameMotor.set(speed);
-      setTlmSpeed(speed);
+      frameMotor.set(TalonFXControlMode.PercentOutput, speed);
    }
 
    @Override
    public void stop() {
       double speed = 0;
       leftMotor.set(speed);
-      frameMotor.set(speed);
+      frameMotor.set(TalonFXControlMode.PercentOutput, speed);
       setTlmSpeed(speed);
    }
 
@@ -120,7 +123,7 @@ public class ProtoGripperSubsystem extends BaseGripperSubsystem {
    public void pushOut() {
       double speed = -0.8;
       leftMotor.set(speed);
-      frameMotor.set(speed);
+      frameMotor.set(TalonFXControlMode.PercentOutput, speed);
       setTlmSpeed(speed);
    }
 
@@ -137,7 +140,7 @@ public class ProtoGripperSubsystem extends BaseGripperSubsystem {
          speed = Math.min(speed, maxInSpeed);
       }
       leftMotor.set(speed);
-      frameMotor.set(speed);
+      frameMotor.set(TalonFXControlMode.PercentOutput, speed);
       setTlmSpeed(speed);
    }
 
