@@ -43,6 +43,9 @@ public class SuitcaseArmRotatorSubsystem extends BaseArmRotatorSubsystem {
       checkError(encoder.setPosition(0), "set encoder position to 0 {}");
       checkError(motor.setOpenLoopRampRate(0), "set open loop ramp rate to 0 {}");
 
+      // Assume starts to front as we have no encoder to tell
+      onFrontSide = true;
+
       logger.info("constructed");
    }
 
@@ -54,6 +57,27 @@ public class SuitcaseArmRotatorSubsystem extends BaseArmRotatorSubsystem {
       if (error != REVLibError.kOk) {
          lastError = error;
          logger.error(message, error);
+      }
+   }
+
+   private boolean onFrontSide;
+
+   @Override
+   public void periodic() {
+      if (isTlmPIDEnabled()) {
+         double current = getTlmPIDCurrent();
+         // Only works because '0' is straight up
+         if (Math.abs(current) < 0.05) {
+            if (current < 0) {
+               // On the front side of robot; more power in negative side
+               checkError(pid.setOutputRange(pidValues.MinOutput, pidValues.MaxOutput),
+                     "set PID_ min and max output {}");
+            } else {
+               // On the back side of robot; more power in positive side
+               checkError(pid.setOutputRange(pidValues.MinOutput, pidValues.MaxOutput),
+                     "set PID_ min and max output {}");
+            }
+         }
       }
    }
 

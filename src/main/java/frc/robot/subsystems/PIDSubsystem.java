@@ -44,6 +44,10 @@ public abstract class PIDSubsystem extends BaseSubsystem implements IPIDSubsyste
       }
    }
 
+   protected boolean isTlmPIDEnabled() {
+      return tlmPID.PIDEnabled;
+   }
+
    protected void setTlmPIDTarget(double target) {
       tlmPID.PIDTarget = target;
 
@@ -59,6 +63,10 @@ public abstract class PIDSubsystem extends BaseSubsystem implements IPIDSubsyste
 
       newMeasurement(current);
       tlmPID.PIDAtTarget = atSetpoint();
+   }
+
+   protected double getTlmPIDCurrent() {
+      return tlmPID.PIDCurrent;
    }
 
    protected void updateTelemetry(String enabledName, String targetName, String currentName, String atTargetName) {
