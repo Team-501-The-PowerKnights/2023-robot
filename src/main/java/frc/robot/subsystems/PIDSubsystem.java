@@ -31,7 +31,7 @@ public abstract class PIDSubsystem extends BaseSubsystem implements IPIDSubsyste
       logger.info("constructing");
 
       m_atSetPoint = new AtSetPoint();
-      m_achievedSetPoint = new AchievedSetPoint();
+      m_onSetPoint = new OnSetPoint();
 
       logger.info("constructed");
    }
@@ -61,11 +61,13 @@ public abstract class PIDSubsystem extends BaseSubsystem implements IPIDSubsyste
       tlmPID.PIDAtTarget = atSetpoint();
    }
 
-   protected void updateTelemetry(String enabledName, String targetName, String currentName, String atTargetName) {
+   protected void updateTelemetry(String enabledName, String targetName, String currentName, String atTargetName,
+         String onTargetName) {
       SmartDashboard.putBoolean(enabledName, tlmPID.PIDEnabled);
       SmartDashboard.putNumber(targetName, tlmPID.PIDTarget);
       SmartDashboard.putNumber(currentName, tlmPID.PIDCurrent);
       SmartDashboard.putBoolean(atTargetName, tlmPID.PIDAtTarget);
+      SmartDashboard.putBoolean(onTargetName, tlmPID.PIDOnTarget);
    }
 
    private boolean m_haveSetpoint;
@@ -92,7 +94,7 @@ public abstract class PIDSubsystem extends BaseSubsystem implements IPIDSubsyste
 
    private AtSetPoint m_atSetPoint;
 
-   private class AchievedSetPoint {
+   private class OnSetPoint {
       // The error that is considered at setpoint.
       public double m_positionTolerance;
 
@@ -112,21 +114,21 @@ public abstract class PIDSubsystem extends BaseSubsystem implements IPIDSubsyste
          }
       }
 
-      public boolean achievedSetPoint() {
+      public boolean onSetPoint() {
          return m_positionAtCount > 5; // 0.10 seconds
       }
    }
 
-   private AchievedSetPoint m_achievedSetPoint;
+   private OnSetPoint m_onSetPoint;
 
    public void setSetpoint(double setpoint) {
       m_setpoint = setpoint;
       m_haveSetpoint = true;
 
-      m_achievedSetPoint.setPositionTolerance(setpoint);
+      m_onSetPoint.setPositionTolerance(setpoint);
 
       m_atSetPoint.calcPositionError();
-      m_achievedSetPoint.calcPositionError();
+      m_onSetPoint.calcPositionError();
    }
 
    public double getSetpoint() {
@@ -146,7 +148,7 @@ public abstract class PIDSubsystem extends BaseSubsystem implements IPIDSubsyste
       m_haveMeasurement = true;
 
       m_atSetPoint.calcPositionError();
-      m_achievedSetPoint.calcPositionError();
+      m_onSetPoint.calcPositionError();
    }
 
    public boolean atSetpoint() {
@@ -155,10 +157,10 @@ public abstract class PIDSubsystem extends BaseSubsystem implements IPIDSubsyste
             && m_atSetPoint.atSetPoint();
    }
 
-   public boolean achievedSetPoint() {
+   public boolean onSetPoint() {
       return m_haveMeasurement
             && m_haveSetpoint
-            && m_achievedSetPoint.achievedSetPoint();
+            && m_onSetPoint.onSetPoint();
    }
 
    public void reset() {
@@ -167,12 +169,12 @@ public abstract class PIDSubsystem extends BaseSubsystem implements IPIDSubsyste
 
       m_atSetPoint.m_positionError = 0;
 
-      m_achievedSetPoint.m_positionAtCount = 0;
+      m_onSetPoint.m_positionAtCount = 0;
    }
 
    public void logPID() {
-      logger.debug("{}: PID enabled={}, target={} current={} atTarget={}",
-            myName, tlmPID.PIDEnabled, tlmPID.PIDTarget, tlmPID.PIDCurrent, tlmPID.PIDAtTarget);
+      logger.debug("{}: PID enabled={}, target={} current={} atTarget={} onTarget={}",
+            myName, tlmPID.PIDEnabled, tlmPID.PIDTarget, tlmPID.PIDCurrent, tlmPID.PIDAtTarget, tlmPID.PIDOnTarget);
    }
 
 }

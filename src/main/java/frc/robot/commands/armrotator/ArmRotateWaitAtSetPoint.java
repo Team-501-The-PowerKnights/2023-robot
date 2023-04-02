@@ -30,7 +30,7 @@ public class ArmRotateWaitAtSetPoint extends ArmRotatorCommandBase {
 
    @Override
    public boolean isFinished() {
-      return subsys.achievedSetPoint();
+      return subsys.atSetpoint();
    }
 
    @Override

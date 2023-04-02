@@ -30,13 +30,13 @@ import frc.robot.commands.armextender.ArmExtendToInPosition;
 import frc.robot.commands.armextender.ArmExtendToLowPosition;
 import frc.robot.commands.armextender.ArmExtendToOverPosition;
 import frc.robot.commands.armextender.ArmExtendToTarget;
-import frc.robot.commands.armextender.ArmExtendWaitToSetPoint;
+import frc.robot.commands.armextender.ArmExtendWaitOnSetPoint;
 import frc.robot.commands.armrotator.ArmRotateToAutoConePosition;
 import frc.robot.commands.armrotator.ArmRotateToLowPosition;
 import frc.robot.commands.armrotator.ArmRotateToMidPosition;
 import frc.robot.commands.armrotator.ArmRotateToOverPosition;
 import frc.robot.commands.armrotator.ArmRotateToTarget;
-import frc.robot.commands.armrotator.ArmRotateWaitToSetPoint;
+import frc.robot.commands.armrotator.ArmRotateWaitOnSetPoint;
 import frc.robot.commands.drive.DriveBackwardTimed;
 import frc.robot.commands.drive.DriveBackwardToBalance;
 import frc.robot.commands.drive.DriveBalance;
@@ -45,7 +45,7 @@ import frc.robot.commands.drive.DriveForwardToBalance;
 import frc.robot.commands.gripper.GripperEject;
 import frc.robot.commands.gripper.GripperStop;
 import frc.robot.commands.wrist.WristRotateToOverPosition;
-import frc.robot.commands.wrist.WristRotateWaitToSetPoint;
+import frc.robot.commands.wrist.WristRotateWaitOnSetPoint;
 import frc.robot.modules.IModule;
 import frc.robot.modules.ModulesFactory;
 import frc.robot.preferences.PreferencesManager;
@@ -361,13 +361,13 @@ public class RobotContainer {
             // @formatter:off
             return
                new SequentialCommandGroup(
-                  new SequentialCommandGroup(new ArmRotateToAutoConePosition(), new ArmRotateWaitToSetPoint()),
-                  new SequentialCommandGroup(new WristRotateToOverPosition(), new WristRotateWaitToSetPoint()),
-                  new SequentialCommandGroup(new ArmExtendToAutoConePosition(), new ArmExtendWaitToSetPoint()),
+                  new SequentialCommandGroup(new ArmRotateToAutoConePosition(), new ArmRotateWaitOnSetPoint()),
+                  new SequentialCommandGroup(new WristRotateToOverPosition(), new WristRotateWaitOnSetPoint()),
+                  new SequentialCommandGroup(new ArmExtendToAutoConePosition(), new ArmExtendWaitOnSetPoint()),
                   new LogPIDs(),
                   new SequentialCommandGroup(new GripperEject(), new WaitCommand(0.5)),
                   new ParallelCommandGroup(
-                     new SequentialCommandGroup(new ArmExtendToLowPosition(), new ArmExtendWaitToSetPoint()),
+                     new SequentialCommandGroup(new ArmExtendToLowPosition(), new ArmExtendWaitOnSetPoint()),
                      new SequentialCommandGroup(new GripperStop(), new WaitCommand(0.1))
                   ),
                   new LogPIDs()
@@ -443,11 +443,11 @@ public class RobotContainer {
             // @formatter:off
             return 
                new SequentialCommandGroup(
-                  new SequentialCommandGroup(new ArmRotateToTarget(17), new ArmRotateWaitToSetPoint()),
-                  new SequentialCommandGroup(new ArmExtendToTarget(423.6), new ArmExtendWaitToSetPoint()),
-                  new SequentialCommandGroup(new ArmRotateToTarget(19.5), new ArmRotateWaitToSetPoint()),
+                  new SequentialCommandGroup(new ArmRotateToTarget(17), new ArmRotateWaitOnSetPoint()),
+                  new SequentialCommandGroup(new ArmExtendToTarget(423.6), new ArmExtendWaitOnSetPoint()),
+                  new SequentialCommandGroup(new ArmRotateToTarget(19.5), new ArmRotateWaitOnSetPoint()),
                   new SequentialCommandGroup(new GripperEject(), new WaitCommand(0.3)),
-                  new SequentialCommandGroup(new ArmExtendToInPosition(), new ArmExtendWaitToSetPoint()),
+                  new SequentialCommandGroup(new ArmExtendToInPosition(), new ArmExtendWaitOnSetPoint()),
                   new GripperStop()
                );
          // @formatter:on

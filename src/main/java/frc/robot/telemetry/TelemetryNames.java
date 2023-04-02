@@ -188,6 +188,7 @@ public final class TelemetryNames {
       public static final String PIDTarget = name + PIDTelemetry.pid_Target;
       public static final String PIDCurrent = name + PIDTelemetry.pid_Current;
       public static final String PIDAtTarget = name + PIDTelemetry.pid_AtTarget;
+      public static final String PIDOnTarget = name + PIDTelemetry.pid_OnTarget;
 
       public static final String absCurrent = name + ".absCurrent";
    }
@@ -204,6 +205,7 @@ public final class TelemetryNames {
       public static final String PIDTarget = name + PIDTelemetry.pid_Target;
       public static final String PIDCurrent = name + PIDTelemetry.pid_Current;
       public static final String PIDAtTarget = name + PIDTelemetry.pid_AtTarget;
+      public static final String PIDOnTarget = name + PIDTelemetry.pid_OnTarget;
    }
 
    public final class Arm {
@@ -218,6 +220,7 @@ public final class TelemetryNames {
       public static final String PIDTarget = name + PIDTelemetry.pid_Target;
       public static final String PIDCurrent = name + PIDTelemetry.pid_Current;
       public static final String PIDAtTarget = name + PIDTelemetry.pid_AtTarget;
+      public static final String PIDOnTarget = name + PIDTelemetry.pid_OnTarget;
    }
 
    public final class Gripper {
@@ -243,6 +246,7 @@ public final class TelemetryNames {
       public static final String PIDTarget = name + PIDTelemetry.pid_Target;
       public static final String PIDCurrent = name + PIDTelemetry.pid_Current;
       public static final String PIDAtTarget = name + PIDTelemetry.pid_AtTarget;
+      public static final String PIDOnTarget = name + PIDTelemetry.pid_OnTarget;
    }
 
 }
