@@ -45,7 +45,7 @@ public class ProtoArmExtenderSubsystem extends BaseArmExtenderSubsystem {
       checkError(motor.setSoftLimit(SoftLimitDirection.kForward, 0), "set max soft limit to 0 {}");
       checkError(motor.enableSoftLimit(SoftLimitDirection.kReverse, true), "enable reverse soft limit {}");
       checkError(motor.enableSoftLimit(SoftLimitDirection.kForward, true), "enable forward soft limit {}");
-      checkError(motor.setSmartCurrentLimit(11), "set current limit to 11 {}");
+      checkError(motor.setSmartCurrentLimit(12), "set current limit to 12 {}");
 
       // Set the PID so when it wakes up it doesn't try to move
       extendToTarget(encoder.getPosition());
