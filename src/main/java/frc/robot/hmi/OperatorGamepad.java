@@ -159,7 +159,7 @@ public class OperatorGamepad extends F310Gamepad {
       // This does both low cone as well as mid- and high-cube
       armMidPoseButton
             .onTrue(new SequentialCommandGroup(
-                  new SequentialCommandGroup(new ArmRotateToTarget(18), new ArmRotateWaitAtSetPoint()),
+                  new SequentialCommandGroup(new ArmRotateToTarget(17), new ArmRotateWaitAtSetPoint()),
                   new SequentialCommandGroup(new ArmExtendToTarget(141.2), new ArmExtendWaitAtSetPoint()),
                   new SequentialCommandGroup(new ArmRotateToTarget(19.5), new ArmRotateWaitAtSetPoint()),
                   new SequentialCommandGroup(new GripperEject(), new WaitCommand(0.3)),
