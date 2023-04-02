@@ -78,17 +78,17 @@ public abstract class PIDSubsystem extends BaseSubsystem implements IPIDSubsyste
 
    private class AtSetPoint {
       // The error that is considered at setpoint.
-      public double m_positionTolerance = 0.05;
+      private double m_positionTolerance = 0.09;
 
       // The error at the time of the most recent call to calculate()
-      public double m_positionError;
+      private double m_positionError;
 
       public void calcPositionError() {
-         m_positionError = m_setpoint - m_measurement;
+         m_positionError = Math.abs(m_setpoint - m_measurement);
       }
 
       public boolean atSetPoint() {
-         return Math.abs(m_atSetPoint.m_positionError) < m_atSetPoint.m_positionTolerance;
+         return (m_positionError < m_positionTolerance);
       }
    }
 
@@ -96,7 +96,7 @@ public abstract class PIDSubsystem extends BaseSubsystem implements IPIDSubsyste
 
    private class OnSetPoint {
       // The error that is considered at setpoint.
-      public double m_positionTolerance;
+      private double m_positionTolerance;
 
       public void setPositionTolerance(double setPoint) {
          m_positionTolerance = Math.abs(setPoint * 0.10);
@@ -104,10 +104,14 @@ public abstract class PIDSubsystem extends BaseSubsystem implements IPIDSubsyste
          m_positionAtCount = 0;
       }
 
-      public long m_positionAtCount;
+      // The error at the time of the most recent call to calculate()
+      private double m_positionError;
+      // Count of how many times within position error
+      private long m_positionAtCount;
 
       public void calcPositionError() {
-         if (m_atSetPoint.m_positionError < m_positionTolerance) {
+         m_positionError = Math.abs(m_setpoint - m_measurement);
+         if (m_positionError < m_positionTolerance) {
             m_positionAtCount = (m_positionAtCount < 0) ? 0 : ++m_positionAtCount;
          } else {
             --m_positionAtCount;
