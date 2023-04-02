@@ -66,7 +66,7 @@ public interface IPIDSubsystem extends ISubsystem {
     * 
     * @return Whether the error is within the acceptable bounds.
     */
-   public boolean achievedSetPoint();
+   public boolean onSetPoint();
 
    /**
     * 

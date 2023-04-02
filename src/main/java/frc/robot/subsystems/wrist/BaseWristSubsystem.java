@@ -117,7 +117,7 @@ abstract class BaseWristSubsystem extends PIDSubsystem implements IWristSubsyste
    @Override
    public void updateTelemetry() {
       super.updateTelemetry(TelemetryNames.Wrist.PIDEnabled, TelemetryNames.Wrist.PIDTarget,
-            TelemetryNames.Wrist.PIDCurrent, TelemetryNames.Wrist.PIDAtTarget);
+            TelemetryNames.Wrist.PIDCurrent, TelemetryNames.Wrist.PIDAtTarget, TelemetryNames.Wrist.PIDOnTarget);
    }
 
    @Override

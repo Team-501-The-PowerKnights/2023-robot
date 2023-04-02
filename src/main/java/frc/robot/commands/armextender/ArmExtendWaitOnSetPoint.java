@@ -6,17 +6,17 @@
 /*- of this project.                                                      */
 /*------------------------------------------------------------------------*/
 
-package frc.robot.commands.armrotator;
+package frc.robot.commands.armextender;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-public class ArmRotateWaitToSetPoint extends ArmRotatorCommandBase {
+public class ArmExtendWaitOnSetPoint extends ArmExtenderCommandBase {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(ArmRotateWaitToSetPoint.class.getName());
+   private static final PKLogger logger = RioLogger.getLogger(ArmExtendWaitOnSetPoint.class.getName());
 
-   public ArmRotateWaitToSetPoint() {
+   public ArmExtendWaitOnSetPoint() {
       logger.info("constructing {}", getName());
 
       logger.info("constructed");
@@ -30,7 +30,7 @@ public class ArmRotateWaitToSetPoint extends ArmRotatorCommandBase {
 
    @Override
    public boolean isFinished() {
-      return subsys.atSetpoint();
+      return subsys.onSetPoint();
    }
 
    @Override

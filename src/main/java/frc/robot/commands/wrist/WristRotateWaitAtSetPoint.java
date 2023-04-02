@@ -30,7 +30,7 @@ public class WristRotateWaitAtSetPoint extends WristCommandBase {
 
    @Override
    public boolean isFinished() {
-      return subsys.achievedSetPoint();
+      return subsys.atSetpoint();
    }
 
    @Override

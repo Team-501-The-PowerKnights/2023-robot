@@ -8,6 +8,11 @@
 
 package frc.robot.subsystems.gripper;
 
+import com.ctre.phoenix.ErrorCode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
+
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.REVLibError;
 import com.revrobotics.CANSparkMax.IdleMode;
@@ -27,6 +32,8 @@ public class ProtoGripperSubsystem extends BaseGripperSubsystem {
    /** */
    private final CANSparkMax leftMotor;
    private final CANSparkMax rightMotor;
+   //
+   private final TalonFX frameMotor;
 
    ProtoGripperSubsystem() {
       super();
@@ -42,16 +49,34 @@ public class ProtoGripperSubsystem extends BaseGripperSubsystem {
 
       checkError(rightMotor.follow(leftMotor, true), "RG set follow and invert to true {}");
 
+      frameMotor = new TalonFX(33);
+      checkError(frameMotor.configFactoryDefault(), "FG restore factory defaults {}");
+      frameMotor.setNeutralMode(NeutralMode.Coast);
+
+      // frameMotor.setInverted(true);
+      // frameMotor.follow(leftMotor);
+
       logger.info("constructed");
    }
 
    // TODO: Use to set a degraded error status/state on subsystem
    @SuppressWarnings("unused")
-   private REVLibError lastError;
+   private REVLibError lastREVError;
 
    private void checkError(REVLibError error, String message) {
       if (error != REVLibError.kOk) {
-         lastError = error;
+         lastREVError = error;
+         logger.error(message, error);
+      }
+   }
+
+   // TODO: Use to set a degraded error status/state on subsystem
+   @SuppressWarnings("unused")
+   private ErrorCode lastCTREError;
+
+   private void checkError(ErrorCode error, String message) {
+      if (error != ErrorCode.OK) {
+         lastCTREError = error;
          logger.error(message, error);
       }
    }
@@ -62,6 +87,7 @@ public class ProtoGripperSubsystem extends BaseGripperSubsystem {
 
       checkError(leftMotor.setIdleMode(IdleMode.kBrake), "LG set idle mode to brake {}");
       checkError(rightMotor.setIdleMode(IdleMode.kBrake), "RG set idle mode to brake {}");
+      frameMotor.setNeutralMode(NeutralMode.Brake);
    };
 
    @Override
@@ -70,18 +96,22 @@ public class ProtoGripperSubsystem extends BaseGripperSubsystem {
 
       checkError(leftMotor.setIdleMode(IdleMode.kBrake), "LG set idle mode to brake {}");
       checkError(rightMotor.setIdleMode(IdleMode.kBrake), "RG set idle mode to brake {}");
+      frameMotor.setNeutralMode(NeutralMode.Brake);
    };
 
    @Override
    public void disable() {
-      leftMotor.set(0);
-      setTlmSpeed(0);
+      double speed = 0;
+      leftMotor.set(speed);
+      frameMotor.set(TalonFXControlMode.PercentOutput, speed);
    }
 
    @Override
    public void stop() {
-      leftMotor.set(0);
-      setTlmSpeed(0);
+      double speed = 0;
+      leftMotor.set(speed);
+      frameMotor.set(TalonFXControlMode.PercentOutput, speed);
+      setTlmSpeed(speed);
    }
 
    @Override
@@ -93,12 +123,21 @@ public class ProtoGripperSubsystem extends BaseGripperSubsystem {
    public void pushOut() {
       double speed = -0.8;
       leftMotor.set(speed);
+      frameMotor.set(TalonFXControlMode.PercentOutput, speed);
       setTlmSpeed(speed);
    }
 
    @Override
    public void idleIn() {
-      grip(idleSpeed);
+      double speed = idleSpeed;
+      if (speed < 0) {
+         speed = Math.max(speed, -maxOutSpeed);
+      } else {
+         speed = Math.min(speed, maxInSpeed);
+      }
+      leftMotor.set(speed);
+      frameMotor.set(TalonFXControlMode.PercentOutput, 0); // no idle on frame motor
+      setTlmSpeed(speed);
    }
 
    @Override
@@ -109,6 +148,7 @@ public class ProtoGripperSubsystem extends BaseGripperSubsystem {
          speed = Math.min(speed, maxInSpeed);
       }
       leftMotor.set(speed);
+      frameMotor.set(TalonFXControlMode.PercentOutput, speed);
       setTlmSpeed(speed);
    }
 

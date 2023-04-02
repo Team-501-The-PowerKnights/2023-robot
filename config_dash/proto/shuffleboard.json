@@ -1431,7 +1431,7 @@
               "_showGlyph": false
             }
           },
-          "25,2": {
+          "28,2": {
             "size": [
               4,
               2
@@ -1470,7 +1470,7 @@
               "_showGlyph": false
             }
           },
-          "25,6": {
+          "28,6": {
             "size": [
               4,
               2
@@ -1496,7 +1496,7 @@
               "_showGlyph": false
             }
           },
-          "25,4": {
+          "28,4": {
             "size": [
               4,
               2
@@ -1522,7 +1522,7 @@
               "_showGlyph": false
             }
           },
-          "25,0": {
+          "28,0": {
             "size": [
               4,
               2
@@ -1654,7 +1654,7 @@
               "_showGlyph": false
             }
           },
-          "30,4": {
+          "33,4": {
             "size": [
               4,
               2
@@ -1667,7 +1667,7 @@
               "_showGlyph": false
             }
           },
-          "19,9": {
+          "23,4": {
             "size": [
               4,
               2
@@ -1689,6 +1689,21 @@
               "_type": "Boolean Box",
               "_source0": "network_table:///SmartDashboard/ArmRotator.PIDAtTarget",
               "_title": "PIDAtTarget",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#999999FF"
+            }
+          },
+          "19,8": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/ArmRotator.PIDOnTarget",
+              "_title": "PIDOnTarget",
               "_glyph": 148,
               "_showGlyph": false,
               "Colors/Color when true": "#7CFC00FF",
@@ -1735,7 +1750,7 @@
               "_showGlyph": false
             }
           },
-          "25,2": {
+          "28,2": {
             "size": [
               4,
               2
@@ -1774,7 +1789,7 @@
               "_showGlyph": false
             }
           },
-          "25,8": {
+          "28,8": {
             "size": [
               4,
               2
@@ -1787,7 +1802,7 @@
               "_showGlyph": false
             }
           },
-          "25,6": {
+          "28,6": {
             "size": [
               4,
               2
@@ -1826,7 +1841,7 @@
               "_showGlyph": false
             }
           },
-          "25,4": {
+          "28,4": {
             "size": [
               4,
               2
@@ -1971,7 +1986,7 @@
               "_showGlyph": false
             }
           },
-          "25,0": {
+          "28,0": {
             "size": [
               4,
               2
@@ -1984,7 +1999,7 @@
               "_showGlyph": false
             }
           },
-          "30,4": {
+          "33,4": {
             "size": [
               4,
               2
@@ -2006,6 +2021,21 @@
               "_type": "Boolean Box",
               "_source0": "network_table:///SmartDashboard/ArmExtender.PIDAtTarget",
               "_title": "PIDAtTarget",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#999999FF"
+            }
+          },
+          "19,8": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/ArmExtender.PIDOnTarget",
+              "_title": "PIDOnTarget",
               "_glyph": 148,
               "_showGlyph": false,
               "Colors/Color when true": "#7CFC00FF",
@@ -2328,7 +2358,7 @@
               "_showGlyph": false
             }
           },
-          "25,0": {
+          "28,0": {
             "size": [
               4,
               2
@@ -2341,7 +2371,7 @@
               "_showGlyph": false
             }
           },
-          "25,2": {
+          "28,2": {
             "size": [
               4,
               2
@@ -2363,6 +2393,21 @@
               "_type": "Boolean Box",
               "_source0": "network_table:///SmartDashboard/Wrist.PIDAtTarget",
               "_title": "PIDAtTarget",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#999999FF"
+            }
+          },
+          "19,8": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Wrist.PIDOnTarget",
+              "_title": "PIDOnTarget",
               "_glyph": 148,
               "_showGlyph": false,
               "Colors/Color when true": "#7CFC00FF",
@@ -2396,7 +2441,7 @@
               "_showGlyph": false
             }
           },
-          "28,0": {
+          "32,0": {
             "size": [
               7,
               13
@@ -2410,10 +2455,10 @@
               "Miscellaneous/Show search box": true
             }
           },
-          "12,2": {
+          "4,4": {
             "size": [
               3,
-              5
+              7
             ],
             "content": {
               "_type": "Voltage View",
@@ -2421,14 +2466,14 @@
               "_title": "Gyro.pitch",
               "_glyph": 148,
               "_showGlyph": false,
-              "Range/Min": -30.0,
-              "Range/Max": 30.0,
+              "Range/Min": -20.0,
+              "Range/Max": 20.0,
               "Range/Center": 0.0,
               "Visuals/Orientation": "VERTICAL",
               "Visuals/Number of tick marks": 5
             }
           },
-          "10,7": {
+          "2,11": {
             "size": [
               7,
               2
@@ -2439,11 +2484,127 @@
               "_title": "SmartDashboard/Gyro.roll",
               "_glyph": 148,
               "_showGlyph": false,
-              "Range/Min": -30.0,
-              "Range/Max": 30.0,
+              "Range/Min": -20.0,
+              "Range/Max": 20.0,
               "Range/Center": 0.0,
               "Visuals/Orientation": "HORIZONTAL",
               "Visuals/Number of tick marks": 5
+            }
+          },
+          "17,4": {
+            "size": [
+              5,
+              3
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/ArmExtender.PIDAtTarget",
+              "_title": "ArmExtender.PIDAtTarget",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#999999FF"
+            }
+          },
+          "11,4": {
+            "size": [
+              5,
+              3
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/ArmRotator.PIDAtTarget",
+              "_title": "ArmRotator.PIDAtTarget",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#999999FF"
+            }
+          },
+          "17,2": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ArmExtender.PIDTarget",
+              "_title": "ArmExtender.PIDTarget",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "11,2": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ArmRotator.PIDTarget",
+              "_title": "ArmRotator.PIDTarget",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "17,0": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/ArmExtender.PIDEnabled",
+              "_title": "ArmExtender.PIDEnabled",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "11,0": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/ArmRotator.PIDEnabled",
+              "_title": "ArmRotator.PIDEnabled",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "17,7": {
+            "size": [
+              5,
+              3
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/ArmExtender.PIDOnTarget",
+              "_title": "ArmExtender.PIDOnTarget",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#999999FF"
+            }
+          },
+          "11,7": {
+            "size": [
+              5,
+              3
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/ArmRotator.PIDOnTarget",
+              "_title": "ArmRotator.PIDOnTarget",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#999999FF"
             }
           }
         }

@@ -11,12 +11,12 @@ package frc.robot.commands.wrist;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-public class WristRotateWaitToSetPoint extends WristCommandBase {
+public class WristRotateWaitOnSetPoint extends WristCommandBase {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(WristRotateWaitToSetPoint.class.getName());
+   private static final PKLogger logger = RioLogger.getLogger(WristRotateWaitOnSetPoint.class.getName());
 
-   public WristRotateWaitToSetPoint() {
+   public WristRotateWaitOnSetPoint() {
       logger.info("constructing {}", getName());
 
       logger.info("constructed");
@@ -30,7 +30,7 @@ public class WristRotateWaitToSetPoint extends WristCommandBase {
 
    @Override
    public boolean isFinished() {
-      return subsys.achievedSetPoint();
+      return subsys.onSetPoint();
    }
 
    @Override
