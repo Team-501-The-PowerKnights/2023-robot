@@ -64,20 +64,28 @@ public class SuitcaseArmRotatorSubsystem extends BaseArmRotatorSubsystem {
 
    @Override
    public void periodic() {
+      double current = getTlmPIDCurrent();
       if (isTlmPIDEnabled()) {
-         double current = getTlmPIDCurrent();
          // Only works because '0' is straight up
          if (Math.abs(current) < 0.05) {
-            if (current < 0) {
+            if ((onFrontSide == true) && (current < 0)) {
+               logger.debug("transitioning front to back: current={} onFrontSide={}", current, onFrontSide);
+               onFrontSide = false;
+
                // On the front side of robot; more power in negative side
                checkError(pid.setOutputRange(pidValues.MinOutput, pidValues.MaxOutput),
                      "set PID_ min and max output {}");
-            } else {
+            } else if ((onFrontSide == false) && (current > 0)) {
+               logger.debug("transitioning back to front: current={} onFrontSide={}", current, onFrontSide);
+               onFrontSide = false;
+
                // On the back side of robot; more power in positive side
                checkError(pid.setOutputRange(pidValues.MinOutput, pidValues.MaxOutput),
                      "set PID_ min and max output {}");
             }
          }
+      } else {
+         onFrontSide = (current >= 0) ? true : false;
       }
    }
 
