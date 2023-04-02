@@ -129,7 +129,15 @@ public class ProtoGripperSubsystem extends BaseGripperSubsystem {
 
    @Override
    public void idleIn() {
-      grip(idleSpeed);
+      double speed = idleSpeed;
+      if (speed < 0) {
+         speed = Math.max(speed, -maxOutSpeed);
+      } else {
+         speed = Math.min(speed, maxInSpeed);
+      }
+      leftMotor.set(speed);
+      frameMotor.set(TalonFXControlMode.PercentOutput, 0); // no idle on frame motor
+      setTlmSpeed(speed);
    }
 
    @Override
