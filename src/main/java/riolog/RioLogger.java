@@ -28,8 +28,8 @@ public class RioLogger {
    // Logger setting for default level
    // @formatter:off
    // private static final Level defaultLevel = Level.INFO;
-   // private static final Level defaultLevel = Level.DEBUG;
-   private static final Level defaultLevel = Level.TRACE;
+   private static final Level defaultLevel = Level.DEBUG;
+   // private static final Level defaultLevel = Level.TRACE;
    // @formatter:on
 
    // Logger setting for message format/content

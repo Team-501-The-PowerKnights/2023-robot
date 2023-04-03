@@ -66,6 +66,14 @@ public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
       // Set the PID so when it wakes up it doesn't try to move
       rotateToTarget(encoderZero); // Can't use get right after set?
 
+      // Set the starting state (front or back of the vertical plane)
+      if (encoderZero >= 0) {
+         onFrontSide = true;
+      } else {
+         onFrontSide = false;
+      }
+      logger.info("onFrontSide init: encoderZero = {}, onFrontSide = {}", encoderZero, onFrontSide);
+
       logger.info("constructed");
    }
 
@@ -77,6 +85,50 @@ public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
       if (error != REVLibError.kOk) {
          lastError = error;
          logger.error(message, error);
+      }
+   }
+
+   private boolean onFrontSide;
+
+   // @Override
+   public void periodic() {
+      double current = getTlmPIDCurrent();
+      if (isTlmPIDEnabled()) {
+         // Only works because '0' is straight up
+         if ((onFrontSide == true) && (current < 0.5)) {
+            logger.debug("************************** FRONT TO BACK ***********************************************");
+            logger.debug("**********  transitioning front to back: current={} onFrontSide={}  *****************",
+                  current, onFrontSide);
+            logger.debug("************************** FRONT TO BACK ***********************************************");
+            onFrontSide = false;
+
+            // On the front side of robot; more power in negative side
+            // checkError(pid.setOutputRange(pidValues.MinOutput, pidValues.MaxOutput),
+            // "set PID_ min and max output {}");
+            logger.debug("switch min & max ouput: minOuput = {}, maxOutput = {}",
+                  pid.getOutputMin(), pid.getOutputMax());
+         } else if ((onFrontSide == false) && (current > 0.5)) {
+            logger.debug("************************** BACK TO FRONT ***********************************************");
+            logger.debug("************  transitioning back to front: current={} onFrontSide={} ********************",
+                  current, onFrontSide);
+            logger.debug("************************** BACK TO FRONT ***********************************************");
+            onFrontSide = true;
+
+            // On the back side of robot; more power in positive side (so reverse min & max,
+            // but keep signs)
+            double minOutput = pidValues.MaxOutput;
+            minOutput *= (pidValues.MinOutput < 0) ? -1 : 1;
+            double maxOutput = pidValues.MinOutput;
+            maxOutput *= (pidValues.MaxOutput < 0) ? -1 : 1;
+            logger.debug("switch min & max ouput: minOuput = {}, maxOutput = {}",
+                  minOutput, maxOutput);
+            // checkError(pid.setOutputRange(minOutput, maxOutput), "set PID_ min and max
+            // output {}");
+            logger.debug("switch min & max ouput: minOuput = {}, maxOutput = {}",
+                  pid.getOutputMin(), pid.getOutputMax());
+         }
+      } else {
+         onFrontSide = (current >= 0) ? true : false;
       }
    }
 
