@@ -22,8 +22,6 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 import frc.robot.modules.led.LEDModuleFactory;
 import frc.robot.preferences.PreferencesManager;
-import frc.robot.subsystems.arm.ArmFactory;
-import frc.robot.subsystems.arm.IArmSubsystem.ArmRotationPosition;
 import frc.robot.telemetry.TelemetryManager;
 import frc.robot.telemetry.TelemetryNames;
 import frc.robot.utils.PKColor8Bit;
@@ -273,6 +271,17 @@ public class Robot extends TimedRobot {
       boolean realAutoSelected = robotContainer.isRealAutoSelected();
       SmartDashboard.putBoolean(TelemetryNames.Misc.realAuto, realAutoSelected);
 
+      displayAutoSelectionStatus(realAutoSelected);
+   }
+
+   /**
+    * Displays a flashing red in the LEDs if a real auto hasn't been
+    * selected. Waits a bit for transitioning from green though (so
+    * can see the state of start-up).
+    *
+    * @param realAutoSelected
+    */
+   private void displayAutoSelectionStatus(boolean realAutoSelected) {
       if (autoModeCheckEnabled && !robotContainer.isRealAutoSelected()) {
          if (autoModeCheckDelay > 0) {
             --autoModeCheckDelay;
@@ -423,7 +432,9 @@ public class Robot extends TimedRobot {
 
       ModeFollowers.getInstance().initTest();
 
-      ArmFactory.getInstance().rotateToPosition(ArmRotationPosition.highPosition);
+      /*
+       * Put any code for Init here
+       */
 
       logger.info("initialized test");
    }
@@ -441,6 +452,10 @@ public class Robot extends TimedRobot {
    @Override
    public void testExit() {
       logger.info("exiting test");
+
+      /*
+       * Put any code for Exit here
+       */
 
       ModeFollowers.getInstance().exitTest();
 
