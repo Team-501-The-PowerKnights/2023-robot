@@ -15,7 +15,6 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.armextender.ArmExtendToHighPosition;
 import frc.robot.commands.armextender.ArmExtendToInPosition;
 import frc.robot.commands.armextender.ArmExtendToLowPosition;
-import frc.robot.commands.armextender.ArmExtendToMidPosition;
 import frc.robot.commands.armextender.ArmExtendToOverPosition;
 import frc.robot.commands.armextender.ArmExtendToTarget;
 import frc.robot.commands.armextender.ArmExtendWaitAtSetPoint;
@@ -23,7 +22,6 @@ import frc.robot.commands.armextender.ArmNudgeExtensionTarget;
 import frc.robot.commands.armrotator.ArmNudgeRotationTarget;
 import frc.robot.commands.armrotator.ArmRotateToHighPosition;
 import frc.robot.commands.armrotator.ArmRotateToLowPosition;
-import frc.robot.commands.armrotator.ArmRotateToMidPosition;
 import frc.robot.commands.armrotator.ArmRotateToOverPosition;
 import frc.robot.commands.armrotator.ArmRotateToTarget;
 import frc.robot.commands.armrotator.ArmRotateWaitAtSetPoint;
@@ -161,7 +159,7 @@ public class OperatorGamepad extends F310Gamepad {
       // This does both low cone as well as mid- and high-cube
       armMidPoseButton
             .onTrue(new SequentialCommandGroup(
-                  new SequentialCommandGroup(new ArmRotateToTarget(18), new ArmRotateWaitAtSetPoint()),
+                  new SequentialCommandGroup(new ArmRotateToTarget(17), new ArmRotateWaitAtSetPoint()),
                   new SequentialCommandGroup(new ArmExtendToTarget(141.2), new ArmExtendWaitAtSetPoint()),
                   new SequentialCommandGroup(new ArmRotateToTarget(19.5), new ArmRotateWaitAtSetPoint()),
                   new SequentialCommandGroup(new GripperEject(), new WaitCommand(0.3)),

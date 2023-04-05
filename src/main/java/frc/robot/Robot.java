@@ -22,12 +22,11 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 import frc.robot.modules.led.LEDModuleFactory;
 import frc.robot.preferences.PreferencesManager;
-import frc.robot.subsystems.arm.ArmFactory;
-import frc.robot.subsystems.arm.IArmSubsystem.ArmRotationPosition;
 import frc.robot.telemetry.TelemetryManager;
 import frc.robot.telemetry.TelemetryNames;
 import frc.robot.utils.PKColor8Bit;
 
+import riolog.Level;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -113,6 +112,9 @@ public class Robot extends TimedRobot {
       // But we want access to the CommandScheduler telemetry content
       // LiveWindow.disableAllTelemetry();
       // LiveWindow.enableTelemetry(CommandScheduler.getInstance());
+
+      // Create the chooser for the Logger level
+      createLoggerLevelChooser();
 
       logger.info("initialized");
    }
@@ -256,14 +258,6 @@ public class Robot extends TimedRobot {
       logger.info("error counts: errorCount={}, warnCount={}", errorCount, warnCount);
    }
 
-   private boolean autoModeCheckEnabled = true;
-
-   private long autoModeCheckDelay = (long) (20.0 / getPeriod());
-   private long autoErrorOnPeriod = (long) (1.5 / getPeriod());
-   private long autoErrorOffPeriod = (long) (0.75 / getPeriod());
-   private long autoErrorCount;
-   private boolean autoErrorOn = true;
-
    /**
     * This function is called periodically while the robot is in Disabled mode.
     */
@@ -273,6 +267,28 @@ public class Robot extends TimedRobot {
       boolean realAutoSelected = robotContainer.isRealAutoSelected();
       SmartDashboard.putBoolean(TelemetryNames.Misc.realAuto, realAutoSelected);
 
+      displayAutoSelectionStatus(realAutoSelected);
+
+      Level level = loggerLevelChooser.getSelected();
+      RioLogger.setLevel(level);
+   }
+
+   private boolean autoModeCheckEnabled = true;
+
+   private long autoModeCheckDelay = (long) (20.0 / getPeriod());
+   private long autoErrorOnPeriod = (long) (1.5 / getPeriod());
+   private long autoErrorOffPeriod = (long) (0.75 / getPeriod());
+   private long autoErrorCount;
+   private boolean autoErrorOn = true;
+
+   /**
+    * Displays a flashing red in the LEDs if a real auto hasn't been
+    * selected. Waits a bit for transitioning from green though (so
+    * can see the state of start-up).
+    *
+    * @param realAutoSelected
+    */
+   private void displayAutoSelectionStatus(boolean realAutoSelected) {
       if (autoModeCheckEnabled && !robotContainer.isRealAutoSelected()) {
          if (autoModeCheckDelay > 0) {
             --autoModeCheckDelay;
@@ -423,7 +439,9 @@ public class Robot extends TimedRobot {
 
       ModeFollowers.getInstance().initTest();
 
-      ArmFactory.getInstance().rotateToPosition(ArmRotationPosition.highPosition);
+      /*
+       * Put any code for Init here
+       */
 
       logger.info("initialized test");
    }
@@ -441,6 +459,10 @@ public class Robot extends TimedRobot {
    @Override
    public void testExit() {
       logger.info("exiting test");
+
+      /*
+       * Put any code for Exit here
+       */
 
       ModeFollowers.getInstance().exitTest();
 
@@ -520,5 +542,22 @@ public class Robot extends TimedRobot {
       }
 
    };
+
+   // Chooser for overriding logger level
+   private static SendableChooser<Level> loggerLevelChooser;
+
+   // TODO: Comment
+   // TODO: Move to 501 Robot?
+   private static void createLoggerLevelChooser() {
+      loggerLevelChooser = new SendableChooser<>();
+
+      loggerLevelChooser.addOption("ERROR", Level.ERROR);
+      loggerLevelChooser.addOption("WARN", Level.WARN);
+      loggerLevelChooser.addOption("INFO", Level.INFO);
+      loggerLevelChooser.setDefaultOption("DEBUG", Level.DEBUG);
+      loggerLevelChooser.addOption("TRACE", Level.TRACE);
+
+      SmartDashboard.putData("Logger Level", loggerLevelChooser);
+   }
 
 }

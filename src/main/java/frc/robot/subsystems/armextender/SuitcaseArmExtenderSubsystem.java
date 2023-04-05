@@ -83,12 +83,14 @@ public class SuitcaseArmExtenderSubsystem extends BaseArmExtenderSubsystem {
 
    @Override
    public void disable() {
+      // FIXME: Change to non-deprecated method
       checkError(pid.setReference(0, ControlType.kDutyCycle), "PID set reference to kDutyCycle,0 {}");
       setTlmPIDEnabled(false);
    }
 
    @Override
    public void stop() {
+      // FIXME: Change to non-deprecated method
       checkError(pid.setReference(0, ControlType.kDutyCycle), "PID set reference to kDutyCycle,0 {}");
       setTlmPIDEnabled(false);
    }
@@ -105,6 +107,7 @@ public class SuitcaseArmExtenderSubsystem extends BaseArmExtenderSubsystem {
    public void extendToTarget(double target) {
       logger.debug("set PID target = {}", target);
 
+      // FIXME: Change to non-deprecated method
       checkError(pid.setReference(target, ControlType.kPosition), "PID set reference to kPosition,0 {}");
       setTlmPIDEnabled(true);
       setTlmPIDTarget(target);

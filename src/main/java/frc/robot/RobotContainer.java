@@ -445,7 +445,7 @@ public class RobotContainer {
             // @formatter:off
             return 
                new SequentialCommandGroup(
-                  new SequentialCommandGroup(new ArmRotateToTarget(18), new ArmRotateWaitAtSetPoint()),
+                  new SequentialCommandGroup(new ArmRotateToTarget(17), new ArmRotateWaitAtSetPoint()),
                   new SequentialCommandGroup(new ArmExtendToTarget(141.2), new ArmExtendWaitAtSetPoint()),
                   new SequentialCommandGroup(new ArmRotateToTarget(19.5), new ArmRotateWaitAtSetPoint()),
                   new SequentialCommandGroup(new GripperEject(), new WaitCommand(0.3)),

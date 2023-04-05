@@ -45,7 +45,7 @@ public class ProtoArmExtenderSubsystem extends BaseArmExtenderSubsystem {
       checkError(motor.setSoftLimit(SoftLimitDirection.kForward, 0), "set max soft limit to 0 {}");
       checkError(motor.enableSoftLimit(SoftLimitDirection.kReverse, true), "enable reverse soft limit {}");
       checkError(motor.enableSoftLimit(SoftLimitDirection.kForward, true), "enable forward soft limit {}");
-      checkError(motor.setSmartCurrentLimit(11), "set current limit to 11 {}");
+      checkError(motor.setSmartCurrentLimit(14), "set current limit to 14 {}");
 
       // Set the PID so when it wakes up it doesn't try to move
       extendToTarget(encoder.getPosition());
@@ -107,12 +107,14 @@ public class ProtoArmExtenderSubsystem extends BaseArmExtenderSubsystem {
 
    @Override
    public void disable() {
+      // FIXME: Change to non-deprecated method
       checkError(pid.setReference(0, ControlType.kDutyCycle), "PID set reference to kDutyCycle,0 {}");
       setTlmPIDEnabled(false);
    }
 
    @Override
    public void stop() {
+      // FIXME: Change to non-deprecated method
       checkError(pid.setReference(0, ControlType.kDutyCycle), "PID set reference to kDutyCycle,0 {}");
       setTlmPIDEnabled(false);
    }
@@ -129,6 +131,7 @@ public class ProtoArmExtenderSubsystem extends BaseArmExtenderSubsystem {
    public void extendToTarget(double target) {
       logger.trace("set PID target = {}", target);
 
+      // FIXME: Change to non-deprecated method
       checkError(pid.setReference(target, ControlType.kPosition), "PID set reference to kPosition,0 {}");
       setTlmPIDEnabled(true);
       setTlmPIDTarget(target);

@@ -28,8 +28,8 @@ public class RioLogger {
    // Logger setting for default level
    // @formatter:off
    // private static final Level defaultLevel = Level.INFO;
-   // private static final Level defaultLevel = Level.DEBUG;
-   private static final Level defaultLevel = Level.TRACE;
+   private static final Level defaultLevel = Level.DEBUG;
+   // private static final Level defaultLevel = Level.TRACE;
    // @formatter:on
 
    // Logger setting for message format/content
@@ -46,7 +46,10 @@ public class RioLogger {
    private static final String logFile;
    private static final boolean useLogFile;
 
+   private static final ch.qos.logback.classic.Logger rootLogger;
+
    static {
+      // Log info about the configuration of the loggin subsystem
       LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
       StatusPrinter.print(lc);
 
@@ -73,6 +76,10 @@ public class RioLogger {
       } else {
          logFile = "";
       }
+
+      // Set the 'default' logging level on the root logger
+      rootLogger = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
+      setLevel(rootLogger, defaultLevel);
    }
 
    public static PKLogger getLogger(String loggerName) {
@@ -114,14 +121,31 @@ public class RioLogger {
          logger.addAppender(fileAppender);
       }
 
-      setLevel(logger, defaultLevel);
+      // setLevel(logger, defaultLevel); /* set if each logger has unique level */
       logger.setAdditive(false); /* set to true if root should log too */
 
       return new PKLogger(logger);
    }
 
+   /**
+    * Sets the logging level on the specified logger.
+    *
+    * @param logger
+    * @param level
+    */
    public static void setLevel(Logger logger, Level level) {
       ((ch.qos.logback.classic.Logger) logger).setLevel(level.level);
+   }
+
+   /**
+    * Sets the logging level on the 'root' logger.
+    *
+    * @param level
+    */
+   public static void setLevel(Level level) {
+      if (rootLogger.getLevel().toInt() != level.level.toInt()) {
+         rootLogger.setLevel(level.level);
+      }
    }
 
 }
