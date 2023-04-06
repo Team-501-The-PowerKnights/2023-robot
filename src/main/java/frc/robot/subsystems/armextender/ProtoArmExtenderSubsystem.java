@@ -142,8 +142,7 @@ public class ProtoArmExtenderSubsystem extends BaseArmExtenderSubsystem {
       logger.trace("offset PID target = {}", offset);
 
       double target = getTlmPIDTarget();
-      // used to be + before new arm (this preserves API sense)
-      target -= offset;
+      target += offset;
       extendToTarget(target);
    }
 
