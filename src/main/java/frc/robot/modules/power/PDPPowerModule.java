@@ -26,7 +26,7 @@ class PDPPowerModule extends BasePowerModule {
    /** Our classes' logger **/
    private static final PKLogger logger = RioLogger.getLogger(PDPPowerModule.class.getName());
 
-   private final PowerDistribution module;
+   protected final PowerDistribution module;
 
    public PDPPowerModule() {
       logger.info("constructing");

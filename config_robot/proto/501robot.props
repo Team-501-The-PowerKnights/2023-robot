@@ -20,8 +20,8 @@ Robot.implementation = Proto
 #####################
 # Power
 #####################
-Power.className = StubPowerModule
-#Power.className = 
+#Power.className = StubPowerModule
+Power.className = ProtoPowerModule
 
 
 #####################

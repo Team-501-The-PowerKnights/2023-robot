@@ -111,6 +111,8 @@ public final class TelemetryNames {
       public static final String busVoltage = name + ".busVoltage";
       public static final String totalCurrent = name + ".totalCurrent";
       public static final String totalEnergy = name + ".totalEnergy";
+
+      public static final String armExtenderCurrent = name + ".armExtenderCurrent";
    }
 
    public final class Pneumatic {
@@ -191,6 +193,7 @@ public final class TelemetryNames {
       public static final String PIDOnTarget = name + PIDTelemetry.pid_OnTarget;
 
       public static final String absCurrent = name + ".absCurrent";
+      public static final String absCorrected = name + ".absCorrected";
    }
 
    public final class ArmExtender {
