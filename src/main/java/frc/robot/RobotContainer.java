@@ -267,6 +267,7 @@ public class RobotContainer {
             // @formatter:off
             return
               new SequentialCommandGroup(
+                  new GripperEject(),
                   new ArmRotateToLowPosition(),
                   new ArmExtendToLowPosition(),
                   new WaitCommand(0.5),
