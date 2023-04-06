@@ -123,8 +123,11 @@ public class ProtoGripperSubsystem extends BaseGripperSubsystem {
    public void pushOut() {
       double speed = -0.8;
       leftMotor.set(speed);
-      frameMotor.set(TalonFXControlMode.PercentOutput, speed);
       setTlmSpeed(speed);
+
+      // Reduce the rate for frame one
+      speed *= 0.65;
+      frameMotor.set(TalonFXControlMode.PercentOutput, speed);
    }
 
    @Override
@@ -136,8 +139,11 @@ public class ProtoGripperSubsystem extends BaseGripperSubsystem {
          speed = Math.min(speed, maxInSpeed);
       }
       leftMotor.set(speed);
-      frameMotor.set(TalonFXControlMode.PercentOutput, 0); // no idle on frame motor
       setTlmSpeed(speed);
+
+      // Reduce the rate for frame one
+      speed *= 0.50;
+      frameMotor.set(TalonFXControlMode.PercentOutput, speed);
    }
 
    @Override
@@ -149,9 +155,12 @@ public class ProtoGripperSubsystem extends BaseGripperSubsystem {
       }
       leftMotor.set(speed);
       setTlmSpeed(speed);
-      // Reduce the rate of pull-in
+
+      // Reduce the rate for frame one
       if (speed > 0) {
          speed *= 0.35;
+      } else {
+         speed *= 0.65;
       }
       frameMotor.set(TalonFXControlMode.PercentOutput, speed);
    }
