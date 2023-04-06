@@ -148,7 +148,9 @@ public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
 
    @Override
    public void updateTelemetry() {
-      SmartDashboard.putNumber(TelemetryNames.ArmRotator.absCurrent,
+      double current = absEncoder.getPosition();
+      SmartDashboard.putNumber(TelemetryNames.ArmRotator.absCurrent, current);
+      SmartDashboard.putNumber(TelemetryNames.ArmRotator.absCorrected,
             ((absEncoder.getPosition() - absEncoderBaseline) * absEncoderScale));
 
       setTlmPIDCurrent(encoder.getPosition());
