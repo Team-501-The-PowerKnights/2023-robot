@@ -52,7 +52,7 @@ public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
       pid = motor.getPIDController();
       encoder = motor.getEncoder();
       checkError(encoder.setPosition(0), "set encoder position to 0 {}");
-      checkError(motor.setOpenLoopRampRate(0), "set open loop ramp rate to 0 {}");
+      checkError(motor.setClosedLoopRampRate(0), "set closed loop ramp rate to 0 {}");
 
       absEncoder = motor.getAbsoluteEncoder(Type.kDutyCycle);
 
@@ -180,7 +180,7 @@ public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
       checkError(pid.setFF(pidValues.FF), "set PID_FF {}");
       checkError(pid.setOutputRange(pidValues.MinOutput, pidValues.MaxOutput), "set PID_OutputRange {}");
 
-      checkError(motor.setOpenLoopRampRate(rampRate), "set open loop ramp rate to 0 {}");
+      checkError(motor.setClosedLoopRampRate(rampRate), "set closed loop ramp rate {}");
 
       ArmRotationPosition.overPosition.set(overSetPoint);
       ArmRotationPosition.highPosition.set(highSetPoint);
@@ -215,7 +215,7 @@ public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
       logger.trace("set PID target = {}", target);
 
       // FIXME: Change to non-deprecated method
-      checkError(pid.setReference(target, ControlType.kPosition), "PID set reference to kPosition,0 {}");
+      checkError(pid.setReference(target, ControlType.kPosition), "PID set reference to kPosition {}");
       setTlmPIDEnabled(true);
       setTlmPIDTarget(target);
    }
