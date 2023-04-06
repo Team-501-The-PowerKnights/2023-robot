@@ -63,9 +63,9 @@ class AddressibleLEDModule extends BaseLEDModule {
    @Override
    public void setRGB(int r, int g, int b) {
       if (!Robot.isFieldConnected()) {
-         r *= 0.33;
-         g *= 0.33;
-         b *= 0.33;
+         r *= 0.10;
+         g *= 0.10;
+         b *= 0.10;
       }
       for (int i = 0; i < m_ledBuffer.getLength(); i++) {
          m_ledBuffer.setRGB(i, r, g, b);
