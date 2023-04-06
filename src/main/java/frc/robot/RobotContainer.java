@@ -33,6 +33,7 @@ import frc.robot.commands.armextender.ArmExtendToTarget;
 import frc.robot.commands.armextender.ArmExtendWaitAtSetPoint;
 import frc.robot.commands.armextender.ArmExtendWaitOnSetPoint;
 import frc.robot.commands.armrotator.ArmRotateToAutoConePosition;
+import frc.robot.commands.armrotator.ArmRotateToHighPosition;
 import frc.robot.commands.armrotator.ArmRotateToLowPosition;
 import frc.robot.commands.armrotator.ArmRotateToMidPosition;
 import frc.robot.commands.armrotator.ArmRotateToOverPosition;
@@ -291,7 +292,7 @@ public class RobotContainer {
             return
               new SequentialCommandGroup(
                   new GripperEject(),
-                  new ArmRotateToLowPosition(), 
+                  new ArmRotateToHighPosition(), 
                   new ArmExtendToLowPosition(),
                   new WaitCommand(0.5), 
                   new LogPIDs(),
@@ -305,7 +306,7 @@ public class RobotContainer {
             return
               new SequentialCommandGroup(
                   new GripperEject(),
-                  new ArmRotateToLowPosition(), 
+                  new ArmRotateToHighPosition(), 
                   new ArmExtendToLowPosition(),
                   new WaitCommand(0.5), 
                   new LogPIDs(),
