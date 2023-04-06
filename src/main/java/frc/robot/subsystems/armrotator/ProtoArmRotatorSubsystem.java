@@ -39,9 +39,8 @@ public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
    private RelativeEncoder encoder;
 
    private AbsoluteEncoder absEncoder;
-   private final double absEncoderBaseline = 0.5911; // 0.5356;
-   // Plus reverse sign for direction to normalize to relative
-   private final double absEncoderScale = -450; // -112.5;
+   private final double absEncoderBaseline = 0.5912; // 0.5911
+   private final double absEncoderScale = 5.0 * 5.0 * 4.0 * 3.0 * (50.0 / 30.0);
 
    ProtoArmRotatorSubsystem() {
       logger.info("constructing");
@@ -51,15 +50,15 @@ public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
       checkError(motor.setIdleMode(IdleMode.kBrake), "set idle mode to brake {}");
       pid = motor.getPIDController();
       encoder = motor.getEncoder();
-      checkError(encoder.setPosition(0), "set encoder position to 0 {}");
       checkError(motor.setClosedLoopRampRate(0), "set closed loop ramp rate to 0 {}");
+      // checkError(motor.setSmartCurrentLimit(14), "set current limit to 14 {}");
 
       absEncoder = motor.getAbsoluteEncoder(Type.kDutyCycle);
 
       double absEncoderCurrent = absEncoder.getPosition();
       double encoderOffset = absEncoderCurrent - absEncoderBaseline;
-      logger.info("encoder init: baseline={}, current={}, offset={}",
-            absEncoderBaseline, absEncoderCurrent, encoderOffset);
+      logger.info("encoder init: scale = {}, baseline={}, current={}, offset={}",
+            absEncoderScale, absEncoderBaseline, absEncoderCurrent, encoderOffset);
       double encoderZero = encoderOffset * absEncoderScale;
       checkError(encoder.setPosition(encoderZero), "set encoder position based on absolute {}");
 
@@ -156,12 +155,12 @@ public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
 
    @Override
    public void updateTelemetry() {
+      setTlmPIDCurrent(encoder.getPosition());
+
       double current = absEncoder.getPosition();
       SmartDashboard.putNumber(TelemetryNames.ArmRotator.absCurrent, current);
       SmartDashboard.putNumber(TelemetryNames.ArmRotator.absCorrected,
             ((absEncoder.getPosition() - absEncoderBaseline) * absEncoderScale));
-
-      setTlmPIDCurrent(encoder.getPosition());
 
       current = motor.getOutputCurrent(); // bad I know :)
       SmartDashboard.putNumber(TelemetryNames.ArmRotator.current, current);
@@ -226,7 +225,7 @@ public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
 
       double target = getTlmPIDTarget();
       // FIXME: This should be adding and do the sign on input
-      target -= offset;
+      target += offset;
       rotateToTarget(target);
    }
 
