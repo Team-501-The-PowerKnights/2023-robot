@@ -114,7 +114,7 @@
   {
     "name": "/Preferences/ArmRotator.HighSetPoint",
     "type": "double",
-    "value": 0.0,
+    "value": 7.0,
     "properties": {
       "persistent": true
     }
@@ -122,7 +122,7 @@
   {
     "name": "/Preferences/ArmRotator.MidSetPoint",
     "type": "double",
-    "value": 17.0,
+    "value": 18.0,
     "properties": {
       "persistent": true
     }
@@ -138,7 +138,7 @@
   {
     "name": "/Preferences/ArmExtender.P",
     "type": "double",
-    "value": 0.5,
+    "value": 1.0,
     "properties": {
       "persistent": true
     }
@@ -146,7 +146,7 @@
   {
     "name": "/Preferences/ArmExtender.I",
     "type": "double",
-    "value": 0.001,
+    "value": 0.0,
     "properties": {
       "persistent": true
     }
@@ -154,7 +154,7 @@
   {
     "name": "/Preferences/ArmExtender.D",
     "type": "double",
-    "value": 1.0,
+    "value": 0.0,
     "properties": {
       "persistent": true
     }
@@ -170,7 +170,7 @@
   {
     "name": "/Preferences/ArmExtender.FF",
     "type": "double",
-    "value": 0.01,
+    "value": 0.0,
     "properties": {
       "persistent": true
     }
@@ -194,7 +194,7 @@
   {
     "name": "/Preferences/ArmExtender.MinSoftLimit",
     "type": "double",
-    "value": -200.0,
+    "value": -150.0,
     "properties": {
       "persistent": true
     }
@@ -202,7 +202,7 @@
   {
     "name": "/Preferences/ArmExtender.MaxSoftLimit",
     "type": "double",
-    "value": 480.0,
+    "value": 150.0,
     "properties": {
       "persistent": true
     }
@@ -210,7 +210,7 @@
   {
     "name": "/Preferences/ArmExtender.OverSetPoint",
     "type": "double",
-    "value": 365.0,
+    "value": -30.0,
     "properties": {
       "persistent": true
     }
@@ -226,7 +226,7 @@
   {
     "name": "/Preferences/ArmExtender.MidSetPoint",
     "type": "double",
-    "value": 367.0,
+    "value": -30.0,
     "properties": {
       "persistent": true
     }
@@ -234,7 +234,7 @@
   {
     "name": "/Preferences/ArmExtender.LowSetPoint",
     "type": "double",
-    "value": 5.0,
+    "value": -5.0,
     "properties": {
       "persistent": true
     }
@@ -242,7 +242,7 @@
   {
     "name": "/Preferences/ArmExtender.InSetPoint",
     "type": "double",
-    "value": 5.0,
+    "value": 0.0,
     "properties": {
       "persistent": true
     }
@@ -354,7 +354,7 @@
   {
     "name": "/Preferences/ArmExtender.AutoConeSetPoint",
     "type": "double",
-    "value": 200.0,
+    "value": 66.0,
     "properties": {
       "persistent": true
     }
