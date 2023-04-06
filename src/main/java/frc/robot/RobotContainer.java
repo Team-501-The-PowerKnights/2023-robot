@@ -272,7 +272,7 @@ public class RobotContainer {
                   new ArmRotateToLowPosition(),
                   new ArmExtendToLowPosition(),
                   new WaitCommand(0.5),
-                  new DriveBackwardTimed(3.0, -0.60)
+                  new DriveBackwardTimed(3.4, -0.60)  // 3.0
               );
             // @formatter:on
 
@@ -283,7 +283,7 @@ public class RobotContainer {
                   new ArmRotateToLowPosition(),
                   new ArmExtendToLowPosition(),
                   new WaitCommand(0.5),
-                  new DriveForwardTimed(3.0, -0.60)
+                  new DriveForwardTimed(3.4, -0.60)  // 3.0
               );
             // @formatter:on
 
@@ -310,8 +310,8 @@ public class RobotContainer {
                   new ArmExtendToLowPosition(),
                   new WaitCommand(0.5), 
                   new LogPIDs(),
-                  new DriveBackwardToBalance(3.5, -0.60),
-                  new DriveForwardTimed(3.5, 0.45),
+                  new DriveBackwardToBalance(3.9, -0.60),  // 3.5
+                  new DriveForwardTimed(3.9, 0.45),  // 3.5
                   new DriveBalance()
               );
             // @formatter:on
@@ -339,8 +339,8 @@ public class RobotContainer {
                   new ArmExtendToLowPosition(),
                   new WaitCommand(1.0), 
                   new LogPIDs(),
-                  new DriveForwardToBalance(3.6, 0.60),
-                  new DriveBackwardTimed(3.5, -0.45),
+                  new DriveForwardToBalance(3.9, 0.60),  // 3.6
+                  new DriveBackwardTimed(3.8, -0.45),  // 3.5
                   new DriveBalance()
               );
             // @formatter:on

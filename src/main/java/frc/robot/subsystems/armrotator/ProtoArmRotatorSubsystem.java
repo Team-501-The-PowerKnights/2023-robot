@@ -51,7 +51,7 @@ public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
       pid = motor.getPIDController();
       encoder = motor.getEncoder();
       checkError(motor.setClosedLoopRampRate(0), "set closed loop ramp rate to 0 {}");
-      checkError(motor.setSmartCurrentLimit(12), "set current limit to 12 {}");
+      checkError(motor.setSmartCurrentLimit(20), "set current limit to 20 {}");
 
       absEncoder = motor.getAbsoluteEncoder(Type.kDutyCycle);
 
@@ -101,6 +101,28 @@ public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
             logger.debug("************************** FRONT TO BACK ***********************************************");
             onFrontSide = false;
 
+            // On the back side of robot; more power in positive side
+            // (so reverse min & max, but keep signs)
+            logger.debug("properties of pidValues: minOuput = {}, maxOutput = {}",
+                  pidValues.MinOutput, pidValues.MaxOutput);
+            double minOutput = Math.abs(pidValues.MaxOutput);
+            minOutput *= (pidValues.MinOutput < 0) ? -1 : 1;
+            double maxOutput = Math.abs(pidValues.MinOutput);
+            maxOutput *= (pidValues.MaxOutput < 0) ? -1 : 1;
+            logger.debug("calculated min & max ouput: minOuput = {}, maxOutput = {}",
+                  minOutput, maxOutput);
+            // checkError(pid.setOutputRange(minOutput, maxOutput), "set PID_ min and max
+            // output {}");
+            logger.debug("switched min & max ouput from pid: minOuput = {}, maxOutput = {}",
+                  pid.getOutputMin(), pid.getOutputMax());
+
+         } else if ((onFrontSide == false) && (current > 0.5)) {
+            logger.debug("************************** BACK TO FRONT ***********************************************");
+            logger.debug("************  transitioning back to front: current={} onFrontSide={}",
+                  current, onFrontSide);
+            logger.debug("************************** BACK TO FRONT ***********************************************");
+            onFrontSide = true;
+
             // On the front side of robot; more power in negative side (default prefs)
             logger.debug("properties of pidValues: minOuput = {}, maxOutput = {}",
                   pidValues.MinOutput, pidValues.MaxOutput);
@@ -111,27 +133,6 @@ public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
             // checkError(pid.setOutputRange(minOutput, maxOutput), "set PID_ min and max
             // output {}");
             logger.debug("reverted min & max ouput from pid: minOuput = {}, maxOutput = {}",
-                  pid.getOutputMin(), pid.getOutputMax());
-         } else if ((onFrontSide == false) && (current > 0.5)) {
-            logger.debug("************************** BACK TO FRONT ***********************************************");
-            logger.debug("************  transitioning back to front: current={} onFrontSide={}",
-                  current, onFrontSide);
-            logger.debug("************************** BACK TO FRONT ***********************************************");
-            onFrontSide = true;
-
-            // On the back side of robot; more power in positive side
-            // (so reverse min & max, but keep signs)
-            logger.debug("properties of pidValues: minOuput = {}, maxOutput = {}",
-                  pidValues.MinOutput, pidValues.MaxOutput);
-            double minOutput = pidValues.MaxOutput;
-            minOutput *= (pidValues.MinOutput < 0) ? -1 : 1;
-            double maxOutput = pidValues.MinOutput;
-            maxOutput *= (pidValues.MaxOutput < 0) ? -1 : 1;
-            logger.debug("calculated min & max ouput: minOuput = {}, maxOutput = {}",
-                  minOutput, maxOutput);
-            // checkError(pid.setOutputRange(minOutput, maxOutput), "set PID_ min and max
-            // output {}");
-            logger.debug("switched min & max ouput from pid: minOuput = {}, maxOutput = {}",
                   pid.getOutputMin(), pid.getOutputMax());
          }
       } else {

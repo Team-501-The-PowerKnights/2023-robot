@@ -10,6 +10,7 @@ package frc.robot.subsystems.drive;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.REVLibError;
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
@@ -35,6 +36,9 @@ abstract class CANSparkMaxDriveSubsystem extends BaseDriveSubsystem {
    private final CANSparkMax leftRear;
    private final CANSparkMax rightFront;
    private final CANSparkMax rightRear;
+
+   private final RelativeEncoder leftEncoder;
+   private final RelativeEncoder rightEncoder;
 
    // Using WPILib DifferentialDrive for now
    private final DifferentialDrive drive;
@@ -68,6 +72,13 @@ abstract class CANSparkMaxDriveSubsystem extends BaseDriveSubsystem {
 
       // Drive uses the two paired controllers (Front is master)
       drive = new DifferentialDrive(leftFront, rightFront);
+
+      // Instantiation of encoders and zeroing
+      leftEncoder = leftFront.getEncoder();
+      rightEncoder = rightFront.getEncoder();
+
+      checkError(leftEncoder.setPosition(0.0), "L zeroing the encoder {}");
+      checkError(rightEncoder.setPosition(0.0), "R zeroing the encoder {}");
 
       // FIXME: Shouldn't need to do this
       drive.setSafetyEnabled(false);
