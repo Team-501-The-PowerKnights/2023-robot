@@ -155,6 +155,9 @@ public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
 
       setTlmPIDCurrent(encoder.getPosition());
 
+      current = motor.getOutputCurrent(); // bad I know :)
+      SmartDashboard.putNumber(TelemetryNames.ArmRotator.current, current);
+
       super.updateTelemetry();
    }
 

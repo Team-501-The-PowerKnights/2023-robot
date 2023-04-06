@@ -194,6 +194,8 @@ public final class TelemetryNames {
 
       public static final String absCurrent = name + ".absCurrent";
       public static final String absCorrected = name + ".absCorrected";
+
+      public static final String current = name + ".current";
    }
 
    public final class ArmExtender {
