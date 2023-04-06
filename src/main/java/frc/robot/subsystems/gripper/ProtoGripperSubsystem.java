@@ -148,8 +148,12 @@ public class ProtoGripperSubsystem extends BaseGripperSubsystem {
          speed = Math.min(speed, maxInSpeed);
       }
       leftMotor.set(speed);
-      frameMotor.set(TalonFXControlMode.PercentOutput, speed);
       setTlmSpeed(speed);
+      // Reduce the rate of pull-in
+      if (speed > 0) {
+         speed *= 0.35;
+      }
+      frameMotor.set(TalonFXControlMode.PercentOutput, speed);
    }
 
 }
