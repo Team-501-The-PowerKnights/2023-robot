@@ -10,7 +10,10 @@ package frc.robot.modules.led;
 
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
+
+import frc.robot.Robot;
 import frc.robot.utils.PKColor8Bit;
+
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -59,6 +62,11 @@ class AddressibleLEDModule extends BaseLEDModule {
 
    @Override
    public void setRGB(int r, int g, int b) {
+      if (!Robot.isFieldConnected()) {
+         r *= 0.33;
+         g *= 0.33;
+         b *= 0.33;
+      }
       for (int i = 0; i < m_ledBuffer.getLength(); i++) {
          m_ledBuffer.setRGB(i, r, g, b);
       }
