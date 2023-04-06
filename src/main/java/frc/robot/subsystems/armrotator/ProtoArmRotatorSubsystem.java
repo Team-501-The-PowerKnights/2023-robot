@@ -51,7 +51,7 @@ public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
       pid = motor.getPIDController();
       encoder = motor.getEncoder();
       checkError(motor.setClosedLoopRampRate(0), "set closed loop ramp rate to 0 {}");
-      // checkError(motor.setSmartCurrentLimit(14), "set current limit to 14 {}");
+      checkError(motor.setSmartCurrentLimit(12), "set current limit to 12 {}");
 
       absEncoder = motor.getAbsoluteEncoder(Type.kDutyCycle);
 
