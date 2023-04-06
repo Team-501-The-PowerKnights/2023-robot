@@ -8,10 +8,6 @@
 
 package frc.robot.modules.power;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import frc.robot.telemetry.TelemetryNames;
-
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -24,13 +20,6 @@ public class ProtoPowerModule extends PDHPowerModule {
       logger.info("constructing");
 
       logger.info("constructed");
-   }
-
-   @Override
-   public void updateTelemetry() {
-      SmartDashboard.putNumber(TelemetryNames.Power.armExtenderCurrent, getCurrent(11));
-
-      super.updateTelemetry();
    }
 
 }

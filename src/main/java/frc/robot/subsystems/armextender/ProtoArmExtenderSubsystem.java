@@ -17,6 +17,10 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMax.SoftLimitDirection;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import frc.robot.telemetry.TelemetryNames;
+
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -81,6 +85,9 @@ public class ProtoArmExtenderSubsystem extends BaseArmExtenderSubsystem {
    @Override
    public void updateTelemetry() {
       setTlmPIDCurrent(encoder.getPosition());
+
+      double current = motor.getOutputCurrent(); // bad I know :)
+      SmartDashboard.putNumber(TelemetryNames.ArmExtender.current, current);
 
       super.updateTelemetry();
    }
