@@ -64,6 +64,11 @@ public final class ArmExtenderPreferences extends BasePreferences {
    static final double default_pid_minOutput = -1;
    static final double default_pid_maxOutput = 1;
 
+   /** Ramp rate */
+   final String rampRate = name + ".RampRate";
+
+   private static final double default_rampRate = 0.5;
+
    /** Soft limits */
    final String minSoftLimit = name + ".MinSoftLimit";
    final String maxSoftLimit = name + ".MaxSoftLimit";
@@ -119,6 +124,11 @@ public final class ArmExtenderPreferences extends BasePreferences {
       if (!Preferences.containsKey(PID_maxOutput)) {
          logger.warn("{} doesn't exist; creating with default", PID_maxOutput);
          Preferences.setDouble(PID_maxOutput, default_pid_maxOutput);
+      }
+
+      if (!Preferences.containsKey(rampRate)) {
+         logger.warn("{} doesn't exist; creating with default", rampRate);
+         Preferences.setDouble(rampRate, default_rampRate);
       }
 
       if (!Preferences.containsKey(minSoftLimit)) {

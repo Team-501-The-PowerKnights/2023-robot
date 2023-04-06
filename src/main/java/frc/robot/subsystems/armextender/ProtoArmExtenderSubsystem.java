@@ -45,11 +45,13 @@ public class ProtoArmExtenderSubsystem extends BaseArmExtenderSubsystem {
       checkError(motor.setIdleMode(IdleMode.kBrake), "set idle mode to brake {}");
       pid = motor.getPIDController();
       encoder = motor.getEncoder();
+      checkError(motor.setClosedLoopRampRate(0), "set closed loop ramp rate to 0 {}");
+      // checkError(motor.setSmartCurrentLimit(14), "set current limit to 14 {}");
+
       checkError(motor.setSoftLimit(SoftLimitDirection.kReverse, 0), "set min soft limit to 0 {}");
       checkError(motor.setSoftLimit(SoftLimitDirection.kForward, 0), "set max soft limit to 0 {}");
       checkError(motor.enableSoftLimit(SoftLimitDirection.kReverse, true), "enable reverse soft limit {}");
       checkError(motor.enableSoftLimit(SoftLimitDirection.kForward, true), "enable forward soft limit {}");
-      // checkError(motor.setSmartCurrentLimit(14), "set current limit to 14 {}");
 
       // Set the PID so when it wakes up it doesn't try to move
       extendToTarget(encoder.getPosition());
@@ -102,6 +104,8 @@ public class ProtoArmExtenderSubsystem extends BaseArmExtenderSubsystem {
       checkError(pid.setIZone(pidValues.IZone), "set PID_IZone {}");
       checkError(pid.setFF(pidValues.FF), "set PID_FF {}");
       checkError(pid.setOutputRange(pidValues.MinOutput, pidValues.MaxOutput), "set PID_OutputRange {}");
+
+      checkError(motor.setClosedLoopRampRate(rampRate), "set closed loop ramp rate {}");
 
       checkError(motor.setSoftLimit(SoftLimitDirection.kReverse, minSoftLimit), "set min soft limit to 0 {}");
       checkError(motor.setSoftLimit(SoftLimitDirection.kForward, maxSoftLimit), "set max soft limit to 0 {}");
