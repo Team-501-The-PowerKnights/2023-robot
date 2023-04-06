@@ -39,9 +39,9 @@ public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
    private RelativeEncoder encoder;
 
    private AbsoluteEncoder absEncoder;
-   private final double absEncoderBaseline = 0.5356;
+   private final double absEncoderBaseline = 0.5911; // 0.5356;
    // Plus reverse sign for direction to normalize to relative
-   private final double absEncoderScale = -112.5;
+   private final double absEncoderScale = -450; // -112.5;
 
    ProtoArmRotatorSubsystem() {
       logger.info("constructing");
@@ -103,9 +103,15 @@ public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
             onFrontSide = false;
 
             // On the front side of robot; more power in negative side
-            // checkError(pid.setOutputRange(pidValues.MinOutput, pidValues.MaxOutput),
-            // "set PID_ min and max output {}");
-            logger.debug("switch min & max ouput: minOuput = {}, maxOutput = {}",
+            logger.debug("properties of pidValues: minOuput = {}, maxOutput = {}",
+                  pidValues.MinOutput, pidValues.MaxOutput);
+            double minOutput = pidValues.MinOutput;
+            double maxOutput = pidValues.MaxOutput;
+            logger.debug("calculated min & max ouput: minOuput = {}, maxOutput = {}",
+                  minOutput, maxOutput);
+            // checkError(pid.setOutputRange(minOutput, maxOutput), "set PID_ min and max
+            // output {}");
+            logger.debug("switched min & max ouput from pid: minOuput = {}, maxOutput = {}",
                   pid.getOutputMin(), pid.getOutputMax());
          } else if ((onFrontSide == false) && (current > 0.5)) {
             logger.debug("************************** BACK TO FRONT ***********************************************");
@@ -116,15 +122,17 @@ public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
 
             // On the back side of robot; more power in positive side (so reverse min & max,
             // but keep signs)
+            logger.debug("properties of pidValues: minOuput = {}, maxOutput = {}",
+                  pidValues.MinOutput, pidValues.MaxOutput);
             double minOutput = pidValues.MaxOutput;
             minOutput *= (pidValues.MinOutput < 0) ? -1 : 1;
             double maxOutput = pidValues.MinOutput;
             maxOutput *= (pidValues.MaxOutput < 0) ? -1 : 1;
-            logger.debug("switch min & max ouput: minOuput = {}, maxOutput = {}",
+            logger.debug("calculated min & max ouput: minOuput = {}, maxOutput = {}",
                   minOutput, maxOutput);
             // checkError(pid.setOutputRange(minOutput, maxOutput), "set PID_ min and max
             // output {}");
-            logger.debug("switch min & max ouput: minOuput = {}, maxOutput = {}",
+            logger.debug("switched min & max ouput from pid: minOuput = {}, maxOutput = {}",
                   pid.getOutputMin(), pid.getOutputMax());
          }
       } else {
