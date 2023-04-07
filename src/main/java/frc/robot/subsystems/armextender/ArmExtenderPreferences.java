@@ -56,13 +56,13 @@ public final class ArmExtenderPreferences extends BasePreferences {
    final String PID_minOutput = name + PIDValues.pid_minOutput;
    final String PID_maxOutput = name + PIDValues.pid_maxOutput;
 
-   static final double default_pid_P = 0.5;
-   static final double default_pid_I = 0.001;
-   static final double default_pid_D = 1;
+   static final double default_pid_P = 1;
+   static final double default_pid_I = 0.0001;
+   static final double default_pid_D = 5;
    static final double default_pid_IZone = 10;
-   static final double default_pid_FF = 0.01;
-   static final double default_pid_minOutput = -1;
-   static final double default_pid_maxOutput = 1;
+   static final double default_pid_FF = 0;
+   static final double default_pid_minOutput = -0.5;
+   static final double default_pid_maxOutput = 0.5;
 
    /** Ramp rate */
    final String rampRate = name + ".RampRate";
@@ -73,8 +73,8 @@ public final class ArmExtenderPreferences extends BasePreferences {
    final String minSoftLimit = name + ".MinSoftLimit";
    final String maxSoftLimit = name + ".MaxSoftLimit";
 
-   static final float default_minSoftLimit = -200f;
-   static final float default_maxSoftLimit = 480f;
+   static final float default_minSoftLimit = -150f;
+   static final float default_maxSoftLimit = 0f;
 
    /** Set points for the various positions */
    final String overSetPoint = name + ".OverSetPoint";
@@ -85,13 +85,13 @@ public final class ArmExtenderPreferences extends BasePreferences {
    //
    final String autoConeSetPoint = name + ".AutoConeSetPoint";
 
-   static final double default_overPosition = 365;
+   static final double default_overPosition = -31.2;
    static final double default_highPosition = 0;
-   static final double default_midPosition = 367;
-   static final double default_lowPosition = 5;
-   static final double default_inPosition = 5;
+   static final double default_midPosition = -26;
+   static final double default_lowPosition = 0;
+   static final double default_inPosition = 0;
    //
-   static final double default_autoConePosition = 200;
+   static final double default_autoConePosition = 66;
 
    // FIXME: Make perferences & NetworkTables right
    public void initialize() {
