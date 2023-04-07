@@ -231,21 +231,26 @@ public class RobotContainer {
       autoChooser.addOption("Community FORWARD to Balance", AutoSelection.doCommunityForwardToBalance);
 
       //
-      autoChooser.addOption("Place Mid Cone (Timed)", AutoSelection.doMidConeTimed);
+      // autoChooser.addOption("Place Mid Cone (Timed)",
+      // AutoSelection.doMidConeTimed);
       //
-      autoChooser.addOption("Place Mid Cone (PID)", AutoSelection.doMidConePID);
+      // autoChooser.addOption("Place Mid Cone (PID)", AutoSelection.doMidConePID);
       //
       autoChooser.addOption("Place Mid Cone & BACKWARD", AutoSelection.doMidConeAndBackward);
       //
       // autoChooser.addOption("Place Over Cone & Go Forward",
       // AutoSelection.doOverConeAndGoForward);
       //
-      autoChooser.addOption("Full Auto", AutoSelection.doFull);
+      // autoChooser.addOption("Full Auto", AutoSelection.doFull);
 
-      // Working on automating operator
-      autoChooser.addOption("*** Place Low Cone Forward (Timed)", AutoSelection.doLowConeForwardTimed);
+      /*
+       * Working on automating operator
+       */
+      // autoChooser.addOption("*** Place Low Cone Forward (Timed)",
+      // AutoSelection.doLowConeForwardTimed);
       //
-      autoChooser.addOption("*** Place Low Cone Forward (PID)", AutoSelection.doLowConeForwardPID);
+      // autoChooser.addOption("*** Place Low Cone Forward (PID)",
+      // AutoSelection.doLowConeForwardPID);
 
       SmartDashboard.putData("Auto Mode", autoChooser);
    }
