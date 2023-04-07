@@ -20,8 +20,10 @@ import frc.robot.commands.armextender.ArmExtendToTarget;
 import frc.robot.commands.armextender.ArmExtendWaitAtSetPoint;
 import frc.robot.commands.armextender.ArmNudgeExtensionTarget;
 import frc.robot.commands.armrotator.ArmNudgeRotationTarget;
+import frc.robot.commands.armrotator.ArmOffsetRotationTarget;
 import frc.robot.commands.armrotator.ArmRotateToHighPosition;
 import frc.robot.commands.armrotator.ArmRotateToLowPosition;
+import frc.robot.commands.armrotator.ArmRotateToMidPosition;
 import frc.robot.commands.armrotator.ArmRotateToOverPosition;
 import frc.robot.commands.armrotator.ArmRotateToTarget;
 import frc.robot.commands.armrotator.ArmRotateWaitAtSetPoint;
@@ -30,7 +32,7 @@ import frc.robot.commands.gripper.GripperGrip;
 import frc.robot.commands.gripper.GripperStop;
 import frc.robot.commands.wrist.WristRotateToOverPosition;
 import frc.robot.commands.wrist.WristRotateToUpPosition;
-
+import frc.robot.subsystems.armrotator.IArmRotatorSubsystem;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -159,9 +161,9 @@ public class OperatorGamepad extends F310Gamepad {
       // This does both low cone as well as mid- and high-cube
       armMidPoseButton
             .onTrue(new SequentialCommandGroup(
-                  new SequentialCommandGroup(new ArmRotateToTarget(-82), new ArmRotateWaitAtSetPoint()),
+                  new SequentialCommandGroup(new ArmRotateToMidPosition(), new ArmRotateWaitAtSetPoint()),
                   new SequentialCommandGroup(new ArmExtendToTarget(141.2), new ArmExtendWaitAtSetPoint()),
-                  new SequentialCommandGroup(new ArmRotateToTarget(-90.83), new ArmRotateWaitAtSetPoint()),
+                  new SequentialCommandGroup(new ArmOffsetRotationTarget(2), new ArmRotateWaitAtSetPoint()),
                   new SequentialCommandGroup(new GripperEject(), new WaitCommand(0.3)),
                   new SequentialCommandGroup(new ArmExtendToInPosition(), new ArmExtendWaitAtSetPoint()),
                   new GripperStop()));
