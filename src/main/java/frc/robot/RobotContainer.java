@@ -28,10 +28,12 @@ import frc.robot.commands.LogPIDs;
 import frc.robot.commands.armextender.ArmExtendToAutoConePosition;
 import frc.robot.commands.armextender.ArmExtendToInPosition;
 import frc.robot.commands.armextender.ArmExtendToLowPosition;
+import frc.robot.commands.armextender.ArmExtendToMidPosition;
 import frc.robot.commands.armextender.ArmExtendToOverPosition;
 import frc.robot.commands.armextender.ArmExtendToTarget;
 import frc.robot.commands.armextender.ArmExtendWaitAtSetPoint;
 import frc.robot.commands.armextender.ArmExtendWaitOnSetPoint;
+import frc.robot.commands.armrotator.ArmOffsetRotationTarget;
 import frc.robot.commands.armrotator.ArmRotateToAutoConePosition;
 import frc.robot.commands.armrotator.ArmRotateToHighPosition;
 import frc.robot.commands.armrotator.ArmRotateToLowPosition;
@@ -382,15 +384,12 @@ public class RobotContainer {
             // @formatter:off
             return
                new SequentialCommandGroup(
-                  new SequentialCommandGroup(new ArmRotateToAutoConePosition(), new WaitCommand(1)),
-                  new SequentialCommandGroup(new WristRotateToOverPosition(), new WaitCommand(0.5)),
-                  new SequentialCommandGroup(new ArmExtendToAutoConePosition(), new WaitCommand(3.5)), // 4
-                  new LogPIDs(),
-                  new SequentialCommandGroup(new GripperEject(), new WaitCommand(0.5)),
-                  new ParallelCommandGroup(
-                     new SequentialCommandGroup(new ArmExtendToLowPosition(), new WaitCommand(3)),
-                     new SequentialCommandGroup(new GripperStop(), new WaitCommand(0.1))
-                  ),
+                  new SequentialCommandGroup(new ArmRotateToMidPosition(), new ArmRotateWaitAtSetPoint()),
+                  new SequentialCommandGroup(new ArmExtendToMidPosition(), new ArmExtendWaitAtSetPoint()),
+                  new SequentialCommandGroup(new ArmOffsetRotationTarget(-4), new ArmRotateWaitAtSetPoint()),
+                  new SequentialCommandGroup(new GripperEject(), new WaitCommand(0.3)),
+                  new SequentialCommandGroup(new ArmExtendToInPosition(), new ArmExtendWaitAtSetPoint()),
+                  new GripperStop(),
                   new DriveBackwardTimed(3.5, -0.60)  // 3.0 2.24
                );
             // @formatter:on

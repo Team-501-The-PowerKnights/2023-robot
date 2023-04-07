@@ -147,25 +147,35 @@ public class OperatorGamepad extends F310Gamepad {
 
       // Pose the arm when button is pressed
       armOverPoseButton
-            .onTrue(new ArmExtendToInPosition())
-            .onTrue(new WaitCommand(2.0)) // FIXME: Delete time delay
-            .onTrue(new ArmRotateToOverPosition())
-            .onTrue(new WaitCommand(2.0)) // FIXME: Delete time delay
-            .onTrue(new ArmExtendToOverPosition())
-            .onTrue(new WristRotateToOverPosition());
+            .onTrue(new SequentialCommandGroup(
+                  new SequentialCommandGroup(new ArmExtendToInPosition(), new ArmExtendWaitAtSetPoint()),
+                  new SequentialCommandGroup(new ArmRotateToHighPosition(), new ArmRotateWaitAtSetPoint()),
+                  new WristRotateToOverPosition(),
+                  new SequentialCommandGroup(new ArmRotateToOverPosition(), new ArmRotateWaitAtSetPoint()),
+                  new SequentialCommandGroup(new ArmExtendToOverPosition(), new ArmExtendWaitAtSetPoint()),
+                  new SequentialCommandGroup(new ArmOffsetRotationTarget(3), new ArmRotateWaitAtSetPoint()),
+                  new SequentialCommandGroup(new GripperEject(), new WaitCommand(0.3)),
+                  new SequentialCommandGroup(new ArmExtendToMidPosition(), new ArmExtendWaitAtSetPoint()),
+                  new GripperStop(),
+                  new ArmRotateToHighPosition(),
+                  new WristRotateToUpPosition(),
+                  new SequentialCommandGroup(new ArmExtendToInPosition(), new ArmExtendWaitAtSetPoint())));
+
       armHighPoseButton
             .onTrue(new ArmRotateToHighPosition())
             .onTrue(new ArmExtendToHighPosition())
             .onTrue(new WristRotateToUpPosition());
+
       // This does both low cone as well as mid- and high-cube
       armMidPoseButton
             .onTrue(new SequentialCommandGroup(
                   new SequentialCommandGroup(new ArmRotateToMidPosition(), new ArmRotateWaitAtSetPoint()),
                   new SequentialCommandGroup(new ArmExtendToMidPosition(), new ArmExtendWaitAtSetPoint()),
-                  new SequentialCommandGroup(new ArmOffsetRotationTarget(-3), new ArmRotateWaitAtSetPoint()),
+                  new SequentialCommandGroup(new ArmOffsetRotationTarget(-4), new ArmRotateWaitAtSetPoint()),
                   new SequentialCommandGroup(new GripperEject(), new WaitCommand(0.3)),
                   new SequentialCommandGroup(new ArmExtendToInPosition(), new ArmExtendWaitAtSetPoint()),
                   new GripperStop()));
+
       armLowPoseButton
             .onTrue(new ArmRotateToLowPosition())
             .onTrue(new ArmExtendToLowPosition())
