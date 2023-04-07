@@ -87,7 +87,7 @@ public abstract class PIDSubsystem extends BaseSubsystem implements IPIDSubsyste
 
    private class AtSetPoint {
       // The error that is considered at setpoint.
-      private double m_positionTolerance = 0.13; // 0.09
+      private double m_positionTolerance = 0.25; // 0.09
 
       // The error at the time of the most recent call to calculate()
       private double m_positionError;
