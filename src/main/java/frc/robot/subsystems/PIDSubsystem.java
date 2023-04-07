@@ -120,7 +120,7 @@ public abstract class PIDSubsystem extends BaseSubsystem implements IPIDSubsyste
 
       public void calcPositionError() {
          m_positionError = Math.abs(m_setpoint - m_measurement);
-         if (m_positionError < m_positionTolerance) {
+         if (m_positionError <= m_positionTolerance) {
             m_positionAtCount = (m_positionAtCount < 0) ? 0 : ++m_positionAtCount;
          } else {
             --m_positionAtCount;
