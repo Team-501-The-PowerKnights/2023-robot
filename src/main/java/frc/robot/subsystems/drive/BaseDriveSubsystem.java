@@ -8,6 +8,7 @@
 
 package frc.robot.subsystems.drive;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.commands.drive.DriveDoNothing;
@@ -56,6 +57,8 @@ abstract class BaseDriveSubsystem extends BaseSubsystem implements IDriveSubsyst
    private double tlmLeftSpeed = 0.0;
    private double tlmRightSpeed = 0.0;
    private boolean tlmBrakeEnabled = false;
+   private double tlmOdometerClicks = 0.0;
+   private double tlmSpeedometerClicks = 0.0;
 
    protected void setTlmSpeed(double leftSpeed, double rightSpeed) {
       tlmLeftSpeed = leftSpeed;
@@ -66,11 +69,32 @@ abstract class BaseDriveSubsystem extends BaseSubsystem implements IDriveSubsyst
       tlmBrakeEnabled = brakeEnabled;
    }
 
+   protected void setTlmOdometerClicks(double count) {
+      tlmOdometerClicks = count;
+   }
+
+   protected double getTlmOdometerClicks() {
+      return tlmOdometerClicks;
+   }
+
+   protected void setTlmSpeedometerClicks(double speed) {
+      tlmSpeedometerClicks = speed;
+   }
+
+   protected double getTlmSpeedometerClicks() {
+      return tlmSpeedometerClicks;
+   }
+
    @Override
    public void updateTelemetry() {
       SmartDashboard.putNumber(TelemetryNames.Drive.leftSpeed, tlmLeftSpeed);
       SmartDashboard.putNumber(TelemetryNames.Drive.rightSpeed, tlmRightSpeed);
       SmartDashboard.putBoolean(TelemetryNames.Drive.brakeEnabled, tlmBrakeEnabled);
+
+      if (DriverStation.isAutonomousEnabled()) {
+         SmartDashboard.putNumber(TelemetryNames.Drive.odometerClicks, tlmOdometerClicks);
+         SmartDashboard.putNumber(TelemetryNames.Drive.speedometerClicks, tlmSpeedometerClicks);
+      }
    }
 
    @Override

@@ -134,13 +134,23 @@ public class SuitcaseDriveSubsystem extends BaseDriveSubsystem {
    }
 
    @Override
-   public double getEncoderClicks() {
+   public void logOdometer() {
+      // TODO Auto-generated method stub
+   }
+
+   @Override
+   public void resetOdometer() {
+      // TODO Auto-generated method stub
+   }
+
+   @Override
+   public double getOdometerClicks() {
       // TODO Auto-generated method stub
       return 0;
    }
 
    @Override
-   public double getEncoderVelocity() {
+   public double getSpeedometerClicks() {
       // TODO Auto-generated method stub
       return 0;
    }

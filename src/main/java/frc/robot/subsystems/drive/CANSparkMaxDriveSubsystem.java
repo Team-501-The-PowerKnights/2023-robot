@@ -16,7 +16,10 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
+
+import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
@@ -99,6 +102,23 @@ abstract class CANSparkMaxDriveSubsystem extends BaseDriveSubsystem {
    }
 
    @Override
+   public void updateTelemetry() {
+      SmartDashboard.putNumber(TelemetryNames.Drive.leftEncoderClicks, leftEncoder.getPosition());
+      SmartDashboard.putNumber(TelemetryNames.Drive.rightEncoderClicks, rightEncoder.getPosition());
+
+      double leftCount = leftEncoder.getPosition();
+      double rightCount = rightEncoder.getPosition();
+      double clicks = (leftCount + rightCount) / 2;
+      setTlmOdometerClicks(clicks);
+      double leftVelocity = leftEncoder.getVelocity();
+      double rightVelocity = rightEncoder.getVelocity();
+      double velocity = (leftVelocity + rightVelocity) / 2;
+      setTlmSpeedometerClicks(velocity);
+
+      super.updateTelemetry();
+   }
+
+   @Override
    public void validateCalibration() {
       // TODO Auto-generated method stub
    }
@@ -152,15 +172,28 @@ abstract class CANSparkMaxDriveSubsystem extends BaseDriveSubsystem {
    }
 
    @Override
-   public double getEncoderClicks() {
-      // TODO Auto-generated method stub
-      return 0;
+   public void logOdometer() {
+      logger.info("{}: Odometer clicks = {} velocity = {}",
+            myName, getOdometerClicks(), getSpeedometerClicks());
    }
 
    @Override
-   public double getEncoderVelocity() {
-      // TODO Auto-generated method stub
-      return 0;
+   public void resetOdometer() {
+      checkError(leftEncoder.setPosition(0.0), "L zeroing the encoder {}");
+      checkError(rightEncoder.setPosition(0.0), "R zeroing the encoder {}");
+
+      setTlmOdometerClicks(0);
+      setTlmSpeedometerClicks(0);
+   }
+
+   @Override
+   public double getOdometerClicks() {
+      return getTlmOdometerClicks();
+   }
+
+   @Override
+   public double getSpeedometerClicks() {
+      return getTlmSpeedometerClicks();
    }
 
    @Override
