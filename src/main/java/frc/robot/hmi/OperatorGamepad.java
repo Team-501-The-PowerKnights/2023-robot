@@ -8,6 +8,7 @@
 
 package frc.robot.hmi;
 
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -31,7 +32,7 @@ import frc.robot.commands.gripper.GripperGrip;
 import frc.robot.commands.gripper.GripperStop;
 import frc.robot.commands.wrist.WristRotateToOverPosition;
 import frc.robot.commands.wrist.WristRotateToUpPosition;
-
+import frc.robot.subsystems.armrotator.ArmRotatorFactory;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -53,6 +54,8 @@ public class OperatorGamepad extends F310Gamepad {
 
    private final Trigger armRetractButton;
 
+   private final Trigger armSyncEncodersButton;
+
    private final Trigger armRotateNudgeJoystick;
    private final Trigger armExtendNudgeJoystick;
 
@@ -68,6 +71,8 @@ public class OperatorGamepad extends F310Gamepad {
       armLowPoseButton = cmdStick.button(greenButton);
 
       armRetractButton = cmdStick.button(blueButton);
+
+      armSyncEncodersButton = cmdStick.button(startButton);
 
       armRotateNudgeJoystick = new Trigger(this::isArmRotationNudged);
       armExtendNudgeJoystick = new Trigger(this::isArmExtensionNudged);
@@ -184,6 +189,10 @@ public class OperatorGamepad extends F310Gamepad {
       // Retract arm completely when button is pressed
       armRetractButton
             .onTrue(new ArmExtendToInPosition());
+
+      // Sync arm rotator encoders when button is pressed
+      armSyncEncodersButton
+            .onTrue(Commands.runOnce(() -> ArmRotatorFactory.getInstance().syncEncoders()));
 
       // Nudge rotation when joystick is moved
       armRotateNudgeJoystick

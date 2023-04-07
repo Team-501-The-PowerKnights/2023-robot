@@ -55,12 +55,7 @@ public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
 
       absEncoder = motor.getAbsoluteEncoder(Type.kDutyCycle);
 
-      double absEncoderCurrent = absEncoder.getPosition();
-      double encoderOffset = absEncoderCurrent - absEncoderBaseline;
-      logger.info("encoder init: scale = {}, baseline={}, current={}, offset={}",
-            absEncoderScale, absEncoderBaseline, absEncoderCurrent, encoderOffset);
-      double encoderZero = encoderOffset * absEncoderScale;
-      checkError(encoder.setPosition(encoderZero), "set encoder position based on absolute {}");
+      double encoderZero = syncEncoders();
 
       // Set the PID so when it wakes up it doesn't try to move
       rotateToTarget(encoderZero); // Can't use get right after set?
@@ -234,6 +229,20 @@ public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
    public void rotate(double speed) {
       // TODO Auto-generated method stub
 
+   }
+
+   @Override
+   public double syncEncoders() {
+      logger.debug("sync encoders");
+
+      double absEncoderCurrent = absEncoder.getPosition();
+      double encoderOffset = absEncoderCurrent - absEncoderBaseline;
+      logger.info("encoder sync: scale = {}, baseline={}, current={}, offset={}",
+            absEncoderScale, absEncoderBaseline, absEncoderCurrent, encoderOffset);
+      double encoderZero = encoderOffset * absEncoderScale;
+      checkError(encoder.setPosition(encoderZero), "set encoder position based on absolute {}");
+
+      return encoderZero;
    }
 
 }

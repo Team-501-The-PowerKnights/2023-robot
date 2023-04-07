@@ -87,4 +87,10 @@ public interface IArmRotatorSubsystem extends IPIDSubsystem {
     */
    public void rotate(double speed);
 
+   /**
+    * 
+    * @return
+    */
+   public double syncEncoders();
+
 }
