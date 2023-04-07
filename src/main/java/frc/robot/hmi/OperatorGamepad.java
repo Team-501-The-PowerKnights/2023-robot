@@ -171,7 +171,7 @@ public class OperatorGamepad extends F310Gamepad {
             .onTrue(new SequentialCommandGroup(
                   new SequentialCommandGroup(new ArmRotateToMidPosition(), new ArmRotateWaitAtSetPoint()),
                   new SequentialCommandGroup(new ArmExtendToMidPosition(), new ArmExtendWaitAtSetPoint()),
-                  new SequentialCommandGroup(new ArmOffsetRotationTarget(-4), new ArmRotateWaitAtSetPoint()),
+                  new SequentialCommandGroup(new ArmOffsetRotationTarget(-5), new ArmRotateWaitAtSetPoint()),
                   new SequentialCommandGroup(new GripperEject(), new WaitCommand(0.3)),
                   new SequentialCommandGroup(new ArmExtendToInPosition(), new ArmExtendWaitAtSetPoint()),
                   new GripperStop()));
