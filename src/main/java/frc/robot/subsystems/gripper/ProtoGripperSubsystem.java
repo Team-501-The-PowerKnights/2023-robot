@@ -141,8 +141,6 @@ public class ProtoGripperSubsystem extends BaseGripperSubsystem {
       leftMotor.set(speed);
       setTlmSpeed(speed);
 
-      // Reduce the rate for frame one
-      // speed *= 0.50;
       // Don't run the frame one
       speed = 0;
       frameMotor.set(TalonFXControlMode.PercentOutput, speed);
@@ -159,10 +157,9 @@ public class ProtoGripperSubsystem extends BaseGripperSubsystem {
       setTlmSpeed(speed);
 
       // Reduce the rate for frame one
-      if (speed > 0) {
-         speed *= 0.35;
-      } else {
-         speed *= 0.65;
+      if (Math.abs(speed) < 0.75) {
+         speed = 0.35;
+         speed *= (speed < 0) ? -1 : 1;
       }
       frameMotor.set(TalonFXControlMode.PercentOutput, speed);
    }
