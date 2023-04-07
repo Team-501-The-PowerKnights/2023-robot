@@ -51,7 +51,7 @@ public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
       pid = motor.getPIDController();
       encoder = motor.getEncoder();
       checkError(motor.setClosedLoopRampRate(0), "set closed loop ramp rate to 0 {}");
-      checkError(motor.setSmartCurrentLimit(20), "set current limit to 20 {}");
+      // checkError(motor.setSmartCurrentLimit(20), "set current limit to 20 {}");
 
       absEncoder = motor.getAbsoluteEncoder(Type.kDutyCycle);
 
@@ -226,7 +226,7 @@ public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
 
       double target = getTlmPIDTarget();
       // FIXME: This should be adding and do the sign on input
-      target += offset;
+      target -= offset;
       rotateToTarget(target);
    }
 

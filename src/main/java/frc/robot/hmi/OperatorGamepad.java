@@ -15,8 +15,8 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.armextender.ArmExtendToHighPosition;
 import frc.robot.commands.armextender.ArmExtendToInPosition;
 import frc.robot.commands.armextender.ArmExtendToLowPosition;
+import frc.robot.commands.armextender.ArmExtendToMidPosition;
 import frc.robot.commands.armextender.ArmExtendToOverPosition;
-import frc.robot.commands.armextender.ArmExtendToTarget;
 import frc.robot.commands.armextender.ArmExtendWaitAtSetPoint;
 import frc.robot.commands.armextender.ArmNudgeExtensionTarget;
 import frc.robot.commands.armrotator.ArmNudgeRotationTarget;
@@ -25,14 +25,13 @@ import frc.robot.commands.armrotator.ArmRotateToHighPosition;
 import frc.robot.commands.armrotator.ArmRotateToLowPosition;
 import frc.robot.commands.armrotator.ArmRotateToMidPosition;
 import frc.robot.commands.armrotator.ArmRotateToOverPosition;
-import frc.robot.commands.armrotator.ArmRotateToTarget;
 import frc.robot.commands.armrotator.ArmRotateWaitAtSetPoint;
 import frc.robot.commands.gripper.GripperEject;
 import frc.robot.commands.gripper.GripperGrip;
 import frc.robot.commands.gripper.GripperStop;
 import frc.robot.commands.wrist.WristRotateToOverPosition;
 import frc.robot.commands.wrist.WristRotateToUpPosition;
-import frc.robot.subsystems.armrotator.IArmRotatorSubsystem;
+
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -162,8 +161,8 @@ public class OperatorGamepad extends F310Gamepad {
       armMidPoseButton
             .onTrue(new SequentialCommandGroup(
                   new SequentialCommandGroup(new ArmRotateToMidPosition(), new ArmRotateWaitAtSetPoint()),
-                  new SequentialCommandGroup(new ArmExtendToTarget(141.2), new ArmExtendWaitAtSetPoint()),
-                  new SequentialCommandGroup(new ArmOffsetRotationTarget(2), new ArmRotateWaitAtSetPoint()),
+                  new SequentialCommandGroup(new ArmExtendToMidPosition(), new ArmExtendWaitAtSetPoint()),
+                  new SequentialCommandGroup(new ArmOffsetRotationTarget(-3), new ArmRotateWaitAtSetPoint()),
                   new SequentialCommandGroup(new GripperEject(), new WaitCommand(0.3)),
                   new SequentialCommandGroup(new ArmExtendToInPosition(), new ArmExtendWaitAtSetPoint()),
                   new GripperStop()));
