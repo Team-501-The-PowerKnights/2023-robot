@@ -180,7 +180,11 @@ public class RobotContainer {
       doMidConeAndBackward("doMidConeAndBackward"),
       doOverConeAndGoForward("doOverConeAndForward"),
       //
-      doHighCubeAndBackward("doHighCubeAndBackward");
+      doMidConeAndBackwardToBalance("doMidConeAndBackwardToBalance"),
+      //
+      doHighCubeAndBackward("doHighCubeAndBackward"),
+      //
+      doHighCubeAndBackwardToBalance("doHighCubeAndBackwardToBalance");
       // @formatter:on
 
       private final String name;
@@ -234,10 +238,22 @@ public class RobotContainer {
       autoChooser.addOption("Place Over CONE & Go FORWARD", AutoSelection.doOverConeAndGoForward);
 
       /**
+       * Cone and Balance
+       */
+      //
+      autoChooser.addOption("Place Mid CONE & BACKWARD to Balance", AutoSelection.doMidConeAndBackwardToBalance);
+
+      /**
        * Cube and Drive
        */
       //
       autoChooser.addOption("Place High CUBE & BACKWARD", AutoSelection.doHighCubeAndBackward);
+
+      /**
+       * Cube and Balance
+       */
+      //
+      autoChooser.addOption("Place High CUBE & BACKWARD to Balance", AutoSelection.doHighCubeAndBackwardToBalance);
 
       SmartDashboard.putData("Auto Mode", autoChooser);
    }
@@ -373,6 +389,21 @@ public class RobotContainer {
                );
             // @formatter:on
 
+         case doMidConeAndBackwardToBalance:
+            // @formatter:off
+            return
+               new SequentialCommandGroup(
+                  new SequentialCommandGroup(new ArmRotateToMidPosition(), new ArmRotateWaitAtSetPoint()),
+                  new SequentialCommandGroup(new ArmExtendToMidPosition(), new ArmExtendWaitAtSetPoint()),
+                  new SequentialCommandGroup(new ArmOffsetRotationTarget(-4), new ArmRotateWaitAtSetPoint()),
+                  new SequentialCommandGroup(new GripperEject(), new WaitCommand(0.3)),
+                  new SequentialCommandGroup(new ArmExtendToInPosition(), new ArmExtendWaitAtSetPoint()),
+                  new GripperStop(),
+                  new DriveBackwardToBalance(2.12, -0.60),
+                  new DriveBalance()
+               );
+            // @formatter:on
+
          case doHighCubeAndBackward:
             // @formatter:off
             return
@@ -383,6 +414,20 @@ public class RobotContainer {
                   new SequentialCommandGroup(new ArmExtendToInPosition(), new ArmExtendWaitAtSetPoint()),
                   new GripperStop(),
                   new DriveBackwardTimed(3.5, -0.60)
+               );
+            // @formatter:on
+
+         case doHighCubeAndBackwardToBalance:
+            // @formatter:off
+            return
+               new SequentialCommandGroup(
+                  new SequentialCommandGroup(new ArmRotateToMidPosition(), new ArmRotateWaitAtSetPoint()),
+                  new SequentialCommandGroup(new ArmExtendToMidPosition(), new ArmExtendWaitAtSetPoint()),
+                  new SequentialCommandGroup(new GripperEject(), new WaitCommand(0.3)),
+                  new SequentialCommandGroup(new ArmExtendToInPosition(), new ArmExtendWaitAtSetPoint()),
+                  new GripperStop(),
+                  new DriveBackwardToBalance(2.12, -0.60),
+                  new DriveBalance()
                );
             // @formatter:on
 
