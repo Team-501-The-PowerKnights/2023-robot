@@ -39,8 +39,8 @@ public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
    private RelativeEncoder encoder;
 
    private AbsoluteEncoder absEncoder;
-   private final double absEncoderBaseline = 0.5912; // 0.5911
-   private final double absEncoderScale = 5.0 * 5.0 * 4.0 * 3.0 * (50.0 / 30.0);
+   private final double absEncoderBaseline = 0.5912;
+   private final double absEncoderScale = -1 * (5.0 * 5.0 * 5.0 * (72.0 / 36.0));
 
    ProtoArmRotatorSubsystem() {
       logger.info("constructing");
