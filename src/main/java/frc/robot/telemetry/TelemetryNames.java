@@ -167,13 +167,14 @@ public final class TelemetryNames {
       public static final String autoCommand = name + ".autoCommand";
       public static final String teleCommand = name + ".teleCommand";
 
-      public static final String encoderClicks = name + ".encoderClicks";
-      public static final String distanceClicks = name + ".distanceClicks";
-      public static final String targetClicks = name + ".targetClicks";
-
       public static final String leftSpeed = name + ".leftSpeed";
       public static final String rightSpeed = name + ".rightSpeed";
       public static final String brakeEnabled = name + ".brakeEnabled";
+
+      public static final String leftEncoderClicks = name + ".leftEncoderClicks";
+      public static final String rightEncoderClicks = name + ".rightEncoderClicks";
+      public static final String odometerClicks = name + ".odometerClicks";
+      public static final String speedometerClicks = name + ".speedometerClicks";
    }
 
    public final class ArmRotator {
@@ -191,6 +192,9 @@ public final class TelemetryNames {
       public static final String PIDOnTarget = name + PIDTelemetry.pid_OnTarget;
 
       public static final String absCurrent = name + ".absCurrent";
+      public static final String absCorrected = name + ".absCorrected";
+
+      public static final String current = name + ".current";
    }
 
    public final class ArmExtender {
@@ -206,6 +210,8 @@ public final class TelemetryNames {
       public static final String PIDCurrent = name + PIDTelemetry.pid_Current;
       public static final String PIDAtTarget = name + PIDTelemetry.pid_AtTarget;
       public static final String PIDOnTarget = name + PIDTelemetry.pid_OnTarget;
+
+      public static final String current = name + ".current";
    }
 
    public final class Arm {

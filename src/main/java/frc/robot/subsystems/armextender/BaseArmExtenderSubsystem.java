@@ -50,6 +50,8 @@ abstract class BaseArmExtenderSubsystem extends PIDSubsystem implements IArmExte
       pid_maxOutput);
    //@formatter:on
 
+   protected double rampRate;
+
    protected float minSoftLimit;
    protected float maxSoftLimit;
 
@@ -105,6 +107,10 @@ abstract class BaseArmExtenderSubsystem extends PIDSubsystem implements IArmExte
       v = Preferences.getDouble(prefs.PID_maxOutput, pidValues.MaxOutput);
       logger.info("{} = {}", prefs.PID_maxOutput, v);
       pidValues.MaxOutput = v;
+
+      v = Preferences.getDouble(prefs.rampRate, rampRate);
+      logger.info("{} = {}", prefs.rampRate, v);
+      rampRate = v;
 
       v = Preferences.getDouble(prefs.minSoftLimit, minSoftLimit);
       logger.info("{} = {}", prefs.minSoftLimit, v);

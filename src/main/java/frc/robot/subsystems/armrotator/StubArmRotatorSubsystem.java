@@ -67,4 +67,10 @@ class StubArmRotatorSubsystem extends BaseArmRotatorSubsystem {
 
    }
 
+   @Override
+   public double syncEncoders() {
+      // TODO Auto-generated method stub
+      return 0;
+   }
+
 }

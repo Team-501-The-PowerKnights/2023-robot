@@ -58,16 +58,31 @@ public interface IDriveSubsystem extends ISubsystem {
 
    /**
     * 
+    */
+   public void logOdometer();
+
+   /**
+    * 
+    */
+   public void resetOdometer();
+
+   /**
+    * 
     * @return number of encoder clicks
     */
-   public double getEncoderClicks();
+   public double getOdometerClicks();
 
    /**
     * 
     * @return encoder velocity (clicks per second?)
     */
-   public double getEncoderVelocity();
+   public double getSpeedometerClicks();
 
+   /**
+    * 
+    * @param canID
+    * @param speed
+    */
    public void setSpeed(int canID, double speed);
 
 }

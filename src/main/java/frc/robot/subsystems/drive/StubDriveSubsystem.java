@@ -62,13 +62,23 @@ class StubDriveSubsystem extends BaseDriveSubsystem {
    }
 
    @Override
-   public double getEncoderClicks() {
+   public void logOdometer() {
+      // Stub doesn't implement this
+   }
+
+   @Override
+   public void resetOdometer() {
+      // Stub doesn't implement this
+   }
+
+   @Override
+   public double getOdometerClicks() {
       // Stub doesn't implement this
       return 0;
    }
 
    @Override
-   public double getEncoderVelocity() {
+   public double getSpeedometerClicks() {
       // Stub doesn't implement this
       return 0;
    }

@@ -6,15 +6,20 @@
 /*- of this project.                                                      */
 /*------------------------------------------------------------------------*/
 
-package frc.robot.config;
+package frc.robot.modules.power;
 
-/**
- * This class provides a code versioning string that can be used to determine
- * the build pedigree of a robot as loaded on the roboRIO.
- **/
-class CodeVersionInfo {
+import riolog.PKLogger;
+import riolog.RioLogger;
 
-   // Provides a version string that gets incorporated into build
-   public static final String version = "2023.4.2.0";
+public class ProtoPowerModule extends PDHPowerModule {
+
+   /** Our classes' logger **/
+   private static final PKLogger logger = RioLogger.getLogger(ProtoPowerModule.class.getName());
+
+   public ProtoPowerModule() {
+      logger.info("constructing");
+
+      logger.info("constructed");
+   }
 
 }

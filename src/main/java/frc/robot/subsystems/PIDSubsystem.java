@@ -21,7 +21,7 @@ import riolog.RioLogger;
 public abstract class PIDSubsystem extends BaseSubsystem implements IPIDSubsystem {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(BaseSubsystem.class.getName());
+   private static final PKLogger logger = RioLogger.getLogger(PIDSubsystem.class.getName());
 
    /** Standard telemetry for PID */
    protected PIDTelemetry tlmPID = new PIDTelemetry();
@@ -87,7 +87,7 @@ public abstract class PIDSubsystem extends BaseSubsystem implements IPIDSubsyste
 
    private class AtSetPoint {
       // The error that is considered at setpoint.
-      private double m_positionTolerance = 0.09;
+      private double m_positionTolerance = 0.25; // 0.09
 
       // The error at the time of the most recent call to calculate()
       private double m_positionError;
@@ -120,7 +120,7 @@ public abstract class PIDSubsystem extends BaseSubsystem implements IPIDSubsyste
 
       public void calcPositionError() {
          m_positionError = Math.abs(m_setpoint - m_measurement);
-         if (m_positionError < m_positionTolerance) {
+         if (m_positionError <= m_positionTolerance) {
             m_positionAtCount = (m_positionAtCount < 0) ? 0 : ++m_positionAtCount;
          } else {
             --m_positionAtCount;
