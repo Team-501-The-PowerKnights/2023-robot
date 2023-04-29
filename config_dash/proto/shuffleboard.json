@@ -7,91 +7,24 @@
       "widgetPane": {
         "gridSize": 32.0,
         "showGrid": true,
-        "hgap": 8.0,
-        "vgap": 8.0,
+        "hgap": 10.0,
+        "vgap": 10.0,
+        "titleType": 0,
         "tiles": {
-          "20,11": {
-            "size": [
-              11,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Misc.codeVersion",
-              "_title": "codeVersion"
-            }
-          },
-          "33,6": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Misc.fmsConnected",
-              "_title": "fmsConnected",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "31,11": {
-            "size": [
-              3,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Misc.robotImpl",
-              "_title": "robotImpl"
-            }
-          },
-          "34,11": {
-            "size": [
-              3,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Misc.robotName",
-              "_title": "robotName"
-            }
-          },
-          "24,0": {
-            "size": [
-              9,
-              3
-            ],
-            "content": {
-              "_type": "ComboBox Chooser",
-              "_source0": "network_table:///SmartDashboard/Auto Mode",
-              "_title": "Auto Mode"
-            }
-          },
-          "33,2": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Misc.realAuto",
-              "_title": "realAuto",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
           "0,0": {
             "size": [
-              16,
-              13
+              14,
+              12
             ],
             "content": {
               "_type": "Camera Stream",
               "_source0": "camera_server://limelight",
               "_title": "limelight",
+              "_glyph": 148,
+              "_showGlyph": false,
               "Crosshair/Show crosshair": true,
               "Crosshair/Crosshair color": "#FFFFFFFF",
-              "Controls/Show controls": true,
+              "Controls/Show controls": false,
               "Controls/Rotation": "NONE",
               "compression": -1.0,
               "fps": -1,
@@ -99,525 +32,107 @@
               "imageHeight": 0
             }
           },
-          "33,4": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/PCM.pressureGood",
-              "_title": "PCM.pressureGood",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "16,0": {
+          "15,0": {
             "size": [
               4,
               4
             ],
             "content": {
-              "_type": "Simple Dial",
-              "_source0": "network_table:///SmartDashboard/HMI.rawSpeed",
-              "_title": "HMI.rawSpeed",
-              "Range/Min": -1.0,
-              "Range/Max": 1.0,
-              "Visuals/Show value": true
-            }
-          },
-          "20,0": {
-            "size": [
-              4,
-              4
-            ],
-            "content": {
-              "_type": "Simple Dial",
-              "_source0": "network_table:///SmartDashboard/HMI.rawTurn",
-              "_title": "HMI.rawTurn",
-              "Range/Min": -1.0,
-              "Range/Max": 1.0,
-              "Visuals/Show value": true
-            }
-          },
-          "31,8": {
-            "size": [
-              6,
-              3
-            ],
-            "content": {
-              "_type": "ComboBox Chooser",
-              "_source0": "network_table:///SmartDashboard/FMS Override",
-              "_title": "FMS Override"
-            }
-          },
-          "33,0": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
               "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Misc.initStatus",
-              "_title": "initStatus",
+              "_source0": "network_table:///SmartDashboard/driveBrakeEnabled",
+              "_title": "driveBrakeEnabled",
+              "_glyph": 148,
+              "_showGlyph": false,
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "16,5": {
+          "26,10": {
             "size": [
-              4,
-              3
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Misc.endGameStarted",
-              "_title": "endGameStarted",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          }
-        }
-      }
-    },
-    {
-      "title": "Configuration",
-      "autoPopulate": false,
-      "autoPopulatePrefix": "",
-      "widgetPane": {
-        "gridSize": 32.0,
-        "showGrid": true,
-        "hgap": 8.0,
-        "vgap": 8.0,
-        "tiles": {
-          "9,7": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Drive.implClass",
-              "_title": "Drive.implClass"
-            }
-          },
-          "9,5": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Drive.status",
-              "_title": "Drive.status"
-            }
-          },
-          "3,3": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Gyro.implClass",
-              "_title": "Gyro.implClass"
-            }
-          },
-          "0,3": {
-            "size": [
-              3,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Gyro.status",
-              "_title": "Gyro.status"
-            }
-          },
-          "0,0": {
-            "size": [
-              12,
+              11,
               2
             ],
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Misc.codeVersion",
-              "_title": "Misc.codeVersion"
+              "_title": "Misc.codeVersion",
+              "_glyph": 148,
+              "_showGlyph": false
             }
           },
-          "12,2": {
+          "27,0": {
+            "size": [
+              10,
+              3
+            ],
+            "content": {
+              "_type": "ComboBox Chooser",
+              "_source0": "network_table:///SmartDashboard/Auto Mode",
+              "_title": "SmartDashboard/Auto Mode",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "30,3": {
             "size": [
               4,
               2
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Misc.robotImpl",
-              "_title": "Misc.robotImpl"
+              "_source0": "network_table:///SmartDashboard/Auto state",
+              "_title": "Auto state",
+              "_glyph": 148,
+              "_showGlyph": false
             }
           },
-          "12,0": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Misc.robotName",
-              "_title": "Misc.robotName"
-            }
-          },
-          "18,2": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/PDP.implClass",
-              "_title": "PDP.implClass"
-            }
-          },
-          "18,0": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/PDP.status",
-              "_title": "PDP.status"
-            }
-          },
-          "28,0": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Scheduler.status",
-              "_title": "Scheduler.status"
-            }
-          },
-          "33,0": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Properties.status",
-              "_title": "Properties.status"
-            }
-          },
-          "33,2": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Preferences.status",
-              "_title": "Preferences.status"
-            }
-          },
-          "3,5": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Vision.implClass",
-              "_title": "Vision.implClass"
-            }
-          },
-          "0,5": {
+          "29,5": {
             "size": [
               3,
+              5
+            ],
+            "content": {
+              "_type": "Voltage View",
+              "_source0": "network_table:///SmartDashboard/Gyro pitch",
+              "_title": "Gyro pitch",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Range/Min": -20.0,
+              "Range/Max": 20.0,
+              "Range/Center": 0.0,
+              "Visuals/Orientation": "VERTICAL",
+              "Visuals/Number of tick marks": 5
+            }
+          },
+          "32,6": {
+            "size": [
+              5,
               2
             ],
             "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Vision.status",
-              "_title": "Vision.status"
+              "_type": "Voltage View",
+              "_source0": "network_table:///SmartDashboard/Gyro roll",
+              "_title": "Gyro roll",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Range/Min": -20.0,
+              "Range/Max": 20.0,
+              "Range/Center": 0.0,
+              "Visuals/Orientation": "HORIZONTAL",
+              "Visuals/Number of tick marks": 5
             }
           },
-          "22,0": {
+          "23,0": {
             "size": [
               4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/PCM.status",
-              "_title": "PCM.status"
-            }
-          },
-          "22,2": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/PCM.implClass",
-              "_title": "PCM.implClass"
-            }
-          },
-          "9,9": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Drive.autoCommand",
-              "_title": "Drive.autoCommand"
-            }
-          },
-          "9,11": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Drive.teleCommand",
-              "_title": "Drive.teleCommand"
-            }
-          }
-        }
-      }
-    },
-    {
-      "title": "Sensors",
-      "autoPopulate": false,
-      "autoPopulatePrefix": "",
-      "widgetPane": {
-        "gridSize": 32.0,
-        "showGrid": true,
-        "hgap": 8.0,
-        "vgap": 8.0,
-        "tiles": {
-          "2,0": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Vision.implClass",
-              "_title": "Vision.implClass"
-            }
-          },
-          "2,9": {
-            "size": [
-              5,
-              2
+              4
             ],
             "content": {
               "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Vision.locked",
-              "_title": "Vision.locked",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "2,2": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Vision.status",
-              "_title": "Vision.status"
-            }
-          },
-          "2,7": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Vision.enabled",
-              "_title": "Vision.enabled",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "2,5": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Vision.active",
-              "_title": "Vision.active",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "31,0": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Gyro.implClass",
-              "_title": "Gyro.implClass"
-            }
-          },
-          "31,2": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Gyro.status",
-              "_title": "Gyro.status"
-            }
-          },
-          "31,5": {
-            "size": [
-              3,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Gyro.angle",
-              "_title": "Gyro.angle"
-            }
-          },
-          "34,5": {
-            "size": [
-              3,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Gyro.heading",
-              "_title": "Gyro.heading"
-            }
-          },
-          "31,7": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Gyro.roll",
-              "_title": "Gyro.roll"
-            }
-          },
-          "31,9": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Gyro.pitch",
-              "_title": "Gyro.pitch"
-            }
-          },
-          "31,11": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Gyro.yaw",
-              "_title": "Gyro.yaw"
-            }
-          }
-        }
-      }
-    },
-    {
-      "title": "Modules",
-      "autoPopulate": false,
-      "autoPopulatePrefix": "",
-      "widgetPane": {
-        "gridSize": 32.0,
-        "showGrid": true,
-        "hgap": 8.0,
-        "vgap": 8.0,
-        "tiles": {
-          "2,2": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/PDP.status",
-              "_title": "PDP.status"
-            }
-          },
-          "2,0": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/PDP.implClass",
-              "_title": "PDP.implClass"
-            }
-          },
-          "11,2": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/PCM.status",
-              "_title": "PCM.status"
-            }
-          },
-          "11,0": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/PCM.implClass",
-              "_title": "PCM.implClass"
-            }
-          },
-          "11,7": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/PCM.pressureGood",
-              "_title": "PCM.pressureGood",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "11,5": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/PCM.enabled",
-              "_title": "PCM.enabled",
+              "_source0": "network_table:///SmartDashboard/Real Auto?",
+              "_title": "Real Auto?",
+              "_glyph": 148,
+              "_showGlyph": false,
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
@@ -626,116 +141,435 @@
       }
     },
     {
-      "title": "OI \u0026 Commands",
+      "title": "Arm Rotate",
       "autoPopulate": false,
       "autoPopulatePrefix": "",
       "widgetPane": {
         "gridSize": 32.0,
         "showGrid": true,
-        "hgap": 8.0,
-        "vgap": 8.0,
+        "hgap": 10.0,
+        "vgap": 10.0,
+        "titleType": 0,
         "tiles": {
-          "8,0": {
+          "5,4": {
             "size": [
-              3,
+              4,
               2
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/HMI.intakeSpeed",
-              "_title": "HMI.intakeSpeed"
+              "_source0": "network_table:///SmartDashboard/Arm Rot D Gain",
+              "_title": "Arm Rot D Gain",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "10,0": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Arm Rot Feed Forward",
+              "_title": "Arm Rot Feed Forward",
+              "_glyph": 148,
+              "_showGlyph": false
             }
           },
           "5,2": {
             "size": [
-              3,
-              2
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/HMI.crawl",
-              "_title": "HMI.crawl",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "2,4": {
-            "size": [
-              3,
+              4,
               2
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/HMI.oiSpeed",
-              "_title": "HMI.oiSpeed"
+              "_source0": "network_table:///SmartDashboard/Arm Rot I Gain",
+              "_title": "Arm Rot I Gain",
+              "_glyph": 148,
+              "_showGlyph": false
             }
           },
-          "5,0": {
-            "size": [
-              3,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/HMI.rawTurn",
-              "_title": "HMI.rawTurn"
-            }
-          },
-          "2,2": {
-            "size": [
-              3,
-              2
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/HMI.turbo",
-              "_title": "HMI.turbo",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "2,0": {
-            "size": [
-              3,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/HMI.rawSpeed",
-              "_title": "HMI.rawSpeed"
-            }
-          },
-          "5,4": {
-            "size": [
-              3,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/HMI.oiTurn",
-              "_title": "HMI.oiTurn"
-            }
-          },
-          "2,9": {
-            "size": [
-              35,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Scheduler.currentCommands",
-              "_title": "Scheduler.currentCommands"
-            }
-          },
-          "2,7": {
+          "10,2": {
             "size": [
               4,
               2
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Scheduler.status",
-              "_title": "Scheduler.status"
+              "_source0": "network_table:///SmartDashboard/Arm Rot I Zone",
+              "_title": "Arm Rot I Zone",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "10,6": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Arm Rot Max Output",
+              "_title": "Arm Rot Max Output",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "10,4": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Arm Rot Min Output",
+              "_title": "Arm Rot Min Output",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "5,0": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Arm Rot P Gain",
+              "_title": "Arm Rot P Gain",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "19,0": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Toggle Switch",
+              "_source0": "network_table:///SmartDashboard/Arm Rot PID Enabled",
+              "_title": "Arm Rot PID Enabled",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "15,2": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Arm Rot Set Target",
+              "_title": "Arm Rot Set Target",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "15,6": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Arm Rot arvVal",
+              "_title": "Arm Rot arvVal",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "15,4": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Arm Rot Feedback",
+              "_title": "Arm Rot Feedback",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "15,0": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Arm Rot PID Enabled",
+              "_title": "Arm Rot PID Enabled",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "26,2": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/armRotate.high",
+              "_title": "armRotate.high",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "26,4": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/armRotate.mid",
+              "_title": "armRotate.mid",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "26,6": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/armRotate.low",
+              "_title": "armRotate.low",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "26,0": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/armRotate.over",
+              "_title": "armRotate.over",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Arm Extend",
+      "autoPopulate": false,
+      "autoPopulatePrefix": "",
+      "widgetPane": {
+        "gridSize": 32.0,
+        "showGrid": true,
+        "hgap": 10.0,
+        "vgap": 10.0,
+        "titleType": 0,
+        "tiles": {
+          "15,0": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Arm Ext PID Enabled",
+              "_title": "Arm Ext PID Enabled",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "15,2": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Arm Ext Set Target",
+              "_title": "Arm Ext Set Target",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "15,4": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Arm Ext Feedback",
+              "_title": "Arm Ext Feedback",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "15,6": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Arm Ext arvVal",
+              "_title": "Arm Ext arvVal",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "19,0": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Toggle Switch",
+              "_source0": "network_table:///SmartDashboard/Arm Ext PID Enabled",
+              "_title": "Arm Ext PID Enabled",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "5,0": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Arm Ext P Gain",
+              "_title": "Arm Ext P Gain",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "5,4": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Arm Ext D Gain",
+              "_title": "Arm Ext D Gain",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "10,0": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Arm Ext Feed Forward",
+              "_title": "Arm Ext Feed Forward",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "10,6": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Arm Ext Max Output",
+              "_title": "Arm Ext Max Output",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "10,4": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Arm Ext Min Output",
+              "_title": "Arm Ext Min Output",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "10,2": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Arm Ext I Zone",
+              "_title": "Arm Ext I Zone",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "5,2": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Arm Ext I Gain",
+              "_title": "Arm Ext I Gain",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "26,0": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/armExtend.high",
+              "_title": "armExtend.high",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "26,2": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/armExtend.mid",
+              "_title": "armExtend.mid",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "26,4": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/armExtend.low",
+              "_title": "armExtend.low",
+              "_glyph": 148,
+              "_showGlyph": false
             }
           }
         }
@@ -748,315 +582,90 @@
       "widgetPane": {
         "gridSize": 32.0,
         "showGrid": true,
-        "hgap": 8.0,
-        "vgap": 8.0,
+        "hgap": 10.0,
+        "vgap": 10.0,
+        "titleType": 0,
         "tiles": {
-          "2,0": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Drive.implClass",
-              "_title": "Drive.implClass"
-            }
-          },
-          "2,2": {
-            "size": [
-              3,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Drive.status",
-              "_title": "Drive.status"
-            }
-          },
-          "8,6": {
+          "17,0": {
             "size": [
               4,
               2
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Drive.leftSpeed",
-              "_title": "Drive.leftSpeed"
+              "_source0": "network_table:///Preferences/Drive.rampRate",
+              "_title": "Drive.rampRate",
+              "_glyph": 148,
+              "_showGlyph": false
             }
           },
-          "12,6": {
+          "25,0": {
             "size": [
               4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Drive.rightSpeed",
-              "_title": "Drive.rightSpeed"
-            }
-          },
-          "8,2": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/HMI.oiSpeed",
-              "_title": "HMI.oiSpeed"
-            }
-          },
-          "12,2": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/HMI.oiTurn",
-              "_title": "HMI.oiTurn"
-            }
-          },
-          "2,9": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Gyro.implClass",
-              "_title": "Gyro.implClass"
-            }
-          },
-          "2,11": {
-            "size": [
-              3,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Gyro.status",
-              "_title": "Gyro.status"
-            }
-          },
-          "8,11": {
-            "size": [
-              3,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Gyro.roll",
-              "_title": "Gyro.roll"
-            }
-          },
-          "14,11": {
-            "size": [
-              3,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Gyro.yaw",
-              "_title": "Gyro.yaw"
-            }
-          },
-          "11,11": {
-            "size": [
-              3,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Gyro.pitch",
-              "_title": "Gyro.pitch"
-            }
-          },
-          "8,9": {
-            "size": [
-              3,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Gyro.heading",
-              "_title": "Gyro.heading"
-            }
-          },
-          "11,9": {
-            "size": [
-              3,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Gyro.angle",
-              "_title": "Gyro.angle"
-            }
-          },
-          "8,4": {
-            "size": [
-              4,
-              2
+              3
             ],
             "content": {
               "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/HMI.turbo",
-              "_title": "HMI.turbo",
+              "_source0": "network_table:///SmartDashboard/driveBrakeEnabled",
+              "_title": "driveBrakeEnabled",
+              "_glyph": 148,
+              "_showGlyph": false,
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "12,4": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/HMI.crawl",
-              "_title": "HMI.crawl",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "29,0": {
-            "size": [
-              4,
-              10
-            ],
-            "content": {
-              "_type": "List Layout",
-              "_title": "Preferences",
-              "Layout/Label position": "TOP",
-              "_children": [
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///Preferences/Drive.P",
-                  "_title": "Drive.P"
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///Preferences/Drive.I",
-                  "_title": "Drive.I"
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///Preferences/Drive.D",
-                  "_title": "Drive.D"
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///Preferences/Drive.F",
-                  "_title": "Drive.F"
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///Preferences/Drive.ramp",
-                  "_title": "Drive.ramp"
-                }
-              ]
-            }
-          },
-          "8,0": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/HMI.rawSpeed",
-              "_title": "HMI.rawSpeed"
-            }
-          },
-          "12,0": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/HMI.rawTurn",
-              "_title": "HMI.rawTurn"
-            }
-          },
-          "2,4": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Drive.autoCommand",
-              "_title": "Drive.autoCommand"
-            }
-          },
-          "2,6": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Drive.teleCommand",
-              "_title": "Drive.teleCommand"
             }
           }
         }
       }
     },
     {
-      "title": "Arm",
+      "title": "Gyro",
       "autoPopulate": false,
       "autoPopulatePrefix": "",
       "widgetPane": {
         "gridSize": 32.0,
         "showGrid": true,
-        "hgap": 8.0,
-        "vgap": 8.0,
+        "hgap": 10.0,
+        "vgap": 10.0,
+        "titleType": 0,
         "tiles": {
-          "2,2": {
+          "22,3": {
             "size": [
-              3,
-              2
+              14,
+              8
             ],
             "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Intake.status",
-              "_title": "Intake.status"
+              "_type": "Graph",
+              "_source0": "network_table:///SmartDashboard/Gyro roll",
+              "_title": "Gyro roll",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Graph/Visible time": 30.0,
+              "Graph/X-axis auto scrolling": true,
+              "Y-axis/Automatic bounds": true,
+              "Y-axis/Upper bound": 1.0,
+              "Y-axis/Lower bound": -1.0,
+              "Y-axis/Unit": "ul",
+              "Visible data/SmartDashboard/Gyro roll": true
             }
           },
-          "2,0": {
+          "6,3": {
             "size": [
-              5,
-              2
+              14,
+              8
             ],
             "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Intake.implClass",
-              "_title": "Intake.implClass"
-            }
-          },
-          "2,6": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Intake.teleCommand",
-              "_title": "Intake.teleCommand"
-            }
-          },
-          "2,4": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Intake.autoCommand",
-              "_title": "Intake.autoCommand"
+              "_type": "Graph",
+              "_source0": "network_table:///SmartDashboard/Gyro pitch",
+              "_title": "Gyro pitch",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Graph/Visible time": 30.0,
+              "Graph/X-axis auto scrolling": true,
+              "Y-axis/Automatic bounds": true,
+              "Y-axis/Upper bound": 1.0,
+              "Y-axis/Lower bound": -1.0,
+              "Y-axis/Unit": "ul",
+              "Visible data/SmartDashboard/Gyro pitch": true
             }
           }
         }
@@ -1069,317 +678,73 @@
       "widgetPane": {
         "gridSize": 32.0,
         "showGrid": true,
-        "hgap": 8.0,
-        "vgap": 8.0,
-        "tiles": {}
-      }
-    },
-    {
-      "title": "I\u0026T",
-      "autoPopulate": false,
-      "autoPopulatePrefix": "",
-      "widgetPane": {
-        "gridSize": 32.0,
-        "showGrid": true,
-        "hgap": 8.0,
-        "vgap": 8.0,
+        "hgap": 10.0,
+        "vgap": 10.0,
+        "titleType": 0,
         "tiles": {
-          "2,0": {
+          "12,0": {
             "size": [
-              7,
+              4,
               2
             ],
             "content": {
-              "_type": "ComboBox Chooser",
-              "_source0": "network_table:///SmartDashboard/FMS Override",
-              "_title": "FMS Override"
-            }
-          }
-        }
-      }
-    },
-    {
-      "title": "LiveWindow",
-      "autoPopulate": true,
-      "autoPopulatePrefix": "LiveWindow/",
-      "widgetPane": {
-        "gridSize": 96.0,
-        "showGrid": true,
-        "hgap": 16.0,
-        "vgap": 16.0,
-        "tiles": {
-          "0,0": {
-            "size": [
-              2,
-              4
-            ],
-            "content": {
-              "_type": "Subsystem Layout",
-              "_source0": "network_table:///LiveWindow/StubDriveSubsystem",
-              "_title": "StubDriveSubsystem",
-              "Layout/Label position": "BOTTOM",
-              "_children": []
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/Gripper.maxInSpeed",
+              "_title": "Gripper.MaxInSpeed",
+              "_glyph": 148,
+              "_showGlyph": false
             }
           },
-          "2,0": {
+          "12,2": {
             "size": [
-              2,
-              4
+              4,
+              2
             ],
             "content": {
-              "_type": "Subsystem Layout",
-              "_source0": "network_table:///LiveWindow/StubIntakeSubsystem",
-              "_title": "StubArmSubsystem",
-              "Layout/Label position": "BOTTOM",
-              "_children": []
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/Gripper.maxOutSpeed",
+              "_title": "Gripper.maxOutSpeed",
+              "_glyph": 148,
+              "_showGlyph": false
             }
           },
-          "4,0": {
+          "19,2": {
             "size": [
-              2,
-              4
+              4,
+              2
             ],
             "content": {
-              "_type": "Subsystem Layout",
-              "_source0": "network_table:///LiveWindow/StubTurretSubsystem",
-              "_title": "StubGripperSubsystem",
-              "Layout/Label position": "BOTTOM",
-              "_children": []
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Gripper speed",
+              "_title": "Gripper speed",
+              "_glyph": 148,
+              "_showGlyph": false
             }
           },
-          "8,0": {
+          "17,0": {
             "size": [
-              2,
-              4
+              4,
+              2
             ],
             "content": {
-              "_type": "Subsystem Layout",
-              "_source0": "network_table:///LiveWindow/Ungrouped",
-              "_title": "Ungrouped",
-              "Layout/Label position": "BOTTOM",
-              "_children": [
-                {
-                  "_type": "Differential Drivebase",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/DifferentialDrive[1]",
-                  "_title": "DifferentialDrive[1]",
-                  "Wheels/Number of wheels": 4,
-                  "Wheels/Wheel diameter": 80.0,
-                  "Visuals/Show velocity vectors": true
-                },
-                {
-                  "_type": "Boolean Box",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/DigitalInput[9]/Value",
-                  "_title": "DigitalInput[9]/Value",
-                  "Colors/Color when true": "#7CFC00FF",
-                  "Colors/Color when false": "#8B0000FF"
-                },
-                {
-                  "_type": "Boolean Box",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/SwitchableChannel",
-                  "_title": "PowerDistribution[0]/SwitchableChannel",
-                  "Colors/Color when true": "#7CFC00FF",
-                  "Colors/Color when false": "#8B0000FF"
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Voltage",
-                  "_title": "PowerDistribution[0]/Voltage"
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Chan10",
-                  "_title": "PowerDistribution[0]/Chan10"
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Chan11",
-                  "_title": "PowerDistribution[0]/Chan11"
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Chan12",
-                  "_title": "PowerDistribution[0]/Chan12"
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Chan13",
-                  "_title": "PowerDistribution[0]/Chan13"
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Chan14",
-                  "_title": "PowerDistribution[0]/Chan14"
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Chan15",
-                  "_title": "PowerDistribution[0]/Chan15"
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Chan0",
-                  "_title": "PowerDistribution[0]/Chan0"
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Chan1",
-                  "_title": "PowerDistribution[0]/Chan1"
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Chan2",
-                  "_title": "PowerDistribution[0]/Chan2"
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Chan3",
-                  "_title": "PowerDistribution[0]/Chan3"
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Chan4",
-                  "_title": "PowerDistribution[0]/Chan4"
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Chan5",
-                  "_title": "PowerDistribution[0]/Chan5"
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Chan7",
-                  "_title": "PowerDistribution[0]/Chan7"
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Chan8",
-                  "_title": "PowerDistribution[0]/Chan8"
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Chan9",
-                  "_title": "PowerDistribution[0]/Chan9"
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Chan6",
-                  "_title": "PowerDistribution[0]/Chan6"
-                },
-                {
-                  "_type": "Gyro",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/navX-Sensor[4]",
-                  "_title": "navX-Sensor[4]",
-                  "Visuals/Major tick spacing": 45.0,
-                  "Visuals/Starting angle": 180.0,
-                  "Visuals/Show tick mark ring": true,
-                  "Visuals/Counter clockwise": false
-                },
-                {
-                  "_type": "Boolean Box",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/DigitalInput[8]/Value",
-                  "_title": "DigitalInput[8]/Value",
-                  "Colors/Color when true": "#7CFC00FF",
-                  "Colors/Color when false": "#8B0000FF"
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/TotalCurrent",
-                  "_title": "PowerDistribution[0]/TotalCurrent"
-                },
-                {
-                  "_type": "Boolean Box",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/Compressor[0]/Enabled",
-                  "_title": "Compressor[0]/Enabled",
-                  "Colors/Color when true": "#7CFC00FF",
-                  "Colors/Color when false": "#8B0000FF"
-                },
-                {
-                  "_type": "Boolean Box",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/Compressor[0]/Pressure switch",
-                  "_title": "Compressor[0]/Pressure switch",
-                  "Colors/Color when true": "#7CFC00FF",
-                  "Colors/Color when false": "#8B0000FF"
-                },
-                {
-                  "_type": "Boolean Box",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/Solenoid[0,3]/Value",
-                  "_title": "LiveWindow/Ungrouped/Solenoid[0,3]/Value",
-                  "Colors/Color when true": "#7CFC00FF",
-                  "Colors/Color when false": "#8B0000FF"
-                },
-                {
-                  "_type": "Boolean Box",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/Solenoid[0,1]/Value",
-                  "_title": "LiveWindow/Ungrouped/Solenoid[0,1]/Value",
-                  "Colors/Color when true": "#7CFC00FF",
-                  "Colors/Color when false": "#8B0000FF"
-                },
-                {
-                  "_type": "Boolean Box",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/DigitalInput[1]/Value",
-                  "_title": "LiveWindow/Ungrouped/DigitalInput[1]/Value",
-                  "Colors/Color when true": "#7CFC00FF",
-                  "Colors/Color when false": "#8B0000FF"
-                },
-                {
-                  "_type": "Boolean Box",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/DigitalInput[0]/Value",
-                  "_title": "DigitalInput[0]/Value",
-                  "Colors/Color when true": "#7CFC00FF",
-                  "Colors/Color when false": "#8B0000FF"
-                },
-                {
-                  "_type": "Boolean Box",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/DigitalInput[2]/Value",
-                  "_title": "DigitalInput[2]/Value",
-                  "Colors/Color when true": "#7CFC00FF",
-                  "Colors/Color when false": "#8B0000FF"
-                },
-                {
-                  "_type": "PID Controller",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PIDController[3]",
-                  "_title": "LiveWindow/Ungrouped/PIDController[3]"
-                },
-                {
-                  "_type": "PID Controller",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PIDController[2]",
-                  "_title": "LiveWindow/Ungrouped/PIDController[2]"
-                },
-                {
-                  "_type": "PID Controller",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PIDController[4]",
-                  "_title": "LiveWindow/Ungrouped/PIDController[4]"
-                },
-                {
-                  "_type": "PID Controller",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PIDController[1]",
-                  "_title": "LiveWindow/Ungrouped/PIDController[1]"
-                },
-                {
-                  "_type": "PID Controller",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PIDController[6]",
-                  "_title": "PIDController[6]"
-                },
-                {
-                  "_type": "PID Controller",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PIDController[5]",
-                  "_title": "PIDController[5]"
-                },
-                {
-                  "_type": "Boolean Box",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/Solenoid[0,7]/Value",
-                  "_title": "Solenoid[0,7]/Value",
-                  "Colors/Color when true": "#7CFC00FF",
-                  "Colors/Color when false": "#8B0000FF"
-                },
-                {
-                  "_type": "Boolean Box",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/Solenoid[0,6]/Value",
-                  "_title": "Solenoid[0,6]/Value",
-                  "Colors/Color when true": "#7CFC00FF",
-                  "Colors/Color when false": "#8B0000FF"
-                }
-              ]
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Gripper inSpeed",
+              "_title": "Gripper inSpeed",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "21,0": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Gripper outSpeed",
+              "_title": "Gripper outSpeed",
+              "_glyph": 148,
+              "_showGlyph": false
             }
           }
         }
@@ -1387,9 +752,9 @@
     }
   ],
   "windowGeometry": {
-    "x": 248.0,
-    "y": 41.0,
-    "width": 1549.0,
-    "height": 668.0
+    "x": 0.0,
+    "y": 0.0,
+    "width": 1612.0,
+    "height": 663.0
   }
 }
