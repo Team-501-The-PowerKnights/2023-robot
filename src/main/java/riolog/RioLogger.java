@@ -34,8 +34,9 @@ public class RioLogger {
 
    // Logger setting for message format/content
    // @formatter:off
-   // This doesn't work for line number as level of indirection through PKLogger
+   // Includes line numbers
    // final String pattern = "%date{HH:mm:ss.SSS} [%thread] %-5level %logger{10}[%-3line] %msg%n";
+   // Leaves out line numbers
    private static final String pattern = "%date{HH:mm:ss.SSS} [%thread] %-5level %logger{10} %msg%n";
    // @formatter:on
 
@@ -82,7 +83,7 @@ public class RioLogger {
       setLevel(rootLogger, defaultLevel);
    }
 
-   public static PKLogger getLogger(String loggerName) {
+   public static Logger getLogger(String loggerName) {
       final ch.qos.logback.classic.Logger logger = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(loggerName);
 
       final LoggerContext lc = logger.getLoggerContext();
@@ -124,7 +125,7 @@ public class RioLogger {
       // setLevel(logger, defaultLevel); /* set if each logger has unique level */
       logger.setAdditive(false); /* set to true if root should log too */
 
-      return new PKLogger(logger);
+      return logger;
    }
 
    /**
