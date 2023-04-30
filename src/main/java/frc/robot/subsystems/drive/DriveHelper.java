@@ -8,10 +8,11 @@
 
 package frc.robot.subsystems.drive;
 
+import org.slf4j.Logger;
+
 import frc.robot.utils.HelperFunctions;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 /**
  * Helper class to implement "Cheesy Drive". "Cheesy Drive" simply means that
@@ -25,7 +26,7 @@ class DriveHelper {
 
    /** Our classes' logger **/
    @SuppressWarnings("unused")
-   private static final PKLogger logger = RioLogger.getLogger(DriveHelper.class.getName());
+   private static final Logger logger = PKLogger.getLogger(DriveHelper.class.getName());
 
    private static final double kThrottleDeadband = 0.0;
    private static final double kWheelDeadband = 0.0;

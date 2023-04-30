@@ -11,16 +11,17 @@ package frc.robot.modules.pneumatic;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+
 import edu.wpi.first.wpilibj.PneumaticHub;
 import edu.wpi.first.wpilibj.Solenoid;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 class PCHPneumaticModule extends BasePneumaticModule {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(PCHPneumaticModule.class.getName());
+   private static final Logger logger = PKLogger.getLogger(PCHPneumaticModule.class.getName());
 
    /** My module */
    protected final PneumaticHub module;

@@ -8,6 +8,8 @@
 
 package frc.robot.modules.led;
 
+import org.slf4j.Logger;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.modules.ModuleNames;
@@ -17,12 +19,12 @@ import frc.robot.telemetry.TelemetryNames;
 import frc.robot.utils.PKStatus;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
+import riolog.ProblemTracker;
 
 public class LEDModuleFactory {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(LEDModuleFactory.class.getName());
+   private static final Logger logger = PKLogger.getLogger(LEDModuleFactory.class.getName());
 
    /** Singleton instance of class for all to use **/
    private static ILEDModule ourInstance;
@@ -71,6 +73,7 @@ public class LEDModuleFactory {
          SmartDashboard.putNumber(TelemetryNames.LED.status, PKStatus.success.tlmValue);
       } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
          logger.error("failed to load class; instantiating default stub for: {}", myName);
+         ProblemTracker.addError();
          ourInstance = new StubLEDModule();
          SmartDashboard.putNumber(TelemetryNames.LED.status, PKStatus.degraded.tlmValue);
       }

@@ -8,10 +8,11 @@
 
 package frc.robot.commands.armrotator;
 
+import org.slf4j.Logger;
+
 import frc.robot.subsystems.armrotator.IArmRotatorSubsystem.ArmRotationPosition;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 /**
  * This class implements an abstract base class suitable for building a
@@ -24,7 +25,7 @@ import riolog.RioLogger;
 abstract class ArmRotateToPosition extends ArmRotatorCommandBase {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(ArmRotateToPosition.class.getName());
+   private static final Logger logger = PKLogger.getLogger(ArmRotateToPosition.class.getName());
 
    /** Which of the fixed set point positions to rotate to */
    private final ArmRotationPosition position;

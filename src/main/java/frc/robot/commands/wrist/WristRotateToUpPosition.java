@@ -8,15 +8,16 @@
 
 package frc.robot.commands.wrist;
 
+import org.slf4j.Logger;
+
 import frc.robot.subsystems.wrist.IWristSubsystem.WristPosition;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 public class WristRotateToUpPosition extends WristRotateToPosition {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(WristRotateToUpPosition.class.getName());
+   private static final Logger logger = PKLogger.getLogger(WristRotateToUpPosition.class.getName());
 
    public WristRotateToUpPosition() {
       super(WristPosition.upPosition);

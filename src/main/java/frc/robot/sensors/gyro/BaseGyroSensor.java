@@ -8,6 +8,8 @@
 
 package frc.robot.sensors.gyro;
 
+import org.slf4j.Logger;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.sensors.BaseSensor;
@@ -15,12 +17,11 @@ import frc.robot.sensors.SensorNames;
 import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 abstract class BaseGyroSensor extends BaseSensor implements IGyroSensor {
 
    /* Our classes logger */
-   private static final PKLogger logger = RioLogger.getLogger(BaseGyroSensor.class.getName());
+   private static final Logger logger = PKLogger.getLogger(BaseGyroSensor.class.getName());
 
    protected final boolean gyroReversed;
 

@@ -8,10 +8,11 @@
 
 package frc.robot.commands.armextender;
 
+import org.slf4j.Logger;
+
 import frc.robot.subsystems.armextender.IArmExtenderSubsystem.ArmExtensionPosition;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 /**
  * This class implements an abstract base class suitable for building a
@@ -24,7 +25,7 @@ import riolog.RioLogger;
 public class ArmExtendToPosition extends ArmExtenderCommandBase {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(ArmExtendToPosition.class.getName());
+   private static final Logger logger = PKLogger.getLogger(ArmExtendToPosition.class.getName());
 
    /** Which of the fixed set point positions to rotate to */
    private final ArmExtensionPosition position;

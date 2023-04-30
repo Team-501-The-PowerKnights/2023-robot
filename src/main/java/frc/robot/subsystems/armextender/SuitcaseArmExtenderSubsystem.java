@@ -8,6 +8,8 @@
 
 package frc.robot.subsystems.armextender;
 
+import org.slf4j.Logger;
+
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.REVLibError;
 import com.revrobotics.RelativeEncoder;
@@ -18,7 +20,7 @@ import com.revrobotics.CANSparkMax.SoftLimitDirection;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
+import riolog.ProblemTracker;
 
 /**
  * DOCS: Add your docs here.
@@ -26,7 +28,7 @@ import riolog.RioLogger;
 public class SuitcaseArmExtenderSubsystem extends BaseArmExtenderSubsystem {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(SuitcaseArmExtenderSubsystem.class.getName());
+   private static final Logger logger = PKLogger.getLogger(SuitcaseArmExtenderSubsystem.class.getName());
 
    /** */
    private final CANSparkMax motor;
@@ -58,6 +60,7 @@ public class SuitcaseArmExtenderSubsystem extends BaseArmExtenderSubsystem {
       if (error != REVLibError.kOk) {
          lastError = error;
          logger.error(message, error);
+         ProblemTracker.addError();
       }
    }
 

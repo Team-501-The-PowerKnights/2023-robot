@@ -8,7 +8,7 @@
 
 package frc.robot.preferences;
 
-import riolog.PKLogger;
+import org.slf4j.Logger;
 
 /**
  * DOCS: Insert docs here
@@ -25,6 +25,6 @@ public interface IPreferences {
     *
     * @param logger
     */
-   public void logPreferences(PKLogger logger);
+   public void logPreferences(Logger logger);
 
 }

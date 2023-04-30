@@ -12,8 +12,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.slf4j.Logger;
+
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 /**
  * A class that implements a system of track the mode transistions of
@@ -25,7 +26,7 @@ import riolog.RioLogger;
 public class ModeFollowers {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(ModeFollowers.class.getName());
+   private static final Logger logger = PKLogger.getLogger(ModeFollowers.class.getName());
 
    /** List of mode followers that have registered */
    private List<IModeFollower> followers;

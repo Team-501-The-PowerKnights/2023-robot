@@ -8,15 +8,16 @@
 
 package frc.robot.commands.armextender;
 
+import org.slf4j.Logger;
+
 import frc.robot.subsystems.armextender.IArmExtenderSubsystem.ArmExtensionPosition;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 public class ArmExtendToInPosition extends ArmExtendToPosition {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(ArmExtendToInPosition.class.getName());
+   private static final Logger logger = PKLogger.getLogger(ArmExtendToInPosition.class.getName());
 
    public ArmExtendToInPosition() {
       super(ArmExtensionPosition.inPosition);

@@ -8,13 +8,14 @@
 
 package frc.robot.modules.power;
 
+import org.slf4j.Logger;
+
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 public class ProtoPowerModule extends PDHPowerModule {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(ProtoPowerModule.class.getName());
+   private static final Logger logger = PKLogger.getLogger(ProtoPowerModule.class.getName());
 
    public ProtoPowerModule() {
       logger.info("constructing");

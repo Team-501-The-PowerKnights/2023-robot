@@ -8,13 +8,14 @@
 
 package frc.robot.commands.drive;
 
+import org.slf4j.Logger;
+
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 public class DriveJoystickControl extends DriveOICommandBase {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(DriveJoystickControl.class.getName());
+   private static final Logger logger = PKLogger.getLogger(DriveJoystickControl.class.getName());
 
    /**
     * Creates a new DriveJoystickControl.

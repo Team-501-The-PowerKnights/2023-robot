@@ -8,6 +8,8 @@
 
 package frc.robot.subsystems.wrist;
 
+import org.slf4j.Logger;
+
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.REVLibError;
 import com.revrobotics.RelativeEncoder;
@@ -17,7 +19,7 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
+import riolog.ProblemTracker;
 
 /**
  * DOCS: Add your docs here.
@@ -25,7 +27,7 @@ import riolog.RioLogger;
 public class ProtoWristSubsystem extends BaseWristSubsystem {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(ProtoWristSubsystem.class.getName());
+   private static final Logger logger = PKLogger.getLogger(ProtoWristSubsystem.class.getName());
 
    /** */
    private final CANSparkMax motor;
@@ -55,6 +57,7 @@ public class ProtoWristSubsystem extends BaseWristSubsystem {
       if (error != REVLibError.kOk) {
          lastError = error;
          logger.error(message, error);
+         ProblemTracker.addError();
       }
    }
 

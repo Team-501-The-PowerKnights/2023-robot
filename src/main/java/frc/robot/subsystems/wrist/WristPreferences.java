@@ -8,14 +8,13 @@
 
 package frc.robot.subsystems.wrist;
 
-import edu.wpi.first.wpilibj.Preferences;
+import org.slf4j.Logger;
 
 import frc.robot.preferences.BasePreferences;
 import frc.robot.subsystems.SubsystemNames;
 import frc.robot.utils.PIDValues;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 /**
  * Defines the names and values of properties for this package.
@@ -30,7 +29,7 @@ import riolog.RioLogger;
 public final class WristPreferences extends BasePreferences {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(WristPreferences.class.getName());
+   private static final Logger logger = PKLogger.getLogger(WristPreferences.class.getName());
 
    private WristPreferences() {
       super(SubsystemNames.wristName);
@@ -75,43 +74,16 @@ public final class WristPreferences extends BasePreferences {
    public void initialize() {
       logger.info("initializing");
 
-      if (!Preferences.containsKey(PID_P)) {
-         logger.warn("{} doesn't exist; creating with default", PID_P);
-         Preferences.setDouble(PID_P, default_pid_P);
-      }
-      if (!Preferences.containsKey(PID_I)) {
-         logger.warn("{} doesn't exist; creating with default", PID_I);
-         Preferences.setDouble(PID_I, default_pid_I);
-      }
-      if (!Preferences.containsKey(PID_D)) {
-         logger.warn("{} doesn't exist; creating with default", PID_D);
-         Preferences.setDouble(PID_D, default_pid_D);
-      }
-      if (!Preferences.containsKey(PID_IZone)) {
-         logger.warn("{} doesn't exist; creating with default", PID_IZone);
-         Preferences.setDouble(PID_IZone, default_pid_IZone);
-      }
-      if (!Preferences.containsKey(PID_FF)) {
-         logger.warn("{} doesn't exist; creating with default", PID_FF);
-         Preferences.setDouble(PID_FF, default_pid_FF);
-      }
-      if (!Preferences.containsKey(PID_minOutput)) {
-         logger.warn("{} doesn't exist; creating with default", PID_minOutput);
-         Preferences.setDouble(PID_minOutput, default_pid_minOutput);
-      }
-      if (!Preferences.containsKey(PID_maxOutput)) {
-         logger.warn("{} doesn't exist; creating with default", PID_maxOutput);
-         Preferences.setDouble(PID_maxOutput, default_pid_maxOutput);
-      }
+      checkAndAddDoublePreference(PID_P, default_pid_P);
+      checkAndAddDoublePreference(PID_I, default_pid_I);
+      checkAndAddDoublePreference(PID_D, default_pid_D);
+      checkAndAddDoublePreference(PID_IZone, default_pid_IZone);
+      checkAndAddDoublePreference(PID_FF, default_pid_FF);
+      checkAndAddDoublePreference(PID_minOutput, default_pid_minOutput);
+      checkAndAddDoublePreference(PID_maxOutput, default_pid_maxOutput);
 
-      if (!Preferences.containsKey(upSetPoint)) {
-         logger.warn("{} doesn't exist; creating with default", upSetPoint);
-         Preferences.setDouble(upSetPoint, default_upPosition);
-      }
-      if (!Preferences.containsKey(overSetPoint)) {
-         logger.warn("{} doesn't exist; creating with default", overSetPoint);
-         Preferences.setDouble(overSetPoint, default_overPosition);
-      }
+      checkAndAddDoublePreference(upSetPoint, default_upPosition);
+      checkAndAddDoublePreference(overSetPoint, default_overPosition);
 
       logger.info("preferences as initialized:");
       logPreferences(logger);

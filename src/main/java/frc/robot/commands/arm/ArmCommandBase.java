@@ -8,12 +8,13 @@
 
 package frc.robot.commands.arm;
 
+import org.slf4j.Logger;
+
 import frc.robot.commands.PKCommandBase;
 import frc.robot.subsystems.arm.ArmFactory;
 import frc.robot.subsystems.arm.IArmSubsystem;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 /**
  * Add your docs here.
@@ -21,7 +22,7 @@ import riolog.RioLogger;
 abstract class ArmCommandBase extends PKCommandBase {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(ArmCommandBase.class.getName());
+   private static final Logger logger = PKLogger.getLogger(ArmCommandBase.class.getName());
 
    // Handle to our subsystem
    protected final IArmSubsystem arm;

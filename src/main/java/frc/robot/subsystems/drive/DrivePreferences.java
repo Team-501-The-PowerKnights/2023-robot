@@ -8,11 +8,12 @@
 
 package frc.robot.subsystems.drive;
 
+import org.slf4j.Logger;
+
 import frc.robot.preferences.BasePreferences;
 import frc.robot.subsystems.SubsystemNames;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 /**
  * Defines the names and values of properties for this package.
@@ -27,7 +28,7 @@ import riolog.RioLogger;
 public final class DrivePreferences extends BasePreferences {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(DrivePreferences.class.getName());
+   private static final Logger logger = PKLogger.getLogger(DrivePreferences.class.getName());
 
    private DrivePreferences() {
       super(SubsystemNames.driveName);

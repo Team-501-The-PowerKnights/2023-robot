@@ -8,17 +8,18 @@
 
 package frc.robot.commands.wrist;
 
+import org.slf4j.Logger;
+
 import frc.robot.commands.PKCommandBase;
 import frc.robot.subsystems.wrist.WristFactory;
 import frc.robot.subsystems.wrist.IWristSubsystem;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 public class WristCommandBase extends PKCommandBase {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(WristCommandBase.class.getName());
+   private static final Logger logger = PKLogger.getLogger(WristCommandBase.class.getName());
 
    // Handle to our subsystem
    protected final IWristSubsystem subsys;

@@ -8,6 +8,8 @@
 
 package frc.robot.modules.led;
 
+import org.slf4j.Logger;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.modules.BaseModule;
@@ -16,12 +18,11 @@ import frc.robot.telemetry.TelemetryNames;
 import frc.robot.utils.PKColor8Bit;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 abstract class BaseLEDModule extends BaseModule implements ILEDModule {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(BaseLEDModule.class.getName());
+   private static final Logger logger = PKLogger.getLogger(BaseLEDModule.class.getName());
 
    BaseLEDModule() {
       super(ModuleNames.ledName);

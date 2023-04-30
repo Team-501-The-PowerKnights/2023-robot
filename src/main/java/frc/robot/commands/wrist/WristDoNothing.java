@@ -8,13 +8,14 @@
 
 package frc.robot.commands.wrist;
 
+import org.slf4j.Logger;
+
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 public class WristDoNothing extends WristCommandBase {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(WristDoNothing.class.getName());
+   private static final Logger logger = PKLogger.getLogger(WristDoNothing.class.getName());
 
    public WristDoNothing() {
       logger.info("constructing {}", getName());

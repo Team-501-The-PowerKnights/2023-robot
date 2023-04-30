@@ -8,6 +8,8 @@
 
 package frc.robot.modules.power;
 
+import org.slf4j.Logger;
+
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -15,7 +17,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 /**
  * This class provides an implementation based on the Cross the Road
@@ -24,7 +25,7 @@ import riolog.RioLogger;
 class PDPPowerModule extends BasePowerModule {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(PDPPowerModule.class.getName());
+   private static final Logger logger = PKLogger.getLogger(PDPPowerModule.class.getName());
 
    protected final PowerDistribution module;
 

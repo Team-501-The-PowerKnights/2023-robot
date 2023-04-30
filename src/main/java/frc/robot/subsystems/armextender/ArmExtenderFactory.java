@@ -8,6 +8,8 @@
 
 package frc.robot.subsystems.armextender;
 
+import org.slf4j.Logger;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.properties.PKProperties;
@@ -18,7 +20,7 @@ import frc.robot.telemetry.TelemetryNames;
 import frc.robot.utils.PKStatus;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
+import riolog.ProblemTracker;
 
 /**
  * 
@@ -26,7 +28,7 @@ import riolog.RioLogger;
 public class ArmExtenderFactory {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(ArmExtenderFactory.class.getName());
+   private static final Logger logger = PKLogger.getLogger(ArmExtenderFactory.class.getName());
 
    /** Singleton instance of class for all to use **/
    private static IArmExtenderSubsystem ourInstance;
@@ -75,6 +77,7 @@ public class ArmExtenderFactory {
          SmartDashboard.putNumber(TelemetryNames.ArmExtender.status, PKStatus.success.tlmValue);
       } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
          logger.error("failed to load class; instantiating default stub for: {}", myName);
+         ProblemTracker.addError();
          ourInstance = new StubArmExtenderSubsystem();
          ourInstance.setDefaultCommand(new ArmExtenderDoNothing());
          SmartDashboard.putNumber(TelemetryNames.ArmExtender.status, PKStatus.degraded.tlmValue);

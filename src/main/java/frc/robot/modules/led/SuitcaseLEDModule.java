@@ -8,13 +8,14 @@
 
 package frc.robot.modules.led;
 
+import org.slf4j.Logger;
+
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 public class SuitcaseLEDModule extends AddressibleLEDModule {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(SuitcaseLEDModule.class.getName());
+   private static final Logger logger = PKLogger.getLogger(SuitcaseLEDModule.class.getName());
 
    private static final int pwmPort = 0;
    private static final int ledLength = 16;

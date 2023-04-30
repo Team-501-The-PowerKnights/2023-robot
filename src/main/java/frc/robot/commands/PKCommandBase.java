@@ -10,10 +10,11 @@ package frc.robot.commands;
 
 import java.util.HashSet;
 
+import org.slf4j.Logger;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 /**
  * 
@@ -21,7 +22,7 @@ import riolog.RioLogger;
 public abstract class PKCommandBase extends CommandBase {
 
    /* Our classes logger */
-   private static final PKLogger logger = RioLogger.getLogger(PKCommandBase.class.getName());
+   private static final Logger logger = PKLogger.getLogger(PKCommandBase.class.getName());
 
    // FIXME - Use handle to CommandTracker class (TBW)
 

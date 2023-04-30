@@ -11,6 +11,8 @@ package frc.robot.subsystems;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.properties.PropertiesManager;
@@ -25,7 +27,6 @@ import frc.robot.telemetry.TelemetryNames;
 import frc.robot.utils.PKStatus;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 /**
  * 
@@ -33,7 +34,7 @@ import riolog.RioLogger;
 public class SubsystemsFactory {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(SubsystemsFactory.class.getName());
+   private static final Logger logger = PKLogger.getLogger(SubsystemsFactory.class.getName());
 
    public static List<ISubsystem> constructSubsystems() {
       logger.info("constructing");

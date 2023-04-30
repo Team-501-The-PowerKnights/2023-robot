@@ -11,6 +11,8 @@ package frc.robot.modules;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.modules.led.LEDModuleFactory;
@@ -21,7 +23,6 @@ import frc.robot.telemetry.TelemetryNames;
 import frc.robot.utils.PKStatus;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 /**
  * Add your docs here.
@@ -29,8 +30,7 @@ import riolog.RioLogger;
 public class ModulesFactory {
 
    /** Our classes' logger **/
-   @SuppressWarnings("unused")
-   private static final PKLogger logger = RioLogger.getLogger(ModulesFactory.class.getName());
+   private static final Logger logger = PKLogger.getLogger(ModulesFactory.class.getName());
 
    public static List<IModule> constructModules() {
 
@@ -38,6 +38,7 @@ public class ModulesFactory {
 
       TelemetryManager tlmMgr = TelemetryManager.getInstance();
 
+      logger.info("construct Power");
       SmartDashboard.putNumber(TelemetryNames.Power.status, PKStatus.unknown.tlmValue);
       {
          PowerModuleFactory.constructInstance();
@@ -46,6 +47,7 @@ public class ModulesFactory {
          modules.add(m);
       }
 
+      logger.info("construct Pneumatic");
       SmartDashboard.putNumber(TelemetryNames.Pneumatic.status, PKStatus.unknown.tlmValue);
       {
          PneumaticModuleFactory.constructInstance();
@@ -54,6 +56,7 @@ public class ModulesFactory {
          modules.add(m);
       }
 
+      logger.info("construct LED");
       SmartDashboard.putNumber(TelemetryNames.LED.status, PKStatus.unknown.tlmValue);
       {
          LEDModuleFactory.constructInstance();

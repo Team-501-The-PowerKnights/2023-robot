@@ -8,12 +8,13 @@
 
 package frc.robot.commands.gripper;
 
+import org.slf4j.Logger;
+
 import frc.robot.commands.PKCommandBase;
 import frc.robot.subsystems.gripper.GripperFactory;
 import frc.robot.subsystems.gripper.IGripperSubsystem;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 /**
  * Add your docs here.
@@ -21,7 +22,7 @@ import riolog.RioLogger;
 abstract class GripperCommandBase extends PKCommandBase {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(GripperCommandBase.class.getName());
+   private static final Logger logger = PKLogger.getLogger(GripperCommandBase.class.getName());
 
    // Handle to our subsystem
    protected final IGripperSubsystem subsys;

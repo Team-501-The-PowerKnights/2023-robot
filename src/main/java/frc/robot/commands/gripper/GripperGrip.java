@@ -10,13 +10,14 @@ package frc.robot.commands.gripper;
 
 import java.util.function.DoubleSupplier;
 
+import org.slf4j.Logger;
+
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 public class GripperGrip extends GripperCommandBase {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(GripperGrip.class.getName());
+   private static final Logger logger = PKLogger.getLogger(GripperGrip.class.getName());
 
    private final DoubleSupplier supplier;
 

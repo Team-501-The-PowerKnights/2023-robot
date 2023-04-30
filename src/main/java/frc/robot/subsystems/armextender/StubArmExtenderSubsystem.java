@@ -8,8 +8,9 @@
 
 package frc.robot.subsystems.armextender;
 
+import org.slf4j.Logger;
+
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 /**
  * DOCS: Add your docs here.
@@ -17,7 +18,7 @@ import riolog.RioLogger;
 class StubArmExtenderSubsystem extends BaseArmExtenderSubsystem {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(StubArmExtenderSubsystem.class.getName());
+   private static final Logger logger = PKLogger.getLogger(StubArmExtenderSubsystem.class.getName());
 
    StubArmExtenderSubsystem() {
       logger.info("constructing");

@@ -8,20 +8,23 @@
 
 package frc.robot.commands.drive;
 
+import org.slf4j.Logger;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import frc.robot.modules.led.ILEDModule;
 import frc.robot.modules.led.LEDModuleFactory;
 import frc.robot.sensors.gyro.GyroFactory;
 import frc.robot.sensors.gyro.IGyroSensor;
 import frc.robot.telemetry.TelemetryNames;
 import frc.robot.utils.PKColor8Bit;
+
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 public class DriveBalance extends DriveCommandBase {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(DriveBalance.class.getName());
+   private static final Logger logger = PKLogger.getLogger(DriveBalance.class.getName());
 
    // Max speed to drive the motors out; no matter how far out.
    // private static final double maxSpeed = 0.3;

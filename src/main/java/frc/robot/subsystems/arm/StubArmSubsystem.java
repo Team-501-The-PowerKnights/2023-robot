@@ -8,8 +8,9 @@
 
 package frc.robot.subsystems.arm;
 
+import org.slf4j.Logger;
+
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 /**
  * DOCS: Add your docs here.
@@ -17,7 +18,7 @@ import riolog.RioLogger;
 class StubArmSubsystem extends BaseArmSubsystem {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(StubArmSubsystem.class.getName());
+   private static final Logger logger = PKLogger.getLogger(StubArmSubsystem.class.getName());
 
    StubArmSubsystem() {
       logger.info("constructing");

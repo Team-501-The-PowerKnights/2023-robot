@@ -8,13 +8,14 @@
 
 package frc.robot.commands.armextender;
 
+import org.slf4j.Logger;
+
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 public class ArmExtendWaitAtSetPoint extends ArmExtenderCommandBase {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(ArmExtendWaitAtSetPoint.class.getName());
+   private static final Logger logger = PKLogger.getLogger(ArmExtendWaitAtSetPoint.class.getName());
 
    public ArmExtendWaitAtSetPoint() {
       logger.info("constructing {}", getName());

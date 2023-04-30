@@ -8,6 +8,8 @@
 
 package frc.robot.modules.pneumatic;
 
+import org.slf4j.Logger;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.modules.ModuleNames;
@@ -17,7 +19,7 @@ import frc.robot.telemetry.TelemetryNames;
 import frc.robot.utils.PKStatus;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
+import riolog.ProblemTracker;
 
 /**
  * 
@@ -25,7 +27,7 @@ import riolog.RioLogger;
 public class PneumaticModuleFactory {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(PneumaticModuleFactory.class.getName());
+   private static final Logger logger = PKLogger.getLogger(PneumaticModuleFactory.class.getName());
 
    /** Singleton instance of class for all to use **/
    private static IPneumaticModule ourInstance;
@@ -74,6 +76,7 @@ public class PneumaticModuleFactory {
          SmartDashboard.putNumber(TelemetryNames.Pneumatic.status, PKStatus.success.tlmValue);
       } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
          logger.error("failed to load class; instantiating default stub for: {}", myName);
+         ProblemTracker.addError();
          ourInstance = new StubPneumaticModule();
          SmartDashboard.putNumber(TelemetryNames.Pneumatic.status, PKStatus.degraded.tlmValue);
       }

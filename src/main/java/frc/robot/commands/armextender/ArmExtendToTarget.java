@@ -8,13 +8,22 @@
 
 package frc.robot.commands.armextender;
 
-import riolog.PKLogger;
-import riolog.RioLogger;
+import org.slf4j.Logger;
 
+import riolog.PKLogger;
+
+/**
+ * This class implements an abstract base class suitable for building a
+ * <code>Command<code> to extend the arm to one of the pre-canned, fixed
+ * locations. It is implemented as a <i>one-shot</code> which means it
+ * makes the call to set the PID reference during the
+ * <code>firstExecution()</code> method, and then does nothing for the
+ * remainder of the subsequent calls to <code>execute()</code>.
+ */
 public class ArmExtendToTarget extends ArmExtenderCommandBase {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(ArmExtendToTarget.class.getName());
+   private static final Logger logger = PKLogger.getLogger(ArmExtendToTarget.class.getName());
 
    /** Value of set point to exxtend to */
    private final double target;

@@ -8,15 +8,16 @@
 
 package frc.robot.commands.armrotator;
 
+import org.slf4j.Logger;
+
 import frc.robot.subsystems.armrotator.IArmRotatorSubsystem.ArmRotationPosition;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 public class ArmRotateToLowPosition extends ArmRotateToPosition {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(ArmRotateToLowPosition.class.getName());
+   private static final Logger logger = PKLogger.getLogger(ArmRotateToLowPosition.class.getName());
 
    public ArmRotateToLowPosition() {
       super(ArmRotationPosition.lowPosition);

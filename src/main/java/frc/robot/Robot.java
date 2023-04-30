@@ -12,6 +12,8 @@
 
 package frc.robot;
 
+import org.slf4j.Logger;
+
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -28,7 +30,7 @@ import frc.robot.utils.PKColor8Bit;
 
 import riolog.Level;
 import riolog.PKLogger;
-import riolog.RioLogger;
+import riolog.ProblemTracker;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -40,7 +42,7 @@ import riolog.RioLogger;
 public class Robot extends TimedRobot {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(Robot.class.getName());
+   private static final Logger logger = PKLogger.getLogger(Robot.class.getName());
 
    // Capture the period at start (shouldn't ever change)
    private static double loopPeriod;
@@ -142,8 +144,8 @@ public class Robot extends TimedRobot {
 
    private void determineInitStatus() {
       // TODO: Make tri-color status when implemented
-      long errorCount = logger.getErrorCount();
-      long warnCount = logger.getWarnCount();
+      long errorCount = ProblemTracker.getErrorCount();
+      long warnCount = ProblemTracker.getWarnCount();
       logger.info("init status: errorCount={}, warnCount={}", errorCount, warnCount);
       // red for bad, green for good (so reverse sense)
       boolean status = !((errorCount != 0) || (warnCount != 0));
@@ -253,8 +255,8 @@ public class Robot extends TimedRobot {
     * log file.
     */
    private void logErrorCounts() {
-      long warnCount = logger.getWarnCount();
-      long errorCount = logger.getErrorCount();
+      long errorCount = ProblemTracker.getErrorCount();
+      long warnCount = ProblemTracker.getWarnCount();
       logger.info("error counts: errorCount={}, warnCount={}", errorCount, warnCount);
    }
 
@@ -270,7 +272,7 @@ public class Robot extends TimedRobot {
       displayAutoSelectionStatus(realAutoSelected);
 
       Level level = loggerLevelChooser.getSelected();
-      RioLogger.setLevel(level);
+      PKLogger.setLevel(level);
    }
 
    private boolean autoModeCheckEnabled = true;

@@ -8,13 +8,14 @@
 
 package frc.robot.commands.wrist;
 
+import org.slf4j.Logger;
+
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 public class WristRotateWaitAtSetPoint extends WristCommandBase {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(WristRotateWaitAtSetPoint.class.getName());
+   private static final Logger logger = PKLogger.getLogger(WristRotateWaitAtSetPoint.class.getName());
 
    public WristRotateWaitAtSetPoint() {
       logger.info("constructing {}", getName());

@@ -8,10 +8,11 @@
 
 package frc.robot.utils;
 
+import org.slf4j.Logger;
+
 import edu.wpi.first.wpilibj.util.Color8Bit;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 /**
  * DOCS
@@ -20,7 +21,7 @@ public class PKColor8Bit extends Color8Bit {
 
    /* Our classes logger */
    @SuppressWarnings("unused")
-   private static final PKLogger logger = RioLogger.getLogger(PKStatus.class.getName());
+   private static final Logger logger = PKLogger.getLogger(PKStatus.class.getName());
 
    public static final PKColor8Bit blackRGB = new PKColor8Bit("black", 0, 0, 0);
 

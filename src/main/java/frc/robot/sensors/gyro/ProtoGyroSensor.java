@@ -8,13 +8,14 @@
 
 package frc.robot.sensors.gyro;
 
+import org.slf4j.Logger;
+
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 public class ProtoGyroSensor extends BaseGyroSensor {
 
    /* Our classes logger */
-   private static final PKLogger logger = RioLogger.getLogger(ProtoGyroSensor.class.getName());
+   private static final Logger logger = PKLogger.getLogger(ProtoGyroSensor.class.getName());
 
    // Handle to the hardware sensor
    private final AHRSGyro mySensor;

@@ -8,13 +8,14 @@
 
 package frc.robot.commands.gripper;
 
+import org.slf4j.Logger;
+
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 public class GripperIdleIn extends GripperCommandBase {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(GripperIdleIn.class.getName());
+   private static final Logger logger = PKLogger.getLogger(GripperIdleIn.class.getName());
 
    public GripperIdleIn() {
       logger.info("constructing {}", getName());

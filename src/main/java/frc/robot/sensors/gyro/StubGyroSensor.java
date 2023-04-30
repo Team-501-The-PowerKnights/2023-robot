@@ -8,8 +8,9 @@
 
 package frc.robot.sensors.gyro;
 
+import org.slf4j.Logger;
+
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 /**
  * Provides implementation of <code>IGyroSensor</code> which has no sensor or
@@ -19,7 +20,7 @@ import riolog.RioLogger;
 class StubGyroSensor extends BaseGyroSensor {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(StubGyroSensor.class.getName());
+   private static final Logger logger = PKLogger.getLogger(StubGyroSensor.class.getName());
 
    StubGyroSensor() {
       logger.info("constructing");

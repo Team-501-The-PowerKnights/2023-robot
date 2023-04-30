@@ -8,15 +8,16 @@
 
 package frc.robot.commands.armextender;
 
+import org.slf4j.Logger;
+
 import java.util.function.DoubleSupplier;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 public class ArmNudgeExtensionTarget extends ArmExtenderCommandBase {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(ArmNudgeExtensionTarget.class.getName());
+   private static final Logger logger = PKLogger.getLogger(ArmNudgeExtensionTarget.class.getName());
 
    private final DoubleSupplier supplier;
 

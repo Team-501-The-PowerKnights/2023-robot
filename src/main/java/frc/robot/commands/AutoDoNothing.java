@@ -8,13 +8,14 @@
 
 package frc.robot.commands;
 
+import org.slf4j.Logger;
+
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 public class AutoDoNothing extends PKCommandBase {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(AutoDoNothing.class.getName());
+   private static final Logger logger = PKLogger.getLogger(AutoDoNothing.class.getName());
 
    public AutoDoNothing() {
       logger.info("constructing {}", getName());

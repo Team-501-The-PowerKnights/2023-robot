@@ -8,12 +8,13 @@
 
 package frc.robot.commands.drive;
 
+import org.slf4j.Logger;
+
 import frc.robot.commands.PKCommandBase;
 import frc.robot.subsystems.drive.DriveFactory;
 import frc.robot.subsystems.drive.IDriveSubsystem;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 /**
  * Add your docs here.
@@ -21,7 +22,7 @@ import riolog.RioLogger;
 abstract class DriveCommandBase extends PKCommandBase {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(DriveCommandBase.class.getName());
+   private static final Logger logger = PKLogger.getLogger(DriveCommandBase.class.getName());
 
    // Handle to our subsystem
    protected final IDriveSubsystem drive;

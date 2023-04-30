@@ -8,6 +8,8 @@
 
 package frc.robot.subsystems.armrotator;
 
+import org.slf4j.Logger;
+
 import com.revrobotics.AbsoluteEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.REVLibError;
@@ -23,7 +25,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
+import riolog.ProblemTracker;
 
 /**
  * DOCS: Add your docs here.
@@ -31,7 +33,7 @@ import riolog.RioLogger;
 public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(ProtoArmRotatorSubsystem.class.getName());
+   private static final Logger logger = PKLogger.getLogger(ProtoArmRotatorSubsystem.class.getName());
 
    /** */
    private final CANSparkMax motor;
@@ -79,6 +81,7 @@ public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
       if (error != REVLibError.kOk) {
          lastError = error;
          logger.error(message, error);
+         ProblemTracker.addError();
       }
    }
 

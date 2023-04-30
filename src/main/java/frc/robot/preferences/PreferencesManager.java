@@ -11,6 +11,8 @@ package frc.robot.preferences;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -25,7 +27,6 @@ import frc.robot.telemetry.TelemetryNames;
 import frc.robot.utils.PKStatus;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 /**
  * Add your docs here.
@@ -33,7 +34,7 @@ import riolog.RioLogger;
 public final class PreferencesManager {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(PreferencesManager.class.getName());
+   private static final Logger logger = PKLogger.getLogger(PreferencesManager.class.getName());
 
    private static PreferencesManager ourInstance;
 
@@ -95,7 +96,7 @@ public final class PreferencesManager {
       logger.info("constructed");
    }
 
-   public void logPreferences(PKLogger logger) {
+   public void logPreferences(Logger logger) {
       StringBuilder buf = new StringBuilder();
       buf.append(" preferences:");
       for (String key : Preferences.getKeys().stream().sorted().collect(Collectors.toCollection(ArrayList::new))) {

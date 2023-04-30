@@ -8,10 +8,11 @@
 
 package frc.robot.utils;
 
+import org.slf4j.Logger;
+
 import frc.robot.Robot;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 /**
  * 
@@ -19,7 +20,7 @@ import riolog.RioLogger;
 public class TimerFromPeriod {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(TimerFromPeriod.class.getName());
+   private static final Logger logger = PKLogger.getLogger(TimerFromPeriod.class.getName());
 
    // Period retreived from robot (shouldn't ever change)
    private static final double period;

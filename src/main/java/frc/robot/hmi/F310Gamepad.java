@@ -8,13 +8,14 @@
 
 package frc.robot.hmi;
 
+import org.slf4j.Logger;
+
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 abstract class F310Gamepad extends BaseGamepad {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(F310Gamepad.class.getName());
+   private static final Logger logger = PKLogger.getLogger(F310Gamepad.class.getName());
 
    protected F310Gamepad(String name, int port) {
       super(name, port);

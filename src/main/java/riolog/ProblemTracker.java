@@ -6,24 +6,37 @@
 /*- of this project.                                                      */
 /*------------------------------------------------------------------------*/
 
-package frc.robot.commands.armrotator;
+package riolog;
 
-import org.slf4j.Logger;
+public class ProblemTracker {
 
-import frc.robot.subsystems.armrotator.IArmRotatorSubsystem.ArmRotationPosition;
+   private static long errorCount;
 
-import riolog.PKLogger;
+   private static long warnCount;
 
-public class ArmRotateToAutoConePosition extends ArmRotateToPosition {
+   static {
+      errorCount = 0;
+      warnCount = 0;
+   }
 
-   /** Our classes' logger **/
-   private static final Logger logger = PKLogger.getLogger(ArmRotateToAutoConePosition.class.getName());
+   // Prevent instantiating class
+   private ProblemTracker() {
+   }
 
-   public ArmRotateToAutoConePosition() {
-      super(ArmRotationPosition.autoConePosition);
-      logger.info("constructing {}", getName());
+   public static void addWarning() {
+      warnCount++;
+   }
 
-      logger.info("constructed");
+   public static long getWarnCount() {
+      return warnCount;
+   }
+
+   public static void addError() {
+      errorCount++;
+   }
+
+   public static long getErrorCount() {
+      return errorCount;
    }
 
 }

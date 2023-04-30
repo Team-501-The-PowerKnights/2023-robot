@@ -8,352 +8,148 @@
 
 package riolog;
 
+import java.io.File;
+
 import org.slf4j.Logger;
-import org.slf4j.Marker;
+import org.slf4j.LoggerFactory;
 
-public class PKLogger implements Logger {
+import ch.qos.logback.classic.LoggerContext;
+import ch.qos.logback.classic.encoder.PatternLayoutEncoder;
+import ch.qos.logback.classic.spi.ILoggingEvent;
+import ch.qos.logback.core.ConsoleAppender;
+import ch.qos.logback.core.FileAppender;
+import ch.qos.logback.core.util.StatusPrinter;
 
-   private final ch.qos.logback.classic.Logger logger;
+/**
+ *
+ **/
+public class PKLogger {
 
-   private static long warnCount = 0;
+   // Logger setting for default level
+   // @formatter:off
+   // private static final Level defaultLevel = Level.INFO;
+   private static final Level defaultLevel = Level.DEBUG;
+   // private static final Level defaultLevel = Level.TRACE;
+   // @formatter:on
 
-   public long getWarnCount() {
-      return warnCount;
+   // Logger setting for message format/content
+   // @formatter:off
+   // "level" length format does not work for console :<
+   // Includes line numbers
+   private static final String pattern = "%date{HH:mm:ss.SSS} %-5level [%thread] %logger{10}[%3line] %msg%n";
+   // Leaves out line numbers
+   //private static final String pattern = "%date{HH:mm:ss.SSS} %-5level [%thread] %logger{10} %msg%n";
+   // @formatter:on
+
+   private static final String logMountPoint = "/media/sda1/";
+   private static final String logDirName = "501logs/";
+   private static final String logFileName = "logfile-";
+   private static final String logFileExtension = ".log";
+   private static final String logFile;
+   private static final boolean useLogFile;
+
+   private static final ch.qos.logback.classic.Logger rootLogger;
+
+   static {
+      // Log info about the configuration of the loggin subsystem
+      LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
+      StatusPrinter.print(lc);
+
+      final File logDir = new File(logMountPoint + logDirName);
+      useLogFile = logDir.exists();
+      System.out.println("useLogFile=" + useLogFile);
+      if (useLogFile) {
+         final StringBuilder buf = new StringBuilder();
+         buf.append(logMountPoint);
+         buf.append(logDirName).append(logFileName);
+         final int keepBufLen = buf.length();
+         for (int i = 1; i <= 100; i++) {
+            buf.setLength(keepBufLen);
+            buf.append(String.format("%03d", i));
+            buf.append(logFileExtension);
+            System.out.println("[" + i + "]:" + buf.toString());
+            final File logFile = new File(buf.toString());
+            if (!logFile.exists()) {
+               break;
+            }
+         }
+         // If we get to 100; we are just going to re-use it regardless
+         logFile = buf.toString();
+      } else {
+         logFile = "";
+      }
+
+      // Set the 'default' logging level on the root logger
+      rootLogger = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
+      setLevel(rootLogger, defaultLevel);
    }
 
-   private static long errorCount = 0;
+   public static Logger getLogger(String loggerName) {
+      final ch.qos.logback.classic.Logger logger = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(loggerName);
 
-   public long getErrorCount() {
-      return errorCount;
+      final LoggerContext lc = logger.getLoggerContext();
+      // we are not interested in auto-configuration
+      lc.reset();
+
+      /*
+       * Can't share encoders, so each appender needs to have it's own
+       */
+
+      {
+         final PatternLayoutEncoder ple = new PatternLayoutEncoder();
+         ple.setContext(lc);
+         ple.setPattern(pattern);
+         ple.start();
+
+         final ConsoleAppender<ILoggingEvent> consoleAppender = new ConsoleAppender<>();
+         consoleAppender.setContext(lc);
+         consoleAppender.setEncoder(ple);
+         consoleAppender.start();
+         //
+         logger.addAppender(consoleAppender);
+      }
+
+      if (useLogFile) {
+         final PatternLayoutEncoder ple = new PatternLayoutEncoder();
+         ple.setContext(lc);
+         ple.setPattern(pattern);
+         ple.start();
+
+         final FileAppender<ILoggingEvent> fileAppender = new FileAppender<>();
+         fileAppender.setFile(logFile);
+         fileAppender.setContext(lc);
+         fileAppender.setEncoder(ple);
+         fileAppender.setAppend(true);
+         fileAppender.start();
+         //
+         logger.addAppender(fileAppender);
+      }
+
+      // setLevel(logger, defaultLevel); /* set if each logger has unique level */
+      logger.setAdditive(false); /* set to true if root should log too */
+
+      return logger;
    }
 
-   PKLogger(ch.qos.logback.classic.Logger logger) {
-      this.logger = logger;
+   /**
+    * Sets the logging level on the specified logger.
+    *
+    * @param logger
+    * @param level
+    */
+   public static void setLevel(Logger logger, Level level) {
+      ((ch.qos.logback.classic.Logger) logger).setLevel(level.level);
    }
 
-   @Override
-   public String getName() {
-      return logger.getName();
-   }
-
-   @Override
-   public boolean isTraceEnabled() {
-      return logger.isTraceEnabled();
-   }
-
-   @Override
-   public void trace(String msg) {
-      logger.trace(msg);
-   }
-
-   @Override
-   public void trace(String format, Object arg) {
-      logger.trace(format, arg);
-   }
-
-   @Override
-   public void trace(String format, Object arg1, Object arg2) {
-      logger.trace(format, arg1, arg2);
-   }
-
-   @Override
-   public void trace(String format, Object... arguments) {
-      logger.trace(format, arguments);
-   }
-
-   @Override
-   public void trace(String msg, Throwable t) {
-      logger.trace(msg, t);
-   }
-
-   @Override
-   public boolean isTraceEnabled(Marker marker) {
-      return logger.isTraceEnabled(marker);
-   }
-
-   @Override
-   public void trace(Marker marker, String msg) {
-      logger.trace(marker, msg);
-   }
-
-   @Override
-   public void trace(Marker marker, String format, Object arg) {
-      logger.trace(marker, format, arg);
-   }
-
-   @Override
-   public void trace(Marker marker, String format, Object arg1, Object arg2) {
-      logger.trace(marker, format, arg1, arg2);
-   }
-
-   @Override
-   public void trace(Marker marker, String format, Object... argArray) {
-      logger.trace(marker, format, argArray);
-   }
-
-   @Override
-   public void trace(Marker marker, String msg, Throwable t) {
-      logger.trace(marker, msg, t);
-   }
-
-   @Override
-   public boolean isDebugEnabled() {
-      return logger.isDebugEnabled();
-   }
-
-   @Override
-   public void debug(String msg) {
-      logger.debug(msg);
-   }
-
-   @Override
-   public void debug(String format, Object arg) {
-      logger.debug(format, arg);
-   }
-
-   @Override
-   public void debug(String format, Object arg1, Object arg2) {
-      logger.debug(format, arg1, arg2);
-   }
-
-   @Override
-   public void debug(String format, Object... arguments) {
-      logger.debug(format, arguments);
-   }
-
-   @Override
-   public void debug(String msg, Throwable t) {
-      logger.debug(msg, t);
-   }
-
-   @Override
-   public boolean isDebugEnabled(Marker marker) {
-      return logger.isDebugEnabled(marker);
-   }
-
-   @Override
-   public void debug(Marker marker, String msg) {
-      logger.debug(marker, msg);
-   }
-
-   @Override
-   public void debug(Marker marker, String format, Object arg) {
-      logger.debug(marker, format, arg);
-   }
-
-   @Override
-   public void debug(Marker marker, String format, Object arg1, Object arg2) {
-      logger.debug(marker, format, arg1, arg2);
-   }
-
-   @Override
-   public void debug(Marker marker, String format, Object... arguments) {
-      logger.debug(marker, format, arguments);
-   }
-
-   @Override
-   public void debug(Marker marker, String msg, Throwable t) {
-      logger.debug(marker, msg, t);
-   }
-
-   @Override
-   public boolean isInfoEnabled() {
-      return logger.isInfoEnabled();
-   }
-
-   @Override
-   public void info(String msg) {
-      logger.info(msg);
-   }
-
-   @Override
-   public void info(String format, Object arg) {
-      logger.info(format, arg);
-   }
-
-   @Override
-   public void info(String format, Object arg1, Object arg2) {
-      logger.info(format, arg1, arg2);
-   }
-
-   @Override
-   public void info(String format, Object... arguments) {
-      logger.info(format, arguments);
-   }
-
-   @Override
-   public void info(String msg, Throwable t) {
-      logger.info(msg, t);
-   }
-
-   @Override
-   public boolean isInfoEnabled(Marker marker) {
-      return logger.isInfoEnabled(marker);
-   }
-
-   @Override
-   public void info(Marker marker, String msg) {
-      logger.info(marker, msg);
-   }
-
-   @Override
-   public void info(Marker marker, String format, Object arg) {
-      logger.info(marker, format, arg);
-   }
-
-   @Override
-   public void info(Marker marker, String format, Object arg1, Object arg2) {
-      logger.info(marker, format, arg1, arg2);
-   }
-
-   @Override
-   public void info(Marker marker, String format, Object... arguments) {
-      logger.info(marker, format, arguments);
-   }
-
-   @Override
-   public void info(Marker marker, String msg, Throwable t) {
-      logger.info(marker, msg, t);
-   }
-
-   @Override
-   public boolean isWarnEnabled() {
-      return logger.isWarnEnabled();
-   }
-
-   @Override
-   public void warn(String msg) {
-      warnCount++;
-      logger.warn(msg);
-   }
-
-   @Override
-   public void warn(String format, Object arg) {
-      warnCount++;
-      logger.warn(format, arg);
-   }
-
-   @Override
-   public void warn(String format, Object... arguments) {
-      warnCount++;
-      logger.warn(format, arguments);
-   }
-
-   @Override
-   public void warn(String format, Object arg1, Object arg2) {
-      warnCount++;
-      logger.warn(format, arg1, arg2);
-   }
-
-   @Override
-   public void warn(String msg, Throwable t) {
-      warnCount++;
-      logger.warn(msg, t);
-   }
-
-   @Override
-   public boolean isWarnEnabled(Marker marker) {
-      return logger.isWarnEnabled(marker);
-   }
-
-   @Override
-   public void warn(Marker marker, String msg) {
-      warnCount++;
-      logger.warn(marker, msg);
-   }
-
-   @Override
-   public void warn(Marker marker, String format, Object arg) {
-      warnCount++;
-      logger.warn(marker, format, arg);
-   }
-
-   @Override
-   public void warn(Marker marker, String format, Object arg1, Object arg2) {
-      warnCount++;
-      logger.warn(marker, format, arg1, arg2);
-   }
-
-   @Override
-   public void warn(Marker marker, String format, Object... arguments) {
-      warnCount++;
-      logger.warn(marker, format, arguments);
-   }
-
-   @Override
-   public void warn(Marker marker, String msg, Throwable t) {
-      warnCount++;
-      logger.warn(marker, msg, t);
-   }
-
-   @Override
-   public boolean isErrorEnabled() {
-      return logger.isErrorEnabled();
-   }
-
-   @Override
-   public void error(String msg) {
-      errorCount++;
-      logger.error(msg);
-   }
-
-   @Override
-   public void error(String format, Object arg) {
-      errorCount++;
-      logger.error(format, arg);
-   }
-
-   @Override
-   public void error(String format, Object arg1, Object arg2) {
-      errorCount++;
-      logger.error(format, arg1, arg2);
-   }
-
-   @Override
-   public void error(String format, Object... arguments) {
-      errorCount++;
-      logger.error(format, arguments);
-   }
-
-   @Override
-   public void error(String msg, Throwable t) {
-      errorCount++;
-      logger.error(msg, t);
-   }
-
-   @Override
-   public boolean isErrorEnabled(Marker marker) {
-      return logger.isErrorEnabled(marker);
-   }
-
-   @Override
-   public void error(Marker marker, String msg) {
-      errorCount++;
-      logger.error(marker, msg);
-   }
-
-   @Override
-   public void error(Marker marker, String format, Object arg) {
-      errorCount++;
-      logger.error(marker, format, arg);
-   }
-
-   @Override
-   public void error(Marker marker, String format, Object arg1, Object arg2) {
-      errorCount++;
-      logger.error(marker, format, arg1, arg2);
-   }
-
-   @Override
-   public void error(Marker marker, String format, Object... arguments) {
-      errorCount++;
-      logger.error(marker, format, arguments);
-   }
-
-   @Override
-   public void error(Marker marker, String msg, Throwable t) {
-      errorCount++;
-      logger.error(marker, msg, t);
+   /**
+    * Sets the logging level on the 'root' logger.
+    *
+    * @param level
+    */
+   public static void setLevel(Level level) {
+      if (rootLogger.getLevel().toInt() != level.level.toInt()) {
+         rootLogger.setLevel(level.level);
+      }
    }
 
 }

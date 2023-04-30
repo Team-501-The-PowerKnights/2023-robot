@@ -8,8 +8,9 @@
 
 package frc.robot.modules.power;
 
+import org.slf4j.Logger;
+
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 /**
  * This class provides the implementation of the {@link IPowerModule} for the
@@ -18,7 +19,7 @@ import riolog.RioLogger;
 class SuitcasePowerModule extends PDHPowerModule {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(SuitcasePowerModule.class.getName());
+   private static final Logger logger = PKLogger.getLogger(SuitcasePowerModule.class.getName());
 
    public SuitcasePowerModule() {
       logger.info("constructing");

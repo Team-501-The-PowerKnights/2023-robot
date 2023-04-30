@@ -8,8 +8,9 @@
 
 package frc.robot.properties;
 
+import org.slf4j.Logger;
+
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 /**
  * Add your docs here.
@@ -18,7 +19,7 @@ public final class PropertyNames {
 
    /** Our classes' logger **/
    @SuppressWarnings("unused")
-   private static final PKLogger logger = RioLogger.getLogger(PropertyNames.class.getName());
+   private static final Logger logger = PKLogger.getLogger(PropertyNames.class.getName());
 
    private PropertyNames() {
    }

@@ -8,15 +8,16 @@
 
 package frc.robot.commands.armrotator;
 
+import org.slf4j.Logger;
+
 import java.util.function.DoubleSupplier;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 public class ArmNudgeRotationTarget extends ArmRotatorCommandBase {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(ArmNudgeRotationTarget.class.getName());
+   private static final Logger logger = PKLogger.getLogger(ArmNudgeRotationTarget.class.getName());
 
    private final DoubleSupplier supplier;
 

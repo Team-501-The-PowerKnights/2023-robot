@@ -8,13 +8,14 @@
 
 package frc.robot.commands.armrotator;
 
+import org.slf4j.Logger;
+
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 public class ArmRotateWaitOnSetPoint extends ArmRotatorCommandBase {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(ArmRotateWaitOnSetPoint.class.getName());
+   private static final Logger logger = PKLogger.getLogger(ArmRotateWaitOnSetPoint.class.getName());
 
    public ArmRotateWaitOnSetPoint() {
       logger.info("constructing {}", getName());

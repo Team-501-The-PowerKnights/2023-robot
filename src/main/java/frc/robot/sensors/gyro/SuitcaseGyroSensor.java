@@ -8,8 +8,9 @@
 
 package frc.robot.sensors.gyro;
 
+import org.slf4j.Logger;
+
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 /**
  * Provides implementation of <code>IGyroSensor</code> for the
@@ -18,7 +19,7 @@ import riolog.RioLogger;
 class SuitcaseGyroSensor extends BaseGyroSensor {
 
    /* Our classes logger */
-   private static final PKLogger logger = RioLogger.getLogger(SuitcaseGyroSensor.class.getName());
+   private static final Logger logger = PKLogger.getLogger(SuitcaseGyroSensor.class.getName());
 
    // Handle to the hardware sensor
    private final AHRSGyro mySensor;

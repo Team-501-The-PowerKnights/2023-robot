@@ -8,13 +8,12 @@
 
 package frc.robot.subsystems.gripper;
 
-import edu.wpi.first.wpilibj.Preferences;
+import org.slf4j.Logger;
 
 import frc.robot.preferences.BasePreferences;
 import frc.robot.subsystems.SubsystemNames;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 /**
  * Defines the names and values of properties for this package.
@@ -29,7 +28,7 @@ import riolog.RioLogger;
 public final class GripperPreferences extends BasePreferences {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(GripperPreferences.class.getName());
+   private static final Logger logger = PKLogger.getLogger(GripperPreferences.class.getName());
 
    private GripperPreferences() {
       super(SubsystemNames.gripperName);
@@ -63,19 +62,10 @@ public final class GripperPreferences extends BasePreferences {
    public void initialize() {
       logger.info("initializing");
 
-      if (!Preferences.containsKey(maxInSpeed)) {
-         logger.warn("{} doesn't exist; creating with default", maxInSpeed);
-         Preferences.setDouble(maxInSpeed, default_maxInSpeed);
-      }
-      if (!Preferences.containsKey(maxOutSpeed)) {
-         logger.warn("{} doesn't exist; creating with default", maxOutSpeed);
-         Preferences.setDouble(maxOutSpeed, default_maxOutSpeed);
-      }
+      checkAndAddDoublePreference(maxInSpeed, default_maxInSpeed);
+      checkAndAddDoublePreference(maxOutSpeed, default_maxOutSpeed);
 
-      if (!Preferences.containsKey(idleSpeed)) {
-         logger.warn("{} doesn't exist; creating with default", idleSpeed);
-         Preferences.setDouble(idleSpeed, default_idleSpeed);
-      }
+      checkAndAddDoublePreference(idleSpeed, default_idleSpeed);
 
       logger.info("preferences as initialized:");
       logPreferences(logger);

@@ -14,6 +14,8 @@ package frc.robot;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -56,7 +58,6 @@ import frc.robot.telemetry.SchedulerProvider;
 import frc.robot.telemetry.TelemetryManager;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -68,7 +69,7 @@ import riolog.RioLogger;
 public class RobotContainer {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(RobotContainer.class.getName());
+   private static final Logger logger = PKLogger.getLogger(RobotContainer.class.getName());
 
    //
    private final TelemetryManager tlmMgr;

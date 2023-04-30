@@ -8,15 +8,16 @@
 
 package frc.robot.commands.armextender;
 
+import org.slf4j.Logger;
+
 import frc.robot.subsystems.armextender.IArmExtenderSubsystem.ArmExtensionPosition;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 public class ArmExtendToLowPosition extends ArmExtendToPosition {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(ArmExtendToLowPosition.class.getName());
+   private static final Logger logger = PKLogger.getLogger(ArmExtendToLowPosition.class.getName());
 
    public ArmExtendToLowPosition() {
       super(ArmExtensionPosition.lowPosition);

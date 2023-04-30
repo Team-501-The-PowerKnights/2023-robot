@@ -8,15 +8,16 @@
 
 package frc.robot.commands.armextender;
 
+import org.slf4j.Logger;
+
 import frc.robot.subsystems.armextender.IArmExtenderSubsystem.ArmExtensionPosition;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 public class ArmExtendToAutoConePosition extends ArmExtendToPosition {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(ArmExtendToAutoConePosition.class.getName());
+   private static final Logger logger = PKLogger.getLogger(ArmExtendToAutoConePosition.class.getName());
 
    public ArmExtendToAutoConePosition() {
       super(ArmExtensionPosition.autoConePosition);

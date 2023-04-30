@@ -8,20 +8,18 @@
 
 package frc.robot.commands;
 
+import org.slf4j.Logger;
+
 import frc.robot.subsystems.armextender.ArmExtenderFactory;
-import frc.robot.subsystems.armextender.IArmExtenderSubsystem;
 import frc.robot.subsystems.armrotator.ArmRotatorFactory;
-import frc.robot.subsystems.armrotator.IArmRotatorSubsystem;
-import frc.robot.subsystems.wrist.IWristSubsystem;
 import frc.robot.subsystems.wrist.WristFactory;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 public class LogPIDs extends PKCommandBase {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(LogPIDs.class.getName());
+   private static final Logger logger = PKLogger.getLogger(LogPIDs.class.getName());
 
    public LogPIDs() {
       logger.info("constructing {}", getName());
@@ -31,18 +29,11 @@ public class LogPIDs extends PKCommandBase {
    public void execute() {
       super.execute();
 
-      {
-         IArmRotatorSubsystem subsys = ArmRotatorFactory.getInstance();
-         subsys.logPID();
-      }
-      {
-         IArmExtenderSubsystem subsys = ArmExtenderFactory.getInstance();
-         subsys.logPID();
-      }
-      {
-         IWristSubsystem subsys = WristFactory.getInstance();
-         subsys.logPID();
-      }
+      ArmRotatorFactory.getInstance().logPID();
+
+      ArmExtenderFactory.getInstance().logPID();
+
+      WristFactory.getInstance().logPID();
    }
 
    @Override
