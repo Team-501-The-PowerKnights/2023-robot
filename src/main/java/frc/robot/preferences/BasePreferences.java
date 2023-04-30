@@ -16,6 +16,7 @@ import org.slf4j.Logger;
 import edu.wpi.first.wpilibj.Preferences;
 
 import riolog.PKLogger;
+import riolog.ProblemTracker;
 
 /**
  * DOCS: Insert docs here
@@ -33,6 +34,14 @@ abstract public class BasePreferences implements IPreferences {
       this.name = name;
 
       logger.info("constructed");
+   }
+
+   protected void checkAndAddDoublePreference(String key, double value) {
+      if (!Preferences.containsKey(key)) {
+         logger.warn("{} doesn't exist; creating with default", key);
+         ProblemTracker.addWarning();
+         Preferences.setDouble(key, value);
+      }
    }
 
    public void logPreferences(Logger logger) {

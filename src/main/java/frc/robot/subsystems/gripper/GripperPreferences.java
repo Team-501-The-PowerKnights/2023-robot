@@ -10,8 +10,6 @@ package frc.robot.subsystems.gripper;
 
 import org.slf4j.Logger;
 
-import edu.wpi.first.wpilibj.Preferences;
-
 import frc.robot.preferences.BasePreferences;
 import frc.robot.subsystems.SubsystemNames;
 
@@ -64,19 +62,10 @@ public final class GripperPreferences extends BasePreferences {
    public void initialize() {
       logger.info("initializing");
 
-      if (!Preferences.containsKey(maxInSpeed)) {
-         logger.warn("{} doesn't exist; creating with default", maxInSpeed);
-         Preferences.setDouble(maxInSpeed, default_maxInSpeed);
-      }
-      if (!Preferences.containsKey(maxOutSpeed)) {
-         logger.warn("{} doesn't exist; creating with default", maxOutSpeed);
-         Preferences.setDouble(maxOutSpeed, default_maxOutSpeed);
-      }
+      checkAndAddDoublePreference(maxInSpeed, default_maxInSpeed);
+      checkAndAddDoublePreference(maxOutSpeed, default_maxOutSpeed);
 
-      if (!Preferences.containsKey(idleSpeed)) {
-         logger.warn("{} doesn't exist; creating with default", idleSpeed);
-         Preferences.setDouble(idleSpeed, default_idleSpeed);
-      }
+      checkAndAddDoublePreference(idleSpeed, default_idleSpeed);
 
       logger.info("preferences as initialized:");
       logPreferences(logger);

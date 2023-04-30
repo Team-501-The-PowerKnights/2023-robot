@@ -10,8 +10,6 @@ package frc.robot.subsystems.arm;
 
 import org.slf4j.Logger;
 
-import edu.wpi.first.wpilibj.Preferences;
-
 import frc.robot.preferences.BasePreferences;
 import frc.robot.subsystems.SubsystemNames;
 import frc.robot.utils.PIDValues;
@@ -73,76 +71,25 @@ public final class ArmPreferences extends BasePreferences {
    public void initialize() {
       logger.info("initializing");
 
-      if (!Preferences.containsKey(rotatePID_P)) {
-         logger.warn("{} doesn't exist; creating with default", rotatePID_P);
-         Preferences.setDouble(rotatePID_P, 0.0);
-      }
-      if (!Preferences.containsKey(rotatePID_I)) {
-         logger.warn("{} doesn't exist; creating with default", rotatePID_I);
-         Preferences.setDouble(rotatePID_I, 0.0);
-      }
-      if (!Preferences.containsKey(rotatePID_D)) {
-         logger.warn("{} doesn't exist; creating with default", rotatePID_D);
-         Preferences.setDouble(rotatePID_D, 0.0);
-      }
-      if (!Preferences.containsKey(rotatePID_IZone)) {
-         logger.warn("{} doesn't exist; creating with default", rotatePID_IZone);
-         Preferences.setDouble(rotatePID_IZone, 0.0);
-      }
-      if (!Preferences.containsKey(rotatePID_FF)) {
-         logger.warn("{} doesn't exist; creating with default", rotatePID_FF);
-         Preferences.setDouble(rotatePID_FF, 0.0);
-      }
-      if (!Preferences.containsKey(rotatePID_minOutput)) {
-         logger.warn("{} doesn't exist; creating with default", rotatePID_minOutput);
-         Preferences.setDouble(rotatePID_minOutput, 0.0);
-      }
-      if (!Preferences.containsKey(rotatePID_maxOutput)) {
-         logger.warn("{} doesn't exist; creating with default", rotatePID_maxOutput);
-         Preferences.setDouble(rotatePID_maxOutput, 0.0);
-      }
+      checkAndAddDoublePreference(rotatePID_P, 0.0);
+      checkAndAddDoublePreference(rotatePID_I, 0.0);
+      checkAndAddDoublePreference(rotatePID_D, 0.0);
+      checkAndAddDoublePreference(rotatePID_IZone, 0.0);
+      checkAndAddDoublePreference(rotatePID_FF, 0.0);
+      checkAndAddDoublePreference(rotatePID_minOutput, 0.0);
+      checkAndAddDoublePreference(rotatePID_maxOutput, 0.0);
 
-      if (!Preferences.containsKey(rotate_highSetPoint)) {
-         logger.warn("{} doesn't exist; creating with default", rotate_highSetPoint);
-         Preferences.setDouble(rotate_highSetPoint, 0.0);
-      }
-      if (!Preferences.containsKey(rotate_midSetPoint)) {
-         logger.warn("{} doesn't exist; creating with default", rotate_midSetPoint);
-         Preferences.setDouble(rotate_midSetPoint, 0.0);
-      }
-      if (!Preferences.containsKey(rotate_lowSetPoint)) {
-         logger.warn("{} doesn't exist; creating with default", rotate_lowSetPoint);
-         Preferences.setDouble(rotate_lowSetPoint, 0.0);
-      }
+      checkAndAddDoublePreference(rotate_highSetPoint, 0.0);
+      checkAndAddDoublePreference(rotate_midSetPoint, 0.0);
+      checkAndAddDoublePreference(rotate_lowSetPoint, 0.0);
 
-      if (!Preferences.containsKey(extendPID_P)) {
-         logger.warn("{} doesn't exist; creating with default", extendPID_P);
-         Preferences.setDouble(extendPID_P, 0.0);
-      }
-      if (!Preferences.containsKey(extendPID_I)) {
-         logger.warn("{} doesn't exist; creating with default", extendPID_I);
-         Preferences.setDouble(extendPID_I, 0.0);
-      }
-      if (!Preferences.containsKey(extendPID_D)) {
-         logger.warn("{} doesn't exist; creating with default", extendPID_D);
-         Preferences.setDouble(extendPID_D, 0.0);
-      }
-      if (!Preferences.containsKey(extendPID_IZone)) {
-         logger.warn("{} doesn't exist; creating with default", extendPID_IZone);
-         Preferences.setDouble(extendPID_IZone, 0.0);
-      }
-      if (!Preferences.containsKey(extendPID_FF)) {
-         logger.warn("{} doesn't exist; creating with default", extendPID_FF);
-         Preferences.setDouble(extendPID_FF, 0.0);
-      }
-      if (!Preferences.containsKey(extendPID_minOutput)) {
-         logger.warn("{} doesn't exist; creating with default", extendPID_minOutput);
-         Preferences.setDouble(extendPID_minOutput, 0.0);
-      }
-      if (!Preferences.containsKey(extendPID_maxOutput)) {
-         logger.warn("{} doesn't exist; creating with default", extendPID_maxOutput);
-         Preferences.setDouble(extendPID_maxOutput, 0.0);
-      }
+      checkAndAddDoublePreference(extendPID_P, 0.0);
+      checkAndAddDoublePreference(extendPID_I, 0.0);
+      checkAndAddDoublePreference(extendPID_D, 0.0);
+      checkAndAddDoublePreference(extendPID_IZone, 0.0);
+      checkAndAddDoublePreference(extendPID_FF, 0.0);
+      checkAndAddDoublePreference(extendPID_minOutput, 0.0);
+      checkAndAddDoublePreference(extendPID_maxOutput, 0.0);
 
       logger.info("preferences as initialized:");
       logPreferences(logger);
