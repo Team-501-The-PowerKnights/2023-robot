@@ -34,10 +34,11 @@ public class PKLogger {
 
    // Logger setting for message format/content
    // @formatter:off
+   // "level" length format does not work for console :<
    // Includes line numbers
-   // final String pattern = "%date{HH:mm:ss.SSS} [%thread] %-5level %logger{10}[%-3line] %msg%n";
+   private static final String pattern = "%date{HH:mm:ss.SSS} %-5level [%thread] %logger{10}[%3line] %msg%n";
    // Leaves out line numbers
-   private static final String pattern = "%date{HH:mm:ss.SSS} [%thread] %-5level %logger{10} %msg%n";
+   //private static final String pattern = "%date{HH:mm:ss.SSS} %-5level [%thread] %logger{10} %msg%n";
    // @formatter:on
 
    private static final String logMountPoint = "/media/sda1/";
@@ -87,6 +88,8 @@ public class PKLogger {
       final ch.qos.logback.classic.Logger logger = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(loggerName);
 
       final LoggerContext lc = logger.getLoggerContext();
+      // we are not interested in auto-configuration
+      lc.reset();
 
       /*
        * Can't share encoders, so each appender needs to have it's own
