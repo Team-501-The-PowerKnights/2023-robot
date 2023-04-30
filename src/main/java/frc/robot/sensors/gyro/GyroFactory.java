@@ -19,6 +19,7 @@ import frc.robot.telemetry.TelemetryNames;
 import frc.robot.utils.PKStatus;
 
 import riolog.PKLogger;
+import riolog.ProblemTracker;
 
 /**
  * 
@@ -75,6 +76,7 @@ public class GyroFactory {
          SmartDashboard.putNumber(TelemetryNames.Gyro.status, PKStatus.success.tlmValue);
       } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
          logger.error("failed to load class; instantiating default stub for {}", myName);
+         ProblemTracker.addError();
          ourInstance = new StubGyroSensor();
          SmartDashboard.putNumber(TelemetryNames.Gyro.status, PKStatus.degraded.tlmValue);
       }

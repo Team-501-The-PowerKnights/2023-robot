@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.SPI;
 
 import riolog.PKLogger;
+import riolog.ProblemTracker;
 
 /**
  * A wrapper class around the navX-MXP sensor so some of the method calls which
@@ -37,6 +38,7 @@ class AHRSGyro {
          ahrsValid = waitForAhrsConnection();
       } catch (final RuntimeException ex) {
          logger.error("Instantiating naxX MXP" + ex.getMessage());
+         ProblemTracker.addError();
          DriverStation.reportError("Error instantiating navX MXP: " + ex.getMessage(), true);
 
          ahrs = null;

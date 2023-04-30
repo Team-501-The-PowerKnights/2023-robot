@@ -24,6 +24,7 @@ import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
+import riolog.ProblemTracker;
 
 /**
  * This class implements the <code>DriveSubsystem</code> for a chassis
@@ -99,6 +100,7 @@ abstract class CANSparkMaxDriveSubsystem extends BaseDriveSubsystem {
       if (error != REVLibError.kOk) {
          lastError = error;
          logger.error(message, error);
+         ProblemTracker.addError();
       }
    }
 

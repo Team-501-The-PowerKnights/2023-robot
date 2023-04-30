@@ -20,6 +20,7 @@ import com.revrobotics.CANSparkMax.SoftLimitDirection;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import riolog.PKLogger;
+import riolog.ProblemTracker;
 
 /**
  * DOCS: Add your docs here.
@@ -59,6 +60,7 @@ public class SuitcaseArmExtenderSubsystem extends BaseArmExtenderSubsystem {
       if (error != REVLibError.kOk) {
          lastError = error;
          logger.error(message, error);
+         ProblemTracker.addError();
       }
    }
 

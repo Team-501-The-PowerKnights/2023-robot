@@ -30,6 +30,7 @@ import frc.robot.utils.PKColor8Bit;
 
 import riolog.Level;
 import riolog.PKLogger;
+import riolog.ProblemTracker;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -143,8 +144,8 @@ public class Robot extends TimedRobot {
 
    private void determineInitStatus() {
       // TODO: Make tri-color status when implemented
-      long errorCount = logger.getErrorCount();
-      long warnCount = logger.getWarnCount();
+      long errorCount = ProblemTracker.getErrorCount();
+      long warnCount = ProblemTracker.getWarnCount();
       logger.info("init status: errorCount={}, warnCount={}", errorCount, warnCount);
       // red for bad, green for good (so reverse sense)
       boolean status = !((errorCount != 0) || (warnCount != 0));
@@ -254,8 +255,8 @@ public class Robot extends TimedRobot {
     * log file.
     */
    private void logErrorCounts() {
-      long warnCount = logger.getWarnCount();
-      long errorCount = logger.getErrorCount();
+      long errorCount = ProblemTracker.getErrorCount();
+      long warnCount = ProblemTracker.getWarnCount();
       logger.info("error counts: errorCount={}, warnCount={}", errorCount, warnCount);
    }
 

@@ -23,6 +23,7 @@ import frc.robot.properties.PropertiesManager;
 import frc.robot.utils.PKStatus;
 
 import riolog.PKLogger;
+import riolog.ProblemTracker;
 
 /**
  * A base class for subsystems that handles registration in the constructor,
@@ -184,11 +185,13 @@ public abstract class BaseSubsystem implements ISubsystem {
          loadedCommand = (PKCommandBase) myObject;
       } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
          logger.error("failed to load class; instantiating default stub for: {}", myName);
+         ProblemTracker.addError();
          try {
             loadedCommand = (PKCommandBase) doNothingClass.getDeclaredConstructor().newInstance();
          } catch (InstantiationException | IllegalAccessException | IllegalArgumentException
                | InvocationTargetException | NoSuchMethodException | SecurityException e) {
             logger.error("failed to load do nothing class; instantiating stub for: {}", myName);
+            ProblemTracker.addError();
             loadedCommand = new DoNothing();
          }
          // FIXME: Need to get to status of subsystem telemetry name

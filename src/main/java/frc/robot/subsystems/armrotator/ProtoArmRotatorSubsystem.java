@@ -25,6 +25,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
+import riolog.ProblemTracker;
 
 /**
  * DOCS: Add your docs here.
@@ -80,6 +81,7 @@ public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
       if (error != REVLibError.kOk) {
          lastError = error;
          logger.error(message, error);
+         ProblemTracker.addError();
       }
    }
 

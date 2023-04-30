@@ -20,6 +20,7 @@ import frc.robot.telemetry.TelemetryNames;
 import frc.robot.utils.PKStatus;
 
 import riolog.PKLogger;
+import riolog.ProblemTracker;
 
 /**
  * 
@@ -76,6 +77,7 @@ public class ArmFactory {
          SmartDashboard.putNumber(TelemetryNames.Arm.status, PKStatus.success.tlmValue);
       } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
          logger.error("failed to load class; instantiating default stub for: {}", myName);
+         ProblemTracker.addError();
          ourInstance = new StubArmSubsystem();
          ourInstance.setDefaultCommand(new ArmDoNothing());
          SmartDashboard.putNumber(TelemetryNames.Arm.status, PKStatus.degraded.tlmValue);

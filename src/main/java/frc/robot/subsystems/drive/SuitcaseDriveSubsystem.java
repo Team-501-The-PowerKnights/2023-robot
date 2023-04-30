@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 
 import riolog.PKLogger;
+import riolog.ProblemTracker;
 
 /**
  * This class implements the <code>DriveSubsystem</code> for the
@@ -81,6 +82,7 @@ public class SuitcaseDriveSubsystem extends BaseDriveSubsystem {
       if (error != ErrorCode.OK) {
          lastError = error;
          logger.error(message, error);
+         ProblemTracker.addError();
       }
    }
 

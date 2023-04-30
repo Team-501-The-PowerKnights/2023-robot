@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandGenericHID;
 import frc.robot.IModeFollower;
 
 import riolog.PKLogger;
+import riolog.ProblemTracker;
 
 abstract class BaseGamepad implements IModeFollower, IGamepad {
 
@@ -46,6 +47,7 @@ abstract class BaseGamepad implements IModeFollower, IGamepad {
    @Override
    public void configureButtonBindings() {
       logger.error("Shouldn't be calling this from anywhere");
+      ProblemTracker.addError();
    }
 
    /**

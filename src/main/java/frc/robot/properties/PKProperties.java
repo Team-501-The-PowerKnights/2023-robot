@@ -13,6 +13,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 
 import riolog.PKLogger;
+import riolog.ProblemTracker;
 
 /**
  * Add your docs here.
@@ -39,6 +40,7 @@ public class PKProperties {
          retValue = Double.parseDouble(value);
       } catch (NumberFormatException ex) {
          logger.error("{}'s property key={} value={} fails to parse", owner, key, value, ex);
+         ProblemTracker.addError();
          retValue = 0.0;
       }
       return retValue;
@@ -51,6 +53,7 @@ public class PKProperties {
          retValue = Long.parseLong(value);
       } catch (NumberFormatException ex) {
          logger.error("{}'s property key={} value={} fails to parse", owner, key, value, ex);
+         ProblemTracker.addError();
          retValue = 0;
       }
       return retValue;
@@ -74,6 +77,7 @@ public class PKProperties {
       String value = props.get(key);
       if (value == null) {
          logger.error("{}'s property key={} is missing / not defined", owner, key);
+         ProblemTracker.addError();
          value = "";
       } else if (value.isEmpty()) {
          logger.warn("{}'s property key={} is defined but empty value", owner, key);

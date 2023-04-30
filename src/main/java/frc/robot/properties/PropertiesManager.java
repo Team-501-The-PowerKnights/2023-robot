@@ -29,6 +29,7 @@ import frc.robot.telemetry.TelemetryNames;
 import frc.robot.utils.PKStatus;
 
 import riolog.PKLogger;
+import riolog.ProblemTracker;
 
 /**
  * Add your docs here.
@@ -75,6 +76,7 @@ public class PropertiesManager {
       // Check to see if file exists and mark as failed if not
       if (!new File(fileName).exists()) {
          logger.error("Properties file doesn't exist {}", fileName);
+         ProblemTracker.addError();
          SmartDashboard.putNumber(TelemetryNames.Properties.status, PKStatus.failed.tlmValue);
       }
       // Check to see if the robot info exists and mark as suspect if not
@@ -119,11 +121,13 @@ public class PropertiesManager {
          props.forEach((k, v) -> sort(k, v));
       } catch (IOException ex) {
          logger.error("Can't load properties from file {}", fileName, ex);
+         ProblemTracker.addError();
          // Handled above ...
       }
 
       if (ownerProperties.isEmpty()) {
          logger.error("No properties parsed from file {}", fileName);
+         ProblemTracker.addError();
       }
 
       logger.info("constructed");
@@ -172,6 +176,7 @@ public class PropertiesManager {
          return new PKProperties(owner, ownerProperties.get(owner));
       } else {
          logger.error("Properties for owner {} don't exist", owner);
+         ProblemTracker.addError();
          return new PKProperties(owner, new HashMap<String, String>());
       }
    }

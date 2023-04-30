@@ -20,6 +20,7 @@ import frc.robot.telemetry.TelemetryNames;
 import frc.robot.utils.PKStatus;
 
 import riolog.PKLogger;
+import riolog.ProblemTracker;
 
 /**
  * DOCS: Add your docs here.
@@ -76,6 +77,7 @@ public class WristFactory {
          SmartDashboard.putNumber(TelemetryNames.Wrist.status, PKStatus.success.tlmValue);
       } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
          logger.error("failed to load class; instantiating default stub for: {}", myName);
+         ProblemTracker.addError();
          ourInstance = new StubWristSubsystem();
          ourInstance.setDefaultCommand(new WristDoNothing());
          SmartDashboard.putNumber(TelemetryNames.Wrist.status, PKStatus.degraded.tlmValue);

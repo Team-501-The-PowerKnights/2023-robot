@@ -20,6 +20,7 @@ import frc.robot.telemetry.TelemetryNames;
 import frc.robot.utils.PKStatus;
 
 import riolog.PKLogger;
+import riolog.ProblemTracker;
 
 /**
  * 
@@ -76,6 +77,7 @@ public class GripperFactory {
          SmartDashboard.putNumber(TelemetryNames.Gripper.status, PKStatus.success.tlmValue);
       } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
          logger.error("failed to load class; instantiating default stub for: {}", myName);
+         ProblemTracker.addError();
          ourInstance = new StubGripperSubsystem();
          ourInstance.setDefaultCommand(new GripperDoNothing());
          SmartDashboard.putNumber(TelemetryNames.Gripper.status, PKStatus.degraded.tlmValue);

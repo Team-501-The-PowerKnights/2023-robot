@@ -21,6 +21,7 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import riolog.PKLogger;
+import riolog.ProblemTracker;
 
 /**
  * DOCS: Add your docs here.
@@ -68,6 +69,7 @@ public class ProtoGripperSubsystem extends BaseGripperSubsystem {
       if (error != REVLibError.kOk) {
          lastREVError = error;
          logger.error(message, error);
+         ProblemTracker.addError();
       }
    }
 
@@ -79,6 +81,7 @@ public class ProtoGripperSubsystem extends BaseGripperSubsystem {
       if (error != ErrorCode.OK) {
          lastCTREError = error;
          logger.error(message, error);
+         ProblemTracker.addError();
       }
    }
 
