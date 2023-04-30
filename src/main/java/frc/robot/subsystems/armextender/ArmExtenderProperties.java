@@ -8,16 +8,17 @@
 
 package frc.robot.subsystems.armextender;
 
+import org.slf4j.Logger;
+
 import frc.robot.subsystems.SubsystemNames;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 public final class ArmExtenderProperties {
 
    /** Our classes' logger **/
    @SuppressWarnings("unused")
-   private static final PKLogger logger = RioLogger.getLogger(ArmExtenderProperties.class.getName());
+   private static final Logger logger = PKLogger.getLogger(ArmExtenderProperties.class.getName());
 
    private ArmExtenderProperties() {
    }

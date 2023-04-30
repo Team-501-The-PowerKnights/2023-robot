@@ -8,6 +8,8 @@
 
 package frc.robot.modules.led;
 
+import org.slf4j.Logger;
+
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 
@@ -15,12 +17,11 @@ import frc.robot.Robot;
 import frc.robot.utils.PKColor8Bit;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 class AddressibleLEDModule extends BaseLEDModule {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(AddressibleLEDModule.class.getName());
+   private static final Logger logger = PKLogger.getLogger(AddressibleLEDModule.class.getName());
 
    private final AddressableLED m_led;
    private final AddressableLEDBuffer m_ledBuffer;

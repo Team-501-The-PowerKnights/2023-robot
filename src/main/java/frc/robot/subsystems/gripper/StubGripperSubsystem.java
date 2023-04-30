@@ -8,8 +8,9 @@
 
 package frc.robot.subsystems.gripper;
 
+import org.slf4j.Logger;
+
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 /**
  * DOCS: Add your docs here.
@@ -17,7 +18,7 @@ import riolog.RioLogger;
 class StubGripperSubsystem extends BaseGripperSubsystem {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(StubGripperSubsystem.class.getName());
+   private static final Logger logger = PKLogger.getLogger(StubGripperSubsystem.class.getName());
 
    StubGripperSubsystem() {
       logger.info("constructing");

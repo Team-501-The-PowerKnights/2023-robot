@@ -8,6 +8,8 @@
 
 package frc.robot.subsystems.drive;
 
+import org.slf4j.Logger;
+
 import com.ctre.phoenix.ErrorCode;
 import com.ctre.phoenix.motorcontrol.FollowerType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -18,7 +20,6 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 /**
  * This class implements the <code>DriveSubsystem</code> for the
@@ -28,7 +29,7 @@ import riolog.RioLogger;
 public class SuitcaseDriveSubsystem extends BaseDriveSubsystem {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(SuitcaseDriveSubsystem.class.getName());
+   private static final Logger logger = PKLogger.getLogger(SuitcaseDriveSubsystem.class.getName());
 
    // Need to WPILib wrapper classes to function w/ Drive class
    private final WPI_VictorSPX leftFront;

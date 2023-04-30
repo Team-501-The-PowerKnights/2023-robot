@@ -8,8 +8,9 @@
 
 package frc.robot.subsystems.wrist;
 
+import org.slf4j.Logger;
+
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 /**
  * DOCS: Add your docs here.
@@ -17,7 +18,7 @@ import riolog.RioLogger;
 public class StubWristSubsystem extends BaseWristSubsystem {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(StubWristSubsystem.class.getName());
+   private static final Logger logger = PKLogger.getLogger(StubWristSubsystem.class.getName());
 
    StubWristSubsystem() {
       logger.info("constructing");

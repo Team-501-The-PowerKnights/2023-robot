@@ -23,7 +23,7 @@ import ch.qos.logback.core.util.StatusPrinter;
 /**
  *
  **/
-public class RioLogger {
+public class PKLogger {
 
    // Logger setting for default level
    // @formatter:off

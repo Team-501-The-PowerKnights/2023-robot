@@ -8,6 +8,8 @@
 
 package frc.robot.sensors.gyro;
 
+import org.slf4j.Logger;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.properties.PKProperties;
@@ -17,7 +19,6 @@ import frc.robot.telemetry.TelemetryNames;
 import frc.robot.utils.PKStatus;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 /**
  * 
@@ -25,7 +26,7 @@ import riolog.RioLogger;
 public class GyroFactory {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(GyroFactory.class.getName());
+   private static final Logger logger = PKLogger.getLogger(GyroFactory.class.getName());
 
    /** Singleton instance of class for all to use **/
    private static IGyroSensor ourInstance;

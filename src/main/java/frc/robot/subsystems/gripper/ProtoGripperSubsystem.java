@@ -8,6 +8,8 @@
 
 package frc.robot.subsystems.gripper;
 
+import org.slf4j.Logger;
+
 import com.ctre.phoenix.ErrorCode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
@@ -19,7 +21,6 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 /**
  * DOCS: Add your docs here.
@@ -27,7 +28,7 @@ import riolog.RioLogger;
 public class ProtoGripperSubsystem extends BaseGripperSubsystem {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(ProtoGripperSubsystem.class.getName());
+   private static final Logger logger = PKLogger.getLogger(ProtoGripperSubsystem.class.getName());
 
    /** */
    private final CANSparkMax leftMotor;

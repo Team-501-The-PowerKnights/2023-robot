@@ -8,10 +8,11 @@
 
 package frc.robot.commands.wrist;
 
+import org.slf4j.Logger;
+
 import frc.robot.subsystems.wrist.IWristSubsystem.WristPosition;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 /**
  * This class implements an abstract base class suitable for building a
@@ -24,7 +25,7 @@ import riolog.RioLogger;
 abstract class WristRotateToPosition extends WristCommandBase {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(WristRotateToPosition.class.getName());
+   private static final Logger logger = PKLogger.getLogger(WristRotateToPosition.class.getName());
 
    /** Which of the fixed set point positions to move to */
    private final WristPosition position;

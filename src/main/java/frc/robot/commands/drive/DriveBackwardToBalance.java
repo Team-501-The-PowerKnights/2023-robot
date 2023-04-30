@@ -8,10 +8,11 @@
 
 package frc.robot.commands.drive;
 
+import org.slf4j.Logger;
+
 import frc.robot.utils.TimerFromPeriod;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 /**
  * DOCS: Add your docs here.
@@ -19,7 +20,7 @@ import riolog.RioLogger;
 public class DriveBackwardToBalance extends DriveCommandBase {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(DriveBackwardToBalance.class.getName());
+   private static final Logger logger = PKLogger.getLogger(DriveBackwardToBalance.class.getName());
 
    // Duration to execute (in seconds)
    private double duration;

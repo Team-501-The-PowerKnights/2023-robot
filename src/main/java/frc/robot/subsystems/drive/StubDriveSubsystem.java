@@ -8,16 +8,17 @@
 
 package frc.robot.subsystems.drive;
 
+import org.slf4j.Logger;
+
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 class StubDriveSubsystem extends BaseDriveSubsystem {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(StubDriveSubsystem.class.getName());
+   private static final Logger logger = PKLogger.getLogger(StubDriveSubsystem.class.getName());
 
    StubDriveSubsystem() {
       logger.info("constructing");

@@ -8,6 +8,8 @@
 
 package frc.robot.hmi;
 
+import org.slf4j.Logger;
+
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
@@ -33,8 +35,8 @@ import frc.robot.commands.gripper.GripperStop;
 import frc.robot.commands.wrist.WristRotateToOverPosition;
 import frc.robot.commands.wrist.WristRotateToUpPosition;
 import frc.robot.subsystems.armrotator.ArmRotatorFactory;
+
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 /**
  * This class implements the Operator's gamepad.
@@ -45,7 +47,7 @@ import riolog.RioLogger;
 public class OperatorGamepad extends F310Gamepad {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(OperatorGamepad.class.getName());
+   private static final Logger logger = PKLogger.getLogger(OperatorGamepad.class.getName());
 
    private final Trigger armOverPoseButton;
    private final Trigger armHighPoseButton;

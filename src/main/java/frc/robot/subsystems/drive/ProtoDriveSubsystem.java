@@ -8,8 +8,9 @@
 
 package frc.robot.subsystems.drive;
 
+import org.slf4j.Logger;
+
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 /**
  * This class implements the <code>DriveSubsystem</code> for the
@@ -18,7 +19,7 @@ import riolog.RioLogger;
 class ProtoDriveSubsystem extends CANSparkMaxDriveSubsystem {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(ProtoDriveSubsystem.class.getName());
+   private static final Logger logger = PKLogger.getLogger(ProtoDriveSubsystem.class.getName());
 
    ProtoDriveSubsystem() {
       logger.info("constructing");

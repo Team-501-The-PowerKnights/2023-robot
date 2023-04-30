@@ -8,6 +8,8 @@
 
 package frc.robot;
 
+import org.slf4j.Logger;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -15,11 +17,9 @@ import frc.robot.hmi.DriverGamepad;
 import frc.robot.hmi.OperatorGamepad;
 import frc.robot.telemetry.ITelemetryProvider;
 import frc.robot.telemetry.TelemetryNames;
-
 import frc.robot.utils.PKStatus;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 /**
  * Add your docs here.
@@ -27,7 +27,7 @@ import riolog.RioLogger;
 public class OI implements ITelemetryProvider, IModeFollower {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(OI.class.getName());
+   private static final Logger logger = PKLogger.getLogger(OI.class.getName());
 
    /** Singleton instance of class for all to use **/
    private static OI ourInstance;

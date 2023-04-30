@@ -8,13 +8,14 @@
 
 package frc.robot.commands.armrotator;
 
+import org.slf4j.Logger;
+
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 public class ArmRotatorDoNothing extends ArmRotatorCommandBase {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(ArmRotatorDoNothing.class.getName());
+   private static final Logger logger = PKLogger.getLogger(ArmRotatorDoNothing.class.getName());
 
    public ArmRotatorDoNothing() {
       logger.info("constructing {}", getName());

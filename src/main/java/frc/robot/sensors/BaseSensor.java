@@ -8,8 +8,9 @@
 
 package frc.robot.sensors;
 
+import org.slf4j.Logger;
+
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 /**
  * A base class for sensors that provides default methods for the
@@ -19,7 +20,7 @@ import riolog.RioLogger;
 public abstract class BaseSensor implements ISensor {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(BaseSensor.class.getName());
+   private static final Logger logger = PKLogger.getLogger(BaseSensor.class.getName());
 
    /** Our sensors's name **/
    protected final String myName;

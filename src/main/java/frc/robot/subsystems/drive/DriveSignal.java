@@ -10,8 +10,9 @@ package frc.robot.subsystems.drive;
 
 import java.lang.StringBuilder;
 
+import org.slf4j.Logger;
+
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 /**
  * A drivetrain command consisting of the left, right motor settings and whether
@@ -21,7 +22,7 @@ class DriveSignal {
 
    /** Our classes' logger **/
    @SuppressWarnings("unused")
-   private static final PKLogger logger = RioLogger.getLogger(DriveSignal.class.getName());
+   private static final Logger logger = PKLogger.getLogger(DriveSignal.class.getName());
 
    protected double mLeftMotor;
    protected double mRightMotor;

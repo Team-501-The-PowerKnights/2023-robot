@@ -8,13 +8,15 @@
 
 package frc.robot.utils;
 
+import org.slf4j.Logger;
+
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 public class PIDValues {
+
    /** Our classes' logger **/
    @SuppressWarnings("unused")
-   private static final PKLogger logger = RioLogger.getLogger(PIDValues.class.getName());
+   private static final Logger logger = PKLogger.getLogger(PIDValues.class.getName());
 
    public static final String pid_P = ".P";
    public static final String pid_I = ".I";

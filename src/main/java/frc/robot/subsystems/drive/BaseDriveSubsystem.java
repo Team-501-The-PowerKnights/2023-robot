@@ -8,6 +8,8 @@
 
 package frc.robot.subsystems.drive;
 
+import org.slf4j.Logger;
+
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -17,7 +19,6 @@ import frc.robot.subsystems.SubsystemNames;
 import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 /**
  * Add your docs here.
@@ -25,7 +26,7 @@ import riolog.RioLogger;
 abstract class BaseDriveSubsystem extends BaseSubsystem implements IDriveSubsystem {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(BaseDriveSubsystem.class.getName());
+   private static final Logger logger = PKLogger.getLogger(BaseDriveSubsystem.class.getName());
 
    BaseDriveSubsystem() {
       super(SubsystemNames.driveName);

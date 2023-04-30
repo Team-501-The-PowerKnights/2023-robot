@@ -21,13 +21,14 @@ import java.util.stream.Collectors;
 import static java.util.stream.Collectors.*;
 import static java.util.Map.Entry.*;
 
+import org.slf4j.Logger;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.telemetry.TelemetryNames;
 import frc.robot.utils.PKStatus;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 /**
  * Add your docs here.
@@ -35,7 +36,7 @@ import riolog.RioLogger;
 public class PropertiesManager {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(PropertiesManager.class.getName());
+   private static final Logger logger = PKLogger.getLogger(PropertiesManager.class.getName());
 
    /* Default fully qualified file name */
    public static final String defaultFileName = "/home/lvuser/501robot.props";
@@ -184,7 +185,7 @@ public class PropertiesManager {
       return buf.toString();
    }
 
-   public void logProperties(PKLogger logger) {
+   public void logProperties(Logger logger) {
       StringBuilder buf = new StringBuilder();
       buf.append(" properties:");
       for (String owner : ownerProperties.keySet()) {

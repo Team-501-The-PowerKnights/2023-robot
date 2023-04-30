@@ -8,15 +8,16 @@
 
 package frc.robot.modules.led;
 
+import org.slf4j.Logger;
+
 import frc.robot.utils.PKColor8Bit;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 public class StubLEDModule extends BaseLEDModule {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(StubLEDModule.class.getName());
+   private static final Logger logger = PKLogger.getLogger(StubLEDModule.class.getName());
 
    public StubLEDModule() {
       logger.info("constructing");

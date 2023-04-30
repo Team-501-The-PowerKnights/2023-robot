@@ -8,6 +8,8 @@
 
 package frc.robot.subsystems.drive;
 
+import org.slf4j.Logger;
+
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.REVLibError;
 import com.revrobotics.RelativeEncoder;
@@ -22,7 +24,6 @@ import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 /**
  * This class implements the <code>DriveSubsystem</code> for a chassis
@@ -33,7 +34,7 @@ import riolog.RioLogger;
 abstract class CANSparkMaxDriveSubsystem extends BaseDriveSubsystem {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(CANSparkMaxDriveSubsystem.class.getName());
+   private static final Logger logger = PKLogger.getLogger(CANSparkMaxDriveSubsystem.class.getName());
 
    private final CANSparkMax leftFront;
    private final CANSparkMax leftRear;

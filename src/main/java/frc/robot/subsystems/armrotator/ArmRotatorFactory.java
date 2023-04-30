@@ -8,6 +8,8 @@
 
 package frc.robot.subsystems.armrotator;
 
+import org.slf4j.Logger;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.properties.PKProperties;
@@ -18,7 +20,6 @@ import frc.robot.telemetry.TelemetryNames;
 import frc.robot.utils.PKStatus;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 /**
  * 
@@ -26,7 +27,7 @@ import riolog.RioLogger;
 public class ArmRotatorFactory {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(ArmRotatorFactory.class.getName());
+   private static final Logger logger = PKLogger.getLogger(ArmRotatorFactory.class.getName());
 
    /** Singleton instance of class for all to use **/
    private static IArmRotatorSubsystem ourInstance;

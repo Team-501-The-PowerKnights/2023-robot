@@ -8,10 +8,11 @@
 
 package frc.robot.commands.drive;
 
+import org.slf4j.Logger;
+
 import frc.robot.OI;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 /**
  * Add your docs here.
@@ -19,7 +20,7 @@ import riolog.RioLogger;
 abstract class DriveOICommandBase extends DriveCommandBase {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(DriveOICommandBase.class.getName());
+   private static final Logger logger = PKLogger.getLogger(DriveOICommandBase.class.getName());
 
    // Handle to the OI
    protected OI oi;

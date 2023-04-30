@@ -8,13 +8,14 @@
 
 package frc.robot.commands.drive;
 
+import org.slf4j.Logger;
+
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 public class DriveLogOdometer extends DriveCommandBase {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(DriveLogOdometer.class.getName());
+   private static final Logger logger = PKLogger.getLogger(DriveLogOdometer.class.getName());
 
    public DriveLogOdometer() {
       logger.info("constructing {}", getName());

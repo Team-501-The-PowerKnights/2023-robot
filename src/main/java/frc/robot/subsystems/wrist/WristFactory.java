@@ -8,6 +8,8 @@
 
 package frc.robot.subsystems.wrist;
 
+import org.slf4j.Logger;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.properties.PKProperties;
@@ -18,7 +20,6 @@ import frc.robot.telemetry.TelemetryNames;
 import frc.robot.utils.PKStatus;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 /**
  * DOCS: Add your docs here.
@@ -26,7 +27,7 @@ import riolog.RioLogger;
 public class WristFactory {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(WristFactory.class.getName());
+   private static final Logger logger = PKLogger.getLogger(WristFactory.class.getName());
 
    /** Singleton instance of class for all to use **/
    private static IWristSubsystem ourInstance;

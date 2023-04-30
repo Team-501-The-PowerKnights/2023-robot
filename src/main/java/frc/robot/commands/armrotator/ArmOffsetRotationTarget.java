@@ -8,13 +8,14 @@
 
 package frc.robot.commands.armrotator;
 
+import org.slf4j.Logger;
+
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 public class ArmOffsetRotationTarget extends ArmRotatorCommandBase {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(ArmOffsetRotationTarget.class.getName());
+   private static final Logger logger = PKLogger.getLogger(ArmOffsetRotationTarget.class.getName());
 
    private final double offset;
 

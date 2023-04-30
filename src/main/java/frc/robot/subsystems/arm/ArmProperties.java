@@ -8,16 +8,17 @@
 
 package frc.robot.subsystems.arm;
 
+import org.slf4j.Logger;
+
 import frc.robot.subsystems.SubsystemNames;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 public final class ArmProperties {
 
    /** Our classes' logger **/
    @SuppressWarnings("unused")
-   private static final PKLogger logger = RioLogger.getLogger(ArmProperties.class.getName());
+   private static final Logger logger = PKLogger.getLogger(ArmProperties.class.getName());
 
    private ArmProperties() {
    }

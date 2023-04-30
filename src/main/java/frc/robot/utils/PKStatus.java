@@ -8,8 +8,9 @@
 
 package frc.robot.utils;
 
+import org.slf4j.Logger;
+
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 /**
  * This class defines a set of statuses which can be used to set telemetry which
@@ -20,7 +21,7 @@ public class PKStatus {
 
    /* Our classes logger */
    @SuppressWarnings("unused")
-   private static final PKLogger logger = RioLogger.getLogger(PKStatus.class.getName());
+   private static final Logger logger = PKLogger.getLogger(PKStatus.class.getName());
 
    public final double tlmValue;
 

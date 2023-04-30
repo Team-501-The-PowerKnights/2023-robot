@@ -8,16 +8,17 @@
 
 package frc.robot.subsystems.gripper;
 
+import org.slf4j.Logger;
+
 import frc.robot.subsystems.SubsystemNames;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 public final class GripperProperties {
 
    /** Our classes' logger **/
    @SuppressWarnings("unused")
-   private static final PKLogger logger = RioLogger.getLogger(GripperProperties.class.getName());
+   private static final Logger logger = PKLogger.getLogger(GripperProperties.class.getName());
 
    private GripperProperties() {
    }

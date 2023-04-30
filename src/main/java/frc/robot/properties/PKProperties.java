@@ -10,8 +10,9 @@ package frc.robot.properties;
 
 import java.util.Map;
 
+import org.slf4j.Logger;
+
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 /**
  * Add your docs here.
@@ -19,7 +20,7 @@ import riolog.RioLogger;
 public class PKProperties {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(PKProperties.class.getName());
+   private static final Logger logger = PKLogger.getLogger(PKProperties.class.getName());
 
    // "Owner" of the properties (mostly for logging)
    private final String owner;

@@ -8,12 +8,13 @@
 
 package frc.robot.subsystems;
 
+import org.slf4j.Logger;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.telemetry.PIDTelemetry;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 /**
  * DOCS: Insert docs here
@@ -21,7 +22,7 @@ import riolog.RioLogger;
 public abstract class PIDSubsystem extends BaseSubsystem implements IPIDSubsystem {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(PIDSubsystem.class.getName());
+   private static final Logger logger = PKLogger.getLogger(PIDSubsystem.class.getName());
 
    /** Standard telemetry for PID */
    protected PIDTelemetry tlmPID = new PIDTelemetry();

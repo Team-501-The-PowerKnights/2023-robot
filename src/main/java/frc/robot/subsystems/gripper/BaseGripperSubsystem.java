@@ -8,6 +8,8 @@
 
 package frc.robot.subsystems.gripper;
 
+import org.slf4j.Logger;
+
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -17,12 +19,11 @@ import frc.robot.subsystems.SubsystemNames;
 import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 abstract class BaseGripperSubsystem extends BaseSubsystem implements IGripperSubsystem {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(BaseGripperSubsystem.class.getName());
+   private static final Logger logger = PKLogger.getLogger(BaseGripperSubsystem.class.getName());
 
    protected double maxInSpeed;
    protected double maxOutSpeed;

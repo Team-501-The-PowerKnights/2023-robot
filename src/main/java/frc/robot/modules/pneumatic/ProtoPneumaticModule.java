@@ -8,13 +8,14 @@
 
 package frc.robot.modules.pneumatic;
 
+import org.slf4j.Logger;
+
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 class ProtoPneumaticModule extends PCHPneumaticModule {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(ProtoPneumaticModule.class.getName());
+   private static final Logger logger = PKLogger.getLogger(ProtoPneumaticModule.class.getName());
 
    public ProtoPneumaticModule() {
       logger.info("constructing");

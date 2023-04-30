@@ -8,6 +8,8 @@
 
 package frc.robot.subsystems.armrotator;
 
+import org.slf4j.Logger;
+
 import edu.wpi.first.wpilibj.Preferences;
 
 import frc.robot.preferences.BasePreferences;
@@ -15,7 +17,6 @@ import frc.robot.subsystems.SubsystemNames;
 import frc.robot.utils.PIDValues;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 /**
  * Defines the names and values of properties for this package.
@@ -30,7 +31,7 @@ import riolog.RioLogger;
 public final class ArmRotatorPreferences extends BasePreferences {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(ArmRotatorPreferences.class.getName());
+   private static final Logger logger = PKLogger.getLogger(ArmRotatorPreferences.class.getName());
 
    private ArmRotatorPreferences() {
       super(SubsystemNames.armRotatorName);

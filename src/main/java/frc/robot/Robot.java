@@ -12,6 +12,8 @@
 
 package frc.robot;
 
+import org.slf4j.Logger;
+
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -28,7 +30,6 @@ import frc.robot.utils.PKColor8Bit;
 
 import riolog.Level;
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -40,7 +41,7 @@ import riolog.RioLogger;
 public class Robot extends TimedRobot {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(Robot.class.getName());
+   private static final Logger logger = PKLogger.getLogger(Robot.class.getName());
 
    // Capture the period at start (shouldn't ever change)
    private static double loopPeriod;
@@ -270,7 +271,7 @@ public class Robot extends TimedRobot {
       displayAutoSelectionStatus(realAutoSelected);
 
       Level level = loggerLevelChooser.getSelected();
-      RioLogger.setLevel(level);
+      PKLogger.setLevel(level);
    }
 
    private boolean autoModeCheckEnabled = true;

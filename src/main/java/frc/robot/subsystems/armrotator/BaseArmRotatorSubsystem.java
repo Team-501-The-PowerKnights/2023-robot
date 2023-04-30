@@ -8,6 +8,8 @@
 
 package frc.robot.subsystems.armrotator;
 
+import org.slf4j.Logger;
+
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -18,12 +20,11 @@ import frc.robot.telemetry.TelemetryNames;
 import frc.robot.utils.PIDValues;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 abstract class BaseArmRotatorSubsystem extends PIDSubsystem implements IArmRotatorSubsystem {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(BaseArmRotatorSubsystem.class.getName());
+   private static final Logger logger = PKLogger.getLogger(BaseArmRotatorSubsystem.class.getName());
 
    /**
     * PID(s) for Subystem

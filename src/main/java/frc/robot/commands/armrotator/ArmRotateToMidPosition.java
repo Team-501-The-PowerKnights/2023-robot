@@ -8,15 +8,16 @@
 
 package frc.robot.commands.armrotator;
 
+import org.slf4j.Logger;
+
 import frc.robot.subsystems.armrotator.IArmRotatorSubsystem.ArmRotationPosition;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 public class ArmRotateToMidPosition extends ArmRotateToPosition {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(ArmRotateToMidPosition.class.getName());
+   private static final Logger logger = PKLogger.getLogger(ArmRotateToMidPosition.class.getName());
 
    public ArmRotateToMidPosition() {
       super(ArmRotationPosition.midPosition);

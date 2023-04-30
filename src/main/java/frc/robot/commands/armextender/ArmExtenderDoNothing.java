@@ -8,13 +8,14 @@
 
 package frc.robot.commands.armextender;
 
+import org.slf4j.Logger;
+
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 public class ArmExtenderDoNothing extends ArmExtenderCommandBase {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(ArmExtenderDoNothing.class.getName());
+   private static final Logger logger = PKLogger.getLogger(ArmExtenderDoNothing.class.getName());
 
    public ArmExtenderDoNothing() {
       logger.info("constructing {}", getName());

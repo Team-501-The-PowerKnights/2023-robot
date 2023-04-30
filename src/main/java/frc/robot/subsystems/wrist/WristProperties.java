@@ -8,10 +8,11 @@
 
 package frc.robot.subsystems.wrist;
 
+import org.slf4j.Logger;
+
 import frc.robot.subsystems.SubsystemNames;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 /**
  * DOCS: Add your docs here.
@@ -20,7 +21,7 @@ public final class WristProperties {
 
    /** Our classes' logger **/
    @SuppressWarnings("unused")
-   private static final PKLogger logger = RioLogger.getLogger(WristProperties.class.getName());
+   private static final Logger logger = PKLogger.getLogger(WristProperties.class.getName());
 
    private WristProperties() {
    }

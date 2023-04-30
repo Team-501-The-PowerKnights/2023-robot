@@ -11,9 +11,11 @@ package frc.robot.preferences;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+
 import edu.wpi.first.wpilibj.Preferences;
+
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 /**
  * DOCS: Insert docs here
@@ -21,7 +23,7 @@ import riolog.RioLogger;
 abstract public class BasePreferences implements IPreferences {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(BasePreferences.class.getName());
+   private static final Logger logger = PKLogger.getLogger(BasePreferences.class.getName());
 
    protected final String name;
 
@@ -33,7 +35,7 @@ abstract public class BasePreferences implements IPreferences {
       logger.info("constructed");
    }
 
-   public void logPreferences(PKLogger logger) {
+   public void logPreferences(Logger logger) {
       StringBuilder buf = new StringBuilder();
       buf.append(" preferences:");
       for (String key : Preferences.getKeys().stream().filter(k -> k.contains(name)).sorted()

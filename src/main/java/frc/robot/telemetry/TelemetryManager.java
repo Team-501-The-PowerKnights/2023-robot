@@ -10,6 +10,8 @@ package frc.robot.telemetry;
 
 import java.util.ArrayList;
 
+import org.slf4j.Logger;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.Robot;
@@ -17,7 +19,6 @@ import frc.robot.telemetry.TelemetryNames.Misc;
 import frc.robot.utils.PKStatus;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 /**
  * Add your docs here.
@@ -25,7 +26,7 @@ import riolog.RioLogger;
 public class TelemetryManager {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(TelemetryManager.class.getName());
+   private static final Logger logger = PKLogger.getLogger(TelemetryManager.class.getName());
 
    /** Singleton instance of class for all to use **/
    private static TelemetryManager ourInstance;

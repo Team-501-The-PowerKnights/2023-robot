@@ -8,6 +8,8 @@
 
 package frc.robot.modules.pneumatic;
 
+import org.slf4j.Logger;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.modules.BaseModule;
@@ -15,12 +17,11 @@ import frc.robot.modules.ModuleNames;
 import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 abstract class BasePneumaticModule extends BaseModule implements IPneumaticModule {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(BasePneumaticModule.class.getName());
+   private static final Logger logger = PKLogger.getLogger(BasePneumaticModule.class.getName());
 
    BasePneumaticModule() {
       super(ModuleNames.pneumaticName);

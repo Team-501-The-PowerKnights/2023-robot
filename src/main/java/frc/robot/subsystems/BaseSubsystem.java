@@ -10,6 +10,8 @@ package frc.robot.subsystems;
 
 import java.lang.reflect.InvocationTargetException;
 
+import org.slf4j.Logger;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -21,7 +23,6 @@ import frc.robot.properties.PropertiesManager;
 import frc.robot.utils.PKStatus;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 /**
  * A base class for subsystems that handles registration in the constructor,
@@ -32,7 +33,7 @@ import riolog.RioLogger;
 public abstract class BaseSubsystem implements ISubsystem {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(BaseSubsystem.class.getName());
+   private static final Logger logger = PKLogger.getLogger(BaseSubsystem.class.getName());
 
    /** Our subsystem's name **/
    protected final String myName;

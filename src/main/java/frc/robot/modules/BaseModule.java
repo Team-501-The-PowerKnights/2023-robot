@@ -8,8 +8,9 @@
 
 package frc.robot.modules;
 
+import org.slf4j.Logger;
+
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 /**
  * A base class for modules that provides default methods for the
@@ -19,7 +20,7 @@ import riolog.RioLogger;
 public abstract class BaseModule implements IModule {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(BaseModule.class.getName());
+   private static final Logger logger = PKLogger.getLogger(BaseModule.class.getName());
 
    /** Our sensors's name **/
    protected final String myName;

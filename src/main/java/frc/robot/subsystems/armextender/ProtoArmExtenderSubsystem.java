@@ -8,6 +8,8 @@
 
 package frc.robot.subsystems.armextender;
 
+import org.slf4j.Logger;
+
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.REVLibError;
 import com.revrobotics.RelativeEncoder;
@@ -22,7 +24,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
-import riolog.RioLogger;
 
 /**
  * DOCS: Add your docs here.
@@ -30,7 +31,7 @@ import riolog.RioLogger;
 public class ProtoArmExtenderSubsystem extends BaseArmExtenderSubsystem {
 
    /** Our classes' logger **/
-   private static final PKLogger logger = RioLogger.getLogger(ProtoArmExtenderSubsystem.class.getName());
+   private static final Logger logger = PKLogger.getLogger(ProtoArmExtenderSubsystem.class.getName());
 
    /** */
    private final CANSparkMax motor;
