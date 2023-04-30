@@ -81,6 +81,7 @@ public class PKProperties {
          value = "";
       } else if (value.isEmpty()) {
          logger.warn("{}'s property key={} is defined but empty value", owner, key);
+         ProblemTracker.addWarning();
       }
       return value;
    }

@@ -82,6 +82,7 @@ public class PropertiesManager {
       // Check to see if the robot info exists and mark as suspect if not
       else if (robotName.isEmpty() || robotImpl.isEmpty()) {
          logger.warn("Properties file {} exists but missing key info", fileName);
+         ProblemTracker.addWarning();
          SmartDashboard.putNumber(TelemetryNames.Properties.status, PKStatus.unknown.tlmValue);
       } else {
          SmartDashboard.putNumber(TelemetryNames.Properties.status, PKStatus.success.tlmValue);

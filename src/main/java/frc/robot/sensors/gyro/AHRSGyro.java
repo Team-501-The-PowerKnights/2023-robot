@@ -69,6 +69,7 @@ class AHRSGyro {
          }
          if (++count > 10) {
             logger.warn("connect - failed to finish count={}", count);
+            ProblemTracker.addWarning();
             break;
          }
       }
@@ -103,6 +104,7 @@ class AHRSGyro {
          }
          if (++count > 10) {
             logger.warn("zeroYaw - failed to finish count={}", count);
+            ProblemTracker.addWarning();
             break;
          }
       }
