@@ -10,9 +10,8 @@ package frc.robot.subsystems.armextender;
 
 import org.slf4j.Logger;
 
-import frc.robot.preferences.BasePreferences;
+import frc.robot.preferences.PIDPreferences;
 import frc.robot.subsystems.SubsystemNames;
-import frc.robot.utils.PIDValues;
 
 import riolog.PKLogger;
 
@@ -26,13 +25,22 @@ import riolog.PKLogger;
  *
  * @see edu.wpi.first.networktables.NetworkTable
  */
-public final class ArmExtenderPreferences extends BasePreferences {
+public final class ArmExtenderPreferences extends PIDPreferences {
 
    /** Our classes' logger **/
    private static final Logger logger = PKLogger.getLogger(ArmExtenderPreferences.class.getName());
 
    private ArmExtenderPreferences() {
-      super(SubsystemNames.armExtenderName);
+      //@formatter:off
+      super(SubsystemNames.armExtenderName,
+         default_pid_P,
+         default_pid_I,
+         default_pid_D,
+         default_pid_IZone,
+         default_pid_FF,
+         default_pid_minOutput,
+         default_pid_maxOutput);
+      //@formatter:on
       logger.info("constructing");
 
       logger.info("constructed");
@@ -47,14 +55,6 @@ public final class ArmExtenderPreferences extends BasePreferences {
    }
 
    /** PID settings */
-   final String PID_P = name + PIDValues.pid_P;
-   final String PID_I = name + PIDValues.pid_I;
-   final String PID_D = name + PIDValues.pid_D;
-   final String PID_IZone = name + PIDValues.pid_IZone;
-   final String PID_FF = name + PIDValues.pid_FF;
-   final String PID_minOutput = name + PIDValues.pid_minOutput;
-   final String PID_maxOutput = name + PIDValues.pid_maxOutput;
-
    static final double default_pid_P = 1;
    static final double default_pid_I = 0.0001;
    static final double default_pid_D = 5;
@@ -95,14 +95,7 @@ public final class ArmExtenderPreferences extends BasePreferences {
    // FIXME: Make perferences & NetworkTables right
    public void initialize() {
       logger.info("initializing");
-
-      checkAndAddDoublePreference(PID_P, default_pid_P);
-      checkAndAddDoublePreference(PID_I, default_pid_I);
-      checkAndAddDoublePreference(PID_D, default_pid_D);
-      checkAndAddDoublePreference(PID_IZone, default_pid_IZone);
-      checkAndAddDoublePreference(PID_FF, default_pid_FF);
-      checkAndAddDoublePreference(PID_minOutput, default_pid_minOutput);
-      checkAndAddDoublePreference(PID_maxOutput, default_pid_maxOutput);
+      super.initialize();
 
       checkAndAddDoublePreference(rampRate, default_rampRate);
 

@@ -29,7 +29,7 @@ abstract public class BasePreferences implements IPreferences {
    protected final String name;
 
    protected BasePreferences(String name) {
-      logger.info("constructing");
+      logger.info("constructing for name={}", name);
 
       this.name = name;
 

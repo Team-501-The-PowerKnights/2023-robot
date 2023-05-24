@@ -88,8 +88,6 @@ public class PKLogger {
       final ch.qos.logback.classic.Logger logger = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(loggerName);
 
       final LoggerContext lc = logger.getLoggerContext();
-      // we are not interested in auto-configuration
-      lc.reset();
 
       /*
        * Can't share encoders, so each appender needs to have it's own
