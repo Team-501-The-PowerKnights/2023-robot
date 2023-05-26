@@ -6,41 +6,38 @@
 
 | Subsystem      | Controller Type | Motor Type    | CAN ID | Position    | PDB ID |
 | -------------- | --------------- | ------------- | ------ | ----------- | ------ |
-|                |                 |               |        |             |        |
-|                |                 |               |        |             |        |
-|                |                 |               |        |             |        |
-|                |                 |               |        |             |        |
-|                |                 |               |        |             |        |
-|                |                 |               |        |             |        |
-|                |                 |               |        |             |        |
-|                |                 |               |        |             |        |
-|                |                 |               |        |             |        |
-|                |                 |               |        |             |        |
-|                |                 |               |        |             |        |
+| Drive          | Spark Max       | NEO Brushless | 11     | Left Front  | 8      |
+| Drive          | Spark Max       | NEO Brushless | 12     | Left Rear   | 9      |
+| Drive          | Spark Max       | NEO Brushless | 13     | Right Front | 1      |
+| Drive          | Spark Max       | NEO Brushless | 14     | Right Rear  | 0      |
+~~| Arm Rotator    | Spark Max       | NEO Brushless | 21     | --          | 10     |~~
+~~| Arm Extender   | Spark Max       | NEO Brushless | 22     | --          | 11     |~~
+| Elevator       | Spark Max       | NEO Brushless | 21     | --          | 12     |
+| Arm            | Spark Max       | NEO Brushless | 22     | --          | 13     |
+| Gripper        | Spark Max       | REV HD Hex    | 31     | Left        | 10      |
+| Gripper        | Spark Max       | REV HD Hex    | 32     | Right       | 11     |
+~~| Wrist          | Spark Max       | NEO Brushless | 41     | --          | 16     |~~
+| Turret         | Spark Max       | NEO Brushless | 51     | --          | 4      |
 
 ## Modules
 
-| Mechanism      | Controller Type  | CAN ID | Position    | PDB ID |
+| Module         | Module Type      | CAN ID | Position    | PDB ID |
 | -------------- | ---------------- | ------ | ----------- | ------ |
 | Power          | Rev Robotics PDB | 1      |             |        | 
-|                |                  |        |             |        | 
-|                |                  |        |             |        | 
-|                |                  |        |             |        | 
-|                |                  |        |             |        | 
+| Voltage        | CTRE VRM         |        |             | ??     | 
+| Processor      | NI RoboRIO V2    | 0      |             | 20     | 
+| Radio Power    |                  |        |             | 22     | 
 |                |                  |        |             |        | 
 |                |                  |        |             |        | 
 
 ## Sensors
 
-| Mechanism   | Sensor Type  | Port      | Position |
-| ----------- | ------------ | --------- |----------|
-|             |              |           |          |
-|             |              |           |          |
-|             |              |           |          |
-|             |              |           |          |
-|             |              |           |          |
-|             |              |           |          |
-~~| Elevator    | Ultrasonic-y | 0         | Lower    |~~
-
-~~| Drive       | Relative Encoder | Left  | Left Front (Talon SRX)  |~~
-~~| Drive       | Relative Encoder | Right | Right Front (Talon SRX) |~~
+| Subsystem      | Mechanism Type   | Sensor Type        | Port      | Position    |
+| -------------- | ---------------- | ------------------ | --------- | ----------- |
+| Drive          | Gyro             | NavX2-MXP          | 0         |             |
+| Drive          |                  |                    |           | Left Front  |
+| Drive          |                  |                    |           | Right Front |
+~~| Arm Rotator    | Relative Encoder |                    | --        | --          |~~
+~~| Arm Extender   | Relative Encoder |                    | --        | --          |~~
+| ???            | Vision           | Limelight          | 22          |             |
+|                |                  |                    |           |             |
