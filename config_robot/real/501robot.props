@@ -48,8 +48,8 @@ LED.className = StubLEDModule
 #####################
 # Gyro
 #####################
-#Gyro.className = StubGyroSensor
-Gyro.className = GyroSensor
+Gyro.className = StubGyroSensor
+#Gyro.className = GyroSensor
 
 
 
@@ -69,21 +69,21 @@ Drive.teleCommandName = DriveDoNothing
 
 
 #####################
-# ArmRotator
+# Turret
 #####################
-ArmRotator.className = StubArmRotatorSubsystem
-#ArmRotator.className =
-ArmRotator.autoCommandName = ArmRotatorDoNothing
-ArmRotator.teleCommandName = ArmRotatorDoNothing
+Turret.className = TurretArmSubsystem
+#Turret.className =
+Turret.autoCommandName = TurretDoNothing
+Turret.teleCommandName = TurretDoNothing
 
 
 #####################
-# ArmExtender
+# Lift
 #####################
-ArmExtender.className = StubArmExtenderSubsystem
-#ArmExtender.className =
-ArmExtender.autoCommandName = ArmExtenderDoNothing
-ArmExtender.teleCommandName = ArmExtenderDoNothing
+Lift.className = LiftSubsystem
+#Lift.className =
+Lift.autoCommandName = LiftDoNothing
+Lift.teleCommandName = LiftDoNothing
 
 
 #####################
@@ -102,15 +102,6 @@ Gripper.className = StubGripperSubsystem
 #Gripper.className =
 Gripper.autoCommandName = GripperDoNothing
 Gripper.teleCommandName = GripperDoNothing
-
-
-#####################
-# Wrist
-#####################
-Wrist.className = StubWristSubsystem
-#Wrist.className = 
-Wrist.autoCommandName = WristDoNothing
-Wrist.teleCommandName = WristDoNothing
 
 
 

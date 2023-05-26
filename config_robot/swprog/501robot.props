@@ -68,51 +68,6 @@ Drive.autoCommandName = DriveDoNothing
 Drive.teleCommandName = DriveJoystickControl
 
 
-#####################
-# ArmRotator
-#####################
-ArmRotator.className = StubArmRotatorSubsystem
-#ArmRotator.className =
-ArmRotator.autoCommandName = ArmRotatorDoNothing
-ArmRotator.teleCommandName = ArmRotatorDoNothing
-
-
-#####################
-# ArmExtender
-#####################
-ArmExtender.className = StubArmExtenderSubsystem
-#ArmExtender.className =
-ArmExtender.autoCommandName = ArmExtenderDoNothing
-ArmExtender.teleCommandName = ArmExtenderDoNothing
-
-
-#####################
-# Arm
-#####################
-Arm.className = StubArmSubsystem
-#Arm.className =
-Arm.autoCommandName = ArmDoNothing
-Arm.teleCommandName = ArmDoNothing
-
-
-#####################
-# Gripper
-#####################
-Gripper.className = StubGripperSubsystem
-#Gripper.className =
-Gripper.autoCommandName = GripperDoNothing
-Gripper.teleCommandName = GripperDoNothing
-
-
-#####################
-# Wrist
-#####################
-Wrist.className = StubWristSubsystem
-#Wrist.className = 
-Wrist.autoCommandName = WristDoNothing
-Wrist.teleCommandName = WristDoNothing
-
-
 
 #########################################
 #########################################

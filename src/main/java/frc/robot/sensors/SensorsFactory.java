@@ -37,6 +37,9 @@ public class SensorsFactory {
 
       TelemetryManager tlmMgr = TelemetryManager.getInstance();
 
+      logger.info("constructing sensors ...");
+
+      logger.info("construct Gyro");
       SmartDashboard.putNumber(TelemetryNames.Gyro.status, PKStatus.unknown.tlmValue);
       {
          GyroFactory.constructInstance();

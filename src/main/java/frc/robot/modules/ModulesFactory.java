@@ -38,6 +38,8 @@ public class ModulesFactory {
 
       TelemetryManager tlmMgr = TelemetryManager.getInstance();
 
+      logger.info("constructing modules ...");
+
       logger.info("construct Power");
       SmartDashboard.putNumber(TelemetryNames.Power.status, PKStatus.unknown.tlmValue);
       {
@@ -65,6 +67,7 @@ public class ModulesFactory {
          modules.add(m);
       }
 
+      logger.info("constructed");
       return modules;
    }
 

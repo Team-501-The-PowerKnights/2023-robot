@@ -22,6 +22,8 @@ import frc.robot.subsystems.armextender.ArmExtenderPreferences;
 import frc.robot.subsystems.armrotator.ArmRotatorPreferences;
 import frc.robot.subsystems.drive.DrivePreferences;
 import frc.robot.subsystems.gripper.GripperPreferences;
+import frc.robot.subsystems.lift.LiftPreferences;
+import frc.robot.subsystems.turret.TurretPreferences;
 import frc.robot.subsystems.wrist.WristPreferences;
 import frc.robot.telemetry.TelemetryNames;
 import frc.robot.utils.PKStatus;
@@ -66,32 +68,49 @@ public final class PreferencesManager {
    private PreferencesManager() {
       logger.info("constructing");
 
-      DrivePreferences.getInstance().initialize();
-
       switch (PropertiesManager.getInstance().getRobotName()) {
          case "Suitcase-Bot":
-         case "Swprog-Bot":
-         case "Proto-Bot":
+            // ** Drive **
+            // Always do drive first
+            DrivePreferences.getInstance().initialize();
 
+         case "Swprog-Bot":
+            // ** Drive **
+            // Always do drive first
+            DrivePreferences.getInstance().initialize();
+            break;
+
+         case "Proto-Bot":
+            // ** Drive **
+            // Always do drive first
+            DrivePreferences.getInstance().initialize();
             // ** ArmRotator **
             ArmRotatorPreferences.getInstance().initialize();
             // ** Arm Extender **
             ArmExtenderPreferences.getInstance().initialize();
+            // ** Wrist **
+            WristPreferences.getInstance().initialize();
+            // ** Gripper **
+            GripperPreferences.getInstance().initialize();
             break;
 
          case "Real-Bot":
-
+            // ** Drive **
+            // Always do drive first
+            DrivePreferences.getInstance().initialize();
+            // ** Turret **
+            TurretPreferences.getInstance().initialize();
+            // ** Wrist **
+            LiftPreferences.getInstance().initialize();
             // ** Arm **
             ArmPreferences.getInstance().initialize();
+            // ** Gripper **
+            GripperPreferences.getInstance().initialize();
             break;
 
          default:
             break;
       }
-
-      GripperPreferences.getInstance().initialize();
-
-      WristPreferences.getInstance().initialize();
 
       logger.info("constructed");
    }

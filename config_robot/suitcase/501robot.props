@@ -86,34 +86,6 @@ ArmExtender.autoCommandName = ArmExtenderDoNothing
 ArmExtender.teleCommandName = ArmExtenderDoNothing
 
 
-#####################
-# Arm
-#####################
-Arm.className = StubArmSubsystem
-#Arm.className = SuitcaseArmSubsystem
-Arm.autoCommandName = ArmDoNothing
-Arm.teleCommandName = ArmDoNothing
-
-
-#####################
-# Gripper
-#####################
-#Gripper.className = StubGripperSubsystem
-Gripper.className = SuitcaseGripperSubsystem
-Gripper.autoCommandName = GripperDoNothing
-#Gripper.teleCommandName = GripperDoNothing
-Gripper.teleCommandName = GripperIdleIn
-
-
-#####################
-# Wrist
-#####################
-#Wrist.className = StubWristSubsystem
-Wrist.className = SuitcaseWristSubsystem
-Wrist.autoCommandName = WristDoNothing
-Wrist.teleCommandName = WristDoNothing
-
-
 
 #########################################
 #########################################
