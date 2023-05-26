@@ -24,17 +24,17 @@ import riolog.ProblemTracker;
 /**
  * DOCS: Add your docs here.
  */
-public class SuitcaseArmSubsystem extends BaseArmSubsystem {
+public class RealArmSubsystem extends BaseArmSubsystem {
 
    /** Our classes' logger **/
-   private static final Logger logger = PKLogger.getLogger(SuitcaseArmSubsystem.class.getName());
+   private static final Logger logger = PKLogger.getLogger(RealArmSubsystem.class.getName());
 
    /** */
    private final CANSparkMax motor;
    private SparkMaxPIDController pid;
    private RelativeEncoder encoder;
 
-   SuitcaseArmSubsystem() {
+   RealArmSubsystem() {
       logger.info("constructing");
 
       motor = new CANSparkMax(21, MotorType.kBrushless);

@@ -23,7 +23,7 @@ public interface IArmSubsystem extends ISubsystem {
    /**
     * DOCS: Add your docs here.
     */
-   public static enum ArmRotationPosition {
+   public static enum ArmPosition {
       //@formatter:off
       highPosition("High", 0), 
       midPosition("Mid", 0), 
@@ -33,7 +33,7 @@ public interface IArmSubsystem extends ISubsystem {
       private final String name;
       private double position;
 
-      private ArmRotationPosition(String name, double position) {
+      private ArmPosition(String name, double position) {
          this.name = name;
          this.position = position;
       }
@@ -53,65 +53,36 @@ public interface IArmSubsystem extends ISubsystem {
    }
 
    /**
-    * Rotate the arm to the specified position and hold it
+    * Move the arm to the specified position and hold it
     * there (using a PID).
     */
-   public void rotateToPosition(ArmRotationPosition position);
+   public void moveToPosition(ArmPosition position);
 
    /**
-    * Rotate the arm to the specified position and hold it
+    * Move the arm to the specified position and hold it
     * there (using a PID). This is meant for a "manual" setting
     * rather than one of the canned pre-sets.
     * 
     * @param target
     */
-   public void rotateToTarget(double target);
+   public void moveToTarget(double target);
 
    /**
-    * Rotate the arm (away from the ground) or "backwards" (towards
-    * the back of the robot).
+    * Move the arm out away from the tower.
     */
-   public void rotateUp();
+   public void moveOut();
 
    /**
-    * Rotate the arm down (towards the ground) or "forward" (towards
-    * the front of the robot).
+    * Move the arm in towards the tower.
     */
-   public void rotateDown();
+   public void moveIn();
 
    /**
-    * Rotate the arm under 'manual' control.
+    * Move the arm under 'manual' control.
     *
     * @param speed
-    *           speed to rotate at ("+" is up, "-" is down)
+    *           speed to move at ("+" is up, "-" is down)
     */
-   public void rotate(double speed);
-
-   /**
-    * Extend the arm to the specified position and hold it
-    * there (using a PID). This is meant for a "manual" setting
-    * rather than one of the canned pre-sets.
-    * 
-    * @param target
-    */
-   public void extendToTarget(double target);
-
-   /**
-    * Extend the arm out.
-    */
-   public void extend();
-
-   /**
-    * Retract the arm in.
-    */
-   public void retract();
-
-   /**
-    * Extend the arm under 'manual' control.
-    *
-    * @param speed
-    *           speed to extend at ("+" is out, "-" is in)
-    */
-   public void extend(double speed);
+   public void move(double speed);
 
 }

@@ -18,16 +18,16 @@ public class SubsystemNames {
    public static final String hmiName = "HMI";
 
    public static final String driveName = "Drive";
+   public static final String gripperName = "Gripper";
 
    // Proto-Bot
    public static final String armExtenderName = "ArmExtender";
    public static final String armRotatorName = "ArmRotator";
-   // Real-Bot
-   public static final String armName = "Arm";
-   public static final String liftName = "Lift";
-   public static final String turretName = "Turret";
-
-   public static final String gripperName = "Gripper";
    public static final String wristName = "Wrist";
+
+   // Real-Bot
+   public static final String turretName = "Turret";
+   public static final String liftName = "Lift";
+   public static final String armName = "Arm";
 
 }

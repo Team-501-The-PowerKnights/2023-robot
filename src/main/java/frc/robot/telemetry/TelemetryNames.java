@@ -214,6 +214,51 @@ public final class TelemetryNames {
       public static final String current = name + ".current";
    }
 
+   public final class Wrist {
+      private static final String name = SubsystemNames.wristName;
+
+      public static final String status = name + ".status";
+      public static final String implClass = name + ".implClass";
+      public static final String autoCommand = name + ".autoCommand";
+      public static final String teleCommand = name + ".teleCommand";
+
+      public static final String PIDEnabled = name + PIDTelemetry.pid_Enabled;
+      public static final String PIDTarget = name + PIDTelemetry.pid_Target;
+      public static final String PIDCurrent = name + PIDTelemetry.pid_Current;
+      public static final String PIDAtTarget = name + PIDTelemetry.pid_AtTarget;
+      public static final String PIDOnTarget = name + PIDTelemetry.pid_OnTarget;
+   }
+
+   public final class Turret {
+      private static final String name = SubsystemNames.armName;
+
+      public static final String status = name + ".status";
+      public static final String implClass = name + ".implClass";
+      public static final String autoCommand = name + ".autoCommand";
+      public static final String teleCommand = name + ".teleCommand";
+
+      public static final String PIDEnabled = name + PIDTelemetry.pid_Enabled;
+      public static final String PIDTarget = name + PIDTelemetry.pid_Target;
+      public static final String PIDCurrent = name + PIDTelemetry.pid_Current;
+      public static final String PIDAtTarget = name + PIDTelemetry.pid_AtTarget;
+      public static final String PIDOnTarget = name + PIDTelemetry.pid_OnTarget;
+   }
+
+   public final class Lift {
+      private static final String name = SubsystemNames.armName;
+
+      public static final String status = name + ".status";
+      public static final String implClass = name + ".implClass";
+      public static final String autoCommand = name + ".autoCommand";
+      public static final String teleCommand = name + ".teleCommand";
+
+      public static final String PIDEnabled = name + PIDTelemetry.pid_Enabled;
+      public static final String PIDTarget = name + PIDTelemetry.pid_Target;
+      public static final String PIDCurrent = name + PIDTelemetry.pid_Current;
+      public static final String PIDAtTarget = name + PIDTelemetry.pid_AtTarget;
+      public static final String PIDOnTarget = name + PIDTelemetry.pid_OnTarget;
+   }
+
    public final class Arm {
       private static final String name = SubsystemNames.armName;
 
@@ -238,21 +283,6 @@ public final class TelemetryNames {
       public static final String teleCommand = name + ".teleCommand";
 
       public static final String speed = name + ".speed";
-   }
-
-   public final class Wrist {
-      private static final String name = SubsystemNames.wristName;
-
-      public static final String status = name + ".status";
-      public static final String implClass = name + ".implClass";
-      public static final String autoCommand = name + ".autoCommand";
-      public static final String teleCommand = name + ".teleCommand";
-
-      public static final String PIDEnabled = name + PIDTelemetry.pid_Enabled;
-      public static final String PIDTarget = name + PIDTelemetry.pid_Target;
-      public static final String PIDCurrent = name + PIDTelemetry.pid_Current;
-      public static final String PIDAtTarget = name + PIDTelemetry.pid_AtTarget;
-      public static final String PIDOnTarget = name + PIDTelemetry.pid_OnTarget;
    }
 
 }

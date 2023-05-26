@@ -28,64 +28,45 @@ class StubArmSubsystem extends BaseArmSubsystem {
 
    @Override
    public void disable() {
-      // Stub doesn't implement this
+      setTlmPIDEnabled(false);
    }
 
    @Override
    public void stop() {
+      setTlmPIDEnabled(false);
+   }
+
+   @Override
+   public void moveToPosition(ArmPosition position) {
+      logger.debug("position = {}", position);
+
+      double target = position.get();
+      moveToTarget(target);
+   }
+
+   @Override
+   public void moveToTarget(double target) {
+      logger.trace("set PID target = {}", target);
+
       // Stub doesn't implement this
+      setTlmPIDEnabled(true);
+      setTlmPIDTarget(target);
    }
 
    @Override
-   public void rotateToPosition(ArmRotationPosition position) {
+   public void moveOut() {
       // TODO Auto-generated method stub
 
    }
 
    @Override
-   public void rotateToTarget(double target) {
+   public void moveIn() {
       // TODO Auto-generated method stub
 
    }
 
    @Override
-   public void rotateUp() {
-      // TODO Auto-generated method stub
-
-   }
-
-   @Override
-   public void rotateDown() {
-      // TODO Auto-generated method stub
-
-   }
-
-   @Override
-   public void rotate(double speed) {
-      // TODO Auto-generated method stub
-
-   }
-
-   @Override
-   public void extendToTarget(double target) {
-      // TODO Auto-generated method stub
-
-   }
-
-   @Override
-   public void extend() {
-      // TODO Auto-generated method stub
-
-   }
-
-   @Override
-   public void retract() {
-      // TODO Auto-generated method stub
-
-   }
-
-   @Override
-   public void extend(double speed) {
+   public void move(double speed) {
       // TODO Auto-generated method stub
 
    }

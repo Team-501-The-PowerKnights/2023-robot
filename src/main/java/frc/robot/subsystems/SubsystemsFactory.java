@@ -43,24 +43,33 @@ public class SubsystemsFactory {
 
       TelemetryManager tlmMgr = TelemetryManager.getInstance();
 
-      // ** Drive **
-      // Always do drive first
-      SmartDashboard.putNumber(TelemetryNames.Drive.status,
-            PKStatus.unknown.tlmValue);
-      {
-         DriveFactory.constructInstance();
-         ISubsystem ss = DriveFactory.getInstance();
-         tlmMgr.addProvider(ss);
-         subsystems.add(ss);
-      }
+      logger.info("constructing subsystems ...");
 
       switch (PropertiesManager.getInstance().getRobotName()) {
+
          case "Suitcase-Bot":
-         case "Swprog-Bot":
-         case "Proto-Bot":
+
+            // ** Drive **
+            // Always do drive first
+            // @formatter:off
+            logger.info("construct Drive");
+            SmartDashboard.putNumber(TelemetryNames.Drive.status,
+                  PKStatus.unknown.tlmValue); 
+            {
+               DriveFactory.constructInstance();
+               ISubsystem ss = DriveFactory.getInstance();
+               tlmMgr.addProvider(ss);
+               subsystems.add(ss);
+            }
+            //@formatter:on
+
+            // ** Gripper **
+            SmartDashboard.putNumber(TelemetryNames.Gripper.status,
+                  PKStatus.unknown.tlmValue);
 
             // ** ArmRotator **
             // @formatter:off
+            logger.info("construct ArmRotator");
             SmartDashboard.putNumber(TelemetryNames.ArmRotator.status,
                   PKStatus.unknown.tlmValue);
             {
@@ -69,10 +78,11 @@ public class SubsystemsFactory {
                tlmMgr.addProvider(ss);
                subsystems.add(ss);
             }
-            // @formatter:off
+            // @formatter:on
 
             // ** ArmExtender **
             // @formatter:off
+            logger.info("construct ArmExtender");
             SmartDashboard.putNumber(TelemetryNames.ArmExtender.status,
                   PKStatus.unknown.tlmValue);
             {
@@ -83,20 +93,180 @@ public class SubsystemsFactory {
             }
             // @formatter:on
 
+            // ** Wrist **
+            SmartDashboard.putNumber(TelemetryNames.Wrist.status,
+                  PKStatus.unknown.tlmValue);
+
+            // ** Turret **
+            SmartDashboard.putNumber(TelemetryNames.Turret.status,
+                  PKStatus.unknown.tlmValue);
+            // ** Lift **
+            SmartDashboard.putNumber(TelemetryNames.Lift.status,
+                  PKStatus.unknown.tlmValue);
+            // ** Arm **
+            SmartDashboard.putNumber(TelemetryNames.Arm.status,
+                  PKStatus.unknown.tlmValue);
+
+            break;
+
+         case "Swprog-Bot":
+            // ** Drive **
+            // Always do drive first
+            // @formatter:off
+            logger.info("construct Drive");
+            SmartDashboard.putNumber(TelemetryNames.Drive.status,
+                  PKStatus.unknown.tlmValue); 
+            {
+               DriveFactory.constructInstance();
+               ISubsystem ss = DriveFactory.getInstance();
+               tlmMgr.addProvider(ss);
+               subsystems.add(ss);
+            }
+            //@formatter:on
+
+            SmartDashboard.putNumber(TelemetryNames.Gripper.status,
+                  PKStatus.unknown.tlmValue);
+
+            SmartDashboard.putNumber(TelemetryNames.ArmRotator.status,
+                  PKStatus.unknown.tlmValue);
+            SmartDashboard.putNumber(TelemetryNames.ArmRotator.status,
+                  PKStatus.unknown.tlmValue);
+            SmartDashboard.putNumber(TelemetryNames.Wrist.status,
+                  PKStatus.unknown.tlmValue);
+
+            SmartDashboard.putNumber(TelemetryNames.Turret.status,
+                  PKStatus.unknown.tlmValue);
+            SmartDashboard.putNumber(TelemetryNames.Lift.status,
+                  PKStatus.unknown.tlmValue);
+            SmartDashboard.putNumber(TelemetryNames.Arm.status,
+                  PKStatus.unknown.tlmValue);
+
+            break;
+
+         case "Proto-Bot":
+            // ** Drive **
+            // Always do drive first
+            // @formatter:off
+            logger.info("construct Drive");
+            SmartDashboard.putNumber(TelemetryNames.Drive.status,
+                  PKStatus.unknown.tlmValue); 
+            {
+               DriveFactory.constructInstance();
+               ISubsystem ss = DriveFactory.getInstance();
+               tlmMgr.addProvider(ss);
+               subsystems.add(ss);
+            }
+            //@formatter:on
+
+            // ** Gripper **
+            // @formatter:off
+            logger.info("construct Gripper");
+            SmartDashboard.putNumber(TelemetryNames.Gripper.status,
+                  PKStatus.unknown.tlmValue);
+            {
+               GripperFactory.constructInstance();
+               ISubsystem ss = GripperFactory.getInstance();
+               tlmMgr.addProvider(ss);
+               subsystems.add(ss);
+            }
+            // @formatter:on
+
+            // ** ArmRotator **
+            // @formatter:off
+            logger.info("construct ArmRotator");
+            SmartDashboard.putNumber(TelemetryNames.ArmRotator.status,
+                  PKStatus.unknown.tlmValue);
+            {
+               ArmRotatorFactory.constructInstance();
+               ISubsystem ss = ArmRotatorFactory.getInstance();
+               tlmMgr.addProvider(ss);
+               subsystems.add(ss);
+            }
+            // @formatter:on
+
+            // ** ArmExtender **
+            // @formatter:off
+            logger.info("construct ArmExtender");
+            SmartDashboard.putNumber(TelemetryNames.ArmExtender.status,
+                  PKStatus.unknown.tlmValue);
+            {
+               ArmExtenderFactory.constructInstance();
+               ISubsystem ss = ArmExtenderFactory.getInstance();
+               tlmMgr.addProvider(ss);
+               subsystems.add(ss);
+            }
+            // @formatter:on
+
+            // ** Wrist **
+            // @formatter:off
+            logger.info("construct Wrist");
+            SmartDashboard.putNumber(TelemetryNames.Wrist.status,
+                  PKStatus.unknown.tlmValue);
+            {
+               WristFactory.constructInstance();
+               ISubsystem ss = WristFactory.getInstance();
+               tlmMgr.addProvider(ss);
+               subsystems.add(ss);
+            }
+            // @formatter:on
+
+            // ** Turret **
+            SmartDashboard.putNumber(TelemetryNames.Turret.status,
+                  PKStatus.unknown.tlmValue);
+            // ** Lift **
+            SmartDashboard.putNumber(TelemetryNames.Lift.status,
+                  PKStatus.unknown.tlmValue);
+            // ** Arm **
             SmartDashboard.putNumber(TelemetryNames.Arm.status,
                   PKStatus.unknown.tlmValue);
 
             break;
 
          case "Real-Bot":
+            // ** Drive **
+            // Always do drive first
+            // @formatter:off
+            logger.info("construct Drive");
+            SmartDashboard.putNumber(TelemetryNames.Drive.status,
+                  PKStatus.unknown.tlmValue); 
+            {
+               DriveFactory.constructInstance();
+               ISubsystem ss = DriveFactory.getInstance();
+               tlmMgr.addProvider(ss);
+               subsystems.add(ss);
+            }
+            //@formatter:on
+
+            // ** Gripper **
+            // @formatter:off
+            logger.info("construct Gripper");
+            SmartDashboard.putNumber(TelemetryNames.Gripper.status,
+                  PKStatus.unknown.tlmValue);
+            {
+               GripperFactory.constructInstance();
+               ISubsystem ss = GripperFactory.getInstance();
+               tlmMgr.addProvider(ss);
+               subsystems.add(ss);
+            }
+            // @formatter:on
 
             SmartDashboard.putNumber(TelemetryNames.ArmRotator.status,
                   PKStatus.unknown.tlmValue);
-            SmartDashboard.putNumber(TelemetryNames.ArmExtender.status,
+            SmartDashboard.putNumber(TelemetryNames.ArmRotator.status,
+                  PKStatus.unknown.tlmValue);
+            SmartDashboard.putNumber(TelemetryNames.Wrist.status,
+                  PKStatus.unknown.tlmValue);
+
+            // ** Turret **
+            SmartDashboard.putNumber(TelemetryNames.Turret.status,
+                  PKStatus.unknown.tlmValue);
+            // ** Lift **
+            SmartDashboard.putNumber(TelemetryNames.Lift.status,
                   PKStatus.unknown.tlmValue);
 
             // ** Arm **
             // @formatter:off
+            logger.info("construct Arm");
             SmartDashboard.putNumber(TelemetryNames.Arm.status,
                   PKStatus.unknown.tlmValue);
             {
@@ -113,32 +283,14 @@ public class SubsystemsFactory {
             break;
       }
 
-      // ** Gripper **
-      SmartDashboard.putNumber(TelemetryNames.Gripper.status,
-            PKStatus.unknown.tlmValue);
-      {
-         GripperFactory.constructInstance();
-         ISubsystem ss = GripperFactory.getInstance();
-         tlmMgr.addProvider(ss);
-         subsystems.add(ss);
-      }
-
-      // ** Gripper **
-      SmartDashboard.putNumber(TelemetryNames.Wrist.status,
-            PKStatus.unknown.tlmValue);
-      {
-         WristFactory.constructInstance();
-         ISubsystem ss = WristFactory.getInstance();
-         tlmMgr.addProvider(ss);
-         subsystems.add(ss);
-      }
-
       // Load and update the preferences now that all the subsystems are created
+      logger.info("updating subsystem preferences ...");
       for (ISubsystem ss : subsystems) {
          ss.updatePreferences();
       }
 
       // Load the default commands now that all subsystems are created
+      logger.info("loading subsystem default commands ...");
       for (ISubsystem ss : subsystems) {
          ss.loadDefaultCommands();
       }

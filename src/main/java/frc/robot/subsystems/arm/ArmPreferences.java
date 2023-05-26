@@ -46,50 +46,47 @@ public final class ArmPreferences extends BasePreferences {
       private static final ArmPreferences INSTANCE = new ArmPreferences();
    }
 
-   static private final String rotateKey = ".Rotate";
-   final String rotatePID_P = name + rotateKey + PIDValues.pid_P;
-   final String rotatePID_I = name + rotateKey + PIDValues.pid_I;
-   final String rotatePID_D = name + rotateKey + PIDValues.pid_D;
-   final String rotatePID_IZone = name + rotateKey + PIDValues.pid_IZone;
-   final String rotatePID_FF = name + rotateKey + PIDValues.pid_FF;
-   final String rotatePID_minOutput = name + rotateKey + PIDValues.pid_minOutput;
-   final String rotatePID_maxOutput = name + rotateKey + PIDValues.pid_maxOutput;
-   final String rotate_highSetPoint = name + rotateKey + ".HighSetPoint";
-   final String rotate_midSetPoint = name + rotateKey + ".MidSetPoint";
-   final String rotate_lowSetPoint = name + rotateKey + ".LowSetPoint";
+   /** PID settings */
+   final String PID_P = name + PIDValues.pid_P;
+   final String PID_I = name + PIDValues.pid_I;
+   final String PID_D = name + PIDValues.pid_D;
+   final String PID_IZone = name + PIDValues.pid_IZone;
+   final String PID_FF = name + PIDValues.pid_FF;
+   final String PID_minOutput = name + PIDValues.pid_minOutput;
+   final String PID_maxOutput = name + PIDValues.pid_maxOutput;
 
-   static final private String extendKey = ".Extend";
-   final String extendPID_P = name + extendKey + PIDValues.pid_P;
-   final String extendPID_I = name + extendKey + PIDValues.pid_I;
-   final String extendPID_D = name + extendKey + PIDValues.pid_D;
-   final String extendPID_IZone = name + extendKey + PIDValues.pid_IZone;
-   final String extendPID_FF = name + extendKey + PIDValues.pid_FF;
-   final String extendPID_minOutput = name + extendKey + PIDValues.pid_minOutput;
-   final String extendPID_maxOutput = name + extendKey + PIDValues.pid_maxOutput;
+   private static final double default_pid_P = 0;
+   private static final double default_pid_I = 0;
+   private static final double default_pid_D = 0;
+   private static final double default_pid_IZone = 0;
+   private static final double default_pid_FF = 0;
+   private static final double default_pid_minOutput = 0;
+   private static final double default_pid_maxOutput = 0;
+
+   /** Set points for the various positions */
+   final String highSetPoint = name + ".HighSetPoint";
+   final String midSetPoint = name + ".MidSetPoint";
+   final String lowSetPoint = name + ".LowSetPoint";
+
+   private static final double default_highPosition = 0;
+   private static final double default_midPosition = 0;
+   private static final double default_lowPosition = 0;
 
    // FIXME: Make perferences & NetworkTables right
    public void initialize() {
       logger.info("initializing");
 
-      checkAndAddDoublePreference(rotatePID_P, 0.0);
-      checkAndAddDoublePreference(rotatePID_I, 0.0);
-      checkAndAddDoublePreference(rotatePID_D, 0.0);
-      checkAndAddDoublePreference(rotatePID_IZone, 0.0);
-      checkAndAddDoublePreference(rotatePID_FF, 0.0);
-      checkAndAddDoublePreference(rotatePID_minOutput, 0.0);
-      checkAndAddDoublePreference(rotatePID_maxOutput, 0.0);
+      checkAndAddDoublePreference(PID_P, default_pid_P);
+      checkAndAddDoublePreference(PID_I, default_pid_I);
+      checkAndAddDoublePreference(PID_D, default_pid_D);
+      checkAndAddDoublePreference(PID_IZone, default_pid_IZone);
+      checkAndAddDoublePreference(PID_FF, default_pid_FF);
+      checkAndAddDoublePreference(PID_minOutput, default_pid_minOutput);
+      checkAndAddDoublePreference(PID_maxOutput, default_pid_maxOutput);
 
-      checkAndAddDoublePreference(rotate_highSetPoint, 0.0);
-      checkAndAddDoublePreference(rotate_midSetPoint, 0.0);
-      checkAndAddDoublePreference(rotate_lowSetPoint, 0.0);
-
-      checkAndAddDoublePreference(extendPID_P, 0.0);
-      checkAndAddDoublePreference(extendPID_I, 0.0);
-      checkAndAddDoublePreference(extendPID_D, 0.0);
-      checkAndAddDoublePreference(extendPID_IZone, 0.0);
-      checkAndAddDoublePreference(extendPID_FF, 0.0);
-      checkAndAddDoublePreference(extendPID_minOutput, 0.0);
-      checkAndAddDoublePreference(extendPID_maxOutput, 0.0);
+      checkAndAddDoublePreference(highSetPoint, default_highPosition);
+      checkAndAddDoublePreference(midSetPoint, default_midPosition);
+      checkAndAddDoublePreference(lowSetPoint, default_lowPosition);
 
       logger.info("preferences as initialized:");
       logPreferences(logger);
