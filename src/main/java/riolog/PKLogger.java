@@ -89,7 +89,7 @@ public class PKLogger {
 
       final LoggerContext lc = logger.getLoggerContext();
       // we are not interested in auto-configuration
-      lc.reset();
+      // lc.reset(); // this breaks the depth of logging somehow
 
       /*
        * Can't share encoders, so each appender needs to have it's own
