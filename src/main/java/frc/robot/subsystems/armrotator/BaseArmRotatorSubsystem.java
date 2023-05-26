@@ -30,8 +30,7 @@ abstract class BaseArmRotatorSubsystem extends PIDSubsystem implements IArmRotat
     * PID(s) for Subystem
     *
     * These are the defaults to use, and they get overwritten by the values from
-    * the
-    * <i>Preferences</i> if they exist.
+    * the <i>Preferences</i> if they exist.
     **/
 
    protected double pid_P;

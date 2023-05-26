@@ -43,6 +43,7 @@ abstract class BaseDriveSubsystem extends BaseSubsystem implements IDriveSubsyst
    }
 
    protected void loadPreferences() {
+      logger.info("new preferences for {}:", myName);
    }
 
    @Override
