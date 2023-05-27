@@ -40,11 +40,13 @@ public class ProtoWristSubsystem extends BaseWristSubsystem {
       motor = new CANSparkMax(41, MotorType.kBrushless);
       checkError(motor.restoreFactoryDefaults(), "restore factory defaults {}");
       checkError(motor.setIdleMode(IdleMode.kBrake), "set idle mode to brake {}");
-      pid = motor.getPIDController();
-      encoder = motor.getEncoder();
-      checkError(encoder.setPosition(0), "set encoder position to 0 {}");
       checkError(motor.setOpenLoopRampRate(0), "set open loop ramp rate to 0 {}");
       checkError(motor.setSmartCurrentLimit(3), "set smart current limit to 3 {}");
+
+      pid = motor.getPIDController();
+
+      encoder = motor.getEncoder();
+      checkError(encoder.setPosition(0), "set encoder position to 0 {}");
 
       logger.info("constructed");
    }
