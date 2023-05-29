@@ -16,7 +16,7 @@ import org.slf4j.Logger;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import frc.robot.properties.PropertiesManager;
+import frc.robot.subsystems.SubsystemsConfig;
 import frc.robot.subsystems.arm.ArmPreferences;
 import frc.robot.subsystems.armextender.ArmExtenderPreferences;
 import frc.robot.subsystems.armrotator.ArmRotatorPreferences;
@@ -68,50 +68,45 @@ public final class PreferencesManager {
    private PreferencesManager() {
       logger.info("constructing");
 
-      switch (PropertiesManager.getInstance().getRobotName()) {
-         case "Suitcase-Bot":
-            // ** Drive **
-            // Always do drive first
-            DrivePreferences.getInstance().initialize();
-            // ** Turret **
-            TurretPreferences.getInstance().initialize();
+      // ** Drive **
+      // Always do drive first
+      if (SubsystemsConfig.hasDrive()) {
+         DrivePreferences.getInstance().initialize();
+      }
 
-         case "Swprog-Bot":
-            // ** Drive **
-            // Always do drive first
-            DrivePreferences.getInstance().initialize();
-            break;
+      // ** Gripper **
+      if (SubsystemsConfig.hasGripper()) {
+         GripperPreferences.getInstance().initialize();
+      }
 
-         case "Proto-Bot":
-            // ** Drive **
-            // Always do drive first
-            DrivePreferences.getInstance().initialize();
-            // ** ArmRotator **
-            ArmRotatorPreferences.getInstance().initialize();
-            // ** Arm Extender **
-            ArmExtenderPreferences.getInstance().initialize();
-            // ** Wrist **
-            WristPreferences.getInstance().initialize();
-            // ** Gripper **
-            GripperPreferences.getInstance().initialize();
-            break;
+      // ** Arm Rotator **
+      if (SubsystemsConfig.hasArmRotator()) {
+         ArmRotatorPreferences.getInstance().initialize();
+      }
 
-         case "Real-Bot":
-            // ** Drive **
-            // Always do drive first
-            DrivePreferences.getInstance().initialize();
-            // ** Turret **
-            TurretPreferences.getInstance().initialize();
-            // ** Wrist **
-            LiftPreferences.getInstance().initialize();
-            // ** Arm **
-            ArmPreferences.getInstance().initialize();
-            // ** Gripper **
-            GripperPreferences.getInstance().initialize();
-            break;
+      // ** Arm Extender **
+      if (SubsystemsConfig.hasArmExtener()) {
+         ArmExtenderPreferences.getInstance().initialize();
+      }
 
-         default:
-            break;
+      // ** Wrist **
+      if (SubsystemsConfig.hasWrist()) {
+         WristPreferences.getInstance().initialize();
+      }
+
+      // ** Turret **
+      if (SubsystemsConfig.hasTurret()) {
+         TurretPreferences.getInstance().initialize();
+      }
+
+      // ** Lift **
+      if (SubsystemsConfig.hasLift()) {
+         LiftPreferences.getInstance().initialize();
+      }
+
+      // ** Arm **
+      if (SubsystemsConfig.hasArm()) {
+         ArmPreferences.getInstance().initialize();
       }
 
       logger.info("constructed");

@@ -15,7 +15,6 @@ import org.slf4j.Logger;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import frc.robot.properties.PropertiesManager;
 import frc.robot.subsystems.arm.ArmFactory;
 import frc.robot.subsystems.armextender.ArmExtenderFactory;
 import frc.robot.subsystems.armrotator.ArmRotatorFactory;
@@ -47,77 +46,9 @@ public class SubsystemsFactory {
 
       logger.info("constructing subsystems ...");
 
-      // Always have Drive
-      boolean constructDrive = false;
-
-      // Common Subsystems
-      boolean constructGripper = false;
-
-      // Proto-Bot Unique
-      boolean constructArmRotator = false;
-      boolean constructArmExtener = false;
-      boolean constructWrist = false;
-
-      // Real-Bot Unique
-      boolean constructTurret = false;
-      boolean constructLift = false;
-      boolean constructArm = false;
-
-      switch (PropertiesManager.getInstance().getRobotName()) {
-
-         case "Suitcase-Bot":
-
-            constructDrive = true;
-
-            constructGripper = true;
-
-            constructArmRotator = true;
-            constructArmExtener = true;
-            constructWrist = true;
-
-            constructTurret = true;
-            constructLift = true;
-            constructArm = true;
-
-            break;
-
-         case "Swprog-Bot":
-
-            constructDrive = true;
-
-            break;
-
-         case "Proto-Bot":
-
-            constructDrive = true;
-
-            constructGripper = true;
-
-            constructArmRotator = true;
-            constructArmExtener = true;
-            constructWrist = true;
-
-            break;
-
-         case "Real-Bot":
-
-            constructDrive = true;
-
-            constructGripper = true;
-
-            constructTurret = true;
-            constructLift = true;
-            constructArm = true;
-
-            break;
-
-         default:
-            break;
-      }
-
       // ** Drive **
       // Always do drive first
-      if (constructDrive) {
+      if (SubsystemsConfig.hasDrive()) {
          logger.info("construct Drive");
          SmartDashboard.putNumber(TelemetryNames.Drive.status,
                PKStatus.unknown.tlmValue);
@@ -130,7 +61,7 @@ public class SubsystemsFactory {
       }
 
       // ** Gripper **
-      if (constructGripper) {
+      if (SubsystemsConfig.hasGripper()) {
          logger.info("construct Gripper");
          SmartDashboard.putNumber(TelemetryNames.Gripper.status,
                PKStatus.unknown.tlmValue);
@@ -143,7 +74,7 @@ public class SubsystemsFactory {
       }
 
       // ** ArmRotator **
-      if (constructArmRotator) {
+      if (SubsystemsConfig.hasArmRotator()) {
          logger.info("construct ArmRotator");
          SmartDashboard.putNumber(TelemetryNames.ArmRotator.status,
                PKStatus.unknown.tlmValue);
@@ -156,7 +87,7 @@ public class SubsystemsFactory {
       }
 
       // ** ArmExtender **
-      if (constructArmExtener) {
+      if (SubsystemsConfig.hasArmExtener()) {
          logger.info("construct ArmExtender");
          SmartDashboard.putNumber(TelemetryNames.ArmExtender.status,
                PKStatus.unknown.tlmValue);
@@ -169,7 +100,7 @@ public class SubsystemsFactory {
       }
 
       // ** Wrist **
-      if (constructWrist) {
+      if (SubsystemsConfig.hasWrist()) {
          logger.info("construct Wrist");
          SmartDashboard.putNumber(TelemetryNames.Wrist.status,
                PKStatus.unknown.tlmValue);
@@ -182,7 +113,7 @@ public class SubsystemsFactory {
       }
 
       // ** Turret **
-      if (constructTurret) {
+      if (SubsystemsConfig.hasTurret()) {
          logger.info("construct Turret");
          SmartDashboard.putNumber(TelemetryNames.Turret.status,
                PKStatus.unknown.tlmValue);
@@ -194,8 +125,8 @@ public class SubsystemsFactory {
          }
       }
 
-      // ** List **
-      if (constructLift) {
+      // ** Lift **
+      if (SubsystemsConfig.hasLift()) {
          logger.info("construct Lift");
          SmartDashboard.putNumber(TelemetryNames.Lift.status,
                PKStatus.unknown.tlmValue);
@@ -208,7 +139,7 @@ public class SubsystemsFactory {
       }
 
       // ** Arm **
-      if (constructArm) {
+      if (SubsystemsConfig.hasArm()) {
          logger.info("construct Arm");
          SmartDashboard.putNumber(TelemetryNames.Arm.status,
                PKStatus.unknown.tlmValue);
