@@ -252,7 +252,7 @@ public final class TelemetryNames {
    }
 
    public final class Turret {
-      private static final String name = SubsystemNames.armName;
+      private static final String name = SubsystemNames.turretName;
 
       public static final String status = name + ".status";
       public static final String implClass = name + ".implClass";
@@ -267,7 +267,7 @@ public final class TelemetryNames {
    }
 
    public final class Lift {
-      private static final String name = SubsystemNames.armName;
+      private static final String name = SubsystemNames.liftName;
 
       public static final String status = name + ".status";
       public static final String implClass = name + ".implClass";
