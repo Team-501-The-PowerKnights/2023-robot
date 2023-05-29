@@ -6,31 +6,38 @@
 /*- of this project.                                                      */
 /*------------------------------------------------------------------------*/
 
-package frc.robot.commands.wrist;
+package frc.robot.commands.turret;
 
 import org.slf4j.Logger;
 
-import frc.robot.commands.PKCommandBase;
-import frc.robot.subsystems.wrist.WristFactory;
-import frc.robot.subsystems.wrist.IWristSubsystem;
-
 import riolog.PKLogger;
 
-abstract class WristCommandBase extends PKCommandBase {
+public class TurretStop extends TurretCommandBase {
 
    /** Our classes' logger **/
-   private static final Logger logger = PKLogger.getLogger(WristCommandBase.class.getName());
+   private static final Logger logger = PKLogger.getLogger(TurretStop.class.getName());
 
-   // Handle to our subsystem
-   protected final IWristSubsystem subsys;
-
-   public WristCommandBase() {
+   public TurretStop() {
       logger.info("constructing {}", getName());
 
-      subsys = WristFactory.getInstance();
-      addRequirements(subsys);
-
       logger.info("constructed");
+   }
+
+   @Override
+   public void execute() {
+      super.execute();
+   }
+
+   @Override
+   protected void firstExecution() {
+      logger.trace("subsys.stop() called in firstExecution()");
+
+      subsys.stop();
+   }
+
+   @Override
+   public boolean isFinished() {
+      return true;
    }
 
 }

@@ -69,10 +69,19 @@ Drive.teleCommandName = DriveJoystickControl
 
 
 #####################
+# Gripper
+#####################
+Gripper.className = StubDriveSubsystem
+#Gripper.className = 
+Gripper.autoCommandName = GripperDoNothing
+Gripper.teleCommandName = GripperDoNothing
+
+
+#####################
 # ArmRotator
 #####################
-#ArmRotator.className = StubArmRotatorSubsystem
-ArmRotator.className = SuitcaseArmRotatorSubsystem
+ArmRotator.className = StubArmRotatorSubsystem
+#ArmRotator.className = SuitcaseArmRotatorSubsystem
 ArmRotator.autoCommandName = ArmRotatorDoNothing
 ArmRotator.teleCommandName = ArmRotatorDoNothing
 
@@ -80,10 +89,46 @@ ArmRotator.teleCommandName = ArmRotatorDoNothing
 #####################
 # ArmExtender
 #####################
-#ArmExtender.className = StubArmExtenderSubsystem
-ArmExtender.className = SuitcaseArmExtenderSubsystem
+ArmExtender.className = StubArmExtenderSubsystem
+#ArmExtender.className = SuitcaseArmExtenderSubsystem
 ArmExtender.autoCommandName = ArmExtenderDoNothing
 ArmExtender.teleCommandName = ArmExtenderDoNothing
+
+
+#####################
+# Wrist
+#####################
+Wrist.className = StubWristSubsystem
+#Wrist.className = 
+Wrist.autoCommandName = WristDoNothing
+Wrist.teleCommandName = WristDoNothing
+
+
+#####################
+# Turret
+#####################
+Turret.className = StubTurretSubsystem
+#Turret.className = 
+Turret.autoCommandName = TurretDoNothing
+Turret.teleCommandName = TurretDoNothing
+
+
+#####################
+# Lift
+#####################
+Lift.className = StubLiftSubsystem
+#Lift.className = 
+Lift.autoCommandName = LiftDoNothing
+Lift.teleCommandName = LiftDoNothing
+
+
+#####################
+# Arm
+#####################
+Arm.className = StubArmSubsystem
+#Arm.className = 
+Arm.autoCommandName = ArmDoNothing
+Arm.teleCommandName = ArmDoNothing
 
 
 

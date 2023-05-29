@@ -73,6 +73,8 @@ public final class PreferencesManager {
             // ** Drive **
             // Always do drive first
             DrivePreferences.getInstance().initialize();
+            // ** Turret **
+            TurretPreferences.getInstance().initialize();
 
          case "Swprog-Bot":
             // ** Drive **

@@ -63,14 +63,17 @@ public class TurretPreferences extends BasePreferences {
    private static final double default_pid_minOutput = 0;
    private static final double default_pid_maxOutput = 0;
 
-   /** Set points for the various positions */
-   final String leftSetPoint = name + ".LeftSetPoint";
-   final String frontSetPoint = name + ".FrontSetPoint";
-   final String rightSetPoint = name + ".RightSetPoint";
+   /** Ramp rate */
+   final String rampRate = name + ".RampRate";
 
-   private static final double default_leftPosition = 0;
+   private static final double default_rampRate = 0.5;
+
+   /** Set points for the various positions */
+   final String startSetPoint = name + ".StartSetPoint";
+   final String frontSetPoint = name + ".FrontSetPoint";
+
+   private static final double default_startPosition = 0;
    private static final double default_frontPosition = 0;
-   private static final double default_rightPosition = 0;
 
    // FIXME: Make perferences & NetworkTables right
    public void initialize() {
@@ -84,9 +87,10 @@ public class TurretPreferences extends BasePreferences {
       checkAndAddDoublePreference(PID_minOutput, default_pid_minOutput);
       checkAndAddDoublePreference(PID_maxOutput, default_pid_maxOutput);
 
-      checkAndAddDoublePreference(leftSetPoint, default_leftPosition);
+      checkAndAddDoublePreference(rampRate, default_rampRate);
+
+      checkAndAddDoublePreference(startSetPoint, default_startPosition);
       checkAndAddDoublePreference(frontSetPoint, default_frontPosition);
-      checkAndAddDoublePreference(rightSetPoint, default_rightPosition);
 
       logger.info("preferences as initialized:");
       logPreferences(logger);

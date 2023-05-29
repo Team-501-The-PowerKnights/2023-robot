@@ -21,6 +21,7 @@ import frc.robot.subsystems.armextender.ArmExtenderFactory;
 import frc.robot.subsystems.armrotator.ArmRotatorFactory;
 import frc.robot.subsystems.drive.DriveFactory;
 import frc.robot.subsystems.gripper.GripperFactory;
+import frc.robot.subsystems.turret.TurretFactory;
 import frc.robot.subsystems.wrist.WristFactory;
 import frc.robot.telemetry.TelemetryManager;
 import frc.robot.telemetry.TelemetryNames;
@@ -64,6 +65,7 @@ public class SubsystemsFactory {
             //@formatter:on
 
             // ** Gripper **
+            logger.info("construct Gripper");
             SmartDashboard.putNumber(TelemetryNames.Gripper.status,
                   PKStatus.unknown.tlmValue);
 
@@ -72,40 +74,47 @@ public class SubsystemsFactory {
             logger.info("construct ArmRotator");
             SmartDashboard.putNumber(TelemetryNames.ArmRotator.status,
                   PKStatus.unknown.tlmValue);
-            {
-               ArmRotatorFactory.constructInstance();
-               ISubsystem ss = ArmRotatorFactory.getInstance();
-               tlmMgr.addProvider(ss);
-               subsystems.add(ss);
-            }
-            // @formatter:on
 
             // ** ArmExtender **
             // @formatter:off
             logger.info("construct ArmExtender");
             SmartDashboard.putNumber(TelemetryNames.ArmExtender.status,
                   PKStatus.unknown.tlmValue);
+
+            // ** Wrist **
+            logger.info("construct Wrist");
+            SmartDashboard.putNumber(TelemetryNames.Wrist.status,
+                  PKStatus.unknown.tlmValue);
+
+            // ** Turret **
+            // @formatter:off
+            logger.info("construct Turret");
+            SmartDashboard.putNumber(TelemetryNames.Turret.status,
+                  PKStatus.unknown.tlmValue);
             {
-               ArmExtenderFactory.constructInstance();
-               ISubsystem ss = ArmExtenderFactory.getInstance();
+               TurretFactory.constructInstance();
+               ISubsystem ss = TurretFactory.getInstance();
                tlmMgr.addProvider(ss);
                subsystems.add(ss);
             }
             // @formatter:on
 
-            // ** Wrist **
-            SmartDashboard.putNumber(TelemetryNames.Wrist.status,
-                  PKStatus.unknown.tlmValue);
-
-            // ** Turret **
-            SmartDashboard.putNumber(TelemetryNames.Turret.status,
-                  PKStatus.unknown.tlmValue);
             // ** Lift **
             SmartDashboard.putNumber(TelemetryNames.Lift.status,
                   PKStatus.unknown.tlmValue);
+
             // ** Arm **
+            // @formatter:off
+            logger.info("construct Arm");
             SmartDashboard.putNumber(TelemetryNames.Arm.status,
                   PKStatus.unknown.tlmValue);
+            {
+               ArmFactory.constructInstance();
+               ISubsystem ss = ArmFactory.getInstance();
+               tlmMgr.addProvider(ss);
+               subsystems.add(ss);
+            }
+            // @formatter:on
 
             break;
 
