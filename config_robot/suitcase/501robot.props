@@ -105,6 +105,15 @@ Wrist.teleCommandName = WristDoNothing
 
 
 #####################
+# Ingester
+#####################
+Ingester.className = StubIngesterSubsystem
+#Ingester.className = 
+Ingester.autoCommandName = IngesterDoNothing
+Ingester.teleCommandName = IngesterDoNothing
+
+
+#####################
 # Turret
 #####################
 Turret.className = StubTurretSubsystem

@@ -24,6 +24,7 @@ public class SubsystemNames {
    public static final String armExtenderName = "ArmExtender";
    public static final String armRotatorName = "ArmRotator";
    public static final String wristName = "Wrist";
+   public static final String ingesterName = "Ingester";
 
    // Real-Bot
    public static final String turretName = "Turret";

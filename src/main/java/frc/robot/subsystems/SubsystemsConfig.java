@@ -28,6 +28,7 @@ public final class SubsystemsConfig {
    private static boolean hasArmRotator = false;
    private static boolean hasArmExtener = false;
    private static boolean hasWrist = false;
+   private static boolean hasIngester = false;
 
    // Real-Bot Unique
    private static boolean hasTurret = false;
@@ -46,6 +47,7 @@ public final class SubsystemsConfig {
             hasArmRotator = true;
             hasArmExtener = true;
             hasWrist = true;
+            hasIngester = true;
 
             hasTurret = true;
             hasLift = true;
@@ -68,6 +70,7 @@ public final class SubsystemsConfig {
             hasArmRotator = true;
             hasArmExtener = true;
             hasWrist = true;
+            hasIngester = true;
 
             break;
 
@@ -112,6 +115,10 @@ public final class SubsystemsConfig {
 
    public static boolean hasWrist() {
       return hasWrist;
+   }
+
+   public static boolean hasIngester() {
+      return hasIngester;
    }
 
    public static boolean hasTurret() {

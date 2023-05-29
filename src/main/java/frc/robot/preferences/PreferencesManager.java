@@ -22,6 +22,7 @@ import frc.robot.subsystems.armextender.ArmExtenderPreferences;
 import frc.robot.subsystems.armrotator.ArmRotatorPreferences;
 import frc.robot.subsystems.drive.DrivePreferences;
 import frc.robot.subsystems.gripper.GripperPreferences;
+import frc.robot.subsystems.ingester.IngesterPreferences;
 import frc.robot.subsystems.lift.LiftPreferences;
 import frc.robot.subsystems.turret.TurretPreferences;
 import frc.robot.subsystems.wrist.WristPreferences;
@@ -92,6 +93,11 @@ public final class PreferencesManager {
       // ** Wrist **
       if (SubsystemsConfig.hasWrist()) {
          WristPreferences.getInstance().initialize();
+      }
+
+      // ** Ingester **
+      if (SubsystemsConfig.hasIngester()) {
+         IngesterPreferences.getInstance().initialize();
       }
 
       // ** Turret **

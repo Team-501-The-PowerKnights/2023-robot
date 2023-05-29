@@ -177,6 +177,17 @@ public final class TelemetryNames {
       public static final String speedometerClicks = name + ".speedometerClicks";
    }
 
+   public final class Gripper {
+      private static final String name = SubsystemNames.gripperName;
+
+      public static final String status = name + ".status";
+      public static final String implClass = name + ".implClass";
+      public static final String autoCommand = name + ".autoCommand";
+      public static final String teleCommand = name + ".teleCommand";
+
+      public static final String speed = name + ".speed";
+   }
+
    public final class ArmRotator {
       private static final String name = SubsystemNames.armRotatorName;
 
@@ -229,6 +240,17 @@ public final class TelemetryNames {
       public static final String PIDOnTarget = name + PIDTelemetry.pid_OnTarget;
    }
 
+   public final class Ingester {
+      private static final String name = SubsystemNames.ingesterName;
+
+      public static final String status = name + ".status";
+      public static final String implClass = name + ".implClass";
+      public static final String autoCommand = name + ".autoCommand";
+      public static final String teleCommand = name + ".teleCommand";
+
+      public static final String speed = name + ".speed";
+   }
+
    public final class Turret {
       private static final String name = SubsystemNames.armName;
 
@@ -272,17 +294,6 @@ public final class TelemetryNames {
       public static final String PIDCurrent = name + PIDTelemetry.pid_Current;
       public static final String PIDAtTarget = name + PIDTelemetry.pid_AtTarget;
       public static final String PIDOnTarget = name + PIDTelemetry.pid_OnTarget;
-   }
-
-   public final class Gripper {
-      private static final String name = SubsystemNames.gripperName;
-
-      public static final String status = name + ".status";
-      public static final String implClass = name + ".implClass";
-      public static final String autoCommand = name + ".autoCommand";
-      public static final String teleCommand = name + ".teleCommand";
-
-      public static final String speed = name + ".speed";
    }
 
 }

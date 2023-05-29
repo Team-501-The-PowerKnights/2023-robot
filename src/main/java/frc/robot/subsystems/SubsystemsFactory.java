@@ -20,6 +20,7 @@ import frc.robot.subsystems.armextender.ArmExtenderFactory;
 import frc.robot.subsystems.armrotator.ArmRotatorFactory;
 import frc.robot.subsystems.drive.DriveFactory;
 import frc.robot.subsystems.gripper.GripperFactory;
+import frc.robot.subsystems.ingester.IngesterFactory;
 import frc.robot.subsystems.lift.LiftFactory;
 import frc.robot.subsystems.turret.TurretFactory;
 import frc.robot.subsystems.wrist.WristFactory;
@@ -107,6 +108,19 @@ public class SubsystemsFactory {
          {
             WristFactory.constructInstance();
             ISubsystem ss = WristFactory.getInstance();
+            tlmMgr.addProvider(ss);
+            subsystems.add(ss);
+         }
+      }
+
+      // ** Ingester **
+      if (SubsystemsConfig.hasIngester()) {
+         logger.info("construct Ingester");
+         SmartDashboard.putNumber(TelemetryNames.Ingester.status,
+               PKStatus.unknown.tlmValue);
+         {
+            IngesterFactory.constructInstance();
+            ISubsystem ss = IngesterFactory.getInstance();
             tlmMgr.addProvider(ss);
             subsystems.add(ss);
          }
