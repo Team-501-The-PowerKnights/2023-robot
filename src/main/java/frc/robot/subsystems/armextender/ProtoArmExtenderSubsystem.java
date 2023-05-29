@@ -29,7 +29,7 @@ import riolog.ProblemTracker;
 /**
  * DOCS: Add your docs here.
  */
-public class ProtoArmExtenderSubsystem extends BaseArmExtenderSubsystem {
+class ProtoArmExtenderSubsystem extends BaseArmExtenderSubsystem {
 
    /** Our classes' logger **/
    private static final Logger logger = PKLogger.getLogger(ProtoArmExtenderSubsystem.class.getName());

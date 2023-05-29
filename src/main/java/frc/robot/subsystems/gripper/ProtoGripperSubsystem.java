@@ -26,7 +26,7 @@ import riolog.ProblemTracker;
 /**
  * DOCS: Add your docs here.
  */
-public class ProtoGripperSubsystem extends BaseGripperSubsystem {
+class ProtoGripperSubsystem extends BaseGripperSubsystem {
 
    /** Our classes' logger **/
    private static final Logger logger = PKLogger.getLogger(ProtoGripperSubsystem.class.getName());

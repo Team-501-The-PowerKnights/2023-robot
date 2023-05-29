@@ -24,7 +24,7 @@ import riolog.ProblemTracker;
 /**
  * DOCS: Add your docs here.
  */
-public class SuitcaseArmRotatorSubsystem extends BaseArmRotatorSubsystem {
+class SuitcaseArmRotatorSubsystem extends BaseArmRotatorSubsystem {
 
    /** Our classes' logger **/
    private static final Logger logger = PKLogger.getLogger(SuitcaseArmRotatorSubsystem.class.getName());

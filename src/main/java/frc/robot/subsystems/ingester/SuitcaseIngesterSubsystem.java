@@ -15,7 +15,7 @@ import riolog.PKLogger;
 /**
  * DOCS: Add your docs here.
  */
-public class SuitcaseIngesterSubsystem extends BaseIngesterSubsystem {
+class SuitcaseIngesterSubsystem extends BaseIngesterSubsystem {
 
    /** Our classes' logger **/
    private static final Logger logger = PKLogger.getLogger(SuitcaseIngesterSubsystem.class.getName());

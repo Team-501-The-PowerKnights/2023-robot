@@ -15,7 +15,7 @@ import riolog.PKLogger;
 /**
  * DOCS: Add your docs here.
  */
-public class StubLiftSubsystem extends BaseLiftSubsystem {
+class StubLiftSubsystem extends BaseLiftSubsystem {
 
    /** Our classes' logger **/
    private static final Logger logger = PKLogger.getLogger(StubLiftSubsystem.class.getName());

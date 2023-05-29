@@ -24,7 +24,7 @@ import riolog.ProblemTracker;
 /**
  * DOCS: Add your docs here.
  */
-public class ProtoWristSubsystem extends BaseWristSubsystem {
+class ProtoWristSubsystem extends BaseWristSubsystem {
 
    /** Our classes' logger **/
    private static final Logger logger = PKLogger.getLogger(ProtoWristSubsystem.class.getName());

@@ -27,7 +27,7 @@ import riolog.ProblemTracker;
  * <i>Suitcase-Bot<i>. It uses the {@link DifferentialDrive} from
  * WPILib.
  */
-public class SuitcaseDriveSubsystem extends BaseDriveSubsystem {
+class SuitcaseDriveSubsystem extends BaseDriveSubsystem {
 
    /** Our classes' logger **/
    private static final Logger logger = PKLogger.getLogger(SuitcaseDriveSubsystem.class.getName());

@@ -30,7 +30,7 @@ import riolog.ProblemTracker;
 /**
  * DOCS: Add your docs here.
  */
-public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
+class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
 
    /** Our classes' logger **/
    private static final Logger logger = PKLogger.getLogger(ProtoArmRotatorSubsystem.class.getName());

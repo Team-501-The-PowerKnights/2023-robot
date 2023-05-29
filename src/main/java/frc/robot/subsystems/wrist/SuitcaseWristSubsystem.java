@@ -15,7 +15,7 @@ import riolog.PKLogger;
 /**
  * DOCS: Add your docs here.
  */
-public class SuitcaseWristSubsystem extends BaseWristSubsystem {
+class SuitcaseWristSubsystem extends BaseWristSubsystem {
 
    /** Our classes' logger **/
    private static final Logger logger = PKLogger.getLogger(SuitcaseWristSubsystem.class.getName());

@@ -25,7 +25,7 @@ import riolog.ProblemTracker;
 /**
  * DOCS: Add your docs here.
  */
-public class SuitcaseArmExtenderSubsystem extends BaseArmExtenderSubsystem {
+class SuitcaseArmExtenderSubsystem extends BaseArmExtenderSubsystem {
 
    /** Our classes' logger **/
    private static final Logger logger = PKLogger.getLogger(SuitcaseArmExtenderSubsystem.class.getName());
