@@ -166,7 +166,7 @@ public class RobotContainer {
    }
 
    //
-   public enum AutoSelection {
+   private enum AutoSelection {
       // @formatter:off
       doNothing("doNothing"), 
       //
@@ -194,6 +194,7 @@ public class RobotContainer {
          this.name = name;
       }
 
+      @SuppressWarnings("unused")
       public String getName() {
          return name;
       }
@@ -207,6 +208,113 @@ public class RobotContainer {
    private void createAutoChooser() {
       autoChooser = new SendableChooser<>();
 
+      switch (PropertiesManager.getInstance().getRobotName()) {
+
+         case "Suitcase-Bot":
+            createAutoChooserSuitcase();
+            break;
+
+         case "Swprog-Bot":
+            createAutoChooserSwprog();
+            break;
+
+         case "Proto-Bot":
+            createAutoChooserProto();
+            break;
+
+         case "Real-Bot":
+            createAutoChooserReal();
+            break;
+
+         default:
+            break;
+      }
+
+      SmartDashboard.putData("Auto Mode", autoChooser);
+   }
+
+   public boolean isRealAutoSelected() {
+      switch (PropertiesManager.getInstance().getRobotName()) {
+
+         case "Suitcase-Bot":
+            return isRealAutoSelectedSuitcase();
+
+         case "Swprog-Bot":
+            return isRealAutoSelectedSwprog();
+
+         case "Proto-Bot":
+            return isRealAutoSelectedProto();
+
+         case "Real-Bot":
+            return isRealAutoSelectedReal();
+
+         default:
+            return false;
+      }
+   }
+
+   /**
+    * Use this to pass the autonomous command to the main {@link Robot} class.
+    *
+    * @return the command to run in autonomous
+    */
+   public Command getAutonomousCommand() {
+      switch (PropertiesManager.getInstance().getRobotName()) {
+
+         case "Suitcase-Bot":
+            return getAutonomousCommandSuitcase();
+
+         case "Swprog-Bot":
+            return getAutonomousCommandSwprog();
+
+         case "Proto-Bot":
+            return getAutonomousCommandProto();
+
+         case "Real-Bot":
+            return getAutonomousCommandReal();
+
+         default:
+            return new AutoDoNothing();
+      }
+   }
+
+   /*- ******************** */
+   /*- ***** Suitcase ***** */
+   /*- ******************** */
+
+   private void createAutoChooserSuitcase() {
+
+   }
+
+   private boolean isRealAutoSelectedSuitcase() {
+      return false;
+   }
+
+   private Command getAutonomousCommandSuitcase() {
+      return null;
+   }
+
+   /*- ******************** */
+   /*- ****** Swprog ****** */
+   /*- ******************** */
+
+   private void createAutoChooserSwprog() {
+
+   }
+
+   private boolean isRealAutoSelectedSwprog() {
+      return false;
+   }
+
+   private Command getAutonomousCommandSwprog() {
+      return new AutoDoNothing();
+   }
+
+   /*- ******************** */
+   /*- ****** Proto ******* */
+   /*- ******************** */
+
+   private void createAutoChooserProto() {
       // Default option is safety of "do nothing"
       autoChooser.setDefaultOption("Do Nothing", AutoSelection.doNothing);
 
@@ -255,22 +363,16 @@ public class RobotContainer {
        */
       //
       autoChooser.addOption("Place High CUBE & BACKWARD to Balance", AutoSelection.doHighCubeAndBackwardToBalance);
-
-      SmartDashboard.putData("Auto Mode", autoChooser);
    }
 
-   public boolean isRealAutoSelected() {
+   private boolean isRealAutoSelectedProto() {
       return (autoChooser.getSelected() != AutoSelection.doNothing);
    }
 
-   /**
-    * Use this to pass the autonomous command to the main {@link Robot} class.
-    *
-    * @return the command to run in autonomous
-    */
-   public Command getAutonomousCommand() {
+   private Command getAutonomousCommandProto() {
       autoSelected = autoChooser.getSelected();
       logger.info("auto command selected = {}", autoSelected);
+
       switch (autoSelected) {
          case doNothing:
             return new AutoDoNothing();
@@ -435,6 +537,22 @@ public class RobotContainer {
          default:
             return new AutoDoNothing();
       }
+   }
+
+   /*- ******************** */
+   /*- ******* Real ******* */
+   /*- ******************** */
+
+   private void createAutoChooserReal() {
+
+   }
+
+   private boolean isRealAutoSelectedReal() {
+      return false;
+   }
+
+   private Command getAutonomousCommandReal() {
+      return new AutoDoNothing();
    }
 
 }
