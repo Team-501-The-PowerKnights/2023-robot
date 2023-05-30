@@ -48,6 +48,9 @@ public class ProtoWristSubsystem extends BaseWristSubsystem {
       encoder = motor.getEncoder();
       checkError(encoder.setPosition(0), "set encoder position to 0 {}");
 
+      // Set the PID so when it wakes up it doesn't try to move
+      rotateToTarget(encoder.getPosition());
+
       logger.info("constructed");
    }
 
