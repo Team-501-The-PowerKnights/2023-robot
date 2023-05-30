@@ -40,10 +40,12 @@ public class SuitcaseArmRotatorSubsystem extends BaseArmRotatorSubsystem {
       motor = new CANSparkMax(21, MotorType.kBrushless);
       checkError(motor.restoreFactoryDefaults(), "restore factory defaults {}");
       checkError(motor.setIdleMode(IdleMode.kBrake), "set idle mode to brake {}");
+      checkError(motor.setOpenLoopRampRate(0), "set open loop ramp rate to 0 {}");
+
       pid = motor.getPIDController();
+
       encoder = motor.getEncoder();
       checkError(encoder.setPosition(0), "set encoder position to 0 {}");
-      checkError(motor.setOpenLoopRampRate(0), "set open loop ramp rate to 0 {}");
 
       logger.info("constructed");
    }

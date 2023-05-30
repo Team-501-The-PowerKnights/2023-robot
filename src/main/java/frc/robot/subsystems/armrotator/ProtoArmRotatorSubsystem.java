@@ -52,15 +52,14 @@ public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
       motor = new CANSparkMax(21, MotorType.kBrushless);
       checkError(motor.restoreFactoryDefaults(), "restore factory defaults {}");
       checkError(motor.setIdleMode(IdleMode.kBrake), "set idle mode to brake {}");
+      checkError(motor.setClosedLoopRampRate(0), "set closed loop ramp rate to 0 {}");
+      checkError(motor.setSmartCurrentLimit(20), "set current limit to 20 {}");
       // make max voltage consistant
       checkError(motor.enableVoltageCompensation(10.0), "enable voltage compensation {}");
 
       pid = motor.getPIDController();
 
       encoder = motor.getEncoder();
-      // checkError(motor.setClosedLoopRampRate(0), "set closed loop ramp rate to 0
-      // {}");
-      // checkError(motor.setSmartCurrentLimit(20), "set current limit to 20 {}");
 
       absEncoder = motor.getAbsoluteEncoder(Type.kDutyCycle);
 
@@ -225,8 +224,8 @@ public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
 
       // FIXME: Change to non-deprecated method
       checkError(pid.setReference(target, ControlType.kSmartMotion, motionSlot),
-            "PID set reference to kSmartMotion {}");
-      // checkError(pid.setReference(target, ControlType.kPosition), "PID set
+            "set PID reference to kSmartMotion {}");
+      // checkError(pid.setReference(target, ControlType.kPosition), "set PID
       // reference to kPosition {}");
       setTlmPIDEnabled(true);
       setTlmPIDTarget(target);
