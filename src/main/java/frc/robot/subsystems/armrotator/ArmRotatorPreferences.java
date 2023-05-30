@@ -66,8 +66,8 @@ public final class ArmRotatorPreferences extends BasePreferences {
    private static final double default_pid_FF = 0.000038;
    private static final double default_pid_minOutput = -0.8;
    private static final double default_pid_maxOutput = 0.8;
-   private static final double default_pid_maxVel = 2000.0;
    private static final double default_pid_minVel = 0.0;
+   private static final double default_pid_maxVel = 2000.0;
    private static final double default_pid_maxAcc = 1000;
    private static final double default_pid_maxErr = 0.2;
 
@@ -103,8 +103,8 @@ public final class ArmRotatorPreferences extends BasePreferences {
       checkAndAddDoublePreference(PID_FF, default_pid_FF);
       checkAndAddDoublePreference(PID_minOutput, default_pid_minOutput);
       checkAndAddDoublePreference(PID_maxOutput, default_pid_maxOutput);
-      checkAndAddDoublePreference(PID_maxVel, default_pid_maxVel);
       checkAndAddDoublePreference(PID_minVel, default_pid_minVel);
+      checkAndAddDoublePreference(PID_maxVel, default_pid_maxVel);
       checkAndAddDoublePreference(PID_maxAcc, default_pid_maxAcc);
       checkAndAddDoublePreference(PID_maxErr, default_pid_maxErr);
 

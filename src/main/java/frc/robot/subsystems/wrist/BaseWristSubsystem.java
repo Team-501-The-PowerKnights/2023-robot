@@ -40,8 +40,8 @@ abstract class BaseWristSubsystem extends PIDSubsystem implements IWristSubsyste
    protected double pid_FF;
    protected double pid_minOutput;
    protected double pid_maxOutput;
-   protected double pid_maxVel;
    protected double pid_minVel;
+   protected double pid_maxVel;
    protected double pid_maxAcc;
    protected double pid_maxErr;
 
@@ -54,8 +54,8 @@ abstract class BaseWristSubsystem extends PIDSubsystem implements IWristSubsyste
       pid_FF, 
       pid_minOutput, 
       pid_maxOutput,
-      pid_maxVel,
       pid_minVel,
+      pid_maxVel,
       pid_maxAcc,
       pid_maxErr
       );

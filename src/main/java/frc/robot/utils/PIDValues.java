@@ -25,8 +25,8 @@ public class PIDValues {
    public static final String pid_FF = ".FF";
    public static final String pid_minOutput = ".MinOutput";
    public static final String pid_maxOutput = ".MaxOutput";
-   public static final String pid_maxVel = ".MaxVel";
    public static final String pid_minVel = ".MinVel";
+   public static final String pid_maxVel = ".MaxVel";
    public static final String pid_maxAcc = ".MaxAcc";
    public static final String pid_maxErr = ".MaxErr";
 
@@ -37,8 +37,8 @@ public class PIDValues {
    public double FF;
    public double MinOutput;
    public double MaxOutput;
-   public double MaxVel;
    public double MinVel;
+   public double MaxVel;
    public double MaxAcc;
    public double MaxErr;
 
@@ -55,8 +55,8 @@ public class PIDValues {
       double FF,
       double MinOutput,
       double MaxOutput,
-      double MaxVel,
       double MinVel,
+      double MaxVel,
       double MaxAcc,
       double MaxErr
       )
@@ -69,8 +69,8 @@ public class PIDValues {
       this.FF = FF;
       this.MinOutput = MinOutput;
       this.MaxOutput = MaxOutput;
-      this.MaxVel = MaxVel;
       this.MinVel = MinVel;
+      this.MaxVel = MaxVel;
       this.MaxAcc = MaxAcc;
       this.MaxErr = MaxErr;
    }
@@ -86,8 +86,8 @@ public class PIDValues {
       buf.append(",FF=").append(FF);
       buf.append(",MinOutput=").append(MinOutput);
       buf.append(",MaxOutput=").append(MaxOutput);
-      buf.append(",MaxVel=").append(MaxVel);
       buf.append(",MinVel=").append(MinVel);
+      buf.append(",MaxVel=").append(MaxVel);
       buf.append(",MaxAcc=").append(MaxAcc);
       buf.append(",MaxErr=").append(MaxErr);
       return buf.toString();
