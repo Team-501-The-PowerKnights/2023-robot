@@ -69,10 +69,19 @@ Drive.teleCommandName = DriveDoNothing
 
 
 #####################
+# Gripper
+#####################
+Gripper.className = StubGripperSubsystem
+#Gripper.className = 
+Gripper.autoCommandName = GripperDoNothing
+Gripper.teleCommandName = GripperDoNothing
+
+
+#####################
 # Turret
 #####################
-Turret.className = TurretArmSubsystem
-#Turret.className =
+Turret.className = StubTurretSubsystem
+#Turret.className = 
 Turret.autoCommandName = TurretDoNothing
 Turret.teleCommandName = TurretDoNothing
 
@@ -80,8 +89,8 @@ Turret.teleCommandName = TurretDoNothing
 #####################
 # Lift
 #####################
-Lift.className = LiftSubsystem
-#Lift.className =
+Lift.className = StubLiftSubsystem
+#Lift.className = 
 Lift.autoCommandName = LiftDoNothing
 Lift.teleCommandName = LiftDoNothing
 
@@ -90,18 +99,9 @@ Lift.teleCommandName = LiftDoNothing
 # Arm
 #####################
 Arm.className = StubArmSubsystem
-#Arm.className =
+#Arm.className = 
 Arm.autoCommandName = ArmDoNothing
 Arm.teleCommandName = ArmDoNothing
-
-
-#####################
-# Gripper
-#####################
-Gripper.className = StubGripperSubsystem
-#Gripper.className =
-Gripper.autoCommandName = GripperDoNothing
-Gripper.teleCommandName = GripperDoNothing
 
 
 
