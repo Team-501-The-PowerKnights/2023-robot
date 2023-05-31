@@ -43,6 +43,10 @@ abstract class BaseArmSubsystem extends BaseSubsystem implements IArmSubsystem {
    protected double rotate_pid_FF = 0;
    protected double rotate_pid_minOutput = 0;
    protected double rotate_pid_maxOutput = 0;
+   protected double rotate_pid_minVel = 0;
+   protected double rotate_pid_maxVel = 0;
+   protected double rotate_pid_maxAcc = 0;
+   protected double rotate_pid_maxErr = 0;
    //@formatter:off
    protected PIDValues rotatePIDValues = new PIDValues(
       rotate_pid_P, 
@@ -51,7 +55,12 @@ abstract class BaseArmSubsystem extends BaseSubsystem implements IArmSubsystem {
       rotate_pid_IZone,
       rotate_pid_FF, 
       rotate_pid_minOutput, 
-      rotate_pid_maxOutput);
+      rotate_pid_maxOutput,
+      rotate_pid_minVel,
+      rotate_pid_maxVel,
+      rotate_pid_maxAcc,
+      rotate_pid_maxErr
+      );
    //@formatter:on
    protected double rotate_highSetPoint;
    protected double rotate_midSetPoint;
@@ -65,6 +74,10 @@ abstract class BaseArmSubsystem extends BaseSubsystem implements IArmSubsystem {
    protected double extend_pid_FF = 0;
    protected double extend_pid_minOutput = 0;
    protected double extend_pid_maxOutput = 0;
+   protected double extend_pid_minVel = 0;
+   protected double extend_pid_maxVel = 0;
+   protected double extend_pid_maxAcc = 0;
+   protected double extend_pid_maxErr = 0;
    //@formatter:off
    protected PIDValues extendPIDValues = new PIDValues(
       extend_pid_P, 
@@ -73,7 +86,12 @@ abstract class BaseArmSubsystem extends BaseSubsystem implements IArmSubsystem {
       extend_pid_IZone,
       extend_pid_FF, 
       extend_pid_minOutput, 
-      extend_pid_maxOutput);
+      extend_pid_maxOutput,
+      extend_pid_minVel,
+      extend_pid_maxVel,
+      extend_pid_maxAcc,
+      extend_pid_maxErr
+      );
    //@formatter:on
 
    private final ArmPreferences prefs;

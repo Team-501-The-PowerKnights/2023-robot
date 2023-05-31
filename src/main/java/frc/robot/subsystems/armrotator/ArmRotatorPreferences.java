@@ -54,14 +54,22 @@ public final class ArmRotatorPreferences extends BasePreferences {
    final String PID_FF = name + PIDValues.pid_FF;
    final String PID_minOutput = name + PIDValues.pid_minOutput;
    final String PID_maxOutput = name + PIDValues.pid_maxOutput;
+   final String PID_minVel = name + PIDValues.pid_minVel;
+   final String PID_maxVel = name + PIDValues.pid_maxVel;
+   final String PID_maxAcc = name + PIDValues.pid_maxAcc;
+   final String PID_maxErr = name + PIDValues.pid_maxErr;
 
-   private static final double default_pid_P = 0.1;
-   private static final double default_pid_I = 0.0005;
-   private static final double default_pid_D = 5;
-   private static final double default_pid_IZone = 2;
-   private static final double default_pid_FF = 0;
-   private static final double default_pid_minOutput = -0.7;
-   private static final double default_pid_maxOutput = 0.69;
+   private static final double default_pid_P = 0.00005;
+   private static final double default_pid_I = 0.000001;
+   private static final double default_pid_D = 0;
+   private static final double default_pid_IZone = 0;
+   private static final double default_pid_FF = 0.000038;
+   private static final double default_pid_minOutput = -0.8;
+   private static final double default_pid_maxOutput = 0.8;
+   private static final double default_pid_minVel = 0;
+   private static final double default_pid_maxVel = 2000.0;
+   private static final double default_pid_maxAcc = 1000;
+   private static final double default_pid_maxErr = 0.2;
 
    /** Ramp rate */
    final String rampRate = name + ".RampRate";
@@ -95,6 +103,10 @@ public final class ArmRotatorPreferences extends BasePreferences {
       checkAndAddDoublePreference(PID_FF, default_pid_FF);
       checkAndAddDoublePreference(PID_minOutput, default_pid_minOutput);
       checkAndAddDoublePreference(PID_maxOutput, default_pid_maxOutput);
+      checkAndAddDoublePreference(PID_minVel, default_pid_minVel);
+      checkAndAddDoublePreference(PID_maxVel, default_pid_maxVel);
+      checkAndAddDoublePreference(PID_maxAcc, default_pid_maxAcc);
+      checkAndAddDoublePreference(PID_maxErr, default_pid_maxErr);
 
       checkAndAddDoublePreference(rampRate, default_rampRate);
 

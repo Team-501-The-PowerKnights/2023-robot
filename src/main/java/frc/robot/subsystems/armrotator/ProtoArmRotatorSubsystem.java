@@ -43,6 +43,8 @@ public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
    private AbsoluteEncoder absEncoder;
    private final double absEncoderBaseline = 0.5912;
    private final double absEncoderScale = -1 * (5.0 * 5.0 * 5.0 * (72.0 / 36.0));
+   private final int motionSlot = 0; // FIXME add to constructor...maybe
+   // private final double maxError = 0.2; //FIXME add to constructor
 
    ProtoArmRotatorSubsystem() {
       logger.info("constructing");
@@ -50,10 +52,14 @@ public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
       motor = new CANSparkMax(21, MotorType.kBrushless);
       checkError(motor.restoreFactoryDefaults(), "restore factory defaults {}");
       checkError(motor.setIdleMode(IdleMode.kBrake), "set idle mode to brake {}");
-      pid = motor.getPIDController();
-      encoder = motor.getEncoder();
       checkError(motor.setClosedLoopRampRate(0), "set closed loop ramp rate to 0 {}");
-      // checkError(motor.setSmartCurrentLimit(20), "set current limit to 20 {}");
+      checkError(motor.setSmartCurrentLimit(20), "set current limit to 20 {}");
+      // make max voltage consistant
+      checkError(motor.enableVoltageCompensation(10.0), "enable voltage compensation {}");
+
+      pid = motor.getPIDController();
+
+      encoder = motor.getEncoder();
 
       absEncoder = motor.getAbsoluteEncoder(Type.kDutyCycle);
 
@@ -177,6 +183,10 @@ public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
       checkError(pid.setIZone(pidValues.IZone), "set PID_IZone {}");
       checkError(pid.setFF(pidValues.FF), "set PID_FF {}");
       checkError(pid.setOutputRange(pidValues.MinOutput, pidValues.MaxOutput), "set PID_OutputRange {}");
+      checkError(pid.setSmartMotionMinOutputVelocity(pidValues.MinVel, motionSlot), "set PID_MinVel {}");
+      checkError(pid.setSmartMotionMaxVelocity(pidValues.MaxVel, motionSlot), "set PID_MaxVel {}");
+      checkError(pid.setSmartMotionMaxAccel(pidValues.MaxAcc, motionSlot), "set PID_MaxAcc {}");
+      checkError(pid.setSmartMotionAllowedClosedLoopError(pidValues.MaxErr, motionSlot), "set PID_maxError {}");
 
       checkError(motor.setClosedLoopRampRate(rampRate), "set closed loop ramp rate {}");
 
@@ -213,7 +223,10 @@ public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
       logger.trace("set PID target = {}", target);
 
       // FIXME: Change to non-deprecated method
-      checkError(pid.setReference(target, ControlType.kPosition), "PID set reference to kPosition {}");
+      checkError(pid.setReference(target, ControlType.kSmartMotion, motionSlot),
+            "set PID reference to kSmartMotion {}");
+      // checkError(pid.setReference(target, ControlType.kPosition), "set PID
+      // reference to kPosition {}");
       setTlmPIDEnabled(true);
       setTlmPIDTarget(target);
    }

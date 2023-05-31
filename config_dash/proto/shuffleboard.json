@@ -1483,7 +1483,7 @@
               "_showGlyph": false
             }
           },
-          "14,2": {
+          "28,11": {
             "size": [
               4,
               2
@@ -1509,7 +1509,7 @@
               "_showGlyph": false
             }
           },
-          "14,0": {
+          "28,9": {
             "size": [
               4,
               2
@@ -1535,7 +1535,7 @@
               "_showGlyph": false
             }
           },
-          "14,5": {
+          "32,10": {
             "size": [
               4,
               2
@@ -1735,6 +1735,58 @@
               "_glyph": 148,
               "_showGlyph": false
             }
+          },
+          "13,4": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/ArmRotator.MaxAcc",
+              "_title": "MaxAcc",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "13,6": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/ArmRotator.MaxErr",
+              "_title": "MaxErr",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "13,2": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/ArmRotator.MaxVel",
+              "_title": "MaxVel",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "13,0": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/ArmRotator.MinVel",
+              "_title": "MinVel",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
           }
         }
       }
@@ -1815,7 +1867,7 @@
               "_showGlyph": false
             }
           },
-          "28,8": {
+          "33,6": {
             "size": [
               4,
               2
@@ -1841,7 +1893,7 @@
               "_showGlyph": false
             }
           },
-          "14,2": {
+          "28,11": {
             "size": [
               4,
               2
@@ -1854,7 +1906,7 @@
               "_showGlyph": false
             }
           },
-          "14,10": {
+          "24,11": {
             "size": [
               4,
               2
@@ -1880,7 +1932,7 @@
               "_showGlyph": false
             }
           },
-          "14,0": {
+          "28,9": {
             "size": [
               4,
               2
@@ -1893,7 +1945,7 @@
               "_showGlyph": false
             }
           },
-          "14,8": {
+          "24,9": {
             "size": [
               4,
               2
@@ -2081,7 +2133,7 @@
               "_showGlyph": false
             }
           },
-          "14,5": {
+          "32,10": {
             "size": [
               4,
               2
@@ -2090,6 +2142,58 @@
               "_type": "Text View",
               "_source0": "network_table:///Preferences/ArmExtender.RampRate",
               "_title": "RampRate",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "13,2": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/ArmExtender.MaxVel",
+              "_title": "MaxVel",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "13,0": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/ArmExtender.MinVel",
+              "_title": "MinVel",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "13,4": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/ArmExtender.MaxAcc",
+              "_title": "MaxAcc",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "13,6": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/ArmExtender.MaxErr",
+              "_title": "MaxErr",
               "_glyph": 148,
               "_showGlyph": false
             }

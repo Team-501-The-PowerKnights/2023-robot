@@ -54,6 +54,10 @@ public final class ArmExtenderPreferences extends BasePreferences {
    final String PID_FF = name + PIDValues.pid_FF;
    final String PID_minOutput = name + PIDValues.pid_minOutput;
    final String PID_maxOutput = name + PIDValues.pid_maxOutput;
+   final String PID_minVel = name + PIDValues.pid_minVel;
+   final String PID_maxVel = name + PIDValues.pid_maxVel;
+   final String PID_maxAcc = name + PIDValues.pid_maxAcc;
+   final String PID_maxErr = name + PIDValues.pid_maxErr;
 
    static final double default_pid_P = 1;
    static final double default_pid_I = 0.0001;
@@ -62,6 +66,10 @@ public final class ArmExtenderPreferences extends BasePreferences {
    static final double default_pid_FF = 0;
    static final double default_pid_minOutput = -0.5;
    static final double default_pid_maxOutput = 0.5;
+   private static final double default_pid_minVel = 0;
+   private static final double default_pid_maxVel = 0;
+   private static final double default_pid_maxAcc = 0;
+   private static final double default_pid_maxErr = 0;
 
    /** Ramp rate */
    final String rampRate = name + ".RampRate";
@@ -103,6 +111,10 @@ public final class ArmExtenderPreferences extends BasePreferences {
       checkAndAddDoublePreference(PID_FF, default_pid_FF);
       checkAndAddDoublePreference(PID_minOutput, default_pid_minOutput);
       checkAndAddDoublePreference(PID_maxOutput, default_pid_maxOutput);
+      checkAndAddDoublePreference(PID_minVel, default_pid_minVel);
+      checkAndAddDoublePreference(PID_maxVel, default_pid_maxVel);
+      checkAndAddDoublePreference(PID_maxAcc, default_pid_maxAcc);
+      checkAndAddDoublePreference(PID_maxErr, default_pid_maxErr);
 
       checkAndAddDoublePreference(rampRate, default_rampRate);
 
