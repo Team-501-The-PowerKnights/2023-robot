@@ -51,6 +51,9 @@ public class ProtoArmExtenderSubsystem extends BaseArmExtenderSubsystem {
       checkError(motor.setSoftLimit(SoftLimitDirection.kForward, 0), "set max soft limit to 0 {}");
       checkError(motor.enableSoftLimit(SoftLimitDirection.kReverse, true), "enable reverse soft limit {}");
       checkError(motor.enableSoftLimit(SoftLimitDirection.kForward, true), "enable forward soft limit {}");
+      // make max voltage consistant
+      // checkError(motor.enableVoltageCompensation(10.0), "enable voltage
+      // compensation {}");
 
       pid = motor.getPIDController();
 
@@ -108,6 +111,14 @@ public class ProtoArmExtenderSubsystem extends BaseArmExtenderSubsystem {
       checkError(pid.setIZone(pidValues.IZone), "set PID_IZone {}");
       checkError(pid.setFF(pidValues.FF), "set PID_FF {}");
       checkError(pid.setOutputRange(pidValues.MinOutput, pidValues.MaxOutput), "set PID_OutputRange {}");
+      // checkError(pid.setSmartMotionMinOutputVelocity(pidValues.MinVel, motionSlot),
+      // "set PID_MinVel {}");
+      // checkError(pid.setSmartMotionMaxVelocity(pidValues.MaxVel, motionSlot), "set
+      // PID_MaxVel {}");
+      // checkError(pid.setSmartMotionMaxAccel(pidValues.MaxAcc, motionSlot), "set
+      // PID_MaxAcc {}");
+      // checkError(pid.setSmartMotionAllowedClosedLoopError(pidValues.MaxErr,
+      // motionSlot), "set PID_maxError {}");
 
       checkError(motor.setClosedLoopRampRate(rampRate), "set closed loop ramp rate {}");
       checkError(motor.setSoftLimit(SoftLimitDirection.kReverse, minSoftLimit), "set min soft limit to 0 {}");
@@ -146,6 +157,8 @@ public class ProtoArmExtenderSubsystem extends BaseArmExtenderSubsystem {
       logger.trace("set PID target = {}", target);
 
       // FIXME: Change to non-deprecated method
+      // checkError(pid.setReference(target, ControlType.kSmartMotion, motionSlot),
+      // "set PID reference to kSmartMotion {}");
       checkError(pid.setReference(target, ControlType.kPosition), "PID set reference to kPosition,0 {}");
       setTlmPIDEnabled(true);
       setTlmPIDTarget(target);

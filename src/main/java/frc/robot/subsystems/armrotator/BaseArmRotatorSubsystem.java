@@ -45,6 +45,7 @@ abstract class BaseArmRotatorSubsystem extends PIDSubsystem implements IArmRotat
    protected double pid_maxVel;
    protected double pid_maxAcc;
    protected double pid_maxErr;
+
    //@formatter:off
    protected PIDValues pidValues = new PIDValues(
       pid_P, 
@@ -114,12 +115,12 @@ abstract class BaseArmRotatorSubsystem extends PIDSubsystem implements IArmRotat
       v = Preferences.getDouble(prefs.PID_maxOutput, pidValues.MaxOutput);
       logger.info("{} = {}", prefs.PID_maxOutput, v);
       pidValues.MaxOutput = v;
-      v = Preferences.getDouble(prefs.PID_maxVel, pidValues.MaxVel);
-      logger.info("{} = {}", prefs.PID_maxVel, pidValues.MaxVel);
-      pidValues.MaxVel = v;
       v = Preferences.getDouble(prefs.PID_minVel, pidValues.MinVel);
       logger.info("{} = {}", prefs.PID_minVel, pidValues.MinVel);
       pidValues.MinVel = v;
+      v = Preferences.getDouble(prefs.PID_maxVel, pidValues.MaxVel);
+      logger.info("{} = {}", prefs.PID_maxVel, pidValues.MaxVel);
+      pidValues.MaxVel = v;
       v = Preferences.getDouble(prefs.PID_maxAcc, pidValues.MaxAcc);
       logger.info("{} = {}", prefs.PID_maxAcc, pidValues.MaxAcc);
       pidValues.MaxAcc = v;

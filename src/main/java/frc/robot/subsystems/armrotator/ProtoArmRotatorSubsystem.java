@@ -183,8 +183,8 @@ public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
       checkError(pid.setIZone(pidValues.IZone), "set PID_IZone {}");
       checkError(pid.setFF(pidValues.FF), "set PID_FF {}");
       checkError(pid.setOutputRange(pidValues.MinOutput, pidValues.MaxOutput), "set PID_OutputRange {}");
-      checkError(pid.setSmartMotionMaxVelocity(pidValues.MaxVel, motionSlot), "set PID_MaxVel {}");
       checkError(pid.setSmartMotionMinOutputVelocity(pidValues.MinVel, motionSlot), "set PID_MinVel {}");
+      checkError(pid.setSmartMotionMaxVelocity(pidValues.MaxVel, motionSlot), "set PID_MaxVel {}");
       checkError(pid.setSmartMotionMaxAccel(pidValues.MaxAcc, motionSlot), "set PID_MaxAcc {}");
       checkError(pid.setSmartMotionAllowedClosedLoopError(pidValues.MaxErr, motionSlot), "set PID_maxError {}");
 
