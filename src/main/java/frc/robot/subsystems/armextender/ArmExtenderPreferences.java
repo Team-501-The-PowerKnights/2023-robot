@@ -59,17 +59,17 @@ public final class ArmExtenderPreferences extends BasePreferences {
    final String PID_maxAcc = name + PIDValues.pid_maxAcc;
    final String PID_maxErr = name + PIDValues.pid_maxErr;
 
-   static final double default_pid_P = 1;
-   static final double default_pid_I = 0.0001;
-   static final double default_pid_D = 5;
-   static final double default_pid_IZone = 10;
-   static final double default_pid_FF = 0;
+   static final double default_pid_P = 0.0005;
+   static final double default_pid_I = 0.00001;
+   static final double default_pid_D = 0;
+   static final double default_pid_IZone = 0;
+   static final double default_pid_FF = 0.000038;
    static final double default_pid_minOutput = -0.5;
    static final double default_pid_maxOutput = 0.5;
    private static final double default_pid_minVel = 0;
-   private static final double default_pid_maxVel = 0;
-   private static final double default_pid_maxAcc = 0;
-   private static final double default_pid_maxErr = 0;
+   private static final double default_pid_maxVel = 3500;
+   private static final double default_pid_maxAcc = 2000;
+   private static final double default_pid_maxErr = 0.2;
 
    /** Ramp rate */
    final String rampRate = name + ".RampRate";
