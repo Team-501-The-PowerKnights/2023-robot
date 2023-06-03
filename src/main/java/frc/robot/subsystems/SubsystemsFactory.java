@@ -14,7 +14,8 @@ import java.util.List;
 import org.slf4j.Logger;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
+import frc.robot.robot.IRobot;
+import frc.robot.robot.RobotFactory;
 import frc.robot.subsystems.arm.ArmFactory;
 import frc.robot.subsystems.armextender.ArmExtenderFactory;
 import frc.robot.subsystems.armrotator.ArmRotatorFactory;
@@ -47,9 +48,11 @@ public class SubsystemsFactory {
 
       logger.info("constructing subsystems ...");
 
+      IRobot robot = RobotFactory.getInstance();
+
       // ** Drive **
       // Always do drive first
-      if (SubsystemsConfig.hasDrive()) {
+      if (robot.hasDrive()) {
          logger.info("construct Drive");
          SmartDashboard.putNumber(TelemetryNames.Drive.status,
                PKStatus.unknown.tlmValue);
@@ -62,7 +65,7 @@ public class SubsystemsFactory {
       }
 
       // ** Gripper **
-      if (SubsystemsConfig.hasGripper()) {
+      if (robot.hasGripper()) {
          logger.info("construct Gripper");
          SmartDashboard.putNumber(TelemetryNames.Gripper.status,
                PKStatus.unknown.tlmValue);
@@ -75,7 +78,7 @@ public class SubsystemsFactory {
       }
 
       // ** ArmRotator **
-      if (SubsystemsConfig.hasArmRotator()) {
+      if (robot.hasArmRotator()) {
          logger.info("construct ArmRotator");
          SmartDashboard.putNumber(TelemetryNames.ArmRotator.status,
                PKStatus.unknown.tlmValue);
@@ -88,7 +91,7 @@ public class SubsystemsFactory {
       }
 
       // ** ArmExtender **
-      if (SubsystemsConfig.hasArmExtener()) {
+      if (robot.hasArmExtener()) {
          logger.info("construct ArmExtender");
          SmartDashboard.putNumber(TelemetryNames.ArmExtender.status,
                PKStatus.unknown.tlmValue);
@@ -101,7 +104,7 @@ public class SubsystemsFactory {
       }
 
       // ** Wrist **
-      if (SubsystemsConfig.hasWrist()) {
+      if (robot.hasWrist()) {
          logger.info("construct Wrist");
          SmartDashboard.putNumber(TelemetryNames.Wrist.status,
                PKStatus.unknown.tlmValue);
@@ -114,7 +117,7 @@ public class SubsystemsFactory {
       }
 
       // ** Ingester **
-      if (SubsystemsConfig.hasIngester()) {
+      if (robot.hasIngester()) {
          logger.info("construct Ingester");
          SmartDashboard.putNumber(TelemetryNames.Ingester.status,
                PKStatus.unknown.tlmValue);
@@ -127,7 +130,7 @@ public class SubsystemsFactory {
       }
 
       // ** Turret **
-      if (SubsystemsConfig.hasTurret()) {
+      if (robot.hasTurret()) {
          logger.info("construct Turret");
          SmartDashboard.putNumber(TelemetryNames.Turret.status,
                PKStatus.unknown.tlmValue);
@@ -140,7 +143,7 @@ public class SubsystemsFactory {
       }
 
       // ** Lift **
-      if (SubsystemsConfig.hasLift()) {
+      if (robot.hasLift()) {
          logger.info("construct Lift");
          SmartDashboard.putNumber(TelemetryNames.Lift.status,
                PKStatus.unknown.tlmValue);
@@ -153,7 +156,7 @@ public class SubsystemsFactory {
       }
 
       // ** Arm **
-      if (SubsystemsConfig.hasArm()) {
+      if (robot.hasArm()) {
          logger.info("construct Arm");
          SmartDashboard.putNumber(TelemetryNames.Arm.status,
                PKStatus.unknown.tlmValue);

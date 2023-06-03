@@ -15,8 +15,8 @@ import org.slf4j.Logger;
 
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import frc.robot.subsystems.SubsystemsConfig;
+import frc.robot.robot.IRobot;
+import frc.robot.robot.RobotFactory;
 import frc.robot.subsystems.arm.ArmPreferences;
 import frc.robot.subsystems.armextender.ArmExtenderPreferences;
 import frc.robot.subsystems.armrotator.ArmRotatorPreferences;
@@ -69,49 +69,51 @@ public final class PreferencesManager {
    private PreferencesManager() {
       logger.info("constructing");
 
+      IRobot robot = RobotFactory.getInstance();
+
       // ** Drive **
       // Always do drive first
-      if (SubsystemsConfig.hasDrive()) {
+      if (robot.hasDrive()) {
          DrivePreferences.getInstance().initialize();
       }
 
       // ** Gripper **
-      if (SubsystemsConfig.hasGripper()) {
+      if (robot.hasGripper()) {
          GripperPreferences.getInstance().initialize();
       }
 
       // ** Arm Rotator **
-      if (SubsystemsConfig.hasArmRotator()) {
+      if (robot.hasArmRotator()) {
          ArmRotatorPreferences.getInstance().initialize();
       }
 
       // ** Arm Extender **
-      if (SubsystemsConfig.hasArmExtener()) {
+      if (robot.hasArmExtener()) {
          ArmExtenderPreferences.getInstance().initialize();
       }
 
       // ** Wrist **
-      if (SubsystemsConfig.hasWrist()) {
+      if (robot.hasWrist()) {
          WristPreferences.getInstance().initialize();
       }
 
       // ** Ingester **
-      if (SubsystemsConfig.hasIngester()) {
+      if (robot.hasIngester()) {
          IngesterPreferences.getInstance().initialize();
       }
 
       // ** Turret **
-      if (SubsystemsConfig.hasTurret()) {
+      if (robot.hasTurret()) {
          TurretPreferences.getInstance().initialize();
       }
 
       // ** Lift **
-      if (SubsystemsConfig.hasLift()) {
+      if (robot.hasLift()) {
          LiftPreferences.getInstance().initialize();
       }
 
       // ** Arm **
-      if (SubsystemsConfig.hasArm()) {
+      if (robot.hasArm()) {
          ArmPreferences.getInstance().initialize();
       }
 

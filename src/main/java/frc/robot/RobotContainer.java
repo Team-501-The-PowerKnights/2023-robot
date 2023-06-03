@@ -67,16 +67,16 @@ public class RobotContainer {
       // Make sure Properties file exists and can be parsed
       initializeProperties();
 
+      // Create the robot with all the configuration, etc.
+      RobotFactory.constructInstance();
+      robot = RobotFactory.getInstance();
+
       // Make sure Preferences are initialized
       intializePreferences();
 
       // Create telemetry manager
       TelemetryManager.constructInstance();
       tlmMgr = TelemetryManager.getInstance();
-
-      // Create the robot with all the configuration, etc.
-      RobotFactory.constructInstance();
-      robot = RobotFactory.getInstance();
 
       // Create command manager
       SchedulerProvider.constructInstance();
