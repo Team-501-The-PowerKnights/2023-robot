@@ -81,7 +81,7 @@ public class DriveBalance extends DriveCommandBase {
          setUnbalanced();
          speed = (offsetAngle < 0) ? -0.26 : 0.26;
       }
-      logger.debug("balance: angle={} speed={}", offsetAngle, speed);
+      logger.trace("balance: angle={} speed={}", offsetAngle, speed);
       SmartDashboard.putBoolean(TelemetryNames.Gyro.balanced, isBalanced);
       drive.drive(speed, 0);
    }
