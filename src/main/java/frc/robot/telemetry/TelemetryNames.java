@@ -31,6 +31,7 @@ public final class TelemetryNames {
       public static final String robotName = name + ".robotName";
       public static final String robotImpl = name + ".robotImpl";
       public static final String robotStatus = name + ".robotStatus";
+      public static final String robotImplClass = name + ".robotImplClass";
 
       public static final String dsConnected = name + ".dsConnected";
       public static final String fmsConnected = name + ".fmsConnected";

@@ -46,9 +46,9 @@ public class RobotFactory {
          throw new IllegalStateException(myName + " Already Constructed");
       }
 
-      props = PropertiesManager.getInstance().getProperties("Misc");
+      props = PropertiesManager.getInstance().getProperties(myName);
       logger.info(props.listProperties());
-      String robotName = props.getString("robotName");
+      String robotName = props.getString("implementation");
 
       loadImplementationClass(robotName);
    }
@@ -68,37 +68,34 @@ public class RobotFactory {
       return ourInstance;
    }
 
+   // "Proto"
    private static void loadImplementationClass(String myRobotName) {
+      String myPkgName = RobotFactory.class.getPackage().getName();
       if (myRobotName.isEmpty()) {
-         logger.warn("no class specified; go with subsystem default");
+         logger.warn("no class specified; go with robot stub");
          ProblemTracker.addWarning();
-         myRobotName = "Stub-Bot";
+         myRobotName = "Stub";
       }
 
-      logger.debug("robot to load: {}", myRobotName);
-      switch (myRobotName) {
+      String myClassName = new StringBuilder().append(myRobotName).append(myName).toString();
+      String classToLoad = new StringBuilder().append(myPkgName).append(".").append(myClassName).toString();
+      logger.debug("class to load: {}", classToLoad);
 
-         case "Suitcase-Bot":
-            ourInstance = new SuitcaseRobot();
-            break;
-
-         case "Swprog-Bot":
-            ourInstance = new SwprogRobot();
-            break;
-
-         case "Proto-Bot":
-            ourInstance = new ProtoRobot();
-            break;
-
-         case "Real-Bot":
-            ourInstance = new RealRobot();
-            break;
-
-         case "Stub-Bot":
-         default:
-            ourInstance = new StubRobot();
-            break;
+      logger.info("constructing {} for {} subsystem", myClassName, myName);
+      try {
+         @SuppressWarnings("rawtypes")
+         Class myClass = Class.forName(classToLoad);
+         @SuppressWarnings("deprecation")
+         Object myObject = myClass.newInstance();
+         ourInstance = (IRobot) myObject;
+         SmartDashboard.putNumber(TelemetryNames.Misc.robotStatus, PKStatus.success.tlmValue);
+      } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+         logger.error("failed to load class; instantiating default stub for: {}", myName);
+         ProblemTracker.addError();
+         ourInstance = new StubRobot();
+         SmartDashboard.putNumber(TelemetryNames.Misc.robotStatus, PKStatus.degraded.tlmValue);
       }
+      SmartDashboard.putString(TelemetryNames.Misc.robotImplClass, ourInstance.getClass().getSimpleName());
    }
 
 }
