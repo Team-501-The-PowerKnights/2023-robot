@@ -50,6 +50,8 @@ import frc.robot.modules.IModule;
 import frc.robot.modules.ModulesFactory;
 import frc.robot.preferences.PreferencesManager;
 import frc.robot.properties.PropertiesManager;
+import frc.robot.robot.IRobot;
+import frc.robot.robot.RobotFactory;
 import frc.robot.sensors.ISensor;
 import frc.robot.sensors.SensorsFactory;
 import frc.robot.subsystems.ISubsystem;
@@ -75,6 +77,9 @@ public class RobotContainer {
    private final TelemetryManager tlmMgr;
 
    //
+   private final IRobot robot;
+
+   //
    private final List<IModule> modules;
    //
    private final List<ISensor> sensors;
@@ -96,6 +101,10 @@ public class RobotContainer {
       // Create telemetry manager
       TelemetryManager.constructInstance();
       tlmMgr = TelemetryManager.getInstance();
+
+      // Create the robot with all the configuration, etc.
+      RobotFactory.constructInstance();
+      robot = RobotFactory.getInstance();
 
       // Create command manager
       SchedulerProvider.constructInstance();
@@ -122,10 +131,10 @@ public class RobotContainer {
       ModeFollowers.getInstance().add(OI.getInstance());
 
       // Create and place auto chooser on dashboard
-      createAutoChooser();
+      robot.createAutoChooser();
 
       // Configure the trigger bindings
-      configureBindings();
+      robot.configureBindings();
 
       logger.info("Created robot container");
    }
@@ -141,28 +150,6 @@ public class RobotContainer {
 
       logger.info("Properties as initialized:");
       PropertiesManager.getInstance().logProperties(logger);
-   }
-
-   /**
-    * Use this method to define your trigger->command mappings. Triggers can be
-    * created via the {@link Trigger#Trigger(java.util.function.BooleanSupplier)}
-    * constructor with an arbitrary predicate, or via the named factories in
-    * {@link edu.wpi.first.wpilibj2.command.button.CommandGenericHID}'s subclasses
-    * for
-    * {@link CommandXboxController
-    * Xbox}/{@link edu.wpi.first.wpilibj2.command.button.CommandPS4Controller PS4}
-    * controllers or
-    * {@link edu.wpi.first.wpilibj2.command.button.CommandJoystick Flight
-    * joysticks}.
-    */
-   private void configureBindings() {
-      // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-      // new Trigger(m_exampleSubsystem::exampleCondition)
-      // .onTrue(new ExampleCommand(m_exampleSubsystem));
-
-      // Schedule `exampleMethodCommand` when the Xbox controller's B button is
-      // pressed, cancelling on release.
-      // m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
    }
 
    //
