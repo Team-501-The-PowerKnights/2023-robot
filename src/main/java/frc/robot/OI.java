@@ -14,12 +14,20 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 import frc.robot.hmi.DriverGamepad;
+import frc.robot.hmi.IGamepad;
 import frc.robot.hmi.OperatorGamepad;
+import frc.robot.hmi.ProtoOperatorGamepad;
+import frc.robot.hmi.RealOperatorGamepad;
+import frc.robot.hmi.StubOperatorGamepad;
+import frc.robot.hmi.SuitcaseOperatorGamepad;
+import frc.robot.hmi.SwprogOperatorGamepad;
+import frc.robot.properties.PropertiesManager;
 import frc.robot.telemetry.ITelemetryProvider;
 import frc.robot.telemetry.TelemetryNames;
 import frc.robot.utils.PKStatus;
 
 import riolog.PKLogger;
+import riolog.ProblemTracker;
 
 /**
  * Add your docs here.
@@ -58,13 +66,34 @@ public class OI implements ITelemetryProvider, IModeFollower {
    // Driver gamepad
    private final DriverGamepad driverPad;
    // Operator gamepad
-   private final OperatorGamepad operatorPad;
+   private final IGamepad operatorPad;
 
    private OI() {
       logger.info("constructing {}", myName);
 
       driverPad = new DriverGamepad();
-      operatorPad = new OperatorGamepad();
+
+      String config = PropertiesManager.getInstance().getImpl();
+      switch (config) {
+         case "Suitcase":
+            operatorPad = new SuitcaseOperatorGamepad();
+            break;
+         case "Swprog":
+            operatorPad = new SwprogOperatorGamepad();
+            break;
+         case "Proto":
+            operatorPad = new ProtoOperatorGamepad();
+            break;
+         case "Real":
+            operatorPad = new RealOperatorGamepad();
+            break;
+         default:
+            operatorPad = new StubOperatorGamepad();
+            logger.error("no config specified; instantiating default stub for: {}",
+                  operatorPad.getClass().getSimpleName());
+            ProblemTracker.addError();
+            break;
+      }
 
       logger.info("constructed");
    }

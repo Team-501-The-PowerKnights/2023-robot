@@ -8,12 +8,13 @@
 
 package frc.robot.hmi;
 
+import frc.robot.IModeFollower;
 import frc.robot.telemetry.ITelemetryProvider;
 
 /**
  * Add your docs here.
  */
-public interface IGamepad extends ITelemetryProvider {
+public interface IGamepad extends ITelemetryProvider, IModeFollower {
 
    /**
      * 

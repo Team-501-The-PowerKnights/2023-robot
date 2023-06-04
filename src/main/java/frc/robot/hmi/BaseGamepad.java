@@ -13,12 +13,10 @@ import org.slf4j.Logger;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.button.CommandGenericHID;
 
-import frc.robot.IModeFollower;
-
 import riolog.PKLogger;
 import riolog.ProblemTracker;
 
-abstract class BaseGamepad implements IModeFollower, IGamepad {
+abstract class BaseGamepad implements IGamepad {
 
    /** Our classes' logger **/
    private static final Logger logger = PKLogger.getLogger(BaseGamepad.class.getName());
