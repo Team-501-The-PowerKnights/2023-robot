@@ -82,7 +82,7 @@ public class RobotContainer {
       SchedulerProvider.constructInstance();
       tlmMgr.addProvider(SchedulerProvider.getInstance());
 
-      // Creat the OI "subsystem"
+      // Create the OI "subsystem"
       OI.constructInstance();
       tlmMgr.addProvider(OI.getInstance());
 

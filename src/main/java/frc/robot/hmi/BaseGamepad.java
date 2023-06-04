@@ -14,9 +14,8 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.button.CommandGenericHID;
 
 import riolog.PKLogger;
-import riolog.ProblemTracker;
 
-abstract class BaseGamepad implements IGamepad {
+abstract class BaseGamepad {
 
    /** Our classes' logger **/
    private static final Logger logger = PKLogger.getLogger(BaseGamepad.class.getName());
@@ -40,12 +39,6 @@ abstract class BaseGamepad implements IGamepad {
       stick = cmdStick.getHID();
 
       logger.info("constructed");
-   }
-
-   @Override
-   public void configureButtonBindings() {
-      logger.error("Shouldn't be calling this from anywhere");
-      ProblemTracker.addError();
    }
 
    /**

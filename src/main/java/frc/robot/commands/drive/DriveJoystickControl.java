@@ -30,8 +30,8 @@ public class DriveJoystickControl extends DriveOICommandBase {
    public void execute() {
       super.execute();
 
-      double speed = oi.getDriveSpeed();
-      double turn = oi.getDriveTurn();
+      double speed = pad.getDriveSpeed();
+      double turn = pad.getDriveTurn();
 
       drive.drive(speed, turn);
    }

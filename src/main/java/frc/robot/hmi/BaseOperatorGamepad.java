@@ -30,4 +30,9 @@ abstract class BaseOperatorGamepad extends F310Gamepad implements IOperatorGamep
       logger.info("constructed");
    }
 
+   @Override
+   public void configureButtonBindings() {
+      logger.error("no one should be calling this at the moment");
+   }
+
 }

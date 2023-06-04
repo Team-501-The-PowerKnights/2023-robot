@@ -11,6 +11,10 @@ package frc.robot.hmi;
 /**
  * Add your docs here.
  */
-public interface IOperatorGamepad extends IGamepad {
+public interface IDriverGamepad extends IGamepad {
+
+   public double getDriveSpeed();
+
+   public double getDriveTurn();
 
 }

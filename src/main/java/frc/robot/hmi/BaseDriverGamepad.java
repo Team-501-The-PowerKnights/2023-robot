@@ -6,31 +6,33 @@
 /*- of this project.                                                      */
 /*------------------------------------------------------------------------*/
 
-package frc.robot.commands.drive;
+package frc.robot.hmi;
 
 import org.slf4j.Logger;
 
-import frc.robot.OI;
-import frc.robot.hmi.IDriverGamepad;
 import riolog.PKLogger;
 
 /**
- * Add your docs here.
+ * This class implements the Driver's gamepad.
+ * <p>
+ * See <code>control_mode.md</code> for documentation of how configured and
+ * used.
  */
-abstract class DriveOICommandBase extends DriveCommandBase {
+abstract class BaseDriverGamepad extends F310Gamepad implements IDriverGamepad {
 
    /** Our classes' logger **/
-   private static final Logger logger = PKLogger.getLogger(DriveOICommandBase.class.getName());
+   private static final Logger logger = PKLogger.getLogger(BaseDriverGamepad.class.getName());
 
-   // Handle to the Driver Gamepad
-   protected IDriverGamepad pad;
-
-   public DriveOICommandBase() {
-      logger.info("constructing {}", getName());
-
-      pad = OI.getInstance().getDriverPad();
+   public BaseDriverGamepad(String name, int port) {
+      super(name, port);
+      logger.info("constructing");
 
       logger.info("constructed");
+   }
+
+   @Override
+   public void configureButtonBindings() {
+      logger.error("no one should be calling this at the moment");
    }
 
 }

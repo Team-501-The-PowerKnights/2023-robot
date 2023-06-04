@@ -27,7 +27,7 @@ import riolog.PKLogger;
  * See <code>control_mode.md</code> for documentation of how configured and
  * used.
  */
-public class DriverGamepad extends F310Gamepad {
+public class DriverGamepad extends BaseDriverGamepad {
 
    /** Our classes' logger **/
    private static final Logger logger = PKLogger.getLogger(DriverGamepad.class.getName());
@@ -145,6 +145,7 @@ public class DriverGamepad extends F310Gamepad {
     * Drive
     *********************/
 
+   @Override
    public double getDriveSpeed() {
       double hmiSpeed = getRawDriveSpeed();
       double calcSpeed = hmiSpeed;
@@ -165,6 +166,7 @@ public class DriverGamepad extends F310Gamepad {
       return deadBand(getLeftYAxis(), 0.05);
    }
 
+   @Override
    public double getDriveTurn() {
       // Need to reverse the sign of turn
       final double hmiTurn = -getRawDriveTurn();

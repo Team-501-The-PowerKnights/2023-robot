@@ -14,7 +14,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 import frc.robot.hmi.DriverGamepad;
-import frc.robot.hmi.IGamepad;
+import frc.robot.hmi.IDriverGamepad;
+import frc.robot.hmi.IOperatorGamepad;
 import frc.robot.hmi.ProtoOperatorGamepad;
 import frc.robot.hmi.RealOperatorGamepad;
 import frc.robot.hmi.StubOperatorGamepad;
@@ -63,30 +64,42 @@ public class OI implements ITelemetryProvider, IModeFollower {
    }
 
    // Driver gamepad
-   private final DriverGamepad driverPad;
+   private final IDriverGamepad driverPad;
+
+   public IDriverGamepad getDriverPad() {
+      return driverPad;
+   }
+
    // Operator gamepad
-   private final IGamepad operatorPad;
+   private final IOperatorGamepad operatorPad;
+
+   public IOperatorGamepad getOperatorPad() {
+      return operatorPad;
+   }
 
    private OI() {
       logger.info("constructing {}", myName);
 
-      driverPad = new DriverGamepad();
-
       String config = PropertiesManager.getInstance().getImpl();
       switch (config) {
          case "Suitcase":
+            driverPad = new DriverGamepad();
             operatorPad = new SuitcaseOperatorGamepad();
             break;
          case "Swprog":
+            driverPad = new DriverGamepad();
             operatorPad = new SwprogOperatorGamepad();
             break;
          case "Proto":
+            driverPad = new DriverGamepad();
             operatorPad = new ProtoOperatorGamepad();
             break;
          case "Real":
+            driverPad = new DriverGamepad();
             operatorPad = new RealOperatorGamepad();
             break;
          default:
+            driverPad = new DriverGamepad();
             operatorPad = new StubOperatorGamepad();
             logger.error("no config specified; instantiating default stub for: {}",
                   operatorPad.getClass().getSimpleName());
@@ -145,18 +158,6 @@ public class OI implements ITelemetryProvider, IModeFollower {
       operatorPad.testInit();
 
       logger.info("initialized test for {}", myName);
-   }
-
-   /*****************
-    * Drive
-    *****************/
-
-   public double getDriveSpeed() {
-      return driverPad.getDriveSpeed();
-   }
-
-   public double getDriveTurn() {
-      return driverPad.getDriveTurn();
    }
 
 }
