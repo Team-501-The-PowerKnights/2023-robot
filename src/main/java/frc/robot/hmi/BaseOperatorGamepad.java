@@ -12,20 +12,22 @@ import org.slf4j.Logger;
 
 import riolog.PKLogger;
 
-public class RealOperatorGamepad extends BaseOperatorGamepad {
+/**
+ * This class implements the Operator's gamepad.
+ * <p>
+ * See <code>control_mode.md</code> for documentation of how configured and
+ * used.
+ */
+abstract class BaseOperatorGamepad extends F310Gamepad implements IOperatorGamepad {
 
    /** Our classes' logger **/
-   private static final Logger logger = PKLogger.getLogger(RealOperatorGamepad.class.getName());
+   private static final Logger logger = PKLogger.getLogger(BaseOperatorGamepad.class.getName());
 
-   public RealOperatorGamepad() {
-      super("OperatorGamepad", 1);
+   public BaseOperatorGamepad(String name, int port) {
+      super(name, port);
       logger.info("constructing");
 
       logger.info("constructed");
-   }
-
-   @Override
-   public void updateTelemetry() {
    }
 
 }

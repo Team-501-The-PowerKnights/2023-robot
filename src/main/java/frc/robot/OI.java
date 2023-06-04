@@ -15,7 +15,6 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 import frc.robot.hmi.DriverGamepad;
 import frc.robot.hmi.IGamepad;
-import frc.robot.hmi.OperatorGamepad;
 import frc.robot.hmi.ProtoOperatorGamepad;
 import frc.robot.hmi.RealOperatorGamepad;
 import frc.robot.hmi.StubOperatorGamepad;

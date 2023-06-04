@@ -12,7 +12,7 @@ import org.slf4j.Logger;
 
 import riolog.PKLogger;
 
-public class SuitcaseOperatorGamepad extends F310Gamepad {
+public class SuitcaseOperatorGamepad extends BaseOperatorGamepad {
 
    /** Our classes' logger **/
    private static final Logger logger = PKLogger.getLogger(SuitcaseOperatorGamepad.class.getName());

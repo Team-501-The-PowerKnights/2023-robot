@@ -38,7 +38,7 @@ import frc.robot.subsystems.armrotator.ArmRotatorFactory;
 
 import riolog.PKLogger;
 
-public class ProtoOperatorGamepad extends F310Gamepad {
+public class ProtoOperatorGamepad extends BaseOperatorGamepad {
 
    /** Our classes' logger **/
    private static final Logger logger = PKLogger.getLogger(ProtoOperatorGamepad.class.getName());

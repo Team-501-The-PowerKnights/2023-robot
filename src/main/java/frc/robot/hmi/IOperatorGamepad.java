@@ -8,24 +8,9 @@
 
 package frc.robot.hmi;
 
-import org.slf4j.Logger;
-
-import riolog.PKLogger;
-
-public class RealOperatorGamepad extends BaseOperatorGamepad {
-
-   /** Our classes' logger **/
-   private static final Logger logger = PKLogger.getLogger(RealOperatorGamepad.class.getName());
-
-   public RealOperatorGamepad() {
-      super("OperatorGamepad", 1);
-      logger.info("constructing");
-
-      logger.info("constructed");
-   }
-
-   @Override
-   public void updateTelemetry() {
-   }
+/**
+ * Add your docs here.
+ */
+public interface IOperatorGamepad {
 
 }
