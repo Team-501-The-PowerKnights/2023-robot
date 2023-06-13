@@ -37,13 +37,15 @@ public class ProtoArmRotatorSubsystem extends BaseArmRotatorSubsystem {
 
    /** */
    private final CANSparkMax motor;
-   private SparkMaxPIDController pid;
-   private RelativeEncoder encoder;
+   private final SparkMaxPIDController pid;
+   private final RelativeEncoder encoder;
 
-   private AbsoluteEncoder absEncoder;
+   private final int motionSlot = 0; // FIXME add to constructor...maybe
+
+   private final AbsoluteEncoder absEncoder;
    private final double absEncoderBaseline = 0.5912;
    private final double absEncoderScale = -1 * (5.0 * 5.0 * 5.0 * (72.0 / 36.0));
-   private final int motionSlot = 0; // FIXME add to constructor...maybe
+
    // private final double maxError = 0.2; //FIXME add to constructor
 
    ProtoArmRotatorSubsystem() {

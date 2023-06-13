@@ -67,8 +67,8 @@ public final class ArmRotatorPreferences extends BasePreferences {
    private static final double default_pid_minOutput = -0.8;
    private static final double default_pid_maxOutput = 0.8;
    private static final double default_pid_minVel = 0;
-   private static final double default_pid_maxVel = 2000.0;
-   private static final double default_pid_maxAcc = 1000;
+   private static final double default_pid_maxVel = 2200.0;
+   private static final double default_pid_maxAcc = 1700;
    private static final double default_pid_maxErr = 0.2;
 
    /** Ramp rate */
