@@ -29,6 +29,31 @@ class RealRobot extends BaseRobot {
    }
 
    @Override
+   public boolean hasDrive() {
+      return true;
+   };
+
+   @Override
+   public boolean hasGripper() {
+      return true;
+   };
+
+   @Override
+   public boolean hasTurret() {
+      return true;
+   };
+
+   @Override
+   public boolean hasLift() {
+      return true;
+   };
+
+   @Override
+   public boolean hasArm() {
+      return true;
+   };
+
+   @Override
    public void configureBindings() {
       logger.info("configure");
       logger.info("configured");

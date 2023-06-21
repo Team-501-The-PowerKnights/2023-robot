@@ -62,6 +62,7 @@ public class SubsystemsFactory {
             tlmMgr.addProvider(ss);
             subsystems.add(ss);
          }
+         logger.info("constructed Drive");
       }
 
       // ** Gripper **
@@ -75,6 +76,7 @@ public class SubsystemsFactory {
             tlmMgr.addProvider(ss);
             subsystems.add(ss);
          }
+         logger.info("constructed Gripper");
       }
 
       // ** ArmRotator **
@@ -88,6 +90,7 @@ public class SubsystemsFactory {
             tlmMgr.addProvider(ss);
             subsystems.add(ss);
          }
+         logger.info("constructed ArmRotator");
       }
 
       // ** ArmExtender **
@@ -101,6 +104,7 @@ public class SubsystemsFactory {
             tlmMgr.addProvider(ss);
             subsystems.add(ss);
          }
+         logger.info("constructed ArmExtender");
       }
 
       // ** Wrist **
@@ -114,6 +118,7 @@ public class SubsystemsFactory {
             tlmMgr.addProvider(ss);
             subsystems.add(ss);
          }
+         logger.info("constructed Wrist");
       }
 
       // ** Ingester **
@@ -127,6 +132,7 @@ public class SubsystemsFactory {
             tlmMgr.addProvider(ss);
             subsystems.add(ss);
          }
+         logger.info("constructed Ingester");
       }
 
       // ** Turret **
@@ -140,6 +146,7 @@ public class SubsystemsFactory {
             tlmMgr.addProvider(ss);
             subsystems.add(ss);
          }
+         logger.info("constructed Turret");
       }
 
       // ** Lift **
@@ -153,6 +160,7 @@ public class SubsystemsFactory {
             tlmMgr.addProvider(ss);
             subsystems.add(ss);
          }
+         logger.info("constructed Lift");
       }
 
       // ** Arm **
@@ -166,6 +174,7 @@ public class SubsystemsFactory {
             tlmMgr.addProvider(ss);
             subsystems.add(ss);
          }
+         logger.info("constructed Arm");
       }
 
       // Load and update the preferences now that all the subsystems are created
