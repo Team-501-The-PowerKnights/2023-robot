@@ -51,6 +51,8 @@ abstract class BaseArmSubsystem extends PIDSubsystem implements IArmSubsystem {
       pid_maxOutput);
    //@formatter:on
 
+   protected double rampRate;
+
    protected double highSetPoint;
    protected double midSetPoint;
    protected double lowSetPoint;
@@ -99,6 +101,10 @@ abstract class BaseArmSubsystem extends PIDSubsystem implements IArmSubsystem {
       v = Preferences.getDouble(prefs.PID_maxOutput, pidValues.MaxOutput);
       logger.info("{} = {}", prefs.PID_maxOutput, v);
       pidValues.MaxOutput = v;
+
+      v = Preferences.getDouble(prefs.rampRate, rampRate);
+      logger.info("{} = {}", prefs.rampRate, v);
+      rampRate = v;
 
       v = Preferences.getDouble(prefs.highSetPoint, highSetPoint);
       logger.info("{} = {}", prefs.highSetPoint, v);

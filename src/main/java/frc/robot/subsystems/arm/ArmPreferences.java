@@ -63,6 +63,11 @@ public final class ArmPreferences extends BasePreferences {
    private static final double default_pid_minOutput = 0;
    private static final double default_pid_maxOutput = 0;
 
+   /** Ramp rate */
+   final String rampRate = name + ".RampRate";
+
+   private static final double default_rampRate = 0.5;
+
    /** Set points for the various positions */
    final String highSetPoint = name + ".HighSetPoint";
    final String midSetPoint = name + ".MidSetPoint";
@@ -83,6 +88,8 @@ public final class ArmPreferences extends BasePreferences {
       checkAndAddDoublePreference(PID_FF, default_pid_FF);
       checkAndAddDoublePreference(PID_minOutput, default_pid_minOutput);
       checkAndAddDoublePreference(PID_maxOutput, default_pid_maxOutput);
+
+      checkAndAddDoublePreference(rampRate, default_rampRate);
 
       checkAndAddDoublePreference(highSetPoint, default_highPosition);
       checkAndAddDoublePreference(midSetPoint, default_midPosition);
