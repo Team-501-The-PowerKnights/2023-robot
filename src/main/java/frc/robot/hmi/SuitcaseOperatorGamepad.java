@@ -18,7 +18,7 @@ public class SuitcaseOperatorGamepad extends BaseOperatorGamepad {
    private static final Logger logger = PKLogger.getLogger(SuitcaseOperatorGamepad.class.getName());
 
    public SuitcaseOperatorGamepad() {
-      super("OperatorGamepad", 1);
+      super("SuitcaseOperatorGamepad", 1);
       logger.info("constructing");
 
       logger.info("constructed");

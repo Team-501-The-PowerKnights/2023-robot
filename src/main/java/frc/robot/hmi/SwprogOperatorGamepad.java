@@ -18,7 +18,7 @@ public class SwprogOperatorGamepad extends BaseOperatorGamepad {
    private static final Logger logger = PKLogger.getLogger(SwprogOperatorGamepad.class.getName());
 
    public SwprogOperatorGamepad() {
-      super("OperatorGamepad", 1);
+      super("SwprogOperatorGamepad", 1);
       logger.info("constructing");
 
       logger.info("constructed");

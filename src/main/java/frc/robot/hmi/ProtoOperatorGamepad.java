@@ -58,7 +58,7 @@ public class ProtoOperatorGamepad extends BaseOperatorGamepad {
    private final Trigger gripperTrigger;
 
    public ProtoOperatorGamepad() {
-      super("OperatorGamepad", 1);
+      super("ProtoOperatorGamepad", 1);
       logger.info("constructing");
 
       armOverPoseButton = cmdStick.button(rightBumper);

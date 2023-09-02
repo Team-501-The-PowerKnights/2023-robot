@@ -6,26 +6,39 @@
 /*- of this project.                                                      */
 /*------------------------------------------------------------------------*/
 
-package frc.robot.hmi;
+package frc.robot.commands.lift;
 
 import org.slf4j.Logger;
 
+import java.util.function.DoubleSupplier;
+
 import riolog.PKLogger;
 
-public class StubOperatorGamepad extends BaseOperatorGamepad {
+public class LiftNudgeTarget extends LiftCommandBase {
 
    /** Our classes' logger **/
-   private static final Logger logger = PKLogger.getLogger(StubOperatorGamepad.class.getName());
+   private static final Logger logger = PKLogger.getLogger(LiftNudgeTarget.class.getName());
 
-   public StubOperatorGamepad() {
-      super("StubOperatorGamepad", 1);
-      logger.info("constructing");
+   private final DoubleSupplier supplier;
+
+   public LiftNudgeTarget(DoubleSupplier supplier) {
+      logger.info("constructing {}", getName());
+
+      this.supplier = supplier;
 
       logger.info("constructed");
    }
 
    @Override
-   public void updateTelemetry() {
+   public void execute() {
+      double input = supplier.getAsDouble();
+      if (input == 0) {
+         return;
+      }
+
+      // Scale by 15% and change sign
+      input *= -0.15;
+      subsys.offsetTarget(input);
    }
 
 }
