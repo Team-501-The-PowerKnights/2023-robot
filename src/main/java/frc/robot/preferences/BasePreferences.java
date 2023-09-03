@@ -47,7 +47,7 @@ abstract public class BasePreferences implements IPreferences {
    public void logPreferences(Logger logger) {
       StringBuilder buf = new StringBuilder();
       buf.append(" preferences:");
-      for (String key : Preferences.getKeys().stream().filter(k -> k.contains(name)).sorted()
+      for (String key : Preferences.getKeys().stream().filter(k -> k.contains(name + ".")).sorted()
             .collect(Collectors.toCollection(ArrayList::new))) {
          buf.append("\n..."); // logger gobbles up leading spaces
          buf.append(key).append(" = ").append(Preferences.getDouble(key, 3171960.));
