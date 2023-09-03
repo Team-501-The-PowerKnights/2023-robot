@@ -94,4 +94,54 @@ public abstract class PKCommandBase extends CommandBase {
       remove(this);
    }
 
+   /**
+    * Determines if the input is 'zero'.
+    *
+    * @param num
+    *           number to test
+    * @param zeroEpsilon
+    *           epsilon around zero to use
+    * @return true if and only if number is closer to zero than epsilon
+    */
+   public boolean isZero(float num, float zeroEpsilon) {
+      return Math.abs(num) < zeroEpsilon;
+   }
+
+   /**
+    * Determines if the input is 'zero'.
+    *
+    * @param num
+    *           number to test
+    * @param zeroEpsilon
+    *           epsilon around zero to use
+    * @return true if and only if number is closer to zero than epsilon
+    */
+   public boolean isZero(double num, double zeroEpsilon) {
+      return Math.abs(num) < zeroEpsilon;
+   }
+
+   /**
+    * Negates the input (e.g., returns a negative number for a positive
+    * input, and a positive number for a negative input).
+    *
+    * @param num
+    *           number to negate
+    * @return negated input (+ if - input, and - if + input)
+    */
+   public float negate(float num) {
+      return -1 * num;
+   }
+
+   /**
+    * Negates the input (e.g., returns a negative number for a positive
+    * input, and a positive number for a negative input).
+    *
+    * @param num
+    *           number to negate
+    * @return negated input (+ if - input, and - if + input)
+    */
+   public double negate(double num) {
+      return -1 * num;
+   }
+
 }

@@ -32,7 +32,7 @@ public class ArmStop extends ArmCommandBase {
    protected void firstExecution() {
       logger.trace("arm.stop() called in firstExecution()");
 
-      arm.stop();
+      subsys.stop();
    }
 
    @Override

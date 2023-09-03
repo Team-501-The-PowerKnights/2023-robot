@@ -25,13 +25,13 @@ abstract class ArmCommandBase extends PKCommandBase {
    private static final Logger logger = PKLogger.getLogger(ArmCommandBase.class.getName());
 
    // Handle to our subsystem
-   protected final IArmSubsystem arm;
+   protected final IArmSubsystem subsys;
 
    public ArmCommandBase() {
       logger.info("constructing {}", getName());
 
-      arm = ArmFactory.getInstance();
-      addRequirements(arm);
+      subsys = ArmFactory.getInstance();
+      addRequirements(subsys);
 
       logger.info("constructed");
    }

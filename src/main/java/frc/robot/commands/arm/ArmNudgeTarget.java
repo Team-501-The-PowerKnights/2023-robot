@@ -6,7 +6,7 @@
 /*- of this project.                                                      */
 /*------------------------------------------------------------------------*/
 
-package frc.robot.commands.lift;
+package frc.robot.commands.arm;
 
 import org.slf4j.Logger;
 
@@ -14,16 +14,16 @@ import java.util.function.DoubleSupplier;
 
 import riolog.PKLogger;
 
-public class LiftNudgeTarget extends LiftCommandBase {
+public class ArmNudgeTarget extends ArmCommandBase {
 
    /** Our classes' logger **/
-   private static final Logger logger = PKLogger.getLogger(LiftNudgeTarget.class.getName());
+   private static final Logger logger = PKLogger.getLogger(ArmNudgeTarget.class.getName());
 
    private static final double scale = 0.15;
 
    private final DoubleSupplier supplier;
 
-   public LiftNudgeTarget(DoubleSupplier supplier) {
+   public ArmNudgeTarget(DoubleSupplier supplier) {
       logger.info("constructing {}", getName());
 
       this.supplier = supplier;
