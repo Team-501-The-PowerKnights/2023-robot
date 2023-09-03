@@ -14,7 +14,7 @@ import java.util.function.DoubleSupplier;
 
 import riolog.PKLogger;
 
-abstract public class ArmManualCommandBase extends ArmCommandBase {
+abstract class ArmManualCommandBase extends ArmCommandBase {
 
    /** Our classes' logger **/
    private static final Logger logger = PKLogger.getLogger(ArmManualCommandBase.class.getName());

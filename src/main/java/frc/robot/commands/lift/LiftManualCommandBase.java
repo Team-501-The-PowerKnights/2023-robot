@@ -14,7 +14,7 @@ import java.util.function.DoubleSupplier;
 
 import riolog.PKLogger;
 
-abstract public class LiftManualCommandBase extends LiftCommandBase {
+abstract class LiftManualCommandBase extends LiftCommandBase {
 
    /** Our classes' logger **/
    private static final Logger logger = PKLogger.getLogger(LiftManualCommandBase.class.getName());

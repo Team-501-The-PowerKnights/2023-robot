@@ -14,7 +14,7 @@ import java.util.function.DoubleSupplier;
 
 import riolog.PKLogger;
 
-abstract public class TurretManualCommandBase extends TurretCommandBase {
+abstract class TurretManualCommandBase extends TurretCommandBase {
 
    /** Our classes' logger **/
    private static final Logger logger = PKLogger.getLogger(TurretManualCommandBase.class.getName());
