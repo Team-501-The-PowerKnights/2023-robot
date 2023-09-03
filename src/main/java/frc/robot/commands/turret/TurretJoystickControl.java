@@ -14,19 +14,14 @@ import java.util.function.DoubleSupplier;
 
 import riolog.PKLogger;
 
-public class TurretJoystickControl extends TurretCommandBase {
+public class TurretJoystickControl extends TurretManualCommandBase {
 
    /** Our classes' logger **/
    private static final Logger logger = PKLogger.getLogger(TurretJoystickControl.class.getName());
 
-   private static final double scale = 0.15;
-
-   private final DoubleSupplier supplier;
-
    public TurretJoystickControl(DoubleSupplier supplier) {
+      super(supplier);
       logger.info("constructing {}", getName());
-
-      this.supplier = supplier;
 
       logger.info("constructed");
    }
@@ -35,16 +30,11 @@ public class TurretJoystickControl extends TurretCommandBase {
    public void execute() {
       double input = supplier.getAsDouble();
 
-      // If close enough to zero we stop motion (gamepad doesn't zero)
-      if (isZero(input, 0.01)) {
+      if (noInput(input)) {
          subsys.stop();
       }
 
-      // Scale to make less responsive
-      // Reverse sign to make gamepad match convention
-      input = negate(input * scale);
-
-      subsys.move(input);
+      subsys.move(getCorrectedInput(input));
    }
 
 }

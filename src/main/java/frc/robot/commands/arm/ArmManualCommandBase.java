@@ -6,7 +6,7 @@
 /*- of this project.                                                      */
 /*------------------------------------------------------------------------*/
 
-package frc.robot.commands.lift;
+package frc.robot.commands.arm;
 
 import org.slf4j.Logger;
 
@@ -14,27 +14,34 @@ import java.util.function.DoubleSupplier;
 
 import riolog.PKLogger;
 
-public class LiftNudgeTarget extends LiftManualCommandBase {
+abstract public class ArmManualCommandBase extends ArmCommandBase {
 
    /** Our classes' logger **/
-   private static final Logger logger = PKLogger.getLogger(LiftNudgeTarget.class.getName());
+   private static final Logger logger = PKLogger.getLogger(ArmManualCommandBase.class.getName());
 
-   public LiftNudgeTarget(DoubleSupplier supplier) {
-      super(supplier);
+   //
+   private static final double zeroEpsilon = 0.01;
+   //
+   private static final double scale = 0.15;
+
+   protected final DoubleSupplier supplier;
+
+   public ArmManualCommandBase(DoubleSupplier supplier) {
       logger.info("constructing {}", getName());
+
+      this.supplier = supplier;
 
       logger.info("constructed");
    }
 
-   @Override
-   public void execute() {
-      double input = supplier.getAsDouble();
+   protected boolean noInput(double input) {
+      return isZero(input, zeroEpsilon);
+   }
 
-      if (noInput(input)) {
-         return;
-      }
-
-      subsys.offsetTarget(getCorrectedInput(input));
+   protected double getCorrectedInput(double input) {
+      // Scale to make less responsive
+      // Reverse sign to make gamepad match convention
+      return negate(input * scale);
    }
 
 }
