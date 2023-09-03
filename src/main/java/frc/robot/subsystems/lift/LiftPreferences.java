@@ -75,9 +75,9 @@ public class LiftPreferences extends BasePreferences {
    final String highSetPoint = name + ".HighSetPoint";
 
    private static final double default_startPosition = 0;
-   private static final double default_lowPosition = 0;
-   private static final double default_midPosition = 0;
    private static final double default_highPosition = 0;
+   private static final double default_midPosition = 0;
+   private static final double default_lowPosition = 0;
 
    // FIXME: Make perferences & NetworkTables right
    public void initialize() {
@@ -94,9 +94,9 @@ public class LiftPreferences extends BasePreferences {
       checkAndAddDoublePreference(rampRate, default_rampRate);
 
       checkAndAddDoublePreference(startSetPoint, default_startPosition);
-      checkAndAddDoublePreference(lowSetPoint, default_lowPosition);
-      checkAndAddDoublePreference(midSetPoint, default_midPosition);
       checkAndAddDoublePreference(highSetPoint, default_highPosition);
+      checkAndAddDoublePreference(midSetPoint, default_midPosition);
+      checkAndAddDoublePreference(lowSetPoint, default_lowPosition);
 
       logger.info("preferences as initialized:");
       logPreferences(logger);

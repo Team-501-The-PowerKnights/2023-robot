@@ -69,10 +69,12 @@ public final class ArmPreferences extends BasePreferences {
    private static final double default_rampRate = 0.5;
 
    /** Set points for the various positions */
+   final String startSetPoint = name + ".StartSetPoint";
    final String highSetPoint = name + ".HighSetPoint";
    final String midSetPoint = name + ".MidSetPoint";
    final String lowSetPoint = name + ".LowSetPoint";
 
+   private static final double default_startPosition = 0;
    private static final double default_highPosition = 0;
    private static final double default_midPosition = 0;
    private static final double default_lowPosition = 0;
@@ -91,6 +93,7 @@ public final class ArmPreferences extends BasePreferences {
 
       checkAndAddDoublePreference(rampRate, default_rampRate);
 
+      checkAndAddDoublePreference(startSetPoint, default_startPosition);
       checkAndAddDoublePreference(highSetPoint, default_highPosition);
       checkAndAddDoublePreference(midSetPoint, default_midPosition);
       checkAndAddDoublePreference(lowSetPoint, default_lowPosition);
