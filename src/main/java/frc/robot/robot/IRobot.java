@@ -22,6 +22,8 @@ public interface IRobot {
       return false;
    };
 
+   // Robot Common Subsystems
+
    public default boolean hasGripper() {
       return false;
    };
