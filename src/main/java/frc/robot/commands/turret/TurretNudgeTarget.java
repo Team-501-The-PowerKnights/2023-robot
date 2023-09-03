@@ -14,12 +14,12 @@ import java.util.function.DoubleSupplier;
 
 import riolog.PKLogger;
 
-public class TurretNudgeToTarget extends TurretManualCommandBase {
+public class TurretNudgeTarget extends TurretManualCommandBase {
 
    /** Our classes' logger **/
-   private static final Logger logger = PKLogger.getLogger(TurretNudgeToTarget.class.getName());
+   private static final Logger logger = PKLogger.getLogger(TurretNudgeTarget.class.getName());
 
-   public TurretNudgeToTarget(DoubleSupplier supplier) {
+   public TurretNudgeTarget(DoubleSupplier supplier) {
       super(supplier);
       logger.info("constructing {}", getName());
 
