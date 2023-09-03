@@ -383,7 +383,7 @@
           },
           "3,5": {
             "size": [
-              5,
+              6,
               2
             ],
             "content": {
@@ -459,7 +459,7 @@
               "_showGlyph": false
             }
           },
-          "27,9": {
+          "33,9": {
             "size": [
               5,
               2
@@ -472,7 +472,7 @@
               "_showGlyph": false
             }
           },
-          "27,7": {
+          "33,7": {
             "size": [
               5,
               2
@@ -485,7 +485,7 @@
               "_showGlyph": false
             }
           },
-          "27,5": {
+          "33,5": {
             "size": [
               5,
               2
@@ -498,7 +498,7 @@
               "_showGlyph": false
             }
           },
-          "27,11": {
+          "33,11": {
             "size": [
               5,
               2
@@ -507,162 +507,6 @@
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Gripper.teleCommand",
               "_title": "Gripper.teleCommand",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "15,5": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/ArmRotator.status",
-              "_title": "ArmRotator.status",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "15,7": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/ArmRotator.implClass",
-              "_title": "ArmRotator.implClass",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "15,9": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/ArmRotator.autoCommand",
-              "_title": "ArmRotator.autoCommand",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "15,11": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/ArmRotator.teleCommand",
-              "_title": "ArmRotator.teleCommand",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "21,5": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/ArmExtender.status",
-              "_title": "ArmExtender.status",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "21,7": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/ArmExtender.implClass",
-              "_title": "ArmExtender.implClass",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "21,11": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/ArmExtender.teleCommand",
-              "_title": "ArmExtender.teleCommand",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "21,9": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/ArmExtender.autoCommand",
-              "_title": "ArmExtender.autoCommand",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "33,5": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Wrist.status",
-              "_title": "Wrist.status",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "33,7": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Wrist.implClass",
-              "_title": "Wrist.implClass",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "33,11": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Wrist.teleCommand",
-              "_title": "Wrist.teleCommand",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "33,9": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Wrist.autoCommand",
-              "_title": "Wrist.autoCommand",
               "_glyph": 148,
               "_showGlyph": false
             }
@@ -689,6 +533,162 @@
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/LED.implClass",
               "_title": "LED.implClass",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "27,5": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Arm.status",
+              "_title": "Arm.status",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "27,7": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Arm.implClass",
+              "_title": "Arm.implClass",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "27,11": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Arm.teleCommand",
+              "_title": "Arm.teleCommand",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "27,9": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Arm.autoCommand",
+              "_title": "Arm.autoCommand",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "21,9": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Lift.autoCommand",
+              "_title": "Lift.autoCommand",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "21,7": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Lift.implClass",
+              "_title": "Lift.implClass",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "21,5": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Lift.status",
+              "_title": "Lift.status",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "21,11": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Lift.teleCommand",
+              "_title": "Lift.teleCommand",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "15,5": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Turret.status",
+              "_title": "Turret.status",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "15,7": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Turret.implClass",
+              "_title": "Turret.implClass",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "15,9": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Turret.autoCommand",
+              "_title": "Turret.autoCommand",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "15,11": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Turret.teleCommand",
+              "_title": "Turret.teleCommand",
               "_glyph": 148,
               "_showGlyph": false
             }
@@ -1395,7 +1395,7 @@
       }
     },
     {
-      "title": "Arm Rotator",
+      "title": "Turret",
       "autoPopulate": false,
       "autoPopulatePrefix": "",
       "widgetPane": {
@@ -1405,197 +1405,15 @@
         "vgap": 8.0,
         "titleType": 0,
         "tiles": {
-          "9,4": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///Preferences/ArmRotator.D",
-              "_title": "D",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "9,8": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///Preferences/ArmRotator.FF",
-              "_title": "FF",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "28,2": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///Preferences/ArmRotator.HighSetPoint",
-              "_title": "HighSetPoint",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "9,2": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///Preferences/ArmRotator.I",
-              "_title": "I",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "9,6": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///Preferences/ArmRotator.IZone",
-              "_title": "IZone",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "28,6": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///Preferences/ArmRotator.LowSetPoint",
-              "_title": "LowSetPoint",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "14,2": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///Preferences/ArmRotator.MaxOutput",
-              "_title": "MaxOutput",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "28,4": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///Preferences/ArmRotator.MidSetPoint",
-              "_title": "MidSetPoint",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "14,0": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///Preferences/ArmRotator.MinOutput",
-              "_title": "MinOutput",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "28,0": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///Preferences/ArmRotator.OverSetPoint",
-              "_title": "OverSetPoint",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "14,5": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///Preferences/ArmRotator.RampRate",
-              "_title": "RampRate",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "9,0": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///Preferences/ArmRotator.P",
-              "_title": "P",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "19,4": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/ArmRotator.PIDCurrent",
-              "_title": "PIDCurrent",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "19,2": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/ArmRotator.PIDTarget",
-              "_title": "PIDTarget",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "1,4": {
+          "1,6": {
             "size": [
               6,
               2
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/ArmRotator.autoCommand",
-              "_title": "autoCommand",
+              "_source0": "network_table:///SmartDashboard/Turret.teleCommand",
+              "_title": "teleCommand",
               "_glyph": 148,
               "_showGlyph": false
             }
@@ -1607,8 +1425,8 @@
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/ArmRotator.implClass",
-              "_title": "implClass",
+              "_source0": "network_table:///SmartDashboard/Turret.status",
+              "_title": "status",
               "_glyph": 148,
               "_showGlyph": false
             }
@@ -1620,127 +1438,134 @@
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/ArmRotator.status",
-              "_title": "status",
+              "_source0": "network_table:///SmartDashboard/Turret.implClass",
+              "_title": "implClass",
               "_glyph": 148,
               "_showGlyph": false
             }
           },
-          "1,6": {
+          "1,4": {
             "size": [
               6,
               2
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/ArmRotator.teleCommand",
-              "_title": "teleCommand",
+              "_source0": "network_table:///SmartDashboard/Turret.autoCommand",
+              "_title": "autoCommand",
               "_glyph": 148,
               "_showGlyph": false
             }
           },
-          "33,4": {
+          "9,0": {
             "size": [
               4,
               2
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///Preferences/ArmRotator.AutoConeSetPoint",
-              "_title": "AutoConeSetPoint",
+              "_source0": "network_table:///Preferences/Turret.P",
+              "_title": "P",
               "_glyph": 148,
               "_showGlyph": false
             }
           },
-          "23,6": {
+          "9,2": {
             "size": [
               4,
               2
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/ArmRotator.absCurrent",
-              "_title": "absCurrent",
+              "_source0": "network_table:///Preferences/Turret.I",
+              "_title": "I",
               "_glyph": 148,
               "_showGlyph": false
             }
           },
-          "23,4": {
+          "9,4": {
             "size": [
               4,
               2
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/ArmRotator.absCorrected",
-              "_title": "absCorrected",
+              "_source0": "network_table:///Preferences/Turret.D",
+              "_title": "D",
               "_glyph": 148,
               "_showGlyph": false
             }
           },
-          "19,11": {
+          "9,6": {
             "size": [
               4,
               2
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/ArmRotator.current",
-              "_title": "current",
+              "_source0": "network_table:///Preferences/Turret.IZone",
+              "_title": "IZone",
               "_glyph": 148,
               "_showGlyph": false
             }
           },
-          "19,0": {
+          "9,8": {
             "size": [
               4,
               2
             ],
             "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/ArmRotator.PIDEnabled",
-              "_title": "PIDEnabled",
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/Turret.FF",
+              "_title": "FF",
               "_glyph": 148,
-              "_showGlyph": false,
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
+              "_showGlyph": false
             }
           },
-          "19,6": {
+          "14,0": {
             "size": [
               4,
               2
             ],
             "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/ArmRotator.PIDAtTarget",
-              "_title": "PIDAtTarget",
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/Turret.MinOutput",
+              "_title": "MinOutput",
               "_glyph": 148,
-              "_showGlyph": false,
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
+              "_showGlyph": false
             }
           },
-          "19,8": {
+          "14,2": {
             "size": [
               4,
               2
             ],
             "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/ArmRotator.PIDOnTarget",
-              "_title": "PIDOnTarget",
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/Turret.MaxOutput",
+              "_title": "MaxOutput",
               "_glyph": 148,
-              "_showGlyph": false,
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
+              "_showGlyph": false
+            }
+          },
+          "14,5": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/Turret.RampRate",
+              "_title": "RampRate",
+              "_glyph": 148,
+              "_showGlyph": false
             }
           }
         }
       }
     },
     {
-      "title": "Arm Extender",
+      "title": "Lift",
       "autoPopulate": false,
       "autoPopulatePrefix": "",
       "widgetPane": {
@@ -1750,6 +1575,84 @@
         "vgap": 8.0,
         "titleType": 0,
         "tiles": {
+          "1,2": {
+            "size": [
+              6,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Lift.implClass",
+              "_title": "implClass",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "1,0": {
+            "size": [
+              6,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Lift.status",
+              "_title": "status",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "1,4": {
+            "size": [
+              6,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Lift.autoCommand",
+              "_title": "autoCommand",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "1,6": {
+            "size": [
+              6,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Lift.teleCommand",
+              "_title": "teleCommand",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "9,0": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/Lift.P",
+              "_title": "P",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "9,2": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/Lift.I",
+              "_title": "I",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
           "9,4": {
             "size": [
               4,
@@ -1757,7 +1660,7 @@
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///Preferences/ArmExtender.D",
+              "_source0": "network_table:///Preferences/Lift.D",
               "_title": "D",
               "_glyph": 148,
               "_showGlyph": false
@@ -1770,34 +1673,8 @@
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///Preferences/ArmExtender.FF",
+              "_source0": "network_table:///Preferences/Lift.FF",
               "_title": "FF",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "28,2": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///Preferences/ArmExtender.HighSetPoint",
-              "_title": "HighSetPoint",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "9,2": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///Preferences/ArmExtender.I",
-              "_title": "I",
               "_glyph": 148,
               "_showGlyph": false
             }
@@ -1809,73 +1686,8 @@
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///Preferences/ArmExtender.IZone",
+              "_source0": "network_table:///Preferences/Lift.IZone",
               "_title": "IZone",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "28,8": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///Preferences/ArmExtender.InSetPoint",
-              "_title": "InSetPoint",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "28,6": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///Preferences/ArmExtender.LowSetPoint",
-              "_title": "LowSetPoint",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "14,2": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///Preferences/ArmExtender.MaxOutput",
-              "_title": "MaxOutput",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "14,10": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///Preferences/ArmExtender.MaxSoftLimit",
-              "_title": "MaxSoftLimit",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "28,4": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///Preferences/ArmExtender.MidSetPoint",
-              "_title": "MidSetPoint",
               "_glyph": 148,
               "_showGlyph": false
             }
@@ -1887,151 +1699,21 @@
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///Preferences/ArmExtender.MinOutput",
+              "_source0": "network_table:///Preferences/Lift.MinOutput",
               "_title": "MinOutput",
               "_glyph": 148,
               "_showGlyph": false
             }
           },
-          "14,8": {
+          "14,2": {
             "size": [
               4,
               2
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///Preferences/ArmExtender.MinSoftLimit",
-              "_title": "MinSoftLimit",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "9,0": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///Preferences/ArmExtender.P",
-              "_title": "P",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "19,4": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/ArmExtender.PIDCurrent",
-              "_title": "PIDCurrent",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "19,2": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/ArmExtender.PIDTarget",
-              "_title": "PIDTarget",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "1,4": {
-            "size": [
-              6,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/ArmExtender.autoCommand",
-              "_title": "autoCommand",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "1,0": {
-            "size": [
-              6,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/ArmExtender.implClass",
-              "_title": "implClass",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "1,2": {
-            "size": [
-              6,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/ArmExtender.status",
-              "_title": "status",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "1,6": {
-            "size": [
-              6,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/ArmExtender.teleCommand",
-              "_title": "teleCommand",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "28,0": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///Preferences/ArmExtender.OverSetPoint",
-              "_title": "OverSetPoint",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "33,4": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///Preferences/ArmExtender.AutoConeSetPoint",
-              "_title": "AutoConeSetPoint",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "19,11": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/ArmRotator.current",
-              "_title": "current",
+              "_source0": "network_table:///Preferences/Lift.MaxOutput",
+              "_title": "MaxOutput",
               "_glyph": 148,
               "_showGlyph": false
             }
@@ -2043,7 +1725,7 @@
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///Preferences/ArmExtender.RampRate",
+              "_source0": "network_table:///Preferences/Lift.RampRate",
               "_title": "RampRate",
               "_glyph": 148,
               "_showGlyph": false
@@ -2056,8 +1738,49 @@
             ],
             "content": {
               "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/ArmExtender.PIDEnabled",
+              "_source0": "network_table:///SmartDashboard/Lift.PIDEnabled",
               "_title": "PIDEnabled",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "19,2": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Lift.PIDTarget",
+              "_title": "PIDTarget",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "19,4": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Lift.PIDCurrent",
+              "_title": "PIDCurrent",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "19,8": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Lift.PIDOnTarget",
+              "_title": "PIDOnTarget",
               "_glyph": 148,
               "_showGlyph": false,
               "Colors/Color when true": "#7CFC00FF",
@@ -2071,7 +1794,7 @@
             ],
             "content": {
               "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/ArmExtender.PIDAtTarget",
+              "_source0": "network_table:///SmartDashboard/Lift.PIDAtTarget",
               "_title": "PIDAtTarget",
               "_glyph": 148,
               "_showGlyph": false,
@@ -2079,19 +1802,226 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "19,8": {
+          "28,6": {
             "size": [
               4,
               2
             ],
             "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/ArmExtender.PIDOnTarget",
-              "_title": "PIDOnTarget",
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/Lift.StartSetPoint",
+              "_title": "StartSetPoint",
               "_glyph": 148,
-              "_showGlyph": false,
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
+              "_showGlyph": false
+            }
+          },
+          "28,4": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/Lift.LowSetPoint",
+              "_title": "LowSetPoint",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "28,2": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/Lift.MidSetPoint",
+              "_title": "MidSetPoint",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "28,0": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/Lift.HighSetPoint",
+              "_title": "HighSetPoint",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Arm",
+      "autoPopulate": false,
+      "autoPopulatePrefix": "",
+      "widgetPane": {
+        "gridSize": 32.0,
+        "showGrid": true,
+        "hgap": 8.0,
+        "vgap": 8.0,
+        "titleType": 0,
+        "tiles": {
+          "1,0": {
+            "size": [
+              6,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Arm.status",
+              "_title": "status",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "1,2": {
+            "size": [
+              6,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Arm.implClass",
+              "_title": "implClass",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "1,6": {
+            "size": [
+              6,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Arm.teleCommand",
+              "_title": "teleCommand",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "1,4": {
+            "size": [
+              6,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Arm.autoCommand",
+              "_title": "autoCommand",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "9,0": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/Arm.P",
+              "_title": "P",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "9,2": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/Arm.I",
+              "_title": "I",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "9,4": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/Arm.D",
+              "_title": "D",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "9,6": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/Arm.IZone",
+              "_title": "IZone",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "9,8": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/Arm.FF",
+              "_title": "FF",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "14,2": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/Arm.MaxOutput",
+              "_title": "MaxOutput",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "14,0": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/Arm.MinOutput",
+              "_title": "MinOutput",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "14,5": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/Arm.RampRate",
+              "_title": "RampRate",
+              "_glyph": 148,
+              "_showGlyph": false
             }
           }
         }
@@ -2110,7 +2040,7 @@
         "tiles": {
           "9,4": {
             "size": [
-              4,
+              5,
               2
             ],
             "content": {
@@ -2123,7 +2053,7 @@
           },
           "9,0": {
             "size": [
-              4,
+              5,
               2
             ],
             "content": {
@@ -2136,7 +2066,7 @@
           },
           "9,2": {
             "size": [
-              4,
+              5,
               2
             ],
             "content": {
@@ -2147,9 +2077,9 @@
               "_showGlyph": false
             }
           },
-          "14,0": {
+          "16,0": {
             "size": [
-              4,
+              5,
               2
             ],
             "content": {
@@ -2216,261 +2146,7 @@
       }
     },
     {
-      "title": "Wrist",
-      "autoPopulate": false,
-      "autoPopulatePrefix": "",
-      "widgetPane": {
-        "gridSize": 32.0,
-        "showGrid": true,
-        "hgap": 8.0,
-        "vgap": 8.0,
-        "titleType": 0,
-        "tiles": {
-          "9,4": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///Preferences/Wrist.D",
-              "_title": "D",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "9,8": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///Preferences/Wrist.FF",
-              "_title": "Wrist.FF",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "9,2": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///Preferences/Wrist.I",
-              "_title": "I",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "9,6": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///Preferences/Wrist.IZone",
-              "_title": "IZone",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "14,2": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///Preferences/Wrist.MaxOutput",
-              "_title": "MaxOutput",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "14,0": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///Preferences/Wrist.MinOutput",
-              "_title": "MinOutput",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "9,0": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///Preferences/Wrist.P",
-              "_title": "P",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "19,4": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Wrist.PIDCurrent",
-              "_title": "PIDCurrent",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "19,2": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Wrist.PIDTarget",
-              "_title": "PIDTarget",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "1,4": {
-            "size": [
-              6,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Wrist.autoCommand",
-              "_title": "autoCommand",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "1,0": {
-            "size": [
-              6,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Wrist.implClass",
-              "_title": "implClass",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "1,2": {
-            "size": [
-              6,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Wrist.status",
-              "_title": "status",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "1,6": {
-            "size": [
-              6,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Wrist.teleCommand",
-              "_title": "teleCommand",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "28,0": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///Preferences/Wrist.UpSetPoint",
-              "_title": "UpSetPoint",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "28,2": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///Preferences/Wrist.OverSetPoint",
-              "_title": "OverSetPoint",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "19,0": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Wrist.PIDEnabled",
-              "_title": "PIDEnabled",
-              "_glyph": 148,
-              "_showGlyph": false,
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "19,6": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Wrist.PIDAtTarget",
-              "_title": "PIDAtTarget",
-              "_glyph": 148,
-              "_showGlyph": false,
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "19,8": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Wrist.PIDOnTarget",
-              "_title": "PIDOnTarget",
-              "_glyph": 148,
-              "_showGlyph": false,
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          }
-        }
-      }
-    },
-    {
-      "title": "Proto I\u0026T",
+      "title": "I\u0026T",
       "autoPopulate": false,
       "autoPopulatePrefix": "",
       "widgetPane": {
@@ -2676,7 +2352,7 @@
       }
     },
     {
-      "title": "Ingester",
+      "title": "Arm Rotator",
       "autoPopulate": false,
       "autoPopulatePrefix": "",
       "widgetPane": {
@@ -2693,21 +2369,34 @@
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///Preferences/Ingester.IdleSpeed",
-              "_title": "IdleSpeed",
+              "_source0": "network_table:///Preferences/ArmRotator.D",
+              "_title": "D",
               "_glyph": 148,
               "_showGlyph": false
             }
           },
-          "9,0": {
+          "9,8": {
             "size": [
               4,
               2
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///Preferences/Ingester.MaxInSpeed",
-              "_title": "MaxInSpeed",
+              "_source0": "network_table:///Preferences/ArmRotator.FF",
+              "_title": "FF",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "28,2": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/ArmRotator.HighSetPoint",
+              "_title": "HighSetPoint",
               "_glyph": 148,
               "_showGlyph": false
             }
@@ -2719,34 +2408,60 @@
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///Preferences/Ingester.MaxOutSpeed",
-              "_title": "MaxOutSpeed",
+              "_source0": "network_table:///Preferences/ArmRotator.I",
+              "_title": "I",
               "_glyph": 148,
               "_showGlyph": false
             }
           },
-          "1,4": {
+          "9,6": {
             "size": [
-              6,
+              4,
               2
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Ingester.autoCommand",
-              "_title": "autoCommand",
+              "_source0": "network_table:///Preferences/ArmRotator.IZone",
+              "_title": "IZone",
               "_glyph": 148,
               "_showGlyph": false
             }
           },
-          "1,0": {
+          "28,6": {
             "size": [
-              6,
+              4,
               2
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Ingester.implClass",
-              "_title": "implClass",
+              "_source0": "network_table:///Preferences/ArmRotator.LowSetPoint",
+              "_title": "LowSetPoint",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "14,2": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/ArmRotator.MaxOutput",
+              "_title": "MaxOutput",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "28,4": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/ArmRotator.MidSetPoint",
+              "_title": "MidSetPoint",
               "_glyph": 148,
               "_showGlyph": false
             }
@@ -2758,117 +2473,49 @@
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Ingester.speed",
-              "_title": "speed",
+              "_source0": "network_table:///Preferences/ArmRotator.MinOutput",
+              "_title": "MinOutput",
               "_glyph": 148,
               "_showGlyph": false
             }
           },
-          "1,2": {
-            "size": [
-              6,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Ingester.status",
-              "_title": "status",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "1,6": {
-            "size": [
-              6,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Ingester.teleCommand",
-              "_title": "teleCommand",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          }
-        }
-      }
-    },
-    {
-      "title": "Turret",
-      "autoPopulate": false,
-      "autoPopulatePrefix": "",
-      "widgetPane": {
-        "gridSize": 32.0,
-        "showGrid": true,
-        "hgap": 8.0,
-        "vgap": 8.0,
-        "titleType": 0,
-        "tiles": {
-          "1,4": {
-            "size": [
-              6,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Turret.autoCommand",
-              "_title": "autoCommand",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "1,0": {
-            "size": [
-              6,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Turret.implClass",
-              "_title": "implClass",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "1,2": {
-            "size": [
-              6,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Turret.status",
-              "_title": "status",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "1,6": {
-            "size": [
-              6,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Turret.teleCommand",
-              "_title": "teleCommand",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "19,6": {
+          "28,0": {
             "size": [
               4,
               2
             ],
             "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Turret.PIDAtTarget",
-              "_title": "PIDAtTarget",
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/ArmRotator.OverSetPoint",
+              "_title": "OverSetPoint",
               "_glyph": 148,
-              "_showGlyph": false,
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
+              "_showGlyph": false
+            }
+          },
+          "14,5": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/ArmRotator.RampRate",
+              "_title": "RampRate",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "9,0": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/ArmRotator.P",
+              "_title": "P",
+              "_glyph": 148,
+              "_showGlyph": false
             }
           },
           "19,4": {
@@ -2878,7 +2525,7 @@
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Turret.PIDCurrent",
+              "_source0": "network_table:///SmartDashboard/ArmRotator.PIDCurrent",
               "_title": "PIDCurrent",
               "_glyph": 148,
               "_showGlyph": false
@@ -2891,12 +2538,12 @@
             ],
             "content": {
               "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Turret.PIDEnabled",
+              "_source0": "network_table:///SmartDashboard/ArmRotator.PIDEnabled",
               "_title": "PIDEnabled",
               "_glyph": 148,
               "_showGlyph": false,
               "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
+              "Colors/Color when false": "#999999FF"
             }
           },
           "19,2": {
@@ -2906,50 +2553,8 @@
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Turret.PIDTarget",
+              "_source0": "network_table:///SmartDashboard/ArmRotator.PIDTarget",
               "_title": "PIDTarget",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "19,8": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Turret.PIDOnTarget",
-              "_title": "PIDOnTarget",
-              "_glyph": 148,
-              "_showGlyph": false,
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          }
-        }
-      }
-    },
-    {
-      "title": "Lift",
-      "autoPopulate": false,
-      "autoPopulatePrefix": "",
-      "widgetPane": {
-        "gridSize": 32.0,
-        "showGrid": true,
-        "hgap": 8.0,
-        "vgap": 8.0,
-        "titleType": 0,
-        "tiles": {
-          "1,0": {
-            "size": [
-              6,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Lift.implClass",
-              "_title": "implClass",
               "_glyph": 148,
               "_showGlyph": false
             }
@@ -2961,131 +2566,7 @@
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Lift.autoCommand",
-              "_title": "autoCommand",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "1,2": {
-            "size": [
-              6,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Lift.status",
-              "_title": "status",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "1,6": {
-            "size": [
-              6,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Lift.teleCommand",
-              "_title": "teleCommand",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "19,0": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Lift.PIDEnabled",
-              "_title": "PIDEnabled",
-              "_glyph": 148,
-              "_showGlyph": false,
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "19,2": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Lift.PIDTarget",
-              "_title": "PIDTarget",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "19,4": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Lift.PIDCurrent",
-              "_title": "PIDCurrent",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "19,6": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Lift.PIDAtTarget",
-              "_title": "PIDAtTarget",
-              "_glyph": 148,
-              "_showGlyph": false,
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "19,8": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Lift.PIDOnTarget",
-              "_title": "PIDOnTarget",
-              "_glyph": 148,
-              "_showGlyph": false,
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          }
-        }
-      }
-    },
-    {
-      "title": "Arm",
-      "autoPopulate": false,
-      "autoPopulatePrefix": "",
-      "widgetPane": {
-        "gridSize": 32.0,
-        "showGrid": true,
-        "hgap": 8.0,
-        "vgap": 8.0,
-        "titleType": 0,
-        "tiles": {
-          "1,4": {
-            "size": [
-              6,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Arm.autoCommand",
+              "_source0": "network_table:///SmartDashboard/ArmRotator.autoCommand",
               "_title": "autoCommand",
               "_glyph": 148,
               "_showGlyph": false
@@ -3098,7 +2579,7 @@
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Arm.implClass",
+              "_source0": "network_table:///SmartDashboard/ArmRotator.implClass",
               "_title": "implClass",
               "_glyph": 148,
               "_showGlyph": false
@@ -3111,7 +2592,7 @@
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Arm.status",
+              "_source0": "network_table:///SmartDashboard/ArmRotator.status",
               "_title": "status",
               "_glyph": 148,
               "_showGlyph": false
@@ -3124,49 +2605,34 @@
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Arm.teleCommand",
+              "_source0": "network_table:///SmartDashboard/ArmRotator.teleCommand",
               "_title": "teleCommand",
               "_glyph": 148,
               "_showGlyph": false
             }
           },
-          "19,0": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Arm.PIDEnabled",
-              "_title": "PIDEnabled",
-              "_glyph": 148,
-              "_showGlyph": false,
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "19,2": {
+          "33,4": {
             "size": [
               4,
               2
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Arm.PIDTarget",
-              "_title": "PIDTarget",
+              "_source0": "network_table:///Preferences/ArmRotator.AutoConeSetPoint",
+              "_title": "AutoConeSetPoint",
               "_glyph": 148,
               "_showGlyph": false
             }
           },
-          "19,4": {
+          "23,6": {
             "size": [
               4,
               2
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Arm.PIDCurrent",
-              "_title": "PIDCurrent",
+              "_source0": "network_table:///SmartDashboard/ArmRotator.absCurrent",
+              "_title": "absCurrent",
               "_glyph": 148,
               "_showGlyph": false
             }
@@ -3178,12 +2644,12 @@
             ],
             "content": {
               "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Arm.PIDAtTarget",
+              "_source0": "network_table:///SmartDashboard/ArmRotator.PIDAtTarget",
               "_title": "PIDAtTarget",
               "_glyph": 148,
               "_showGlyph": false,
               "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
+              "Colors/Color when false": "#999999FF"
             }
           },
           "19,8": {
@@ -3193,12 +2659,650 @@
             ],
             "content": {
               "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Arm.PIDOnTarget",
+              "_source0": "network_table:///SmartDashboard/ArmRotator.PIDOnTarget",
               "_title": "PIDOnTarget",
               "_glyph": 148,
               "_showGlyph": false,
               "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
+              "Colors/Color when false": "#999999FF"
+            }
+          },
+          "23,4": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ArmRotator.absCorrected",
+              "_title": "absCorrected",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "19,11": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ArmRotator.current",
+              "_title": "current",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Arm Extender",
+      "autoPopulate": false,
+      "autoPopulatePrefix": "",
+      "widgetPane": {
+        "gridSize": 32.0,
+        "showGrid": true,
+        "hgap": 8.0,
+        "vgap": 8.0,
+        "titleType": 0,
+        "tiles": {
+          "9,4": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/ArmExtender.D",
+              "_title": "D",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "9,8": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/ArmExtender.FF",
+              "_title": "FF",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "28,2": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/ArmExtender.HighSetPoint",
+              "_title": "HighSetPoint",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "9,2": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/ArmExtender.I",
+              "_title": "I",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "9,6": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/ArmExtender.IZone",
+              "_title": "IZone",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "28,8": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/ArmExtender.InSetPoint",
+              "_title": "InSetPoint",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "28,6": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/ArmExtender.LowSetPoint",
+              "_title": "LowSetPoint",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "14,2": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/ArmExtender.MaxOutput",
+              "_title": "MaxOutput",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "14,10": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/ArmExtender.MaxSoftLimit",
+              "_title": "MaxSoftLimit",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "28,4": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/ArmExtender.MidSetPoint",
+              "_title": "MidSetPoint",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "14,0": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/ArmExtender.MinOutput",
+              "_title": "MinOutput",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "14,8": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/ArmExtender.MinSoftLimit",
+              "_title": "MinSoftLimit",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "9,0": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/ArmExtender.P",
+              "_title": "P",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "19,4": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ArmExtender.PIDCurrent",
+              "_title": "PIDCurrent",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "19,0": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/ArmExtender.PIDEnabled",
+              "_title": "PIDEnabled",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#999999FF"
+            }
+          },
+          "19,2": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ArmExtender.PIDTarget",
+              "_title": "PIDTarget",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "1,4": {
+            "size": [
+              6,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ArmExtender.autoCommand",
+              "_title": "autoCommand",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "1,0": {
+            "size": [
+              6,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ArmExtender.implClass",
+              "_title": "implClass",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "1,2": {
+            "size": [
+              6,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ArmExtender.status",
+              "_title": "status",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "1,6": {
+            "size": [
+              6,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ArmExtender.teleCommand",
+              "_title": "teleCommand",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "28,0": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/ArmExtender.OverSetPoint",
+              "_title": "OverSetPoint",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "33,4": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/ArmExtender.AutoConeSetPoint",
+              "_title": "AutoConeSetPoint",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "19,6": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/ArmExtender.PIDAtTarget",
+              "_title": "PIDAtTarget",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#999999FF"
+            }
+          },
+          "19,8": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/ArmExtender.PIDOnTarget",
+              "_title": "PIDOnTarget",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#999999FF"
+            }
+          },
+          "19,11": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ArmRotator.current",
+              "_title": "current",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "14,5": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/ArmExtender.RampRate",
+              "_title": "RampRate",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Wrist",
+      "autoPopulate": false,
+      "autoPopulatePrefix": "",
+      "widgetPane": {
+        "gridSize": 32.0,
+        "showGrid": true,
+        "hgap": 8.0,
+        "vgap": 8.0,
+        "titleType": 0,
+        "tiles": {
+          "9,4": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/Wrist.D",
+              "_title": "D",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "9,8": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/Wrist.FF",
+              "_title": "Wrist.FF",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "9,2": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/Wrist.I",
+              "_title": "I",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "9,6": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/Wrist.IZone",
+              "_title": "IZone",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "14,2": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/Wrist.MaxOutput",
+              "_title": "MaxOutput",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "14,0": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/Wrist.MinOutput",
+              "_title": "MinOutput",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "9,0": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/Wrist.P",
+              "_title": "P",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "19,4": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Wrist.PIDCurrent",
+              "_title": "PIDCurrent",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "19,0": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Wrist.PIDEnabled",
+              "_title": "PIDEnabled",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#999999FF"
+            }
+          },
+          "19,2": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Wrist.PIDTarget",
+              "_title": "PIDTarget",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "1,4": {
+            "size": [
+              6,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Wrist.autoCommand",
+              "_title": "autoCommand",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "1,0": {
+            "size": [
+              6,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Wrist.implClass",
+              "_title": "implClass",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "1,2": {
+            "size": [
+              6,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Wrist.status",
+              "_title": "status",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "1,6": {
+            "size": [
+              6,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Wrist.teleCommand",
+              "_title": "teleCommand",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "28,0": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/Wrist.UpSetPoint",
+              "_title": "UpSetPoint",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "28,2": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/Wrist.OverSetPoint",
+              "_title": "OverSetPoint",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "19,6": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Wrist.PIDAtTarget",
+              "_title": "PIDAtTarget",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#999999FF"
+            }
+          },
+          "19,8": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Wrist.PIDOnTarget",
+              "_title": "PIDOnTarget",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#999999FF"
             }
           }
         }
