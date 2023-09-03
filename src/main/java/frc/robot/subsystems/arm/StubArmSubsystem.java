@@ -54,15 +54,12 @@ class StubArmSubsystem extends BaseArmSubsystem {
    }
 
    @Override
-   public void moveOut() {
-      // TODO Auto-generated method stub
+   public void offsetTarget(double offset) {
+      logger.trace("offset PID target = {}", offset);
 
-   }
-
-   @Override
-   public void moveIn() {
-      // TODO Auto-generated method stub
-
+      double target = getTlmPIDTarget();
+      target += offset;
+      moveToTarget(target);
    }
 
    @Override

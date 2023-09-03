@@ -40,15 +40,15 @@ public class RealLiftSubsystem extends BaseLiftSubsystem {
       motor = new CANSparkMax(21, MotorType.kBrushless);
       checkError(motor.restoreFactoryDefaults(), "restore factory defaults {}");
       checkError(motor.setIdleMode(IdleMode.kBrake), "set idle mode to brake {}");
+
       pid = motor.getPIDController();
       encoder = motor.getEncoder();
       // Motor sense controls encoder as well with brushless
       motor.setInverted(true);
       checkError(motor.setClosedLoopRampRate(0), "set closed loop ramp rate to 0 {}");
       // checkError(motor.setSmartCurrentLimit(20), "set current limit to 20 {}");
-
       // Set the PID so when it wakes up it doesn't try to move
-      liftToTarget(encoder.getPosition());
+      moveToTarget(encoder.getPosition());
 
       logger.info("constructed");
    }
@@ -69,7 +69,10 @@ public class RealLiftSubsystem extends BaseLiftSubsystem {
    public void autonomousInit() {
       super.autonomousInit();
 
-      checkError(motor.setIdleMode(IdleMode.kCoast), "set idle mode to brake {}");
+      // Set the PID so when it wakes up it doesn't try to move
+      moveToTarget(encoder.getPosition());
+      // Coast mode when under PID control
+      checkError(motor.setIdleMode(IdleMode.kCoast), "set idle mode to coast {}");
    };
 
    @Override
@@ -77,9 +80,9 @@ public class RealLiftSubsystem extends BaseLiftSubsystem {
       super.teleopInit();
 
       // Set the PID so when it wakes up it doesn't try to move
-      liftToTarget(encoder.getPosition());
-
-      checkError(motor.setIdleMode(IdleMode.kCoast), "set idle mode to brake {}");
+      moveToTarget(encoder.getPosition());
+      // Coast mode when under PID control
+      checkError(motor.setIdleMode(IdleMode.kCoast), "set idle mode to coast {}");
    };
 
    @Override
@@ -91,31 +94,28 @@ public class RealLiftSubsystem extends BaseLiftSubsystem {
 
    @Override
    public void disable() {
-      // FIXME: Change to non-deprecated method
       checkError(pid.setReference(0, ControlType.kDutyCycle), "PID set reference to kDutyCycle,0 {}");
       setTlmPIDEnabled(false);
    }
 
    @Override
    public void stop() {
-      // FIXME: Change to non-deprecated method
       checkError(pid.setReference(0, ControlType.kDutyCycle), "PID set reference to kDutyCycle,0 {}");
       setTlmPIDEnabled(false);
    }
 
    @Override
-   public void liftToPosition(LiftPosition position) {
+   public void moveToPosition(LiftPosition position) {
       logger.debug("position = {}", position);
 
       double target = position.get();
-      liftToTarget(target);
+      moveToTarget(target);
    }
 
    @Override
-   public void liftToTarget(double target) {
+   public void moveToTarget(double target) {
       logger.trace("set PID target = {}", target);
 
-      // FIXME: Change to non-deprecated method
       checkError(pid.setReference(target, ControlType.kPosition), "PID set reference to kPosition,0 {}");
       setTlmPIDEnabled(true);
       setTlmPIDTarget(target);
@@ -127,11 +127,11 @@ public class RealLiftSubsystem extends BaseLiftSubsystem {
 
       double target = getTlmPIDTarget();
       target += offset;
-      liftToTarget(target);
+      moveToTarget(target);
    }
 
    @Override
-   public void lift(double speed) {
+   public void move(double speed) {
       // TODO Auto-generated method stub
 
    }

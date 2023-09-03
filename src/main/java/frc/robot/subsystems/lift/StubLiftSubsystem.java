@@ -37,15 +37,15 @@ class StubLiftSubsystem extends BaseLiftSubsystem {
    }
 
    @Override
-   public void liftToPosition(LiftPosition position) {
+   public void moveToPosition(LiftPosition position) {
       logger.debug("position = {}", position);
 
       double target = position.get();
-      liftToTarget(target);
+      moveToTarget(target);
    }
 
    @Override
-   public void liftToTarget(double target) {
+   public void moveToTarget(double target) {
       logger.trace("set PID target = {}", target);
 
       // Stub doesn't implement this
@@ -59,11 +59,11 @@ class StubLiftSubsystem extends BaseLiftSubsystem {
 
       double target = getTlmPIDTarget();
       target += offset;
-      liftToTarget(target);
+      moveToTarget(target);
    }
 
    @Override
-   public void lift(double speed) {
+   public void move(double speed) {
       // TODO Auto-generated method stub
 
    }

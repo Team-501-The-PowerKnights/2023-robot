@@ -37,9 +37,10 @@ class RealArmSubsystem extends BaseArmSubsystem {
    RealArmSubsystem() {
       logger.info("constructing");
 
-      motor = new CANSparkMax(21, MotorType.kBrushless);
+      motor = new CANSparkMax(22, MotorType.kBrushless);
       checkError(motor.restoreFactoryDefaults(), "restore factory defaults {}");
       checkError(motor.setIdleMode(IdleMode.kBrake), "set idle mode to brake {}");
+
       pid = motor.getPIDController();
       encoder = motor.getEncoder();
       checkError(encoder.setPosition(0), "set encoder position to 0 {}");
@@ -60,6 +61,26 @@ class RealArmSubsystem extends BaseArmSubsystem {
    }
 
    @Override
+   public void autonomousInit() {
+      super.autonomousInit();
+
+      // Set the PID so when it wakes up it doesn't try to move
+      moveToTarget(encoder.getPosition());
+      // Coast mode when under PID control
+      checkError(motor.setIdleMode(IdleMode.kCoast), "set idle mode to coast {}");
+   };
+
+   @Override
+   public void teleopInit() {
+      super.teleopInit();
+
+      // Set the PID so when it wakes up it doesn't try to move
+      moveToTarget(encoder.getPosition());
+      // Coast mode when under PID control
+      checkError(motor.setIdleMode(IdleMode.kCoast), "set idle mode to coast {}");
+   };
+
+   @Override
    public void updatePreferences() {
       super.updatePreferences();
 
@@ -77,14 +98,12 @@ class RealArmSubsystem extends BaseArmSubsystem {
 
    @Override
    public void disable() {
-      // FIXME: Change to non-deprecated method
       checkError(pid.setReference(0, ControlType.kDutyCycle), "PID set reference to kDutyCycle,0 {}");
       setTlmPIDEnabled(false);
    }
 
    @Override
    public void stop() {
-      // FIXME: Change to non-deprecated method
       checkError(pid.setReference(0, ControlType.kDutyCycle), "PID set reference to kDutyCycle,0 {}");
       setTlmPIDEnabled(false);
    }
@@ -101,22 +120,18 @@ class RealArmSubsystem extends BaseArmSubsystem {
    public void moveToTarget(double target) {
       logger.trace("set PID target = {}", target);
 
-      // FIXME: Change to non-deprecated method
       checkError(pid.setReference(target, ControlType.kPosition), "PID set reference to kPosition,0 {}");
       setTlmPIDEnabled(true);
       setTlmPIDTarget(target);
    }
 
    @Override
-   public void moveOut() {
-      // TODO Auto-generated method stub
+   public void offsetTarget(double offset) {
+      logger.trace("offset PID target = {}", offset);
 
-   }
-
-   @Override
-   public void moveIn() {
-      // TODO Auto-generated method stub
-
+      double target = getTlmPIDTarget();
+      target += offset;
+      moveToTarget(target);
    }
 
    @Override

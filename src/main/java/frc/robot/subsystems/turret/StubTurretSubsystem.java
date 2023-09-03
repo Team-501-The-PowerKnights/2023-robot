@@ -37,15 +37,15 @@ class StubTurretSubsystem extends BaseTurretSubsystem {
    }
 
    @Override
-   public void rotateToPosition(TurretPosition position) {
+   public void moveToPosition(TurretPosition position) {
       logger.debug("position = {}", position);
 
       double target = position.get();
-      rotateToTarget(target);
+      moveToTarget(target);
    }
 
    @Override
-   public void rotateToTarget(double target) {
+   public void moveToTarget(double target) {
       logger.trace("set PID target = {}", target);
 
       // Stub doesn't implement this
@@ -59,11 +59,11 @@ class StubTurretSubsystem extends BaseTurretSubsystem {
 
       double target = getTlmPIDTarget();
       target += offset;
-      rotateToTarget(target);
+      moveToTarget(target);
    }
 
    @Override
-   public void rotate(double speed) {
+   public void move(double speed) {
       // TODO Auto-generated method stub
 
    }
