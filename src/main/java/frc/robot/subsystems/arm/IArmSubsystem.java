@@ -68,21 +68,40 @@ public interface IArmSubsystem extends ISubsystem {
    public void moveToTarget(double target);
 
    /**
-    * Move the arm out away from the tower.
+    * Adjust the current set point of the PID. This change will
+    * be lost the next time one of the pre-sets is selected.
+    *
+    * @param offset
+    *           amount of offset ("+" is up, "-" is down)
     */
-   public void moveOut();
+   public void offsetTarget(double offset);
 
    /**
-    * Move the arm in towards the tower.
-    */
-   public void moveIn();
-
-   /**
-    * Move the arm under 'manual' control.
+    * Extend/Retract the subsystem under 'manual' control.
     *
     * @param speed
-    *           speed to move at ("+" is up, "-" is down)
+    *           speed to move at ("+" is extend, "-" is retract)
     */
    public void move(double speed);
+
+   /**
+    * Extend the subystem out under 'manual' control.
+    *
+    * @param speed
+    *           speed to extend at
+    */
+   default public void extendOut(double speed) {
+      move(Math.abs(speed));
+   }
+
+   /**
+    * Retract the subsystem in under 'manual' control.
+    *
+    * @param speed
+    *           speed to retract at
+    */
+   default public void retractIn(double speed) {
+      move(-Math.abs(speed));
+   }
 
 }

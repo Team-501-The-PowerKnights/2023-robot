@@ -57,7 +57,7 @@ public interface ILiftSubsystem extends IPIDSubsystem {
     * Lift the subsystem to the specified position and hold it
     * there (using a PID).
     */
-   public void liftToPosition(LiftPosition position);
+   public void moveToPosition(LiftPosition position);
 
    /**
     * Lift the subsystem to the specified position and hold it
@@ -66,7 +66,7 @@ public interface ILiftSubsystem extends IPIDSubsystem {
     * 
     * @param target
     */
-   public void liftToTarget(double target);
+   public void moveToTarget(double target);
 
    /**
     * Adjust the current set point of the PID. This change will
@@ -78,11 +78,31 @@ public interface ILiftSubsystem extends IPIDSubsystem {
    public void offsetTarget(double offset);
 
    /**
-    * Rotate the subsystem under 'manual' control.
+    * Raise/Lower the subsystem under 'manual' control.
     *
     * @param speed
-    *           speed to lift at ("+" is up, "-" is down)
+    *           speed to move at ("+" is up, "-" is down)
     */
-   public void lift(double speed);
+   public void move(double speed);
+
+   /**
+    * Lift the subystem up under 'manual' control.
+    * 
+    * @param speed
+    *           speed to lift at
+    */
+   default public void liftUp(double speed) {
+      move(Math.abs(speed));
+   }
+
+   /**
+    * Drop the subsystem down under 'manual' control.
+    *
+    * @param speed
+    *           speed to drop at
+    */
+   default public void dropDown(double speed) {
+      move(-Math.abs(speed));
+   }
 
 }

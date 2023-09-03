@@ -55,7 +55,7 @@ public interface ITurretSubsystem extends IPIDSubsystem {
     * Rotate the subsystem to the specified position and hold it
     * there (using a PID).
     */
-   public void rotateToPosition(TurretPosition position);
+   public void moveToPosition(TurretPosition position);
 
    /**
     * Rotate the subsystem to the specified position and hold it
@@ -64,7 +64,7 @@ public interface ITurretSubsystem extends IPIDSubsystem {
     * 
     * @param target
     */
-   public void rotateToTarget(double target);
+   public void moveToTarget(double target);
 
    /**
     * Adjust the current set point of the PID. This change will
@@ -79,8 +79,38 @@ public interface ITurretSubsystem extends IPIDSubsystem {
     * Rotate the subsystem under 'manual' control.
     *
     * @param speed
-    *           speed to rotate at ("+" is CCW, "-" is CW)
+    *           speed to move at ("+" is CCW, "-" is CW)
     */
-   public void rotate(double speed);
+   public void move(double speed);
+
+   /**
+    * Rotate the subsystem under 'manual' control.
+    *
+    * @param speed
+    *           speed to move at ("+" is CCW, "-" is CW)
+    */
+   default public void rotate(double speed) {
+      move(speed);
+   }
+
+   /**
+    * Rotate the subystem CCW under 'manual' control.
+    * 
+    * @param speed
+    *           speed to rotate at
+    */
+   default public void rotateCCW(double speed) {
+      move(Math.abs(speed));
+   }
+
+   /**
+    * Rotate the subsystem CW under 'manual' control.
+    *
+    * @param speed
+    *           speed to rotate at
+    */
+   default public void rotateCW(double speed) {
+      move(-Math.abs(speed));
+   }
 
 }
