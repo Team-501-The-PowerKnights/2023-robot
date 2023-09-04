@@ -71,7 +71,7 @@ public interface ITurretSubsystem extends IPIDSubsystem {
     * be lost the next time one of the pre-sets is selected.
     *
     * @param offset
-    *           amount of offset ("+" is CCW, "-" is CW)
+    *           amount of offset ("-" is CCW, "+" is CW)
     */
    public void offsetTarget(double offset);
 
@@ -79,7 +79,7 @@ public interface ITurretSubsystem extends IPIDSubsystem {
     * Rotate the subsystem under 'manual' control.
     *
     * @param speed
-    *           speed to move at ("+" is CCW, "-" is CW)
+    *           speed to move at ("-" is CCW, "+" is CW)
     */
    public void move(double speed);
 
@@ -87,7 +87,7 @@ public interface ITurretSubsystem extends IPIDSubsystem {
     * Rotate the subsystem under 'manual' control.
     *
     * @param speed
-    *           speed to move at ("+" is CCW, "-" is CW)
+    *           speed to move at ("-" is CCW, "+" is CW)
     */
    default public void rotate(double speed) {
       move(speed);
@@ -100,7 +100,7 @@ public interface ITurretSubsystem extends IPIDSubsystem {
     *           speed to rotate at
     */
    default public void rotateCCW(double speed) {
-      move(Math.abs(speed));
+      move(-Math.abs(speed));
    }
 
    /**
@@ -110,7 +110,7 @@ public interface ITurretSubsystem extends IPIDSubsystem {
     *           speed to rotate at
     */
    default public void rotateCW(double speed) {
-      move(-Math.abs(speed));
+      move(Math.abs(speed));
    }
 
 }

@@ -26,6 +26,12 @@ abstract class F310Gamepad extends BaseGamepad {
 
    protected final int leftYAxis = 1;
 
+   /**
+    * Return the value of the left Y Axis joystick. Note - the sign is inverted,
+    * so that '+' is up and '-' is down.
+    *
+    * @return value of joystick (inverted to '+' up and '-' down)
+    */
    protected double getLeftYAxis() {
       return -stick.getRawAxis(leftYAxis);
    }
@@ -38,6 +44,12 @@ abstract class F310Gamepad extends BaseGamepad {
 
    protected final int rightYAxis = 5;
 
+   /**
+    * Return the value of the right Y Axis joystick. Note - the sign is inverted,
+    * so that '+' is up and '-' is down.
+    *
+    * @return value of joystick (inverted to '+' up and '-' down)
+    */
    protected double getRightYAxis() {
       return -stick.getRawAxis(rightYAxis);
    }

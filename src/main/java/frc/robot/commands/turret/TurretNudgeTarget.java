@@ -39,7 +39,7 @@ public class TurretNudgeTarget extends TurretManualCommandBase {
 
       // apply any adjustments (including sign to match subsystem convention)
       double offset = getCorrectedInput(input);
-      logger.trace("input={}, corrected offset={}", offset);
+      logger.trace("input={}, corrected offset={}", input, offset);
       subsys.offsetTarget(offset);
    }
 

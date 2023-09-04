@@ -43,6 +43,7 @@ public class RealTurretSubsystem extends BaseTurretSubsystem {
 
       pid = motor.getPIDController();
       encoder = motor.getEncoder();
+
       // Motor sense controls encoder as well with brushless
       motor.setInverted(true);
       checkError(motor.setClosedLoopRampRate(0), "set closed loop ramp rate to 0 {}");
@@ -85,7 +86,6 @@ public class RealTurretSubsystem extends BaseTurretSubsystem {
 
    @Override
    public void updateTelemetry() {
-      logger.trace("called");
       setTlmPIDCurrent(encoder.getPosition());
 
       super.updateTelemetry();
@@ -131,7 +131,6 @@ public class RealTurretSubsystem extends BaseTurretSubsystem {
 
    @Override
    public void move(double speed) {
-      // TODO Auto-generated method stub
       logger.trace("speed={}", speed);
 
       motor.set(speed);
