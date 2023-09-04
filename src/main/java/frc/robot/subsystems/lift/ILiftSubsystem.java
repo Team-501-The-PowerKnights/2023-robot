@@ -73,7 +73,7 @@ public interface ILiftSubsystem extends IPIDSubsystem {
     * be lost the next time one of the pre-sets is selected.
     *
     * @param offset
-    *           amount of offset ("+" is up, "-" is down)
+    *           amount of offset ("-" is down, "+" is up)
     */
    public void offsetTarget(double offset);
 
@@ -81,7 +81,7 @@ public interface ILiftSubsystem extends IPIDSubsystem {
     * Raise/Lower the subsystem under 'manual' control.
     *
     * @param speed
-    *           speed to move at ("+" is up, "-" is down)
+    *           speed to move at ("-" is down, "+" is up)
     */
    public void move(double speed);
 

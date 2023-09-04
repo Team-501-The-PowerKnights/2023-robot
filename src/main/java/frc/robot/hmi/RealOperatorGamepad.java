@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 import frc.robot.commands.arm.ArmJoystickControl;
 import frc.robot.commands.lift.LiftJoystickControl;
+import frc.robot.commands.lift.LiftNudgeTarget;
 import frc.robot.commands.turret.TurretJoystickControl;
 import frc.robot.commands.turret.TurretNudgeTarget;
 import riolog.PKLogger;
@@ -110,7 +111,7 @@ public class RealOperatorGamepad extends BaseOperatorGamepad {
 
       // Nudge lift when joystick is moved
       liftNudgeJoystick
-            .whileTrue(new LiftJoystickControl(() -> getLiftInput()));
+            .whileTrue(new LiftNudgeTarget(() -> getLiftInput()));
 
       // Nudge arm when joystick is moved
       armNudgeJoystick
