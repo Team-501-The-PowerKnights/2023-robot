@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 import frc.robot.commands.arm.ArmJoystickControl;
+import frc.robot.commands.arm.ArmNudgeTarget;
 import frc.robot.commands.lift.LiftJoystickControl;
 import frc.robot.commands.lift.LiftNudgeTarget;
 import frc.robot.commands.turret.TurretJoystickControl;
@@ -115,7 +116,7 @@ public class RealOperatorGamepad extends BaseOperatorGamepad {
 
       // Nudge arm when joystick is moved
       armNudgeJoystick
-            .whileTrue(new ArmJoystickControl(() -> getArmInput()));
+            .whileTrue(new ArmNudgeTarget(() -> getArmInput()));
 
       logger.info("configured");
    }

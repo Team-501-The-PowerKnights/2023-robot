@@ -98,8 +98,8 @@ Lift.teleCommandName = LiftDoNothing
 #####################
 # Arm
 #####################
-Arm.className = StubArmSubsystem
-#Arm.className = 
+#Arm.className = StubArmSubsystem
+Arm.className = RealArmSubsystem
 Arm.autoCommandName = ArmDoNothing
 Arm.teleCommandName = ArmDoNothing
 

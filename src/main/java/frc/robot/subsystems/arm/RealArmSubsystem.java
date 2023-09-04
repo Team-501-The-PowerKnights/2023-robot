@@ -43,7 +43,11 @@ class RealArmSubsystem extends BaseArmSubsystem {
 
       pid = motor.getPIDController();
       encoder = motor.getEncoder();
-      checkError(encoder.setPosition(0), "set encoder position to 0 {}");
+
+      // Motor sense controls encoder as well with brushless
+      motor.setInverted(true);
+      checkError(motor.setClosedLoopRampRate(0), "set closed loop ramp rate to 0 {}");
+      // checkError(motor.setSmartCurrentLimit(20), "set current limit to 20 {}");
 
       logger.info("constructed");
    }
@@ -97,14 +101,21 @@ class RealArmSubsystem extends BaseArmSubsystem {
    }
 
    @Override
+   public void updateTelemetry() {
+      setTlmPIDCurrent(encoder.getPosition());
+
+      super.updateTelemetry();
+   }
+
+   @Override
    public void disable() {
-      checkError(pid.setReference(0, ControlType.kDutyCycle), "PID set reference to kDutyCycle,0 {}");
+      checkError(pid.setReference(0, ControlType.kDutyCycle), "PID set reference to kDutyCycle {}");
       setTlmPIDEnabled(false);
    }
 
    @Override
    public void stop() {
-      checkError(pid.setReference(0, ControlType.kDutyCycle), "PID set reference to kDutyCycle,0 {}");
+      checkError(pid.setReference(0, ControlType.kDutyCycle), "PID set reference to kDutyCycle {}");
       setTlmPIDEnabled(false);
    }
 
@@ -120,7 +131,7 @@ class RealArmSubsystem extends BaseArmSubsystem {
    public void moveToTarget(double target) {
       logger.trace("set PID target = {}", target);
 
-      checkError(pid.setReference(target, ControlType.kPosition), "PID set reference to kPosition,0 {}");
+      checkError(pid.setReference(target, ControlType.kPosition), "PID set reference to kPosition {}");
       setTlmPIDEnabled(true);
       setTlmPIDTarget(target);
    }
@@ -136,8 +147,9 @@ class RealArmSubsystem extends BaseArmSubsystem {
 
    @Override
    public void move(double speed) {
-      // TODO Auto-generated method stub
+      logger.trace("speed={}", speed);
 
+      motor.set(speed);
    }
 
 }

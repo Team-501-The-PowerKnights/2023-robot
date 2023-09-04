@@ -26,15 +26,29 @@ public class ArmNudgeTarget extends ArmManualCommandBase {
       logger.info("constructed");
    }
 
+   /**
+    * Moves the Arm in response to the values being provided by
+    * the Operator input device. The <code>offset</code> to the PID
+    * set point is provided as a double, where '+' moves it CW and
+    * '-' moves it CCW.
+    * 
+    * @see edu.wpi.first.wpilibj2.command.Command#execute()
+    */
    @Override
    public void execute() {
+      super.execute();
+
+      // value directly from the gamepad
       double input = supplier.getAsDouble();
 
       if (noInput(input)) {
          return;
       }
 
-      subsys.offsetTarget(getCorrectedInput(input));
+      // apply any adjustments (including sign to match subsystem convention)
+      double offset = getCorrectedInput(input);
+      logger.trace("input={}, corrected offset={}", input, offset);
+      subsys.offsetTarget(offset);
    }
 
 }

@@ -26,15 +26,34 @@ public class ArmJoystickControl extends ArmManualCommandBase {
       logger.info("constructed");
    }
 
+   /**
+    * Moves the Arm in response to the values being provided by
+    * the Operator input device. The <code>speed</code> is provided
+    * as a double, where '+' pushes it out and '-' pulls it in.
+    * {@inheritDoc}
+    */
    @Override
    public void execute() {
+      super.execute();
+
+      // value directly from the gamepad
       double input = supplier.getAsDouble();
 
       if (noInput(input)) {
          subsys.stop();
       }
 
-      subsys.move(getCorrectedInput(input));
+      // apply any adjustments (including sign to match subsystem convention)
+      double speed = getCorrectedInput(input);
+      logger.trace("input={}, corrected speed={}", input, speed);
+      subsys.move(speed);
+   }
+
+   @Override
+   public void end(boolean interrupted) {
+      subsys.stop();
+
+      super.end(interrupted);
    }
 
 }

@@ -39,7 +39,7 @@ public class TurretJoystickControl extends TurretManualCommandBase {
 
       // apply any adjustments (including sign to match subsystem convention)
       double speed = getCorrectedInput(input);
-      logger.trace("input={}, corrected speed={}", speed);
+      logger.trace("input={}, corrected speed={}", input, speed);
       subsys.move(speed);
    }
 

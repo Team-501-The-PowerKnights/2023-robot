@@ -72,7 +72,7 @@ public interface IArmSubsystem extends ISubsystem {
     * be lost the next time one of the pre-sets is selected.
     *
     * @param offset
-    *           amount of offset ("+" is up, "-" is down)
+    *           amount of offset ("+" is extend, "-" is retract)
     */
    public void offsetTarget(double offset);
 
