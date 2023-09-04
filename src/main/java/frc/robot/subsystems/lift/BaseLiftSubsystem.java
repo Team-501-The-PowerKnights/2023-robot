@@ -54,9 +54,9 @@ abstract class BaseLiftSubsystem extends PIDSubsystem implements ILiftSubsystem 
    protected double rampRate;
 
    protected double startSetPoint;
-   protected double lowSetPoint;
-   protected double midSetPoint;
    protected double highSetPoint;
+   protected double midSetPoint;
+   protected double lowSetPoint;
 
    private final LiftPreferences prefs;
 
@@ -110,15 +110,15 @@ abstract class BaseLiftSubsystem extends PIDSubsystem implements ILiftSubsystem 
       v = Preferences.getDouble(prefs.startSetPoint, startSetPoint);
       logger.info("{} = {}", prefs.startSetPoint, v);
       startSetPoint = v;
-      v = Preferences.getDouble(prefs.lowSetPoint, lowSetPoint);
-      logger.info("{} = {}", prefs.lowSetPoint, v);
-      lowSetPoint = v;
-      v = Preferences.getDouble(prefs.midSetPoint, midSetPoint);
-      logger.info("{} = {}", prefs.midSetPoint, v);
-      midSetPoint = v;
       v = Preferences.getDouble(prefs.highSetPoint, highSetPoint);
       logger.info("{} = {}", prefs.highSetPoint, v);
       highSetPoint = v;
+      v = Preferences.getDouble(prefs.midSetPoint, midSetPoint);
+      logger.info("{} = {}", prefs.midSetPoint, v);
+      midSetPoint = v;
+      v = Preferences.getDouble(prefs.lowSetPoint, lowSetPoint);
+      logger.info("{} = {}", prefs.lowSetPoint, v);
+      lowSetPoint = v;
 
       LiftPosition.startPosition.set(startSetPoint);
       LiftPosition.lowPosition.set(lowSetPoint);

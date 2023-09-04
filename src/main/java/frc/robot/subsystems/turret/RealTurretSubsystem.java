@@ -85,6 +85,23 @@ public class RealTurretSubsystem extends BaseTurretSubsystem {
    };
 
    @Override
+   public void updatePreferences() {
+      super.updatePreferences();
+
+      checkError(pid.setP(pidValues.P), "set PID_P {}");
+      checkError(pid.setI(pidValues.I), "set PID_I {}");
+      checkError(pid.setD(pidValues.D), "set PID_D {}");
+      checkError(pid.setIZone(pidValues.IZone), "set PID_IZone {}");
+      checkError(pid.setFF(pidValues.FF), "set PID_FF {}");
+      checkError(pid.setOutputRange(pidValues.MinOutput, pidValues.MaxOutput), "set PID_ min and max output {}");
+
+      checkError(motor.setClosedLoopRampRate(rampRate), "set closed loop ramp rate {}");
+
+      TurretPosition.startPosition.set(startSetPoint);
+      TurretPosition.frontPosition.set(frontSetPoint);
+   }
+
+   @Override
    public void updateTelemetry() {
       setTlmPIDCurrent(encoder.getPosition());
 
