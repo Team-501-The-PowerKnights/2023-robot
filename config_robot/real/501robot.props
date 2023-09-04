@@ -62,8 +62,8 @@ Gyro.className = StubGyroSensor
 #####################
 # Drive
 #####################
-#Drive.className = StubDriveSubsystem
-Drive.className = ProtoDriveSubsystem
+Drive.className = StubDriveSubsystem
+#Drive.className = ProtoDriveSubsystem
 Drive.autoCommandName = DriveDoNothing
 Drive.teleCommandName = DriveJoystickControl
 
@@ -80,8 +80,8 @@ Gripper.teleCommandName = GripperDoNothing
 #####################
 # Turret
 #####################
-Turret.className = StubTurretSubsystem
-#Turret.className = 
+#Turret.className = StubTurretSubsystem
+Turret.className = RealTurretSubsystem
 Turret.autoCommandName = TurretDoNothing
 Turret.teleCommandName = TurretDoNothing
 
@@ -89,8 +89,8 @@ Turret.teleCommandName = TurretDoNothing
 #####################
 # Lift
 #####################
-#Lift.className = StubLiftSubsystem
-Lift.className = RealLiftSubsystem
+Lift.className = StubLiftSubsystem
+#Lift.className = RealLiftSubsystem
 Lift.autoCommandName = LiftDoNothing
 Lift.teleCommandName = LiftDoNothing
 

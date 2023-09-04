@@ -40,8 +40,7 @@ abstract class TurretManualCommandBase extends TurretCommandBase {
 
    protected double getCorrectedInput(double input) {
       // Scale to make less responsive
-      // Reverse sign to make gamepad match convention
-      return negate(input * scale);
+      return (input * scale);
    }
 
 }

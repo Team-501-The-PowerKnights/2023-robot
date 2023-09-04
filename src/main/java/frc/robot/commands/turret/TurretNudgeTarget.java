@@ -28,13 +28,19 @@ public class TurretNudgeTarget extends TurretManualCommandBase {
 
    @Override
    public void execute() {
+      super.execute();
+
+      // value directly from the gamepad
       double input = supplier.getAsDouble();
 
       if (noInput(input)) {
          return;
       }
 
-      subsys.offsetTarget(getCorrectedInput(input));
+      // apply any adjustments (including sign to match subsystem convention)
+      double offset = getCorrectedInput(input);
+      logger.trace("input={}, corrected offset={}", offset);
+      subsys.offsetTarget(offset);
    }
 
 }

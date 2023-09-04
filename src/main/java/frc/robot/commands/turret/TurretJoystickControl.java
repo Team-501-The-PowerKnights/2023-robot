@@ -28,13 +28,26 @@ public class TurretJoystickControl extends TurretManualCommandBase {
 
    @Override
    public void execute() {
+      super.execute();
+
+      // value directly from the gamepad
       double input = supplier.getAsDouble();
 
       if (noInput(input)) {
          subsys.stop();
       }
 
-      subsys.move(getCorrectedInput(input));
+      // apply any adjustments (including sign to match subsystem convention)
+      double speed = getCorrectedInput(input);
+      logger.trace("input={}, corrected speed={}", speed);
+      subsys.move(speed);
+   }
+
+   @Override
+   public void end(boolean interrupted) {
+      subsys.stop();
+
+      super.end(interrupted);
    }
 
 }
