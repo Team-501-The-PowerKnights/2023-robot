@@ -72,9 +72,10 @@ Drive.teleCommandName = DriveJoystickControl
 # Gripper
 #####################
 Gripper.className = StubGripperSubsystem
-#Gripper.className = 
+#Gripper.className = RealGripperSubsystem
 Gripper.autoCommandName = GripperDoNothing
 Gripper.teleCommandName = GripperDoNothing
+#Gripper.teleCommandName = GripperIdleIn
 
 
 #####################
