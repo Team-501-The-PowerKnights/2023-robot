@@ -14,8 +14,12 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 import frc.robot.commands.arm.ArmJoystickControl;
 import frc.robot.commands.arm.ArmNudgeTarget;
+import frc.robot.commands.arm.ArmToHighPosition;
+import frc.robot.commands.arm.ArmToLowPosition;
 import frc.robot.commands.lift.LiftJoystickControl;
 import frc.robot.commands.lift.LiftNudgeTarget;
+import frc.robot.commands.lift.LiftToHighPosition;
+import frc.robot.commands.lift.LiftToLowPosition;
 import frc.robot.commands.turret.TurretJoystickControl;
 import frc.robot.commands.turret.TurretNudgeTarget;
 import riolog.PKLogger;
@@ -26,10 +30,13 @@ public class RealOperatorGamepad extends BaseOperatorGamepad {
    private static final Logger logger = PKLogger.getLogger(RealOperatorGamepad.class.getName());
 
    private final Trigger turretNudgeJoystick;
-
    private final Trigger liftNudgeJoystick;
-
    private final Trigger armNudgeJoystick;
+
+   private final Trigger liftHighPoseButton;
+   private final Trigger liftLowPoseButton;
+   private final Trigger armHighPoseButton;
+   private final Trigger armLowPoseButton;
 
    public RealOperatorGamepad() {
       super("RealOperatorGamepad", 1);
@@ -38,6 +45,12 @@ public class RealOperatorGamepad extends BaseOperatorGamepad {
       turretNudgeJoystick = new Trigger(this::isTurretNudged);
       liftNudgeJoystick = new Trigger(this::isLiftNudged);
       armNudgeJoystick = new Trigger(this::isArmNudged);
+
+      liftHighPoseButton = cmdStick.button(yellowButton);
+      liftLowPoseButton = cmdStick.button(greenButton);
+
+      armHighPoseButton = cmdStick.button(yellowButton);
+      armLowPoseButton = cmdStick.button(greenButton);
 
       logger.info("constructed");
    }
@@ -109,14 +122,22 @@ public class RealOperatorGamepad extends BaseOperatorGamepad {
       // Nudge turret when joystick is moved
       turretNudgeJoystick
             .whileTrue(new TurretNudgeTarget(() -> getTurretInput()));
-
       // Nudge lift when joystick is moved
       liftNudgeJoystick
             .whileTrue(new LiftNudgeTarget(() -> getLiftInput()));
-
       // Nudge arm when joystick is moved
       armNudgeJoystick
             .whileTrue(new ArmNudgeTarget(() -> getArmInput()));
+
+      liftHighPoseButton
+            .onTrue(new LiftToHighPosition());
+      liftLowPoseButton
+            .onTrue(new LiftToLowPosition());
+
+      armHighPoseButton
+            .onTrue(new ArmToHighPosition());
+      armLowPoseButton
+            .onTrue(new ArmToLowPosition());
 
       logger.info("configured");
    }
