@@ -143,7 +143,7 @@ abstract class BaseArmRotatorSubsystem extends PIDSubsystem implements IArmRotat
    public void updateTelemetry() {
       super.updateTelemetry(TelemetryNames.ArmRotator.PIDEnabled, TelemetryNames.ArmRotator.PIDTarget,
             TelemetryNames.ArmRotator.PIDCurrent, TelemetryNames.ArmRotator.PIDAtTarget,
-            TelemetryNames.ArmRotator.PIDOnTarget);
+            TelemetryNames.ArmRotator.PIDOnTarget, TelemetryNames.ArmRotator.PIDOutput);
    }
 
    @Override

@@ -23,15 +23,17 @@ public class PIDTelemetry {
    public static final String pid_Current = ".PIDCurrent";
    public static final String pid_AtTarget = ".PIDAtTarget";
    public static final String pid_OnTarget = ".PIDOnTarget";
+   public static final String pid_Output = ".PIDOutput";
 
    public boolean PIDEnabled;
    public double PIDTarget;
    public double PIDCurrent;
    public boolean PIDAtTarget;
    public boolean PIDOnTarget;
+   public double PIDOutput;
 
    public PIDTelemetry() {
-      this(false, 0, 0, false, false);
+      this(false, 0, 0, false, false, 0);
    }
 
    public PIDTelemetry(
@@ -40,7 +42,8 @@ public class PIDTelemetry {
       double PIDTarget,
       double PIDCurrent,
       boolean PIDAtTarget,
-      boolean PIDOnTarget)
+      boolean PIDOnTarget,
+      double PIDOutput)
     //@formatter:on
    {
       this.PIDEnabled = PIDEnabled;
@@ -48,6 +51,7 @@ public class PIDTelemetry {
       this.PIDCurrent = PIDCurrent;
       this.PIDAtTarget = PIDAtTarget;
       this.PIDOnTarget = PIDOnTarget;
+      this.PIDOutput = PIDOutput;
    }
 
 }

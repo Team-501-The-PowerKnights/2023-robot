@@ -157,7 +157,7 @@ abstract class BaseArmExtenderSubsystem extends PIDSubsystem implements IArmExte
    public void updateTelemetry() {
       super.updateTelemetry(TelemetryNames.ArmExtender.PIDEnabled, TelemetryNames.ArmExtender.PIDTarget,
             TelemetryNames.ArmExtender.PIDCurrent, TelemetryNames.ArmExtender.PIDAtTarget,
-            TelemetryNames.ArmExtender.PIDOnTarget);
+            TelemetryNames.ArmExtender.PIDOnTarget, TelemetryNames.ArmExtender.PIDOutput);
    }
 
    @Override

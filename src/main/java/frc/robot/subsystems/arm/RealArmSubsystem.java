@@ -103,6 +103,7 @@ class RealArmSubsystem extends BaseArmSubsystem {
    @Override
    public void updateTelemetry() {
       setTlmPIDCurrent(encoder.getPosition());
+      setTlmPIDOutput(motor.get());
 
       super.updateTelemetry();
    }

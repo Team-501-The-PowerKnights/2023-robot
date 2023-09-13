@@ -130,7 +130,7 @@ abstract class BaseArmSubsystem extends PIDSubsystem implements IArmSubsystem {
    public void updateTelemetry() {
       super.updateTelemetry(TelemetryNames.Arm.PIDEnabled, TelemetryNames.Arm.PIDTarget,
             TelemetryNames.Arm.PIDCurrent, TelemetryNames.Arm.PIDAtTarget,
-            TelemetryNames.Arm.PIDOnTarget);
+            TelemetryNames.Arm.PIDOnTarget, TelemetryNames.Arm.PIDOutput);
    }
 
    @Override

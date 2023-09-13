@@ -71,13 +71,22 @@ public abstract class PIDSubsystem extends BaseSubsystem implements IPIDSubsyste
       return tlmPID.PIDCurrent;
    }
 
+   protected void setTlmPIDOutput(double output) {
+      tlmPID.PIDOutput = output;
+   }
+
+   protected double getTlmPIDOutput() {
+      return tlmPID.PIDOutput;
+   }
+
    protected void updateTelemetry(String enabledName, String targetName, String currentName, String atTargetName,
-         String onTargetName) {
+         String onTargetName, String outputName) {
       SmartDashboard.putBoolean(enabledName, tlmPID.PIDEnabled);
       SmartDashboard.putNumber(targetName, tlmPID.PIDTarget);
       SmartDashboard.putNumber(currentName, tlmPID.PIDCurrent);
       SmartDashboard.putBoolean(atTargetName, tlmPID.PIDAtTarget);
       SmartDashboard.putBoolean(onTargetName, tlmPID.PIDOnTarget);
+      SmartDashboard.putNumber(outputName, tlmPID.PIDOutput);
    }
 
    private boolean m_haveSetpoint;
@@ -187,8 +196,9 @@ public abstract class PIDSubsystem extends BaseSubsystem implements IPIDSubsyste
    }
 
    public void logPID() {
-      logger.debug("{}: PID enabled={}, target={} current={} atTarget={} onTarget={}",
-            myName, tlmPID.PIDEnabled, tlmPID.PIDTarget, tlmPID.PIDCurrent, tlmPID.PIDAtTarget, tlmPID.PIDOnTarget);
+      logger.debug("{}: PID enabled={}, target={} current={} atTarget={} onTarget={} output={}",
+            myName, tlmPID.PIDEnabled, tlmPID.PIDTarget, tlmPID.PIDCurrent, tlmPID.PIDAtTarget, tlmPID.PIDOnTarget,
+            tlmPID.PIDOutput);
    }
 
 }

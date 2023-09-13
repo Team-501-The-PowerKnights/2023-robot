@@ -106,6 +106,7 @@ public class RealLiftSubsystem extends BaseLiftSubsystem {
    @Override
    public void updateTelemetry() {
       setTlmPIDCurrent(encoder.getPosition());
+      setTlmPIDOutput(motor.get());
 
       super.updateTelemetry();
    }

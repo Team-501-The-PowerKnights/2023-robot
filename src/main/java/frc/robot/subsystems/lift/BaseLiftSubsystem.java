@@ -135,7 +135,7 @@ abstract class BaseLiftSubsystem extends PIDSubsystem implements ILiftSubsystem 
    public void updateTelemetry() {
       super.updateTelemetry(TelemetryNames.Lift.PIDEnabled, TelemetryNames.Lift.PIDTarget,
             TelemetryNames.Lift.PIDCurrent, TelemetryNames.Lift.PIDAtTarget,
-            TelemetryNames.Lift.PIDOnTarget);
+            TelemetryNames.Lift.PIDOnTarget, TelemetryNames.Lift.PIDOutput);
    }
 
    @Override

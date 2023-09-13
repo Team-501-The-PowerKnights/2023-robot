@@ -90,6 +90,7 @@ class ProtoArmExtenderSubsystem extends BaseArmExtenderSubsystem {
    @Override
    public void updateTelemetry() {
       setTlmPIDCurrent(encoder.getPosition());
+      setTlmPIDOutput(motor.get());
 
       double current = motor.getOutputCurrent(); // bad I know :)
       SmartDashboard.putNumber(TelemetryNames.ArmExtender.current, current);

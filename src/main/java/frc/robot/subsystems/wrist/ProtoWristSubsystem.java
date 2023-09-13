@@ -82,6 +82,7 @@ class ProtoWristSubsystem extends BaseWristSubsystem {
    @Override
    public void updateTelemetry() {
       setTlmPIDCurrent(encoder.getPosition());
+      setTlmPIDOutput(motor.get());
 
       super.updateTelemetry();
    }

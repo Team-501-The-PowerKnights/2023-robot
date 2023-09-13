@@ -125,7 +125,7 @@ abstract class BaseTurretSubsystem extends PIDSubsystem implements ITurretSubsys
    public void updateTelemetry() {
       super.updateTelemetry(TelemetryNames.Turret.PIDEnabled, TelemetryNames.Turret.PIDTarget,
             TelemetryNames.Turret.PIDCurrent, TelemetryNames.Turret.PIDAtTarget,
-            TelemetryNames.Turret.PIDOnTarget);
+            TelemetryNames.Turret.PIDOnTarget, TelemetryNames.Turret.PIDOutput);
    }
 
    @Override

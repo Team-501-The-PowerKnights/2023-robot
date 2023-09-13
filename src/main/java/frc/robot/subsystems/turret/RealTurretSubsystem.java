@@ -104,6 +104,7 @@ public class RealTurretSubsystem extends BaseTurretSubsystem {
    @Override
    public void updateTelemetry() {
       setTlmPIDCurrent(encoder.getPosition());
+      setTlmPIDOutput(motor.get());
 
       super.updateTelemetry();
    }
