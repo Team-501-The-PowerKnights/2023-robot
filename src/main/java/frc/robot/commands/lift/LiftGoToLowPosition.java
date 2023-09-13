@@ -14,13 +14,13 @@ import frc.robot.subsystems.lift.ILiftSubsystem.LiftPosition;
 
 import riolog.PKLogger;
 
-public class LiftToHighPosition extends LiftGoToPosition {
+public class LiftGoToLowPosition extends LiftGoToPosition {
 
    /** Our classes' logger **/
-   private static final Logger logger = PKLogger.getLogger(LiftToHighPosition.class.getName());
+   private static final Logger logger = PKLogger.getLogger(LiftGoToLowPosition.class.getName());
 
-   public LiftToHighPosition() {
-      super(LiftPosition.highPosition);
+   public LiftGoToLowPosition() {
+      super(LiftPosition.lowPosition);
       logger.info("constructing {}", getName());
 
       logger.info("constructed");

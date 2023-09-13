@@ -14,13 +14,13 @@ import frc.robot.subsystems.arm.IArmSubsystem.ArmPosition;
 
 import riolog.PKLogger;
 
-public class ArmToLowPosition extends ArmGoToPosition {
+public class ArmGoToHighPosition extends ArmGoToPosition {
 
    /** Our classes' logger **/
-   private static final Logger logger = PKLogger.getLogger(ArmToLowPosition.class.getName());
+   private static final Logger logger = PKLogger.getLogger(ArmGoToHighPosition.class.getName());
 
-   public ArmToLowPosition() {
-      super(ArmPosition.lowPosition);
+   public ArmGoToHighPosition() {
+      super(ArmPosition.highPosition);
       logger.info("constructing {}", getName());
 
       logger.info("constructed");

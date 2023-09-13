@@ -14,12 +14,12 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 import frc.robot.commands.arm.ArmJoystickControl;
 import frc.robot.commands.arm.ArmNudgeTarget;
-import frc.robot.commands.arm.ArmToHighPosition;
-import frc.robot.commands.arm.ArmToLowPosition;
+import frc.robot.commands.arm.ArmGoToHighPosition;
+import frc.robot.commands.arm.ArmGoToLowPosition;
 import frc.robot.commands.lift.LiftJoystickControl;
 import frc.robot.commands.lift.LiftNudgeTarget;
-import frc.robot.commands.lift.LiftToHighPosition;
-import frc.robot.commands.lift.LiftToLowPosition;
+import frc.robot.commands.lift.LiftGoToHighPosition;
+import frc.robot.commands.lift.LiftGoToLowPosition;
 import frc.robot.commands.turret.TurretJoystickControl;
 import frc.robot.commands.turret.TurretNudgeTarget;
 import riolog.PKLogger;
@@ -130,14 +130,14 @@ public class RealOperatorGamepad extends BaseOperatorGamepad {
             .whileTrue(new ArmNudgeTarget(() -> getArmInput()));
 
       liftHighPoseButton
-            .onTrue(new LiftToHighPosition());
+            .onTrue(new LiftGoToHighPosition());
       liftLowPoseButton
-            .onTrue(new LiftToLowPosition());
+            .onTrue(new LiftGoToLowPosition());
 
       armHighPoseButton
-            .onTrue(new ArmToHighPosition());
+            .onTrue(new ArmGoToHighPosition());
       armLowPoseButton
-            .onTrue(new ArmToLowPosition());
+            .onTrue(new ArmGoToLowPosition());
 
       logger.info("configured");
    }

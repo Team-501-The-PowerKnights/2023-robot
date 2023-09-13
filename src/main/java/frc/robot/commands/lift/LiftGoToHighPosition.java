@@ -6,21 +6,21 @@
 /*- of this project.                                                      */
 /*------------------------------------------------------------------------*/
 
-package frc.robot.commands.arm;
+package frc.robot.commands.lift;
 
 import org.slf4j.Logger;
 
-import frc.robot.subsystems.arm.IArmSubsystem.ArmPosition;
+import frc.robot.subsystems.lift.ILiftSubsystem.LiftPosition;
 
 import riolog.PKLogger;
 
-public class ArmToHighPosition extends ArmGoToPosition {
+public class LiftGoToHighPosition extends LiftGoToPosition {
 
    /** Our classes' logger **/
-   private static final Logger logger = PKLogger.getLogger(ArmToHighPosition.class.getName());
+   private static final Logger logger = PKLogger.getLogger(LiftGoToHighPosition.class.getName());
 
-   public ArmToHighPosition() {
-      super(ArmPosition.highPosition);
+   public LiftGoToHighPosition() {
+      super(LiftPosition.highPosition);
       logger.info("constructing {}", getName());
 
       logger.info("constructed");
