@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 import frc.robot.commands.arm.ArmJoystickControl;
 import frc.robot.commands.arm.ArmNudgeTarget;
+import frc.robot.commands.gripper.GripperGrip;
 import frc.robot.commands.arm.ArmGoToHighPosition;
 import frc.robot.commands.arm.ArmGoToLowPosition;
 import frc.robot.commands.lift.LiftJoystickControl;
@@ -29,28 +30,31 @@ public class RealOperatorGamepad extends BaseOperatorGamepad {
    /** Our classes' logger **/
    private static final Logger logger = PKLogger.getLogger(RealOperatorGamepad.class.getName());
 
-   private final Trigger turretNudgeJoystick;
-   private final Trigger liftNudgeJoystick;
-   private final Trigger armNudgeJoystick;
-
    private final Trigger liftHighPoseButton;
    private final Trigger liftLowPoseButton;
    private final Trigger armHighPoseButton;
    private final Trigger armLowPoseButton;
 
+   private final Trigger turretNudgeJoystick;
+   private final Trigger liftNudgeJoystick;
+   private final Trigger armNudgeJoystick;
+
+   private final Trigger gripperTrigger;
+
    public RealOperatorGamepad() {
       super("RealOperatorGamepad", 1);
       logger.info("constructing");
+
+      liftHighPoseButton = cmdStick.button(yellowButton);
+      liftLowPoseButton = cmdStick.button(greenButton);
+      armHighPoseButton = cmdStick.button(yellowButton);
+      armLowPoseButton = cmdStick.button(greenButton);
 
       turretNudgeJoystick = new Trigger(this::isTurretNudged);
       liftNudgeJoystick = new Trigger(this::isLiftNudged);
       armNudgeJoystick = new Trigger(this::isArmNudged);
 
-      liftHighPoseButton = cmdStick.button(yellowButton);
-      liftLowPoseButton = cmdStick.button(greenButton);
-
-      armHighPoseButton = cmdStick.button(yellowButton);
-      armLowPoseButton = cmdStick.button(greenButton);
+      gripperTrigger = new Trigger(this::isGripperActive);
 
       logger.info("constructed");
    }
@@ -94,6 +98,31 @@ public class RealOperatorGamepad extends BaseOperatorGamepad {
       return (Math.abs(deadBand(getArmInput(), 0.10)) > 0);
    }
 
+   /**
+    * Determine if the Left and/or Right Triggers are moved from the
+    * <i>dead band<i>.
+    *
+    * @return whether either (or both) of the triggers are active
+    */
+   private boolean isGripperActive() {
+      return (deadBand(getLeftTrigger(), 0.01) > 0)
+            || (deadBand(getRightTrigger(), 0.01) > 0);
+      // return true;
+   }
+
+   private double getGripperSpeed() {
+      double inSpeed = getLeftTrigger();
+      double outSpeed = getRightTrigger();
+
+      double speed;
+      if (inSpeed > outSpeed) {
+         speed = inSpeed;
+      } else {
+         speed = -outSpeed;
+      }
+      return speed;
+   }
+
    @Override
    public void updateTelemetry() {
    }
@@ -119,6 +148,15 @@ public class RealOperatorGamepad extends BaseOperatorGamepad {
    private void configureTeleopButtonBindings() {
       logger.info("configure");
 
+      liftHighPoseButton
+            .onTrue(new LiftGoToHighPosition());
+      liftLowPoseButton
+            .onTrue(new LiftGoToLowPosition());
+      armHighPoseButton
+            .onTrue(new ArmGoToHighPosition());
+      armLowPoseButton
+            .onTrue(new ArmGoToLowPosition());
+
       // Nudge turret when joystick is moved
       turretNudgeJoystick
             .whileTrue(new TurretNudgeTarget(() -> getTurretInput()));
@@ -129,15 +167,9 @@ public class RealOperatorGamepad extends BaseOperatorGamepad {
       armNudgeJoystick
             .whileTrue(new ArmNudgeTarget(() -> getArmInput()));
 
-      liftHighPoseButton
-            .onTrue(new LiftGoToHighPosition());
-      liftLowPoseButton
-            .onTrue(new LiftGoToLowPosition());
-
-      armHighPoseButton
-            .onTrue(new ArmGoToHighPosition());
-      armLowPoseButton
-            .onTrue(new ArmGoToLowPosition());
+      // Move the gripper motors when triggers are active
+      gripperTrigger
+            .whileTrue(new GripperGrip(() -> getGripperSpeed()));
 
       logger.info("configured");
    }
