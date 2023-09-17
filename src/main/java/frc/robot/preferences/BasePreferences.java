@@ -36,6 +36,14 @@ abstract public class BasePreferences implements IPreferences {
       logger.info("constructed");
    }
 
+   protected void checkAndAddBooleanPreference(String key, boolean value) {
+      if (!Preferences.containsKey(key)) {
+         logger.warn("{} doesn't exist; creating with default", key);
+         ProblemTracker.addWarning();
+         Preferences.setBoolean(key, value);
+      }
+   }
+
    protected void checkAndAddDoublePreference(String key, double value) {
       if (!Preferences.containsKey(key)) {
          logger.warn("{} doesn't exist; creating with default", key);

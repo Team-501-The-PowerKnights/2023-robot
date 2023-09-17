@@ -68,21 +68,29 @@ public class RealLiftSubsystem extends BaseLiftSubsystem {
    public void autonomousInit() {
       super.autonomousInit();
 
-      // Set the PID so when it wakes up it doesn't try to move
-      moveToTarget(encoder.getPosition());
-      // Coast mode when under PID control
-      checkError(motor.setIdleMode(IdleMode.kCoast), "set idle mode to coast {}");
+      initPIDControl(pidValues.Use);
    };
 
    @Override
    public void teleopInit() {
       super.teleopInit();
 
-      // Set the PID so when it wakes up it doesn't try to move
-      moveToTarget(encoder.getPosition());
-      // Coast mode when under PID control
-      checkError(motor.setIdleMode(IdleMode.kCoast), "set idle mode to coast {}");
+      initPIDControl(pidValues.Use);
    };
+
+   private void initPIDControl(boolean usePID) {
+      if (usePID) {
+         logger.trace("using PID control");
+         // Set the PID so when it wakes up it doesn't try to move
+         moveToTarget(encoder.getPosition());
+         // Coast mode when under PID control
+         checkError(motor.setIdleMode(IdleMode.kCoast), "set idle mode to coast {}");
+      } else {
+         logger.trace("not using PID control");
+         checkError(pid.setReference(0, ControlType.kDutyCycle), "PID set reference to kDutyCycle {}");
+         checkError(motor.setIdleMode(IdleMode.kBrake), "set idle mode to brake {}");
+      }
+   }
 
    @Override
    public void updatePreferences() {

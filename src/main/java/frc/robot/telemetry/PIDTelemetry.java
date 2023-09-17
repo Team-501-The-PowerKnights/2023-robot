@@ -18,6 +18,7 @@ public class PIDTelemetry {
    @SuppressWarnings("unused")
    private static final Logger logger = PKLogger.getLogger(PIDTelemetry.class.getName());
 
+   public static final String pid_Use = ".PIDUse";
    public static final String pid_Enabled = ".PIDEnabled";
    public static final String pid_Target = ".PIDTarget";
    public static final String pid_Current = ".PIDCurrent";
@@ -25,6 +26,7 @@ public class PIDTelemetry {
    public static final String pid_OnTarget = ".PIDOnTarget";
    public static final String pid_Output = ".PIDOutput";
 
+   public boolean PIDUse;
    public boolean PIDEnabled;
    public double PIDTarget;
    public double PIDCurrent;
@@ -33,11 +35,12 @@ public class PIDTelemetry {
    public double PIDOutput;
 
    public PIDTelemetry() {
-      this(false, 0, 0, false, false, 0);
+      this(false, false, 0, 0, false, false, 0);
    }
 
    public PIDTelemetry(
    //@formatter:off
+      boolean PIDUse,
       boolean PIDEnabled,
       double PIDTarget,
       double PIDCurrent,
@@ -46,6 +49,7 @@ public class PIDTelemetry {
       double PIDOutput)
     //@formatter:on
    {
+      this.PIDUse = PIDUse;
       this.PIDEnabled = PIDEnabled;
       this.PIDTarget = PIDTarget;
       this.PIDCurrent = PIDCurrent;

@@ -18,6 +18,7 @@ public class PIDValues {
    @SuppressWarnings("unused")
    private static final Logger logger = PKLogger.getLogger(PIDValues.class.getName());
 
+   public static final String pid_Use = ".UsePID";
    public static final String pid_P = ".P";
    public static final String pid_I = ".I";
    public static final String pid_D = ".D";
@@ -26,6 +27,7 @@ public class PIDValues {
    public static final String pid_minOutput = ".MinOutput";
    public static final String pid_maxOutput = ".MaxOutput";
 
+   public boolean Use;
    public double P;
    public double I;
    public double D;
@@ -35,11 +37,12 @@ public class PIDValues {
    public double MaxOutput;
 
    public PIDValues() {
-      this(0, 0, 0, 0, 0, 0, 0);
+      this(false, 0, 0, 0, 0, 0, 0, 0);
    }
 
    public PIDValues(
    //@formatter:off
+      boolean Use,
       double P,
       double I,
       double D,
@@ -49,6 +52,7 @@ public class PIDValues {
       double MaxOutput)
     //@formatter:on
    {
+      this.Use = Use;
       this.P = P;
       this.I = I;
       this.D = D;
@@ -62,7 +66,8 @@ public class PIDValues {
    public String toString() {
       StringBuilder buf = new StringBuilder();
       buf.append("PID:");
-      buf.append(" P=").append(P);
+      buf.append(" Use=").append(Use);
+      buf.append(",P=").append(P);
       buf.append(",I=").append(I);
       buf.append(",D=").append(D);
       buf.append(",IZone=").append(IZone);

@@ -33,6 +33,7 @@ abstract class BaseArmSubsystem extends PIDSubsystem implements IArmSubsystem {
     * the <i>Preferences</i> if they exist.
     **/
 
+   protected boolean pid_Use;
    protected double pid_P;
    protected double pid_I;
    protected double pid_D;
@@ -42,6 +43,7 @@ abstract class BaseArmSubsystem extends PIDSubsystem implements IArmSubsystem {
    protected double pid_maxOutput;
    //@formatter:off
    protected PIDValues pidValues = new PIDValues(
+      pid_Use,
       pid_P, 
       pid_I, 
       pid_D,
@@ -80,6 +82,11 @@ abstract class BaseArmSubsystem extends PIDSubsystem implements IArmSubsystem {
 
       logger.info("new preferences for {}:", myName);
 
+      {
+         boolean b = Preferences.getBoolean(prefs.PID_Use, pidValues.Use);
+         logger.info("{} = {}", prefs.PID_Use, b);
+         pidValues.Use = b;
+      }
       v = Preferences.getDouble(prefs.PID_P, pidValues.P);
       logger.info("{} = {}", prefs.PID_P, v);
       pidValues.P = v;

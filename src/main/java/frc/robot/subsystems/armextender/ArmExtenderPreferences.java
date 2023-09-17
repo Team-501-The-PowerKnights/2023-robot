@@ -47,6 +47,7 @@ public final class ArmExtenderPreferences extends BasePreferences {
    }
 
    /** PID settings */
+   final String PID_Use = name + PIDValues.pid_Use;
    final String PID_P = name + PIDValues.pid_P;
    final String PID_I = name + PIDValues.pid_I;
    final String PID_D = name + PIDValues.pid_D;
@@ -55,6 +56,7 @@ public final class ArmExtenderPreferences extends BasePreferences {
    final String PID_minOutput = name + PIDValues.pid_minOutput;
    final String PID_maxOutput = name + PIDValues.pid_maxOutput;
 
+   private static final boolean default_pid_Use = false;
    static final double default_pid_P = 1;
    static final double default_pid_I = 0.0001;
    static final double default_pid_D = 5;
@@ -96,6 +98,7 @@ public final class ArmExtenderPreferences extends BasePreferences {
    public void initialize() {
       logger.info("initializing");
 
+      checkAndAddBooleanPreference(PID_Use, default_pid_Use);
       checkAndAddDoublePreference(PID_P, default_pid_P);
       checkAndAddDoublePreference(PID_I, default_pid_I);
       checkAndAddDoublePreference(PID_D, default_pid_D);
