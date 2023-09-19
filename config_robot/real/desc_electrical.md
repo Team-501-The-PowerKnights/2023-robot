@@ -10,13 +10,10 @@
 | Drive          | Spark Max       | NEO Brushless | 12     | Left Rear   | 9      |
 | Drive          | Spark Max       | NEO Brushless | 13     | Right Front | 1      |
 | Drive          | Spark Max       | NEO Brushless | 14     | Right Rear  | 0      |
-~~| Arm Rotator    | Spark Max       | NEO Brushless | 21     | --          | 10     |~~
-~~| Arm Extender   | Spark Max       | NEO Brushless | 22     | --          | 11     |~~
-| Elevator       | Spark Max       | NEO Brushless | 21     | --          | 12     |
+| Lift           | Spark Max       | NEO Brushless | 21     | --          | 12     |
 | Arm            | Spark Max       | NEO Brushless | 22     | --          | 13     |
-| Gripper        | Spark Max       | REV HD Hex    | 31     | Left        | 10      |
+| Gripper        | Spark Max       | REV HD Hex    | 31     | Left        | 10     |
 | Gripper        | Spark Max       | REV HD Hex    | 32     | Right       | 11     |
-~~| Wrist          | Spark Max       | NEO Brushless | 41     | --          | 16     |~~
 | Turret         | Spark Max       | NEO Brushless | 51     | --          | 4      |
 
 ## Modules
@@ -37,7 +34,8 @@
 | Drive          | Gyro             | NavX2-MXP          | 0         |             |
 | Drive          |                  |                    |           | Left Front  |
 | Drive          |                  |                    |           | Right Front |
-~~| Arm Rotator    | Relative Encoder |                    | --        | --          |~~
-~~| Arm Extender   | Relative Encoder |                    | --        | --          |~~
-| ???            | Vision           | Limelight          | 22          |             |
+| Lift           | Relative Encoder |                    |           |             |
+| Arm            | Relative Encoder |                    |           |             |
+| Gripper        | Relative Encoder |                    |           |             |
+| ???            | Vision           | Limelight          | 22        |             |
 |                |                  |                    |           |             |
