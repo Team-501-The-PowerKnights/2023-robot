@@ -47,8 +47,8 @@ public class RealOperatorGamepad extends BaseOperatorGamepad {
 
       liftHighPoseButton = cmdStick.button(yellowButton);
       liftLowPoseButton = cmdStick.button(greenButton);
-      armHighPoseButton = cmdStick.button(yellowButton);
-      armLowPoseButton = cmdStick.button(greenButton);
+      armHighPoseButton = cmdStick.button(blueButton);
+      armLowPoseButton = cmdStick.button(redButton);
 
       turretNudgeJoystick = new Trigger(this::isTurretNudged);
       liftNudgeJoystick = new Trigger(this::isLiftNudged);
