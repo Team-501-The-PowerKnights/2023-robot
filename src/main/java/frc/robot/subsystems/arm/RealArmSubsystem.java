@@ -69,6 +69,13 @@ class RealArmSubsystem extends BaseArmSubsystem {
    }
 
    @Override
+   public void disabledInit() {
+      super.disabledInit();
+
+      checkError(motor.setIdleMode(IdleMode.kBrake), "set idle mode to brake {}");
+   };
+
+   @Override
    public void autonomousInit() {
       super.autonomousInit();
 
@@ -84,13 +91,13 @@ class RealArmSubsystem extends BaseArmSubsystem {
 
    private void initPIDControl(boolean usePID) {
       if (usePID) {
-         logger.trace("using PID control");
+         logger.info("using PID control");
          // Set the PID so when it wakes up it doesn't try to move
          moveToTarget(encoder.getPosition());
          // Coast mode when under PID control
          checkError(motor.setIdleMode(IdleMode.kCoast), "set idle mode to coast {}");
       } else {
-         logger.trace("not using PID control");
+         logger.info("not using PID control");
          checkError(pid.setReference(0, ControlType.kDutyCycle), "PID set reference to kDutyCycle {}");
          checkError(motor.setIdleMode(IdleMode.kBrake), "set idle mode to brake {}");
       }
