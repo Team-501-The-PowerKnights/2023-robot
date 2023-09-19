@@ -32,6 +32,7 @@ class RealArmSubsystem extends BaseArmSubsystem {
    /** */
    private final CANSparkMax motor;
    private SparkMaxPIDController pid;
+   private final int smartMotionSlotID = 0;
    private RelativeEncoder encoder;
 
    RealArmSubsystem() {
@@ -46,8 +47,11 @@ class RealArmSubsystem extends BaseArmSubsystem {
 
       // Motor sense controls encoder as well with brushless
       motor.setInverted(true);
-      checkError(motor.setClosedLoopRampRate(0), "set closed loop ramp rate to 0 {}");
+      // checkError(motor.setClosedLoopRampRate(0), "set closed loop ramp rate to 0
+      // {}");
       // checkError(motor.setSmartCurrentLimit(20), "set current limit to 20 {}");
+      // checkError(motor.enableVoltageCompensation(0.0), "enable voltage compensation
+      // 0 {}");
 
       logger.info("constructed");
    }
@@ -103,6 +107,15 @@ class RealArmSubsystem extends BaseArmSubsystem {
       checkError(pid.setFF(pidValues.FF), "set PID_FF {}");
       checkError(pid.setOutputRange(pidValues.MinOutput, pidValues.MaxOutput), "set PID_ min and max output {}");
 
+      checkError(pid.setSmartMotionMinOutputVelocity(pidValues.MinVelocity, smartMotionSlotID),
+            "set PID_SM_MinVelocity");
+      checkError(pid.setSmartMotionMaxVelocity(pidValues.MaxVelocity, smartMotionSlotID),
+            "set PID_SM_MaxVelocity");
+      checkError(pid.setSmartMotionMaxAccel(pidValues.MaxAccel, smartMotionSlotID),
+            "set PID_SM_MaxAccel");
+      checkError(pid.setSmartMotionAllowedClosedLoopError(pidValues.AllowedError, smartMotionSlotID),
+            "set PID_SM_AllowedError");
+
       ArmPosition.highPosition.set(highSetPoint);
       ArmPosition.midPosition.set(midSetPoint);
       ArmPosition.lowPosition.set(lowSetPoint);
@@ -140,7 +153,15 @@ class RealArmSubsystem extends BaseArmSubsystem {
    public void moveToTarget(double target) {
       logger.trace("set PID target = {}", target);
 
-      checkError(pid.setReference(target, ControlType.kPosition), "PID set reference to kPosition {}");
+      if (pidValues.smartMotionSet()) {
+         logger.info("Setting PID to kSmartMotion w/ slotID={}", smartMotionSlotID);
+         checkError(pid.setReference(target, ControlType.kSmartMotion, smartMotionSlotID),
+               "PID set reference to kSmartMotion {}");
+      } else {
+         logger.info("Setting PID to kPosition");
+         checkError(pid.setReference(target, ControlType.kPosition), "PID set reference to kPosition {}");
+      }
+
       setTlmPIDEnabled(true);
       setTlmPIDTarget(target);
    }

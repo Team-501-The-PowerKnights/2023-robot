@@ -65,10 +65,21 @@ public class LiftPreferences extends BasePreferences {
    private static final double default_pid_minOutput = 0;
    private static final double default_pid_maxOutput = 0;
 
+   /** Smart Motion settings */
+   final String PIDSM_minVelocity = name + PIDValues.pidsm_minVelocity;
+   final String PIDSM_maxVelocity = name + PIDValues.pidsm_maxVelocity;
+   final String PIDSM_maxAccel = name + PIDValues.pidsm_maxAccel;
+   final String PIDSM_allowedError = name + PIDValues.pidsm_AllowedError;
+
+   private static final double default_pidsm_minVelocity = 0;
+   private static final double default_pidsm_maxVelocity = 0;
+   private static final double default_pidsm_maxAccel = 0;
+   private static final double default_pidsm_allowedError = 0;
+
    /** Ramp rate */
    final String rampRate = name + ".RampRate";
 
-   private static final double default_rampRate = 0.5;
+   private static final double default_rampRate = 0;
 
    /** Set points for the various positions */
    final String startSetPoint = name + ".StartSetPoint";
@@ -93,6 +104,11 @@ public class LiftPreferences extends BasePreferences {
       checkAndAddDoublePreference(PID_FF, default_pid_FF);
       checkAndAddDoublePreference(PID_minOutput, default_pid_minOutput);
       checkAndAddDoublePreference(PID_maxOutput, default_pid_maxOutput);
+
+      checkAndAddDoublePreference(PIDSM_minVelocity, default_pidsm_minVelocity);
+      checkAndAddDoublePreference(PIDSM_maxVelocity, default_pidsm_maxVelocity);
+      checkAndAddDoublePreference(PIDSM_maxAccel, default_pidsm_maxAccel);
+      checkAndAddDoublePreference(PIDSM_allowedError, default_pidsm_allowedError);
 
       checkAndAddDoublePreference(rampRate, default_rampRate);
 

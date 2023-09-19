@@ -18,6 +18,7 @@ public class PIDValues {
    @SuppressWarnings("unused")
    private static final Logger logger = PKLogger.getLogger(PIDValues.class.getName());
 
+   /** PID settings */
    public static final String pid_Use = ".UsePID";
    public static final String pid_P = ".P";
    public static final String pid_I = ".I";
@@ -26,6 +27,12 @@ public class PIDValues {
    public static final String pid_FF = ".FF";
    public static final String pid_minOutput = ".MinOutput";
    public static final String pid_maxOutput = ".MaxOutput";
+
+   /** Smart Motion settings */
+   public static final String pidsm_minVelocity = ".MinVelocity";
+   public static final String pidsm_maxVelocity = ".MaxVelocity";
+   public static final String pidsm_maxAccel = ".MaxAccel";
+   public static final String pidsm_AllowedError = ".AllowedError";
 
    public boolean Use;
    public double P;
@@ -36,8 +43,13 @@ public class PIDValues {
    public double MinOutput;
    public double MaxOutput;
 
+   public double MinVelocity;
+   public double MaxVelocity;
+   public double MaxAccel;
+   public double AllowedError;
+
    public PIDValues() {
-      this(false, 0, 0, 0, 0, 0, 0, 0);
+      this(false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
    }
 
    public PIDValues(
@@ -52,6 +64,25 @@ public class PIDValues {
       double MaxOutput)
     //@formatter:on
    {
+      this(Use, P, I, D, IZone, FF, MinOutput, MaxOutput, 0, 0, 0, 0);
+   }
+
+   public PIDValues(
+   //@formatter:off
+      boolean Use,
+      double P,
+      double I,
+      double D,
+      double IZone,
+      double FF,
+      double MinOutput,
+      double MaxOutput,
+      double MinVelocity,
+      double MaxVelocity,
+      double MaxAccel,
+      double AllowedError)
+    //@formatter:on
+   {
       this.Use = Use;
       this.P = P;
       this.I = I;
@@ -60,6 +91,18 @@ public class PIDValues {
       this.FF = FF;
       this.MinOutput = MinOutput;
       this.MaxOutput = MaxOutput;
+      this.MinVelocity = MinVelocity;
+      this.MaxVelocity = MaxVelocity;
+      this.MaxAccel = MaxAccel;
+      this.AllowedError = AllowedError;
+   }
+
+   public boolean outputsSet() {
+      return ((MinOutput != 0) && (MaxOutput != 0));
+   }
+
+   public boolean smartMotionSet() {
+      return ((MinVelocity != 0) || (MaxVelocity != 0) || (MaxAccel != 0) || (AllowedError != 0));
    }
 
    @Override
@@ -74,6 +117,12 @@ public class PIDValues {
       buf.append(",FF=").append(FF);
       buf.append(",MinOutput=").append(MinOutput);
       buf.append(",MaxOutput=").append(MaxOutput);
+      if (smartMotionSet()) {
+         buf.append(",MinVelocity=").append(MinVelocity);
+         buf.append(",MaxVelocity=").append(MaxVelocity);
+         buf.append(",MaxAccel=").append(MaxAccel);
+         buf.append(",AllowedError=").append(AllowedError);
+      }
       return buf.toString();
    }
 
