@@ -14,6 +14,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 import frc.robot.commands.drive.DriveToggleBrake;
+import frc.robot.commands.turret.TurretRotateToFrontPosition;
+import frc.robot.commands.turret.TurretRotateToLeftPosition;
+import frc.robot.commands.turret.TurretRotateToRearPosition;
+import frc.robot.commands.turret.TurretRotateToRightPosition;
 import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
@@ -35,6 +39,11 @@ public class RealDriverGamepad extends BaseDriverGamepad {
 
    private final Trigger brakeToggleButton;
 
+   private final Trigger turretLeftButton;
+   private final Trigger turretFrontButton;
+   private final Trigger turretRightButton;
+   private final Trigger turretRearButton;
+
    public RealDriverGamepad() {
       super("RealDriverGamepad", 0);
       logger.info("constructing");
@@ -44,6 +53,11 @@ public class RealDriverGamepad extends BaseDriverGamepad {
       // driveSwapButton = new JoystickButton(stick, backButton);
 
       brakeToggleButton = cmdStick.button(startButton);
+
+      turretLeftButton = cmdStick.povLeft();
+      turretFrontButton = cmdStick.povUp();
+      turretRightButton = cmdStick.povRight();
+      turretRearButton = cmdStick.povDown();
 
       logger.info("constructed");
    }
@@ -84,6 +98,11 @@ public class RealDriverGamepad extends BaseDriverGamepad {
       // driveSwapButton.whenPressed(new DriveSwap());
 
       brakeToggleButton.onTrue(new DriveToggleBrake());
+
+      turretLeftButton.onTrue(new TurretRotateToLeftPosition());
+      turretFrontButton.onTrue(new TurretRotateToFrontPosition());
+      turretRightButton.onTrue(new TurretRotateToRightPosition());
+      turretRearButton.onTrue(new TurretRotateToRearPosition());
 
       // Hook to configure for testing of new stuff
       configureTestBindings();
