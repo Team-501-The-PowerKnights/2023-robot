@@ -17,6 +17,7 @@ import frc.robot.hmi.DriverGamepad;
 import frc.robot.hmi.IDriverGamepad;
 import frc.robot.hmi.IOperatorGamepad;
 import frc.robot.hmi.ProtoOperatorGamepad;
+import frc.robot.hmi.RealDriverGamepad;
 import frc.robot.hmi.RealOperatorGamepad;
 import frc.robot.hmi.StubOperatorGamepad;
 import frc.robot.hmi.SuitcaseOperatorGamepad;
@@ -95,7 +96,7 @@ public class OI implements ITelemetryProvider, IModeFollower {
             operatorPad = new ProtoOperatorGamepad();
             break;
          case "Real":
-            driverPad = new DriverGamepad();
+            driverPad = new RealDriverGamepad();
             operatorPad = new RealOperatorGamepad();
             break;
          default:

@@ -25,6 +25,12 @@ import frc.robot.commands.turret.TurretJoystickControl;
 import frc.robot.commands.turret.TurretNudgeTarget;
 import riolog.PKLogger;
 
+/**
+ * This class implements the Operator's gamepad forthe Real-Bot.
+ * <p>
+ * See <code>control_mode.md</code> for documentation of how configured and
+ * used.
+ */
 public class RealOperatorGamepad extends BaseOperatorGamepad {
 
    /** Our classes' logger **/
