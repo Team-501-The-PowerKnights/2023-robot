@@ -126,7 +126,9 @@ public class RealTurretSubsystem extends BaseTurretSubsystem {
       checkError(motor.setClosedLoopRampRate(rampRate), "set closed loop ramp rate {}");
 
       TurretPosition.startPosition.set(startSetPoint);
+      TurretPosition.leftPosition.set(leftSetPoint);
       TurretPosition.frontPosition.set(frontSetPoint);
+      TurretPosition.rightPosition.set(rightSetPoint);
    }
 
    @Override
