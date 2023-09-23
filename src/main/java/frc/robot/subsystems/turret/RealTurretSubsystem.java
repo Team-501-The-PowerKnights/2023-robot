@@ -47,11 +47,6 @@ public class RealTurretSubsystem extends BaseTurretSubsystem {
 
       // Motor sense controls encoder as well with brushless
       motor.setInverted(true);
-      // checkError(motor.setClosedLoopRampRate(0), "set closed loop ramp rate to 0
-      // {}");
-      // checkError(motor.setSmartCurrentLimit(20), "set current limit to 20 {}");
-      // checkError(motor.enableVoltageCompensation(0.0), "enable voltage compensation
-      // 0 {}");
 
       logger.info("constructed");
    }
