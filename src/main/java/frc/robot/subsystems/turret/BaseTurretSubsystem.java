@@ -56,7 +56,9 @@ abstract class BaseTurretSubsystem extends PIDSubsystem implements ITurretSubsys
    protected double rampRate;
 
    protected double startSetPoint;
+   protected double leftSetPoint;
    protected double frontSetPoint;
+   protected double rightSetPoint;
 
    private final TurretPreferences prefs;
 
@@ -115,12 +117,20 @@ abstract class BaseTurretSubsystem extends PIDSubsystem implements ITurretSubsys
       v = Preferences.getDouble(prefs.startSetPoint, startSetPoint);
       logger.info("{} = {}", prefs.startSetPoint, v);
       startSetPoint = v;
+      v = Preferences.getDouble(prefs.leftSetPoint, leftSetPoint);
+      logger.info("{} = {}", prefs.leftSetPoint, v);
+      leftSetPoint = v;
       v = Preferences.getDouble(prefs.frontSetPoint, frontSetPoint);
       logger.info("{} = {}", prefs.frontSetPoint, v);
       frontSetPoint = v;
+      v = Preferences.getDouble(prefs.rightSetPoint, rightSetPoint);
+      logger.info("{} = {}", prefs.rightSetPoint, v);
+      rightSetPoint = v;
 
       TurretPosition.startPosition.set(startSetPoint);
+      TurretPosition.leftPosition.set(leftSetPoint);
       TurretPosition.frontPosition.set(frontSetPoint);
+      TurretPosition.rightPosition.set(rightSetPoint);
    }
 
    @Override

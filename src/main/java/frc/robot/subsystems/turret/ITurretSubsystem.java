@@ -26,7 +26,9 @@ public interface ITurretSubsystem extends IPIDSubsystem {
    public static enum TurretPosition {
       //@formatter:off
       startPosition("Start", 0),
-      frontPosition("Front", 0);
+      leftPosition("Left", 0),
+      frontPosition("Front", 0),
+      rightPosition("Right", 0);
       //@formatter:on
 
       private final String name;
