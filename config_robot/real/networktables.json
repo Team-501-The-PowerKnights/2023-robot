@@ -1,253 +1,5 @@
 [
   {
-    "name": "/Preferences/Drive.P",
-    "type": "double",
-    "value": 0.0,
-    "properties": {
-      "persistent": true
-    }
-  },
-  {
-    "name": "/Preferences/Drive.I",
-    "type": "double",
-    "value": 0.0,
-    "properties": {
-      "persistent": true
-    }
-  },
-  {
-    "name": "/Preferences/Drive.D",
-    "type": "double",
-    "value": 0.0,
-    "properties": {
-      "persistent": true
-    }
-  },
-  {
-    "name": "/Preferences/Drive.F",
-    "type": "double",
-    "value": 0.0,
-    "properties": {
-      "persistent": true
-    }
-  },
-  {
-    "name": "/Preferences/Drive.ramp",
-    "type": "double",
-    "value": 0.0,
-    "properties": {
-      "persistent": true
-    }
-  },
-  {
-    "name": "/Preferences/ArmRotator.P",
-    "type": "double",
-    "value": 0.1,
-    "properties": {
-      "persistent": true
-    }
-  },
-  {
-    "name": "/Preferences/ArmRotator.I",
-    "type": "double",
-    "value": 0.0005,
-    "properties": {
-      "persistent": true
-    }
-  },
-  {
-    "name": "/Preferences/ArmRotator.D",
-    "type": "double",
-    "value": 45.0,
-    "properties": {
-      "persistent": true
-    }
-  },
-  {
-    "name": "/Preferences/ArmRotator.IZone",
-    "type": "double",
-    "value": 2.0,
-    "properties": {
-      "persistent": true
-    }
-  },
-  {
-    "name": "/Preferences/ArmRotator.FF",
-    "type": "double",
-    "value": 0.0,
-    "properties": {
-      "persistent": true
-    }
-  },
-  {
-    "name": "/Preferences/ArmRotator.MinOutput",
-    "type": "double",
-    "value": -0.7,
-    "properties": {
-      "persistent": true
-    }
-  },
-  {
-    "name": "/Preferences/ArmRotator.MaxOutput",
-    "type": "double",
-    "value": 0.69,
-    "properties": {
-      "persistent": true
-    }
-  },
-  {
-    "name": "/Preferences/ArmRotator.RampRate",
-    "type": "double",
-    "value": 0.5,
-    "properties": {
-      "persistent": true
-    }
-  },
-  {
-    "name": "/Preferences/ArmRotator.OverSetPoint",
-    "type": "double",
-    "value": -16.0,
-    "properties": {
-      "persistent": true
-    }
-  },
-  {
-    "name": "/Preferences/ArmRotator.HighSetPoint",
-    "type": "double",
-    "value": 25.0,
-    "properties": {
-      "persistent": true
-    }
-  },
-  {
-    "name": "/Preferences/ArmRotator.MidSetPoint",
-    "type": "double",
-    "value": 40.0,
-    "properties": {
-      "persistent": true
-    }
-  },
-  {
-    "name": "/Preferences/ArmRotator.LowSetPoint",
-    "type": "double",
-    "value": 70.0,
-    "properties": {
-      "persistent": true
-    }
-  },
-  {
-    "name": "/Preferences/ArmExtender.P",
-    "type": "double",
-    "value": 1.5,
-    "properties": {
-      "persistent": true
-    }
-  },
-  {
-    "name": "/Preferences/ArmExtender.I",
-    "type": "double",
-    "value": 0.001,
-    "properties": {
-      "persistent": true
-    }
-  },
-  {
-    "name": "/Preferences/ArmExtender.D",
-    "type": "double",
-    "value": 150.0,
-    "properties": {
-      "persistent": true
-    }
-  },
-  {
-    "name": "/Preferences/ArmExtender.IZone",
-    "type": "double",
-    "value": 2.5,
-    "properties": {
-      "persistent": true
-    }
-  },
-  {
-    "name": "/Preferences/ArmExtender.FF",
-    "type": "double",
-    "value": 0.0,
-    "properties": {
-      "persistent": true
-    }
-  },
-  {
-    "name": "/Preferences/ArmExtender.MinOutput",
-    "type": "double",
-    "value": -0.6,
-    "properties": {
-      "persistent": true
-    }
-  },
-  {
-    "name": "/Preferences/ArmExtender.MaxOutput",
-    "type": "double",
-    "value": 0.6,
-    "properties": {
-      "persistent": true
-    }
-  },
-  {
-    "name": "/Preferences/ArmExtender.MinSoftLimit",
-    "type": "double",
-    "value": -150.0,
-    "properties": {
-      "persistent": true
-    }
-  },
-  {
-    "name": "/Preferences/ArmExtender.MaxSoftLimit",
-    "type": "double",
-    "value": 50.0,
-    "properties": {
-      "persistent": true
-    }
-  },
-  {
-    "name": "/Preferences/ArmExtender.OverSetPoint",
-    "type": "double",
-    "value": -30.0,
-    "properties": {
-      "persistent": true
-    }
-  },
-  {
-    "name": "/Preferences/ArmExtender.HighSetPoint",
-    "type": "double",
-    "value": 0.0,
-    "properties": {
-      "persistent": true
-    }
-  },
-  {
-    "name": "/Preferences/ArmExtender.MidSetPoint",
-    "type": "double",
-    "value": -23.0,
-    "properties": {
-      "persistent": true
-    }
-  },
-  {
-    "name": "/Preferences/ArmExtender.LowSetPoint",
-    "type": "double",
-    "value": 0.0,
-    "properties": {
-      "persistent": true
-    }
-  },
-  {
-    "name": "/Preferences/ArmExtender.InSetPoint",
-    "type": "double",
-    "value": 0.0,
-    "properties": {
-      "persistent": true
-    }
-  },
-  {
     "name": "/Preferences/Gripper.MaxInSpeed",
     "type": "double",
     "value": 1.0,
@@ -272,23 +24,15 @@
     }
   },
   {
-    "name": "/Preferences/Wrist.P",
+    "name": "/Preferences/Turret.P",
     "type": "double",
-    "value": 0.4,
+    "value": 1.0,
     "properties": {
       "persistent": true
     }
   },
   {
-    "name": "/Preferences/Wrist.I",
-    "type": "double",
-    "value": 0.0006,
-    "properties": {
-      "persistent": true
-    }
-  },
-  {
-    "name": "/Preferences/Wrist.D",
+    "name": "/Preferences/Turret.I",
     "type": "double",
     "value": 0.0,
     "properties": {
@@ -296,7 +40,7 @@
     }
   },
   {
-    "name": "/Preferences/Wrist.IZone",
+    "name": "/Preferences/Turret.D",
     "type": "double",
     "value": 0.0,
     "properties": {
@@ -304,7 +48,7 @@
     }
   },
   {
-    "name": "/Preferences/Wrist.FF",
+    "name": "/Preferences/Turret.IZone",
     "type": "double",
     "value": 0.0,
     "properties": {
@@ -312,23 +56,7 @@
     }
   },
   {
-    "name": "/Preferences/Wrist.MinOutput",
-    "type": "double",
-    "value": -0.3,
-    "properties": {
-      "persistent": true
-    }
-  },
-  {
-    "name": "/Preferences/Wrist.MaxOutput",
-    "type": "double",
-    "value": 0.3,
-    "properties": {
-      "persistent": true
-    }
-  },
-  {
-    "name": "/Preferences/Wrist.UpSetPoint",
+    "name": "/Preferences/Turret.FF",
     "type": "double",
     "value": 0.0,
     "properties": {
@@ -336,15 +64,7 @@
     }
   },
   {
-    "name": "/Preferences/Wrist.OverSetPoint",
-    "type": "double",
-    "value": 10.2,
-    "properties": {
-      "persistent": true
-    }
-  },
-  {
-    "name": "/Preferences/ArmRotator.AutoConeSetPoint",
+    "name": "/Preferences/Turret.MinOutput",
     "type": "double",
     "value": 0.0,
     "properties": {
@@ -352,17 +72,345 @@
     }
   },
   {
-    "name": "/Preferences/ArmExtender.AutoConeSetPoint",
+    "name": "/Preferences/Turret.MaxOutput",
     "type": "double",
-    "value": 66.0,
+    "value": 0.0,
     "properties": {
       "persistent": true
     }
   },
   {
-    "name": "/Preferences/ArmExtender.RampRate",
+    "name": "/Preferences/Turret.RampRate",
     "type": "double",
-    "value": 0.65,
+    "value": 0.5,
+    "properties": {
+      "persistent": true
+    }
+  },
+  {
+    "name": "/Preferences/Turret.StartSetPoint",
+    "type": "double",
+    "value": 0.0,
+    "properties": {
+      "persistent": true
+    }
+  },
+  {
+    "name": "/Preferences/Turret.FrontSetPoint",
+    "type": "double",
+    "value": 0.0,
+    "properties": {
+      "persistent": true
+    }
+  },
+  {
+    "name": "/Preferences/Lift.P",
+    "type": "double",
+    "value": 0.05,
+    "properties": {
+      "persistent": true
+    }
+  },
+  {
+    "name": "/Preferences/Lift.I",
+    "type": "double",
+    "value": 1e-06,
+    "properties": {
+      "persistent": true
+    }
+  },
+  {
+    "name": "/Preferences/Lift.D",
+    "type": "double",
+    "value": 5.0,
+    "properties": {
+      "persistent": true
+    }
+  },
+  {
+    "name": "/Preferences/Lift.IZone",
+    "type": "double",
+    "value": 50.0,
+    "properties": {
+      "persistent": true
+    }
+  },
+  {
+    "name": "/Preferences/Lift.FF",
+    "type": "double",
+    "value": 0.0,
+    "properties": {
+      "persistent": true
+    }
+  },
+  {
+    "name": "/Preferences/Lift.MinOutput",
+    "type": "double",
+    "value": -0.25,
+    "properties": {
+      "persistent": true
+    }
+  },
+  {
+    "name": "/Preferences/Lift.MaxOutput",
+    "type": "double",
+    "value": 1.0,
+    "properties": {
+      "persistent": true
+    }
+  },
+  {
+    "name": "/Preferences/Lift.RampRate",
+    "type": "double",
+    "value": 0.5,
+    "properties": {
+      "persistent": true
+    }
+  },
+  {
+    "name": "/Preferences/Lift.StartSetPoint",
+    "type": "double",
+    "value": 0.0,
+    "properties": {
+      "persistent": true
+    }
+  },
+  {
+    "name": "/Preferences/Lift.HighSetPoint",
+    "type": "double",
+    "value": 75.0,
+    "properties": {
+      "persistent": true
+    }
+  },
+  {
+    "name": "/Preferences/Lift.MidSetPoint",
+    "type": "double",
+    "value": 0.0,
+    "properties": {
+      "persistent": true
+    }
+  },
+  {
+    "name": "/Preferences/Lift.LowSetPoint",
+    "type": "double",
+    "value": 1.0,
+    "properties": {
+      "persistent": true
+    }
+  },
+  {
+    "name": "/Preferences/Arm.P",
+    "type": "double",
+    "value": 0.5,
+    "properties": {
+      "persistent": true
+    }
+  },
+  {
+    "name": "/Preferences/Arm.I",
+    "type": "double",
+    "value": 0.0,
+    "properties": {
+      "persistent": true
+    }
+  },
+  {
+    "name": "/Preferences/Arm.D",
+    "type": "double",
+    "value": 0.0,
+    "properties": {
+      "persistent": true
+    }
+  },
+  {
+    "name": "/Preferences/Arm.IZone",
+    "type": "double",
+    "value": 0.0,
+    "properties": {
+      "persistent": true
+    }
+  },
+  {
+    "name": "/Preferences/Arm.FF",
+    "type": "double",
+    "value": 0.0,
+    "properties": {
+      "persistent": true
+    }
+  },
+  {
+    "name": "/Preferences/Arm.MinOutput",
+    "type": "double",
+    "value": -0.25,
+    "properties": {
+      "persistent": true
+    }
+  },
+  {
+    "name": "/Preferences/Arm.MaxOutput",
+    "type": "double",
+    "value": 0.25,
+    "properties": {
+      "persistent": true
+    }
+  },
+  {
+    "name": "/Preferences/Arm.RampRate",
+    "type": "double",
+    "value": 0.5,
+    "properties": {
+      "persistent": true
+    }
+  },
+  {
+    "name": "/Preferences/Arm.StartSetPoint",
+    "type": "double",
+    "value": 0.0,
+    "properties": {
+      "persistent": true
+    }
+  },
+  {
+    "name": "/Preferences/Arm.HighSetPoint",
+    "type": "double",
+    "value": 10.0,
+    "properties": {
+      "persistent": true
+    }
+  },
+  {
+    "name": "/Preferences/Arm.MidSetPoint",
+    "type": "double",
+    "value": 5.0,
+    "properties": {
+      "persistent": true
+    }
+  },
+  {
+    "name": "/Preferences/Arm.LowSetPoint",
+    "type": "double",
+    "value": 1.0,
+    "properties": {
+      "persistent": true
+    }
+  },
+  {
+    "name": "/Preferences/Turret.UsePID",
+    "type": "boolean",
+    "value": false,
+    "properties": {
+      "persistent": true
+    }
+  },
+  {
+    "name": "/Preferences/Turret.MinVelocity",
+    "type": "double",
+    "value": 0.0,
+    "properties": {
+      "persistent": true
+    }
+  },
+  {
+    "name": "/Preferences/Turret.MaxVelocity",
+    "type": "double",
+    "value": 0.0,
+    "properties": {
+      "persistent": true
+    }
+  },
+  {
+    "name": "/Preferences/Turret.MaxAccel",
+    "type": "double",
+    "value": 0.0,
+    "properties": {
+      "persistent": true
+    }
+  },
+  {
+    "name": "/Preferences/Turret.AllowedError",
+    "type": "double",
+    "value": 0.0,
+    "properties": {
+      "persistent": true
+    }
+  },
+  {
+    "name": "/Preferences/Lift.UsePID",
+    "type": "boolean",
+    "value": true,
+    "properties": {
+      "persistent": true
+    }
+  },
+  {
+    "name": "/Preferences/Lift.MinVelocity",
+    "type": "double",
+    "value": 0.0,
+    "properties": {
+      "persistent": true
+    }
+  },
+  {
+    "name": "/Preferences/Lift.MaxVelocity",
+    "type": "double",
+    "value": 0.0,
+    "properties": {
+      "persistent": true
+    }
+  },
+  {
+    "name": "/Preferences/Lift.MaxAccel",
+    "type": "double",
+    "value": 0.0,
+    "properties": {
+      "persistent": true
+    }
+  },
+  {
+    "name": "/Preferences/Lift.AllowedError",
+    "type": "double",
+    "value": 0.0,
+    "properties": {
+      "persistent": true
+    }
+  },
+  {
+    "name": "/Preferences/Arm.UsePID",
+    "type": "boolean",
+    "value": true,
+    "properties": {
+      "persistent": true
+    }
+  },
+  {
+    "name": "/Preferences/Arm.MinVelocity",
+    "type": "double",
+    "value": 0.0,
+    "properties": {
+      "persistent": true
+    }
+  },
+  {
+    "name": "/Preferences/Arm.MaxVelocity",
+    "type": "double",
+    "value": 0.0,
+    "properties": {
+      "persistent": true
+    }
+  },
+  {
+    "name": "/Preferences/Arm.MaxAccel",
+    "type": "double",
+    "value": 0.0,
+    "properties": {
+      "persistent": true
+    }
+  },
+  {
+    "name": "/Preferences/Arm.AllowedError",
+    "type": "double",
+    "value": 0.0,
     "properties": {
       "persistent": true
     }

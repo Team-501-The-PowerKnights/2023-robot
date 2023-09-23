@@ -48,8 +48,8 @@ LED.className = StubLEDModule
 #####################
 # Gyro
 #####################
-Gyro.className = StubGyroSensor
-#Gyro.className = GyroSensor
+#Gyro.className = StubGyroSensor
+Gyro.className = ProtoGyroSensor
 
 
 
@@ -71,11 +71,11 @@ Drive.teleCommandName = DriveJoystickControl
 #####################
 # Gripper
 #####################
-Gripper.className = StubGripperSubsystem
-#Gripper.className = RealGripperSubsystem
+#Gripper.className = StubGripperSubsystem
+Gripper.className = RealGripperSubsystem
 Gripper.autoCommandName = GripperDoNothing
-Gripper.teleCommandName = GripperDoNothing
-#Gripper.teleCommandName = GripperIdleIn
+#Gripper.teleCommandName = GripperDoNothing
+Gripper.teleCommandName = GripperIdleIn
 
 
 #####################
