@@ -163,6 +163,10 @@ public class RealTurretSubsystem extends BaseTurretSubsystem {
    public void moveToTarget(double target) {
       logger.trace("set PID target = {}", target);
 
+      if (Math.abs(target) > 180) {
+         target = (target < 0) ? -180 : 180;
+      }
+
       if (pidValues.smartMotionSet()) {
          logger.info("Setting PID to kSmartMotion w/ slotID={}", smartMotionSlotID);
          checkError(pid.setReference(target, ControlType.kSmartMotion, smartMotionSlotID),

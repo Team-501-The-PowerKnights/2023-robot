@@ -57,13 +57,13 @@ public class LiftPreferences extends BasePreferences {
    final String PID_maxOutput = name + PIDValues.pid_maxOutput;
 
    private static final boolean default_pid_Use = false;
-   private static final double default_pid_P = 0;
-   private static final double default_pid_I = 0;
-   private static final double default_pid_D = 0;
-   private static final double default_pid_IZone = 0;
+   private static final double default_pid_P = 0.05;
+   private static final double default_pid_I = 0.000001;
+   private static final double default_pid_D = 5;
+   private static final double default_pid_IZone = 50;
    private static final double default_pid_FF = 0;
-   private static final double default_pid_minOutput = 0;
-   private static final double default_pid_maxOutput = 0;
+   private static final double default_pid_minOutput = -0.25;
+   private static final double default_pid_maxOutput = 1;
 
    /** Smart Motion settings */
    final String PIDSM_minVelocity = name + PIDValues.pidsm_minVelocity;
@@ -79,7 +79,7 @@ public class LiftPreferences extends BasePreferences {
    /** Ramp rate */
    final String rampRate = name + ".RampRate";
 
-   private static final double default_rampRate = 0;
+   private static final double default_rampRate = 0.5;
 
    /** Set points for the various positions */
    final String startSetPoint = name + ".StartSetPoint";
@@ -88,9 +88,9 @@ public class LiftPreferences extends BasePreferences {
    final String highSetPoint = name + ".HighSetPoint";
 
    private static final double default_startPosition = 0;
-   private static final double default_highPosition = 0;
+   private static final double default_highPosition = 75;
    private static final double default_midPosition = 0;
-   private static final double default_lowPosition = 0;
+   private static final double default_lowPosition = 1;
 
    // FIXME: Make perferences & NetworkTables right
    public void initialize() {

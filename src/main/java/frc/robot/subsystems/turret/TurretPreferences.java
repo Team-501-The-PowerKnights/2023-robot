@@ -57,13 +57,13 @@ public class TurretPreferences extends BasePreferences {
    final String PID_maxOutput = name + PIDValues.pid_maxOutput;
 
    private static final boolean default_pid_Use = false;
-   private static final double default_pid_P = 0;
-   private static final double default_pid_I = 0;
+   private static final double default_pid_P = 0.00006;
+   private static final double default_pid_I = 0.000001;
    private static final double default_pid_D = 0;
    private static final double default_pid_IZone = 0;
-   private static final double default_pid_FF = 0;
-   private static final double default_pid_minOutput = 0;
-   private static final double default_pid_maxOutput = 0;
+   private static final double default_pid_FF = 0.00005;
+   private static final double default_pid_minOutput = -1;
+   private static final double default_pid_maxOutput = 1;
 
    /** Smart Motion settings */
    final String PIDSM_minVelocity = name + PIDValues.pidsm_minVelocity;
@@ -72,14 +72,14 @@ public class TurretPreferences extends BasePreferences {
    final String PIDSM_allowedError = name + PIDValues.pidsm_AllowedError;
 
    private static final double default_pidsm_minVelocity = 0;
-   private static final double default_pidsm_maxVelocity = 0;
-   private static final double default_pidsm_maxAccel = 0;
-   private static final double default_pidsm_allowedError = 0;
+   private static final double default_pidsm_maxVelocity = 6000;
+   private static final double default_pidsm_maxAccel = 5000;
+   private static final double default_pidsm_allowedError = 0.1;
 
    /** Ramp rate */
    final String rampRate = name + ".RampRate";
 
-   private static final double default_rampRate = 0;
+   private static final double default_rampRate = 0.5;
 
    /** Set points for the various positions */
    final String startSetPoint = name + ".StartSetPoint";
@@ -88,9 +88,9 @@ public class TurretPreferences extends BasePreferences {
    final String rightSetPoint = name + ".RightSetPoint";
 
    private static final double default_startPosition = 0;
-   private static final double default_leftPosition = 0; // negative (CCW)
+   private static final double default_leftPosition = -150; // negative (CCW)
    private static final double default_frontPosition = 0;
-   private static final double default_rightPosition = 0; // positive (CW)
+   private static final double default_rightPosition = 150; // positive (CW)
 
    // FIXME: Make perferences & NetworkTables right
    public void initialize() {

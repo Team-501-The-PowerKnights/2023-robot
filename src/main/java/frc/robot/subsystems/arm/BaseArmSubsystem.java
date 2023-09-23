@@ -41,6 +41,11 @@ abstract class BaseArmSubsystem extends PIDSubsystem implements IArmSubsystem {
    protected double pid_FF;
    protected double pid_minOutput;
    protected double pid_maxOutput;
+
+   protected double pid_minVelocity;
+   protected double pid_maxVelocity;
+   protected double pid_maxAccel;
+   protected double pid_allowedError;
    //@formatter:off
    protected PIDValues pidValues = new PIDValues(
       pid_Use,
@@ -50,7 +55,11 @@ abstract class BaseArmSubsystem extends PIDSubsystem implements IArmSubsystem {
       pid_IZone,
       pid_FF, 
       pid_minOutput, 
-      pid_maxOutput);
+      pid_maxOutput,
+      pid_minVelocity,
+      pid_maxVelocity,
+      pid_maxAccel,
+      pid_allowedError);
    //@formatter:on
 
    protected double rampRate;
@@ -108,6 +117,19 @@ abstract class BaseArmSubsystem extends PIDSubsystem implements IArmSubsystem {
       v = Preferences.getDouble(prefs.PID_maxOutput, pidValues.MaxOutput);
       logger.info("{} = {}", prefs.PID_maxOutput, v);
       pidValues.MaxOutput = v;
+
+      v = Preferences.getDouble(prefs.PIDSM_minVelocity, pidValues.MinVelocity);
+      logger.info("{} = {}", prefs.PIDSM_minVelocity, v);
+      pidValues.MinVelocity = v;
+      v = Preferences.getDouble(prefs.PIDSM_maxVelocity, pidValues.MaxVelocity);
+      logger.info("{} = {}", prefs.PIDSM_maxVelocity, v);
+      pidValues.MaxVelocity = v;
+      v = Preferences.getDouble(prefs.PIDSM_maxAccel, pidValues.MaxAccel);
+      logger.info("{} = {}", prefs.PIDSM_maxAccel, v);
+      pidValues.MaxAccel = v;
+      v = Preferences.getDouble(prefs.PIDSM_allowedError, pidValues.AllowedError);
+      logger.info("{} = {}", prefs.PIDSM_allowedError, v);
+      pidValues.AllowedError = v;
 
       v = Preferences.getDouble(prefs.rampRate, rampRate);
       logger.info("{} = {}", prefs.rampRate, v);

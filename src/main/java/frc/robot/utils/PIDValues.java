@@ -117,12 +117,12 @@ public class PIDValues {
       buf.append(",FF=").append(FF);
       buf.append(",MinOutput=").append(MinOutput);
       buf.append(",MaxOutput=").append(MaxOutput);
-      if (smartMotionSet()) {
-         buf.append(",MinVelocity=").append(MinVelocity);
-         buf.append(",MaxVelocity=").append(MaxVelocity);
-         buf.append(",MaxAccel=").append(MaxAccel);
-         buf.append(",AllowedError=").append(AllowedError);
-      }
+      // if (smartMotionSet()) {
+      buf.append(",MinVelocity=").append(MinVelocity);
+      buf.append(",MaxVelocity=").append(MaxVelocity);
+      buf.append(",MaxAccel=").append(MaxAccel);
+      buf.append(",AllowedError=").append(AllowedError);
+      // }
       return buf.toString();
    }
 
