@@ -8,12 +8,12 @@
 
 package frc.robot.subsystems.arm;
 
-import frc.robot.subsystems.ISubsystem;
+import frc.robot.subsystems.IPIDSubsystem;
 
 /**
  * DOCS: Add your docs here.
  */
-public interface IArmSubsystem extends ISubsystem {
+public interface IArmSubsystem extends IPIDSubsystem {
 
    /**
     * Stop the arm from any motion it may have been running under.
