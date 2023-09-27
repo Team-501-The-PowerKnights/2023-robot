@@ -10,19 +10,21 @@ package frc.robot.hmi;
 
 import org.slf4j.Logger;
 
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
-import frc.robot.commands.arm.ArmJoystickControl;
 import frc.robot.commands.arm.ArmNudgeTarget;
-import frc.robot.commands.gripper.GripperGrip;
+import frc.robot.commands.arm.ArmWaitAtSetPoint;
 import frc.robot.commands.arm.ArmGoToHighPosition;
 import frc.robot.commands.arm.ArmGoToLowPosition;
-import frc.robot.commands.lift.LiftJoystickControl;
+import frc.robot.commands.arm.ArmGoToMidPosition;
+import frc.robot.commands.gripper.GripperGrip;
 import frc.robot.commands.lift.LiftNudgeTarget;
+import frc.robot.commands.lift.LiftWaitAtSetPoint;
 import frc.robot.commands.lift.LiftGoToHighPosition;
-import frc.robot.commands.lift.LiftGoToLowPosition;
-import frc.robot.commands.turret.TurretJoystickControl;
+import frc.robot.commands.lift.LiftGoToMidPosition;
 import frc.robot.commands.turret.TurretNudgeTarget;
+
 import riolog.PKLogger;
 
 /**
@@ -36,10 +38,10 @@ public class RealOperatorGamepad extends BaseOperatorGamepad {
    /** Our classes' logger **/
    private static final Logger logger = PKLogger.getLogger(RealOperatorGamepad.class.getName());
 
-   private final Trigger liftHighPoseButton;
-   private final Trigger liftLowPoseButton;
-   private final Trigger armHighPoseButton;
-   private final Trigger armLowPoseButton;
+   private final Trigger stowPoseButton;
+   private final Trigger topRowPoseButton;
+   private final Trigger middleRowPoseButton;
+   private final Trigger floorPickupPoseButton;
 
    private final Trigger turretNudgeJoystick;
    private final Trigger liftNudgeJoystick;
@@ -51,10 +53,10 @@ public class RealOperatorGamepad extends BaseOperatorGamepad {
       super("RealOperatorGamepad", 1);
       logger.info("constructing");
 
-      liftHighPoseButton = cmdStick.button(yellowButton);
-      liftLowPoseButton = cmdStick.button(greenButton);
-      armHighPoseButton = cmdStick.button(blueButton);
-      armLowPoseButton = cmdStick.button(redButton);
+      stowPoseButton = cmdStick.button(blueButton);
+      topRowPoseButton = cmdStick.button(yellowButton);
+      middleRowPoseButton = cmdStick.button(redButton);
+      floorPickupPoseButton = cmdStick.button(greenButton);
 
       turretNudgeJoystick = new Trigger(this::isTurretNudged);
       liftNudgeJoystick = new Trigger(this::isLiftNudged);
@@ -154,14 +156,34 @@ public class RealOperatorGamepad extends BaseOperatorGamepad {
    private void configureTeleopButtonBindings() {
       logger.info("configure");
 
-      liftHighPoseButton
-            .onTrue(new LiftGoToHighPosition());
-      liftLowPoseButton
-            .onTrue(new LiftGoToLowPosition());
-      armHighPoseButton
-            .onTrue(new ArmGoToHighPosition());
-      armLowPoseButton
-            .onTrue(new ArmGoToLowPosition());
+      stowPoseButton
+            .onTrue(new SequentialCommandGroup(
+            // @formatter:off
+               new SequentialCommandGroup(new LiftGoToMidPosition(), new LiftWaitAtSetPoint()),
+               new SequentialCommandGroup(new ArmGoToLowPosition(), new ArmWaitAtSetPoint())
+            // @formatter:on
+            ));
+      topRowPoseButton
+            .onTrue(new SequentialCommandGroup(
+            // @formatter:off
+               new SequentialCommandGroup(new LiftGoToHighPosition(), new LiftWaitAtSetPoint()),
+               new SequentialCommandGroup(new ArmGoToHighPosition(), new ArmWaitAtSetPoint())
+             // @formatter:on
+            ));
+      middleRowPoseButton
+            .onTrue(new SequentialCommandGroup(
+            // @formatter:off
+               new SequentialCommandGroup(new LiftGoToHighPosition(), new LiftWaitAtSetPoint()),
+               new SequentialCommandGroup(new ArmGoToMidPosition(), new ArmWaitAtSetPoint())
+             // @formatter:on
+            ));
+      floorPickupPoseButton
+            .onTrue(new SequentialCommandGroup(
+            // @formatter:off
+               new SequentialCommandGroup(new ArmGoToMidPosition(), new ArmWaitAtSetPoint()),
+               new SequentialCommandGroup(new LiftGoToHighPosition(), new LiftWaitAtSetPoint())
+             // @formatter:on
+            ));
 
       // Nudge turret when joystick is moved
       turretNudgeJoystick
