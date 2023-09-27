@@ -26,7 +26,7 @@
   {
     "name": "/Preferences/Turret.P",
     "type": "double",
-    "value": 1.0,
+    "value": 6e-05,
     "properties": {
       "persistent": true
     }
@@ -34,7 +34,7 @@
   {
     "name": "/Preferences/Turret.I",
     "type": "double",
-    "value": 0.0,
+    "value": 1e-06,
     "properties": {
       "persistent": true
     }
@@ -58,7 +58,7 @@
   {
     "name": "/Preferences/Turret.FF",
     "type": "double",
-    "value": 0.0,
+    "value": 5e-05,
     "properties": {
       "persistent": true
     }
@@ -66,7 +66,7 @@
   {
     "name": "/Preferences/Turret.MinOutput",
     "type": "double",
-    "value": 0.0,
+    "value": -1.0,
     "properties": {
       "persistent": true
     }
@@ -74,7 +74,7 @@
   {
     "name": "/Preferences/Turret.MaxOutput",
     "type": "double",
-    "value": 0.0,
+    "value": 1.0,
     "properties": {
       "persistent": true
     }
@@ -106,7 +106,7 @@
   {
     "name": "/Preferences/Lift.P",
     "type": "double",
-    "value": 0.05,
+    "value": 3e-05,
     "properties": {
       "persistent": true
     }
@@ -114,7 +114,7 @@
   {
     "name": "/Preferences/Lift.I",
     "type": "double",
-    "value": 1e-06,
+    "value": 5e-07,
     "properties": {
       "persistent": true
     }
@@ -122,7 +122,7 @@
   {
     "name": "/Preferences/Lift.D",
     "type": "double",
-    "value": 5.0,
+    "value": 0.0,
     "properties": {
       "persistent": true
     }
@@ -130,7 +130,7 @@
   {
     "name": "/Preferences/Lift.IZone",
     "type": "double",
-    "value": 50.0,
+    "value": 0.0,
     "properties": {
       "persistent": true
     }
@@ -138,7 +138,7 @@
   {
     "name": "/Preferences/Lift.FF",
     "type": "double",
-    "value": 0.0,
+    "value": 0.0001,
     "properties": {
       "persistent": true
     }
@@ -146,7 +146,7 @@
   {
     "name": "/Preferences/Lift.MinOutput",
     "type": "double",
-    "value": -0.25,
+    "value": -1.0,
     "properties": {
       "persistent": true
     }
@@ -178,7 +178,7 @@
   {
     "name": "/Preferences/Lift.HighSetPoint",
     "type": "double",
-    "value": 75.0,
+    "value": 200.0,
     "properties": {
       "persistent": true
     }
@@ -186,7 +186,7 @@
   {
     "name": "/Preferences/Lift.MidSetPoint",
     "type": "double",
-    "value": 0.0,
+    "value": 100.0,
     "properties": {
       "persistent": true
     }
@@ -194,7 +194,7 @@
   {
     "name": "/Preferences/Lift.LowSetPoint",
     "type": "double",
-    "value": 1.0,
+    "value": 15.0,
     "properties": {
       "persistent": true
     }
@@ -202,7 +202,7 @@
   {
     "name": "/Preferences/Arm.P",
     "type": "double",
-    "value": 0.5,
+    "value": 1e-05,
     "properties": {
       "persistent": true
     }
@@ -210,7 +210,7 @@
   {
     "name": "/Preferences/Arm.I",
     "type": "double",
-    "value": 0.0,
+    "value": 1e-06,
     "properties": {
       "persistent": true
     }
@@ -234,7 +234,7 @@
   {
     "name": "/Preferences/Arm.FF",
     "type": "double",
-    "value": 0.0,
+    "value": 5e-05,
     "properties": {
       "persistent": true
     }
@@ -242,7 +242,7 @@
   {
     "name": "/Preferences/Arm.MinOutput",
     "type": "double",
-    "value": -0.25,
+    "value": -1.0,
     "properties": {
       "persistent": true
     }
@@ -250,7 +250,7 @@
   {
     "name": "/Preferences/Arm.MaxOutput",
     "type": "double",
-    "value": 0.25,
+    "value": 1.0,
     "properties": {
       "persistent": true
     }
@@ -274,7 +274,7 @@
   {
     "name": "/Preferences/Arm.HighSetPoint",
     "type": "double",
-    "value": 10.0,
+    "value": 55.0,
     "properties": {
       "persistent": true
     }
@@ -290,7 +290,7 @@
   {
     "name": "/Preferences/Arm.LowSetPoint",
     "type": "double",
-    "value": 1.0,
+    "value": -5.0,
     "properties": {
       "persistent": true
     }
@@ -298,7 +298,7 @@
   {
     "name": "/Preferences/Turret.UsePID",
     "type": "boolean",
-    "value": false,
+    "value": true,
     "properties": {
       "persistent": true
     }
@@ -314,7 +314,7 @@
   {
     "name": "/Preferences/Turret.MaxVelocity",
     "type": "double",
-    "value": 0.0,
+    "value": 6000.0,
     "properties": {
       "persistent": true
     }
@@ -322,7 +322,7 @@
   {
     "name": "/Preferences/Turret.MaxAccel",
     "type": "double",
-    "value": 0.0,
+    "value": 5000.0,
     "properties": {
       "persistent": true
     }
@@ -330,7 +330,7 @@
   {
     "name": "/Preferences/Turret.AllowedError",
     "type": "double",
-    "value": 0.0,
+    "value": 0.1,
     "properties": {
       "persistent": true
     }
@@ -354,7 +354,7 @@
   {
     "name": "/Preferences/Lift.MaxVelocity",
     "type": "double",
-    "value": 0.0,
+    "value": 3000.0,
     "properties": {
       "persistent": true
     }
@@ -362,7 +362,7 @@
   {
     "name": "/Preferences/Lift.MaxAccel",
     "type": "double",
-    "value": 0.0,
+    "value": 4000.0,
     "properties": {
       "persistent": true
     }
@@ -370,7 +370,7 @@
   {
     "name": "/Preferences/Lift.AllowedError",
     "type": "double",
-    "value": 0.0,
+    "value": 1.0,
     "properties": {
       "persistent": true
     }
@@ -378,7 +378,7 @@
   {
     "name": "/Preferences/Arm.UsePID",
     "type": "boolean",
-    "value": true,
+    "value": false,
     "properties": {
       "persistent": true
     }
@@ -394,7 +394,7 @@
   {
     "name": "/Preferences/Arm.MaxVelocity",
     "type": "double",
-    "value": 0.0,
+    "value": 1000.0,
     "properties": {
       "persistent": true
     }
@@ -402,7 +402,7 @@
   {
     "name": "/Preferences/Arm.MaxAccel",
     "type": "double",
-    "value": 0.0,
+    "value": 500.0,
     "properties": {
       "persistent": true
     }
@@ -410,7 +410,7 @@
   {
     "name": "/Preferences/Arm.AllowedError",
     "type": "double",
-    "value": 0.0,
+    "value": 0.1,
     "properties": {
       "persistent": true
     }
@@ -418,7 +418,7 @@
   {
     "name": "/Preferences/Turret.LeftSetPoint",
     "type": "double",
-    "value": 0.0,
+    "value": -150.0,
     "properties": {
       "persistent": true
     }
@@ -426,7 +426,79 @@
   {
     "name": "/Preferences/Turret.RightSetPoint",
     "type": "double",
-    "value": 0.0,
+    "value": 150.0,
+    "properties": {
+      "persistent": true
+    }
+  },
+  {
+    "name": "/Preferences/ArmRotator.P",
+    "type": "double",
+    "value": 6e-05,
+    "properties": {
+      "persistent": true
+    }
+  },
+  {
+    "name": "/Preferences/ArmRotator.I",
+    "type": "double",
+    "value": 1e-06,
+    "properties": {
+      "persistent": true
+    }
+  },
+  {
+    "name": "/Preferences/ArmRotator.MaxVel",
+    "type": "double",
+    "value": 3000.0,
+    "properties": {
+      "persistent": true
+    }
+  },
+  {
+    "name": "/Preferences/ArmRotator.MaxAcc",
+    "type": "double",
+    "value": 6000.0,
+    "properties": {
+      "persistent": true
+    }
+  },
+  {
+    "name": "/Preferences/ArmRotator.MaxErr",
+    "type": "double",
+    "value": 0.15,
+    "properties": {
+      "persistent": true
+    }
+  },
+  {
+    "name": "/Preferences/ArmExtender.P",
+    "type": "double",
+    "value": 7e-05,
+    "properties": {
+      "persistent": true
+    }
+  },
+  {
+    "name": "/Preferences/ArmExtender.I",
+    "type": "double",
+    "value": 2e-06,
+    "properties": {
+      "persistent": true
+    }
+  },
+  {
+    "name": "/Preferences/ArmExtender.MaxVel",
+    "type": "double",
+    "value": 3500.0,
+    "properties": {
+      "persistent": true
+    }
+  },
+  {
+    "name": "/Preferences/ArmExtender.MaxAcc",
+    "type": "double",
+    "value": 2000.0,
     "properties": {
       "persistent": true
     }

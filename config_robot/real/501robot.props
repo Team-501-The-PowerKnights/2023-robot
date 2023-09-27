@@ -34,8 +34,8 @@ Pneumatic.className = StubPneumaticModule
 #####################
 # LED
 #####################
-LED.className = StubLEDModule
-#LED.className = 
+#LED.className = StubLEDModule
+LED.className = RealLEDModule
 
 
 
