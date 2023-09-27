@@ -18,7 +18,7 @@ public class ProtoLEDModule extends AddressibleLEDModule {
    private static final Logger logger = PKLogger.getLogger(ProtoLEDModule.class.getName());
 
    private static final int pwmPort = 0;
-   private static final int ledLength = 72;
+   private static final int ledLength = 134; // 72;
 
    public ProtoLEDModule() {
       super(pwmPort, ledLength);
