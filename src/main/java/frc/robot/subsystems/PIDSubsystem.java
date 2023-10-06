@@ -97,7 +97,11 @@ public abstract class PIDSubsystem extends BaseSubsystem implements IPIDSubsyste
 
    private class AtSetPoint {
       // The error that is considered at setpoint.
-      private double m_positionTolerance = 0.25; // 0.09
+      private double m_positionTolerance = 0.25;
+
+      private void setPositionTolerance(double tolerance) {
+         m_positionTolerance = Math.abs(tolerance);
+      }
 
       // The error at the time of the most recent call to calculate()
       private double m_positionError;
@@ -115,10 +119,10 @@ public abstract class PIDSubsystem extends BaseSubsystem implements IPIDSubsyste
 
    private class OnSetPoint {
       // The error that is considered at setpoint.
-      private double m_positionTolerance;
+      private double m_positionTolerance = 0.125; // half of "at" value
 
-      public void setPositionTolerance(double setPoint) {
-         m_positionTolerance = Math.abs(setPoint * 0.10);
+      private void setPositionTolerance(double tolerance) {
+         m_positionTolerance = Math.abs(tolerance);
 
          m_positionAtCount = 0;
       }
@@ -158,8 +162,9 @@ public abstract class PIDSubsystem extends BaseSubsystem implements IPIDSubsyste
       return m_setpoint;
    }
 
-   public void setTolerance(double tolerance) {
-      m_atSetPoint.m_positionTolerance = tolerance;
+   public void setAbsoluteTolerance(double atTolerance, double onTolerance) {
+      m_atSetPoint.setPositionTolerance(atTolerance);
+      m_onSetPoint.setPositionTolerance(onTolerance);
    }
 
    public double getTolerance() {

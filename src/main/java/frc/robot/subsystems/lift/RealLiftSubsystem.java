@@ -41,6 +41,7 @@ public class RealLiftSubsystem extends BaseLiftSubsystem {
       motor = new CANSparkMax(21, MotorType.kBrushless);
       checkError(motor.restoreFactoryDefaults(), "restore factory defaults {}");
       checkError(motor.setIdleMode(IdleMode.kBrake), "set idle mode to brake {}");
+      checkError(motor.setSmartCurrentLimit(15), "set current limit to 15 {}");
 
       pid = motor.getPIDController();
       encoder = motor.getEncoder();
@@ -162,9 +163,12 @@ public class RealLiftSubsystem extends BaseLiftSubsystem {
          logger.info("Setting PID to kSmartMotion w/ slotID={}", smartMotionSlotID);
          checkError(pid.setReference(target, ControlType.kSmartMotion, smartMotionSlotID),
                "PID set reference to kSmartMotion {}");
+         setAbsoluteTolerance((pidValues.AllowedError * 2), pidValues.AllowedError);
       } else {
          logger.info("Setting PID to kPosition");
          checkError(pid.setReference(target, ControlType.kPosition), "PID set reference to kPosition {}");
+         // FIXME: Make this something calculated
+         setAbsoluteTolerance((target * 0.10 * 2), (target * 0.10));
       }
 
       setTlmPIDEnabled(true);

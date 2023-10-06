@@ -159,9 +159,12 @@ class RealArmSubsystem extends BaseArmSubsystem {
          logger.info("Setting PID to kSmartMotion w/ slotID={}", smartMotionSlotID);
          checkError(pid.setReference(target, ControlType.kSmartMotion, smartMotionSlotID),
                "PID set reference to kSmartMotion {}");
+         setAbsoluteTolerance((pidValues.AllowedError * 2), pidValues.AllowedError);
       } else {
          logger.info("Setting PID to kPosition");
          checkError(pid.setReference(target, ControlType.kPosition), "PID set reference to kPosition {}");
+         // FIXME: Make this something calculated
+         setAbsoluteTolerance((target * 0.10 * 2), (target * 0.10));
       }
 
       setTlmPIDEnabled(true);

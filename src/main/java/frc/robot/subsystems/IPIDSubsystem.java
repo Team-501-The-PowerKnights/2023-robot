@@ -32,10 +32,12 @@ public interface IPIDSubsystem extends ISubsystem {
     * Sets the position error which is considered tolerable for use with
     * atSetpoint().
     *
-    * @param tolerance
+    * @param atTolerance
+    *           - Position error which is tolerable.
+    * @param onTolerance
     *           - Position error which is tolerable.
     */
-   public void setTolerance(double tolerance);
+   public void setAbsoluteTolerance(double atTolerance, double onTolerance);
 
    /**
     * Returns the position tolerance of this controller.
