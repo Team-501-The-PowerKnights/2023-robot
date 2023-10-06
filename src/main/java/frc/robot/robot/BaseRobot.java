@@ -15,7 +15,7 @@ import riolog.PKLogger;
 abstract class BaseRobot implements IRobot {
 
    /** Our classes' logger **/
-   private static final Logger logger = PKLogger.getLogger(SuitcaseRobot.class.getName());
+   private static final Logger logger = PKLogger.getLogger(BaseRobot.class.getName());
 
    BaseRobot() {
       logger.info("constructing");
