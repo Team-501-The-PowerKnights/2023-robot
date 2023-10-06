@@ -18,7 +18,7 @@ public class RealLEDModule extends AddressibleLEDModule {
    private static final Logger logger = PKLogger.getLogger(RealLEDModule.class.getName());
 
    private static final int pwmPort = 0;
-   private static final int ledLength = 50;
+   private static final int ledLength = 60;
 
    public RealLEDModule() {
       super(pwmPort, ledLength);
