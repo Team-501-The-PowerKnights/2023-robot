@@ -16,6 +16,7 @@ import java.util.List;
 
 import org.slf4j.Logger;
 
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.Command;
 
 import frc.robot.modules.IModule;
@@ -93,6 +94,9 @@ public class RobotContainer {
       // Create all the sensors
       sensors = SensorsFactory.constructSensors();
       ModeFollowers.getInstance().addAll(sensors);
+
+      // FIXME: Should be limelight Vision sensor
+      NetworkTableInstance.getDefault().getTable("limelight-realbot").getEntry("camMode").setNumber(1);
 
       // Create all the subsystems
       subsystems = SubsystemsFactory.constructSubsystems();
