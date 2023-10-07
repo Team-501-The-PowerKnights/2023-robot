@@ -10,31 +10,29 @@ package frc.robot.commands.lift;
 
 import org.slf4j.Logger;
 
-import frc.robot.subsystems.lift.ILiftSubsystem.LiftPosition;
-
 import riolog.PKLogger;
 
-public class LiftGoToPosition extends LiftCommandBase {
+public class LiftGoToTarget extends LiftCommandBase {
 
    /** Our classes' logger **/
-   private static final Logger logger = PKLogger.getLogger(LiftGoToPosition.class.getName());
+   private static final Logger logger = PKLogger.getLogger(LiftGoToTarget.class.getName());
 
-   /** Which of the fixed set point positions to move to */
-   private final LiftPosition position;
+   /** New target to move to */
+   private final double target;
 
-   public LiftGoToPosition(LiftPosition position) {
+   public LiftGoToTarget(double target) {
       logger.info("constructing {}", getName());
 
-      this.position = position;
+      this.target = target;
 
       logger.info("constructed");
    }
 
    @Override
    protected void firstExecution() {
-      logger.trace("subsys.moveToPosition() to {} called in firstExecution()", position);
+      logger.trace("subsys.moveToTarget() to {} called in firstExecution()", target);
 
-      subsys.moveToPosition(position);
+      subsys.moveToTarget(target);
    }
 
    @Override

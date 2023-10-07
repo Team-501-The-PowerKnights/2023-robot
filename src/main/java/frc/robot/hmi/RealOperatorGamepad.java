@@ -18,13 +18,17 @@ import frc.robot.commands.arm.ArmWaitAtSetPoint;
 import frc.robot.commands.arm.ArmGoToHighPosition;
 import frc.robot.commands.arm.ArmGoToLowPosition;
 import frc.robot.commands.arm.ArmGoToMidPosition;
+import frc.robot.commands.arm.ArmGoToTarget;
 import frc.robot.commands.gripper.GripperGrip;
 import frc.robot.commands.lift.LiftNudgeTarget;
 import frc.robot.commands.lift.LiftWaitAtSetPoint;
 import frc.robot.commands.lift.LiftGoToHighPosition;
+import frc.robot.commands.lift.LiftGoToLowPosition;
 import frc.robot.commands.lift.LiftGoToMidPosition;
+import frc.robot.commands.lift.LiftGoToTarget;
+import frc.robot.commands.turret.TurretGoToTarget;
 import frc.robot.commands.turret.TurretNudgeTarget;
-
+import frc.robot.commands.turret.TurretWaitAtSetPoint;
 import riolog.PKLogger;
 
 /**
@@ -159,8 +163,9 @@ public class RealOperatorGamepad extends BaseOperatorGamepad {
       stowPoseButton
             .onTrue(new SequentialCommandGroup(
             // @formatter:off
-               new SequentialCommandGroup(new LiftGoToMidPosition(), new LiftWaitAtSetPoint()),
-               new SequentialCommandGroup(new ArmGoToLowPosition(), new ArmWaitAtSetPoint())
+               new SequentialCommandGroup(new LiftGoToTarget(43), new LiftWaitAtSetPoint()),
+               new SequentialCommandGroup(new ArmGoToTarget(0), new ArmWaitAtSetPoint()),
+               new SequentialCommandGroup(new TurretGoToTarget(0), new TurretWaitAtSetPoint())
             // @formatter:on
             ));
       topRowPoseButton
@@ -173,15 +178,16 @@ public class RealOperatorGamepad extends BaseOperatorGamepad {
       middleRowPoseButton
             .onTrue(new SequentialCommandGroup(
             // @formatter:off
-               new SequentialCommandGroup(new LiftGoToHighPosition(), new LiftWaitAtSetPoint()),
+               new SequentialCommandGroup(new LiftGoToMidPosition(), new LiftWaitAtSetPoint()),
                new SequentialCommandGroup(new ArmGoToMidPosition(), new ArmWaitAtSetPoint())
              // @formatter:on
             ));
       floorPickupPoseButton
             .onTrue(new SequentialCommandGroup(
             // @formatter:off
-               new SequentialCommandGroup(new ArmGoToMidPosition(), new ArmWaitAtSetPoint()),
-               new SequentialCommandGroup(new LiftGoToHighPosition(), new LiftWaitAtSetPoint())
+               new SequentialCommandGroup(new ArmGoToLowPosition(), new ArmWaitAtSetPoint()),
+               new SequentialCommandGroup(new LiftGoToLowPosition(), new LiftWaitAtSetPoint())
+
              // @formatter:on
             ));
 

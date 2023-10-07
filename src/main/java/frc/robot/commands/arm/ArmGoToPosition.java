@@ -32,7 +32,7 @@ public class ArmGoToPosition extends ArmCommandBase {
 
    @Override
    protected void firstExecution() {
-      logger.trace("subsys.extendToPosition() to {} called in firstExecution()", position);
+      logger.trace("subsys.moveToPosition() to {} called in firstExecution()", position);
 
       subsys.moveToPosition(position);
    }
