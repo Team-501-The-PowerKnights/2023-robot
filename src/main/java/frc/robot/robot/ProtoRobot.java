@@ -11,6 +11,7 @@ package frc.robot.robot;
 import org.slf4j.Logger;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
@@ -151,6 +152,8 @@ class ProtoRobot extends BaseRobot {
        */
       //
       autoChooser.addOption("Place High CUBE & BACKWARD to Balance", AutoSelection.doHighCubeAndBackwardToBalance);
+
+      SmartDashboard.putData("Auto Chooser", autoChooser);
 
       logger.info("created");
    }

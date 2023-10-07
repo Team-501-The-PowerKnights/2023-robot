@@ -13,9 +13,13 @@ import org.slf4j.Logger;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 import frc.robot.commands.AutoDoNothing;
-
+import frc.robot.commands.drive.DriveBackwardTimed;
+import frc.robot.commands.drive.DriveForwardTimed;
+import frc.robot.commands.gripper.GripperEject;
 import riolog.PKLogger;
 
 class RealRobot extends BaseRobot {
@@ -63,7 +67,10 @@ class RealRobot extends BaseRobot {
    //
    private enum AutoSelection {
       // @formatter:off
-      doNothing("doNothing");
+      doNothing("doNothing"),
+      //
+      doSimpleBackward("doSimpleBackward"),
+      doSimpleForward("doSimpleForward");
      // @formatter:on
 
       private final String name;
@@ -92,6 +99,14 @@ class RealRobot extends BaseRobot {
       // Default option is safety of "do nothing"
       autoChooser.setDefaultOption("Do Nothing", AutoSelection.doNothing);
 
+      /**
+       * Drive
+       */
+      //
+      autoChooser.addOption("Simple BACKWARD", AutoSelection.doSimpleBackward);
+      //
+      autoChooser.addOption("Simple FORWARD", AutoSelection.doSimpleForward);
+
       SmartDashboard.putData("Auto Chooser", autoChooser);
 
       logger.info("created");
@@ -110,6 +125,27 @@ class RealRobot extends BaseRobot {
       switch (autoSelected) {
          case doNothing:
             return new AutoDoNothing();
+
+         case doSimpleBackward:
+            // @formatter:off
+            return
+              new SequentialCommandGroup(
+                  new GripperEject(),
+                  // Any Arm or Lift actions? Proto had rotate & extend
+                  new WaitCommand(0.5),
+                  new DriveBackwardTimed(3.4, -0.60)
+              );
+            // @formatter:on
+
+         case doSimpleForward:
+            // @formatter:off
+            return
+              new SequentialCommandGroup(
+                  // Any Arm or Lift actions? Proto had rotate & extend
+                  new WaitCommand(0.5),
+                  new DriveForwardTimed(3.4, -0.60)
+              );
+            // @formatter:on
 
          default:
             return new AutoDoNothing();
