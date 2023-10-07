@@ -83,9 +83,9 @@ public class LiftPreferences extends BasePreferences {
 
    /** Set points for the various positions */
    final String startSetPoint = name + ".StartSetPoint";
-   final String lowSetPoint = name + ".LowSetPoint";
-   final String midSetPoint = name + ".MidSetPoint";
    final String highSetPoint = name + ".HighSetPoint";
+   final String midSetPoint = name + ".MidSetPoint";
+   final String lowSetPoint = name + ".LowSetPoint";
 
    private static final double default_startPosition = 0;
    private static final double default_highPosition = 75;

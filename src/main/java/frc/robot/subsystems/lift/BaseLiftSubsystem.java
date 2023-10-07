@@ -150,9 +150,9 @@ abstract class BaseLiftSubsystem extends PIDSubsystem implements ILiftSubsystem 
       lowSetPoint = v;
 
       LiftPosition.startPosition.set(startSetPoint);
-      LiftPosition.lowPosition.set(lowSetPoint);
-      LiftPosition.midPosition.set(midSetPoint);
       LiftPosition.highPosition.set(highSetPoint);
+      LiftPosition.midPosition.set(midSetPoint);
+      LiftPosition.lowPosition.set(lowSetPoint);
    }
 
    @Override
