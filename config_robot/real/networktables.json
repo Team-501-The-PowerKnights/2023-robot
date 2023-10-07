@@ -178,7 +178,7 @@
   {
     "name": "/Preferences/Lift.HighSetPoint",
     "type": "double",
-    "value": 200.0,
+    "value": 188.0,
     "properties": {
       "persistent": true
     }
@@ -186,7 +186,7 @@
   {
     "name": "/Preferences/Lift.MidSetPoint",
     "type": "double",
-    "value": 100.0,
+    "value": 202.0,
     "properties": {
       "persistent": true
     }
@@ -194,7 +194,7 @@
   {
     "name": "/Preferences/Lift.LowSetPoint",
     "type": "double",
-    "value": 15.0,
+    "value": -46.0,
     "properties": {
       "persistent": true
     }
@@ -274,7 +274,7 @@
   {
     "name": "/Preferences/Arm.HighSetPoint",
     "type": "double",
-    "value": 55.0,
+    "value": 37.0,
     "properties": {
       "persistent": true
     }
@@ -282,7 +282,7 @@
   {
     "name": "/Preferences/Arm.MidSetPoint",
     "type": "double",
-    "value": 5.0,
+    "value": 33.0,
     "properties": {
       "persistent": true
     }
@@ -290,7 +290,7 @@
   {
     "name": "/Preferences/Arm.LowSetPoint",
     "type": "double",
-    "value": -5.0,
+    "value": 14.0,
     "properties": {
       "persistent": true
     }
@@ -370,7 +370,7 @@
   {
     "name": "/Preferences/Lift.AllowedError",
     "type": "double",
-    "value": 1.0,
+    "value": 0.1,
     "properties": {
       "persistent": true
     }
@@ -378,7 +378,7 @@
   {
     "name": "/Preferences/Arm.UsePID",
     "type": "boolean",
-    "value": false,
+    "value": true,
     "properties": {
       "persistent": true
     }
