@@ -88,9 +88,9 @@ public final class ArmPreferences extends BasePreferences {
    final String lowSetPoint = name + ".LowSetPoint";
 
    private static final double default_startPosition = 0;
-   private static final double default_highPosition = 10;
-   private static final double default_midPosition = 5;
-   private static final double default_lowPosition = 1;
+   private static final double default_highPosition = 37;
+   private static final double default_midPosition = 33;
+   private static final double default_lowPosition = 14;
 
    // FIXME: Make perferences & NetworkTables right
    public void initialize() {

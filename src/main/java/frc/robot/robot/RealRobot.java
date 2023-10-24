@@ -133,7 +133,7 @@ class RealRobot extends BaseRobot {
                   new GripperEject(),
                   // Any Arm or Lift actions? Proto had rotate & extend
                   new WaitCommand(0.5),
-                  new DriveBackwardTimed(3.4, -0.60)
+                  new DriveBackwardTimed(3.1, -0.50)  // 3.4, -0.60
               );
             // @formatter:on
 
@@ -143,7 +143,7 @@ class RealRobot extends BaseRobot {
               new SequentialCommandGroup(
                   // Any Arm or Lift actions? Proto had rotate & extend
                   new WaitCommand(0.5),
-                  new DriveForwardTimed(3.4, -0.60)
+                  new DriveForwardTimed(3.1, -0.50)  // 3.4, -0.60
               );
             // @formatter:on
 
