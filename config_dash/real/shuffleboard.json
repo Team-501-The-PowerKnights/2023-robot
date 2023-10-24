@@ -65,19 +65,6 @@
               "_showGlyph": false
             }
           },
-          "26,0": {
-            "size": [
-              9,
-              3
-            ],
-            "content": {
-              "_type": "ComboBox Chooser",
-              "_source0": "network_table:///SmartDashboard/Auto Mode",
-              "_title": "Auto Mode",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
           "35,4": {
             "size": [
               4,
@@ -91,27 +78,6 @@
               "_showGlyph": false,
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "0,0": {
-            "size": [
-              16,
-              13
-            ],
-            "content": {
-              "_type": "Camera Stream",
-              "_source0": "camera_server://limelight",
-              "_title": "limelight",
-              "_glyph": 148,
-              "_showGlyph": false,
-              "Crosshair/Show crosshair": true,
-              "Crosshair/Crosshair color": "#FFFFFFFF",
-              "Controls/Show controls": false,
-              "Controls/Rotation": "NONE",
-              "compression": -1.0,
-              "fps": -1,
-              "imageWidth": 0,
-              "imageHeight": 0
             }
           },
           "16,0": {
@@ -235,6 +201,40 @@
               "_showGlyph": false,
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#FFFF99FF"
+            }
+          },
+          "25,0": {
+            "size": [
+              9,
+              2
+            ],
+            "content": {
+              "_type": "ComboBox Chooser",
+              "_source0": "network_table:///SmartDashboard/Auto Chooser",
+              "_title": "Auto Chooser",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "0,0": {
+            "size": [
+              16,
+              13
+            ],
+            "content": {
+              "_type": "Camera Stream",
+              "_source0": "camera_server://limelight-realbot",
+              "_title": "limelight-realbot",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Crosshair/Show crosshair": true,
+              "Crosshair/Crosshair color": "#FFFFFFFF",
+              "Controls/Show controls": false,
+              "Controls/Rotation": "NONE",
+              "compression": -1.0,
+              "fps": -1,
+              "imageWidth": -1,
+              "imageHeight": -1
             }
           }
         }
@@ -1645,7 +1645,7 @@
               "_showGlyph": false
             }
           },
-          "33,3": {
+          "33,5": {
             "size": [
               4,
               2
@@ -1732,6 +1732,32 @@
               "_type": "Text View",
               "_source0": "network_table:///Preferences/Turret.AllowedError",
               "_title": "AllowedError",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "33,7": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/Turret.RightSetPoint",
+              "_title": "RightSetPoint",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "33,3": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Preferences/Turret.LeftSetPoint",
+              "_title": "LeftSetPoint",
               "_glyph": 148,
               "_showGlyph": false
             }
@@ -2943,9 +2969,9 @@
     }
   ],
   "windowGeometry": {
-    "x": -3.0,
+    "x": 1.0,
     "y": 2.0,
-    "width": 1609.0,
-    "height": 668.0
+    "width": 1926.0,
+    "height": 842.0
   }
 }
