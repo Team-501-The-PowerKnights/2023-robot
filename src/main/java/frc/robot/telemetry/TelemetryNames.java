@@ -270,6 +270,8 @@ public final class TelemetryNames {
       public static final String PIDAtTarget = name + PIDTelemetry.pid_AtTarget;
       public static final String PIDOnTarget = name + PIDTelemetry.pid_OnTarget;
       public static final String PIDOutput = name + PIDTelemetry.pid_Output;
+
+      public static final String MotorTemp = name + ".motorTemp";
    }
 
    public final class Lift {
@@ -286,6 +288,8 @@ public final class TelemetryNames {
       public static final String PIDAtTarget = name + PIDTelemetry.pid_AtTarget;
       public static final String PIDOnTarget = name + PIDTelemetry.pid_OnTarget;
       public static final String PIDOutput = name + PIDTelemetry.pid_Output;
+
+      public static final String MotorTemp = name + ".motorTemp";
    }
 
    public final class Arm {
@@ -302,6 +306,8 @@ public final class TelemetryNames {
       public static final String PIDAtTarget = name + PIDTelemetry.pid_AtTarget;
       public static final String PIDOnTarget = name + PIDTelemetry.pid_OnTarget;
       public static final String PIDOutput = name + PIDTelemetry.pid_Output;
+
+      public static final String MotorTemp = name + ".motorTemp";
    }
 
 }

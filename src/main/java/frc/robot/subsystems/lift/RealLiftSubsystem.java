@@ -18,6 +18,10 @@ import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import frc.robot.telemetry.TelemetryNames;
+
 import riolog.PKLogger;
 import riolog.ProblemTracker;
 
@@ -129,6 +133,8 @@ public class RealLiftSubsystem extends BaseLiftSubsystem {
 
    @Override
    public void updateTelemetry() {
+      SmartDashboard.putNumber(TelemetryNames.Lift.MotorTemp, motor.getMotorTemperature());
+
       setTlmPIDCurrent(encoder.getPosition());
       setTlmPIDOutput(motor.get());
 
