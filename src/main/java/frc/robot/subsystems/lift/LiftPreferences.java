@@ -88,7 +88,7 @@ public class LiftPreferences extends BasePreferences {
    final String lowSetPoint = name + ".LowSetPoint";
 
    private static final double default_startPosition = 0;
-   private static final double default_highPosition = 188;
+   private static final double default_highPosition = 202;
    private static final double default_midPosition = 202;
    private static final double default_lowPosition = -46;
 

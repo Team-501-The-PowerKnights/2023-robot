@@ -57,13 +57,13 @@ public final class ArmPreferences extends BasePreferences {
    final String PID_maxOutput = name + PIDValues.pid_maxOutput;
 
    private static final boolean default_pid_Use = false;
-   private static final double default_pid_P = 0.00008;
-   private static final double default_pid_I = 0.000001;
+   private static final double default_pid_P = 0.8;
+   private static final double default_pid_I = 0.001;
    private static final double default_pid_D = 0;
    private static final double default_pid_IZone = 0;
-   private static final double default_pid_FF = 0.00005;
-   private static final double default_pid_minOutput = -1.0;
-   private static final double default_pid_maxOutput = 1.0;
+   private static final double default_pid_FF = 0;
+   private static final double default_pid_minOutput = -0.45;
+   private static final double default_pid_maxOutput = 0.45;
 
    /** Smart Motion settings */
    final String PIDSM_minVelocity = name + PIDValues.pidsm_minVelocity;
@@ -72,9 +72,9 @@ public final class ArmPreferences extends BasePreferences {
    final String PIDSM_allowedError = name + PIDValues.pidsm_AllowedError;
 
    private static final double default_pidsm_minVelocity = 0;
-   private static final double default_pidsm_maxVelocity = 1000;
-   private static final double default_pidsm_maxAccel = 500;
-   private static final double default_pidsm_allowedError = 0.1;
+   private static final double default_pidsm_maxVelocity = 0;
+   private static final double default_pidsm_maxAccel = 0;
+   private static final double default_pidsm_allowedError = 0;
 
    /** Ramp rate */
    final String rampRate = name + ".RampRate";
@@ -87,7 +87,7 @@ public final class ArmPreferences extends BasePreferences {
    final String midSetPoint = name + ".MidSetPoint";
    final String lowSetPoint = name + ".LowSetPoint";
 
-   private static final double default_startPosition = 0;
+   private static final double default_startPosition = 5;
    private static final double default_highPosition = 37;
    private static final double default_midPosition = 33;
    private static final double default_lowPosition = 14;
