@@ -17,8 +17,12 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 import frc.robot.commands.AutoDoNothing;
+import frc.robot.commands.LogPIDs;
 import frc.robot.commands.drive.DriveBackwardTimed;
+import frc.robot.commands.drive.DriveBackwardToBalance;
+import frc.robot.commands.drive.DriveBalance;
 import frc.robot.commands.drive.DriveForwardTimed;
+import frc.robot.commands.drive.DriveForwardToBalance;
 import frc.robot.commands.gripper.GripperEject;
 import riolog.PKLogger;
 
@@ -70,8 +74,11 @@ class RealRobot extends BaseRobot {
       doNothing("doNothing"),
       //
       doSimpleBackward("doSimpleBackward"),
-      doSimpleForward("doSimpleForward");
-     // @formatter:on
+      doSimpleForward("doSimpleForward"),
+      //
+      doBackwardToBalance("doBackwardToBalance"),
+      doForwardToBalance("doForwardToBalance");
+      // @formatter:on
 
       private final String name;
 
@@ -106,6 +113,14 @@ class RealRobot extends BaseRobot {
       autoChooser.addOption("Simple BACKWARD", AutoSelection.doSimpleBackward);
       //
       autoChooser.addOption("Simple FORWARD", AutoSelection.doSimpleForward);
+
+      /**
+       * Drive and Balance
+       */
+      //
+      autoChooser.addOption("BACKWARD to Balance", AutoSelection.doBackwardToBalance);
+      //
+      autoChooser.addOption("FORWARD to Balance", AutoSelection.doForwardToBalance);
 
       SmartDashboard.putData("Auto Chooser", autoChooser);
 
@@ -144,6 +159,30 @@ class RealRobot extends BaseRobot {
                   // Any Arm or Lift actions? Proto had rotate & extend
                   new WaitCommand(0.5),
                   new DriveForwardTimed(3.1, -0.50)  // 3.4, -0.60
+              );
+            // @formatter:on
+
+         case doBackwardToBalance:
+            // @formatter:off
+            return
+              new SequentialCommandGroup(
+                  new GripperEject(),
+                  new WaitCommand(0.5), 
+                  new LogPIDs(),
+                  new DriveBackwardToBalance(2.68, -0.48), // 2.12, -0.60
+                  new DriveBalance()
+              );
+            // @formatter:on
+
+         case doForwardToBalance:
+            // @formatter:off
+            return
+              new SequentialCommandGroup(
+                  new GripperEject(),
+                  new WaitCommand(0.5),  // 1.0
+                  new LogPIDs(),
+                  new DriveForwardToBalance(2.68, 0.48), // 2.12, 0.60
+                  new DriveBalance()
               );
             // @formatter:on
 

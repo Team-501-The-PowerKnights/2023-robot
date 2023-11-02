@@ -10,9 +10,9 @@ package frc.robot.commands;
 
 import org.slf4j.Logger;
 
-import frc.robot.subsystems.armextender.ArmExtenderFactory;
-import frc.robot.subsystems.armrotator.ArmRotatorFactory;
-import frc.robot.subsystems.wrist.WristFactory;
+import frc.robot.subsystems.arm.ArmFactory;
+import frc.robot.subsystems.lift.LiftFactory;
+import frc.robot.subsystems.turret.TurretFactory;
 
 import riolog.PKLogger;
 
@@ -29,11 +29,18 @@ public class LogPIDs extends PKCommandBase {
    public void execute() {
       super.execute();
 
-      ArmRotatorFactory.getInstance().logPID();
+      // FIXME Make robot based for which subsystems.
+      // ArmRotatorFactory.getInstance().logPID();
 
-      ArmExtenderFactory.getInstance().logPID();
+      // ArmExtenderFactory.getInstance().logPID();
 
-      WristFactory.getInstance().logPID();
+      // WristFactory.getInstance().logPID();
+
+      TurretFactory.getInstance().logPID();
+
+      LiftFactory.getInstance().logPID();
+
+      ArmFactory.getInstance().logPID();
    }
 
    @Override
