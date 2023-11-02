@@ -57,13 +57,13 @@ public final class ArmPreferences extends BasePreferences {
    final String PID_maxOutput = name + PIDValues.pid_maxOutput;
 
    private static final boolean default_pid_Use = false;
-   private static final double default_pid_P = 0.5;
-   private static final double default_pid_I = 0;
+   private static final double default_pid_P = 0.8;
+   private static final double default_pid_I = 0.001;
    private static final double default_pid_D = 0;
    private static final double default_pid_IZone = 0;
    private static final double default_pid_FF = 0;
-   private static final double default_pid_minOutput = -0.25;
-   private static final double default_pid_maxOutput = 0.25;
+   private static final double default_pid_minOutput = -0.45;
+   private static final double default_pid_maxOutput = 0.45;
 
    /** Smart Motion settings */
    final String PIDSM_minVelocity = name + PIDValues.pidsm_minVelocity;
@@ -87,7 +87,7 @@ public final class ArmPreferences extends BasePreferences {
    final String midSetPoint = name + ".MidSetPoint";
    final String lowSetPoint = name + ".LowSetPoint";
 
-   private static final double default_startPosition = 0;
+   private static final double default_startPosition = 5;
    private static final double default_highPosition = 37;
    private static final double default_midPosition = 33;
    private static final double default_lowPosition = 14;

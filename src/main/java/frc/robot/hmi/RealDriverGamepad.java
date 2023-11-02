@@ -31,7 +31,7 @@ import riolog.PKLogger;
 public class RealDriverGamepad extends BaseDriverGamepad {
 
    /** Our classes' logger **/
-   private static final Logger logger = PKLogger.getLogger(DriverGamepad.class.getName());
+   private static final Logger logger = PKLogger.getLogger(RealDriverGamepad.class.getName());
 
    // private final Button turboButton;
    private final Trigger crawlButton;
@@ -118,6 +118,8 @@ public class RealDriverGamepad extends BaseDriverGamepad {
    public double getDriveSpeed() {
       double hmiSpeed = getRawDriveSpeed();
       double calcSpeed = hmiSpeed;
+      // // All get this as new robot is too fast & rookie drivers
+      calcSpeed *= 0.60;
       if (crawlButton.getAsBoolean()) {
          calcSpeed *= 0.60;
       }

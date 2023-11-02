@@ -1761,6 +1761,24 @@
               "_glyph": 148,
               "_showGlyph": false
             }
+          },
+          "29,0": {
+            "size": [
+              3,
+              5
+            ],
+            "content": {
+              "_type": "Voltage View",
+              "_source0": "network_table:///SmartDashboard/Turret.motorTemp",
+              "_title": "motorTemp",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Range/Min": 20.0,
+              "Range/Max": 70.0,
+              "Range/Center": 0.0,
+              "Visuals/Orientation": "VERTICAL",
+              "Visuals/Number of tick marks": 5
+            }
           }
         }
       }
@@ -2132,6 +2150,24 @@
               "_glyph": 148,
               "_showGlyph": false
             }
+          },
+          "29,0": {
+            "size": [
+              3,
+              5
+            ],
+            "content": {
+              "_type": "Voltage View",
+              "_source0": "network_table:///SmartDashboard/Lift.motorTemp",
+              "_title": "motorTemp",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Range/Min": 20.0,
+              "Range/Max": 70.0,
+              "Range/Center": 0.0,
+              "Visuals/Orientation": "VERTICAL",
+              "Visuals/Number of tick marks": 5
+            }
           }
         }
       }
@@ -2502,6 +2538,24 @@
               "_title": "AllowedError",
               "_glyph": 148,
               "_showGlyph": false
+            }
+          },
+          "29,0": {
+            "size": [
+              3,
+              5
+            ],
+            "content": {
+              "_type": "Voltage View",
+              "_source0": "network_table:///SmartDashboard/Arm.motorTemp",
+              "_title": "motorTemp",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Range/Min": 20.0,
+              "Range/Max": 70.0,
+              "Range/Center": 0.0,
+              "Visuals/Orientation": "VERTICAL",
+              "Visuals/Number of tick marks": 5
             }
           }
         }
@@ -2969,7 +3023,7 @@
     }
   ],
   "windowGeometry": {
-    "x": 1.0,
+    "x": -7.0,
     "y": 2.0,
     "width": 1926.0,
     "height": 842.0
