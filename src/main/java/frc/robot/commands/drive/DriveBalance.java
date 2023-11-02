@@ -79,7 +79,7 @@ public class DriveBalance extends DriveCommandBase {
       } else {
          isBalanced = false;
          setUnbalanced();
-         speed = (offsetAngle < 0) ? -0.26 : 0.26;
+         speed = (offsetAngle < 0) ? -0.28 : 0.28;
       }
       logger.debug("balance: angle={} speed={}", offsetAngle, speed);
       SmartDashboard.putBoolean(TelemetryNames.Gyro.balanced, isBalanced);
