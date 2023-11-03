@@ -10,6 +10,9 @@ package frc.robot.hmi;
 
 import org.slf4j.Logger;
 
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import riolog.PKLogger;
 
 /**
@@ -23,9 +26,37 @@ abstract class BaseDriverGamepad extends F310Gamepad implements IDriverGamepad {
    /** Our classes' logger **/
    private static final Logger logger = PKLogger.getLogger(BaseDriverGamepad.class.getName());
 
+   // Chooser for speed sense from Dashboard
+   protected SendableChooser<Boolean> speedSenseChooser;
+
+   // Chooser for turn sense from Dashboard
+   protected SendableChooser<Boolean> turnSenseChooser;
+
+   private void createControlChoosers() {
+      logger.info("creating");
+
+      speedSenseChooser = new SendableChooser<>();
+
+      speedSenseChooser.setDefaultOption("F-F, R-R (Default)", Boolean.TRUE);
+      speedSenseChooser.addOption("F-R, R-F (Sophia)", Boolean.FALSE);
+
+      SmartDashboard.putData("Speed Sense", speedSenseChooser);
+
+      turnSenseChooser = new SendableChooser<>();
+
+      turnSenseChooser.setDefaultOption("L-L, R-R (Default)", Boolean.TRUE);
+      turnSenseChooser.addOption("L-R, R-L (Sophia)", Boolean.FALSE);
+
+      SmartDashboard.putData("Turn Sense", turnSenseChooser);
+
+      logger.info("created");
+   }
+
    public BaseDriverGamepad(String name, int port) {
       super(name, port);
       logger.info("constructing");
+
+      createControlChoosers();
 
       logger.info("constructed");
    }
