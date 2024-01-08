@@ -81,11 +81,19 @@ public class RealDriverGamepad extends BaseDriverGamepad {
       logger.info("initialized auto for {}", myName);
    }
 
+   int speedSense;
+   int turnSense;
+
    @Override
    public void teleopInit() {
       logger.info("initializing teleop for {}", myName);
 
       configureTeleopButtonBindings();
+
+      speedSense = speedSenseChooser.getSelected() ? +1 : -1;
+      logger.info("speedSense = {}", speedSense);
+      turnSense = turnSenseChooser.getSelected() ? +1 : -1;
+      logger.info("turnSense = {}", turnSense);
 
       logger.info("initialized teleop for {}", myName);
    }
@@ -130,7 +138,7 @@ public class RealDriverGamepad extends BaseDriverGamepad {
       // } else {
       // calcSpeed = hmiSpeed *= 0.50;
       // }
-      return calcSpeed;
+      return calcSpeed * speedSense;
    }
 
    private double getRawDriveSpeed() {
@@ -152,7 +160,7 @@ public class RealDriverGamepad extends BaseDriverGamepad {
       // } else {
       // calcTurn = hmiTurn * 0.30;
       // }
-      return calcTurn;
+      return calcTurn * turnSense;
    }
 
    private double getRawDriveTurn() {
